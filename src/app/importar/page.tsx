@@ -66,6 +66,12 @@ type DuplicateSimuladoGroup = {
   ids: string[];
 };
 
+type DuplicateFlashcardGroup = {
+  groupKey: string;
+  preview: string;
+  ids: string[];
+};
+
 export default function ImportarPage() {
   const [report, setReport] = useState<ImportReport | null>(null);
   const [isImporting, setIsImporting] = useState(false);
@@ -83,6 +89,7 @@ export default function ImportarPage() {
   const [importWarnings, setImportWarnings] = useState<string[]>([]);
   const [selectedIncompleteGroups, setSelectedIncompleteGroups] = useState<string[]>([]);
   const [selectedDuplicateGroups, setSelectedDuplicateGroups] = useState<string[]>([]);
+  const [selectedDuplicateCardGroups, setSelectedDuplicateCardGroups] = useState<string[]>([]);
 
   const currentTotals = useMemo(
     () => ({
@@ -180,6 +187,31 @@ export default function ImportarPage() {
 
     return duplicates.sort((a, b) => b.ids.length - a.ids.length);
   }, [dataVersion, report]);
+  const duplicateFlashcardGroups = useMemo(() => {
+    const grouped = new Map<string, { ids: string[]; preview: string }>();
+    loadFlashcards().forEach((item) => {
+      const groupKey = buildFlashcardDuplicateKey(item);
+      const preview = item.frente.trim().replace(/\s+/g, " ").slice(0, 130);
+      const existing = grouped.get(groupKey);
+      if (existing) {
+        existing.ids.push(item.id);
+      } else {
+        grouped.set(groupKey, { ids: [item.id], preview });
+      }
+    });
+
+    const duplicates: DuplicateFlashcardGroup[] = [];
+    grouped.forEach((value, groupKey) => {
+      if (value.ids.length < 2) return;
+      duplicates.push({
+        groupKey,
+        preview: value.preview,
+        ids: value.ids,
+      });
+    });
+
+    return duplicates.sort((a, b) => b.ids.length - a.ids.length);
+  }, [dataVersion, report]);
 
   useEffect(() => {
     setVisibleHistoryCount(HISTORY_PAGE_SIZE);
@@ -191,6 +223,7 @@ export default function ImportarPage() {
   useEffect(() => {
     setSelectedIncompleteGroups([]);
     setSelectedDuplicateGroups([]);
+    setSelectedDuplicateCardGroups([]);
   }, [dataVersion]);
 
   useEffect(() => {
@@ -656,6 +689,56 @@ export default function ImportarPage() {
     }
   }
 
+  async function handleDeleteDuplicateFlashcards() {
+    if (selectedDuplicateCardGroups.length === 0) {
+      setError("Selecione ao menos um grupo de cards repetidos para excluir.");
+      return;
+    }
+
+    const selectedGroups = duplicateFlashcardGroups.filter((group) =>
+      selectedDuplicateCardGroups.includes(group.groupKey),
+    );
+
+    const idsToDelete: string[] = [];
+    selectedGroups.forEach((group) => {
+      const sortedIds = [...group.ids].sort((a, b) => a.localeCompare(b));
+      idsToDelete.push(...sortedIds.slice(1));
+    });
+
+    if (idsToDelete.length === 0) {
+      setError("Nenhum card duplicado elegível para exclusão foi encontrado.");
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      `Excluir ${idsToDelete.length} card(s) repetido(s)? Será mantido 1 por grupo.`,
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const next = loadFlashcards().filter((item) => !idsToDelete.includes(item.id));
+      saveFlashcards(next);
+      if (isSupabaseConfigured()) {
+        setIsSyncingRemote(true);
+        await deleteFlashcardsRemoteByIds(idsToDelete);
+        setIsSyncingRemote(false);
+      }
+      addImportHistoryEntry({
+        action: "delete_selected",
+        flashcards: idsToDelete.length,
+        simulados: 0,
+        details: "Exclusão de cards repetidos (mantendo 1 por grupo)",
+      });
+      setSelectedDuplicateCardGroups([]);
+      setError(null);
+      setDataVersion((value) => value + 1);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "erro desconhecido";
+      setError(`Falha ao excluir cards repetidos: ${message}.`);
+      setIsSyncingRemote(false);
+    }
+  }
+
   async function handleImportBackup(file: File | null) {
     if (!file) return;
 
@@ -950,6 +1033,77 @@ export default function ImportarPage() {
               className="w-full rounded-xl border border-rose/30 bg-rose/15 px-3 py-2 text-sm font-medium text-rose transition hover:opacity-90"
             >
               Excluir incompletos selecionados ({selectedIncompleteGroups.length})
+            </button>
+          </>
+        )}
+      </AppCard>
+
+      <AppCard className="space-y-3">
+        <p className="font-mono text-xs uppercase tracking-wider text-teal">
+          Cards repetidos
+        </p>
+        <p className="text-xs text-muted">
+          Identifica duplicados por conteúdo (frente + verso) e remove os repetidos, mantendo 1
+          registro por grupo.
+        </p>
+        {duplicateFlashcardGroups.length === 0 ? (
+          <p className="text-sm text-muted">Nenhum grupo de cards repetidos detectado.</p>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedDuplicateCardGroups(
+                    duplicateFlashcardGroups.map((group) => group.groupKey),
+                  )
+                }
+                className="rounded-xl border border-blue/30 bg-blue/15 px-3 py-2 text-sm font-medium text-blue transition hover:opacity-90"
+              >
+                Selecionar todos
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedDuplicateCardGroups([])}
+                className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm font-medium text-foreground transition hover:bg-background/55"
+              >
+                Limpar seleção
+              </button>
+            </div>
+            <div className="max-h-56 space-y-2 overflow-auto pr-1">
+              {duplicateFlashcardGroups.map((group) => {
+                const checked = selectedDuplicateCardGroups.includes(group.groupKey);
+                return (
+                  <label
+                    key={group.groupKey}
+                    className="flex cursor-pointer items-start gap-2 rounded-xl border border-border bg-background/35 px-3 py-2"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(event) =>
+                        setSelectedDuplicateCardGroups((prev) =>
+                          event.target.checked
+                            ? [...prev, group.groupKey]
+                            : prev.filter((key) => key !== group.groupKey),
+                        )
+                      }
+                      className="mt-1"
+                    />
+                    <span className="text-xs text-muted">
+                      <span className="block text-sm text-foreground">{group.preview}</span>
+                      repetições: {group.ids.length} (serão removidos {group.ids.length - 1})
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={handleDeleteDuplicateFlashcards}
+              className="w-full rounded-xl border border-teal/30 bg-teal/15 px-3 py-2 text-sm font-medium text-teal transition hover:opacity-90"
+            >
+              Excluir cards repetidos selecionados ({selectedDuplicateCardGroups.length})
             </button>
           </>
         )}
@@ -1288,6 +1442,15 @@ function buildSimuladoDuplicateKey(item: SimuladoQuestion) {
     normalizeForDuplicate(item.alternativaC),
     normalizeForDuplicate(item.alternativaD),
     normalizeForDuplicate(item.correta),
+  ];
+  return parts.join("||");
+}
+
+function buildFlashcardDuplicateKey(item: Flashcard) {
+  const parts = [
+    normalizeForDuplicate(item.frente),
+    normalizeForDuplicate(item.verso),
+    normalizeForDuplicate(item.especialidade ?? ""),
   ];
   return parts.join("||");
 }
