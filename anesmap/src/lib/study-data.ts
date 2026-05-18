@@ -26,7 +26,12 @@ export type SimuladoQuestion = {
 
 export type ImportHistoryEntry = {
   id: string;
-  action: "import_csv" | "import_backup" | "export_backup" | "clear_data";
+  action:
+    | "import_csv"
+    | "import_backup"
+    | "export_backup"
+    | "clear_data"
+    | "delete_selected";
   timestamp: string;
   flashcards: number;
   simulados: number;
@@ -281,6 +286,36 @@ export async function clearStudyDataRemote() {
     .not("id", "is", null);
   if (simuladosError) {
     throw new Error(simuladosError.message);
+  }
+}
+
+export async function deleteFlashcardsRemoteByIds(ids: string[]) {
+  if (ids.length === 0) return;
+  const supabase = getSupabaseClient();
+  if (!supabase) return;
+
+  const chunkSize = 200;
+  for (let index = 0; index < ids.length; index += chunkSize) {
+    const chunk = ids.slice(index, index + chunkSize);
+    const { error } = await supabase.from("flashcards").delete().in("id", chunk);
+    if (error) {
+      throw new Error(error.message);
+    }
+  }
+}
+
+export async function deleteSimuladosRemoteByIds(ids: string[]) {
+  if (ids.length === 0) return;
+  const supabase = getSupabaseClient();
+  if (!supabase) return;
+
+  const chunkSize = 200;
+  for (let index = 0; index < ids.length; index += chunkSize) {
+    const chunk = ids.slice(index, index + chunkSize);
+    const { error } = await supabase.from("simulados").delete().in("id", chunk);
+    if (error) {
+      throw new Error(error.message);
+    }
   }
 }
 
