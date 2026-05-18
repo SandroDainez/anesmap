@@ -54,6 +54,12 @@ type ParserDebugItem = {
   expectedQuestions: number | null;
 };
 
+type IncompleteSimuladoGroup = {
+  sourceKey: string;
+  itemCount: number;
+  expectedQuestions: number;
+};
+
 export default function ImportarPage() {
   const [report, setReport] = useState<ImportReport | null>(null);
   const [isImporting, setIsImporting] = useState(false);
@@ -69,6 +75,7 @@ export default function ImportarPage() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [parserDebug, setParserDebug] = useState<ParserDebugItem[]>([]);
   const [importWarnings, setImportWarnings] = useState<string[]>([]);
+  const [selectedIncompleteGroups, setSelectedIncompleteGroups] = useState<string[]>([]);
 
   const currentTotals = useMemo(
     () => ({
@@ -122,6 +129,25 @@ export default function ImportarPage() {
         item.subtitle.toLowerCase().includes(query),
     );
   }, [manageQuery, manageableItems]);
+  const incompleteSimuladoGroups = useMemo(() => {
+    const grouped = new Map<string, number>();
+    loadSimulados().forEach((item) => {
+      const sourceKey = extractSimuladoSourceKey(item.id);
+      if (!sourceKey) return;
+      grouped.set(sourceKey, (grouped.get(sourceKey) ?? 0) + 1);
+    });
+
+    const groups: IncompleteSimuladoGroup[] = [];
+    grouped.forEach((itemCount, sourceKey) => {
+      const expectedQuestions = inferExpectedQuestionCount(sourceKey);
+      if (!expectedQuestions) return;
+      if (itemCount < expectedQuestions) {
+        groups.push({ sourceKey, itemCount, expectedQuestions });
+      }
+    });
+
+    return groups.sort((a, b) => a.sourceKey.localeCompare(b.sourceKey));
+  }, [dataVersion, report]);
 
   useEffect(() => {
     setVisibleHistoryCount(HISTORY_PAGE_SIZE);
@@ -130,6 +156,9 @@ export default function ImportarPage() {
   useEffect(() => {
     setSelectedIds([]);
   }, [manageKind, dataVersion]);
+  useEffect(() => {
+    setSelectedIncompleteGroups([]);
+  }, [dataVersion]);
 
   useEffect(() => {
     if (!isSupabaseConfigured()) return;
@@ -493,6 +522,54 @@ export default function ImportarPage() {
     }
   }
 
+  async function handleDeleteIncompleteSimulados() {
+    if (selectedIncompleteGroups.length === 0) {
+      setError("Selecione ao menos um grupo de simulados incompletos para excluir.");
+      return;
+    }
+
+    const allSimulados = loadSimulados();
+    const idsToDelete = allSimulados
+      .filter((item) => {
+        const sourceKey = extractSimuladoSourceKey(item.id);
+        return sourceKey ? selectedIncompleteGroups.includes(sourceKey) : false;
+      })
+      .map((item) => item.id);
+
+    if (idsToDelete.length === 0) {
+      setError("Nenhum simulado incompleto encontrado para os grupos selecionados.");
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      `Excluir ${idsToDelete.length} simulado(s) incompleto(s) dos grupos selecionados?`,
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const next = allSimulados.filter((item) => !idsToDelete.includes(item.id));
+      saveSimulados(next);
+      if (isSupabaseConfigured()) {
+        setIsSyncingRemote(true);
+        await deleteSimuladosRemoteByIds(idsToDelete);
+        setIsSyncingRemote(false);
+      }
+      addImportHistoryEntry({
+        action: "delete_selected",
+        flashcards: 0,
+        simulados: idsToDelete.length,
+        details: "Exclusão de simulados incompletos por grupo",
+      });
+      setSelectedIncompleteGroups([]);
+      setError(null);
+      setDataVersion((value) => value + 1);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "erro desconhecido";
+      setError(`Falha ao excluir simulados incompletos: ${message}.`);
+      setIsSyncingRemote(false);
+    }
+  }
+
   async function handleImportBackup(file: File | null) {
     if (!file) return;
 
@@ -721,6 +798,58 @@ export default function ImportarPage() {
       ) : null}
 
       <AppCard className="space-y-3">
+        <p className="font-mono text-xs uppercase tracking-wider text-rose">
+          Simulados incompletos
+        </p>
+        <p className="text-xs text-muted">
+          Exclua apenas grupos incompletos sem afetar os simulados completos.
+        </p>
+        {incompleteSimuladoGroups.length === 0 ? (
+          <p className="text-sm text-muted">
+            Nenhum grupo incompleto detectado (com base no esperado por arquivo 30/50).
+          </p>
+        ) : (
+          <>
+            <div className="max-h-56 space-y-2 overflow-auto pr-1">
+              {incompleteSimuladoGroups.map((group) => {
+                const checked = selectedIncompleteGroups.includes(group.sourceKey);
+                return (
+                  <label
+                    key={group.sourceKey}
+                    className="flex cursor-pointer items-start gap-2 rounded-xl border border-border bg-background/35 px-3 py-2"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(event) =>
+                        setSelectedIncompleteGroups((prev) =>
+                          event.target.checked
+                            ? [...prev, group.sourceKey]
+                            : prev.filter((key) => key !== group.sourceKey),
+                        )
+                      }
+                      className="mt-1"
+                    />
+                    <span className="text-xs text-muted">
+                      <span className="block text-sm text-foreground">{group.sourceKey}</span>
+                      detectado {group.itemCount} / esperado {group.expectedQuestions}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={handleDeleteIncompleteSimulados}
+              className="w-full rounded-xl border border-rose/30 bg-rose/15 px-3 py-2 text-sm font-medium text-rose transition hover:opacity-90"
+            >
+              Excluir incompletos selecionados ({selectedIncompleteGroups.length})
+            </button>
+          </>
+        )}
+      </AppCard>
+
+      <AppCard className="space-y-3">
         <p className="font-mono text-xs uppercase tracking-wider text-amber">
           Gerenciar conteúdo
         </p>
@@ -943,4 +1072,10 @@ function inferExpectedQuestionCount(fileName: string) {
   if (normalized.includes("30q") || normalized.includes("30quest")) return 30;
   if (normalized.includes("provaa") || normalized.includes("provab")) return 30;
   return null;
+}
+
+function extractSimuladoSourceKey(id: string) {
+  if (!id.startsWith("sim-")) return null;
+  const withoutPrefix = id.slice(4);
+  return withoutPrefix.replace(/-\d+$/, "");
 }
