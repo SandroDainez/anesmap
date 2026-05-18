@@ -149,10 +149,21 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(text, "text/html");
-  const questions = Array.from(doc.querySelectorAll(".questao"));
+  const questions = Array.from(doc.querySelectorAll(".questao, .question"));
   if (questions.length === 0) return parseSimuladoRawHtml(text);
 
   const answerMap = new Map<string, { correta: string; explicacao: string }>();
+
+  const comments = Array.from(doc.querySelectorAll(".comentario"));
+  const explanationByQuestion = new Map<string, string>();
+  comments.forEach((comment) => {
+    const cq = comment.querySelector(".cq")?.textContent ?? "";
+    const paragraph = (comment.querySelector("p")?.textContent ?? "").trim();
+    const qMatch = cq.match(/(\d+)/);
+    if (!qMatch) return;
+    explanationByQuestion.set(qMatch[1], paragraph);
+  });
+
   const gabaritoItems = Array.from(doc.querySelectorAll(".gab-item"));
   gabaritoItems.forEach((item) => {
     const header = item.querySelector(".gab-header")?.textContent ?? "";
@@ -163,27 +174,59 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
     if (!numberMatch || !letterMatch) return;
     answerMap.set(numberMatch[1], {
       correta: letterMatch[1].toUpperCase(),
-      explicacao: justificativa.trim(),
+      explicacao: justificativa.trim() || (explanationByQuestion.get(numberMatch[1]) ?? ""),
+    });
+  });
+
+  const gabaritoGridItems = Array.from(doc.querySelectorAll(".gabarito-item"));
+  gabaritoGridItems.forEach((item) => {
+    const qn = item.querySelector(".qn")?.textContent ?? "";
+    const ans = item.querySelector(".ans")?.textContent ?? "";
+    const numberMatch = qn.match(/(\d+)/);
+    const letterMatch = ans.match(/\b([A-E])\b/i);
+    if (!numberMatch || !letterMatch) return;
+    answerMap.set(numberMatch[1], {
+      correta: letterMatch[1].toUpperCase(),
+      explicacao: explanationByQuestion.get(numberMatch[1]) ?? "",
     });
   });
 
   const rows: Record<string, string>[] = [];
   questions.forEach((question, index) => {
-    const numText = question.querySelector(".questao-num")?.textContent ?? "";
+    const numText =
+      question.querySelector(".questao-num")?.textContent ??
+      question.querySelector(".question-number")?.textContent ??
+      "";
     const numMatch = numText.match(/(\d+)/);
     const questionNumber = numMatch?.[1] ?? String(index + 1);
 
-    const cenario = (question.querySelector(".cenario")?.textContent ?? "").trim();
-    const enunciado = (question.querySelector(".enunciado")?.textContent ?? "").trim();
+    const cenario =
+      (question.querySelector(".cenario")?.textContent ??
+        question.querySelector(".question-text .cc")?.textContent ??
+        "")
+        .trim()
+        .replace(/^CC:\s*/i, "");
+    const questionTextNode = question.querySelector(".question-text");
+    const cleanedQuestionText = (() => {
+      if (!questionTextNode) return "";
+      const clone = questionTextNode.cloneNode(true) as Element;
+      clone.querySelector(".cc")?.remove();
+      return (clone.textContent ?? "").trim();
+    })();
+    const enunciado = (question.querySelector(".enunciado")?.textContent ?? cleanedQuestionText)
+      .trim()
+      .replace(/\s+/g, " ");
     const title = cenario ? `${cenario}\n\n${enunciado}` : enunciado;
 
-    const alternatives = Array.from(question.querySelectorAll(".alternativas > div"))
+    const alternatives = Array.from(
+      question.querySelectorAll(".alternativas > div, .alternatives > li"),
+    )
       .map((node) => (node.textContent ?? "").trim())
       .filter(Boolean);
 
     const altMap = new Map<string, string>();
     alternatives.forEach((alt) => {
-      const match = alt.match(/^([A-E])\)\s*([\s\S]*)$/i);
+      const match = alt.match(/^([A-E])[\)\.\-:]\s*([\s\S]*)$/i);
       if (!match) return;
       altMap.set(match[1].toUpperCase(), match[2].trim());
     });
