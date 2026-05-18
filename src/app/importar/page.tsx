@@ -810,6 +810,26 @@ export default function ImportarPage() {
           </p>
         ) : (
           <>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedIncompleteGroups(
+                    incompleteSimuladoGroups.map((group) => group.sourceKey),
+                  )
+                }
+                className="rounded-xl border border-blue/30 bg-blue/15 px-3 py-2 text-sm font-medium text-blue transition hover:opacity-90"
+              >
+                Selecionar todos
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedIncompleteGroups([])}
+                className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm font-medium text-foreground transition hover:bg-background/55"
+              >
+                Limpar seleção
+              </button>
+            </div>
             <div className="max-h-56 space-y-2 overflow-auto pr-1">
               {incompleteSimuladoGroups.map((group) => {
                 const checked = selectedIncompleteGroups.includes(group.sourceKey);
