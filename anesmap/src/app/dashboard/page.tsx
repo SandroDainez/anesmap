@@ -1,6 +1,10 @@
+"use client";
+
+import { useMemo } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
+import { loadFlashcardProgress } from "@/lib/study-data";
 
 const studyTracks = [
   { id: "ME1", tone: "blue" },
@@ -9,6 +13,14 @@ const studyTracks = [
 ] as const;
 
 export default function DashboardPage() {
+  const progress = useMemo(() => {
+    const entries = Object.values(loadFlashcardProgress());
+    const reviewed = entries.filter((item) => item.repetitions > 0).length;
+    const mastered = entries.filter((item) => item.repetitions >= 3).length;
+    const completion = reviewed > 0 ? Math.round((mastered / reviewed) * 100) : 0;
+    return { reviewed, mastered, completion };
+  }, []);
+
   return (
     <main className="flex flex-1 flex-col gap-6">
       <SectionHeader
@@ -32,10 +44,21 @@ export default function DashboardPage() {
         <p className="font-mono text-xs uppercase tracking-wider text-teal">
           Progresso semanal
         </p>
-        <h2 className="mt-2 text-xl font-semibold">62% da meta concluída</h2>
-        <p className="mt-1 text-sm text-muted">
-          Continue por mais 18 minutos para bater sua meta diária.
-        </p>
+        {progress.reviewed > 0 ? (
+          <>
+            <h2 className="mt-2 text-xl font-semibold">{progress.completion}% de retenção atual</h2>
+            <p className="mt-1 text-sm text-muted">
+              {progress.mastered} card(s) consolidados de {progress.reviewed} revisado(s) nesta base.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 className="mt-2 text-xl font-semibold">Sem dados de progresso ainda</h2>
+            <p className="mt-1 text-sm text-muted">
+              Comece a revisar os flashcards para gerar métricas reais no painel.
+            </p>
+          </>
+        )}
       </AppCard>
     </main>
   );
