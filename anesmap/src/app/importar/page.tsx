@@ -124,8 +124,9 @@ export default function ImportarPage() {
 
       for (const file of Array.from(files)) {
         const fileText = await file.text();
-        const isHtml = file.name.toLowerCase().endsWith(".html");
-        const rows = isHtml ? parseHtmlTables(fileText) : parseCsv(fileText);
+        const htmlRows = parseHtmlTables(fileText);
+        const csvRows = parseCsv(fileText);
+        const rows = htmlRows.length > 0 ? htmlRows : csvRows;
         const normalizedFileName = normalizeKey(file.name);
 
         rows.forEach((row, index) => {
@@ -190,14 +191,22 @@ export default function ImportarPage() {
       const mergedFlashcards = mergeById(loadFlashcards(), incomingFlashcards);
       const mergedSimulados = mergeById(loadSimulados(), incomingSimulados);
 
-      saveFlashcards(mergedFlashcards);
-      saveSimulados(mergedSimulados);
+      let localSaveError = false;
+      try {
+        saveFlashcards(mergedFlashcards);
+        saveSimulados(mergedSimulados);
+      } catch {
+        localSaveError = true;
+      }
+      let remoteSyncError = false;
 
       if (isSupabaseConfigured()) {
         setIsSyncingRemote(true);
         try {
           await saveFlashcardsRemote(incomingFlashcards);
           await saveSimuladosRemote(incomingSimulados);
+        } catch {
+          remoteSyncError = true;
         } finally {
           setIsSyncingRemote(false);
         }
@@ -219,11 +228,23 @@ export default function ImportarPage() {
 
       if (incomingFlashcards.length === 0 && incomingSimulados.length === 0) {
         setError(
-          "Nenhum registro reconhecido. Se o arquivo for HTML do Drive, abra e salve como página completa (.html) antes de importar.",
+          "Nenhum registro reconhecido. Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.",
+        );
+      } else if (localSaveError && !remoteSyncError) {
+        setError(
+          "Importação concluída no Supabase, mas sem cache local no navegador (limite de armazenamento).",
+        );
+      } else if (remoteSyncError) {
+        setError(
+          "Importação local concluída, mas houve falha ao sincronizar com Supabase. Verifique permissões/RLS e tente novamente.",
         );
       }
-    } catch (err) {
-      setError("Falha ao importar arquivos. Confira o formato CSV.");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "erro inesperado durante leitura dos arquivos";
+      setError(`Falha ao importar arquivos: ${message}.`);
     } finally {
       setIsImporting(false);
     }
@@ -246,8 +267,12 @@ export default function ImportarPage() {
 
     void (async () => {
       try {
-        saveFlashcards([]);
-        saveSimulados([]);
+        try {
+          saveFlashcards([]);
+          saveSimulados([]);
+        } catch {
+          // Keep remote clear flow even when local storage is full/unavailable.
+        }
         if (isSupabaseConfigured()) {
           setIsSyncingRemote(true);
           await clearStudyDataRemote();
@@ -379,7 +404,7 @@ export default function ImportarPage() {
         <input
           id="csv-files"
           type="file"
-          accept=".csv,text/csv,.html,text/html"
+          accept=".csv,text/csv,.html,.htm,text/html,.txt,text/plain"
           multiple
           className="sr-only"
           onChange={(event) => handleFiles(event.target.files)}
