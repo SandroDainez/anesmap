@@ -162,8 +162,8 @@ export default function ImportarPage() {
     setError(null);
 
     try {
-      const incomingFlashcards: Flashcard[] = [];
-      const incomingSimulados: SimuladoQuestion[] = [];
+      const detectedFlashcards: Flashcard[] = [];
+      const detectedSimulados: SimuladoQuestion[] = [];
       let ignoredRows = 0;
       const debugItems: ParserDebugItem[] = [];
 
@@ -211,8 +211,8 @@ export default function ImportarPage() {
             altD.length > 0 &&
             ["A", "B", "C", "D"].includes(corretaRaw);
 
-          if (looksLikeFlashcard && (importMode === "all" || importMode === "flashcards")) {
-            incomingFlashcards.push({
+          if (looksLikeFlashcard) {
+            detectedFlashcards.push({
               id: `fc-${rowId}`,
               me: track,
               frente: frente.trim(),
@@ -226,8 +226,8 @@ export default function ImportarPage() {
             return;
           }
 
-          if (looksLikeQuestion && (importMode === "all" || importMode === "simulados")) {
-            incomingSimulados.push({
+          if (looksLikeQuestion) {
+            detectedSimulados.push({
               id: `sim-${rowId}`,
               me: track,
               tema: (row.tema ?? "").trim() || undefined,
@@ -244,6 +244,26 @@ export default function ImportarPage() {
 
           ignoredRows += 1;
         });
+      }
+
+      let incomingFlashcards = detectedFlashcards;
+      let incomingSimulados = detectedSimulados;
+      let modeFallbackNotice: string | null = null;
+
+      if (importMode === "flashcards") {
+        incomingSimulados = [];
+        if (incomingFlashcards.length === 0 && detectedSimulados.length > 0) {
+          incomingSimulados = detectedSimulados;
+          modeFallbackNotice =
+            "Modo Cards estava ativo, mas só simulados foram detectados. Importação automática de simulados aplicada.";
+        }
+      } else if (importMode === "simulados") {
+        incomingFlashcards = [];
+        if (incomingSimulados.length === 0 && detectedFlashcards.length > 0) {
+          incomingFlashcards = detectedFlashcards;
+          modeFallbackNotice =
+            "Modo Simulados estava ativo, mas só cards foram detectados. Importação automática de cards aplicada.";
+        }
       }
 
       const uniqueIncomingFlashcards = dedupeById(incomingFlashcards);
@@ -307,6 +327,8 @@ export default function ImportarPage() {
         setError(
           `Importação local concluída, mas houve falha ao sincronizar com Supabase: ${remoteSyncErrorMessage}.`,
         );
+      } else if (modeFallbackNotice) {
+        setError(modeFallbackNotice);
       }
     } catch (err: unknown) {
       const message =
