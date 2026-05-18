@@ -201,7 +201,10 @@ export default function FlashcardsPage() {
                 <>
                   <p className="font-mono text-xs uppercase tracking-wider text-muted">Frente</p>
                   <h2 className="mt-2 text-2xl font-semibold leading-snug">
-                    {currentCardFormatted?.question}
+                    {formatCardQuestionForSession(
+                      currentCardFormatted?.question ?? "",
+                      currentCardIndex,
+                    )}
                   </h2>
                   <p className="mt-3 text-xs text-muted">Toque para virar e ver a resposta.</p>
                 </>
@@ -309,19 +312,26 @@ function parseCardContent(frente: string, verso: string, structuredReferences?: 
 }
 
 function compareCardsForStudyOrder(a: Flashcard, b: Flashcard) {
-  const numA = extractCardNumber(a.frente);
-  const numB = extractCardNumber(b.frente);
-  if (numA !== null && numB !== null && numA !== numB) return numA - numB;
-  if (numA !== null && numB === null) return -1;
-  if (numA === null && numB !== null) return 1;
+  const rowA = extractImportedRowOrder(a.id);
+  const rowB = extractImportedRowOrder(b.id);
+  if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
+  if (rowA !== null && rowB === null) return -1;
+  if (rowA === null && rowB !== null) return 1;
   return a.frente.localeCompare(b.frente, "pt-BR");
 }
 
-function extractCardNumber(text: string) {
-  const trimmed = text.trim();
-  const match = trimmed.match(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?(\d{1,4})[\)\.\-:–—\s]/i);
+function extractImportedRowOrder(id: string) {
+  const match = id.match(/-(\d+)$/);
   if (!match) return null;
   return Number(match[1]);
+}
+
+function formatCardQuestionForSession(question: string, index: number) {
+  const cleaned = question
+    .trim()
+    .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")
+    .trim();
+  return `${index + 1}) ${cleaned || question}`;
 }
 
 function normalizeQuestionLabel(value: string) {

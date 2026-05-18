@@ -48,7 +48,7 @@ export default function SimuladosPage() {
     () =>
       importedSimulados
         .filter((item) => item.me === selectedMe)
-        .sort((a, b) => extractQuestionOrder(a.enunciado) - extractQuestionOrder(b.enunciado)),
+        .sort((a, b) => compareSimuladosForSessionOrder(a, b)),
     [importedSimulados, selectedMe],
   );
   const currentQuestion = simuladosByTrack[currentIndex];
@@ -270,6 +270,25 @@ function extractQuestionOrder(enunciado: string) {
   const match = enunciado.trim().match(/^(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:\s]/i);
   if (!match) return Number.MAX_SAFE_INTEGER;
   return Number(match[1]);
+}
+
+function extractImportedRowOrder(id: string) {
+  const match = id.match(/-(\d+)$/);
+  if (!match) return null;
+  return Number(match[1]);
+}
+
+function compareSimuladosForSessionOrder(a: SimuladoQuestion, b: SimuladoQuestion) {
+  const rowA = extractImportedRowOrder(a.id);
+  const rowB = extractImportedRowOrder(b.id);
+  if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
+  if (rowA !== null && rowB === null) return -1;
+  if (rowA === null && rowB !== null) return 1;
+
+  const numA = extractQuestionOrder(a.enunciado);
+  const numB = extractQuestionOrder(b.enunciado);
+  if (numA !== numB) return numA - numB;
+  return a.enunciado.localeCompare(b.enunciado, "pt-BR");
 }
 
 function formatQuestionWithNumber(enunciado: string, index: number) {
