@@ -1413,7 +1413,7 @@ function extractSimuladoSourceKey(id: string) {
 
 function normalizeQuestionLabel(value: string) {
   const trimmed = value.trim();
-  const match = trimmed.match(/^(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:\s]*(.*)$/i);
+  const match = trimmed.match(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:–—\s]*(.*)$/i);
   if (!match) return trimmed;
   const suffix = (match[2] ?? "").trim();
   if (!suffix) return trimmed;

@@ -30,6 +30,7 @@ export default function FlashcardsPage() {
   const [progressMap, setProgressMap] = useState<Record<string, FlashcardProgress>>({});
   const [now, setNow] = useState(() => new Date());
   const [isFlipped, setIsFlipped] = useState(false);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   useEffect(() => {
     const local = loadFlashcards();
@@ -64,7 +65,8 @@ export default function FlashcardsPage() {
       }),
     [cardsByTrack, progressMap, now],
   );
-  const currentCard: Flashcard | undefined = dueCards[0] ?? cardsByTrack[0];
+  const studyDeck = dueCards.length > 0 ? dueCards : cardsByTrack;
+  const currentCard: Flashcard | undefined = studyDeck[currentCardIndex];
   const currentProgress =
     currentCard ? progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now) : null;
   const currentCardFormatted = currentCard
@@ -74,6 +76,20 @@ export default function FlashcardsPage() {
   useEffect(() => {
     setIsFlipped(false);
   }, [selectedMe, currentCard?.id]);
+
+  useEffect(() => {
+    setCurrentCardIndex(0);
+  }, [selectedMe]);
+
+  useEffect(() => {
+    if (studyDeck.length === 0) {
+      setCurrentCardIndex(0);
+      return;
+    }
+    if (currentCardIndex > studyDeck.length - 1) {
+      setCurrentCardIndex(studyDeck.length - 1);
+    }
+  }, [studyDeck.length, currentCardIndex]);
 
   function gradeCard(quality: number) {
     if (!currentCard) return;
@@ -86,6 +102,16 @@ export default function FlashcardsPage() {
     setProgressMap(updated);
     saveFlashcardProgress(updated);
     setNow(new Date());
+  }
+
+  function goNextCard() {
+    if (currentCardIndex >= studyDeck.length - 1) return;
+    setCurrentCardIndex((value) => value + 1);
+  }
+
+  function goPrevCard() {
+    if (currentCardIndex <= 0) return;
+    setCurrentCardIndex((value) => value - 1);
   }
 
   const deckStats = [
@@ -150,6 +176,9 @@ export default function FlashcardsPage() {
         </p>
         {currentCard ? (
           <>
+            <p className="mt-2 text-xs text-muted">
+              Card {currentCardIndex + 1} de {studyDeck.length}
+            </p>
             <button
               type="button"
               onClick={() => setIsFlipped((value) => !value)}
@@ -191,6 +220,24 @@ export default function FlashcardsPage() {
                 {currentProgress.intervalDays} dia(s)
               </p>
             ) : null}
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={goPrevCard}
+                disabled={currentCardIndex === 0}
+                className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
+              >
+                Anterior
+              </button>
+              <button
+                type="button"
+                onClick={goNextCard}
+                disabled={currentCardIndex >= studyDeck.length - 1}
+                className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
+              >
+                Próximo
+              </button>
+            </div>
           </>
         ) : (
           <p className="mt-2 text-sm text-muted">
@@ -243,7 +290,7 @@ function parseCardContent(frente: string, verso: string) {
 
 function normalizeQuestionLabel(value: string) {
   const trimmed = value.trim();
-  const match = trimmed.match(/^(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:\s]*(.*)$/i);
+  const match = trimmed.match(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:–—\s]*(.*)$/i);
   if (!match) return trimmed;
   const suffix = (match[2] ?? "").trim();
   if (!suffix) return trimmed;
