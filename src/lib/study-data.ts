@@ -11,6 +11,14 @@ export type Flashcard = {
   especialidade?: string;
 };
 
+export type FlashcardProgress = {
+  easeFactor: number;
+  repetitions: number;
+  intervalDays: number;
+  nextReviewAt: string;
+  lastQuality: number;
+};
+
 export type SimuladoQuestion = {
   id: string;
   me: StudyTrack;
@@ -42,6 +50,7 @@ export const STORAGE_KEYS = {
   flashcards: "anesmap.flashcards",
   simulados: "anesmap.simulados",
   importHistory: "anesmap.importHistory",
+  flashcardProgress: "anesmap.flashcardProgress",
 } as const;
 
 function getSupabaseClient() {
@@ -240,6 +249,81 @@ export function loadFlashcards(): Flashcard[] {
   } catch {
     return [];
   }
+}
+
+export function loadFlashcardProgress(): Record<string, FlashcardProgress> {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEYS.flashcardProgress);
+    if (!raw) {
+      return {};
+    }
+    return JSON.parse(raw) as Record<string, FlashcardProgress>;
+  } catch {
+    return {};
+  }
+}
+
+export function saveFlashcardProgress(data: Record<string, FlashcardProgress>) {
+  if (typeof window === "undefined") {
+    return;
+  }
+  window.localStorage.setItem(STORAGE_KEYS.flashcardProgress, JSON.stringify(data));
+}
+
+export function getDefaultFlashcardProgress(now = new Date()): FlashcardProgress {
+  return {
+    easeFactor: 2.5,
+    repetitions: 0,
+    intervalDays: 0,
+    nextReviewAt: now.toISOString(),
+    lastQuality: 0,
+  };
+}
+
+export function applySm2(
+  progress: FlashcardProgress,
+  quality: number,
+  now = new Date(),
+): FlashcardProgress {
+  const boundedQuality = Math.min(5, Math.max(0, quality));
+  let nextEaseFactor = progress.easeFactor;
+  let nextRepetitions = progress.repetitions;
+  let nextIntervalDays = progress.intervalDays;
+
+  if (boundedQuality < 3) {
+    nextRepetitions = 0;
+    nextIntervalDays = 1;
+  } else {
+    if (nextRepetitions === 0) {
+      nextIntervalDays = 1;
+    } else if (nextRepetitions === 1) {
+      nextIntervalDays = 6;
+    } else {
+      nextIntervalDays = Math.max(1, Math.round(nextIntervalDays * nextEaseFactor));
+    }
+    nextRepetitions += 1;
+  }
+
+  nextEaseFactor =
+    nextEaseFactor +
+    (0.1 -
+      (5 - boundedQuality) * (0.08 + (5 - boundedQuality) * 0.02));
+  nextEaseFactor = Math.max(1.3, Number(nextEaseFactor.toFixed(2)));
+
+  const nextReviewAt = new Date(now);
+  nextReviewAt.setDate(nextReviewAt.getDate() + nextIntervalDays);
+
+  return {
+    easeFactor: nextEaseFactor,
+    repetitions: nextRepetitions,
+    intervalDays: nextIntervalDays,
+    nextReviewAt: nextReviewAt.toISOString(),
+    lastQuality: boundedQuality,
+  };
 }
 
 export async function loadFlashcardsRemote(): Promise<Flashcard[] | null> {

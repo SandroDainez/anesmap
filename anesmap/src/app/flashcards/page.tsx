@@ -5,11 +5,16 @@ import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import {
+  applySm2,
   Flashcard,
+  FlashcardProgress,
+  getDefaultFlashcardProgress,
   StudyTrack,
   isSupabaseConfigured,
+  loadFlashcardProgress,
   loadFlashcards,
   loadFlashcardsRemote,
+  saveFlashcardProgress,
   saveFlashcards,
 } from "@/lib/study-data";
 
@@ -22,10 +27,13 @@ const deckStats = [
 export default function FlashcardsPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
   const [importedCards, setImportedCards] = useState<Flashcard[]>([]);
+  const [progressMap, setProgressMap] = useState<Record<string, FlashcardProgress>>({});
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
     const local = loadFlashcards();
     setImportedCards(local);
+    setProgressMap(loadFlashcardProgress());
 
     if (!isSupabaseConfigured()) return;
 
@@ -38,11 +46,45 @@ export default function FlashcardsPage() {
     })();
   }, []);
 
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
   const cardsByTrack = useMemo(
     () => importedCards.filter((item) => item.me === selectedMe),
     [importedCards, selectedMe],
   );
-  const currentCard: Flashcard | undefined = cardsByTrack[0];
+  const dueCards = useMemo(
+    () =>
+      cardsByTrack.filter((card) => {
+        const progress = progressMap[card.id] ?? getDefaultFlashcardProgress(now);
+        return new Date(progress.nextReviewAt) <= now;
+      }),
+    [cardsByTrack, progressMap, now],
+  );
+  const currentCard: Flashcard | undefined = dueCards[0] ?? cardsByTrack[0];
+  const currentProgress =
+    currentCard ? progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now) : null;
+
+  function gradeCard(quality: number) {
+    if (!currentCard) return;
+    const current = progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now);
+    const next = applySm2(current, quality, now);
+    const updated = {
+      ...progressMap,
+      [currentCard.id]: next,
+    };
+    setProgressMap(updated);
+    saveFlashcardProgress(updated);
+    setNow(new Date());
+  }
+
+  const deckStats = [
+    { label: "Devidos", value: dueCards.length, tone: "text-teal" },
+    { label: "Total", value: cardsByTrack.length, tone: "text-blue" },
+    { label: "Dominados", value: cardsByTrack.length - dueCards.length, tone: "text-purple" },
+  ] as const;
 
   return (
     <main className="flex flex-1 flex-col gap-6">
@@ -107,6 +149,12 @@ export default function FlashcardsPage() {
                 {currentCard.especialidade}
               </p>
             ) : null}
+            {currentProgress ? (
+              <p className="mt-2 text-xs text-muted">
+                Repetições: {currentProgress.repetitions} · Intervalo:{" "}
+                {currentProgress.intervalDays} dia(s)
+              </p>
+            ) : null}
           </>
         ) : (
           <p className="mt-2 text-sm text-muted">
@@ -114,13 +162,13 @@ export default function FlashcardsPage() {
           </p>
         )}
         <div className="mt-4 grid grid-cols-3 gap-2 text-sm font-medium">
-          <StatusBadge as="button" tone="rose" className="px-2">
+          <StatusBadge as="button" tone="rose" className="px-2" onClick={() => gradeCard(2)}>
             Difícil
           </StatusBadge>
-          <StatusBadge as="button" tone="amber" className="px-2">
+          <StatusBadge as="button" tone="amber" className="px-2" onClick={() => gradeCard(3)}>
             Médio
           </StatusBadge>
-          <StatusBadge as="button" tone="teal" className="px-2">
+          <StatusBadge as="button" tone="teal" className="px-2" onClick={() => gradeCard(5)}>
             Fácil
           </StatusBadge>
         </div>
