@@ -120,6 +120,13 @@ export function parseHtmlTables(text: string): Record<string, string>[] {
     extractRowsFromTable(table, allRows);
   });
 
+  if (allRows.length === 0) {
+    const fallbackRows = extractRowsFromRawHtml(text);
+    if (fallbackRows.length > 0) {
+      return fallbackRows;
+    }
+  }
+
   return allRows;
 }
 
@@ -476,4 +483,49 @@ function canonicalHeaderKey(header: string) {
   if (normalized.includes("correta") || normalized.includes("gabarito")) return "correta";
 
   return normalized;
+}
+
+function extractRowsFromRawHtml(html: string): Record<string, string>[] {
+  const normalized = decodeHtmlEntities(html)
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n");
+  const trMatches = normalized.match(/<tr[\s\S]*?<\/tr>/gi) ?? [];
+  const rows: Record<string, string>[] = [];
+
+  for (const tr of trMatches) {
+    if (/<th[\s\S]*?>/i.test(tr)) continue;
+
+    const tdMatches = tr.match(/<td[\s\S]*?>([\s\S]*?)<\/td>/gi) ?? [];
+    if (tdMatches.length < 2) continue;
+
+    const cells = tdMatches
+      .map((cell) =>
+        decodeHtmlEntities(
+          cell
+            .replace(/<td[\s\S]*?>/i, "")
+            .replace(/<\/td>/i, "")
+            .replace(/<br\s*\/?>/gi, "\n")
+            .replace(/<[^>]+>/g, " ")
+            .replace(/\s+/g, " ")
+            .trim(),
+        ),
+      )
+      .filter((cell) => cell.length > 0);
+
+    if (cells.length < 2) continue;
+
+    const firstCellIsIndex = /^\d+$/.test(cells[0] ?? "");
+    const frente = firstCellIsIndex ? cells[1] ?? "" : cells[0] ?? "";
+    const verso = firstCellIsIndex ? cells[2] ?? "" : cells[1] ?? "";
+
+    if (!frente || !verso) continue;
+
+    rows.push({
+      id: `raw-html-row-${rows.length + 1}`,
+      frente,
+      verso,
+    });
+  }
+
+  return rows;
 }
