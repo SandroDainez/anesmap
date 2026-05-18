@@ -51,6 +51,7 @@ type ParserDebugItem = {
   simuladoRows: number;
   csvRows: number;
   chosenRows: number;
+  expectedQuestions: number | null;
 };
 
 export default function ImportarPage() {
@@ -67,6 +68,7 @@ export default function ImportarPage() {
   const [manageQuery, setManageQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [parserDebug, setParserDebug] = useState<ParserDebugItem[]>([]);
+  const [importWarnings, setImportWarnings] = useState<string[]>([]);
 
   const currentTotals = useMemo(
     () => ({
@@ -160,18 +162,21 @@ export default function ImportarPage() {
 
     setIsImporting(true);
     setError(null);
+    setImportWarnings([]);
 
     try {
-      const incomingFlashcards: Flashcard[] = [];
-      const incomingSimulados: SimuladoQuestion[] = [];
+      const detectedFlashcards: Flashcard[] = [];
+      const detectedSimulados: SimuladoQuestion[] = [];
       let ignoredRows = 0;
       const debugItems: ParserDebugItem[] = [];
+      const warnings: string[] = [];
 
       for (const file of Array.from(files)) {
         const fileText = await file.text();
         const simuladoRows = parseSimuladoHtml(fileText);
         const htmlRows = parseHtmlTables(fileText);
         const csvRows = parseCsv(fileText);
+        const expectedQuestions = inferExpectedQuestionCount(file.name);
         const rows =
           simuladoRows.length > 0
             ? simuladoRows
@@ -184,7 +189,19 @@ export default function ImportarPage() {
           htmlRows: htmlRows.length,
           csvRows: csvRows.length,
           chosenRows: rows.length,
+          expectedQuestions,
         });
+        if (expectedQuestions) {
+          if (simuladoRows.length === 0 && csvRows.length >= expectedQuestions) {
+            warnings.push(
+              `${file.name}: esperado ${expectedQuestions}, mas parser de simulado detectou 0 (arquivo pode estar em formato não padronizado).`,
+            );
+          } else if (simuladoRows.length > 0 && simuladoRows.length < expectedQuestions) {
+            warnings.push(
+              `${file.name}: esperado ${expectedQuestions}, detectado ${simuladoRows.length} no parser de simulado (arquivo possivelmente incompleto).`,
+            );
+          }
+        }
         const normalizedFileName = normalizeKey(file.name);
 
         rows.forEach((row, index) => {
@@ -211,8 +228,8 @@ export default function ImportarPage() {
             altD.length > 0 &&
             ["A", "B", "C", "D"].includes(corretaRaw);
 
-          if (looksLikeFlashcard && (importMode === "all" || importMode === "flashcards")) {
-            incomingFlashcards.push({
+          if (looksLikeFlashcard) {
+            detectedFlashcards.push({
               id: `fc-${rowId}`,
               me: track,
               frente: frente.trim(),
@@ -226,8 +243,8 @@ export default function ImportarPage() {
             return;
           }
 
-          if (looksLikeQuestion && (importMode === "all" || importMode === "simulados")) {
-            incomingSimulados.push({
+          if (looksLikeQuestion) {
+            detectedSimulados.push({
               id: `sim-${rowId}`,
               me: track,
               tema: (row.tema ?? "").trim() || undefined,
@@ -244,6 +261,26 @@ export default function ImportarPage() {
 
           ignoredRows += 1;
         });
+      }
+
+      let incomingFlashcards = detectedFlashcards;
+      let incomingSimulados = detectedSimulados;
+      let modeFallbackNotice: string | null = null;
+
+      if (importMode === "flashcards") {
+        incomingSimulados = [];
+        if (incomingFlashcards.length === 0 && detectedSimulados.length > 0) {
+          incomingSimulados = detectedSimulados;
+          modeFallbackNotice =
+            "Modo Cards estava ativo, mas só simulados foram detectados. Importação automática de simulados aplicada.";
+        }
+      } else if (importMode === "simulados") {
+        incomingFlashcards = [];
+        if (incomingSimulados.length === 0 && detectedFlashcards.length > 0) {
+          incomingFlashcards = detectedFlashcards;
+          modeFallbackNotice =
+            "Modo Simulados estava ativo, mas só cards foram detectados. Importação automática de cards aplicada.";
+        }
       }
 
       const uniqueIncomingFlashcards = dedupeById(incomingFlashcards);
@@ -283,6 +320,7 @@ export default function ImportarPage() {
         filesProcessed: files.length,
       });
       setParserDebug(debugItems);
+      setImportWarnings(warnings);
       addImportHistoryEntry({
         action: "import_csv",
         flashcards: uniqueIncomingFlashcards.length,
@@ -307,6 +345,8 @@ export default function ImportarPage() {
         setError(
           `Importação local concluída, mas houve falha ao sincronizar com Supabase: ${remoteSyncErrorMessage}.`,
         );
+      } else if (modeFallbackNotice) {
+        setError(modeFallbackNotice);
       }
     } catch (err: unknown) {
       const message =
@@ -620,6 +660,14 @@ export default function ImportarPage() {
           <p className="text-sm text-muted">Sincronizando com Supabase...</p>
         ) : null}
         {error ? <p className="text-sm text-rose">{error}</p> : null}
+        {importWarnings.length > 0 ? (
+          <div className="space-y-1 rounded-xl border border-amber/25 bg-amber/10 p-3 text-xs text-amber">
+            <p className="font-medium">Avisos de consistência</p>
+            {importWarnings.map((warning) => (
+              <p key={warning}>{warning}</p>
+            ))}
+          </div>
+        ) : null}
       </AppCard>
 
       {parserDebug.length > 0 ? (
@@ -639,6 +687,12 @@ export default function ImportarPage() {
                   <span className="text-teal">{item.htmlRows}</span> · csv:{" "}
                   <span className="text-purple">{item.csvRows}</span> · usado:{" "}
                   <span className="text-foreground">{item.chosenRows}</span>
+                  {item.expectedQuestions ? (
+                    <>
+                      {" "}
+                      · esperado: <span className="text-amber">{item.expectedQuestions}</span>
+                    </>
+                  ) : null}
                 </p>
               </div>
             ))}
@@ -881,4 +935,12 @@ function dedupeById<T extends { id: string }>(items: T[]) {
     map.set(item.id, item);
   });
   return Array.from(map.values());
+}
+
+function inferExpectedQuestionCount(fileName: string) {
+  const normalized = normalizeKey(fileName);
+  if (normalized.includes("50quest")) return 50;
+  if (normalized.includes("30q") || normalized.includes("30quest")) return 30;
+  if (normalized.includes("provaa") || normalized.includes("provab")) return 30;
+  return null;
 }
