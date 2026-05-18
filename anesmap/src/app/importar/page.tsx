@@ -45,6 +45,13 @@ type BackupPayload = {
 type HistoryFilter = "all" | "imports" | "backups" | "clear";
 type ImportMode = "all" | "flashcards" | "simulados";
 const HISTORY_PAGE_SIZE = 5;
+type ParserDebugItem = {
+  fileName: string;
+  htmlRows: number;
+  simuladoRows: number;
+  csvRows: number;
+  chosenRows: number;
+};
 
 export default function ImportarPage() {
   const [report, setReport] = useState<ImportReport | null>(null);
@@ -59,6 +66,7 @@ export default function ImportarPage() {
   const [manageKind, setManageKind] = useState<"flashcards" | "simulados">("flashcards");
   const [manageQuery, setManageQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [parserDebug, setParserDebug] = useState<ParserDebugItem[]>([]);
 
   const currentTotals = useMemo(
     () => ({
@@ -157,6 +165,7 @@ export default function ImportarPage() {
       const incomingFlashcards: Flashcard[] = [];
       const incomingSimulados: SimuladoQuestion[] = [];
       let ignoredRows = 0;
+      const debugItems: ParserDebugItem[] = [];
 
       for (const file of Array.from(files)) {
         const fileText = await file.text();
@@ -169,6 +178,13 @@ export default function ImportarPage() {
             : htmlRows.length > 0
               ? htmlRows
               : csvRows;
+        debugItems.push({
+          fileName: file.name,
+          simuladoRows: simuladoRows.length,
+          htmlRows: htmlRows.length,
+          csvRows: csvRows.length,
+          chosenRows: rows.length,
+        });
         const normalizedFileName = normalizeKey(file.name);
 
         rows.forEach((row, index) => {
@@ -266,6 +282,7 @@ export default function ImportarPage() {
         ignoredRows,
         filesProcessed: files.length,
       });
+      setParserDebug(debugItems);
       addImportHistoryEntry({
         action: "import_csv",
         flashcards: uniqueIncomingFlashcards.length,
@@ -604,6 +621,30 @@ export default function ImportarPage() {
         ) : null}
         {error ? <p className="text-sm text-rose">{error}</p> : null}
       </AppCard>
+
+      {parserDebug.length > 0 ? (
+        <AppCard className="space-y-2">
+          <p className="font-mono text-xs uppercase tracking-wider text-amber">
+            Diagnóstico de parser
+          </p>
+          <div className="space-y-2">
+            {parserDebug.map((item) => (
+              <div
+                key={item.fileName}
+                className="rounded-xl border border-border bg-background/35 px-3 py-2 text-xs text-muted"
+              >
+                <p className="text-sm text-foreground">{item.fileName}</p>
+                <p>
+                  simulado: <span className="text-blue">{item.simuladoRows}</span> · html:{" "}
+                  <span className="text-teal">{item.htmlRows}</span> · csv:{" "}
+                  <span className="text-purple">{item.csvRows}</span> · usado:{" "}
+                  <span className="text-foreground">{item.chosenRows}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </AppCard>
+      ) : null}
 
       {report ? (
         <AppCard className="space-y-2">
