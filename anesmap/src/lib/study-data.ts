@@ -84,6 +84,45 @@ export function parseCsv(text: string): Record<string, string>[] {
   });
 }
 
+export function parseHtmlTables(text: string): Record<string, string>[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  const parser = new DOMParser();
+  const primaryDoc = parser.parseFromString(text, "text/html");
+  const primaryTables = Array.from(primaryDoc.querySelectorAll("table"));
+  const doc =
+    primaryTables.length > 0
+      ? primaryDoc
+      : parser.parseFromString(decodeHtmlEntities(text), "text/html");
+  const tables = Array.from(doc.querySelectorAll("table"));
+  const allRows: Record<string, string>[] = [];
+
+  if (tables.length === 0) {
+    const preBlocks = Array.from(doc.querySelectorAll("pre")).map(
+      (node) => node.textContent ?? "",
+    );
+    for (const preContent of preBlocks) {
+      const maybeHtml = decodeHtmlEntities(preContent);
+      const preDoc = parser.parseFromString(maybeHtml, "text/html");
+      const preTables = Array.from(preDoc.querySelectorAll("table"));
+      if (preTables.length > 0) {
+        preTables.forEach((table) => {
+          extractRowsFromTable(table, allRows);
+        });
+        return allRows;
+      }
+    }
+  }
+
+  tables.forEach((table) => {
+    extractRowsFromTable(table, allRows);
+  });
+
+  return allRows;
+}
+
 export function loadFlashcards(): Flashcard[] {
   if (typeof window === "undefined") {
     return [];
@@ -343,4 +382,62 @@ function parseCsvRows(text: string, delimiter: string): string[][] {
   }
 
   return rows;
+}
+
+function decodeHtmlEntities(value: string) {
+  if (typeof window === "undefined") return value;
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = value;
+  return textarea.value;
+}
+
+function extractRowsFromTable(table: Element, target: Record<string, string>[]) {
+  const rawRows = Array.from(table.querySelectorAll("tr")).map((row) => {
+    const cells = Array.from(row.querySelectorAll("th, td")).map((cell) =>
+      (cell.textContent ?? "").trim(),
+    );
+    return cells;
+  });
+
+  const rows = rawRows.filter((row) => row.some((cell) => cell.length > 0));
+  if (rows.length === 0) return;
+
+  const hasExplicitHeader = rows[0].some((_, index) =>
+    table.querySelector(`tr:first-child th:nth-child(${index + 1})`),
+  );
+
+  const firstRow = rows[0];
+  const inferredHeader =
+    !hasExplicitHeader &&
+    firstRow.some((cell) =>
+      /frente|verso|pergunta|resposta|enunciado|alternativa/i.test(cell),
+    );
+
+  if (hasExplicitHeader || inferredHeader) {
+    const headers = rows[0].map((header) => normalizeKey(header));
+    rows.slice(1).forEach((row) => {
+      const obj: Record<string, string> = {};
+      headers.forEach((header, index) => {
+        obj[header] = (row[index] ?? "").trim();
+      });
+      target.push(obj);
+    });
+    return;
+  }
+
+  rows.forEach((row, index) => {
+    if (row.length < 2) return;
+
+    const firstCellIsIndex = /^\d+$/.test((row[0] ?? "").trim());
+    const frente = firstCellIsIndex ? row[1] ?? "" : row[0] ?? "";
+    const verso = firstCellIsIndex ? row[2] ?? "" : row[1] ?? "";
+
+    if (!frente || !verso) return;
+
+    target.push({
+      id: `html-row-${index + 1}`,
+      frente,
+      verso,
+    });
+  });
 }

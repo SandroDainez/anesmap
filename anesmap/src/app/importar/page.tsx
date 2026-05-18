@@ -18,6 +18,7 @@ import {
   mergeById,
   normalizeKey,
   parseCsv,
+  parseHtmlTables,
   resolveTrack,
   saveFlashcards,
   saveFlashcardsRemote,
@@ -123,7 +124,8 @@ export default function ImportarPage() {
 
       for (const file of Array.from(files)) {
         const fileText = await file.text();
-        const rows = parseCsv(fileText);
+        const isHtml = file.name.toLowerCase().endsWith(".html");
+        const rows = isHtml ? parseHtmlTables(fileText) : parseCsv(fileText);
         const normalizedFileName = normalizeKey(file.name);
 
         rows.forEach((row, index) => {
@@ -214,6 +216,12 @@ export default function ImportarPage() {
         details: `${files.length} arquivo(s), ${ignoredRows} linha(s) ignorada(s)`,
       });
       setDataVersion((value) => value + 1);
+
+      if (incomingFlashcards.length === 0 && incomingSimulados.length === 0) {
+        setError(
+          "Nenhum registro reconhecido. Se o arquivo for HTML do Drive, abra e salve como página completa (.html) antes de importar.",
+        );
+      }
     } catch (err) {
       setError("Falha ao importar arquivos. Confira o formato CSV.");
     } finally {
@@ -362,16 +370,16 @@ export default function ImportarPage() {
           className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-background/35 px-4 py-8 text-center"
         >
           <span className="text-sm font-medium text-foreground">
-            Clique para selecionar arquivos CSV
+            Clique para selecionar arquivos CSV ou HTML
           </span>
           <span className="text-xs text-muted">
-            Você pode enviar tudo de uma vez (ME1/ME2/ME3).
+            Você pode enviar tudo de uma vez (ME1/ME2/ME3), incluindo tabelas HTML.
           </span>
         </label>
         <input
           id="csv-files"
           type="file"
-          accept=".csv,text/csv"
+          accept=".csv,text/csv,.html,text/html"
           multiple
           className="sr-only"
           onChange={(event) => handleFiles(event.target.files)}
