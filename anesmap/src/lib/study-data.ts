@@ -149,7 +149,7 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(text, "text/html");
-  const questions = Array.from(doc.querySelectorAll(".questao, .question"));
+  const questions = Array.from(doc.querySelectorAll(".questao, .question, .q"));
   if (questions.length === 0) return parseSimuladoRawHtml(text);
 
   const answerMap = new Map<string, { correta: string; explicacao: string }>();
@@ -180,14 +180,24 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
 
   const gabaritoGridItems = Array.from(doc.querySelectorAll(".gabarito-item"));
   gabaritoGridItems.forEach((item) => {
-    const qn = item.querySelector(".qn")?.textContent ?? "";
-    const ans = item.querySelector(".ans")?.textContent ?? "";
+    const qn =
+      item.querySelector(".qn")?.textContent ??
+      item.querySelector(".resposta")?.textContent ??
+      "";
+    const ans =
+      item.querySelector(".ans")?.textContent ??
+      item.querySelector(".resposta")?.textContent ??
+      "";
     const numberMatch = qn.match(/(\d+)/);
     const letterMatch = ans.match(/\b([A-E])\b/i);
     if (!numberMatch || !letterMatch) return;
+    const respostaText = (item.textContent ?? "").trim();
+    const explicacao = stripTags(
+      respostaText.replace(/^\s*\d+\s*-\s*[A-E]\s*/i, "").replace(/^resposta\s*:\s*[A-E]\s*/i, ""),
+    );
     answerMap.set(numberMatch[1], {
       correta: letterMatch[1].toUpperCase(),
-      explicacao: explanationByQuestion.get(numberMatch[1]) ?? "",
+      explicacao: explicacao || (explanationByQuestion.get(numberMatch[1]) ?? ""),
     });
   });
 
@@ -196,6 +206,7 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
     const numText =
       question.querySelector(".questao-num")?.textContent ??
       question.querySelector(".question-number")?.textContent ??
+      question.querySelector("p strong")?.textContent ??
       "";
     const numMatch = numText.match(/(\d+)/);
     const questionNumber = numMatch?.[1] ?? String(index + 1);
@@ -203,6 +214,8 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
     const cenario =
       (question.querySelector(".cenario")?.textContent ??
         question.querySelector(".question-text .cc")?.textContent ??
+        question.querySelector(".caso-clinico")?.textContent ??
+        question.querySelector(".tag")?.textContent ??
         "")
         .trim()
         .replace(/^CC:\s*/i, "");
@@ -213,13 +226,20 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
       clone.querySelector(".cc")?.remove();
       return (clone.textContent ?? "").trim();
     })();
-    const enunciado = (question.querySelector(".enunciado")?.textContent ?? cleanedQuestionText)
+    const enunciado = (
+      question.querySelector(".enunciado")?.textContent ??
+      question.querySelector(".e")?.textContent ??
+      cleanedQuestionText
+    )
       .trim()
+      .replace(/^q\s*\d+\s*[.:]\s*/i, "")
       .replace(/\s+/g, " ");
     const title = cenario ? `${cenario}\n\n${enunciado}` : enunciado;
 
     const alternatives = Array.from(
-      question.querySelectorAll(".alternativas > div, .alternativas > li, .alternatives > li"),
+      question.querySelectorAll(
+        ".alternativas > div, .alternativas > li, .alternativas p, .alternatives > li, .alternatives p, ul > li",
+      ),
     )
       .map((node) => (node.textContent ?? "").trim())
       .filter(Boolean);
@@ -235,7 +255,10 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
       return;
     }
 
-    const inlineGabaritoText = question.querySelector(".gabarito")?.textContent ?? "";
+    const inlineGabaritoText =
+      question.querySelector(".gabarito")?.textContent ??
+      question.querySelector(".g")?.textContent ??
+      "";
     const inlineLetter = inlineGabaritoText.match(/\b([A-E])\b/i)?.[1]?.toUpperCase();
     const gabarito = answerMap.get(questionNumber);
     const corretaOriginal = (inlineLetter ?? gabarito?.correta ?? "A").toUpperCase();
