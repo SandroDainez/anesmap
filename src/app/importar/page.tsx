@@ -124,8 +124,9 @@ export default function ImportarPage() {
 
       for (const file of Array.from(files)) {
         const fileText = await file.text();
-        const isHtml = file.name.toLowerCase().endsWith(".html");
-        const rows = isHtml ? parseHtmlTables(fileText) : parseCsv(fileText);
+        const htmlRows = parseHtmlTables(fileText);
+        const csvRows = parseCsv(fileText);
+        const rows = htmlRows.length > 0 ? htmlRows : csvRows;
         const normalizedFileName = normalizeKey(file.name);
 
         rows.forEach((row, index) => {
@@ -219,7 +220,7 @@ export default function ImportarPage() {
 
       if (incomingFlashcards.length === 0 && incomingSimulados.length === 0) {
         setError(
-          "Nenhum registro reconhecido. Se o arquivo for HTML do Drive, abra e salve como página completa (.html) antes de importar.",
+          "Nenhum registro reconhecido. Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.",
         );
       }
     } catch (err) {
@@ -379,7 +380,7 @@ export default function ImportarPage() {
         <input
           id="csv-files"
           type="file"
-          accept=".csv,text/csv,.html,text/html"
+          accept=".csv,text/csv,.html,.htm,text/html,.txt,text/plain"
           multiple
           className="sr-only"
           onChange={(event) => handleFiles(event.target.files)}
