@@ -133,7 +133,7 @@ export default function ImportarPage() {
           const rowNumber = index + 2;
 
           const track = resolveTrack(row.me, file.name);
-          const rowId = row.id?.trim() || `${normalizedFileName}-${rowNumber}`;
+          const rowId = `${normalizedFileName}-${rowNumber}`;
 
           const frente = row.frente ?? row.pergunta ?? row.front ?? "";
           const verso = row.verso ?? row.resposta ?? row.back ?? "";
@@ -155,7 +155,7 @@ export default function ImportarPage() {
 
           if (looksLikeFlashcard) {
             incomingFlashcards.push({
-              id: rowId,
+              id: `fc-${rowId}`,
               me: track,
               frente: frente.trim(),
               verso: verso.trim(),
@@ -170,7 +170,7 @@ export default function ImportarPage() {
 
           if (looksLikeQuestion) {
             incomingSimulados.push({
-              id: rowId,
+              id: `sim-${rowId}`,
               me: track,
               tema: (row.tema ?? "").trim() || undefined,
               enunciado: enunciado.trim(),
@@ -188,8 +188,11 @@ export default function ImportarPage() {
         });
       }
 
-      const mergedFlashcards = mergeById(loadFlashcards(), incomingFlashcards);
-      const mergedSimulados = mergeById(loadSimulados(), incomingSimulados);
+      const uniqueIncomingFlashcards = dedupeById(incomingFlashcards);
+      const uniqueIncomingSimulados = dedupeById(incomingSimulados);
+
+      const mergedFlashcards = mergeById(loadFlashcards(), uniqueIncomingFlashcards);
+      const mergedSimulados = mergeById(loadSimulados(), uniqueIncomingSimulados);
 
       let localSaveError = false;
       try {
@@ -204,8 +207,8 @@ export default function ImportarPage() {
       if (isSupabaseConfigured()) {
         setIsSyncingRemote(true);
         try {
-          await saveFlashcardsRemote(incomingFlashcards);
-          await saveSimuladosRemote(incomingSimulados);
+          await saveFlashcardsRemote(uniqueIncomingFlashcards);
+          await saveSimuladosRemote(uniqueIncomingSimulados);
         } catch (err: unknown) {
           remoteSyncError = true;
           remoteSyncErrorMessage =
@@ -216,20 +219,20 @@ export default function ImportarPage() {
       }
 
       setReport({
-        importedFlashcards: incomingFlashcards.length,
-        importedSimulados: incomingSimulados.length,
+        importedFlashcards: uniqueIncomingFlashcards.length,
+        importedSimulados: uniqueIncomingSimulados.length,
         ignoredRows,
         filesProcessed: files.length,
       });
       addImportHistoryEntry({
         action: "import_csv",
-        flashcards: incomingFlashcards.length,
-        simulados: incomingSimulados.length,
+        flashcards: uniqueIncomingFlashcards.length,
+        simulados: uniqueIncomingSimulados.length,
         details: `${files.length} arquivo(s), ${ignoredRows} linha(s) ignorada(s)`,
       });
       setDataVersion((value) => value + 1);
 
-      if (incomingFlashcards.length === 0 && incomingSimulados.length === 0) {
+      if (uniqueIncomingFlashcards.length === 0 && uniqueIncomingSimulados.length === 0) {
         setError(
           "Nenhum registro reconhecido. Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.",
         );
@@ -600,4 +603,12 @@ function matchesFilter(
   if (filter === "imports") return action === "import_csv" || action === "import_backup";
   if (filter === "backups") return action === "export_backup" || action === "import_backup";
   return action === "clear_data";
+}
+
+function dedupeById<T extends { id: string }>(items: T[]) {
+  const map = new Map<string, T>();
+  items.forEach((item) => {
+    map.set(item.id, item);
+  });
+  return Array.from(map.values());
 }
