@@ -60,6 +60,12 @@ type IncompleteSimuladoGroup = {
   expectedQuestions: number;
 };
 
+type DuplicateSimuladoGroup = {
+  groupKey: string;
+  preview: string;
+  ids: string[];
+};
+
 export default function ImportarPage() {
   const [report, setReport] = useState<ImportReport | null>(null);
   const [isImporting, setIsImporting] = useState(false);
@@ -76,6 +82,7 @@ export default function ImportarPage() {
   const [parserDebug, setParserDebug] = useState<ParserDebugItem[]>([]);
   const [importWarnings, setImportWarnings] = useState<string[]>([]);
   const [selectedIncompleteGroups, setSelectedIncompleteGroups] = useState<string[]>([]);
+  const [selectedDuplicateGroups, setSelectedDuplicateGroups] = useState<string[]>([]);
 
   const currentTotals = useMemo(
     () => ({
@@ -148,6 +155,31 @@ export default function ImportarPage() {
 
     return groups.sort((a, b) => a.sourceKey.localeCompare(b.sourceKey));
   }, [dataVersion, report]);
+  const duplicateSimuladoGroups = useMemo(() => {
+    const grouped = new Map<string, { ids: string[]; preview: string }>();
+    loadSimulados().forEach((item) => {
+      const groupKey = buildSimuladoDuplicateKey(item);
+      const preview = item.enunciado.trim().replace(/\s+/g, " ").slice(0, 130);
+      const existing = grouped.get(groupKey);
+      if (existing) {
+        existing.ids.push(item.id);
+      } else {
+        grouped.set(groupKey, { ids: [item.id], preview });
+      }
+    });
+
+    const duplicates: DuplicateSimuladoGroup[] = [];
+    grouped.forEach((value, groupKey) => {
+      if (value.ids.length < 2) return;
+      duplicates.push({
+        groupKey,
+        preview: value.preview,
+        ids: value.ids,
+      });
+    });
+
+    return duplicates.sort((a, b) => b.ids.length - a.ids.length);
+  }, [dataVersion, report]);
 
   useEffect(() => {
     setVisibleHistoryCount(HISTORY_PAGE_SIZE);
@@ -158,6 +190,7 @@ export default function ImportarPage() {
   }, [manageKind, dataVersion]);
   useEffect(() => {
     setSelectedIncompleteGroups([]);
+    setSelectedDuplicateGroups([]);
   }, [dataVersion]);
 
   useEffect(() => {
@@ -570,6 +603,56 @@ export default function ImportarPage() {
     }
   }
 
+  async function handleDeleteDuplicateSimulados() {
+    if (selectedDuplicateGroups.length === 0) {
+      setError("Selecione ao menos um grupo de perguntas repetidas para excluir.");
+      return;
+    }
+
+    const selectedGroups = duplicateSimuladoGroups.filter((group) =>
+      selectedDuplicateGroups.includes(group.groupKey),
+    );
+
+    const idsToDelete: string[] = [];
+    selectedGroups.forEach((group) => {
+      const sortedIds = [...group.ids].sort((a, b) => a.localeCompare(b));
+      idsToDelete.push(...sortedIds.slice(1));
+    });
+
+    if (idsToDelete.length === 0) {
+      setError("Nenhum item duplicado elegível para exclusão foi encontrado.");
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      `Excluir ${idsToDelete.length} item(ns) repetido(s)? Será mantido 1 por grupo.`,
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const next = loadSimulados().filter((item) => !idsToDelete.includes(item.id));
+      saveSimulados(next);
+      if (isSupabaseConfigured()) {
+        setIsSyncingRemote(true);
+        await deleteSimuladosRemoteByIds(idsToDelete);
+        setIsSyncingRemote(false);
+      }
+      addImportHistoryEntry({
+        action: "delete_selected",
+        flashcards: 0,
+        simulados: idsToDelete.length,
+        details: "Exclusão de perguntas repetidas (mantendo 1 por grupo)",
+      });
+      setSelectedDuplicateGroups([]);
+      setError(null);
+      setDataVersion((value) => value + 1);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "erro desconhecido";
+      setError(`Falha ao excluir perguntas repetidas: ${message}.`);
+      setIsSyncingRemote(false);
+    }
+  }
+
   async function handleImportBackup(file: File | null) {
     if (!file) return;
 
@@ -870,6 +953,77 @@ export default function ImportarPage() {
       </AppCard>
 
       <AppCard className="space-y-3">
+        <p className="font-mono text-xs uppercase tracking-wider text-purple">
+          Simulados com perguntas repetidas
+        </p>
+        <p className="text-xs text-muted">
+          Identifica duplicados por conteúdo (enunciado + alternativas + gabarito) e remove os
+          repetidos, mantendo 1 registro por grupo.
+        </p>
+        {duplicateSimuladoGroups.length === 0 ? (
+          <p className="text-sm text-muted">Nenhum grupo de perguntas repetidas detectado.</p>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedDuplicateGroups(
+                    duplicateSimuladoGroups.map((group) => group.groupKey),
+                  )
+                }
+                className="rounded-xl border border-blue/30 bg-blue/15 px-3 py-2 text-sm font-medium text-blue transition hover:opacity-90"
+              >
+                Selecionar todos
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedDuplicateGroups([])}
+                className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm font-medium text-foreground transition hover:bg-background/55"
+              >
+                Limpar seleção
+              </button>
+            </div>
+            <div className="max-h-56 space-y-2 overflow-auto pr-1">
+              {duplicateSimuladoGroups.map((group) => {
+                const checked = selectedDuplicateGroups.includes(group.groupKey);
+                return (
+                  <label
+                    key={group.groupKey}
+                    className="flex cursor-pointer items-start gap-2 rounded-xl border border-border bg-background/35 px-3 py-2"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(event) =>
+                        setSelectedDuplicateGroups((prev) =>
+                          event.target.checked
+                            ? [...prev, group.groupKey]
+                            : prev.filter((key) => key !== group.groupKey),
+                        )
+                      }
+                      className="mt-1"
+                    />
+                    <span className="text-xs text-muted">
+                      <span className="block text-sm text-foreground">{group.preview}</span>
+                      repetições: {group.ids.length} (serão removidos {group.ids.length - 1})
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={handleDeleteDuplicateSimulados}
+              className="w-full rounded-xl border border-purple/30 bg-purple/15 px-3 py-2 text-sm font-medium text-purple transition hover:opacity-90"
+            >
+              Excluir repetidos selecionados ({selectedDuplicateGroups.length})
+            </button>
+          </>
+        )}
+      </AppCard>
+
+      <AppCard className="space-y-3">
         <p className="font-mono text-xs uppercase tracking-wider text-amber">
           Gerenciar conteúdo
         </p>
@@ -1098,4 +1252,25 @@ function extractSimuladoSourceKey(id: string) {
   if (!id.startsWith("sim-")) return null;
   const withoutPrefix = id.slice(4);
   return withoutPrefix.replace(/-\d+$/, "");
+}
+
+function buildSimuladoDuplicateKey(item: SimuladoQuestion) {
+  const parts = [
+    normalizeForDuplicate(item.enunciado),
+    normalizeForDuplicate(item.alternativaA),
+    normalizeForDuplicate(item.alternativaB),
+    normalizeForDuplicate(item.alternativaC),
+    normalizeForDuplicate(item.alternativaD),
+    normalizeForDuplicate(item.correta),
+  ];
+  return parts.join("||");
+}
+
+function normalizeForDuplicate(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
