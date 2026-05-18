@@ -191,8 +191,13 @@ export default function ImportarPage() {
       const mergedFlashcards = mergeById(loadFlashcards(), incomingFlashcards);
       const mergedSimulados = mergeById(loadSimulados(), incomingSimulados);
 
-      saveFlashcards(mergedFlashcards);
-      saveSimulados(mergedSimulados);
+      let localSaveError = false;
+      try {
+        saveFlashcards(mergedFlashcards);
+        saveSimulados(mergedSimulados);
+      } catch {
+        localSaveError = true;
+      }
       let remoteSyncError = false;
 
       if (isSupabaseConfigured()) {
@@ -225,13 +230,21 @@ export default function ImportarPage() {
         setError(
           "Nenhum registro reconhecido. Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.",
         );
+      } else if (localSaveError && !remoteSyncError) {
+        setError(
+          "Importação concluída no Supabase, mas sem cache local no navegador (limite de armazenamento).",
+        );
       } else if (remoteSyncError) {
         setError(
           "Importação local concluída, mas houve falha ao sincronizar com Supabase. Verifique permissões/RLS e tente novamente.",
         );
       }
-    } catch (err) {
-      setError("Falha ao importar arquivos. Confira o formato CSV.");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "erro inesperado durante leitura dos arquivos";
+      setError(`Falha ao importar arquivos: ${message}.`);
     } finally {
       setIsImporting(false);
     }
@@ -254,8 +267,12 @@ export default function ImportarPage() {
 
     void (async () => {
       try {
-        saveFlashcards([]);
-        saveSimulados([]);
+        try {
+          saveFlashcards([]);
+          saveSimulados([]);
+        } catch {
+          // Keep remote clear flow even when local storage is full/unavailable.
+        }
         if (isSupabaseConfigured()) {
           setIsSyncingRemote(true);
           await clearStudyDataRemote();
