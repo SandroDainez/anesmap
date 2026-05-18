@@ -21,6 +21,7 @@ import {
   normalizeKey,
   parseCsv,
   parseHtmlTables,
+  parseSimuladoHtml,
   resolveTrack,
   saveFlashcards,
   saveFlashcardsRemote,
@@ -159,9 +160,15 @@ export default function ImportarPage() {
 
       for (const file of Array.from(files)) {
         const fileText = await file.text();
+        const simuladoRows = parseSimuladoHtml(fileText);
         const htmlRows = parseHtmlTables(fileText);
         const csvRows = parseCsv(fileText);
-        const rows = htmlRows.length > 0 ? htmlRows : csvRows;
+        const rows =
+          simuladoRows.length > 0
+            ? simuladoRows
+            : htmlRows.length > 0
+              ? htmlRows
+              : csvRows;
         const normalizedFileName = normalizeKey(file.name);
 
         rows.forEach((row, index) => {
@@ -268,9 +275,13 @@ export default function ImportarPage() {
       setDataVersion((value) => value + 1);
 
       if (uniqueIncomingFlashcards.length === 0 && uniqueIncomingSimulados.length === 0) {
-        setError(
-          "Nenhum registro reconhecido. Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.",
-        );
+        const modeHint =
+          importMode === "flashcards"
+            ? "Modo atual é Somente cards. Para simulados, selecione o botão Simulados ou Importação em lote."
+            : importMode === "simulados"
+              ? "Modo atual é Somente simulados. Para cards, selecione o botão Cards ou Importação em lote."
+              : "Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.";
+        setError(`Nenhum registro reconhecido. ${modeHint}`);
       } else if (localSaveError && !remoteSyncError) {
         setError(
           "Importação concluída no Supabase, mas sem cache local no navegador (limite de armazenamento).",

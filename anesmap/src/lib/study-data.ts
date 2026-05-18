@@ -135,6 +135,97 @@ export function parseHtmlTables(text: string): Record<string, string>[] {
   return allRows;
 }
 
+export function parseSimuladoHtml(text: string): Record<string, string>[] {
+  if (typeof window === "undefined") return [];
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, "text/html");
+  const questions = Array.from(doc.querySelectorAll(".questao"));
+  if (questions.length === 0) return [];
+
+  const answerMap = new Map<string, { correta: string; explicacao: string }>();
+  const gabaritoItems = Array.from(doc.querySelectorAll(".gab-item"));
+  gabaritoItems.forEach((item) => {
+    const header = item.querySelector(".gab-header")?.textContent ?? "";
+    const resposta = item.querySelector(".gab-resposta")?.textContent ?? "";
+    const justificativa = item.querySelector(".gab-just")?.textContent ?? "";
+    const numberMatch = header.match(/(\d+)/);
+    const letterMatch = resposta.match(/\b([A-E])\b/i);
+    if (!numberMatch || !letterMatch) return;
+    answerMap.set(numberMatch[1], {
+      correta: letterMatch[1].toUpperCase(),
+      explicacao: justificativa.trim(),
+    });
+  });
+
+  const rows: Record<string, string>[] = [];
+  questions.forEach((question, index) => {
+    const numText = question.querySelector(".questao-num")?.textContent ?? "";
+    const numMatch = numText.match(/(\d+)/);
+    const questionNumber = numMatch?.[1] ?? String(index + 1);
+
+    const cenario = (question.querySelector(".cenario")?.textContent ?? "").trim();
+    const enunciado = (question.querySelector(".enunciado")?.textContent ?? "").trim();
+    const title = cenario ? `${cenario}\n\n${enunciado}` : enunciado;
+
+    const alternatives = Array.from(question.querySelectorAll(".alternativas > div"))
+      .map((node) => (node.textContent ?? "").trim())
+      .filter(Boolean);
+
+    const altMap = new Map<string, string>();
+    alternatives.forEach((alt) => {
+      const match = alt.match(/^([A-E])\)\s*([\s\S]*)$/i);
+      if (!match) return;
+      altMap.set(match[1].toUpperCase(), match[2].trim());
+    });
+
+    if (!title || !altMap.get("A") || !altMap.get("B") || !altMap.get("C")) {
+      return;
+    }
+
+    const gabarito = answerMap.get(questionNumber);
+    const corretaOriginal = (gabarito?.correta ?? "A").toUpperCase();
+
+    // Current schema supports up to A-D; when source has E, we keep E info in D/explicacao.
+    const alternativaDOriginal = altMap.get("D") ?? "";
+    const alternativaEOriginal = altMap.get("E") ?? "";
+    let alternativaD = alternativaDOriginal;
+    let correta = corretaOriginal;
+    let explicacao = gabarito?.explicacao ?? "";
+
+    if (!alternativaD && alternativaEOriginal) {
+      alternativaD = alternativaEOriginal;
+      if (correta === "E") correta = "D";
+      explicacao = [explicacao, "Correta original no arquivo: E."]
+        .filter(Boolean)
+        .join(" ");
+    } else if (alternativaD && alternativaEOriginal) {
+      alternativaD = `${alternativaDOriginal} || E) ${alternativaEOriginal}`;
+      if (correta === "E") correta = "D";
+      explicacao = [explicacao, "Alternativa E preservada junto da D para compatibilidade."]
+        .filter(Boolean)
+        .join(" ");
+    } else if (!["A", "B", "C", "D"].includes(correta)) {
+      correta = "A";
+    }
+
+    if (!alternativaD) return;
+
+    rows.push({
+      id: `simulado-html-${questionNumber}`,
+      enunciado: title,
+      alternativaa: altMap.get("A") ?? "",
+      alternativab: altMap.get("B") ?? "",
+      alternativac: altMap.get("C") ?? "",
+      alternativad: alternativaD,
+      correta,
+      explicacao,
+    });
+  });
+
+  return rows;
+}
+
 export function loadFlashcards(): Flashcard[] {
   if (typeof window === "undefined") {
     return [];
