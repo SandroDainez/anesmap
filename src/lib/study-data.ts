@@ -734,15 +734,12 @@ function parseSimuladoRawHtml(text: string): Record<string, string>[] {
     );
     const combined = cenario ? `${cenario}\n\n${enunciado}` : enunciado;
 
-    const alternativesBlock = part.match(
-      /<div class="alternativas">([\s\S]*?)<\/div>\s*<\/div>/i,
-    )?.[1];
-    if (!alternativesBlock || !combined) return;
+    if (!combined) return;
 
     const altMap = new Map<string, string>();
     const altRegex = /<div>\s*([A-E])\)\s*([\s\S]*?)<\/div>/gi;
     let altMatch: RegExpExecArray | null = null;
-    while ((altMatch = altRegex.exec(alternativesBlock)) !== null) {
+    while ((altMatch = altRegex.exec(part)) !== null) {
       altMap.set(altMatch[1].toUpperCase(), stripTags(altMatch[2]));
     }
 
