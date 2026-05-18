@@ -54,15 +54,27 @@ export default function FlashcardsPage() {
   }, []);
 
   const cardsByTrack = useMemo(
-    () => importedCards.filter((item) => item.me === selectedMe),
+    () =>
+      importedCards
+        .filter((item) => item.me === selectedMe)
+        .sort((a, b) => compareCardsForStudyOrder(a, b)),
     [importedCards, selectedMe],
   );
   const dueCards = useMemo(
     () =>
-      cardsByTrack.filter((card) => {
-        const progress = progressMap[card.id] ?? getDefaultFlashcardProgress(now);
-        return new Date(progress.nextReviewAt) <= now;
-      }),
+      cardsByTrack
+        .filter((card) => {
+          const progress = progressMap[card.id] ?? getDefaultFlashcardProgress(now);
+          return new Date(progress.nextReviewAt) <= now;
+        })
+        .sort((a, b) => {
+          const progressA = progressMap[a.id] ?? getDefaultFlashcardProgress(now);
+          const progressB = progressMap[b.id] ?? getDefaultFlashcardProgress(now);
+          const nextA = new Date(progressA.nextReviewAt).getTime();
+          const nextB = new Date(progressB.nextReviewAt).getTime();
+          if (nextA !== nextB) return nextA - nextB;
+          return compareCardsForStudyOrder(a, b);
+        }),
     [cardsByTrack, progressMap, now],
   );
   const studyDeck = dueCards.length > 0 ? dueCards : cardsByTrack;
@@ -286,6 +298,22 @@ function parseCardContent(frente: string, verso: string) {
     answer: normalizeAnswerBody(answer),
     reference,
   };
+}
+
+function compareCardsForStudyOrder(a: Flashcard, b: Flashcard) {
+  const numA = extractCardNumber(a.frente);
+  const numB = extractCardNumber(b.frente);
+  if (numA !== null && numB !== null && numA !== numB) return numA - numB;
+  if (numA !== null && numB === null) return -1;
+  if (numA === null && numB !== null) return 1;
+  return a.frente.localeCompare(b.frente, "pt-BR");
+}
+
+function extractCardNumber(text: string) {
+  const trimmed = text.trim();
+  const match = trimmed.match(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?(\d{1,4})[\)\.\-:–—\s]/i);
+  if (!match) return null;
+  return Number(match[1]);
 }
 
 function normalizeQuestionLabel(value: string) {
