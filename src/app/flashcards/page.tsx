@@ -29,6 +29,7 @@ export default function FlashcardsPage() {
   const [importedCards, setImportedCards] = useState<Flashcard[]>([]);
   const [progressMap, setProgressMap] = useState<Record<string, FlashcardProgress>>({});
   const [now, setNow] = useState(() => new Date());
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     const local = loadFlashcards();
@@ -66,6 +67,13 @@ export default function FlashcardsPage() {
   const currentCard: Flashcard | undefined = dueCards[0] ?? cardsByTrack[0];
   const currentProgress =
     currentCard ? progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now) : null;
+  const currentCardFormatted = currentCard
+    ? parseCardContent(currentCard.frente, currentCard.verso)
+    : null;
+
+  useEffect(() => {
+    setIsFlipped(false);
+  }, [selectedMe, currentCard?.id]);
 
   function gradeCard(quality: number) {
     if (!currentCard) return;
@@ -142,8 +150,36 @@ export default function FlashcardsPage() {
         </p>
         {currentCard ? (
           <>
-            <h2 className="mt-2 text-lg font-semibold">{currentCard.frente}</h2>
-            <p className="mt-2 text-sm text-muted">{currentCard.verso}</p>
+            <button
+              type="button"
+              onClick={() => setIsFlipped((value) => !value)}
+              className="mt-2 w-full rounded-xl border border-border bg-background/35 p-4 text-left transition hover:bg-background/55"
+            >
+              {!isFlipped ? (
+                <>
+                  <p className="font-mono text-xs uppercase tracking-wider text-muted">Frente</p>
+                  <h2 className="mt-2 text-2xl font-semibold leading-snug">
+                    {currentCardFormatted?.question}
+                  </h2>
+                  <p className="mt-3 text-xs text-muted">Toque para virar e ver a resposta.</p>
+                </>
+              ) : (
+                <>
+                  <p className="font-mono text-xs uppercase tracking-wider text-blue">Verso</p>
+                  <h3 className="mt-2 text-sm font-semibold text-foreground">Resposta</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    {currentCardFormatted?.answer}
+                  </p>
+                  <h3 className="mt-3 text-sm font-semibold text-foreground">
+                    Referência bibliográfica
+                  </h3>
+                  <p className="mt-1 text-xs leading-relaxed text-muted">
+                    {currentCardFormatted?.reference}
+                  </p>
+                  <p className="mt-3 text-xs text-muted">Toque para voltar para a pergunta.</p>
+                </>
+              )}
+            </button>
             {currentCard.especialidade ? (
               <p className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
                 {currentCard.especialidade}
@@ -162,17 +198,70 @@ export default function FlashcardsPage() {
           </p>
         )}
         <div className="mt-4 grid grid-cols-3 gap-2 text-sm font-medium">
-          <StatusBadge as="button" tone="rose" className="px-2" onClick={() => gradeCard(2)}>
+          <StatusBadge
+            as="button"
+            tone="rose"
+            className="px-2"
+            onClick={() => gradeCard(2)}
+            disabled={!isFlipped}
+          >
             Difícil
           </StatusBadge>
-          <StatusBadge as="button" tone="amber" className="px-2" onClick={() => gradeCard(3)}>
+          <StatusBadge
+            as="button"
+            tone="amber"
+            className="px-2"
+            onClick={() => gradeCard(3)}
+            disabled={!isFlipped}
+          >
             Médio
           </StatusBadge>
-          <StatusBadge as="button" tone="teal" className="px-2" onClick={() => gradeCard(5)}>
+          <StatusBadge
+            as="button"
+            tone="teal"
+            className="px-2"
+            onClick={() => gradeCard(5)}
+            disabled={!isFlipped}
+          >
             Fácil
           </StatusBadge>
         </div>
       </AppCard>
     </main>
   );
+}
+
+function parseCardContent(frente: string, verso: string) {
+  return {
+    question: normalizeQuestionLabel(frente),
+    answer: normalizeAnswerBody(verso),
+    reference: extractReference(verso),
+  };
+}
+
+function normalizeQuestionLabel(value: string) {
+  const trimmed = value.trim();
+  const match = trimmed.match(/^(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:\s]*(.*)$/i);
+  if (!match) return trimmed;
+  const suffix = (match[2] ?? "").trim();
+  if (!suffix) return trimmed;
+  return `${match[1]}) ${suffix}`;
+}
+
+function normalizeAnswerBody(value: string) {
+  return value
+    .replace(/\s+/g, " ")
+    .replace(/\s*;\s*/g, "; ")
+    .trim();
+}
+
+function extractReference(value: string) {
+  const trimmed = value.trim();
+  const refMatch = trimmed.match(
+    /(?:refer[eê]ncias?|fontes?|bibliografia)\s*:\s*([\s\S]*)$/i,
+  );
+  if (refMatch?.[1]?.trim()) {
+    return refMatch[1].trim();
+  }
+  return "Não informada no card importado. Para evitar conteúdo inventado, adicione a referência no campo verso (ex.: Referências: Miller 9ª ed.; SBA 2023).";
 }
