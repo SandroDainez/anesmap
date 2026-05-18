@@ -226,10 +226,24 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
       clone.querySelector(".cc")?.remove();
       return (clone.textContent ?? "").trim();
     })();
+    const containerQuestionText = (() => {
+      const clone = question.cloneNode(true) as Element;
+      clone
+        .querySelectorAll(
+          ".alternativas, .alternatives, ul, .gabarito, .g, .questao-num, .question-number",
+        )
+        .forEach((node) => node.remove());
+      const heading = clone.querySelector("p strong");
+      if (heading && /quest[aã]o/i.test(heading.textContent ?? "")) {
+        heading.parentElement?.remove();
+      }
+      return (clone.textContent ?? "").trim();
+    })();
     const enunciado = (
-      question.querySelector(".enunciado")?.textContent ??
-      question.querySelector(".e")?.textContent ??
-      cleanedQuestionText
+      question.querySelector(".enunciado")?.textContent ||
+      question.querySelector(".e")?.textContent ||
+      cleanedQuestionText ||
+      containerQuestionText
     )
       .trim()
       .replace(/^q\s*\d+\s*[.:]\s*/i, "")
@@ -246,10 +260,26 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
 
     const altMap = new Map<string, string>();
     alternatives.forEach((alt) => {
-      const match = alt.match(/^([A-E])[\)\.\-:]\s*([\s\S]*)$/i);
+      const match = alt.match(/^([A-E])[\)\.\-:–—]\s*([\s\S]*)$/i);
       if (!match) return;
       altMap.set(match[1].toUpperCase(), match[2].trim());
     });
+
+    if (
+      (!altMap.get("A") || !altMap.get("B") || !altMap.get("C") || !altMap.get("D")) &&
+      alternatives.length >= 4
+    ) {
+      const ordered = alternatives
+        .map((alt) => alt.replace(/^[A-E][\)\.\-:–—]\s*/i, "").trim())
+        .filter(Boolean);
+      if (ordered.length >= 4) {
+        if (!altMap.get("A")) altMap.set("A", ordered[0]);
+        if (!altMap.get("B")) altMap.set("B", ordered[1]);
+        if (!altMap.get("C")) altMap.set("C", ordered[2]);
+        if (!altMap.get("D")) altMap.set("D", ordered[3]);
+        if (!altMap.get("E") && ordered[4]) altMap.set("E", ordered[4]);
+      }
+    }
 
     if (!title || !altMap.get("A") || !altMap.get("B") || !altMap.get("C")) {
       return;
