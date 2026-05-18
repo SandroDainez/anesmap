@@ -22,11 +22,13 @@ import {
   parseCsv,
   parseHtmlTables,
   parseSimuladoHtml,
+  parseStructuredReferences,
   resolveTrack,
   saveFlashcards,
   saveFlashcardsRemote,
   saveSimulados,
   saveSimuladosRemote,
+  StudyReference,
   suggestStudyReferences,
 } from "@/lib/study-data";
 
@@ -326,7 +328,12 @@ export default function ImportarPage() {
 
           if (looksLikeFlashcard) {
             const normalizedFront = normalizeQuestionLabel(frente.trim());
-            const normalizedBack = normalizeAnswerReferenceBlock(verso.trim());
+            const structuredRefs = parseStructuredReferences(row);
+            const normalizedBack = normalizeAnswerReferenceBlock(
+              verso.trim(),
+              `${frente} ${verso}`,
+              structuredRefs,
+            );
             detectedFlashcards.push({
               id: `fc-${rowId}`,
               me: track,
@@ -337,12 +344,14 @@ export default function ImportarPage() {
                 .map((tag) => tag.trim())
                 .filter(Boolean),
               especialidade: (row.especialidade ?? "").trim() || undefined,
+              references: structuredRefs,
             });
             return;
           }
 
           if (looksLikeQuestion) {
             const normalizedStem = normalizeQuestionLabel(enunciado.trim());
+            const structuredRefs = parseStructuredReferences(row);
             detectedSimulados.push({
               id: `sim-${rowId}`,
               me: track,
@@ -354,6 +363,7 @@ export default function ImportarPage() {
               alternativaD: altD.trim(),
               correta: corretaRaw as "A" | "B" | "C" | "D",
               explicacao: (row.explicacao ?? "").trim() || undefined,
+              references: structuredRefs,
             });
             return;
           }
@@ -1421,7 +1431,11 @@ function normalizeQuestionLabel(value: string) {
   return `${match[1]}) ${suffix}`;
 }
 
-function normalizeAnswerReferenceBlock(value: string) {
+function normalizeAnswerReferenceBlock(
+  value: string,
+  context: string,
+  structuredReferences: StudyReference[] = [],
+) {
   if (!value) return value;
   const normalized = value.replace(/\s+/g, " ").trim();
   const refMatch = normalized.match(/(?:refer[eê]ncias?|fontes?|bibliografia)\s*:\s*([\s\S]*)$/i);
@@ -1432,7 +1446,13 @@ function normalizeAnswerReferenceBlock(value: string) {
     );
     return `Resposta: ${answerOnly.trim()}\nReferências: ${refMatch[1].trim()}`;
   }
-  const suggestions = suggestStudyReferences(normalized);
+  if (structuredReferences.length > 0) {
+    const formatted = structuredReferences
+      .map((ref) => [ref.title, ref.year, ref.source, ref.url].filter(Boolean).join(" - "))
+      .join("; ");
+    return `Resposta: ${normalized}\nReferências: ${formatted}`;
+  }
+  const suggestions = suggestStudyReferences(context);
   if (suggestions.length > 0) {
     return `Resposta: ${normalized}\nReferências: ${suggestions.join("; ")}`;
   }

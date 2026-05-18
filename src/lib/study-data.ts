@@ -2,6 +2,13 @@ import { createClient } from "@supabase/supabase-js";
 
 export type StudyTrack = "ME1" | "ME2" | "ME3";
 
+export type StudyReference = {
+  title: string;
+  url?: string;
+  year?: string;
+  source?: string;
+};
+
 export type Flashcard = {
   id: string;
   me: StudyTrack;
@@ -9,6 +16,7 @@ export type Flashcard = {
   verso: string;
   tags?: string[];
   especialidade?: string;
+  references?: StudyReference[];
 };
 
 export type FlashcardProgress = {
@@ -30,6 +38,7 @@ export type SimuladoQuestion = {
   alternativaD: string;
   correta: "A" | "B" | "C" | "D";
   explicacao?: string;
+  references?: StudyReference[];
 };
 
 export type ImportHistoryEntry = {
@@ -440,7 +449,10 @@ export async function loadFlashcardsRemote(): Promise<Flashcard[] | null> {
     .order("id", { ascending: true });
 
   if (error || !data) return null;
-  return data as Flashcard[];
+  return (data as Flashcard[]).map((item) => ({
+    ...item,
+    references: parseReferenceBlock(item.verso),
+  }));
 }
 
 export function loadSimulados(): SimuladoQuestion[] {
@@ -483,6 +495,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
     alternativaD: item.alternativa_d,
     correta: item.correta as "A" | "B" | "C" | "D",
     explicacao: item.explicacao ?? undefined,
+    references: parseReferenceBlock(item.explicacao ?? ""),
   }));
 }
 
@@ -497,9 +510,18 @@ export async function saveFlashcardsRemote(data: Flashcard[]) {
   const supabase = getSupabaseClient();
   if (!supabase) return;
 
+  const payload = data.map((item) => ({
+    id: item.id,
+    me: item.me,
+    frente: item.frente,
+    verso: item.verso,
+    tags: item.tags ?? [],
+    especialidade: item.especialidade ?? null,
+  }));
+
   const chunkSize = 200;
-  for (let index = 0; index < data.length; index += chunkSize) {
-    const chunk = data.slice(index, index + chunkSize);
+  for (let index = 0; index < payload.length; index += chunkSize) {
+    const chunk = payload.slice(index, index + chunkSize);
     const { error } = await supabase.from("flashcards").upsert(chunk, {
       onConflict: "id",
     });
@@ -745,6 +767,81 @@ export function suggestStudyReferences(text: string) {
   return Array.from(refs).slice(0, 4);
 }
 
+export function parseReferenceBlock(text: string): StudyReference[] {
+  const raw = text ?? "";
+  const line = raw.match(/(?:refer[eê]ncias?|fontes?|bibliografia)\s*:\s*([\s\S]*)$/i)?.[1];
+  if (!line) return [];
+  const parts = line
+    .split(/;|\n/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  return parts.map((entry) => parseReferenceEntry(entry)).filter((ref) => ref.title.length > 0);
+}
+
+export function parseStructuredReferences(row: Record<string, string>): StudyReference[] {
+  const refs: StudyReference[] = [];
+  const title = (row.referenciatitulo ?? row.reftitulo ?? "").trim();
+  const url = (row.referenciaurl ?? row.refurl ?? "").trim();
+  const year = (row.referenciaano ?? row.refano ?? "").trim();
+  const source = (row.referenciafonte ?? row.reffonte ?? "").trim();
+
+  if (title) {
+    refs.push({
+      title,
+      url: url || undefined,
+      year: year || undefined,
+      source: source || undefined,
+    });
+  }
+
+  const inlineRefs = parseReferenceBlock(
+    (row.referencias ?? row.bibliografia ?? row.fontes ?? "").trim(),
+  );
+  if (inlineRefs.length > 0) {
+    refs.push(...inlineRefs);
+  }
+
+  return dedupeReferences(refs);
+}
+
+export function formatReferencesForDisplay(references: StudyReference[]) {
+  if (references.length === 0) return "";
+  return references
+    .map((ref) => {
+      const parts = [ref.title];
+      if (ref.year) parts.push(ref.year);
+      if (ref.source) parts.push(ref.source);
+      if (ref.url) parts.push(ref.url);
+      return parts.filter(Boolean).join(" - ");
+    })
+    .join("; ");
+}
+
+function dedupeReferences(references: StudyReference[]) {
+  const map = new Map<string, StudyReference>();
+  references.forEach((ref) => {
+    const key = normalizeKey(`${ref.title}|${ref.url ?? ""}|${ref.year ?? ""}|${ref.source ?? ""}`);
+    if (!key) return;
+    map.set(key, ref);
+  });
+  return Array.from(map.values());
+}
+
+function parseReferenceEntry(entry: string): StudyReference {
+  const urlMatch = entry.match(/https?:\/\/\S+/i)?.[0];
+  const yearMatch = entry.match(/\b(19|20)\d{2}\b/);
+  const titleOnly = entry
+    .replace(/https?:\/\/\S+/gi, "")
+    .replace(/\b(19|20)\d{2}\b/g, "")
+    .replace(/\s*-\s*$/g, "")
+    .trim();
+  return {
+    title: titleOnly || entry.trim(),
+    url: urlMatch,
+    year: yearMatch?.[0],
+  };
+}
+
 function hasAny(normalizedText: string, tokens: string[]) {
   return tokens.some((token) => normalizedText.includes(normalizeKey(token)));
 }
@@ -890,6 +987,17 @@ function canonicalHeaderKey(header: string) {
   if (normalized.includes("alternativac") || normalized === "c") return "alternativac";
   if (normalized.includes("alternativad") || normalized === "d") return "alternativad";
   if (normalized.includes("correta") || normalized.includes("gabarito")) return "correta";
+  if (normalized.includes("referenciatitulo") || normalized === "reftitulo") {
+    return "referenciatitulo";
+  }
+  if (normalized.includes("referenciaurl") || normalized === "refurl") return "referenciaurl";
+  if (normalized.includes("referenciaano") || normalized === "refano") return "referenciaano";
+  if (normalized.includes("referenciafonte") || normalized === "reffonte") {
+    return "referenciafonte";
+  }
+  if (normalized.includes("referencias") || normalized.includes("bibliografia")) {
+    return "referencias";
+  }
 
   return normalized;
 }

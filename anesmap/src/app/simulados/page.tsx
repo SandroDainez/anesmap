@@ -219,9 +219,7 @@ export default function SimuladosPage() {
                 <article className="mt-3 rounded-xl border border-border bg-background/40 px-3 py-2 text-xs text-muted">
                   <p className="font-semibold text-foreground">Referências sugeridas</p>
                   <ul className="mt-1 space-y-1">
-                    {suggestStudyReferences(
-                      `${currentQuestion.tema ?? ""}\n${currentQuestion.enunciado}\n${currentQuestion.explicacao ?? ""}`,
-                    ).map((ref) => (
+                    {getQuestionReferences(currentQuestion).map((ref) => (
                       <li key={ref}>- {ref}</li>
                     ))}
                   </ul>
@@ -291,4 +289,15 @@ function buildOptionComment(letter: "A" | "B" | "C" | "D", question: SimuladoQue
     return `Não é a correta. O gabarito indica ${question.correta}. Veja a justificativa da correta: ${question.explicacao.trim()}`;
   }
   return `Não é a correta para esta questão. O gabarito importado indica ${question.correta}.`;
+}
+
+function getQuestionReferences(question: SimuladoQuestion) {
+  if (question.references && question.references.length > 0) {
+    return question.references.map((ref) =>
+      [ref.title, ref.year, ref.source, ref.url].filter(Boolean).join(" - "),
+    );
+  }
+  return suggestStudyReferences(
+    `${question.tema ?? ""}\n${question.enunciado}\n${question.explicacao ?? ""}`,
+  );
 }

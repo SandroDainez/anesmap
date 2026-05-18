@@ -83,7 +83,7 @@ export default function FlashcardsPage() {
   const currentProgress =
     currentCard ? progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now) : null;
   const currentCardFormatted = currentCard
-    ? parseCardContent(currentCard.frente, currentCard.verso)
+    ? parseCardContent(currentCard.frente, currentCard.verso, currentCard.references)
     : null;
 
   useEffect(() => {
@@ -291,13 +291,20 @@ export default function FlashcardsPage() {
   );
 }
 
-function parseCardContent(frente: string, verso: string) {
+function parseCardContent(frente: string, verso: string, structuredReferences?: Flashcard["references"]) {
+  const parsedInlineRefs = parseInlineReferences(verso);
+  const explicitReference = parsedInlineRefs.length > 0 ? parsedInlineRefs.join("; ") : "";
   const reference = extractReference(verso);
   const answer = removeReferenceFromAnswer(verso);
   return {
     question: normalizeQuestionLabel(frente),
     answer: normalizeAnswerBody(answer),
-    reference: mergeReferenceWithSuggestions(reference, `${frente}\n${verso}`),
+    reference: mergeReferenceWithSuggestions(
+      explicitReference || reference,
+      `${frente}\n${verso}`,
+      parsedInlineRefs,
+      structuredReferences,
+    ),
   };
 }
 
@@ -350,7 +357,20 @@ function removeReferenceFromAnswer(value: string) {
     .trim();
 }
 
-function mergeReferenceWithSuggestions(reference: string, context: string) {
+function mergeReferenceWithSuggestions(
+  reference: string,
+  context: string,
+  parsedInlineRefs: string[] = [],
+  structuredReferences?: Flashcard["references"],
+) {
+  if (structuredReferences && structuredReferences.length > 0) {
+    return structuredReferences
+      .map((ref) => [ref.title, ref.year, ref.source, ref.url].filter(Boolean).join(" - "))
+      .join("; ");
+  }
+  if (parsedInlineRefs.length > 0) {
+    return parsedInlineRefs.join("; ");
+  }
   const suggestions = suggestStudyReferences(context);
   if (reference.trim()) {
     return reference.trim();
@@ -359,4 +379,13 @@ function mergeReferenceWithSuggestions(reference: string, context: string) {
     return "Referência não informada no card importado.";
   }
   return `Referências sugeridas para estudo:\n- ${suggestions.join("\n- ")}`;
+}
+
+function parseInlineReferences(verso: string) {
+  const raw = extractReference(verso).trim();
+  if (!raw) return [];
+  return raw
+    .split(/;|\n/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
 }
