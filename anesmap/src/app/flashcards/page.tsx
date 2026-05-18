@@ -1,10 +1,17 @@
- "use client";
+"use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
-import { Flashcard, StudyTrack, loadFlashcards } from "@/lib/study-data";
+import {
+  Flashcard,
+  StudyTrack,
+  isSupabaseConfigured,
+  loadFlashcards,
+  loadFlashcardsRemote,
+  saveFlashcards,
+} from "@/lib/study-data";
 
 const deckStats = [
   { label: "Novos", value: 24, tone: "text-teal" },
@@ -14,7 +21,23 @@ const deckStats = [
 
 export default function FlashcardsPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
-  const importedCards = useMemo(() => loadFlashcards(), []);
+  const [importedCards, setImportedCards] = useState<Flashcard[]>([]);
+
+  useEffect(() => {
+    const local = loadFlashcards();
+    setImportedCards(local);
+
+    if (!isSupabaseConfigured()) return;
+
+    void (async () => {
+      const remote = await loadFlashcardsRemote();
+      if (remote) {
+        setImportedCards(remote);
+        saveFlashcards(remote);
+      }
+    })();
+  }, []);
+
   const cardsByTrack = useMemo(
     () => importedCards.filter((item) => item.me === selectedMe),
     [importedCards, selectedMe],

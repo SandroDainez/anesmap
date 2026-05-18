@@ -1,10 +1,17 @@
- "use client";
+"use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
-import { StudyTrack, loadSimulados } from "@/lib/study-data";
+import {
+  SimuladoQuestion,
+  StudyTrack,
+  isSupabaseConfigured,
+  loadSimulados,
+  loadSimuladosRemote,
+  saveSimulados,
+} from "@/lib/study-data";
 
 const examMeta = [
   { label: "Questões", value: "120" },
@@ -14,7 +21,23 @@ const examMeta = [
 
 export default function SimuladosPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
-  const importedSimulados = useMemo(() => loadSimulados(), []);
+  const [importedSimulados, setImportedSimulados] = useState<SimuladoQuestion[]>([]);
+
+  useEffect(() => {
+    const local = loadSimulados();
+    setImportedSimulados(local);
+
+    if (!isSupabaseConfigured()) return;
+
+    void (async () => {
+      const remote = await loadSimuladosRemote();
+      if (remote) {
+        setImportedSimulados(remote);
+        saveSimulados(remote);
+      }
+    })();
+  }, []);
+
   const simuladosByTrack = useMemo(
     () => importedSimulados.filter((item) => item.me === selectedMe),
     [importedSimulados, selectedMe],

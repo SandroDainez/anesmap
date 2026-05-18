@@ -6,17 +6,23 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import {
   addImportHistoryEntry,
+  clearStudyDataRemote,
   Flashcard,
+  isSupabaseConfigured,
   loadImportHistory,
   SimuladoQuestion,
   loadFlashcards,
+  loadFlashcardsRemote,
   loadSimulados,
+  loadSimuladosRemote,
   mergeById,
   normalizeKey,
   parseCsv,
   resolveTrack,
   saveFlashcards,
+  saveFlashcardsRemote,
   saveSimulados,
+  saveSimuladosRemote,
 } from "@/lib/study-data";
 
 type ImportReport = {
@@ -43,6 +49,7 @@ export default function ImportarPage() {
   const [historyFilter, setHistoryFilter] = useState<HistoryFilter>("all");
   const [historyQuery, setHistoryQuery] = useState("");
   const [visibleHistoryCount, setVisibleHistoryCount] = useState(HISTORY_PAGE_SIZE);
+  const [isSyncingRemote, setIsSyncingRemote] = useState(false);
 
   const currentTotals = useMemo(
     () => ({
@@ -76,6 +83,32 @@ export default function ImportarPage() {
   useEffect(() => {
     setVisibleHistoryCount(HISTORY_PAGE_SIZE);
   }, [historyFilter, historyQuery, dataVersion]);
+
+  useEffect(() => {
+    if (!isSupabaseConfigured()) return;
+
+    void (async () => {
+      setIsSyncingRemote(true);
+      try {
+        const [remoteFlashcards, remoteSimulados] = await Promise.all([
+          loadFlashcardsRemote(),
+          loadSimuladosRemote(),
+        ]);
+
+        if (remoteFlashcards) {
+          saveFlashcards(remoteFlashcards);
+        }
+        if (remoteSimulados) {
+          saveSimulados(remoteSimulados);
+        }
+        if (remoteFlashcards || remoteSimulados) {
+          setDataVersion((value) => value + 1);
+        }
+      } finally {
+        setIsSyncingRemote(false);
+      }
+    })();
+  }, []);
 
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -158,6 +191,16 @@ export default function ImportarPage() {
       saveFlashcards(mergedFlashcards);
       saveSimulados(mergedSimulados);
 
+      if (isSupabaseConfigured()) {
+        setIsSyncingRemote(true);
+        try {
+          await saveFlashcardsRemote(incomingFlashcards);
+          await saveSimuladosRemote(incomingSimulados);
+        } finally {
+          setIsSyncingRemote(false);
+        }
+      }
+
       setReport({
         importedFlashcards: incomingFlashcards.length,
         importedSimulados: incomingSimulados.length,
@@ -193,17 +236,29 @@ export default function ImportarPage() {
       return;
     }
 
-    saveFlashcards([]);
-    saveSimulados([]);
-    setReport(null);
-    setError(null);
-    addImportHistoryEntry({
-      action: "clear_data",
-      flashcards: 0,
-      simulados: 0,
-      details: "Base local limpa manualmente",
-    });
-    setDataVersion((value) => value + 1);
+    void (async () => {
+      try {
+        saveFlashcards([]);
+        saveSimulados([]);
+        if (isSupabaseConfigured()) {
+          setIsSyncingRemote(true);
+          await clearStudyDataRemote();
+          setIsSyncingRemote(false);
+        }
+        setReport(null);
+        setError(null);
+        addImportHistoryEntry({
+          action: "clear_data",
+          flashcards: 0,
+          simulados: 0,
+          details: "Base local limpa manualmente",
+        });
+        setDataVersion((value) => value + 1);
+      } catch {
+        setError("Falha ao limpar dados remotos do Supabase.");
+        setIsSyncingRemote(false);
+      }
+    })();
   }
 
   function handleExportBackup() {
@@ -259,6 +314,16 @@ export default function ImportarPage() {
 
       saveFlashcards(parsed.flashcards);
       saveSimulados(parsed.simulados);
+      if (isSupabaseConfigured()) {
+        setIsSyncingRemote(true);
+        try {
+          await clearStudyDataRemote();
+          await saveFlashcardsRemote(parsed.flashcards);
+          await saveSimuladosRemote(parsed.simulados);
+        } finally {
+          setIsSyncingRemote(false);
+        }
+      }
       setReport({
         importedFlashcards: parsed.flashcards.length,
         importedSimulados: parsed.simulados.length,
@@ -359,6 +424,9 @@ export default function ImportarPage() {
 
         {isImporting ? (
           <p className="text-sm text-muted">Importando arquivos...</p>
+        ) : null}
+        {isSyncingRemote ? (
+          <p className="text-sm text-muted">Sincronizando com Supabase...</p>
         ) : null}
         {error ? <p className="text-sm text-rose">{error}</p> : null}
       </AppCard>

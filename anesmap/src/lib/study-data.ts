@@ -1,3 +1,5 @@
+import { createClient } from "@supabase/supabase-js";
+
 export type StudyTrack = "ME1" | "ME2" | "ME3";
 
 export type Flashcard = {
@@ -36,6 +38,27 @@ export const STORAGE_KEYS = {
   simulados: "anesmap.simulados",
   importHistory: "anesmap.importHistory",
 } as const;
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !anonKey) {
+    return null;
+  }
+
+  return createClient(url, anonKey);
+}
+
+export function isSupabaseConfigured() {
+  return Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY),
+  );
+}
 
 export function parseCsv(text: string): Record<string, string>[] {
   const normalized = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
@@ -77,6 +100,19 @@ export function loadFlashcards(): Flashcard[] {
   }
 }
 
+export async function loadFlashcardsRemote(): Promise<Flashcard[] | null> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("flashcards")
+    .select("id, me, frente, verso, tags, especialidade")
+    .order("id", { ascending: true });
+
+  if (error || !data) return null;
+  return data as Flashcard[];
+}
+
 export function loadSimulados(): SimuladoQuestion[] {
   if (typeof window === "undefined") {
     return [];
@@ -93,6 +129,33 @@ export function loadSimulados(): SimuladoQuestion[] {
   }
 }
 
+export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("simulados")
+    .select(
+      "id, me, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, correta, explicacao",
+    )
+    .order("id", { ascending: true });
+
+  if (error || !data) return null;
+
+  return data.map((item) => ({
+    id: item.id,
+    me: item.me as StudyTrack,
+    tema: item.tema ?? undefined,
+    enunciado: item.enunciado,
+    alternativaA: item.alternativa_a,
+    alternativaB: item.alternativa_b,
+    alternativaC: item.alternativa_c,
+    alternativaD: item.alternativa_d,
+    correta: item.correta as "A" | "B" | "C" | "D",
+    explicacao: item.explicacao ?? undefined,
+  }));
+}
+
 export function saveFlashcards(data: Flashcard[]) {
   if (typeof window === "undefined") {
     return;
@@ -100,11 +163,71 @@ export function saveFlashcards(data: Flashcard[]) {
   window.localStorage.setItem(STORAGE_KEYS.flashcards, JSON.stringify(data));
 }
 
+export async function saveFlashcardsRemote(data: Flashcard[]) {
+  const supabase = getSupabaseClient();
+  if (!supabase) return;
+
+  const { error } = await supabase.from("flashcards").upsert(data, {
+    onConflict: "id",
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
+
 export function saveSimulados(data: SimuladoQuestion[]) {
   if (typeof window === "undefined") {
     return;
   }
   window.localStorage.setItem(STORAGE_KEYS.simulados, JSON.stringify(data));
+}
+
+export async function saveSimuladosRemote(data: SimuladoQuestion[]) {
+  const supabase = getSupabaseClient();
+  if (!supabase) return;
+
+  const payload = data.map((item) => ({
+    id: item.id,
+    me: item.me,
+    tema: item.tema ?? null,
+    enunciado: item.enunciado,
+    alternativa_a: item.alternativaA,
+    alternativa_b: item.alternativaB,
+    alternativa_c: item.alternativaC,
+    alternativa_d: item.alternativaD,
+    correta: item.correta,
+    explicacao: item.explicacao ?? null,
+  }));
+
+  const { error } = await supabase.from("simulados").upsert(payload, {
+    onConflict: "id",
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function clearStudyDataRemote() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return;
+
+  const { error: flashcardsError } = await supabase
+    .from("flashcards")
+    .delete()
+    .not("id", "is", null);
+  if (flashcardsError) {
+    throw new Error(flashcardsError.message);
+  }
+
+  const { error: simuladosError } = await supabase
+    .from("simulados")
+    .delete()
+    .not("id", "is", null);
+  if (simuladosError) {
+    throw new Error(simuladosError.message);
+  }
 }
 
 export function loadImportHistory(): ImportHistoryEntry[] {
