@@ -27,6 +27,7 @@ import {
   saveFlashcardsRemote,
   saveSimulados,
   saveSimuladosRemote,
+  suggestStudyReferences,
 } from "@/lib/study-data";
 
 type ImportReport = {
@@ -1430,6 +1431,10 @@ function normalizeAnswerReferenceBlock(value: string) {
       "",
     );
     return `Resposta: ${answerOnly.trim()}\nReferências: ${refMatch[1].trim()}`;
+  }
+  const suggestions = suggestStudyReferences(normalized);
+  if (suggestions.length > 0) {
+    return `Resposta: ${normalized}\nReferências: ${suggestions.join("; ")}`;
   }
   return `Resposta: ${normalized}\nReferências: Não informada no material importado.`;
 }

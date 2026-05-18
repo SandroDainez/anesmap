@@ -11,6 +11,7 @@ import {
   loadSimulados,
   loadSimuladosRemote,
   saveSimulados,
+  suggestStudyReferences,
 } from "@/lib/study-data";
 
 const examMeta = [
@@ -215,6 +216,16 @@ export default function SimuladosPage() {
                     </article>
                   ))}
                 </div>
+                <article className="mt-3 rounded-xl border border-border bg-background/40 px-3 py-2 text-xs text-muted">
+                  <p className="font-semibold text-foreground">Referências sugeridas</p>
+                  <ul className="mt-1 space-y-1">
+                    {suggestStudyReferences(
+                      `${currentQuestion.tema ?? ""}\n${currentQuestion.enunciado}\n${currentQuestion.explicacao ?? ""}`,
+                    ).map((ref) => (
+                      <li key={ref}>- {ref}</li>
+                    ))}
+                  </ul>
+                </article>
                 <button
                   type="button"
                   onClick={() => setShowBack(false)}

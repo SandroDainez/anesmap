@@ -14,6 +14,7 @@ import {
   loadFlashcardProgress,
   loadFlashcards,
   loadFlashcardsRemote,
+  suggestStudyReferences,
   saveFlashcardProgress,
   saveFlashcards,
 } from "@/lib/study-data";
@@ -296,7 +297,7 @@ function parseCardContent(frente: string, verso: string) {
   return {
     question: normalizeQuestionLabel(frente),
     answer: normalizeAnswerBody(answer),
-    reference,
+    reference: mergeReferenceWithSuggestions(reference, `${frente}\n${verso}`),
   };
 }
 
@@ -340,11 +341,22 @@ function extractReference(value: string) {
   if (refMatch?.[1]?.trim()) {
     return refMatch[1].trim();
   }
-  return "Não informada no card importado. Para evitar conteúdo inventado, adicione a referência no campo verso (ex.: Referências: Miller 9ª ed.; SBA 2023).";
+  return "";
 }
 
 function removeReferenceFromAnswer(value: string) {
   return value
     .replace(/(?:refer[eê]ncias?|fontes?|bibliografia)\s*:[\s\S]*$/i, "")
     .trim();
+}
+
+function mergeReferenceWithSuggestions(reference: string, context: string) {
+  const suggestions = suggestStudyReferences(context);
+  if (reference.trim()) {
+    return reference.trim();
+  }
+  if (suggestions.length === 0) {
+    return "Referência não informada no card importado.";
+  }
+  return `Referências sugeridas para estudo:\n- ${suggestions.join("\n- ")}`;
 }

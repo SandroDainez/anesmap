@@ -662,6 +662,93 @@ export function mergeById<T extends { id: string }>(current: T[], incoming: T[])
   return Array.from(map.values());
 }
 
+export function suggestStudyReferences(text: string) {
+  const normalized = normalizeKey(text);
+  const refs = new Set<string>();
+
+  // Core references used throughout anesthesiology training.
+  refs.add("Miller's Anesthesia, 9th ed. (Elsevier)");
+  refs.add("Cangiani et al. - Tratado de Anestesiologia SAESP/SBA");
+
+  if (
+    hasAny(normalized, [
+      "cushing",
+      "feocromocitoma",
+      "tiro",
+      "diabetes",
+      "adrenal",
+      "endocr",
+      "metformina",
+    ])
+  ) {
+    refs.add("Miller's Anesthesia, 9th ed. - Endocrine disease and anesthesia");
+    refs.add("Barash Clinical Anesthesia, 9th ed. - Endocrine disorders");
+  }
+
+  if (
+    hasAny(normalized, [
+      "trauma",
+      "hemorrag",
+      "transfus",
+      "choque",
+      "dano",
+      "hipotensao",
+      "parkland",
+      "queim",
+    ])
+  ) {
+    refs.add("ATLS Student Course Manual, 10th ed.");
+    refs.add("Miller's Anesthesia, 9th ed. - Trauma and critical care anesthesia");
+  }
+
+  if (hasAny(normalized, ["sepse", "septic", "vasopress", "norepinefrina", "noradrenalina"])) {
+    refs.add("Surviving Sepsis Campaign Guidelines 2021");
+  }
+
+  if (hasAny(normalized, ["viaaerea", "intub", "dificil", "mils", "laring"])) {
+    refs.add("2022 ASA Practice Guidelines for Management of the Difficult Airway");
+  }
+
+  if (
+    hasAny(normalized, [
+      "cardio",
+      "valva",
+      "cec",
+      "aorta",
+      "carot",
+      "marcapasso",
+      "cdi",
+      "endocard",
+    ])
+  ) {
+    refs.add("Kaplan's Cardiac Anesthesia, 8th ed.");
+    refs.add("AHA/ACC perioperative cardiovascular evaluation guideline");
+  }
+
+  if (hasAny(normalized, ["neuro", "tce", "pic", "ppc", "craniotomia", "vasoespasmo"])) {
+    refs.add("Cottrell and Patel's Neuroanesthesia, 7th ed.");
+  }
+
+  if (hasAny(normalized, ["obst", "gestante", "cesar", "eclampsia", "preclampsia"])) {
+    refs.add("Chestnut's Obstetric Anesthesia: Principles and Practice, 7th ed.");
+  }
+
+  if (hasAny(normalized, ["pedi", "neonat", "crianca", "fontan", "tetralogia"])) {
+    refs.add("A Practice of Anesthesia for Infants and Children, 7th ed.");
+  }
+
+  if (hasAny(normalized, ["dor", "paliat", "opioid", "metadona", "fibromialgia", "nvpo"])) {
+    refs.add("IASP Textbook of Pain, 6th ed.");
+    refs.add("SBA - Diretrizes de Dor e Cuidados Paliativos");
+  }
+
+  return Array.from(refs).slice(0, 4);
+}
+
+function hasAny(normalizedText: string, tokens: string[]) {
+  return tokens.some((token) => normalizedText.includes(normalizeKey(token)));
+}
+
 function detectDelimiter(line: string) {
   const commas = (line.match(/,/g) ?? []).length;
   const semicolons = (line.match(/;/g) ?? []).length;
