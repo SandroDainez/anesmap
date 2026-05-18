@@ -42,6 +42,7 @@ type BackupPayload = {
 };
 
 type HistoryFilter = "all" | "imports" | "backups" | "clear";
+type ImportMode = "all" | "flashcards" | "simulados";
 const HISTORY_PAGE_SIZE = 5;
 
 export default function ImportarPage() {
@@ -53,6 +54,7 @@ export default function ImportarPage() {
   const [historyQuery, setHistoryQuery] = useState("");
   const [visibleHistoryCount, setVisibleHistoryCount] = useState(HISTORY_PAGE_SIZE);
   const [isSyncingRemote, setIsSyncingRemote] = useState(false);
+  const [importMode, setImportMode] = useState<ImportMode>("all");
   const [manageKind, setManageKind] = useState<"flashcards" | "simulados">("flashcards");
   const [manageQuery, setManageQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -186,7 +188,7 @@ export default function ImportarPage() {
             altD.length > 0 &&
             ["A", "B", "C", "D"].includes(corretaRaw);
 
-          if (looksLikeFlashcard) {
+          if (looksLikeFlashcard && (importMode === "all" || importMode === "flashcards")) {
             incomingFlashcards.push({
               id: `fc-${rowId}`,
               me: track,
@@ -201,7 +203,7 @@ export default function ImportarPage() {
             return;
           }
 
-          if (looksLikeQuestion) {
+          if (looksLikeQuestion && (importMode === "all" || importMode === "simulados")) {
             incomingSimulados.push({
               id: `sim-${rowId}`,
               me: track,
@@ -261,7 +263,7 @@ export default function ImportarPage() {
         action: "import_csv",
         flashcards: uniqueIncomingFlashcards.length,
         simulados: uniqueIncomingSimulados.length,
-        details: `${files.length} arquivo(s), ${ignoredRows} linha(s) ignorada(s)`,
+        details: `${files.length} arquivo(s), modo ${formatImportMode(importMode)}, ${ignoredRows} linha(s) ignorada(s)`,
       });
       setDataVersion((value) => value + 1);
 
@@ -485,9 +487,30 @@ export default function ImportarPage() {
 
       <AppCard className="space-y-4">
         <div className="flex flex-wrap gap-2">
-          <StatusBadge tone="teal">Cards</StatusBadge>
-          <StatusBadge tone="blue">Simulados</StatusBadge>
-          <StatusBadge tone="purple">Importação em lote</StatusBadge>
+          <StatusBadge
+            as="button"
+            tone="teal"
+            className={importMode === "flashcards" ? "ring-1 ring-teal/40" : "opacity-70"}
+            onClick={() => setImportMode("flashcards")}
+          >
+            Cards
+          </StatusBadge>
+          <StatusBadge
+            as="button"
+            tone="blue"
+            className={importMode === "simulados" ? "ring-1 ring-blue/40" : "opacity-70"}
+            onClick={() => setImportMode("simulados")}
+          >
+            Simulados
+          </StatusBadge>
+          <StatusBadge
+            as="button"
+            tone="purple"
+            className={importMode === "all" ? "ring-1 ring-purple/40" : "opacity-70"}
+            onClick={() => setImportMode("all")}
+          >
+            Importação em lote
+          </StatusBadge>
         </div>
 
         <label
@@ -498,7 +521,9 @@ export default function ImportarPage() {
             Clique para selecionar arquivos CSV ou HTML
           </span>
           <span className="text-xs text-muted">
-            Você pode enviar tudo de uma vez (ME1/ME2/ME3), incluindo tabelas HTML.
+            Modo atual:{" "}
+            <span className="font-medium text-foreground">{formatImportMode(importMode)}</span>{" "}
+            (ME1/ME2/ME3, incluindo tabelas HTML).
           </span>
         </label>
         <input
@@ -790,6 +815,12 @@ function matchesFilter(
   }
   if (filter === "backups") return action === "export_backup" || action === "import_backup";
   return action === "clear_data";
+}
+
+function formatImportMode(mode: "all" | "flashcards" | "simulados") {
+  if (mode === "all") return "Importação em lote";
+  if (mode === "flashcards") return "Somente cards";
+  return "Somente simulados";
 }
 
 function dedupeById<T extends { id: string }>(items: T[]) {
