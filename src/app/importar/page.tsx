@@ -193,12 +193,15 @@ export default function ImportarPage() {
 
       saveFlashcards(mergedFlashcards);
       saveSimulados(mergedSimulados);
+      let remoteSyncError = false;
 
       if (isSupabaseConfigured()) {
         setIsSyncingRemote(true);
         try {
           await saveFlashcardsRemote(incomingFlashcards);
           await saveSimuladosRemote(incomingSimulados);
+        } catch {
+          remoteSyncError = true;
         } finally {
           setIsSyncingRemote(false);
         }
@@ -221,6 +224,10 @@ export default function ImportarPage() {
       if (incomingFlashcards.length === 0 && incomingSimulados.length === 0) {
         setError(
           "Nenhum registro reconhecido. Tente exportar do Drive como Página da Web (.html) ou CSV e importe novamente.",
+        );
+      } else if (remoteSyncError) {
+        setError(
+          "Importação local concluída, mas houve falha ao sincronizar com Supabase. Verifique permissões/RLS e tente novamente.",
         );
       }
     } catch (err) {

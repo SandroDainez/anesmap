@@ -213,12 +213,16 @@ export async function saveFlashcardsRemote(data: Flashcard[]) {
   const supabase = getSupabaseClient();
   if (!supabase) return;
 
-  const { error } = await supabase.from("flashcards").upsert(data, {
-    onConflict: "id",
-  });
+  const chunkSize = 200;
+  for (let index = 0; index < data.length; index += chunkSize) {
+    const chunk = data.slice(index, index + chunkSize);
+    const { error } = await supabase.from("flashcards").upsert(chunk, {
+      onConflict: "id",
+    });
 
-  if (error) {
-    throw new Error(error.message);
+    if (error) {
+      throw new Error(error.message);
+    }
   }
 }
 
@@ -246,12 +250,16 @@ export async function saveSimuladosRemote(data: SimuladoQuestion[]) {
     explicacao: item.explicacao ?? null,
   }));
 
-  const { error } = await supabase.from("simulados").upsert(payload, {
-    onConflict: "id",
-  });
+  const chunkSize = 200;
+  for (let index = 0; index < payload.length; index += chunkSize) {
+    const chunk = payload.slice(index, index + chunkSize);
+    const { error } = await supabase.from("simulados").upsert(chunk, {
+      onConflict: "id",
+    });
 
-  if (error) {
-    throw new Error(error.message);
+    if (error) {
+      throw new Error(error.message);
+    }
   }
 }
 
