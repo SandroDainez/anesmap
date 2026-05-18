@@ -219,7 +219,7 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
     const title = cenario ? `${cenario}\n\n${enunciado}` : enunciado;
 
     const alternatives = Array.from(
-      question.querySelectorAll(".alternativas > div, .alternatives > li"),
+      question.querySelectorAll(".alternativas > div, .alternativas > li, .alternatives > li"),
     )
       .map((node) => (node.textContent ?? "").trim())
       .filter(Boolean);
@@ -235,15 +235,19 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
       return;
     }
 
+    const inlineGabaritoText = question.querySelector(".gabarito")?.textContent ?? "";
+    const inlineLetter = inlineGabaritoText.match(/\b([A-E])\b/i)?.[1]?.toUpperCase();
     const gabarito = answerMap.get(questionNumber);
-    const corretaOriginal = (gabarito?.correta ?? "A").toUpperCase();
+    const corretaOriginal = (inlineLetter ?? gabarito?.correta ?? "A").toUpperCase();
 
     // Current schema supports up to A-D; when source has E, we keep E info in D/explicacao.
     const alternativaDOriginal = altMap.get("D") ?? "";
     const alternativaEOriginal = altMap.get("E") ?? "";
     let alternativaD = alternativaDOriginal;
     let correta = corretaOriginal;
-    let explicacao = gabarito?.explicacao ?? "";
+    let explicacao =
+      gabarito?.explicacao ??
+      stripTags(inlineGabaritoText.replace(/^\s*gabarito\s*:\s*[A-E]\s*/i, ""));
 
     if (!alternativaD && alternativaEOriginal) {
       alternativaD = alternativaEOriginal;
