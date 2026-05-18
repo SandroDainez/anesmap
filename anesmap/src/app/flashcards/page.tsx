@@ -312,6 +312,12 @@ function parseCardContent(frente: string, verso: string, structuredReferences?: 
 }
 
 function compareCardsForStudyOrder(a: Flashcard, b: Flashcard) {
+  const numberA = extractCardNumber(a.frente);
+  const numberB = extractCardNumber(b.frente);
+  if (numberA !== null && numberB !== null && numberA !== numberB) return numberA - numberB;
+  if (numberA !== null && numberB === null) return -1;
+  if (numberA === null && numberB !== null) return 1;
+
   const rowA = extractImportedRowOrder(a.id);
   const rowB = extractImportedRowOrder(b.id);
   if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
@@ -327,11 +333,26 @@ function extractImportedRowOrder(id: string) {
 }
 
 function formatCardQuestionForSession(question: string, index: number) {
+  const existingNumber = extractCardNumber(question);
+  if (existingNumber !== null) {
+    const cleaned = question
+      .trim()
+      .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")
+      .trim();
+    return `${existingNumber}) ${cleaned || question}`;
+  }
   const cleaned = question
     .trim()
     .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")
     .trim();
   return `${index + 1}) ${cleaned || question}`;
+}
+
+function extractCardNumber(text: string) {
+  const trimmed = text.trim();
+  const match = trimmed.match(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?(\d{1,4})[\)\.\-:–—\s]/i);
+  if (!match) return null;
+  return Number(match[1]);
 }
 
 function normalizeQuestionLabel(value: string) {

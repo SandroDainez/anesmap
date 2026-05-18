@@ -279,15 +279,15 @@ function extractImportedRowOrder(id: string) {
 }
 
 function compareSimuladosForSessionOrder(a: SimuladoQuestion, b: SimuladoQuestion) {
+  const numA = extractQuestionOrder(a.enunciado);
+  const numB = extractQuestionOrder(b.enunciado);
+  if (numA !== numB) return numA - numB;
+
   const rowA = extractImportedRowOrder(a.id);
   const rowB = extractImportedRowOrder(b.id);
   if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
   if (rowA !== null && rowB === null) return -1;
   if (rowA === null && rowB !== null) return 1;
-
-  const numA = extractQuestionOrder(a.enunciado);
-  const numB = extractQuestionOrder(b.enunciado);
-  if (numA !== numB) return numA - numB;
   return a.enunciado.localeCompare(b.enunciado, "pt-BR");
 }
 
