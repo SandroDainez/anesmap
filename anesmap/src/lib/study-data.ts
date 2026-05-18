@@ -414,7 +414,7 @@ function extractRowsFromTable(table: Element, target: Record<string, string>[]) 
     );
 
   if (hasExplicitHeader || inferredHeader) {
-    const headers = rows[0].map((header) => normalizeKey(header));
+    const headers = rows[0].map((header) => canonicalHeaderKey(header));
     rows.slice(1).forEach((row) => {
       const obj: Record<string, string> = {};
       headers.forEach((header, index) => {
@@ -440,4 +440,40 @@ function extractRowsFromTable(table: Element, target: Record<string, string>[]) 
       verso,
     });
   });
+}
+
+function canonicalHeaderKey(header: string) {
+  const normalized = normalizeKey(header);
+
+  if (
+    normalized.includes("frente") ||
+    normalized.includes("pergunta") ||
+    normalized.includes("front")
+  ) {
+    return "frente";
+  }
+
+  if (
+    normalized.includes("verso") ||
+    normalized.includes("resposta") ||
+    normalized.includes("back")
+  ) {
+    return "verso";
+  }
+
+  if (
+    normalized.includes("enunciado") ||
+    normalized.includes("questao") ||
+    normalized.includes("stem")
+  ) {
+    return "enunciado";
+  }
+
+  if (normalized.includes("alternativaa") || normalized === "a") return "alternativaa";
+  if (normalized.includes("alternativab") || normalized === "b") return "alternativab";
+  if (normalized.includes("alternativac") || normalized === "c") return "alternativac";
+  if (normalized.includes("alternativad") || normalized === "d") return "alternativad";
+  if (normalized.includes("correta") || normalized.includes("gabarito")) return "correta";
+
+  return normalized;
 }
