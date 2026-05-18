@@ -199,14 +199,17 @@ export default function ImportarPage() {
         localSaveError = true;
       }
       let remoteSyncError = false;
+      let remoteSyncErrorMessage = "";
 
       if (isSupabaseConfigured()) {
         setIsSyncingRemote(true);
         try {
           await saveFlashcardsRemote(incomingFlashcards);
           await saveSimuladosRemote(incomingSimulados);
-        } catch {
+        } catch (err: unknown) {
           remoteSyncError = true;
+          remoteSyncErrorMessage =
+            err instanceof Error ? err.message : "erro remoto desconhecido";
         } finally {
           setIsSyncingRemote(false);
         }
@@ -236,7 +239,7 @@ export default function ImportarPage() {
         );
       } else if (remoteSyncError) {
         setError(
-          "Importação local concluída, mas houve falha ao sincronizar com Supabase. Verifique permissões/RLS e tente novamente.",
+          `Importação local concluída, mas houve falha ao sincronizar com Supabase: ${remoteSyncErrorMessage}.`,
         );
       }
     } catch (err: unknown) {
