@@ -291,11 +291,13 @@ export default function ImportarPage() {
             ["A", "B", "C", "D"].includes(corretaRaw);
 
           if (looksLikeFlashcard) {
+            const normalizedFront = normalizeQuestionLabel(frente.trim());
+            const normalizedBack = normalizeAnswerReferenceBlock(verso.trim());
             detectedFlashcards.push({
               id: `fc-${rowId}`,
               me: track,
-              frente: frente.trim(),
-              verso: verso.trim(),
+              frente: normalizedFront,
+              verso: normalizedBack,
               tags: (row.tags ?? "")
                 .split(",")
                 .map((tag) => tag.trim())
@@ -306,11 +308,12 @@ export default function ImportarPage() {
           }
 
           if (looksLikeQuestion) {
+            const normalizedStem = normalizeQuestionLabel(enunciado.trim());
             detectedSimulados.push({
               id: `sim-${rowId}`,
               me: track,
               tema: (row.tema ?? "").trim() || undefined,
-              enunciado: enunciado.trim(),
+              enunciado: normalizedStem,
               alternativaA: altA.trim(),
               alternativaB: altB.trim(),
               alternativaC: altC.trim(),
@@ -1252,6 +1255,29 @@ function extractSimuladoSourceKey(id: string) {
   if (!id.startsWith("sim-")) return null;
   const withoutPrefix = id.slice(4);
   return withoutPrefix.replace(/-\d+$/, "");
+}
+
+function normalizeQuestionLabel(value: string) {
+  const trimmed = value.trim();
+  const match = trimmed.match(/^(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:\s]*(.*)$/i);
+  if (!match) return trimmed;
+  const suffix = (match[2] ?? "").trim();
+  if (!suffix) return trimmed;
+  return `${match[1]}) ${suffix}`;
+}
+
+function normalizeAnswerReferenceBlock(value: string) {
+  if (!value) return value;
+  const normalized = value.replace(/\s+/g, " ").trim();
+  const refMatch = normalized.match(/(?:refer[eê]ncias?|fontes?|bibliografia)\s*:\s*([\s\S]*)$/i);
+  if (refMatch?.[1]?.trim()) {
+    const answerOnly = normalized.replace(
+      /(?:refer[eê]ncias?|fontes?|bibliografia)\s*:[\s\S]*$/i,
+      "",
+    );
+    return `Resposta: ${answerOnly.trim()}\nReferências: ${refMatch[1].trim()}`;
+  }
+  return `Resposta: ${normalized}\nReferências: Não informada no material importado.`;
 }
 
 function buildSimuladoDuplicateKey(item: SimuladoQuestion) {

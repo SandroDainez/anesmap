@@ -232,10 +232,12 @@ export default function FlashcardsPage() {
 }
 
 function parseCardContent(frente: string, verso: string) {
+  const reference = extractReference(verso);
+  const answer = removeReferenceFromAnswer(verso);
   return {
     question: normalizeQuestionLabel(frente),
-    answer: normalizeAnswerBody(verso),
-    reference: extractReference(verso),
+    answer: normalizeAnswerBody(answer),
+    reference,
   };
 }
 
@@ -264,4 +266,10 @@ function extractReference(value: string) {
     return refMatch[1].trim();
   }
   return "Não informada no card importado. Para evitar conteúdo inventado, adicione a referência no campo verso (ex.: Referências: Miller 9ª ed.; SBA 2023).";
+}
+
+function removeReferenceFromAnswer(value: string) {
+  return value
+    .replace(/(?:refer[eê]ncias?|fontes?|bibliografia)\s*:[\s\S]*$/i, "")
+    .trim();
 }
