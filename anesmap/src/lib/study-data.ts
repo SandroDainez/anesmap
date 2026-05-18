@@ -145,12 +145,12 @@ export function parseHtmlTables(text: string): Record<string, string>[] {
 }
 
 export function parseSimuladoHtml(text: string): Record<string, string>[] {
-  if (typeof window === "undefined") return [];
+  if (typeof window === "undefined") return parseSimuladoRawHtml(text);
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(text, "text/html");
   const questions = Array.from(doc.querySelectorAll(".questao"));
-  if (questions.length === 0) return [];
+  if (questions.length === 0) return parseSimuladoRawHtml(text);
 
   const answerMap = new Map<string, { correta: string; explicacao: string }>();
   const gabaritoItems = Array.from(doc.querySelectorAll(".gab-item"));
@@ -231,6 +231,10 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
       explicacao,
     });
   });
+
+  if (rows.length === 0) {
+    return parseSimuladoRawHtml(text);
+  }
 
   return rows;
 }
@@ -701,6 +705,98 @@ function canonicalHeaderKey(header: string) {
   if (normalized.includes("correta") || normalized.includes("gabarito")) return "correta";
 
   return normalized;
+}
+
+function parseSimuladoRawHtml(text: string): Record<string, string>[] {
+  const decoded = decodeHtmlEntities(text);
+  const answerMap = new Map<string, { correta: string; explicacao: string }>();
+
+  const gabRegex =
+    /<div class="gab-header">[\s\S]*?(\d+)[\s\S]*?<\/div>[\s\S]*?<div class="gab-resposta">[\s\S]*?\b([A-E])\b[\s\S]*?<\/div>[\s\S]*?<div class="gab-just">([\s\S]*?)<\/div>/gi;
+  let gabMatch: RegExpExecArray | null = null;
+  while ((gabMatch = gabRegex.exec(decoded)) !== null) {
+    answerMap.set(gabMatch[1], {
+      correta: gabMatch[2].toUpperCase(),
+      explicacao: stripTags(gabMatch[3]),
+    });
+  }
+
+  const parts = decoded.split(/<div class="questao">/i).slice(1);
+  const rows: Record<string, string>[] = [];
+
+  parts.forEach((part, index) => {
+    const numberMatch = part.match(/<div class="questao-num">[\s\S]*?(\d+)[\s\S]*?<\/div>/i);
+    const questionNumber = numberMatch?.[1] ?? String(index + 1);
+
+    const cenario = stripTags(part.match(/<div class="cenario">([\s\S]*?)<\/div>/i)?.[1] ?? "");
+    const enunciado = stripTags(
+      part.match(/<div class="enunciado">([\s\S]*?)<\/div>/i)?.[1] ?? "",
+    );
+    const combined = cenario ? `${cenario}\n\n${enunciado}` : enunciado;
+
+    const alternativesBlock = part.match(
+      /<div class="alternativas">([\s\S]*?)<\/div>\s*<\/div>/i,
+    )?.[1];
+    if (!alternativesBlock || !combined) return;
+
+    const altMap = new Map<string, string>();
+    const altRegex = /<div>\s*([A-E])\)\s*([\s\S]*?)<\/div>/gi;
+    let altMatch: RegExpExecArray | null = null;
+    while ((altMatch = altRegex.exec(alternativesBlock)) !== null) {
+      altMap.set(altMatch[1].toUpperCase(), stripTags(altMatch[2]));
+    }
+
+    if (!altMap.get("A") || !altMap.get("B") || !altMap.get("C")) return;
+
+    const gabarito = answerMap.get(questionNumber);
+    const corretaOriginal = (gabarito?.correta ?? "A").toUpperCase();
+    const alternativaDOriginal = altMap.get("D") ?? "";
+    const alternativaEOriginal = altMap.get("E") ?? "";
+    let alternativaD = alternativaDOriginal;
+    let correta = corretaOriginal;
+    let explicacao = gabarito?.explicacao ?? "";
+
+    if (!alternativaD && alternativaEOriginal) {
+      alternativaD = alternativaEOriginal;
+      if (correta === "E") correta = "D";
+      explicacao = [explicacao, "Correta original no arquivo: E."]
+        .filter(Boolean)
+        .join(" ");
+    } else if (alternativaD && alternativaEOriginal) {
+      alternativaD = `${alternativaDOriginal} || E) ${alternativaEOriginal}`;
+      if (correta === "E") correta = "D";
+      explicacao = [explicacao, "Alternativa E preservada junto da D para compatibilidade."]
+        .filter(Boolean)
+        .join(" ");
+    } else if (!["A", "B", "C", "D"].includes(correta)) {
+      correta = "A";
+    }
+
+    if (!alternativaD) return;
+
+    rows.push({
+      id: `simulado-raw-${questionNumber}`,
+      enunciado: combined,
+      alternativaa: altMap.get("A") ?? "",
+      alternativab: altMap.get("B") ?? "",
+      alternativac: altMap.get("C") ?? "",
+      alternativad: alternativaD,
+      correta,
+      explicacao,
+    });
+  });
+
+  return rows;
+}
+
+function stripTags(value: string) {
+  return decodeHtmlEntities(
+    value
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim(),
+  );
 }
 
 function extractRowsFromRawHtml(html: string): Record<string, string>[] {
