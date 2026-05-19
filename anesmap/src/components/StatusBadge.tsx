@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import type { ButtonHTMLAttributes, HTMLAttributes } from "react";
 
 const toneMap = {
-  teal: "border-teal/30 bg-teal/15 text-teal",
-  blue: "border-blue/30 bg-blue/15 text-blue",
-  purple: "border-purple/30 bg-purple/15 text-purple",
-  amber: "border-amber/30 bg-amber/15 text-amber",
-  rose: "border-rose/30 bg-rose/15 text-rose",
+  teal: "border-teal/35 bg-teal/15 text-teal",
+  blue: "border-blue/35 bg-blue/15 text-blue",
+  purple: "border-purple/35 bg-purple/15 text-purple",
+  amber: "border-amber/35 bg-amber/15 text-amber",
+  rose: "border-rose/35 bg-rose/15 text-rose",
 } as const;
 
 type Tone = keyof typeof toneMap;
@@ -30,13 +30,13 @@ export function StatusBadge({
   onClick,
   disabled,
 }: StatusBadgeProps) {
-  const baseClassName = `inline-flex items-center justify-center rounded-xl border px-3 py-2 text-sm font-medium ${toneMap[tone]} ${className}`;
+  const baseClassName = `inline-flex items-center justify-center rounded-xl border px-3 py-2 text-sm font-medium transition-all duration-150 ${toneMap[tone]} ${className}`;
 
   if (Tag === "button") {
     return (
       <button
         type={type}
-        className={baseClassName}
+        className={`${baseClassName} cursor-pointer hover:brightness-110 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-45`}
         onClick={onClick}
         disabled={disabled}
       >

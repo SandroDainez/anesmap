@@ -49,7 +49,7 @@ export default function FlashcardsPage() {
 
     void (async () => {
       const profile = await loadMyProfile();
-      const track = profile?.assigned_track;
+      const track = profile?.assigned_track_cards ?? profile?.assigned_track;
       if (track && track !== "ALL") {
         setAllowedTracks([track as StudyTrack]);
         setSelectedMe(track as StudyTrack);
@@ -197,7 +197,11 @@ export default function FlashcardsPage() {
             <StatusBadge
               as="button"
               tone="blue"
-              className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
+              className={
+                selectedMe === "ME1"
+                  ? "ring-2 ring-blue/60 bg-blue/20 text-blue shadow-[0_0_0_1px_rgba(79,142,247,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-blue/12"
+              }
               onClick={() => changeTrack("ME1")}
             >
               ME1
@@ -205,7 +209,11 @@ export default function FlashcardsPage() {
             <StatusBadge
               as="button"
               tone="purple"
-              className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
+              className={
+                selectedMe === "ME2"
+                  ? "ring-2 ring-purple/60 bg-purple/20 text-purple shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-purple/12"
+              }
               onClick={() => changeTrack("ME2")}
             >
               ME2
@@ -213,7 +221,11 @@ export default function FlashcardsPage() {
             <StatusBadge
               as="button"
               tone="teal"
-              className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
+              className={
+                selectedMe === "ME3"
+                  ? "ring-2 ring-teal/60 bg-teal/20 text-teal shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-teal/12"
+              }
               onClick={() => changeTrack("ME3")}
             >
               ME3

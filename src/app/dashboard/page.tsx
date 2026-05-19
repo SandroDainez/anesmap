@@ -15,6 +15,11 @@ const studyTracks = [
 
 export default function DashboardPage() {
   const [goalInput, setGoalInput] = useState("300");
+  const [localProgress, setLocalProgress] = useState({
+    reviewed: 0,
+    mastered: 0,
+    completion: 0,
+  });
   const [serverMetrics, setServerMetrics] = useState<{
     reviewed: number;
     mastered: number;
@@ -25,12 +30,12 @@ export default function DashboardPage() {
     attemptsCount: number;
   } | null>(null);
 
-  const progress = useMemo(() => {
+  useEffect(() => {
     const entries = Object.values(loadFlashcardProgress());
     const reviewed = entries.filter((item) => item.repetitions > 0).length;
     const mastered = entries.filter((item) => item.repetitions >= 3).length;
     const completion = reviewed > 0 ? Math.round((mastered / reviewed) * 100) : 0;
-    return { reviewed, mastered, completion };
+    setLocalProgress({ reviewed, mastered, completion });
   }, []);
 
   useEffect(() => {
@@ -89,14 +94,14 @@ export default function DashboardPage() {
         <p className="font-mono text-xs uppercase tracking-wider text-teal">
           Progresso semanal
         </p>
-        {(serverMetrics?.reviewed ?? progress.reviewed) > 0 ? (
+        {(serverMetrics?.reviewed ?? localProgress.reviewed) > 0 ? (
           <>
             <h2 className="mt-2 text-xl font-semibold">
-              {serverMetrics?.retention ?? progress.completion}% de retenção atual
+              {serverMetrics?.retention ?? localProgress.completion}% de retenção atual
             </h2>
             <p className="mt-1 text-sm text-muted">
-              {serverMetrics?.mastered ?? progress.mastered} card(s) consolidados de{" "}
-              {serverMetrics?.reviewed ?? progress.reviewed} revisado(s) nesta base.
+              {serverMetrics?.mastered ?? localProgress.mastered} card(s) consolidados de{" "}
+              {serverMetrics?.reviewed ?? localProgress.reviewed} revisado(s) nesta base.
             </p>
           </>
         ) : (

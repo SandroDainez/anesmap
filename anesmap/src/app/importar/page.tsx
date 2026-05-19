@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
+import { useSearchParams } from "next/navigation";
 import {
   addImportHistoryEntry,
   clearStudyDataRemote,
@@ -76,6 +77,8 @@ type DuplicateFlashcardGroup = {
 };
 
 export default function ImportarPage() {
+  const searchParams = useSearchParams();
+  const isEmbedded = searchParams.get("embedded") === "1";
   const [report, setReport] = useState<ImportReport | null>(null);
   const [isImporting, setIsImporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -93,6 +96,13 @@ export default function ImportarPage() {
   const [selectedIncompleteGroups, setSelectedIncompleteGroups] = useState<string[]>([]);
   const [selectedDuplicateGroups, setSelectedDuplicateGroups] = useState<string[]>([]);
   const [selectedDuplicateCardGroups, setSelectedDuplicateCardGroups] = useState<string[]>([]);
+
+  useEffect(() => {
+    const mode = searchParams.get("mode");
+    if (mode === "flashcards" || mode === "simulados" || mode === "all") {
+      setImportMode(mode);
+    }
+  }, [searchParams]);
 
   const currentTotals = useMemo(
     () => ({
@@ -813,18 +823,30 @@ export default function ImportarPage() {
 
   return (
     <main className="flex flex-1 flex-col gap-6">
-      <SectionHeader
-        eyebrow="Admin"
-        title="Importar cards e simulados"
-        description="Selecione múltiplos CSVs exportados do Google Drive para compor o banco do app."
-      />
+      {!isEmbedded ? (
+        <SectionHeader
+          eyebrow="Admin"
+          title="Importar cards e simulados"
+          description="Selecione múltiplos CSVs exportados do Google Drive para compor o banco do app."
+        />
+      ) : (
+        <AppCard>
+          <p className="text-sm text-muted">
+            Importação direta pelo painel admin. Ao finalizar, o conteúdo é publicado no app automaticamente.
+          </p>
+        </AppCard>
+      )}
 
       <AppCard className="space-y-4">
         <div className="flex flex-wrap gap-2">
           <StatusBadge
             as="button"
             tone="teal"
-            className={importMode === "flashcards" ? "ring-1 ring-teal/40" : "opacity-70"}
+            className={
+              importMode === "flashcards"
+                ? "ring-2 ring-teal/60 bg-teal/20 text-teal shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-teal/12"
+            }
             onClick={() => setImportMode("flashcards")}
           >
             Cards
@@ -832,7 +854,11 @@ export default function ImportarPage() {
           <StatusBadge
             as="button"
             tone="blue"
-            className={importMode === "simulados" ? "ring-1 ring-blue/40" : "opacity-70"}
+            className={
+              importMode === "simulados"
+                ? "ring-2 ring-blue/60 bg-blue/20 text-blue shadow-[0_0_0_1px_rgba(79,142,247,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-blue/12"
+            }
             onClick={() => setImportMode("simulados")}
           >
             Simulados
@@ -840,7 +866,11 @@ export default function ImportarPage() {
           <StatusBadge
             as="button"
             tone="purple"
-            className={importMode === "all" ? "ring-1 ring-purple/40" : "opacity-70"}
+            className={
+              importMode === "all"
+                ? "ring-2 ring-purple/60 bg-purple/20 text-purple shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-purple/12"
+            }
             onClick={() => setImportMode("all")}
           >
             Importação em lote
@@ -1209,7 +1239,9 @@ export default function ImportarPage() {
             as="button"
             tone="teal"
             className={
-              manageKind === "flashcards" ? "ring-1 ring-teal/40" : "opacity-70"
+              manageKind === "flashcards"
+                ? "ring-2 ring-teal/60 bg-teal/20 text-teal shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-teal/12"
             }
             onClick={() => setManageKind("flashcards")}
           >
@@ -1219,7 +1251,9 @@ export default function ImportarPage() {
             as="button"
             tone="blue"
             className={
-              manageKind === "simulados" ? "ring-1 ring-blue/40" : "opacity-70"
+              manageKind === "simulados"
+                ? "ring-2 ring-blue/60 bg-blue/20 text-blue shadow-[0_0_0_1px_rgba(79,142,247,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-blue/12"
             }
             onClick={() => setManageKind("simulados")}
           >
@@ -1281,7 +1315,11 @@ export default function ImportarPage() {
           <StatusBadge
             as="button"
             tone="purple"
-            className={historyFilter === "all" ? "ring-1 ring-purple/40" : "opacity-70"}
+            className={
+              historyFilter === "all"
+                ? "ring-2 ring-purple/60 bg-purple/20 text-purple shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-purple/12"
+            }
             onClick={() => setHistoryFilter("all")}
           >
             Todos
@@ -1290,7 +1328,9 @@ export default function ImportarPage() {
             as="button"
             tone="teal"
             className={
-              historyFilter === "imports" ? "ring-1 ring-teal/40" : "opacity-70"
+              historyFilter === "imports"
+                ? "ring-2 ring-teal/60 bg-teal/20 text-teal shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-teal/12"
             }
             onClick={() => setHistoryFilter("imports")}
           >
@@ -1300,7 +1340,9 @@ export default function ImportarPage() {
             as="button"
             tone="blue"
             className={
-              historyFilter === "backups" ? "ring-1 ring-blue/40" : "opacity-70"
+              historyFilter === "backups"
+                ? "ring-2 ring-blue/60 bg-blue/20 text-blue shadow-[0_0_0_1px_rgba(79,142,247,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-blue/12"
             }
             onClick={() => setHistoryFilter("backups")}
           >
@@ -1309,7 +1351,11 @@ export default function ImportarPage() {
           <StatusBadge
             as="button"
             tone="rose"
-            className={historyFilter === "clear" ? "ring-1 ring-rose/40" : "opacity-70"}
+            className={
+              historyFilter === "clear"
+                ? "ring-2 ring-rose/60 bg-rose/20 text-rose shadow-[0_0_0_1px_rgba(247,92,110,0.35)]"
+                : "opacity-95 hover:opacity-100 hover:bg-rose/12"
+            }
             onClick={() => setHistoryFilter("clear")}
           >
             Limpeza

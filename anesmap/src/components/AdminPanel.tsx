@@ -68,6 +68,12 @@ function shortCardId(id: string): string {
   return `…${secondLast}-${last}`;
 }
 
+function humanItemLabel(id: string, prefix: "Card" | "Questão" = "Card"): string {
+  const match = id.match(/-(\d+)$/);
+  if (match) return `${prefix} ${match[1]}`;
+  return `${prefix} registrado`;
+}
+
 function fmtDate(iso: string) {
   return new Date(iso).toLocaleString("pt-BR", {
     day: "2-digit", month: "2-digit", year: "2-digit",
@@ -100,6 +106,21 @@ function humanTrackName(track: string) {
   return track;
 }
 
+function humanRoleName(role: string) {
+  if (role === "admin") return "Administrador";
+  if (role === "student") return "Usuário";
+  return role;
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
   { id: "overview", label: "Visão Geral", icon: "◈" },
   { id: "users", label: "Usuários", icon: "◎" },
@@ -110,6 +131,8 @@ const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
 
 export function AdminPanel() {
   const [tab, setTab] = useState<Tab>("overview");
+  const [showEmbeddedImporter, setShowEmbeddedImporter] = useState(false);
+  const [embeddedImportMode, setEmbeddedImportMode] = useState<"flashcards" | "simulados" | "all">("all");
 
   const [overview, setOverview] = useState({ totalUsers: 0, totalSessions: 0, totalCardEvents: 0, totalAttempts: 0 });
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -154,7 +177,14 @@ export function AdminPanel() {
     let list = users;
     if (trackFilter) list = list.filter((u) => (u.assigned_track ?? "ALL") === trackFilter);
     const q = query.trim().toLowerCase();
-    if (q) list = list.filter((u) => (u.name ?? "").toLowerCase().includes(q) || u.role.includes(q));
+    if (q) {
+      list = list.filter(
+        (u) =>
+          (u.name ?? "").toLowerCase().includes(q) ||
+          u.role.includes(q) ||
+          humanRoleName(u.role).toLowerCase().includes(q),
+      );
+    }
     return list;
   }, [query, users, trackFilter]);
 
@@ -169,11 +199,225 @@ export function AdminPanel() {
     });
   }, [selectedDetails]);
 
-  async function handleTrackChange(userId: string, track: Track) {
-    await updateUserTrack(userId, track);
-    setUsers((prev) => prev.map((u) => u.id === userId ? { ...u, assigned_track: track } : u));
+  const detailedStats = useMemo(() => {
+    const events = selectedDetails?.events ?? [];
+    const attempts = selectedDetails?.attempts ?? [];
+    const answers = selectedDetails?.answers ?? [];
+
+    const cardViews = events.filter((e) => e.event_type === "view").length;
+    const cardFlips = events.filter((e) => e.event_type === "flip").length;
+    const cardGrades = events.filter((e) => e.event_type === "grade");
+    const cardEasy = cardGrades.filter((e) => Number(e.quality ?? 0) >= 4).length;
+    const cardMedium = cardGrades.filter((e) => Number(e.quality ?? 0) === 3).length;
+    const cardHard = cardGrades.filter((e) => Number(e.quality ?? 0) <= 2).length;
+    const uniqueCards = new Set(events.map((e) => e.card_id)).size;
+
+    const totalAnswers = answers.length;
+    const correctAnswers = answers.filter((a) => a.correct).length;
+    const wrongAnswers = totalAnswers - correctAnswers;
+    const accuracy = totalAnswers > 0 ? Math.round((correctAnswers / totalAnswers) * 100) : 0;
+
+    const finishedAttempts = attempts.filter((a) => a.ended_at || a.score_percent !== null).length;
+    const avgScoreFinished =
+      attempts.filter((a) => a.score_percent !== null).length > 0
+        ? Math.round(
+            attempts
+              .filter((a) => a.score_percent !== null)
+              .reduce((acc, a) => acc + Number(a.score_percent ?? 0), 0) /
+              attempts.filter((a) => a.score_percent !== null).length,
+          )
+        : 0;
+
+    const answersByAttempt = new Map<
+      string,
+      { total: number; correct: number; wrong: number }
+    >();
+    for (const ans of answers) {
+      const prev = answersByAttempt.get(ans.attempt_id) ?? { total: 0, correct: 0, wrong: 0 };
+      prev.total += 1;
+      if (ans.correct) prev.correct += 1;
+      else prev.wrong += 1;
+      answersByAttempt.set(ans.attempt_id, prev);
+    }
+
+    return {
+      cards: { cardViews, cardFlips, cardGrades: cardGrades.length, cardEasy, cardMedium, cardHard, uniqueCards },
+      simulados: { totalAnswers, correctAnswers, wrongAnswers, accuracy, finishedAttempts, avgScoreFinished, answersByAttempt },
+    };
+  }, [selectedDetails]);
+
+  function handleDownloadUserPdf() {
+    if (!selectedUser || !selectedDetails) return;
+
+    const attemptsRows = selectedDetails.attempts
+      .slice(0, 30)
+      .map((a) => {
+        const score = a.score_percent === null ? "Sem nota final" : `${Math.round(Number(a.score_percent))}%`;
+        return `
+          <tr>
+            <td>${escapeHtml(a.track)}</td>
+            <td>${escapeHtml(score)}</td>
+            <td>${escapeHtml(fmtSec(a.duration_sec))}</td>
+            <td>${escapeHtml(fmtDate(a.created_at))}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    const answerRows = selectedDetails.answers
+      .slice(0, 60)
+      .map(
+        (ans) => `
+          <tr>
+            <td>${escapeHtml(humanItemLabel(ans.question_id, "Questão"))}</td>
+            <td>${escapeHtml(ans.selected)}</td>
+            <td>${ans.correct ? "Acertou" : "Errou"}</td>
+            <td>${escapeHtml(fmtDate(ans.answered_at))}</td>
+          </tr>
+        `,
+      )
+      .join("");
+
+    const cardRows = selectedDetails.events
+      .slice(0, 60)
+      .map(
+        (ev) => `
+          <tr>
+            <td>${escapeHtml(humanItemLabel(ev.card_id, "Card"))}</td>
+            <td>${escapeHtml(humanCardEvent(ev.event_type, ev.quality))}</td>
+            <td>${ev.quality !== null ? `Q${ev.quality}` : "—"}</td>
+            <td>${escapeHtml(fmtDate(ev.created_at))}</td>
+          </tr>
+        `,
+      )
+      .join("");
+
+    const html = `
+      <!doctype html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="utf-8" />
+        <title>Relatório de desempenho - ${escapeHtml(selectedUser.name ?? "Usuário")}</title>
+        <style>
+          body { font-family: Arial, sans-serif; color: #111827; margin: 24px; }
+          h1 { margin: 0 0 4px; font-size: 24px; }
+          h2 { margin: 24px 0 8px; font-size: 18px; }
+          p { margin: 4px 0; }
+          .muted { color: #6b7280; }
+          .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+          .card { border: 1px solid #d1d5db; border-radius: 8px; padding: 10px; }
+          table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+          th, td { border: 1px solid #e5e7eb; padding: 6px 8px; font-size: 12px; text-align: left; }
+          th { background: #f3f4f6; }
+        </style>
+      </head>
+      <body>
+        <h1>Relatório do estagiário</h1>
+        <p><strong>Nome:</strong> ${escapeHtml(selectedUser.name ?? "Sem nome")}</p>
+        <p><strong>Perfil:</strong> ${escapeHtml(humanRoleName(selectedUser.role))}</p>
+        <p><strong>Trilha de cards:</strong> ${escapeHtml(selectedUser.assigned_track_cards ?? selectedUser.assigned_track ?? "ALL")}</p>
+        <p><strong>Trilha de simulados:</strong> ${escapeHtml(selectedUser.assigned_track_simulados ?? selectedUser.assigned_track ?? "ALL")}</p>
+        <p><strong>Cadastro:</strong> ${escapeHtml(fmtDate(selectedUser.created_at))}</p>
+
+        <h2>Resumo geral</h2>
+        <p>
+          ${escapeHtml(selectedUser.name ?? "O usuário")} estudou ${detailedStats.cards.uniqueCards} cards diferentes,
+          realizou ${selectedDetails.attempts.length} simulados, enviou ${detailedStats.simulados.totalAnswers} respostas,
+          com ${detailedStats.simulados.correctAnswers} acertos e ${detailedStats.simulados.wrongAnswers} erros
+          (taxa de acerto: ${detailedStats.simulados.accuracy}%).
+        </p>
+
+        <div class="grid">
+          <div class="card"><strong>Cards vistos:</strong> ${detailedStats.cards.cardViews}</div>
+          <div class="card"><strong>Cards virados:</strong> ${detailedStats.cards.cardFlips}</div>
+          <div class="card"><strong>Cards avaliados:</strong> ${detailedStats.cards.cardGrades}</div>
+          <div class="card"><strong>Marcados fácil:</strong> ${detailedStats.cards.cardEasy}</div>
+          <div class="card"><strong>Marcados médio:</strong> ${detailedStats.cards.cardMedium}</div>
+          <div class="card"><strong>Marcados difícil:</strong> ${detailedStats.cards.cardHard}</div>
+          <div class="card"><strong>Simulados iniciados:</strong> ${selectedDetails.attempts.length}</div>
+          <div class="card"><strong>Simulados concluídos:</strong> ${detailedStats.simulados.finishedAttempts}</div>
+          <div class="card"><strong>Média de nota:</strong> ${detailedStats.simulados.avgScoreFinished}%</div>
+        </div>
+
+        <h2>Desempenho por trilha</h2>
+        <table>
+          <thead><tr><th>Trilha</th><th>Tentativas</th><th>Média</th></tr></thead>
+          <tbody>
+            ${perTrackStats
+              .map(
+                (row) => `<tr><td>${escapeHtml(row.track)}</td><td>${row.total}</td><td>${row.avg !== null ? `${row.avg}%` : "Sem nota"}</td></tr>`,
+              )
+              .join("")}
+          </tbody>
+        </table>
+
+        <h2>Simulados realizados (últimos 30)</h2>
+        <table>
+          <thead><tr><th>Trilha</th><th>Resultado</th><th>Tempo</th><th>Data</th></tr></thead>
+          <tbody>${attemptsRows || '<tr><td colspan="4">Sem registros</td></tr>'}</tbody>
+        </table>
+
+        <h2>Respostas de simulados (últimas 60)</h2>
+        <table>
+          <thead><tr><th>Questão</th><th>Alternativa</th><th>Status</th><th>Data</th></tr></thead>
+          <tbody>${answerRows || '<tr><td colspan="4">Sem registros</td></tr>'}</tbody>
+        </table>
+
+        <h2>Histórico de cards (últimos 60 eventos)</h2>
+        <table>
+          <thead><tr><th>Card</th><th>Ação</th><th>Qualidade</th><th>Data</th></tr></thead>
+          <tbody>${cardRows || '<tr><td colspan="4">Sem registros</td></tr>'}</tbody>
+        </table>
+
+        <p class="muted" style="margin-top:20px;">
+          Relatório gerado em ${escapeHtml(new Date().toLocaleString("pt-BR"))}.
+        </p>
+      </body>
+      </html>
+    `;
+
+    const win = window.open("", "_blank", "width=1200,height=900");
+    if (!win) return;
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 350);
+  }
+
+  async function handleTrackChange(userId: string, track: Track, kind: "cards" | "simulados" | "all" = "all") {
+    await updateUserTrack(userId, track, kind);
+    setUsers((prev) =>
+      prev.map((u) =>
+        u.id === userId
+          ? {
+              ...u,
+              assigned_track: kind === "all" ? track : u.assigned_track,
+              assigned_track_cards: kind === "cards" || kind === "all" ? track : u.assigned_track_cards,
+              assigned_track_simulados:
+                kind === "simulados" || kind === "all" ? track : u.assigned_track_simulados,
+            }
+          : u,
+      ),
+    );
     if (selectedDetails?.profile?.id === userId) {
-      setSelectedDetails((prev) => prev ? { ...prev, profile: { ...prev.profile!, assigned_track: track } } : prev);
+      setSelectedDetails((prev) =>
+        prev
+          ? {
+              ...prev,
+              profile: {
+                ...prev.profile!,
+                assigned_track: kind === "all" ? track : prev.profile!.assigned_track,
+                assigned_track_cards:
+                  kind === "cards" || kind === "all" ? track : prev.profile!.assigned_track_cards,
+                assigned_track_simulados:
+                  kind === "simulados" || kind === "all"
+                    ? track
+                    : prev.profile!.assigned_track_simulados,
+              },
+            }
+          : prev,
+      );
     }
   }
 
@@ -337,7 +581,7 @@ export function AdminPanel() {
                   <thead>
                     <tr className="border-b border-border text-xs text-muted">
                       <th className="pb-2 text-left">Nome</th>
-                      <th className="pb-2 text-left">Role</th>
+                      <th className="pb-2 text-left">Perfil</th>
                       <th className="pb-2 text-left">Trilha</th>
                       <th className="pb-2 text-left">Cadastro</th>
                     </tr>
@@ -351,7 +595,7 @@ export function AdminPanel() {
                           <td className="py-2">
                             <span className={`rounded-md border px-1.5 py-0.5 text-xs ${
                               u.role === "admin" ? "border-purple/40 bg-purple/10 text-purple" : "border-border text-muted"
-                            }`}>{u.role}</span>
+                            }`}>{humanRoleName(u.role)}</span>
                           </td>
                           <td className="py-2">
                             <span className={`rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
@@ -414,7 +658,7 @@ export function AdminPanel() {
                           <p className="text-sm font-medium text-foreground truncate">{user.name ?? "Sem nome"}</p>
                           <span className={`ml-2 shrink-0 rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
                         </div>
-                        <p className="text-xs text-muted">{user.role}</p>
+                        <p className="text-xs text-muted">{humanRoleName(user.role)}</p>
                       </button>
                     );
                   })}
@@ -433,32 +677,80 @@ export function AdminPanel() {
                           <h2 className="text-xl font-bold text-foreground">{selectedUser.name ?? "Sem nome"}</h2>
                           <p className="mt-1 text-sm text-muted">Cadastro: {fmtDate(selectedUser.created_at)}</p>
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => handleRoleToggle(selectedUser.id, selectedUser.role)}
-                          className={`rounded-xl border px-4 py-2 text-sm font-medium transition ${
-                            selectedUser.role === "admin"
-                              ? "border-purple/40 bg-purple/10 text-purple hover:bg-purple/20"
-                              : "border-border bg-background/35 text-muted hover:text-foreground"
-                          }`}
-                        >
-                          {selectedUser.role === "admin" ? "Admin — Rebaixar" : "Promover a Admin"}
-                        </button>
                       </div>
-                      <div className="mt-4 flex items-center gap-2">
-                        <span className="text-xs text-muted">Trilha:</span>
-                        {TRACKS.map((t) => (
+
+                      <div className="mt-4 space-y-3">
+                        <div className="flex items-center gap-2">
+                          <span className="w-14 text-xs text-muted">Perfil:</span>
                           <button
-                            key={t}
                             type="button"
-                            onClick={() => handleTrackChange(selectedUser.id, t)}
+                            onClick={() => selectedUser.role !== "student" && handleRoleToggle(selectedUser.id, selectedUser.role)}
                             className={`rounded-xl border px-3 py-1 text-xs font-medium transition ${
-                              (selectedUser.assigned_track ?? "ALL") === t ? TRACK_STYLE[t] : "border-border text-muted hover:text-foreground"
+                              selectedUser.role === "student"
+                                ? "border-teal/40 bg-teal/10 text-teal"
+                                : "border-border text-muted hover:text-foreground"
                             }`}
                           >
-                            {t}
+                            Usuário
                           </button>
-                        ))}
+                          <button
+                            type="button"
+                            onClick={() => selectedUser.role !== "admin" && handleRoleToggle(selectedUser.id, selectedUser.role)}
+                            className={`rounded-xl border px-3 py-1 text-xs font-medium transition ${
+                              selectedUser.role === "admin"
+                                ? "border-purple/40 bg-purple/10 text-purple"
+                                : "border-border text-muted hover:text-foreground"
+                            }`}
+                          >
+                            Administrador
+                          </button>
+                        </div>
+
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <span className="w-14 text-xs text-muted">Cards:</span>
+                            {TRACKS.map((t) => (
+                              <button
+                                key={`cards-${t}`}
+                                type="button"
+                                onClick={() => handleTrackChange(selectedUser.id, t, "cards")}
+                                className={`rounded-xl border px-3 py-1 text-xs font-medium transition ${
+                                  (selectedUser.assigned_track_cards ?? selectedUser.assigned_track ?? "ALL") === t
+                                    ? TRACK_STYLE[t]
+                                    : "border-border text-muted hover:text-foreground"
+                                }`}
+                              >
+                                {t}
+                              </button>
+                            ))}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="w-14 text-xs text-muted">Simulados:</span>
+                            {TRACKS.map((t) => (
+                              <button
+                                key={`simulados-${t}`}
+                                type="button"
+                                onClick={() => handleTrackChange(selectedUser.id, t, "simulados")}
+                                className={`rounded-xl border px-3 py-1 text-xs font-medium transition ${
+                                  (selectedUser.assigned_track_simulados ?? selectedUser.assigned_track ?? "ALL") === t
+                                    ? TRACK_STYLE[t]
+                                    : "border-border text-muted hover:text-foreground"
+                                }`}
+                              >
+                                {t}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="pt-1">
+                          <button
+                            type="button"
+                            onClick={handleDownloadUserPdf}
+                            className="rounded-xl border border-blue/30 bg-blue/15 px-4 py-2 text-xs font-medium text-blue transition hover:opacity-90"
+                          >
+                            Gerar relatório PDF do estagiário
+                          </button>
+                        </div>
                       </div>
                     </div>
 
@@ -470,18 +762,33 @@ export function AdminPanel() {
                         <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
                           <h3 className="text-sm font-semibold text-foreground">Resumo do desempenho (linguagem humana)</h3>
                           <p className="text-sm text-muted leading-relaxed">
-                            {selectedUser.name ?? "Este usuário"} está seguindo a trilha{" "}
+                            {selectedUser.name ?? "Este usuário"} está com trilha de cards em{" "}
                             <span className="text-foreground font-medium">
-                              {humanTrackName((selectedUser.assigned_track ?? "ALL") as string)}
+                              {humanTrackName(
+                                (selectedUser.assigned_track_cards ??
+                                  selectedUser.assigned_track ??
+                                  "ALL") as string,
+                              )}
+                            </span>{" "}
+                            e trilha de simulados em{" "}
+                            <span className="text-foreground font-medium">
+                              {humanTrackName(
+                                (selectedUser.assigned_track_simulados ??
+                                  selectedUser.assigned_track ??
+                                  "ALL") as string,
+                              )}
                             </span>.
                             Até agora, ele(a) estudou{" "}
-                            <span className="text-foreground font-semibold">{selectedDetails.events.length}</span> interações com cards,
+                            <span className="text-foreground font-semibold">{detailedStats.cards.uniqueCards}</span> cards diferentes
+                            (total de {selectedDetails.events.length} interações),
                             consolidou progresso em{" "}
                             <span className="text-foreground font-semibold">{selectedDetails.progress.length}</span> cards,
                             realizou{" "}
                             <span className="text-foreground font-semibold">{selectedDetails.attempts.length}</span> simulados
                             e enviou{" "}
-                            <span className="text-foreground font-semibold">{selectedDetails.answers.length}</span> respostas.
+                            <span className="text-foreground font-semibold">{detailedStats.simulados.totalAnswers}</span> respostas,
+                            com taxa de acerto geral de{" "}
+                            <span className="text-foreground font-semibold">{detailedStats.simulados.accuracy}%</span>.
                           </p>
                           <div className="grid grid-cols-3 gap-2">
                             {perTrackStats.map(({ track, total, avg }) => (
@@ -494,69 +801,131 @@ export function AdminPanel() {
                           </div>
                         </div>
 
-                        {/* Timeline unificada item a item */}
-                        <div className="rounded-2xl border border-border bg-background/40 p-5">
-                          <h3 className="mb-3 text-sm font-semibold text-foreground">
-                            Linha do tempo da atividade (item a item)
-                          </h3>
-                          {(() => {
-                            const cardTimeline = selectedDetails.events.map((ev) => ({
-                              id: `card-${ev.id}`,
-                              when: ev.created_at,
-                              type: "card" as const,
-                              text: `${humanCardEvent(ev.event_type, ev.quality)} no ${shortCardId(ev.card_id)}${ev.quality !== null ? ` (qualidade ${ev.quality})` : ""}.`,
-                              badge: "Card",
-                              badgeClass: "border-teal/30 bg-teal/10 text-teal",
-                            }));
-                            const simTimeline = selectedDetails.attempts.map((a) => {
-                              const score = Math.round(Number(a.score_percent ?? 0));
-                              const scoreText = a.score_percent === null ? "ainda sem nota final" : `${score}%`;
-                              return {
-                                id: `attempt-${a.id}`,
-                                when: a.created_at,
-                                type: "attempt" as const,
-                                text: `realizou simulado ${a.track} com resultado ${scoreText} em ${fmtSec(a.duration_sec)}.`,
-                                badge: "Simulado",
-                                badgeClass: "border-blue/30 bg-blue/10 text-blue",
-                              };
-                            });
-                            const answerTimeline = selectedDetails.answers.map((ans) => ({
-                              id: `answer-${ans.id}`,
-                              when: ans.answered_at,
-                              type: "answer" as const,
-                              text: `respondeu questão ${shortCardId(ans.question_id)} e marcou alternativa ${ans.selected} (${ans.correct ? "acertou" : "errou"}).`,
-                              badge: "Resposta",
-                              badgeClass: ans.correct
-                                ? "border-teal/30 bg-teal/10 text-teal"
-                                : "border-rose/30 bg-rose/10 text-rose",
-                            }));
+                        <div className="grid grid-cols-2 gap-5">
+                          <div className="rounded-2xl border border-border bg-background/40 p-5">
+                            <h3 className="mb-3 text-sm font-semibold text-foreground">Estatísticas de cards</h3>
+                            <ul className="space-y-1.5 text-sm text-muted">
+                              <li>• Cards diferentes estudados: <span className="font-semibold text-foreground">{detailedStats.cards.uniqueCards}</span></li>
+                              <li>• Visualizações de cards: <span className="font-semibold text-foreground">{detailedStats.cards.cardViews}</span></li>
+                              <li>• Viradas para ver resposta: <span className="font-semibold text-foreground">{detailedStats.cards.cardFlips}</span></li>
+                              <li>• Avaliações de cards: <span className="font-semibold text-foreground">{detailedStats.cards.cardGrades}</span></li>
+                              <li>• Marcados como fácil: <span className="font-semibold text-teal">{detailedStats.cards.cardEasy}</span></li>
+                              <li>• Marcados como médio: <span className="font-semibold text-amber">{detailedStats.cards.cardMedium}</span></li>
+                              <li>• Marcados como difícil: <span className="font-semibold text-rose">{detailedStats.cards.cardHard}</span></li>
+                            </ul>
+                          </div>
+                          <div className="rounded-2xl border border-border bg-background/40 p-5">
+                            <h3 className="mb-3 text-sm font-semibold text-foreground">Estatísticas de simulados</h3>
+                            <ul className="space-y-1.5 text-sm text-muted">
+                              <li>• Simulados iniciados: <span className="font-semibold text-foreground">{selectedDetails.attempts.length}</span></li>
+                              <li>• Simulados concluídos: <span className="font-semibold text-foreground">{detailedStats.simulados.finishedAttempts}</span></li>
+                              <li>• Respostas totais: <span className="font-semibold text-foreground">{detailedStats.simulados.totalAnswers}</span></li>
+                              <li>• Respostas corretas: <span className="font-semibold text-teal">{detailedStats.simulados.correctAnswers}</span></li>
+                              <li>• Respostas erradas: <span className="font-semibold text-rose">{detailedStats.simulados.wrongAnswers}</span></li>
+                              <li>• Taxa de acerto: <span className="font-semibold text-foreground">{detailedStats.simulados.accuracy}%</span></li>
+                              <li>• Média de nota (simulados finalizados): <span className="font-semibold text-foreground">{detailedStats.simulados.avgScoreFinished}%</span></li>
+                            </ul>
+                          </div>
+                        </div>
 
-                            const timeline = [...cardTimeline, ...simTimeline, ...answerTimeline]
-                              .sort((a, b) => new Date(b.when).getTime() - new Date(a.when).getTime())
-                              .slice(0, 120);
+                        {/* Timelines separadas */}
+                        <div className="grid grid-cols-2 gap-5">
+                          <div className="rounded-2xl border border-border bg-background/40 p-5">
+                            <h3 className="mb-3 text-sm font-semibold text-foreground">
+                              Histórico de Cards (item a item)
+                            </h3>
+                            {(() => {
+                              const cardTimeline = selectedDetails.events
+                                .map((ev) => ({
+                                  id: `card-${ev.id}`,
+                                  when: ev.created_at,
+                                  text: `${humanCardEvent(ev.event_type, ev.quality)} no ${humanItemLabel(ev.card_id, "Card")}${ev.quality !== null ? ` (qualidade ${ev.quality})` : ""}.`,
+                                }))
+                                .sort((a, b) => new Date(b.when).getTime() - new Date(a.when).getTime())
+                                .slice(0, 80);
 
-                            if (timeline.length === 0) {
-                              return <p className="text-xs text-muted">Nenhuma atividade registrada ainda.</p>;
-                            }
+                              if (cardTimeline.length === 0) {
+                                return <p className="text-xs text-muted">Nenhuma atividade de card registrada.</p>;
+                              }
 
-                            return (
-                              <div className="max-h-[520px] space-y-2 overflow-auto pr-1">
-                                {timeline.map((item) => (
-                                  <div key={item.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
-                                    <div className="mb-1 flex items-center justify-between gap-2">
-                                      <span className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${item.badgeClass}`}>
-                                        {item.badge}
-                                      </span>
-                                      <span className="text-[11px] text-muted">{fmtDate(item.when)}</span>
+                              return (
+                                <div className="max-h-[420px] space-y-2 overflow-auto pr-1">
+                                  {cardTimeline.map((item) => (
+                                    <div key={item.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
+                                      <div className="mb-1 flex items-center justify-between gap-2">
+                                        <span className="rounded-md border border-teal/30 bg-teal/10 px-1.5 py-0.5 text-[10px] font-medium text-teal">
+                                          Card
+                                        </span>
+                                        <span className="text-[11px] text-muted">{fmtDate(item.when)}</span>
+                                      </div>
+                                      <p className="text-xs leading-relaxed text-muted">
+                                        <span className="font-medium text-foreground">{selectedUser.name ?? "Usuário"}</span> {item.text}
+                                      </p>
                                     </div>
-                                    <p className="text-xs leading-relaxed text-muted">
-                                      <span className="font-medium text-foreground">{selectedUser.name ?? "Usuário"}</span> {item.text}
-                                    </p>
-                                  </div>
-                                ))}
-                              </div>
-                            );
-                          })()}
+                                  ))}
+                                </div>
+                              );
+                            })()}
+                          </div>
+
+                          <div className="rounded-2xl border border-border bg-background/40 p-5">
+                            <h3 className="mb-3 text-sm font-semibold text-foreground">
+                              Histórico de Simulados e Respostas
+                            </h3>
+                            {(() => {
+                              const simTimeline = selectedDetails.attempts.map((a) => {
+                                const score = Math.round(Number(a.score_percent ?? 0));
+                                const scoreText = a.score_percent === null ? "ainda sem nota final" : `${score}%`;
+                                const attemptAnswers = detailedStats.simulados.answersByAttempt.get(a.id) ?? {
+                                  total: 0,
+                                  correct: 0,
+                                  wrong: 0,
+                                };
+                                return {
+                                  id: `attempt-${a.id}`,
+                                  when: a.created_at,
+                                  badge: "Simulado",
+                                  badgeClass: "border-blue/30 bg-blue/10 text-blue",
+                                  text: `realizou simulado ${a.track} com resultado ${scoreText} em ${fmtSec(a.duration_sec)}. Respondeu ${attemptAnswers.total} questões (${attemptAnswers.correct} acertos e ${attemptAnswers.wrong} erros).`,
+                                };
+                              });
+                              const answerTimeline = selectedDetails.answers.map((ans) => ({
+                                id: `answer-${ans.id}`,
+                                when: ans.answered_at,
+                                badge: "Resposta",
+                                badgeClass: ans.correct
+                                  ? "border-teal/30 bg-teal/10 text-teal"
+                                  : "border-rose/30 bg-rose/10 text-rose",
+                                text: `respondeu ${humanItemLabel(ans.question_id, "Questão")} e marcou alternativa ${ans.selected} (${ans.correct ? "acertou" : "errou"}).`,
+                              }));
+
+                              const timeline = [...simTimeline, ...answerTimeline]
+                                .sort((a, b) => new Date(b.when).getTime() - new Date(a.when).getTime())
+                                .slice(0, 120);
+
+                              if (timeline.length === 0) {
+                                return <p className="text-xs text-muted">Nenhuma atividade de simulado/resposta registrada.</p>;
+                              }
+
+                              return (
+                                <div className="max-h-[420px] space-y-2 overflow-auto pr-1">
+                                  {timeline.map((item) => (
+                                    <div key={item.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
+                                      <div className="mb-1 flex items-center justify-between gap-2">
+                                        <span className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${item.badgeClass}`}>
+                                          {item.badge}
+                                        </span>
+                                        <span className="text-[11px] text-muted">{fmtDate(item.when)}</span>
+                                      </div>
+                                      <p className="text-xs leading-relaxed text-muted">
+                                        <span className="font-medium text-foreground">{selectedUser.name ?? "Usuário"}</span> {item.text}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </div>
+                              );
+                            })()}
+                          </div>
                         </div>
 
                         {/* Tabela objetiva também mantida */}
@@ -611,7 +980,7 @@ export function AdminPanel() {
                                 <tbody>
                                   {selectedDetails.events.slice(0, 20).map((ev) => (
                                     <tr key={ev.id} className="border-b border-border/40 last:border-0">
-                                      <td className="py-1.5 font-mono text-[10px] text-muted">{shortCardId(ev.card_id)}</td>
+                                      <td className="py-1.5 text-[11px] text-muted">{humanItemLabel(ev.card_id, "Card")}</td>
                                       <td className="py-1.5 text-foreground">
                                         {humanCardEvent(ev.event_type, ev.quality)}
                                         {ev.quality !== null ? <span className="ml-1 text-muted">Q{ev.quality}</span> : null}
@@ -641,18 +1010,100 @@ export function AdminPanel() {
             <div className="space-y-5 max-w-4xl">
               <h2 className="text-xl font-bold text-foreground">Gerenciar Conteúdo</h2>
 
-              <div className="rounded-2xl border border-border bg-background/40 p-5">
-                <p className="text-sm text-muted mb-4">
-                  Importe novos flashcards e simulados, faça backup ou remova conteúdo desatualizado.
-                  Todas as alterações ficam disponíveis para todos os usuários em tempo real.
+              <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-5">
+                <p className="text-sm text-muted">
+                  Use em dois passos simples: <strong className="text-foreground">1) baixar</strong> os arquivos que você quer usar,
+                  depois <strong className="text-foreground">2) enviar para o app</strong> para publicar para todos os usuários.
                 </p>
+
+                {/* PASSO 1 */}
+                <div className="rounded-xl border border-blue/20 bg-blue/5 px-4 py-3 space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-blue">Passo 1 — Baixar conteúdo</p>
+                  <p className="text-xs text-muted">
+                    Se você quer pegar os arquivos para guardar/editar, use a aba <strong className="text-foreground">Exportar</strong>.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setTab("export")}
+                    className="inline-flex items-center justify-center rounded-xl border border-blue/30 bg-blue/15 px-4 py-2 text-xs font-medium text-blue transition hover:opacity-90"
+                  >
+                    Ir para Exportar (baixar arquivos)
+                  </button>
+                </div>
+
+                {/* PASSO 2 */}
+                <div className="rounded-xl border border-teal/20 bg-teal/5 px-4 py-3 space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-teal">Passo 2 — Enviar conteúdo para o app</p>
+                  <p className="text-xs text-muted">
+                    Escolha o tipo de conteúdo e envie os arquivos direto aqui no admin. Ao concluir, o conteúdo já fica publicado no app.
+                  </p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEmbeddedImportMode("flashcards");
+                        setShowEmbeddedImporter(true);
+                      }}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-teal/40 bg-teal/20 px-4 py-2.5 text-sm font-medium text-teal transition hover:opacity-90"
+                    >
+                      Enviar Cards para o app
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEmbeddedImportMode("simulados");
+                        setShowEmbeddedImporter(true);
+                      }}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue/40 bg-blue/20 px-4 py-2.5 text-sm font-medium text-blue transition hover:opacity-90"
+                    >
+                      Enviar Simulados para o app
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEmbeddedImportMode("all");
+                        setShowEmbeddedImporter(true);
+                      }}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-purple/40 bg-purple/20 px-4 py-2.5 text-sm font-medium text-purple transition hover:opacity-90"
+                    >
+                      Enviar Lote para o app
+                    </button>
+                  </div>
+                </div>
+
                 <a
                   href="/importar"
-                  className="inline-flex items-center gap-2 rounded-xl border border-teal/30 bg-teal/15 px-5 py-2.5 text-sm font-medium text-teal transition hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-xl border border-border bg-background/35 px-4 py-2 text-xs font-medium text-muted transition hover:text-foreground"
                 >
-                  ⊞ Abrir gerenciador de conteúdo
+                  Abrir gerenciador completo (modo avançado) →
                 </a>
               </div>
+
+              {showEmbeddedImporter ? (
+                <div className="rounded-2xl border border-border bg-background/40 p-3">
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <p className="text-sm font-semibold text-foreground">
+                      Importador embutido no Admin ({embeddedImportMode === "flashcards"
+                        ? "Cards"
+                        : embeddedImportMode === "simulados"
+                          ? "Simulados"
+                          : "Lote"})
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setShowEmbeddedImporter(false)}
+                      className="rounded-lg border border-border bg-background/35 px-3 py-1 text-xs text-muted hover:text-foreground"
+                    >
+                      Fechar
+                    </button>
+                  </div>
+                  <iframe
+                    src={`/importar?embedded=1&mode=${embeddedImportMode}`}
+                    title="Importador embutido"
+                    className="h-[980px] w-full rounded-xl border border-border bg-background"
+                  />
+                </div>
+              ) : null}
 
               <div className="grid grid-cols-3 gap-4">
                 <div className="rounded-2xl border border-border bg-background/40 p-5">
@@ -696,10 +1147,29 @@ export function AdminPanel() {
           {tab === "export" && (
             <div className="max-w-3xl space-y-6">
               <h2 className="text-xl font-bold text-foreground">Exportar conteúdo</h2>
-              <p className="text-sm text-muted">
-                Baixe os dados do app para guardar como backup ou reimportar depois. Os arquivos JSON podem ser
-                reimportados diretamente pela página de importação.
-              </p>
+              <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
+                <p className="text-sm font-semibold text-foreground">O que você quer fazer agora?</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleExport("backup", "json")}
+                    className="rounded-xl border border-teal/35 bg-teal/15 px-4 py-3 text-sm font-medium text-teal transition hover:opacity-90"
+                  >
+                    1) Quero baixar todos os arquivos
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTab("content")}
+                    className="rounded-xl border border-blue/35 bg-blue/15 px-4 py-3 text-sm font-medium text-blue transition hover:opacity-90"
+                  >
+                    2) Quero enviar conteúdo para o app
+                  </button>
+                </div>
+                <p className="text-xs text-muted">
+                  Dica: se você vai apenas guardar backup, clique em <strong className="text-foreground">baixar</strong>.
+                  Se quer publicar conteúdo novo no app, vá em <strong className="text-foreground">enviar conteúdo para o app</strong>.
+                </p>
+              </div>
 
               {/* Backup completo */}
               <div className="rounded-2xl border border-teal/20 bg-teal/5 p-5">
@@ -784,12 +1254,12 @@ export function AdminPanel() {
               </div>
 
               <div className="rounded-2xl border border-border bg-background/40 p-5">
-                <h3 className="mb-2 text-sm font-semibold text-foreground">Como usar os arquivos exportados</h3>
+                <h3 className="mb-2 text-sm font-semibold text-foreground">Como usar sem dúvida</h3>
                 <ol className="space-y-1 text-sm text-muted list-decimal list-inside">
-                  <li>Salve o arquivo baixado em local seguro (Google Drive, etc.)</li>
-                  <li>Para reimportar, vá em <strong className="text-foreground">Conteúdo → Abrir gerenciador</strong></li>
-                  <li>Arraste o arquivo JSON ou CSV para a área de importação</li>
-                  <li>O app faz merge automático sem duplicar conteúdo existente</li>
+                  <li>Para guardar backup: clique em <strong className="text-foreground">Quero baixar todos os arquivos</strong>.</li>
+                  <li>Para publicar conteúdo novo no app: vá para a aba <strong className="text-foreground">Conteúdo</strong>.</li>
+                  <li>Na aba Conteúdo, clique em <strong className="text-foreground">Enviar Cards/Simulados/Lote para o app</strong>.</li>
+                  <li>Quando finalizar o envio, o conteúdo já aparece para os usuários automaticamente.</li>
                 </ol>
               </div>
             </div>

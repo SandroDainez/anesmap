@@ -88,10 +88,10 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => setMode("student")}
-            className={`rounded-xl border px-3 py-2 text-sm ${
+            className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all duration-150 ${
               mode === "student"
-                ? "border-teal/40 bg-teal/15 text-teal"
-                : "border-border bg-background/35 text-muted"
+                ? "border-teal/60 bg-teal/20 text-teal ring-2 ring-teal/60 shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                : "border-border bg-background/35 text-muted hover:text-foreground hover:bg-background/55"
             }`}
           >
             Login Usuário
@@ -99,10 +99,10 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => setMode("admin")}
-            className={`rounded-xl border px-3 py-2 text-sm ${
+            className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all duration-150 ${
               mode === "admin"
-                ? "border-purple/40 bg-purple/15 text-purple"
-                : "border-border bg-background/35 text-muted"
+                ? "border-purple/60 bg-purple/20 text-purple ring-2 ring-purple/60 shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                : "border-border bg-background/35 text-muted hover:text-foreground hover:bg-background/55"
             }`}
           >
             Login Admin

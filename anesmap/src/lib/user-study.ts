@@ -7,6 +7,8 @@ export type UserProfile = {
   name: string | null;
   role: "student" | "admin";
   weekly_goal_minutes: number;
+  assigned_track_cards: "ME1" | "ME2" | "ME3" | "ALL";
+  assigned_track_simulados: "ME1" | "ME2" | "ME3" | "ALL";
   assigned_track: "ME1" | "ME2" | "ME3" | "ALL";
   created_at: string;
 };
@@ -36,6 +38,13 @@ function browserSupabase() {
   return createSupabaseBrowserClient();
 }
 
+function isMissingTrackColumnsError(error: { code?: string; message?: string } | null) {
+  if (!error) return false;
+  if (error.code !== "42703") return false;
+  const msg = (error.message ?? "").toLowerCase();
+  return msg.includes("assigned_track_cards") || msg.includes("assigned_track_simulados");
+}
+
 export async function getCurrentAuthUser() {
   const supabase = browserSupabase();
   if (!supabase) return null;
@@ -57,11 +66,25 @@ export async function loadMyProfile(): Promise<UserProfile | null> {
     console.warn("[loadMyProfile] No authenticated user in session");
     return null;
   }
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from("profiles")
-    .select("id, name, role, weekly_goal_minutes, created_at")
+    .select(
+      "id, name, role, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
+    )
     .eq("id", user.id)
     .single();
+
+  // Backward compatibility: DB may still have only `assigned_track`.
+  if (isMissingTrackColumnsError(error)) {
+    const legacyRes = await supabase
+      .from("profiles")
+      .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+      .eq("id", user.id)
+      .single();
+    data = legacyRes.data as typeof data;
+    error = legacyRes.error;
+  }
+
   if (error) {
     console.error("[loadMyProfile] profiles query error:", error.code, error.message);
     return null;
@@ -70,7 +93,22 @@ export async function loadMyProfile(): Promise<UserProfile | null> {
     console.warn("[loadMyProfile] profiles query returned no data for user:", user.id);
     return null;
   }
-  return data as UserProfile;
+  return {
+    ...(data as UserProfile),
+    assigned_track_cards:
+      ((data as UserProfile).assigned_track_cards ??
+        (data as UserProfile).assigned_track ??
+        "ALL") as UserProfile["assigned_track_cards"],
+    assigned_track_simulados:
+      ((data as UserProfile).assigned_track_simulados ??
+        (data as UserProfile).assigned_track ??
+        "ALL") as UserProfile["assigned_track_simulados"],
+    assigned_track:
+      ((data as UserProfile).assigned_track ??
+        (data as UserProfile).assigned_track_cards ??
+        (data as UserProfile).assigned_track_simulados ??
+        "ALL") as UserProfile["assigned_track"],
+  };
 }
 
 export async function updateWeeklyGoal(minutes: number): Promise<boolean> {
@@ -311,21 +349,57 @@ export async function loadAdminOverview() {
 export async function loadAdminUsers() {
   const supabase = browserSupabase();
   if (!supabase) return [];
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from("profiles")
-    .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+    .select(
+      "id, name, role, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
+    )
     .order("created_at", { ascending: false });
+
+  if (isMissingTrackColumnsError(error)) {
+    const legacyRes = await supabase
+      .from("profiles")
+      .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+      .order("created_at", { ascending: false });
+    data = legacyRes.data as typeof data;
+    error = legacyRes.error;
+  }
+
   if (error || !data) return [];
-  return data as UserProfile[];
+  return (data as UserProfile[]).map((item) => ({
+    ...item,
+    assigned_track_cards: (item.assigned_track_cards ?? item.assigned_track ?? "ALL") as UserProfile["assigned_track_cards"],
+    assigned_track_simulados: (item.assigned_track_simulados ?? item.assigned_track ?? "ALL") as UserProfile["assigned_track_simulados"],
+    assigned_track: (item.assigned_track ?? item.assigned_track_cards ?? item.assigned_track_simulados ?? "ALL") as UserProfile["assigned_track"],
+  }));
 }
 
-export async function updateUserTrack(userId: string, track: string): Promise<boolean> {
+export async function updateUserTrack(
+  userId: string,
+  track: string,
+  kind: "cards" | "simulados" | "all" = "all",
+): Promise<boolean> {
   const supabase = browserSupabase();
   if (!supabase) return false;
+  const payload =
+    kind === "cards"
+      ? { assigned_track_cards: track }
+      : kind === "simulados"
+        ? { assigned_track_simulados: track }
+        : { assigned_track: track, assigned_track_cards: track, assigned_track_simulados: track };
   const { error } = await supabase
     .from("profiles")
-    .update({ assigned_track: track })
+    .update(payload)
     .eq("id", userId);
+
+  if (isMissingTrackColumnsError(error)) {
+    const { error: legacyError } = await supabase
+      .from("profiles")
+      .update({ assigned_track: track })
+      .eq("id", userId);
+    return !legacyError;
+  }
+
   return !error;
 }
 
@@ -350,10 +424,12 @@ export async function loadAdminUserDetails(userId: string) {
       answers: [],
     };
   }
-  const [profileRes, eventsRes, progressRes, attemptsRes, answersRes] = await Promise.all([
+  let [profileRes, eventsRes, progressRes, attemptsRes, answersRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+      .select(
+        "id, name, role, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
+      )
       .eq("id", userId)
       .single(),
     supabase
@@ -380,8 +456,34 @@ export async function loadAdminUserDetails(userId: string) {
       .limit(500),
   ]);
 
+  if (isMissingTrackColumnsError(profileRes.error as { code?: string; message?: string })) {
+    const legacyProfileRes = await supabase
+      .from("profiles")
+      .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+      .eq("id", userId)
+      .single();
+    profileRes = legacyProfileRes as typeof profileRes;
+  }
+
   return {
-    profile: (profileRes.data as UserProfile | null) ?? null,
+    profile: profileRes.data
+      ? ({
+          ...(profileRes.data as UserProfile),
+          assigned_track_cards:
+            ((profileRes.data as UserProfile).assigned_track_cards ??
+              (profileRes.data as UserProfile).assigned_track ??
+              "ALL") as UserProfile["assigned_track_cards"],
+          assigned_track_simulados:
+            ((profileRes.data as UserProfile).assigned_track_simulados ??
+              (profileRes.data as UserProfile).assigned_track ??
+              "ALL") as UserProfile["assigned_track_simulados"],
+          assigned_track:
+            ((profileRes.data as UserProfile).assigned_track ??
+              (profileRes.data as UserProfile).assigned_track_cards ??
+              (profileRes.data as UserProfile).assigned_track_simulados ??
+              "ALL") as UserProfile["assigned_track"],
+        } as UserProfile)
+      : null,
     events: eventsRes.data ?? [],
     progress: progressRes.data ?? [],
     attempts: (attemptsRes.data as SimuladoAttempt[]) ?? [],
