@@ -434,35 +434,20 @@ function parseCardContent(frente: string, verso: string, structuredReferences?: 
 }
 
 function compareCardsForStudyOrder(a: Flashcard, b: Flashcard) {
+  // Prioridade 1: número embutido no texto (ex: "5) Qual é...")
   const numberA = extractCardNumber(a.frente);
   const numberB = extractCardNumber(b.frente);
   if (numberA !== null && numberB !== null && numberA !== numberB) return numberA - numberB;
   if (numberA !== null && numberB === null) return -1;
   if (numberA === null && numberB !== null) return 1;
 
-  const rowA = extractImportedRowOrder(a.id);
-  const rowB = extractImportedRowOrder(b.id);
-  if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
-  if (rowA !== null && rowB === null) return -1;
-  if (rowA === null && rowB !== null) return 1;
-  return a.frente.localeCompare(b.frente, "pt-BR");
-}
-
-function extractImportedRowOrder(id: string) {
-  const match = id.match(/-(\d+)$/);
-  if (!match) return null;
-  return Number(match[1]);
+  // Prioridade 2: ordem de importação pelo ID completo (estável entre arquivos)
+  return a.id.localeCompare(b.id, "pt-BR", { numeric: true });
 }
 
 function formatCardQuestionForSession(question: string, index: number) {
-  const existingNumber = extractCardNumber(question);
-  if (existingNumber !== null) {
-    const cleaned = question
-      .trim()
-      .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")
-      .trim();
-    return `${existingNumber}) ${cleaned || question}`;
-  }
+  // SEMPRE usa posição no array (index+1) para exibição — nunca o número embutido.
+  // O número embutido é usado apenas para ordenação, não para display.
   const cleaned = question
     .trim()
     .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")

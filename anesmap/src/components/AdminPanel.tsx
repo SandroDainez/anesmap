@@ -491,18 +491,18 @@ export function AdminPanel() {
           <span className="text-sm font-semibold text-foreground">Painel Administrativo</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="rounded-md border border-purple/30 bg-purple/10 px-2 py-0.5 text-xs font-medium text-purple">
+          <span className="rounded-lg border border-purple/40 bg-purple/15 px-4 py-2 text-sm font-semibold text-purple">
             Admin
           </span>
           <a
             href="/dashboard"
-            className="rounded-lg border border-border bg-background/35 px-3 py-1.5 text-xs text-muted transition hover:text-foreground"
+            className="rounded-lg border border-border bg-background/35 px-4 py-2 text-sm font-medium text-muted transition hover:text-foreground"
           >
             ← App
           </a>
           <a
             href="/logout"
-            className="rounded-lg border border-border bg-background/35 px-3 py-1.5 text-xs text-muted transition hover:text-foreground"
+            className="rounded-lg border border-border bg-background/35 px-4 py-2 text-sm font-medium text-muted transition hover:text-foreground"
           >
             Sair
           </a>
@@ -528,11 +528,11 @@ export function AdminPanel() {
             </button>
           ))}
 
-          <div className="mt-auto border-t border-border pt-4 space-y-1 text-xs text-muted px-1">
-            <p className="font-mono uppercase tracking-wider text-[10px]">Resumo</p>
-            <p>{overview.totalUsers} usuários</p>
-            <p>{overview.totalSessions} sessões</p>
-            <p>{overview.totalAttempts} simulados</p>
+          <div className="mt-auto border-t border-border pt-4 space-y-2 px-1">
+            <p className="font-mono uppercase tracking-wider text-[11px] text-muted">Resumo</p>
+            <p className="text-sm font-semibold text-foreground">{overview.totalUsers} <span className="font-normal text-muted">usuários</span></p>
+            <p className="text-sm font-semibold text-foreground">{overview.totalSessions} <span className="font-normal text-muted">sessões</span></p>
+            <p className="text-sm font-semibold text-foreground">{overview.totalAttempts} <span className="font-normal text-muted">simulados</span></p>
           </div>
         </nav>
 
