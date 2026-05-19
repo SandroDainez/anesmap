@@ -528,11 +528,22 @@ export function AdminPanel() {
             </button>
           ))}
 
-          <div className="mt-auto border-t border-border pt-4 space-y-2 px-1">
-            <p className="font-mono uppercase tracking-wider text-[11px] text-muted">Resumo</p>
-            <p className="text-sm font-semibold text-foreground">{overview.totalUsers} <span className="font-normal text-muted">usuários</span></p>
-            <p className="text-sm font-semibold text-foreground">{overview.totalSessions} <span className="font-normal text-muted">sessões</span></p>
-            <p className="text-sm font-semibold text-foreground">{overview.totalAttempts} <span className="font-normal text-muted">simulados</span></p>
+          <div className="mt-auto border-t border-border pt-5 space-y-3 px-1">
+            <p className="font-mono uppercase tracking-widest text-xs text-muted">Resumo</p>
+            <div className="space-y-3">
+              <div>
+                <p className="text-3xl font-bold text-teal leading-none">{overview.totalUsers}</p>
+                <p className="mt-1 text-xs text-muted">usuários ativos</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-blue leading-none">{overview.totalSessions}</p>
+                <p className="mt-1 text-xs text-muted">sessões de estudo</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-purple leading-none">{overview.totalAttempts}</p>
+                <p className="mt-1 text-xs text-muted">simulados realizados</p>
+              </div>
+            </div>
           </div>
         </nav>
 
