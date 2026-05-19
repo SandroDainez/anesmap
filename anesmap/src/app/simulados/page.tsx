@@ -149,6 +149,7 @@ export default function SimuladosPage() {
 
   function changeTrack(track: StudyTrack) {
     setSelectedMe(track);
+    setSelectedTrimestre("todos");
     setCurrentIndex(0);
     setShowBack(false);
     setAnswers({});

@@ -177,6 +177,7 @@ export default function FlashcardsPage() {
 
   function changeTrack(track: StudyTrack) {
     setSelectedMe(track);
+    setSelectedTrimestre("todos");
     setCurrentCardIndex(0);
     setIsFlipped(false);
     localStorage.setItem("anesmap_preferred_track", track);
