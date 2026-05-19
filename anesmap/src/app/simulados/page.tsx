@@ -30,6 +30,7 @@ const ALL_TRIMESTERS: Array<Trimestre | "todos"> = ["todos", "T1", "T2", "T3", "
 export default function SimuladosPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
   const [selectedTrimestre, setSelectedTrimestre] = useState<Trimestre | "todos">("todos");
+  const [selectedProvaKey, setSelectedProvaKey] = useState<string | null>(null);
   const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
   // Keep SSR and first client render consistent to avoid hydration mismatch.
   const [importedSimulados, setImportedSimulados] = useState<SimuladoQuestion[]>([]);
@@ -105,9 +106,33 @@ export default function SimuladosPage() {
         .sort((a, b) => compareSimuladosForSessionOrder(a, b)),
     [importedSimulados, selectedMe, selectedTrimestre],
   );
+
+  // Agrupa questões trimestrais por prova (cada arquivo de 30q é uma prova)
+  const provaGroups = useMemo(() => {
+    if (selectedTrimestre === "todos" || selectedTrimestre === "anual") return null;
+    const groups = new Map<string, SimuladoQuestion[]>();
+    for (const q of simuladosByTrack) {
+      const key = q.id.replace(/-\d+$/, "");
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push(q);
+    }
+    return groups.size > 1 ? groups : null;
+  }, [simuladosByTrack, selectedTrimestre]);
+
+  // Questões efetivamente ativas na sessão
+  const activeQuestions = useMemo(() => {
+    if (provaGroups) {
+      if (selectedProvaKey && provaGroups.has(selectedProvaKey)) {
+        return provaGroups.get(selectedProvaKey)!;
+      }
+      return [];
+    }
+    return simuladosByTrack;
+  }, [provaGroups, selectedProvaKey, simuladosByTrack]);
+
   const safeIndex =
-    simuladosByTrack.length === 0 ? 0 : Math.max(0, Math.min(currentIndex, simuladosByTrack.length - 1));
-  const currentQuestion = simuladosByTrack[safeIndex];
+    activeQuestions.length === 0 ? 0 : Math.max(0, Math.min(currentIndex, activeQuestions.length - 1));
+  const currentQuestion = activeQuestions[safeIndex];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
 
   useEffect(() => {
@@ -150,6 +175,7 @@ export default function SimuladosPage() {
   function changeTrack(track: StudyTrack) {
     setSelectedMe(track);
     setSelectedTrimestre("todos");
+    setSelectedProvaKey(null);
     setCurrentIndex(0);
     setShowBack(false);
     setAnswers({});
@@ -158,6 +184,14 @@ export default function SimuladosPage() {
 
   function changeTrimestre(t: Trimestre | "todos") {
     setSelectedTrimestre(t);
+    setSelectedProvaKey(null);
+    setCurrentIndex(0);
+    setShowBack(false);
+    setAnswers({});
+  }
+
+  function chooseProva(key: string) {
+    setSelectedProvaKey(key);
     setCurrentIndex(0);
     setShowBack(false);
     setAnswers({});
@@ -169,16 +203,16 @@ export default function SimuladosPage() {
 
   useEffect(() => {
     if (!attemptState) return;
-    if (answeredCount === 0 || answeredCount < simuladosByTrack.length) return;
+    if (answeredCount === 0 || answeredCount < activeQuestions.length) return;
     void finishSimuladoAttempt({
       attemptId: attemptState.attemptId,
       startedAt: attemptState.startedAt,
       scorePercent: score,
     });
-  }, [attemptState, answeredCount, simuladosByTrack.length, score]);
+  }, [attemptState, answeredCount, activeQuestions.length, score]);
 
   const dynamicMeta = [
-    { label: "Questões", value: String(simuladosByTrack.length) },
+    { label: "Questões", value: String(activeQuestions.length) },
     { label: "Acertos", value: `${score}%` },
     { label: "Respondidas", value: String(answeredCount) },
   ] as const;
@@ -276,6 +310,44 @@ export default function SimuladosPage() {
         </p>
       </AppCard>
 
+      {provaGroups && (
+        <AppCard>
+          <h2 className="mb-3 text-sm font-medium text-muted">Selecionar prova</h2>
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+            {Array.from(provaGroups.entries())
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([key, questions], index, arr) => {
+                const label = buildProvaLabel(key, index, arr.map(([k]) => k));
+                const isActive = selectedProvaKey === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => chooseProva(key)}
+                    className={`rounded-lg border px-2 py-2 text-xs font-medium transition-all ${
+                      isActive
+                        ? "border-teal bg-teal/20 text-teal shadow-sm"
+                        : "border-border bg-background/30 text-muted hover:border-teal/40 hover:text-foreground"
+                    }`}
+                  >
+                    {label}
+                    <span className="ml-1 opacity-60">({questions.length}q)</span>
+                  </button>
+                );
+              })}
+          </div>
+          {selectedProvaKey && (
+            <button
+              type="button"
+              onClick={() => setSelectedProvaKey(null)}
+              className="mt-2 text-xs text-muted underline underline-offset-2 hover:text-foreground"
+            >
+              Trocar prova
+            </button>
+          )}
+        </AppCard>
+      )}
+
       <AppCard>
         <p className="font-mono text-xs uppercase tracking-wider text-blue">
           Sessão ativa
@@ -304,7 +376,7 @@ export default function SimuladosPage() {
         {currentQuestion ? (
           <>
             <h3 className="text-sm font-medium text-muted">
-              Questão {safeIndex + 1} de {simuladosByTrack.length}
+              Questão {safeIndex + 1} de {activeQuestions.length}
             </h3>
             {!showBack ? (
               <>
@@ -389,7 +461,7 @@ export default function SimuladosPage() {
               <button
                 type="button"
                 onClick={goNext}
-                disabled={safeIndex >= simuladosByTrack.length - 1}
+                disabled={safeIndex >= activeQuestions.length - 1}
                 className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
               >
                 Próxima
@@ -399,13 +471,17 @@ export default function SimuladosPage() {
         ) : (
           <>
             <h3 className="text-sm font-medium text-muted">Questão do simulado</h3>
-            {selectedTrimestre !== "todos" ? (
+            {provaGroups && !selectedProvaKey ? (
+              <p className="mt-2 text-sm text-muted">
+                Selecione uma <span className="font-semibold text-foreground">prova</span> acima para começar a sessão de 30 questões.
+              </p>
+            ) : selectedTrimestre !== "todos" ? (
               <div className="mt-2 space-y-2">
                 <p className="text-sm text-muted">
                   Nenhuma questão marcada como <span className="font-semibold text-foreground">{selectedTrimestre === "anual" ? "Anual" : selectedTrimestre}</span> em {selectedMe}.
                 </p>
                 <p className="text-xs text-muted">
-                  As questões existentes ainda não têm trimestre definido. Adicione uma coluna <span className="font-mono text-foreground">trimestre</span> com valor <span className="font-mono text-foreground">T1</span>–<span className="font-mono text-foreground">T4</span> ou <span className="font-mono text-foreground">anual</span> ao CSV e reimporte. Use <span className="font-semibold text-foreground">Todos</span> para ver todas as questões.
+                  Use <span className="font-semibold text-foreground">Todos</span> para ver todas as questões.
                 </p>
               </div>
             ) : (
@@ -483,6 +559,24 @@ function buildOptionComment(letter: "A" | "B" | "C" | "D" | "E", question: Simul
     return `Incorreta. A correta é ${question.correta}. ${question.explicacao.trim()}`;
   }
   return `Incorreta — gabarito: ${question.correta}.`;
+}
+
+/** Gera rótulo legível para uma prova a partir da chave do grupo (ex: "provaa" → "Prova A") */
+function buildProvaLabel(key: string, index: number, allKeys: string[]): string {
+  const match = key.match(/prova([a-z])/i);
+  const letter = match ? match[1].toUpperCase() : String.fromCharCode(65 + index);
+
+  // Detecta duplicatas com a mesma letra para adicionar sufixo de versão
+  const sameLetterKeys = allKeys.filter((k) => {
+    const m = k.match(/prova([a-z])/i);
+    return m ? m[1].toUpperCase() === letter : false;
+  });
+
+  if (sameLetterKeys.length > 1) {
+    const version = sameLetterKeys.indexOf(key) + 1;
+    return `Prova ${letter}${version}`;
+  }
+  return `Prova ${letter}`;
 }
 
 function getQuestionReferences(question: SimuladoQuestion) {

@@ -467,7 +467,7 @@ export async function loadFlashcardsRemote(): Promise<Flashcard[] | null> {
 
   const { data, error } = await supabase
     .from("flashcards")
-    .select("id, me, frente, verso, tags, especialidade")
+    .select("id, me, trimestre, frente, verso, tags, especialidade")
     .order("id", { ascending: true });
 
   if (error || !data) return null;
