@@ -31,6 +31,25 @@ export default function DashboardPage() {
   } | null>(null);
 
   useEffect(() => {
+    // Se for admin, redirecionar para o painel administrativo
+    const { createSupabaseBrowserClient } = require("@/lib/supabase/client") as typeof import("@/lib/supabase/client");
+    const supabase = createSupabaseBrowserClient();
+    if (supabase) {
+      void supabase.auth.getUser().then(async ({ data: { user } }) => {
+        if (!user) return;
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+        if (profile?.role === "admin") {
+          window.location.href = "/admin";
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     const entries = Object.values(loadFlashcardProgress());
     const reviewed = entries.filter((item) => item.repetitions > 0).length;
     const mastered = entries.filter((item) => item.repetitions >= 3).length;

@@ -5,6 +5,12 @@ import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { loadAdminOverview, loadAdminUserDetails, loadAdminUsers, type UserProfile } from "@/lib/user-study";
 
+function humanRoleName(role: string) {
+  if (role === "admin") return "Administrador";
+  if (role === "student") return "Usuário";
+  return role;
+}
+
 type AdminUserDetails = Awaited<ReturnType<typeof loadAdminUserDetails>>;
 
 export function AdminPanel() {
@@ -86,7 +92,7 @@ export function AdminPanel() {
           type="text"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Filtrar por nome/role"
+          placeholder="Filtrar por nome..."
           className="mt-3 w-full rounded-xl border border-border bg-background/35 px-3 py-2 text-sm"
         />
         <div className="mt-3 max-h-56 space-y-2 overflow-auto">
@@ -103,7 +109,7 @@ export function AdminPanel() {
             >
               <p className="font-medium text-foreground">{user.name ?? "Sem nome"}</p>
               <p className="text-xs text-muted">
-                {user.role} · meta {user.weekly_goal_minutes} min/semana
+                {humanRoleName(user.role)} · meta {user.weekly_goal_minutes} min/semana
               </p>
             </button>
           ))}
@@ -116,7 +122,7 @@ export function AdminPanel() {
           <div className="mt-3 space-y-3 text-sm">
             <p className="text-foreground">
               <span className="font-semibold">{selectedDetails.profile.name ?? "Sem nome"}</span> ·{" "}
-              {selectedDetails.profile.role}
+              {humanRoleName(selectedDetails.profile.role)}
             </p>
             <p className="text-muted">
               Cards com progresso: {selectedDetails.progress.length} · eventos:{" "}
