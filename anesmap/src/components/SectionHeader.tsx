@@ -10,12 +10,12 @@ export function SectionHeader({
   description,
 }: SectionHeaderProps) {
   return (
-    <header className="space-y-3 pt-2">
-      <p className="font-mono text-xs uppercase tracking-[0.25em] text-teal">
+    <header className="space-y-4 pt-4">
+      <p className="font-mono text-sm uppercase tracking-[0.3em] text-teal">
         {eyebrow}
       </p>
-      <h1 className="text-4xl font-bold leading-tight tracking-tight">{title}</h1>
-      <p className="text-base text-muted">{description}</p>
+      <h1 className="text-5xl font-bold leading-none tracking-tight">{title}</h1>
+      <p className="text-base text-muted leading-relaxed">{description}</p>
     </header>
   );
 }
