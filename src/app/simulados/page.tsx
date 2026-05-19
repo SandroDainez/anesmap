@@ -13,12 +13,13 @@ import {
   saveSimulados,
   suggestStudyReferences,
 } from "@/lib/study-data";
-
-const examMeta = [
-  { label: "Questões", value: "120" },
-  { label: "Acertos", value: "74%" },
-  { label: "Tempo", value: "01:32:12" },
-] as const;
+import {
+  endStudySession,
+  finishSimuladoAttempt,
+  recordSimuladoAnswer,
+  startSimuladoAttempt,
+  startStudySession,
+} from "@/lib/user-study";
 
 export default function SimuladosPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
@@ -28,6 +29,12 @@ export default function SimuladosPage() {
   const [answers, setAnswers] = useState<
     Record<string, { selected: "A" | "B" | "C" | "D"; isCorrect: boolean }>
   >({});
+  const [attemptState, setAttemptState] = useState<{
+    attemptId: string;
+    startedAt: Date;
+  } | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
   useEffect(() => {
     const local = loadSimulados();
@@ -44,6 +51,22 @@ export default function SimuladosPage() {
     })();
   }, []);
 
+  useEffect(() => {
+    void (async () => {
+      const id = await startStudySession("simulados");
+      if (!id) return;
+      setSessionId(id);
+      setSessionStartedAt(new Date());
+    })();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (!sessionId || !sessionStartedAt) return;
+      void endStudySession(sessionId, sessionStartedAt);
+    };
+  }, [sessionId, sessionStartedAt]);
+
   const simuladosByTrack = useMemo(
     () =>
       importedSimulados
@@ -58,6 +81,10 @@ export default function SimuladosPage() {
     setCurrentIndex(0);
     setShowBack(false);
     setAnswers({});
+    void (async () => {
+      const started = await startSimuladoAttempt(selectedMe);
+      setAttemptState(started);
+    })();
   }, [selectedMe]);
 
   useEffect(() => {
@@ -71,6 +98,14 @@ export default function SimuladosPage() {
       ...prev,
       [currentQuestion.id]: { selected: letter, isCorrect },
     }));
+    if (attemptState) {
+      void recordSimuladoAnswer({
+        attemptId: attemptState.attemptId,
+        questionId: currentQuestion.id,
+        selected: letter,
+        correct: isCorrect,
+      });
+    }
     setShowBack(true);
   }
 
@@ -87,6 +122,16 @@ export default function SimuladosPage() {
   const answeredCount = Object.keys(answers).length;
   const hits = Object.values(answers).filter((item) => item.isCorrect).length;
   const score = answeredCount > 0 ? Math.round((hits / answeredCount) * 100) : 0;
+
+  useEffect(() => {
+    if (!attemptState) return;
+    if (answeredCount === 0 || answeredCount < simuladosByTrack.length) return;
+    void finishSimuladoAttempt({
+      attemptId: attemptState.attemptId,
+      startedAt: attemptState.startedAt,
+      scorePercent: score,
+    });
+  }, [attemptState, answeredCount, simuladosByTrack.length, score]);
 
   const dynamicMeta = [
     { label: "Questões", value: String(simuladosByTrack.length) },

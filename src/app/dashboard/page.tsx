@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { loadFlashcardProgress } from "@/lib/study-data";
+import { loadMyDashboardMetrics, updateWeeklyGoal } from "@/lib/user-study";
 
 const studyTracks = [
   { id: "ME1", tone: "blue" },
@@ -13,6 +14,17 @@ const studyTracks = [
 ] as const;
 
 export default function DashboardPage() {
+  const [goalInput, setGoalInput] = useState("300");
+  const [serverMetrics, setServerMetrics] = useState<{
+    reviewed: number;
+    mastered: number;
+    retention: number;
+    thisWeekMinutes: number;
+    goal: number;
+    goalProgress: number;
+    attemptsCount: number;
+  } | null>(null);
+
   const progress = useMemo(() => {
     const entries = Object.values(loadFlashcardProgress());
     const reviewed = entries.filter((item) => item.repetitions > 0).length;
@@ -20,6 +32,39 @@ export default function DashboardPage() {
     const completion = reviewed > 0 ? Math.round((mastered / reviewed) * 100) : 0;
     return { reviewed, mastered, completion };
   }, []);
+
+  useEffect(() => {
+    void (async () => {
+      const metrics = await loadMyDashboardMetrics();
+      setGoalInput(String(metrics.goal));
+      setServerMetrics({
+        reviewed: metrics.reviewed,
+        mastered: metrics.mastered,
+        retention: metrics.retention,
+        thisWeekMinutes: metrics.thisWeekMinutes,
+        goal: metrics.goal,
+        goalProgress: metrics.goalProgress,
+        attemptsCount: metrics.attemptsCount,
+      });
+    })();
+  }, []);
+
+  async function saveGoal() {
+    const minutes = Number(goalInput);
+    if (!Number.isFinite(minutes)) return;
+    const ok = await updateWeeklyGoal(minutes);
+    if (!ok) return;
+    const refreshed = await loadMyDashboardMetrics();
+    setServerMetrics({
+      reviewed: refreshed.reviewed,
+      mastered: refreshed.mastered,
+      retention: refreshed.retention,
+      thisWeekMinutes: refreshed.thisWeekMinutes,
+      goal: refreshed.goal,
+      goalProgress: refreshed.goalProgress,
+      attemptsCount: refreshed.attemptsCount,
+    });
+  }
 
   return (
     <main className="flex flex-1 flex-col gap-6">
@@ -44,11 +89,14 @@ export default function DashboardPage() {
         <p className="font-mono text-xs uppercase tracking-wider text-teal">
           Progresso semanal
         </p>
-        {progress.reviewed > 0 ? (
+        {(serverMetrics?.reviewed ?? progress.reviewed) > 0 ? (
           <>
-            <h2 className="mt-2 text-xl font-semibold">{progress.completion}% de retenção atual</h2>
+            <h2 className="mt-2 text-xl font-semibold">
+              {serverMetrics?.retention ?? progress.completion}% de retenção atual
+            </h2>
             <p className="mt-1 text-sm text-muted">
-              {progress.mastered} card(s) consolidados de {progress.reviewed} revisado(s) nesta base.
+              {serverMetrics?.mastered ?? progress.mastered} card(s) consolidados de{" "}
+              {serverMetrics?.reviewed ?? progress.reviewed} revisado(s) nesta base.
             </p>
           </>
         ) : (
@@ -59,6 +107,36 @@ export default function DashboardPage() {
             </p>
           </>
         )}
+      </AppCard>
+
+      <AppCard>
+        <p className="font-mono text-xs uppercase tracking-wider text-blue">Metas individuais</p>
+        <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
+          <input
+            value={goalInput}
+            onChange={(event) => setGoalInput(event.target.value)}
+            type="number"
+            min={30}
+            max={6000}
+            className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              void saveGoal();
+            }}
+            className="rounded-xl border border-blue/30 bg-blue/15 px-3 py-2 text-sm font-medium text-blue"
+          >
+            Salvar
+          </button>
+        </div>
+        <p className="mt-2 text-sm text-muted">
+          Semana: {serverMetrics?.thisWeekMinutes ?? 0} min de {serverMetrics?.goal ?? 300} min (
+          {serverMetrics?.goalProgress ?? 0}%)
+        </p>
+        <p className="mt-1 text-sm text-muted">
+          Tentativas de simulados: {serverMetrics?.attemptsCount ?? 0}
+        </p>
       </AppCard>
     </main>
   );

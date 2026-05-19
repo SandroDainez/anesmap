@@ -51,7 +51,7 @@ export default function Home() {
             <p className="font-mono text-[11px] uppercase tracking-wider text-blue">
               02
             </p>
-            <h3 className="mt-1 text-lg font-semibold">Simulados TSBA</h3>
+            <h3 className="mt-1 text-lg font-semibold">Simulados TEA</h3>
             <p className="mt-1 text-sm text-muted">Banco de questões + cronômetro</p>
           </article>
           <article className="rounded-2xl border border-border bg-card p-4">

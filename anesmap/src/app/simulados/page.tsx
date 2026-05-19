@@ -13,26 +13,47 @@ import {
   saveSimulados,
   suggestStudyReferences,
 } from "@/lib/study-data";
+import {
+  endStudySession,
+  finishSimuladoAttempt,
+  loadMyProfile,
+  recordSimuladoAnswer,
+  startSimuladoAttempt,
+  startStudySession,
+} from "@/lib/user-study";
 
-const examMeta = [
-  { label: "Questões", value: "120" },
-  { label: "Acertos", value: "74%" },
-  { label: "Tempo", value: "01:32:12" },
-] as const;
+const ALL_TRACKS: StudyTrack[] = ["ME1", "ME2", "ME3"];
 
 export default function SimuladosPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
-  const [importedSimulados, setImportedSimulados] = useState<SimuladoQuestion[]>([]);
+  const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
+  const [importedSimulados, setImportedSimulados] = useState<SimuladoQuestion[]>(() =>
+    loadSimulados(),
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
   const [answers, setAnswers] = useState<
     Record<string, { selected: "A" | "B" | "C" | "D"; isCorrect: boolean }>
   >({});
+  const [attemptState, setAttemptState] = useState<{
+    attemptId: string;
+    startedAt: Date;
+  } | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
   useEffect(() => {
-    const local = loadSimulados();
-    setImportedSimulados(local);
+    void (async () => {
+      const profile = await loadMyProfile();
+      const track = profile?.assigned_track;
+      if (track && track !== "ALL") {
+        setAllowedTracks([track as StudyTrack]);
+        setSelectedMe(track as StudyTrack);
+      }
+    })();
+  }, []);
 
+  useEffect(() => {
     if (!isSupabaseConfigured()) return;
 
     void (async () => {
@@ -44,6 +65,22 @@ export default function SimuladosPage() {
     })();
   }, []);
 
+  useEffect(() => {
+    void (async () => {
+      const id = await startStudySession("simulados");
+      if (!id) return;
+      setSessionId(id);
+      setSessionStartedAt(new Date());
+    })();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (!sessionId || !sessionStartedAt) return;
+      void endStudySession(sessionId, sessionStartedAt);
+    };
+  }, [sessionId, sessionStartedAt]);
+
   const simuladosByTrack = useMemo(
     () =>
       importedSimulados
@@ -51,18 +88,17 @@ export default function SimuladosPage() {
         .sort((a, b) => compareSimuladosForSessionOrder(a, b)),
     [importedSimulados, selectedMe],
   );
-  const currentQuestion = simuladosByTrack[currentIndex];
+  const safeIndex =
+    simuladosByTrack.length === 0 ? 0 : Math.max(0, Math.min(currentIndex, simuladosByTrack.length - 1));
+  const currentQuestion = simuladosByTrack[safeIndex];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
 
   useEffect(() => {
-    setCurrentIndex(0);
-    setShowBack(false);
-    setAnswers({});
+    void (async () => {
+      const started = await startSimuladoAttempt(selectedMe);
+      setAttemptState(started);
+    })();
   }, [selectedMe]);
-
-  useEffect(() => {
-    setShowBack(false);
-  }, [currentIndex]);
 
   function chooseAlternative(letter: "A" | "B" | "C" | "D") {
     if (!currentQuestion) return;
@@ -71,22 +107,49 @@ export default function SimuladosPage() {
       ...prev,
       [currentQuestion.id]: { selected: letter, isCorrect },
     }));
+    if (attemptState) {
+      void recordSimuladoAnswer({
+        attemptId: attemptState.attemptId,
+        questionId: currentQuestion.id,
+        selected: letter,
+        correct: isCorrect,
+      });
+    }
     setShowBack(true);
   }
 
   function goNext() {
-    if (currentIndex >= simuladosByTrack.length - 1) return;
+    if (safeIndex >= simuladosByTrack.length - 1) return;
     setCurrentIndex((value) => value + 1);
+    setShowBack(false);
   }
 
   function goPrev() {
-    if (currentIndex <= 0) return;
+    if (safeIndex <= 0) return;
     setCurrentIndex((value) => value - 1);
+    setShowBack(false);
+  }
+
+  function changeTrack(track: StudyTrack) {
+    setSelectedMe(track);
+    setCurrentIndex(0);
+    setShowBack(false);
+    setAnswers({});
   }
 
   const answeredCount = Object.keys(answers).length;
   const hits = Object.values(answers).filter((item) => item.isCorrect).length;
   const score = answeredCount > 0 ? Math.round((hits / answeredCount) * 100) : 0;
+
+  useEffect(() => {
+    if (!attemptState) return;
+    if (answeredCount === 0 || answeredCount < simuladosByTrack.length) return;
+    void finishSimuladoAttempt({
+      attemptId: attemptState.attemptId,
+      startedAt: attemptState.startedAt,
+      scorePercent: score,
+    });
+  }, [attemptState, answeredCount, simuladosByTrack.length, score]);
 
   const dynamicMeta = [
     { label: "Questões", value: String(simuladosByTrack.length) },
@@ -98,38 +161,49 @@ export default function SimuladosPage() {
     <main className="flex flex-1 flex-col gap-6">
       <SectionHeader
         eyebrow="Módulo 02"
-        title="Simulados TSBA"
-        description="Treine com cronômetro e métricas no padrão da prova."
+        title="Simulados TEA"
+        description="Questões no formato TEA — Título de Especialista em Anestesiologia."
       />
 
       <AppCard>
-        <h2 className="mb-4 text-sm font-medium text-muted">Selecionar matéria</h2>
-        <div className="grid grid-cols-3 gap-2">
-          <StatusBadge
-            as="button"
-            tone="blue"
-            className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME1")}
-          >
-            ME1
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="purple"
-            className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME2")}
-          >
-            ME2
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="teal"
-            className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME3")}
-          >
-            ME3
-          </StatusBadge>
-        </div>
+        <h2 className="mb-4 text-sm font-medium text-muted">
+          {allowedTracks.length === 1 ? "Sua trilha" : "Selecionar matéria"}
+        </h2>
+        {allowedTracks.length === 1 ? (
+          <div className="flex items-center gap-2">
+            <StatusBadge tone={selectedMe === "ME1" ? "blue" : selectedMe === "ME2" ? "purple" : "teal"}>
+              {selectedMe}
+            </StatusBadge>
+            <span className="text-xs text-muted">Trilha atribuída pelo administrador</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            <StatusBadge
+              as="button"
+              tone="blue"
+              className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
+              onClick={() => changeTrack("ME1")}
+            >
+              ME1
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="purple"
+              className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
+              onClick={() => changeTrack("ME2")}
+            >
+              ME2
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="teal"
+              className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
+              onClick={() => changeTrack("ME3")}
+            >
+              ME3
+            </StatusBadge>
+          </div>
+        )}
       </AppCard>
 
       <AppCard>
@@ -160,12 +234,12 @@ export default function SimuladosPage() {
         {currentQuestion ? (
           <>
             <h3 className="text-sm font-medium text-muted">
-              Questão {currentIndex + 1} de {simuladosByTrack.length}
+              Questão {safeIndex + 1} de {simuladosByTrack.length}
             </h3>
             {!showBack ? (
               <>
                 <p className="mt-2 text-base text-foreground">
-                  {formatQuestionWithNumber(currentQuestion.enunciado, currentIndex)}
+                  {formatQuestionWithNumber(currentQuestion.enunciado, safeIndex)}
                 </p>
                 <div className="mt-3 space-y-2 text-sm">
                   {(
@@ -202,19 +276,32 @@ export default function SimuladosPage() {
                       ["C", currentQuestion.alternativaC],
                       ["D", currentQuestion.alternativaD],
                     ] as const
-                  ).map(([letter, content]) => (
+                  ).map(([letter, content]) => {
+                    const isCorrect = currentQuestion.correta === letter;
+                    const isSelected = currentAnswer?.selected === letter;
+                    const isWrong = isSelected && !isCorrect;
+                    return (
                     <article
                       key={letter}
-                      className="rounded-xl border border-border bg-background/40 px-3 py-2"
+                      className={`rounded-xl border px-3 py-2 ${
+                        isCorrect
+                          ? "border-teal/40 bg-teal/10"
+                          : isWrong
+                            ? "border-rose/40 bg-rose/10"
+                            : "border-border bg-background/40"
+                      }`}
                     >
-                      <p className="text-foreground">
+                      <p className={isCorrect ? "text-teal" : isWrong ? "text-rose" : "text-foreground"}>
                         <span className="font-semibold">{letter})</span> {content}
+                        {isCorrect && <span className="ml-2 text-xs font-medium">✓ correta</span>}
+                        {isWrong && <span className="ml-2 text-xs font-medium">✗ sua resposta</span>}
                       </p>
                       <p className="mt-1 text-xs text-muted">
                         {buildOptionComment(letter, currentQuestion)}
                       </p>
                     </article>
-                  ))}
+                    );
+                  })}
                 </div>
                 <article className="mt-3 rounded-xl border border-border bg-background/40 px-3 py-2 text-xs text-muted">
                   <p className="font-semibold text-foreground">Referências sugeridas</p>
@@ -245,7 +332,7 @@ export default function SimuladosPage() {
               <button
                 type="button"
                 onClick={goNext}
-                disabled={currentIndex >= simuladosByTrack.length - 1}
+                disabled={safeIndex >= simuladosByTrack.length - 1}
                 className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
               >
                 Próxima

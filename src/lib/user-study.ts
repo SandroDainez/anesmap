@@ -1,0 +1,388 @@
+import type { FlashcardProgress, StudyTrack } from "@/lib/study-data";
+import { STORAGE_KEYS, getDefaultFlashcardProgress } from "@/lib/study-data";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+
+export type UserProfile = {
+  id: string;
+  name: string | null;
+  role: "student" | "admin";
+  weekly_goal_minutes: number;
+  created_at: string;
+};
+
+export type SimuladoAttempt = {
+  id: string;
+  user_id: string;
+  track: StudyTrack;
+  started_at: string;
+  ended_at: string | null;
+  duration_sec: number | null;
+  score_percent: number | null;
+  created_at: string;
+};
+
+export type SimuladoAnswer = {
+  id: string;
+  attempt_id: string;
+  user_id: string;
+  question_id: string;
+  selected: "A" | "B" | "C" | "D";
+  correct: boolean;
+  answered_at: string;
+};
+
+function browserSupabase() {
+  return createSupabaseBrowserClient();
+}
+
+export async function getCurrentAuthUser() {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user ?? null;
+}
+
+export async function loadMyProfile(): Promise<UserProfile | null> {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+  const user = await getCurrentAuthUser();
+  if (!user) return null;
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, name, role, weekly_goal_minutes, created_at")
+    .eq("id", user.id)
+    .single();
+  if (error || !data) return null;
+  return data as UserProfile;
+}
+
+export async function updateWeeklyGoal(minutes: number): Promise<boolean> {
+  const supabase = browserSupabase();
+  if (!supabase) return false;
+  const user = await getCurrentAuthUser();
+  if (!user) return false;
+  const { error } = await supabase
+    .from("profiles")
+    .update({ weekly_goal_minutes: Math.max(30, Math.min(6000, Math.round(minutes))) })
+    .eq("id", user.id);
+  return !error;
+}
+
+export async function loadFlashcardProgressRemoteByUser(): Promise<Record<string, FlashcardProgress> | null> {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+  const { data, error } = await supabase
+    .from("flashcard_progress")
+    .select("card_id, ease_factor, repetitions, interval_days, next_review_at, last_quality");
+  if (error || !data) return null;
+  const map: Record<string, FlashcardProgress> = {};
+  for (const item of data) {
+    map[item.card_id] = {
+      easeFactor: Number(item.ease_factor ?? 2.5),
+      repetitions: Number(item.repetitions ?? 0),
+      intervalDays: Number(item.interval_days ?? 0),
+      nextReviewAt: item.next_review_at ?? new Date().toISOString(),
+      lastQuality: Number(item.last_quality ?? 0),
+    };
+  }
+  return map;
+}
+
+export async function upsertFlashcardProgressRemote(progress: Record<string, FlashcardProgress>) {
+  const supabase = browserSupabase();
+  if (!supabase) return;
+  const user = await getCurrentAuthUser();
+  if (!user) return;
+  const payload = Object.entries(progress).map(([cardId, item]) => ({
+    user_id: user.id,
+    card_id: cardId,
+    ease_factor: item.easeFactor,
+    repetitions: item.repetitions,
+    interval_days: item.intervalDays,
+    next_review_at: item.nextReviewAt,
+    last_quality: item.lastQuality,
+    updated_at: new Date().toISOString(),
+  }));
+  if (payload.length === 0) return;
+  const { error } = await supabase.from("flashcard_progress").upsert(payload, {
+    onConflict: "user_id,card_id",
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function addFlashcardEvent(params: {
+  cardId: string;
+  eventType: "view" | "flip" | "grade";
+  quality?: number;
+}) {
+  const supabase = browserSupabase();
+  if (!supabase) return;
+  const user = await getCurrentAuthUser();
+  if (!user) return;
+  const { error } = await supabase.from("flashcard_events").insert({
+    user_id: user.id,
+    card_id: params.cardId,
+    event_type: params.eventType,
+    quality: params.quality ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function startStudySession(kind: "flashcards" | "simulados") {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+  const user = await getCurrentAuthUser();
+  if (!user) return null;
+  const { data, error } = await supabase
+    .from("study_sessions")
+    .insert({ user_id: user.id, kind, started_at: new Date().toISOString() })
+    .select("id")
+    .single();
+  if (error || !data) return null;
+  return data.id as string;
+}
+
+export async function endStudySession(sessionId: string, startedAt: Date) {
+  const supabase = browserSupabase();
+  if (!supabase) return;
+  const durationSec = Math.max(0, Math.round((Date.now() - startedAt.getTime()) / 1000));
+  await supabase
+    .from("study_sessions")
+    .update({
+      ended_at: new Date().toISOString(),
+      duration_sec: durationSec,
+    })
+    .eq("id", sessionId);
+}
+
+export async function startSimuladoAttempt(track: StudyTrack) {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+  const user = await getCurrentAuthUser();
+  if (!user) return null;
+  const { data, error } = await supabase
+    .from("simulado_attempts")
+    .insert({
+      user_id: user.id,
+      track,
+      started_at: new Date().toISOString(),
+    })
+    .select("id, started_at")
+    .single();
+  if (error || !data) return null;
+  return { attemptId: data.id as string, startedAt: new Date(data.started_at as string) };
+}
+
+export async function recordSimuladoAnswer(params: {
+  attemptId: string;
+  questionId: string;
+  selected: "A" | "B" | "C" | "D";
+  correct: boolean;
+}) {
+  const supabase = browserSupabase();
+  if (!supabase) return;
+  const user = await getCurrentAuthUser();
+  if (!user) return;
+  const { error } = await supabase.from("simulado_answers").upsert(
+    {
+      attempt_id: params.attemptId,
+      user_id: user.id,
+      question_id: params.questionId,
+      selected: params.selected,
+      correct: params.correct,
+      answered_at: new Date().toISOString(),
+    },
+    { onConflict: "attempt_id,question_id" },
+  );
+  if (error) throw new Error(error.message);
+}
+
+export async function finishSimuladoAttempt(params: {
+  attemptId: string;
+  startedAt: Date;
+  scorePercent: number;
+}) {
+  const supabase = browserSupabase();
+  if (!supabase) return;
+  const durationSec = Math.max(0, Math.round((Date.now() - params.startedAt.getTime()) / 1000));
+  const { error } = await supabase
+    .from("simulado_attempts")
+    .update({
+      ended_at: new Date().toISOString(),
+      duration_sec: durationSec,
+      score_percent: params.scorePercent,
+    })
+    .eq("id", params.attemptId);
+  if (error) throw new Error(error.message);
+}
+
+export async function loadMyDashboardMetrics() {
+  const [profile, progressMap, cardEvents, attempts] = await Promise.all([
+    loadMyProfile(),
+    loadFlashcardProgressRemoteByUser(),
+    loadMyFlashcardEventsCount(),
+    loadMySimuladoAttempts(),
+  ]);
+
+  const progressEntries = Object.values(progressMap ?? {});
+  const reviewed = progressEntries.filter((item) => item.repetitions > 0).length;
+  const mastered = progressEntries.filter((item) => item.repetitions >= 3).length;
+  const retention = reviewed > 0 ? Math.round((mastered / reviewed) * 100) : 0;
+
+  const thisWeekMinutes = attempts.reduce((acc, item) => acc + Math.round((item.duration_sec ?? 0) / 60), 0);
+  const goal = profile?.weekly_goal_minutes ?? 300;
+  const goalProgress = goal > 0 ? Math.min(100, Math.round((thisWeekMinutes / goal) * 100)) : 0;
+
+  return {
+    profile,
+    reviewed,
+    mastered,
+    retention,
+    cardEvents,
+    attemptsCount: attempts.length,
+    thisWeekMinutes,
+    goal,
+    goalProgress,
+  };
+}
+
+async function loadMyFlashcardEventsCount() {
+  const supabase = browserSupabase();
+  if (!supabase) return 0;
+  const { count } = await supabase
+    .from("flashcard_events")
+    .select("id", { count: "exact", head: true });
+  return count ?? 0;
+}
+
+export async function loadMySimuladoAttempts() {
+  const supabase = browserSupabase();
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("simulado_attempts")
+    .select("id, user_id, track, started_at, ended_at, duration_sec, score_percent, created_at")
+    .order("created_at", { ascending: false });
+  if (error || !data) return [];
+  return data as SimuladoAttempt[];
+}
+
+export async function loadAdminOverview() {
+  const supabase = browserSupabase();
+  if (!supabase) {
+    return {
+      totalUsers: 0,
+      totalSessions: 0,
+      totalCardEvents: 0,
+      totalAttempts: 0,
+    };
+  }
+  const [usersRes, sessionsRes, eventsRes, attemptsRes] = await Promise.all([
+    supabase.from("profiles").select("id", { count: "exact", head: true }),
+    supabase.from("study_sessions").select("id", { count: "exact", head: true }),
+    supabase.from("flashcard_events").select("id", { count: "exact", head: true }),
+    supabase.from("simulado_attempts").select("id", { count: "exact", head: true }),
+  ]);
+
+  return {
+    totalUsers: usersRes.count ?? 0,
+    totalSessions: sessionsRes.count ?? 0,
+    totalCardEvents: eventsRes.count ?? 0,
+    totalAttempts: attemptsRes.count ?? 0,
+  };
+}
+
+export async function loadAdminUsers() {
+  const supabase = browserSupabase();
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, name, role, weekly_goal_minutes, created_at")
+    .order("created_at", { ascending: false });
+  if (error || !data) return [];
+  return data as UserProfile[];
+}
+
+export async function loadAdminUserDetails(userId: string) {
+  const supabase = browserSupabase();
+  if (!supabase) {
+    return {
+      profile: null,
+      events: [],
+      progress: [],
+      attempts: [],
+      answers: [],
+    };
+  }
+  const [profileRes, eventsRes, progressRes, attemptsRes, answersRes] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("id, name, role, weekly_goal_minutes, created_at")
+      .eq("id", userId)
+      .single(),
+    supabase
+      .from("flashcard_events")
+      .select("id, card_id, event_type, quality, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(200),
+    supabase
+      .from("flashcard_progress")
+      .select("card_id, repetitions, interval_days, next_review_at, last_quality")
+      .eq("user_id", userId),
+    supabase
+      .from("simulado_attempts")
+      .select("id, user_id, track, started_at, ended_at, duration_sec, score_percent, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(100),
+    supabase
+      .from("simulado_answers")
+      .select("id, attempt_id, question_id, selected, correct, answered_at")
+      .eq("user_id", userId)
+      .order("answered_at", { ascending: false })
+      .limit(500),
+  ]);
+
+  return {
+    profile: (profileRes.data as UserProfile | null) ?? null,
+    events: eventsRes.data ?? [],
+    progress: progressRes.data ?? [],
+    attempts: (attemptsRes.data as SimuladoAttempt[]) ?? [],
+    answers: (answersRes.data as SimuladoAnswer[]) ?? [],
+  };
+}
+
+export async function migrateLocalHistoryToAccount() {
+  if (typeof window === "undefined") return { migrated: false, reason: "NO_WINDOW" };
+  const markerKey = "anesmap.migrated.localToAccount.v1";
+  if (window.localStorage.getItem(markerKey) === "1") {
+    return { migrated: false, reason: "ALREADY_DONE" };
+  }
+
+  const rawProgress = window.localStorage.getItem(STORAGE_KEYS.flashcardProgress);
+  if (!rawProgress) {
+    window.localStorage.setItem(markerKey, "1");
+    return { migrated: true, reason: "NO_LOCAL_PROGRESS" };
+  }
+
+  try {
+    const parsed = JSON.parse(rawProgress) as Record<string, FlashcardProgress>;
+    await upsertFlashcardProgressRemote(parsed);
+    const eventEntries = Object.entries(parsed).slice(0, 1000);
+    await Promise.all(
+      eventEntries.map(([cardId, value]) =>
+        addFlashcardEvent({
+          cardId,
+          eventType: "grade",
+          quality: value.lastQuality ?? getDefaultFlashcardProgress().lastQuality,
+        }),
+      ),
+    );
+    window.localStorage.setItem(markerKey, "1");
+    return { migrated: true, reason: "OK" };
+  } catch {
+    return { migrated: false, reason: "ERROR" };
+  }
+}

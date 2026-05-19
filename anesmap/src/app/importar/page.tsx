@@ -217,16 +217,25 @@ export default function ImportarPage() {
   }, [dataVersion, report]);
 
   useEffect(() => {
-    setVisibleHistoryCount(HISTORY_PAGE_SIZE);
+    const timer = window.setTimeout(() => {
+      setVisibleHistoryCount(HISTORY_PAGE_SIZE);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [historyFilter, historyQuery, dataVersion]);
 
   useEffect(() => {
-    setSelectedIds([]);
+    const timer = window.setTimeout(() => {
+      setSelectedIds([]);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [manageKind, dataVersion]);
   useEffect(() => {
-    setSelectedIncompleteGroups([]);
-    setSelectedDuplicateGroups([]);
-    setSelectedDuplicateCardGroups([]);
+    const timer = window.setTimeout(() => {
+      setSelectedIncompleteGroups([]);
+      setSelectedDuplicateGroups([]);
+      setSelectedDuplicateCardGroups([]);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [dataVersion]);
 
   useEffect(() => {

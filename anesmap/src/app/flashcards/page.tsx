@@ -18,26 +18,46 @@ import {
   saveFlashcardProgress,
   saveFlashcards,
 } from "@/lib/study-data";
+import {
+  addFlashcardEvent,
+  endStudySession,
+  loadFlashcardProgressRemoteByUser,
+  loadMyProfile,
+  startStudySession,
+  upsertFlashcardProgressRemote,
+} from "@/lib/user-study";
 
-const deckStats = [
-  { label: "Novos", value: 24, tone: "text-teal" },
-  { label: "Revisão", value: 31, tone: "text-blue" },
-  { label: "Críticos", value: 8, tone: "text-rose" },
-] as const;
+const ALL_TRACKS: StudyTrack[] = ["ME1", "ME2", "ME3"];
 
 export default function FlashcardsPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
+  const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
+  // Keep SSR and first client render identical to avoid hydration mismatch.
   const [importedCards, setImportedCards] = useState<Flashcard[]>([]);
   const [progressMap, setProgressMap] = useState<Record<string, FlashcardProgress>>({});
   const [now, setNow] = useState(() => new Date());
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
   useEffect(() => {
-    const local = loadFlashcards();
-    setImportedCards(local);
+    // Hydrate local cached data only on client.
+    setImportedCards(loadFlashcards());
     setProgressMap(loadFlashcardProgress());
+    setNow(new Date());
 
+    void (async () => {
+      const profile = await loadMyProfile();
+      const track = profile?.assigned_track;
+      if (track && track !== "ALL") {
+        setAllowedTracks([track as StudyTrack]);
+        setSelectedMe(track as StudyTrack);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     if (!isSupabaseConfigured()) return;
 
     void (async () => {
@@ -46,8 +66,28 @@ export default function FlashcardsPage() {
         setImportedCards(remote);
         saveFlashcards(remote);
       }
+      const remoteProgress = await loadFlashcardProgressRemoteByUser();
+      if (remoteProgress) {
+        setProgressMap((prev) => ({ ...prev, ...remoteProgress }));
+      }
     })();
   }, []);
+
+  useEffect(() => {
+    void (async () => {
+      const id = await startStudySession("flashcards");
+      if (!id) return;
+      setSessionId(id);
+      setSessionStartedAt(new Date());
+    })();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (!sessionId || !sessionStartedAt) return;
+      void endStudySession(sessionId, sessionStartedAt);
+    };
+  }, [sessionId, sessionStartedAt]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 60_000);
@@ -79,7 +119,9 @@ export default function FlashcardsPage() {
     [cardsByTrack, progressMap, now],
   );
   const studyDeck = dueCards.length > 0 ? dueCards : cardsByTrack;
-  const currentCard: Flashcard | undefined = studyDeck[currentCardIndex];
+  const safeCardIndex =
+    studyDeck.length === 0 ? 0 : Math.max(0, Math.min(currentCardIndex, studyDeck.length - 1));
+  const currentCard: Flashcard | undefined = studyDeck[safeCardIndex];
   const currentProgress =
     currentCard ? progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now) : null;
   const currentCardFormatted = currentCard
@@ -87,22 +129,10 @@ export default function FlashcardsPage() {
     : null;
 
   useEffect(() => {
-    setIsFlipped(false);
-  }, [selectedMe, currentCard?.id]);
-
-  useEffect(() => {
-    setCurrentCardIndex(0);
-  }, [selectedMe]);
-
-  useEffect(() => {
-    if (studyDeck.length === 0) {
-      setCurrentCardIndex(0);
-      return;
+    if (currentCard?.id) {
+      void addFlashcardEvent({ cardId: currentCard.id, eventType: "view" });
     }
-    if (currentCardIndex > studyDeck.length - 1) {
-      setCurrentCardIndex(studyDeck.length - 1);
-    }
-  }, [studyDeck.length, currentCardIndex]);
+  }, [currentCard?.id]);
 
   function gradeCard(quality: number) {
     if (!currentCard) return;
@@ -114,17 +144,27 @@ export default function FlashcardsPage() {
     };
     setProgressMap(updated);
     saveFlashcardProgress(updated);
+    void upsertFlashcardProgressRemote({ [currentCard.id]: next });
+    void addFlashcardEvent({ cardId: currentCard.id, eventType: "grade", quality });
     setNow(new Date());
   }
 
   function goNextCard() {
-    if (currentCardIndex >= studyDeck.length - 1) return;
+    if (safeCardIndex >= studyDeck.length - 1) return;
     setCurrentCardIndex((value) => value + 1);
+    setIsFlipped(false);
   }
 
   function goPrevCard() {
-    if (currentCardIndex <= 0) return;
+    if (safeCardIndex <= 0) return;
     setCurrentCardIndex((value) => value - 1);
+    setIsFlipped(false);
+  }
+
+  function changeTrack(track: StudyTrack) {
+    setSelectedMe(track);
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
   }
 
   const deckStats = [
@@ -142,33 +182,44 @@ export default function FlashcardsPage() {
       />
 
       <AppCard>
-        <h2 className="mb-4 text-sm font-medium text-muted">Selecionar matéria</h2>
-        <div className="grid grid-cols-3 gap-2">
-          <StatusBadge
-            as="button"
-            tone="blue"
-            className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME1")}
-          >
-            ME1
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="purple"
-            className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME2")}
-          >
-            ME2
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="teal"
-            className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME3")}
-          >
-            ME3
-          </StatusBadge>
-        </div>
+        <h2 className="mb-4 text-sm font-medium text-muted">
+          {allowedTracks.length === 1 ? "Sua trilha" : "Selecionar matéria"}
+        </h2>
+        {allowedTracks.length === 1 ? (
+          <div className="flex items-center gap-2">
+            <StatusBadge tone={selectedMe === "ME1" ? "blue" : selectedMe === "ME2" ? "purple" : "teal"}>
+              {selectedMe}
+            </StatusBadge>
+            <span className="text-xs text-muted">Trilha atribuída pelo administrador</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            <StatusBadge
+              as="button"
+              tone="blue"
+              className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
+              onClick={() => changeTrack("ME1")}
+            >
+              ME1
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="purple"
+              className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
+              onClick={() => changeTrack("ME2")}
+            >
+              ME2
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="teal"
+              className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
+              onClick={() => changeTrack("ME3")}
+            >
+              ME3
+            </StatusBadge>
+          </div>
+        )}
       </AppCard>
 
       <section className="grid grid-cols-3 gap-2">
@@ -190,11 +241,16 @@ export default function FlashcardsPage() {
         {currentCard ? (
           <>
             <p className="mt-2 text-xs text-muted">
-              Card {currentCardIndex + 1} de {studyDeck.length}
+              Card {safeCardIndex + 1} de {studyDeck.length}
             </p>
             <button
               type="button"
-              onClick={() => setIsFlipped((value) => !value)}
+              onClick={() => {
+                setIsFlipped((value) => !value);
+                if (currentCard?.id) {
+                  void addFlashcardEvent({ cardId: currentCard.id, eventType: "flip" });
+                }
+              }}
               className="mt-2 w-full rounded-xl border border-border bg-background/35 p-4 text-left transition hover:bg-background/55"
             >
               {!isFlipped ? (
@@ -203,7 +259,7 @@ export default function FlashcardsPage() {
                   <h2 className="mt-2 text-2xl font-semibold leading-snug">
                     {formatCardQuestionForSession(
                       currentCardFormatted?.question ?? "",
-                      currentCardIndex,
+                      safeCardIndex,
                     )}
                   </h2>
                   <p className="mt-3 text-xs text-muted">Toque para virar e ver a resposta.</p>
@@ -248,7 +304,7 @@ export default function FlashcardsPage() {
               <button
                 type="button"
                 onClick={goNextCard}
-                disabled={currentCardIndex >= studyDeck.length - 1}
+                disabled={safeCardIndex >= studyDeck.length - 1}
                 className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
               >
                 Próximo

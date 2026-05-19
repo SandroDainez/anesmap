@@ -4,31 +4,52 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
+  BarChart3,
   ClipboardList,
   Home,
   Layers,
   Siren,
   Target,
 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { loadMyProfile } from "@/lib/user-study";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
   { href: "/flashcards", label: "Flashcards", icon: Layers },
   { href: "/simulados", label: "Simulados", icon: ClipboardList },
+  { href: "/admin", label: "Admin", icon: BarChart3 },
   { href: "/complicacoes", label: "Complicações", icon: Siren },
   { href: "/avaliacao", label: "Avaliação", icon: Target },
 ] as const;
 
 export function BottomNav() {
   const pathname = usePathname();
+  const [role, setRole] = useState<"student" | "admin">("student");
+
+  useEffect(() => {
+    void (async () => {
+      const profile = await loadMyProfile();
+      if (profile?.role === "admin") {
+        setRole("admin");
+      } else {
+        setRole("student");
+      }
+    })();
+  }, []);
+
+  const items = useMemo(
+    () => navItems.filter((item) => (item.href === "/admin" ? role === "admin" : true)),
+    [role],
+  );
 
   return (
     <nav
       aria-label="Navegação principal"
       className="fixed inset-x-4 bottom-4 z-50 rounded-2xl border border-border bg-card/95 p-2 shadow-[0_12px_30px_rgba(0,0,0,0.35)] backdrop-blur"
     >
-      <ul className="grid grid-cols-5 gap-1">
-        {navItems.map(({ href, icon: Icon, label }) => {
+      <ul className={`grid gap-1 ${items.length === 6 ? "grid-cols-6" : "grid-cols-5"}`}>
+        {items.map(({ href, icon: Icon, label }) => {
           const isDashboardRoute = href === "/dashboard";
           const isActive =
             pathname === href ||

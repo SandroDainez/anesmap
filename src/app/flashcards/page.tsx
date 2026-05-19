@@ -18,12 +18,13 @@ import {
   saveFlashcardProgress,
   saveFlashcards,
 } from "@/lib/study-data";
-
-const deckStats = [
-  { label: "Novos", value: 24, tone: "text-teal" },
-  { label: "Revisão", value: 31, tone: "text-blue" },
-  { label: "Críticos", value: 8, tone: "text-rose" },
-] as const;
+import {
+  addFlashcardEvent,
+  endStudySession,
+  loadFlashcardProgressRemoteByUser,
+  startStudySession,
+  upsertFlashcardProgressRemote,
+} from "@/lib/user-study";
 
 export default function FlashcardsPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
@@ -32,6 +33,8 @@ export default function FlashcardsPage() {
   const [now, setNow] = useState(() => new Date());
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
   useEffect(() => {
     const local = loadFlashcards();
@@ -46,8 +49,28 @@ export default function FlashcardsPage() {
         setImportedCards(remote);
         saveFlashcards(remote);
       }
+      const remoteProgress = await loadFlashcardProgressRemoteByUser();
+      if (remoteProgress) {
+        setProgressMap((prev) => ({ ...prev, ...remoteProgress }));
+      }
     })();
   }, []);
+
+  useEffect(() => {
+    void (async () => {
+      const id = await startStudySession("flashcards");
+      if (!id) return;
+      setSessionId(id);
+      setSessionStartedAt(new Date());
+    })();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (!sessionId || !sessionStartedAt) return;
+      void endStudySession(sessionId, sessionStartedAt);
+    };
+  }, [sessionId, sessionStartedAt]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 60_000);
@@ -88,6 +111,9 @@ export default function FlashcardsPage() {
 
   useEffect(() => {
     setIsFlipped(false);
+    if (currentCard?.id) {
+      void addFlashcardEvent({ cardId: currentCard.id, eventType: "view" });
+    }
   }, [selectedMe, currentCard?.id]);
 
   useEffect(() => {
@@ -114,6 +140,8 @@ export default function FlashcardsPage() {
     };
     setProgressMap(updated);
     saveFlashcardProgress(updated);
+    void upsertFlashcardProgressRemote({ [currentCard.id]: next });
+    void addFlashcardEvent({ cardId: currentCard.id, eventType: "grade", quality });
     setNow(new Date());
   }
 
@@ -194,7 +222,12 @@ export default function FlashcardsPage() {
             </p>
             <button
               type="button"
-              onClick={() => setIsFlipped((value) => !value)}
+              onClick={() => {
+                setIsFlipped((value) => !value);
+                if (currentCard?.id) {
+                  void addFlashcardEvent({ cardId: currentCard.id, eventType: "flip" });
+                }
+              }}
               className="mt-2 w-full rounded-xl border border-border bg-background/35 p-4 text-left transition hover:bg-background/55"
             >
               {!isFlipped ? (
