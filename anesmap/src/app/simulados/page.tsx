@@ -107,16 +107,19 @@ export default function SimuladosPage() {
     [importedSimulados, selectedMe, selectedTrimestre],
   );
 
-  // Agrupa questões trimestrais por prova (cada arquivo de 30q é uma prova)
+  // Slots fixos de prova — sempre exibe A1/A2/A3/A4
+  const PROVA_SLOTS = ["A1", "A2", "A3", "A4"] as const;
+
+  // Agrupa questões por prova usando a coluna `prova` do banco
   const provaGroups = useMemo(() => {
-    if (selectedTrimestre === "todos" || selectedTrimestre === "anual") return null;
+    if (selectedTrimestre === "todos") return null;
     const groups = new Map<string, SimuladoQuestion[]>();
+    for (const slot of PROVA_SLOTS) groups.set(slot, []);
     for (const q of simuladosByTrack) {
-      const key = q.id.replace(/-\d+$/, "");
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key)!.push(q);
+      const key = q.prova ?? "A1";
+      if (groups.has(key)) groups.get(key)!.push(q);
     }
-    return groups.size > 1 ? groups : null;
+    return groups;
   }, [simuladosByTrack, selectedTrimestre]);
 
   // Questões efetivamente ativas na sessão
@@ -284,7 +287,7 @@ export default function SimuladosPage() {
           {ALL_TRIMESTERS.map((t) => {
             const isActive = selectedTrimestre === t;
             const label =
-              t === "todos" ? "Todos" : t === "anual" ? "Anual (50q)" : `${t} (30q)`;
+              t === "todos" ? "Todos" : t === "anual" ? "Anual" : t;
             return (
               <button
                 key={t}
@@ -305,36 +308,40 @@ export default function SimuladosPage() {
           {selectedTrimestre === "todos"
             ? "Todas as questões da trilha"
             : selectedTrimestre === "anual"
-            ? "Simulado anual — conteúdo dos 4 trimestres (50 questões)"
-            : `Simulado trimestral ${selectedTrimestre} — 30 questões`}
+            ? "Simulado anual — conteúdo dos 4 trimestres"
+            : `Simulado trimestral ${selectedTrimestre}`}
         </p>
       </AppCard>
 
       {provaGroups && (
         <AppCard>
           <h2 className="mb-3 text-sm font-medium text-muted">Selecionar prova</h2>
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
-            {Array.from(provaGroups.entries())
-              .sort(([a], [b]) => a.localeCompare(b))
-              .map(([key, questions], index, arr) => {
-                const label = buildProvaLabel(key, index, arr.map(([k]) => k));
-                const isActive = selectedProvaKey === key;
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => chooseProva(key)}
-                    className={`rounded-lg border px-2 py-2 text-xs font-medium transition-all ${
-                      isActive
-                        ? "border-teal bg-teal/20 text-teal shadow-sm"
-                        : "border-border bg-background/30 text-muted hover:border-teal/40 hover:text-foreground"
-                    }`}
-                  >
-                    {label}
-                    <span className="ml-1 opacity-60">({questions.length}q)</span>
-                  </button>
-                );
-              })}
+          <div className="grid grid-cols-4 gap-1.5">
+            {(["A1", "A2", "A3", "A4"] as const).map((slot) => {
+              const questions = provaGroups.get(slot) ?? [];
+              const isEmpty = questions.length === 0;
+              const isActive = selectedProvaKey === slot;
+              return (
+                <button
+                  key={slot}
+                  type="button"
+                  disabled={isEmpty}
+                  onClick={() => chooseProva(slot)}
+                  className={`rounded-lg border px-2 py-2.5 text-xs font-medium transition-all ${
+                    isEmpty
+                      ? "cursor-not-allowed border-border/40 bg-background/10 text-muted/40"
+                      : isActive
+                      ? "border-teal bg-teal/20 text-teal shadow-sm"
+                      : "border-border bg-background/30 text-muted hover:border-teal/40 hover:text-foreground"
+                  }`}
+                >
+                  <span className="block font-semibold">{slot}</span>
+                  <span className="block opacity-60 text-[10px] mt-0.5">
+                    {isEmpty ? "em breve" : `${questions.length}q`}
+                  </span>
+                </button>
+              );
+            })}
           </div>
           {selectedProvaKey && (
             <button
@@ -561,23 +568,6 @@ function buildOptionComment(letter: "A" | "B" | "C" | "D" | "E", question: Simul
   return `Incorreta — gabarito: ${question.correta}.`;
 }
 
-/** Gera rótulo legível para uma prova a partir da chave do grupo (ex: "provaa" → "Prova A") */
-function buildProvaLabel(key: string, index: number, allKeys: string[]): string {
-  const match = key.match(/prova([a-z])/i);
-  const letter = match ? match[1].toUpperCase() : String.fromCharCode(65 + index);
-
-  // Detecta duplicatas com a mesma letra para adicionar sufixo de versão
-  const sameLetterKeys = allKeys.filter((k) => {
-    const m = k.match(/prova([a-z])/i);
-    return m ? m[1].toUpperCase() === letter : false;
-  });
-
-  if (sameLetterKeys.length > 1) {
-    const version = sameLetterKeys.indexOf(key) + 1;
-    return `Prova ${letter}${version}`;
-  }
-  return `Prova ${letter}`;
-}
 
 function getQuestionReferences(question: SimuladoQuestion) {
   if (question.references && question.references.length > 0) {

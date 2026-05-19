@@ -41,6 +41,8 @@ export type SimuladoQuestion = {
   me: StudyTrack;
   /** Trimestre: T1–T4 para simulados de 30q; "anual" para simulados de 50q. */
   trimestre?: Trimestre;
+  /** Prova dentro do trimestre: A1, A2, A3 ou A4. */
+  prova?: string;
   tema?: string;
   enunciado: string;
   alternativaA: string;
@@ -500,7 +502,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
   const { data, error } = await supabase
     .from("simulados")
     .select(
-      "id, me, trimestre, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e, correta, explicacao, explicacao_a, explicacao_b, explicacao_c, explicacao_d, explicacao_e",
+      "id, me, trimestre, prova, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e, correta, explicacao, explicacao_a, explicacao_b, explicacao_c, explicacao_d, explicacao_e",
     )
     .order("id", { ascending: true });
 
@@ -510,6 +512,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
     id: item.id,
     me: item.me as StudyTrack,
     trimestre: (item.trimestre ?? undefined) as Trimestre | undefined,
+    prova: item.prova ?? undefined,
     tema: item.tema ?? undefined,
     enunciado: item.enunciado,
     alternativaA: item.alternativa_a,
@@ -577,6 +580,7 @@ export async function saveSimuladosRemote(data: SimuladoQuestion[]) {
     id: item.id,
     me: item.me,
     trimestre: item.trimestre ?? null,
+    prova: item.prova ?? null,
     tema: item.tema ?? null,
     enunciado: item.enunciado,
     alternativa_a: item.alternativaA,
