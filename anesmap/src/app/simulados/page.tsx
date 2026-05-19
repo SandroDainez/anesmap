@@ -7,6 +7,7 @@ import { StatusBadge } from "@/components/StatusBadge";
 import {
   SimuladoQuestion,
   StudyTrack,
+  Trimestre,
   isSupabaseConfigured,
   loadSimulados,
   loadSimuladosRemote,
@@ -23,9 +24,12 @@ import {
 } from "@/lib/user-study";
 
 const ALL_TRACKS: StudyTrack[] = ["ME1", "ME2", "ME3"];
+// Trimestres T1–T4 = simulados de 30q (trimestrais); "anual" = 50q (anuais); "todos" = sem filtro
+const ALL_TRIMESTERS: Array<Trimestre | "todos"> = ["todos", "T1", "T2", "T3", "T4", "anual"];
 
 export default function SimuladosPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
+  const [selectedTrimestre, setSelectedTrimestre] = useState<Trimestre | "todos">("todos");
   const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
   // Keep SSR and first client render consistent to avoid hydration mismatch.
   const [importedSimulados, setImportedSimulados] = useState<SimuladoQuestion[]>([]);
@@ -44,6 +48,12 @@ export default function SimuladosPage() {
   useEffect(() => {
     // Hydrate local cached data only after mount (client-side).
     setImportedSimulados(loadSimulados());
+
+    // Restore preferred track from dashboard selection
+    const preferredTrack = localStorage.getItem("anesmap_preferred_track") as StudyTrack | null;
+    if (preferredTrack && ["ME1", "ME2", "ME3"].includes(preferredTrack)) {
+      setSelectedMe(preferredTrack);
+    }
 
     void (async () => {
       const profile = await loadMyProfile();
@@ -86,9 +96,14 @@ export default function SimuladosPage() {
   const simuladosByTrack = useMemo(
     () =>
       importedSimulados
-        .filter((item) => item.me === selectedMe)
+        .filter((item) => {
+          if (item.me !== selectedMe) return false;
+          if (selectedTrimestre === "todos") return true;
+          // Match exactly by trimestre, or include untagged questions in all views
+          return !item.trimestre || item.trimestre === selectedTrimestre;
+        })
         .sort((a, b) => compareSimuladosForSessionOrder(a, b)),
-    [importedSimulados, selectedMe],
+    [importedSimulados, selectedMe, selectedTrimestre],
   );
   const safeIndex =
     simuladosByTrack.length === 0 ? 0 : Math.max(0, Math.min(currentIndex, simuladosByTrack.length - 1));
@@ -134,6 +149,14 @@ export default function SimuladosPage() {
 
   function changeTrack(track: StudyTrack) {
     setSelectedMe(track);
+    setCurrentIndex(0);
+    setShowBack(false);
+    setAnswers({});
+    localStorage.setItem("anesmap_preferred_track", track);
+  }
+
+  function changeTrimestre(t: Trimestre | "todos") {
+    setSelectedTrimestre(t);
     setCurrentIndex(0);
     setShowBack(false);
     setAnswers({});
@@ -218,6 +241,38 @@ export default function SimuladosPage() {
             </StatusBadge>
           </div>
         )}
+      </AppCard>
+
+      <AppCard>
+        <h2 className="mb-3 text-sm font-medium text-muted">Período / Prova</h2>
+        <div className="grid grid-cols-3 gap-1.5">
+          {ALL_TRIMESTERS.map((t) => {
+            const isActive = selectedTrimestre === t;
+            const label =
+              t === "todos" ? "Todos" : t === "anual" ? "Anual (50q)" : `${t} (30q)`;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => changeTrimestre(t)}
+                className={`rounded-lg border px-2 py-1.5 text-xs font-medium transition-all ${
+                  isActive
+                    ? "border-blue bg-blue/20 text-blue shadow-sm"
+                    : "border-border bg-background/30 text-muted hover:border-blue/40 hover:text-foreground"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-xs text-muted">
+          {selectedTrimestre === "todos"
+            ? "Todas as questões da trilha"
+            : selectedTrimestre === "anual"
+            ? "Simulado anual — conteúdo dos 4 trimestres (50 questões)"
+            : `Simulado trimestral ${selectedTrimestre} — 30 questões`}
+        </p>
       </AppCard>
 
       <AppCard>

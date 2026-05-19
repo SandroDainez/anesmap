@@ -10,6 +10,7 @@ import {
   FlashcardProgress,
   getDefaultFlashcardProgress,
   StudyTrack,
+  Trimestre,
   isSupabaseConfigured,
   loadFlashcardProgress,
   loadFlashcards,
@@ -28,9 +29,11 @@ import {
 } from "@/lib/user-study";
 
 const ALL_TRACKS: StudyTrack[] = ["ME1", "ME2", "ME3"];
+const ALL_TRIMESTERS: Array<Trimestre | "todos"> = ["todos", "T1", "T2", "T3", "T4"];
 
 export default function FlashcardsPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
+  const [selectedTrimestre, setSelectedTrimestre] = useState<Trimestre | "todos">("todos");
   const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
   // Keep SSR and first client render identical to avoid hydration mismatch.
   const [importedCards, setImportedCards] = useState<Flashcard[]>([]);
@@ -46,6 +49,12 @@ export default function FlashcardsPage() {
     setImportedCards(loadFlashcards());
     setProgressMap(loadFlashcardProgress());
     setNow(new Date());
+
+    // Restore preferred track from dashboard selection
+    const preferredTrack = localStorage.getItem("anesmap_preferred_track") as StudyTrack | null;
+    if (preferredTrack && ["ME1", "ME2", "ME3"].includes(preferredTrack)) {
+      setSelectedMe(preferredTrack);
+    }
 
     void (async () => {
       const profile = await loadMyProfile();
@@ -97,9 +106,14 @@ export default function FlashcardsPage() {
   const cardsByTrack = useMemo(
     () =>
       importedCards
-        .filter((item) => item.me === selectedMe)
+        .filter((item) => {
+          if (item.me !== selectedMe) return false;
+          if (selectedTrimestre === "todos") return true;
+          // Show cards tagged with this trimestre OR cards without any trimestre tag
+          return !item.trimestre || item.trimestre === selectedTrimestre;
+        })
         .sort((a, b) => compareCardsForStudyOrder(a, b)),
-    [importedCards, selectedMe],
+    [importedCards, selectedMe, selectedTrimestre],
   );
   const dueCards = useMemo(
     () =>
@@ -163,6 +177,13 @@ export default function FlashcardsPage() {
 
   function changeTrack(track: StudyTrack) {
     setSelectedMe(track);
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
+    localStorage.setItem("anesmap_preferred_track", track);
+  }
+
+  function changeTrimestre(t: Trimestre | "todos") {
+    setSelectedTrimestre(t);
     setCurrentCardIndex(0);
     setIsFlipped(false);
   }
@@ -232,6 +253,34 @@ export default function FlashcardsPage() {
             </StatusBadge>
           </div>
         )}
+      </AppCard>
+
+      <AppCard>
+        <h2 className="mb-3 text-sm font-medium text-muted">Período</h2>
+        <div className="grid grid-cols-5 gap-1.5">
+          {ALL_TRIMESTERS.map((t) => {
+            const isActive = selectedTrimestre === t;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => changeTrimestre(t)}
+                className={`rounded-lg border px-2 py-1.5 text-xs font-medium transition-all ${
+                  isActive
+                    ? "border-teal bg-teal/20 text-teal shadow-sm"
+                    : "border-border bg-background/30 text-muted hover:border-teal/40 hover:text-foreground"
+                }`}
+              >
+                {t === "todos" ? "Todos" : t}
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-xs text-muted">
+          {selectedTrimestre === "todos"
+            ? "Exibindo todos os cards da trilha"
+            : `Exibindo cards do ${selectedTrimestre} (inclui cards sem período definido)`}
+        </p>
       </AppCard>
 
       <section className="grid grid-cols-3 gap-2">

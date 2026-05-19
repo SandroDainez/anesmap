@@ -337,13 +337,20 @@ export default function ImportarPage() {
           const corretaRaw = (row.correta ?? row.gabarito ?? "").toUpperCase();
 
           const looksLikeFlashcard = frente.length > 0 && verso.length > 0;
+          const altE = row.alternativae ?? row.e ?? "";
+          const trimestreRaw = (row.trimestre ?? row.quarter ?? "").toUpperCase().trim();
+          const trimestreValid = ["T1", "T2", "T3", "T4", "ANUAL"].includes(trimestreRaw);
+          const trimestreValue = trimestreValid
+            ? (trimestreRaw.toLowerCase() === "anual" ? "anual" : trimestreRaw) as import("@/lib/study-data").Trimestre
+            : undefined;
+
           const looksLikeQuestion =
             enunciado.length > 0 &&
             altA.length > 0 &&
             altB.length > 0 &&
             altC.length > 0 &&
             altD.length > 0 &&
-            ["A", "B", "C", "D"].includes(corretaRaw);
+            ["A", "B", "C", "D", "E"].includes(corretaRaw);
 
           if (looksLikeFlashcard) {
             const normalizedFront = normalizeQuestionLabel(frente.trim());
@@ -356,6 +363,7 @@ export default function ImportarPage() {
             detectedFlashcards.push({
               id: `fc-${rowId}`,
               me: track,
+              trimestre: trimestreValue,
               frente: normalizedFront,
               verso: normalizedBack,
               tags: (row.tags ?? "")
@@ -374,14 +382,21 @@ export default function ImportarPage() {
             detectedSimulados.push({
               id: `sim-${rowId}`,
               me: track,
+              trimestre: trimestreValue,
               tema: (row.tema ?? "").trim() || undefined,
               enunciado: normalizedStem,
               alternativaA: altA.trim(),
               alternativaB: altB.trim(),
               alternativaC: altC.trim(),
               alternativaD: altD.trim(),
-              correta: corretaRaw as "A" | "B" | "C" | "D",
+              alternativaE: altE.trim() || undefined,
+              correta: corretaRaw as "A" | "B" | "C" | "D" | "E",
               explicacao: (row.explicacao ?? "").trim() || undefined,
+              explicacaoA: (row.explicacaoa ?? "").trim() || undefined,
+              explicacaoB: (row.explicacaob ?? "").trim() || undefined,
+              explicacaoC: (row.explicacaoc ?? "").trim() || undefined,
+              explicacaoD: (row.explicacaod ?? "").trim() || undefined,
+              explicacaoE: (row.explicacaoe ?? "").trim() || undefined,
               references: structuredRefs,
             });
             return;

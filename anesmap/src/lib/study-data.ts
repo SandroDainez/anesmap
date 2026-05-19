@@ -2,6 +2,13 @@ import { createClient } from "@supabase/supabase-js";
 
 export type StudyTrack = "ME1" | "ME2" | "ME3";
 
+/**
+ * Trimestre dentro de uma trilha.
+ * T1–T4 = provas trimestrais (simulados de 30 questões / flashcards daquele período)
+ * "anual" = conteúdo do ano inteiro (simulados de 50 questões / todos os cards)
+ */
+export type Trimestre = "T1" | "T2" | "T3" | "T4" | "anual";
+
 export type StudyReference = {
   title: string;
   url?: string;
@@ -12,6 +19,8 @@ export type StudyReference = {
 export type Flashcard = {
   id: string;
   me: StudyTrack;
+  /** Trimestre ao qual o card pertence. Undefined = exibido em todos os filtros. */
+  trimestre?: Trimestre;
   frente: string;
   verso: string;
   tags?: string[];
@@ -30,6 +39,8 @@ export type FlashcardProgress = {
 export type SimuladoQuestion = {
   id: string;
   me: StudyTrack;
+  /** Trimestre: T1–T4 para simulados de 30q; "anual" para simulados de 50q. */
+  trimestre?: Trimestre;
   tema?: string;
   enunciado: string;
   alternativaA: string;
@@ -489,7 +500,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
   const { data, error } = await supabase
     .from("simulados")
     .select(
-      "id, me, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e, correta, explicacao, explicacao_a, explicacao_b, explicacao_c, explicacao_d, explicacao_e",
+      "id, me, trimestre, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e, correta, explicacao, explicacao_a, explicacao_b, explicacao_c, explicacao_d, explicacao_e",
     )
     .order("id", { ascending: true });
 
@@ -498,6 +509,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
   return data.map((item) => ({
     id: item.id,
     me: item.me as StudyTrack,
+    trimestre: (item.trimestre ?? undefined) as Trimestre | undefined,
     tema: item.tema ?? undefined,
     enunciado: item.enunciado,
     alternativaA: item.alternativa_a,
@@ -530,6 +542,7 @@ export async function saveFlashcardsRemote(data: Flashcard[]) {
   const payload = data.map((item) => ({
     id: item.id,
     me: item.me,
+    trimestre: item.trimestre ?? null,
     frente: item.frente,
     verso: item.verso,
     tags: item.tags ?? [],
@@ -563,6 +576,7 @@ export async function saveSimuladosRemote(data: SimuladoQuestion[]) {
   const payload = data.map((item) => ({
     id: item.id,
     me: item.me,
+    trimestre: item.trimestre ?? null,
     tema: item.tema ?? null,
     enunciado: item.enunciado,
     alternativa_a: item.alternativaA,
@@ -1011,6 +1025,7 @@ function canonicalHeaderKey(header: string) {
   if (normalized.includes("alternativad") || normalized === "d") return "alternativad";
   if (normalized.includes("alternativae") || normalized === "e") return "alternativae";
   if (normalized.includes("correta") || normalized.includes("gabarito")) return "correta";
+  if (normalized === "trimestre" || normalized.includes("trimestre") || normalized === "quarter") return "trimestre";
   if (normalized.includes("explicacaoa") || normalized === "explicacaoa") return "explicacaoa";
   if (normalized.includes("explicacaob") || normalized === "explicacaob") return "explicacaob";
   if (normalized.includes("explicacaoc") || normalized === "explicacaoc") return "explicacaoc";
