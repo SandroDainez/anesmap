@@ -99,8 +99,8 @@ export default function SimuladosPage() {
         .filter((item) => {
           if (item.me !== selectedMe) return false;
           if (selectedTrimestre === "todos") return true;
-          // Match exactly by trimestre, or include untagged questions in all views
-          return !item.trimestre || item.trimestre === selectedTrimestre;
+          // Filtro estrito: só questões com o trimestre exato selecionado
+          return item.trimestre === selectedTrimestre;
         })
         .sort((a, b) => compareSimuladosForSessionOrder(a, b)),
     [importedSimulados, selectedMe, selectedTrimestre],
@@ -398,10 +398,20 @@ export default function SimuladosPage() {
         ) : (
           <>
             <h3 className="text-sm font-medium text-muted">Questão do simulado</h3>
-            <p className="mt-2 text-sm text-muted">
-              Nenhuma questão importada para {selectedMe}. Vá em /importar e envie
-              os CSVs de simulados.
-            </p>
+            {selectedTrimestre !== "todos" ? (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm text-muted">
+                  Nenhuma questão marcada como <span className="font-semibold text-foreground">{selectedTrimestre === "anual" ? "Anual" : selectedTrimestre}</span> em {selectedMe}.
+                </p>
+                <p className="text-xs text-muted">
+                  As questões existentes ainda não têm trimestre definido. Adicione uma coluna <span className="font-mono text-foreground">trimestre</span> com valor <span className="font-mono text-foreground">T1</span>–<span className="font-mono text-foreground">T4</span> ou <span className="font-mono text-foreground">anual</span> ao CSV e reimporte. Use <span className="font-semibold text-foreground">Todos</span> para ver todas as questões.
+                </p>
+              </div>
+            ) : (
+              <p className="mt-2 text-sm text-muted">
+                Nenhuma questão importada para {selectedMe}. Vá em /importar e envie os CSVs de simulados.
+              </p>
+            )}
           </>
         )}
       </AppCard>

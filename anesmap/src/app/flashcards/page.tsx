@@ -109,8 +109,8 @@ export default function FlashcardsPage() {
         .filter((item) => {
           if (item.me !== selectedMe) return false;
           if (selectedTrimestre === "todos") return true;
-          // Show cards tagged with this trimestre OR cards without any trimestre tag
-          return !item.trimestre || item.trimestre === selectedTrimestre;
+          // Filtro estrito: só cards com o trimestre exato selecionado
+          return item.trimestre === selectedTrimestre;
         })
         .sort((a, b) => compareCardsForStudyOrder(a, b)),
     [importedCards, selectedMe, selectedTrimestre],
@@ -378,9 +378,22 @@ export default function FlashcardsPage() {
             </div>
           </>
         ) : (
-          <p className="mt-2 text-sm text-muted">
-            Nenhum card importado para {selectedMe}. Vá em /importar e envie seus CSVs.
-          </p>
+          <div className="mt-2 space-y-2">
+            {selectedTrimestre !== "todos" ? (
+              <>
+                <p className="text-sm text-muted">
+                  Nenhum card marcado como <span className="font-semibold text-foreground">{selectedTrimestre}</span> em {selectedMe}.
+                </p>
+                <p className="text-xs text-muted">
+                  Os cards existentes ainda não têm trimestre definido. Para usar este filtro, adicione uma coluna <span className="font-mono text-foreground">trimestre</span> com valor <span className="font-mono text-foreground">T1</span>, <span className="font-mono text-foreground">T2</span>, <span className="font-mono text-foreground">T3</span> ou <span className="font-mono text-foreground">T4</span> ao CSV e reimporte. Enquanto isso, use <span className="font-semibold text-foreground">Todos</span> para ver todos os cards.
+                </p>
+              </>
+            ) : (
+              <p className="text-sm text-muted">
+                Nenhum card importado para {selectedMe}. Vá em /importar e envie seus CSVs.
+              </p>
+            )}
+          </div>
         )}
         <div className="mt-4 grid grid-cols-3 gap-2 text-sm font-medium">
           <StatusBadge
