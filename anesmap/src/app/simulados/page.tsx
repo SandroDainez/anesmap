@@ -32,7 +32,7 @@ export default function SimuladosPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
   const [answers, setAnswers] = useState<
-    Record<string, { selected: "A" | "B" | "C" | "D"; isCorrect: boolean }>
+    Record<string, { selected: "A" | "B" | "C" | "D" | "E"; isCorrect: boolean }>
   >({});
   const [attemptState, setAttemptState] = useState<{
     attemptId: string;
@@ -102,7 +102,7 @@ export default function SimuladosPage() {
     })();
   }, [selectedMe]);
 
-  function chooseAlternative(letter: "A" | "B" | "C" | "D") {
+  function chooseAlternative(letter: "A" | "B" | "C" | "D" | "E") {
     if (!currentQuestion) return;
     const isCorrect = currentQuestion.correta === letter;
     setAnswers((prev) => ({
@@ -256,18 +256,11 @@ export default function SimuladosPage() {
                   {formatQuestionWithNumber(currentQuestion.enunciado, safeIndex)}
                 </p>
                 <div className="mt-3 space-y-2 text-sm">
-                  {(
-                    [
-                      ["A", currentQuestion.alternativaA],
-                      ["B", currentQuestion.alternativaB],
-                      ["C", currentQuestion.alternativaC],
-                      ["D", currentQuestion.alternativaD],
-                    ] as const
-                  ).map(([letter, content]) => (
+                  {buildAlternativesList(currentQuestion).map(([letter, content]) => (
                     <button
                       key={letter}
                       type="button"
-                      onClick={() => chooseAlternative(letter)}
+                      onClick={() => chooseAlternative(letter as "A" | "B" | "C" | "D" | "E")}
                       className="w-full rounded-xl border border-border bg-background/40 px-3 py-2 text-left text-muted transition hover:bg-background/60"
                     >
                       <span className="font-medium text-foreground">{letter})</span> {content}
@@ -277,51 +270,45 @@ export default function SimuladosPage() {
               </>
             ) : (
               <>
-                <p className="mt-2 font-medium text-foreground">
+                <p className={`mt-2 font-medium ${currentAnswer?.isCorrect ? "text-teal" : "text-rose"}`}>
                   {currentAnswer?.isCorrect
-                    ? "Resposta correta!"
-                    : `Você marcou ${currentAnswer?.selected ?? "-"}, mas a correta é ${currentQuestion.correta}.`}
+                    ? "✅ Resposta correta!"
+                    : `❌ Você marcou ${currentAnswer?.selected ?? "-"} — a correta é ${currentQuestion.correta}.`}
                 </p>
                 <div className="mt-3 space-y-2 text-sm">
-                  {(
-                    [
-                      ["A", currentQuestion.alternativaA],
-                      ["B", currentQuestion.alternativaB],
-                      ["C", currentQuestion.alternativaC],
-                      ["D", currentQuestion.alternativaD],
-                    ] as const
-                  ).map(([letter, content]) => {
+                  {buildAlternativesList(currentQuestion).map(([letter, content]) => {
                     const isCorrect = currentQuestion.correta === letter;
                     const isSelected = currentAnswer?.selected === letter;
                     const isWrong = isSelected && !isCorrect;
+                    const comment = buildOptionComment(letter as "A" | "B" | "C" | "D" | "E", currentQuestion);
                     return (
-                    <article
-                      key={letter}
-                      className={`rounded-xl border px-3 py-2 ${
-                        isCorrect
-                          ? "border-teal/40 bg-teal/10"
-                          : isWrong
-                            ? "border-rose/40 bg-rose/10"
-                            : "border-border bg-background/40"
-                      }`}
-                    >
-                      <p className={isCorrect ? "text-teal" : isWrong ? "text-rose" : "text-foreground"}>
-                        <span className="font-semibold">{letter})</span> {content}
-                        {isCorrect && <span className="ml-2 text-xs font-medium">✓ correta</span>}
-                        {isWrong && <span className="ml-2 text-xs font-medium">✗ sua resposta</span>}
-                      </p>
-                      <p className="mt-1 text-xs text-muted">
-                        {buildOptionComment(letter, currentQuestion)}
-                      </p>
-                    </article>
+                      <article
+                        key={letter}
+                        className={`rounded-xl border px-3 py-2 ${
+                          isCorrect
+                            ? "border-teal/40 bg-teal/10"
+                            : isWrong
+                              ? "border-rose/40 bg-rose/10"
+                              : "border-border bg-background/40"
+                        }`}
+                      >
+                        <p className={`font-semibold ${isCorrect ? "text-teal" : isWrong ? "text-rose" : "text-foreground"}`}>
+                          {letter}) {content}
+                          {isCorrect && <span className="ml-2 text-xs font-medium">✓ correta</span>}
+                          {isWrong && <span className="ml-2 text-xs font-medium">✗ sua resposta</span>}
+                        </p>
+                        {comment && (
+                          <p className="mt-1 text-xs leading-relaxed text-muted">{comment}</p>
+                        )}
+                      </article>
                     );
                   })}
                 </div>
-                <article className="mt-3 rounded-xl border border-border bg-background/40 px-3 py-2 text-xs text-muted">
-                  <p className="font-semibold text-foreground">Referências sugeridas</p>
+                <article className="mt-3 rounded-xl border border-blue/30 bg-blue/8 px-3 py-2 text-xs text-muted">
+                  <p className="font-semibold text-foreground">📚 Referências bibliográficas</p>
                   <ul className="mt-1 space-y-1">
                     {getQuestionReferences(currentQuestion).map((ref) => (
-                      <li key={ref}>- {ref}</li>
+                      <li key={ref} className="leading-relaxed">— {ref}</li>
                     ))}
                   </ul>
                 </article>
@@ -398,17 +385,45 @@ function formatQuestionWithNumber(enunciado: string, index: number) {
   return `${index + 1}) ${cleaned || text}`;
 }
 
-function buildOptionComment(letter: "A" | "B" | "C" | "D", question: SimuladoQuestion) {
-  if (letter === question.correta) {
-    if (question.explicacao?.trim()) {
-      return `Correta. ${question.explicacao.trim()}`;
-    }
-    return "Correta de acordo com o gabarito importado para esta questão.";
+/** Retorna lista de alternativas [letra, texto] incluindo E quando presente */
+function buildAlternativesList(question: SimuladoQuestion): [string, string][] {
+  const alts: [string, string][] = [
+    ["A", question.alternativaA],
+    ["B", question.alternativaB],
+    ["C", question.alternativaC],
+    ["D", question.alternativaD],
+  ];
+  if (question.alternativaE) {
+    alts.push(["E", question.alternativaE]);
   }
+  return alts;
+}
+
+/** Retorna o comentário individual para uma alternativa, priorizando explicação por alternativa */
+function buildOptionComment(letter: "A" | "B" | "C" | "D" | "E", question: SimuladoQuestion) {
+  const isCorrect = letter === question.correta;
+
+  // Prioridade 1: explicação individual por alternativa (formato interativo)
+  const perAlt = (
+    letter === "A" ? question.explicacaoA :
+    letter === "B" ? question.explicacaoB :
+    letter === "C" ? question.explicacaoC :
+    letter === "D" ? question.explicacaoD :
+    question.explicacaoE
+  )?.trim();
+
+  if (perAlt) return perAlt;
+
+  // Prioridade 2: explicação geral da questão
+  if (isCorrect) {
+    if (question.explicacao?.trim()) return question.explicacao.trim();
+    return "Alternativa correta conforme gabarito.";
+  }
+
   if (question.explicacao?.trim()) {
-    return `Não é a correta. O gabarito indica ${question.correta}. Veja a justificativa da correta: ${question.explicacao.trim()}`;
+    return `Incorreta. A correta é ${question.correta}. ${question.explicacao.trim()}`;
   }
-  return `Não é a correta para esta questão. O gabarito importado indica ${question.correta}.`;
+  return `Incorreta — gabarito: ${question.correta}.`;
 }
 
 function getQuestionReferences(question: SimuladoQuestion) {

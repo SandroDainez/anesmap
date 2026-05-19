@@ -29,7 +29,7 @@ export type SimuladoAnswer = {
   attempt_id: string;
   user_id: string;
   question_id: string;
-  selected: "A" | "B" | "C" | "D";
+  selected: "A" | "B" | "C" | "D" | "E";
   correct: boolean;
   answered_at: string;
 };
@@ -231,7 +231,7 @@ export async function startSimuladoAttempt(track: StudyTrack) {
 export async function recordSimuladoAnswer(params: {
   attemptId: string;
   questionId: string;
-  selected: "A" | "B" | "C" | "D";
+  selected: "A" | "B" | "C" | "D" | "E";
   correct: boolean;
 }) {
   const supabase = browserSupabase();

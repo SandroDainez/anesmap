@@ -278,17 +278,22 @@ export default function FlashcardsPage() {
                 </>
               ) : (
                 <>
-                  <p className="font-mono text-xs uppercase tracking-wider text-blue">Verso</p>
-                  <h3 className="mt-2 text-sm font-semibold text-foreground">Resposta</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {currentCardFormatted?.answer}
-                  </p>
-                  <h3 className="mt-3 text-sm font-semibold text-foreground">
-                    Referência bibliográfica
-                  </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-muted">
-                    {currentCardFormatted?.reference}
-                  </p>
+                  <p className="font-mono text-xs uppercase tracking-wider text-blue">Verso — Resposta</p>
+                  <div className="mt-2 rounded-lg border border-teal/30 bg-teal/8 px-3 py-3">
+                    <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
+                      {currentCardFormatted?.answer}
+                    </p>
+                  </div>
+                  {currentCardFormatted?.reference && (
+                    <div className="mt-3 rounded-lg border border-blue/25 bg-blue/8 px-3 py-2">
+                      <p className="font-mono text-xs uppercase tracking-wider text-blue mb-1">
+                        📚 Referência bibliográfica
+                      </p>
+                      <p className="text-xs leading-relaxed text-muted whitespace-pre-wrap">
+                        {currentCardFormatted.reference}
+                      </p>
+                    </div>
+                  )}
                   <p className="mt-3 text-xs text-muted">Toque para voltar para a pergunta.</p>
                 </>
               )}
