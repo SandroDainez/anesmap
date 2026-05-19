@@ -1,14 +1,30 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
+async function readRoleWithRetry(
+  supabase: NonNullable<ReturnType<typeof createSupabaseBrowserClient>>,
+  userId: string,
+  attempts = 5,
+): Promise<string | null> {
+  for (let i = 0; i < attempts; i++) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
+      .single();
+    if (data?.role) return data.role as string;
+    await new Promise((r) => setTimeout(r, 400));
+  }
+  return null;
+}
+
 export default function LoginPage() {
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +42,7 @@ export default function LoginPage() {
       return;
     }
 
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password,
     });
@@ -37,9 +53,20 @@ export default function LoginPage() {
       return;
     }
 
-    const redirect = searchParams.get("redirect") ?? "/dashboard";
-    router.replace(redirect);
-    router.refresh();
+    const userId = signInData.user?.id;
+    let destination = searchParams.get("redirect") ?? "/dashboard";
+
+    if (userId) {
+      const role = await readRoleWithRetry(supabase, userId);
+      if (role === "admin") {
+        destination = "/admin";
+      } else {
+        destination = searchParams.get("redirect") ?? "/dashboard";
+      }
+    }
+
+    // Hard navigation para propagar o cookie de sessão corretamente
+    window.location.href = destination;
   }
 
   return (

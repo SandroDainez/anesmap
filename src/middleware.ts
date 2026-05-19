@@ -46,9 +46,15 @@ export async function middleware(request: NextRequest) {
   }
 
   if (user && isPublic) {
-    const dashboardUrl = request.nextUrl.clone();
-    dashboardUrl.pathname = "/dashboard";
-    return NextResponse.redirect(dashboardUrl);
+    // Verifica o papel para redirecionar admin corretamente
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+    const dest = request.nextUrl.clone();
+    dest.pathname = profile?.role === "admin" ? "/admin" : "/dashboard";
+    return NextResponse.redirect(dest);
   }
 
   if (pathname.startsWith("/admin") && user) {
