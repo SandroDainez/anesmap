@@ -25,13 +25,6 @@ export async function POST(req: NextRequest) {
     "Content-Type": "application/json",
   };
 
-  // Adicionar coluna referencias se não existir
-  await fetch(`${supabaseUrl}/rest/v1/rpc/`, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({ sql: "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS referencias text;" }),
-  });
-
   // Forçar refresh do schema cache
   await fetch(`${supabaseUrl}/rest/v1/simulados?select=*&limit=0`, { headers });
 
@@ -82,7 +75,6 @@ export async function POST(req: NextRequest) {
     explicacao_c: q.explicacaoC?.trim() || null,
     explicacao_d: q.explicacaoD?.trim() || null,
     explicacao_e: q.explicacaoE?.trim() || null,
-    referencias: q.referencias?.trim() || null,
   }));
 
   const res = await fetch(`${supabaseUrl}/rest/v1/simulados`, {
