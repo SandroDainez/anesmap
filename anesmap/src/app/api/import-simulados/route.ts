@@ -25,36 +25,16 @@ export async function POST(req: NextRequest) {
     "Content-Type": "application/json",
   };
 
-  // 1. Adicionar colunas que faltam na tabela
-  const missingColumns = [
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS alternativa_c text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS alternativa_d text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS alternativa_e text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS correta text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_a text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_b text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_c text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_d text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_e text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS referencias text;",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS trimestre text default 't1';",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS prova text default 'A1';",
-    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS created_at timestamptz default now();",
-    "ALTER TABLE public.simulados ALTER COLUMN id TYPE bigint USING id::bigint;",
-  ];
+  // Adicionar coluna referencias se não existir
+  await fetch(`${supabaseUrl}/rest/v1/rpc/`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ sql: "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS referencias text;" }),
+  });
 
-  for (const sql of missingColumns) {
-    await fetch(`${supabaseUrl}/rest/v1/rpc/`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ sql }),
-    });
-  }
-
-  // 2. Forçar refresh do schema cache
+  // Forçar refresh do schema cache
   await fetch(`${supabaseUrl}/rest/v1/simulados?select=*&limit=0`, { headers });
 
-  // 3. Ler body
   let body: unknown;
   try {
     body = await req.json();
@@ -67,7 +47,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Nenhuma questão recebida." }, { status: 400 });
   }
 
-  // 4. Validar
+  // Validar
   const invalid = items.filter(
     (q) =>
       !q.enunciado?.trim() ||
@@ -84,7 +64,7 @@ export async function POST(req: NextRequest) {
     }, { status: 400 });
   }
 
-  // 5. Montar rows (formato com underscore = como está no DB)
+  // Montar rows no formato exato do banco (underscore)
   const rows = items.map((q) => ({
     me: (q.me ?? "").toUpperCase() || null,
     trimestre: q.trimestre?.toLowerCase() || null,
@@ -105,7 +85,6 @@ export async function POST(req: NextRequest) {
     referencias: q.referencias?.trim() || null,
   }));
 
-  // 6. Inserir
   const res = await fetch(`${supabaseUrl}/rest/v1/simulados`, {
     method: "POST",
     headers: { ...headers, Prefer: "return=representation" },
