@@ -3,6 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
+import {
+  saveAssessmentSnapshot,
+  loadAssessmentSnapshots,
+  saveProcedureCounts,
+  loadProcedureCounts,
+} from "@/lib/user-study";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -184,6 +190,7 @@ export default function AvaliacaoPage() {
   const [savedAt, setSavedAt] = useState<string | null>(null);
 
   useEffect(() => {
+    // 1) Load from localStorage immediately for fast display
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setRatings(JSON.parse(raw));
@@ -192,6 +199,31 @@ export default function AvaliacaoPage() {
       const rawH = localStorage.getItem(HISTORY_KEY);
       if (rawH) setHistory(JSON.parse(rawH));
     } catch {}
+
+    // 2) Then load from Supabase (source of truth) and override local
+    void (async () => {
+      const [remoteSnapshots, remoteProcedures] = await Promise.all([
+        loadAssessmentSnapshots(),
+        loadProcedureCounts(),
+      ]);
+
+      if (remoteSnapshots.length > 0) {
+        // Build history from remote snapshots
+        const remoteHistory = remoteSnapshots.map((s) => ({
+          date: new Date(s.created_at).toLocaleDateString("pt-BR", {
+            day: "2-digit", month: "2-digit", year: "2-digit",
+          }),
+          ratings: s.ratings as Record<string, Rating>,
+        }));
+        setHistory(remoteHistory);
+        // Set current ratings to the most recent snapshot
+        setRatings(remoteSnapshots[0].ratings as Record<string, Rating>);
+      }
+
+      if (remoteProcedures) {
+        setProcedureCounts(remoteProcedures);
+      }
+    })();
   }, []);
 
   function setRating(id: string, val: Rating) {
@@ -202,6 +234,7 @@ export default function AvaliacaoPage() {
     const next = { ...procedureCounts, [id]: Math.max(0, val) };
     setProcedureCounts(next);
     localStorage.setItem(PROCEDURES_KEY, JSON.stringify(next));
+    void saveProcedureCounts(next);
   }
 
   function saveSnapshot() {
@@ -214,6 +247,8 @@ export default function AvaliacaoPage() {
     setHistory(next);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
     setSavedAt(entry.date);
+    // Save to Supabase (fire-and-forget)
+    void saveAssessmentSnapshot(ratings);
   }
 
   const avgRating = useMemo(() => {

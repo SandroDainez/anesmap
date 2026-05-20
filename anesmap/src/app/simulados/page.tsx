@@ -164,7 +164,7 @@ export default function SimuladosPage() {
   }
 
   function goNext() {
-    if (safeIndex >= simuladosByTrack.length - 1) return;
+    if (safeIndex >= activeQuestions.length - 1) return;
     setCurrentIndex((value) => value + 1);
     setShowBack(false);
   }

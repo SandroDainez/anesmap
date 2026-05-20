@@ -491,6 +491,129 @@ export async function loadAdminUserDetails(userId: string) {
   };
 }
 
+export async function loadAdminMEStats() {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+
+  const [attemptsRes, profilesRes] = await Promise.all([
+    supabase
+      .from("simulado_attempts")
+      .select("id, user_id, track, score_percent, duration_sec, created_at")
+      .order("created_at", { ascending: true }),
+    supabase
+      .from("profiles")
+      .select("id, name, assigned_track, assigned_track_simulados"),
+  ]);
+
+  return {
+    attempts: (attemptsRes.data ?? []) as Array<{
+      id: string;
+      user_id: string;
+      track: string;
+      score_percent: number | null;
+      duration_sec: number | null;
+      created_at: string;
+    }>,
+    profiles: (profilesRes.data ?? []) as Array<{
+      id: string;
+      name: string | null;
+      assigned_track: string | null;
+      assigned_track_simulados: string | null;
+    }>,
+  };
+}
+
+// ── Auto-avaliação (competências + procedimentos) ────────────────────────────
+
+export type AssessmentRatings = Record<string, number>; // domain_id → 1-5
+export type ProcedureCountsMap = Record<string, number>; // procedure_id → count
+
+export async function saveAssessmentSnapshot(ratings: AssessmentRatings): Promise<boolean> {
+  const supabase = browserSupabase();
+  if (!supabase) return false;
+  const user = await getCurrentAuthUser();
+  if (!user) return false;
+  const { error } = await supabase
+    .from("self_assessment_snapshots")
+    .insert({ user_id: user.id, ratings });
+  return !error;
+}
+
+export async function loadAssessmentSnapshots(): Promise<Array<{ id: string; created_at: string; ratings: AssessmentRatings }>> {
+  const supabase = browserSupabase();
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("self_assessment_snapshots")
+    .select("id, created_at, ratings")
+    .order("created_at", { ascending: false })
+    .limit(20);
+  if (error || !data) return [];
+  return data as Array<{ id: string; created_at: string; ratings: AssessmentRatings }>;
+}
+
+export async function saveProcedureCounts(counts: ProcedureCountsMap): Promise<boolean> {
+  const supabase = browserSupabase();
+  if (!supabase) return false;
+  const user = await getCurrentAuthUser();
+  if (!user) return false;
+  const { error } = await supabase
+    .from("procedure_counts")
+    .upsert({ user_id: user.id, counts, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
+  return !error;
+}
+
+export async function loadProcedureCounts(): Promise<ProcedureCountsMap | null> {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+  const user = await getCurrentAuthUser();
+  if (!user) return null;
+  const { data, error } = await supabase
+    .from("procedure_counts")
+    .select("counts")
+    .eq("user_id", user.id)
+    .single();
+  if (error || !data) return null;
+  return (data as { counts: ProcedureCountsMap }).counts;
+}
+
+export async function loadAdminAssessmentData() {
+  const supabase = browserSupabase();
+  if (!supabase) return null;
+
+  const [snapshotsRes, proceduresRes, profilesRes] = await Promise.all([
+    supabase
+      .from("self_assessment_snapshots")
+      .select("id, user_id, created_at, ratings")
+      .order("created_at", { ascending: true }),
+    supabase
+      .from("procedure_counts")
+      .select("user_id, counts, updated_at"),
+    supabase
+      .from("profiles")
+      .select("id, name, assigned_track, assigned_track_simulados"),
+  ]);
+
+  return {
+    snapshots: (snapshotsRes.data ?? []) as Array<{
+      id: string;
+      user_id: string;
+      created_at: string;
+      ratings: AssessmentRatings;
+    }>,
+    procedures: (proceduresRes.data ?? []) as Array<{
+      user_id: string;
+      counts: ProcedureCountsMap;
+      updated_at: string;
+    }>,
+    profiles: (profilesRes.data ?? []) as Array<{
+      id: string;
+      name: string | null;
+      assigned_track: string | null;
+      assigned_track_simulados: string | null;
+    }>,
+  };
+}
+
 export async function migrateLocalHistoryToAccount() {
   if (typeof window === "undefined") return { migrated: false, reason: "NO_WINDOW" };
   const markerKey = "anesmap.migrated.localToAccount.v1";

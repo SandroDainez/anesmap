@@ -5,6 +5,8 @@ import {
   loadAdminOverview,
   loadAdminUserDetails,
   loadAdminUsers,
+  loadAdminMEStats,
+  loadAdminAssessmentData,
   loadInviteCodes,
   createInviteCode,
   deleteInviteCode,
@@ -47,7 +49,7 @@ function simuladosToCSV(qs: Awaited<ReturnType<typeof loadSimuladosRemote>>): st
   return [header, ...rows].join("\n");
 }
 
-type Tab = "overview" | "users" | "content" | "export" | "invites";
+type Tab = "overview" | "users" | "autoavaliacoes" | "content" | "export" | "invites";
 type AdminUserDetails = Awaited<ReturnType<typeof loadAdminUserDetails>>;
 type Track = "ME1" | "ME2" | "ME3" | "ALL";
 
@@ -124,6 +126,7 @@ function escapeHtml(value: string) {
 const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
   { id: "overview", label: "Visão Geral", icon: "◈" },
   { id: "users", label: "Usuários", icon: "◎" },
+  { id: "autoavaliacoes", label: "Auto-avaliações", icon: "◷" },
   { id: "content", label: "Conteúdo", icon: "⊞" },
   { id: "export", label: "Exportar", icon: "↓" },
   { id: "invites", label: "Convites", icon: "⌘" },
@@ -151,6 +154,17 @@ export function AdminPanel() {
   // Export state
   const [exportStatus, setExportStatus] = useState<Record<string, "idle" | "loading" | "done">>({});
 
+  // ME Stats state
+  type MEStatsData = Awaited<ReturnType<typeof loadAdminMEStats>>;
+  const [meStatsData, setMeStatsData] = useState<MEStatsData>(null);
+  const [meStatsLoading, setMeStatsLoading] = useState(false);
+
+  // Assessment data state
+  type AssessmentData = Awaited<ReturnType<typeof loadAdminAssessmentData>>;
+  const [assessmentData, setAssessmentData] = useState<AssessmentData>(null);
+  const [assessmentLoading, setAssessmentLoading] = useState(false);
+  const [assessmentSubtab, setAssessmentSubtab] = useState<"competencias" | "procedimentos" | "evolucao">("competencias");
+
   useEffect(() => {
     void (async () => {
       const [ov, list, codes] = await Promise.all([
@@ -172,6 +186,26 @@ export function AdminPanel() {
       setDetailsLoading(false);
     })();
   }, [selectedUserId]);
+
+  useEffect(() => {
+    if (tab !== "autoavaliacoes") return;
+    if (meStatsData === null) {
+      setMeStatsLoading(true);
+      void (async () => {
+        const data = await loadAdminMEStats();
+        setMeStatsData(data);
+        setMeStatsLoading(false);
+      })();
+    }
+    if (assessmentData === null) {
+      setAssessmentLoading(true);
+      void (async () => {
+        const data = await loadAdminAssessmentData();
+        setAssessmentData(data);
+        setAssessmentLoading(false);
+      })();
+    }
+  }, [tab, meStatsData, assessmentData]);
 
   const filteredUsers = useMemo(() => {
     let list = users;
@@ -1013,6 +1047,354 @@ export function AdminPanel() {
                   </div>
                 )}
               </div>
+            </div>
+          )}
+
+          {/* ── AUTO-AVALIAÇÕES ── */}
+          {tab === "autoavaliacoes" && (
+            <div className="space-y-6 max-w-5xl">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold text-foreground">Auto-avaliações</h2>
+                <button
+                  type="button"
+                  onClick={() => { setMeStatsData(null); setAssessmentData(null); }}
+                  className="rounded-xl border border-border bg-background/35 px-4 py-2 text-xs font-medium text-muted hover:text-foreground transition"
+                >
+                  ↺ Atualizar dados
+                </button>
+              </div>
+
+              {/* Subtabs */}
+              <div className="flex gap-2">
+                {(["competencias", "procedimentos", "evolucao"] as const).map((st) => (
+                  <button
+                    key={st}
+                    type="button"
+                    onClick={() => setAssessmentSubtab(st)}
+                    className={`rounded-xl border px-4 py-2 text-xs font-medium transition capitalize ${
+                      assessmentSubtab === st
+                        ? "border-purple/40 bg-purple/15 text-purple"
+                        : "border-border bg-background/35 text-muted hover:text-foreground"
+                    }`}
+                  >
+                    {st === "competencias" ? "Competências" : st === "procedimentos" ? "Procedimentos" : "Evolução"}
+                  </button>
+                ))}
+              </div>
+
+              {(assessmentLoading || meStatsLoading) && !assessmentData && !meStatsData ? (
+                <div className="rounded-2xl border border-border bg-background/40 p-10 text-center">
+                  <p className="text-sm text-muted">Carregando dados...</p>
+                </div>
+              ) : (() => {
+                // Domain definitions (same as avaliacao/page.tsx)
+                const ADMIN_DOMAINS = [
+                  { id: "farmacologia", label: "Farmacologia", color: "#2dd4bf" },
+                  { id: "via_aerea", label: "Via Aérea", color: "#60a5fa" },
+                  { id: "anestesia_geral", label: "Anest. Geral", color: "#a78bfa" },
+                  { id: "anestesia_regional", label: "Regional", color: "#f472b6" },
+                  { id: "hemodinamica", label: "Hemodinâmica", color: "#fb923c" },
+                  { id: "ventilacao", label: "Ventilação", color: "#facc15" },
+                  { id: "emergencias", label: "Emergências", color: "#f87171" },
+                  { id: "pediatria", label: "Pediatria", color: "#34d399" },
+                ];
+                const ADMIN_PROCEDURES = [
+                  { id: "iot_laringoscopia", label: "IOT laringoscopia direta", meta: 50, cat: "Via Aérea" },
+                  { id: "iot_video", label: "IOT videolaringoscopia", meta: 20, cat: "Via Aérea" },
+                  { id: "dsg_insercao", label: "Disp. supraglótico", meta: 30, cat: "Via Aérea" },
+                  { id: "cricotireoidostomia", label: "Cricotireoidostomia", meta: 5, cat: "Via Aérea" },
+                  { id: "raquianestesia", label: "Raquianestesia", meta: 50, cat: "Regional" },
+                  { id: "peridural", label: "Anestesia peridural", meta: 30, cat: "Regional" },
+                  { id: "peridural_cateter", label: "Cateter peridural", meta: 20, cat: "Regional" },
+                  { id: "bloqueio_plexo", label: "Bloqueio plexo braquial", meta: 20, cat: "Regional" },
+                  { id: "bloqueio_us", label: "Bloqueio periférico US", meta: 20, cat: "Regional" },
+                  { id: "acesso_central", label: "Acesso venoso central", meta: 20, cat: "Hemodinâmica" },
+                  { id: "arteria_radial", label: "Cateter arterial radial", meta: 30, cat: "Hemodinâmica" },
+                  { id: "rcpbasica", label: "RCP básica (BLS)", meta: 1, cat: "Emergências" },
+                  { id: "rcpavancada", label: "RCP avançada (ACLS)", meta: 1, cat: "Emergências" },
+                  { id: "cardioversao", label: "Cardioversão elétrica", meta: 5, cat: "Emergências" },
+                  { id: "pediatria_inducao", label: "Indução inalatória pediátrica", meta: 20, cat: "Pediatria" },
+                ];
+                const RATING_LABELS_ADMIN: Record<number, string> = {
+                  1: "Sem experiência", 2: "Teórico", 3: "Supervisionado", 4: "Autônomo", 5: "Referência",
+                };
+                const ratingColor = (v: number) => {
+                  if (v >= 5) return "text-purple";
+                  if (v >= 4) return "text-teal";
+                  if (v >= 3) return "text-yellow-400";
+                  if (v >= 2) return "text-amber";
+                  return "text-rose";
+                };
+
+                const snapshots = assessmentData?.snapshots ?? [];
+                const procedures = assessmentData?.procedures ?? [];
+                const allProfiles = assessmentData?.profiles ?? [];
+                const profileMap = new Map(allProfiles.map((p) => [p.id, p]));
+
+                // Users who have at least one snapshot OR procedure entry
+                const userIds = [...new Set([
+                  ...snapshots.map((s) => s.user_id),
+                  ...procedures.map((p) => p.user_id),
+                ])];
+
+                // Latest snapshot per user
+                const latestByUser = new Map<string, typeof snapshots[number]>();
+                for (const snap of snapshots) {
+                  const existing = latestByUser.get(snap.user_id);
+                  if (!existing || snap.created_at > existing.created_at) {
+                    latestByUser.set(snap.user_id, snap);
+                  }
+                }
+
+                // Procedure counts per user
+                const procByUser = new Map(procedures.map((p) => [p.user_id, p.counts]));
+
+                return (
+                  <>
+                    {/* ── COMPETÊNCIAS subtab ── */}
+                    {assessmentSubtab === "competencias" && (
+                      <>
+                        {userIds.length === 0 ? (
+                          <div className="rounded-2xl border border-border bg-background/40 p-10 text-center">
+                            <p className="text-sm text-muted">Nenhuma autoavaliação registrada ainda.</p>
+                            <p className="text-xs text-muted mt-2">Assim que os médicos salvarem suas avaliações, os dados aparecem aqui.</p>
+                          </div>
+                        ) : (
+                          <>
+                            {/* Média da turma por domínio */}
+                            <div className="rounded-2xl border border-border bg-background/40 p-5">
+                              <h3 className="mb-4 text-sm font-semibold text-foreground">Média da turma por competência</h3>
+                              <div className="space-y-2">
+                                {ADMIN_DOMAINS.map((d) => {
+                                  const vals = Array.from(latestByUser.values())
+                                    .map((s) => Number(s.ratings[d.id] ?? 0))
+                                    .filter((v) => v > 0);
+                                  const avg = vals.length > 0
+                                    ? (vals.reduce((a, b) => a + b, 0) / vals.length)
+                                    : null;
+                                  const pct = avg !== null ? (avg / 5) * 100 : 0;
+                                  return (
+                                    <div key={d.id} className="flex items-center gap-3">
+                                      <p className="w-32 text-xs text-muted truncate">{d.label}</p>
+                                      <div className="flex-1 h-2 rounded-full bg-background/40 overflow-hidden">
+                                        <div
+                                          className="h-full rounded-full transition-all"
+                                          style={{ width: `${pct}%`, backgroundColor: d.color }}
+                                        />
+                                      </div>
+                                      <span className="w-12 text-right text-xs font-bold" style={{ color: d.color }}>
+                                        {avg !== null ? `${avg.toFixed(1)}/5` : "—"}
+                                      </span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            {/* Tabela por aluno */}
+                            <div className="rounded-2xl border border-border bg-background/40 p-5 overflow-x-auto">
+                              <h3 className="mb-4 text-sm font-semibold text-foreground">Competências por médico (última avaliação)</h3>
+                              <table className="w-full text-xs min-w-[700px]">
+                                <thead>
+                                  <tr className="border-b border-border text-muted">
+                                    <th className="pb-2 text-left font-medium">Médico</th>
+                                    {ADMIN_DOMAINS.map((d) => (
+                                      <th key={d.id} className="pb-2 text-center font-medium" style={{ color: d.color }}>
+                                        {d.label}
+                                      </th>
+                                    ))}
+                                    <th className="pb-2 text-center font-medium text-purple">Média</th>
+                                    <th className="pb-2 text-right font-medium text-muted">Data</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {userIds.map((userId) => {
+                                    const snap = latestByUser.get(userId);
+                                    const profile = profileMap.get(userId);
+                                    const name = profile?.name ?? "Usuário";
+                                    if (!snap) return null;
+                                    const vals = ADMIN_DOMAINS.map((d) => Number(snap.ratings[d.id] ?? 1));
+                                    const avg = (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1);
+                                    return (
+                                      <tr key={userId} className="border-b border-border/40 last:border-0">
+                                        <td className="py-2 font-medium text-foreground">{name}</td>
+                                        {ADMIN_DOMAINS.map((d) => {
+                                          const v = Number(snap.ratings[d.id] ?? 1);
+                                          return (
+                                            <td key={d.id} className="py-2 text-center">
+                                              <span className={`font-bold ${ratingColor(v)}`} title={RATING_LABELS_ADMIN[v]}>
+                                                {v}
+                                              </span>
+                                            </td>
+                                          );
+                                        })}
+                                        <td className="py-2 text-center font-bold text-purple">{avg}</td>
+                                        <td className="py-2 text-right text-muted">
+                                          {new Date(snap.created_at).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" })}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                                </tbody>
+                              </table>
+                              <p className="mt-3 text-[10px] text-muted">
+                                Escala: 1 = Sem experiência · 2 = Teórico · 3 = Supervisionado · 4 = Autônomo · 5 = Referência
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </>
+                    )}
+
+                    {/* ── PROCEDIMENTOS subtab ── */}
+                    {assessmentSubtab === "procedimentos" && (
+                      <>
+                        {procedures.length === 0 ? (
+                          <div className="rounded-2xl border border-border bg-background/40 p-10 text-center">
+                            <p className="text-sm text-muted">Nenhum procedimento registrado ainda.</p>
+                          </div>
+                        ) : (
+                          <div className="rounded-2xl border border-border bg-background/40 p-5 overflow-x-auto">
+                            <h3 className="mb-4 text-sm font-semibold text-foreground">Procedimentos realizados por médico</h3>
+                            <table className="w-full text-xs min-w-[600px]">
+                              <thead>
+                                <tr className="border-b border-border text-muted">
+                                  <th className="pb-2 text-left font-medium">Procedimento</th>
+                                  <th className="pb-2 text-center font-medium">Meta</th>
+                                  {procedures.map((p) => {
+                                    const pf = profileMap.get(p.user_id);
+                                    return (
+                                      <th key={p.user_id} className="pb-2 text-center font-medium text-foreground truncate max-w-[80px]">
+                                        {pf?.name?.split(" ")[0] ?? "Aluno"}
+                                      </th>
+                                    );
+                                  })}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {ADMIN_PROCEDURES.map((proc) => (
+                                  <tr key={proc.id} className="border-b border-border/40 last:border-0">
+                                    <td className="py-2 text-foreground leading-tight">{proc.label}</td>
+                                    <td className="py-2 text-center text-muted">{proc.meta}</td>
+                                    {procedures.map((p) => {
+                                      const count = (p.counts[proc.id] ?? 0) as number;
+                                      const pct = Math.min(100, Math.round((count / proc.meta) * 100));
+                                      const color = pct >= 100 ? "text-teal" : pct >= 50 ? "text-blue" : count > 0 ? "text-amber" : "text-muted";
+                                      return (
+                                        <td key={p.user_id} className="py-2 text-center">
+                                          <span className={`font-bold ${color}`}>{count}</span>
+                                          {pct >= 100 && <span className="ml-0.5 text-teal">✓</span>}
+                                        </td>
+                                      );
+                                    })}
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                    {/* ── EVOLUÇÃO subtab ── */}
+                    {assessmentSubtab === "evolucao" && (
+                      <>
+                        {snapshots.length === 0 ? (
+                          <div className="rounded-2xl border border-border bg-background/40 p-10 text-center">
+                            <p className="text-sm text-muted">Nenhuma avaliação salva ainda.</p>
+                          </div>
+                        ) : (
+                          <div className="space-y-4">
+                            {userIds.filter((uid) => snapshots.some((s) => s.user_id === uid)).map((userId) => {
+                              const userSnaps = snapshots
+                                .filter((s) => s.user_id === userId)
+                                .sort((a, b) => a.created_at.localeCompare(b.created_at));
+                              const profile = profileMap.get(userId);
+                              const name = profile?.name ?? "Usuário";
+                              if (userSnaps.length === 0) return null;
+                              const first = userSnaps[0];
+                              const latest = userSnaps[userSnaps.length - 1];
+                              return (
+                                <div key={userId} className="rounded-2xl border border-border bg-background/40 p-5">
+                                  <div className="flex items-center justify-between mb-4">
+                                    <div>
+                                      <p className="font-semibold text-foreground">{name}</p>
+                                      <p className="text-xs text-muted">{userSnaps.length} avaliação{userSnaps.length !== 1 ? "ões" : ""} registrada{userSnaps.length !== 1 ? "s" : ""}</p>
+                                    </div>
+                                    {userSnaps.length >= 2 && (
+                                      <span className="rounded-xl border border-teal/30 bg-teal/10 px-3 py-1 text-xs text-teal font-medium">
+                                        {userSnaps.length} snapshots
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* Progress bars: first vs latest */}
+                                  {userSnaps.length >= 2 && (
+                                    <div className="mb-4 space-y-1.5">
+                                      <p className="text-[10px] font-mono uppercase tracking-wider text-muted mb-2">Progresso desde o início</p>
+                                      {ADMIN_DOMAINS.map((d) => {
+                                        const f = Number(first.ratings[d.id] ?? 1);
+                                        const l = Number(latest.ratings[d.id] ?? 1);
+                                        const diff = l - f;
+                                        return (
+                                          <div key={d.id} className="flex items-center gap-2">
+                                            <p className="w-24 text-[11px] text-muted truncate">{d.label}</p>
+                                            <div className="flex-1 h-1.5 rounded-full bg-background/40 overflow-hidden">
+                                              <div className="h-full rounded-full" style={{ width: `${(l / 5) * 100}%`, backgroundColor: d.color }} />
+                                            </div>
+                                            <span className="w-8 text-right text-[11px] font-bold" style={{ color: d.color }}>{l}/5</span>
+                                            {diff > 0 && <span className="w-6 text-right text-[11px] text-teal">+{diff}</span>}
+                                            {diff < 0 && <span className="w-6 text-right text-[11px] text-rose">{diff}</span>}
+                                            {diff === 0 && <span className="w-6 text-right text-[11px] text-muted">—</span>}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  )}
+
+                                  {/* Timeline of snapshots */}
+                                  <div className="space-y-2 max-h-60 overflow-auto">
+                                    {[...userSnaps].reverse().map((snap, idx) => {
+                                      const avg = (
+                                        ADMIN_DOMAINS.map((d) => Number(snap.ratings[d.id] ?? 1))
+                                          .reduce((a, b) => a + b, 0) / ADMIN_DOMAINS.length
+                                      ).toFixed(1);
+                                      return (
+                                        <div key={snap.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
+                                          <div className="flex items-center justify-between mb-1.5">
+                                            <span className="text-xs font-medium text-foreground">
+                                              {new Date(snap.created_at).toLocaleDateString("pt-BR", {
+                                                day: "2-digit", month: "2-digit", year: "2-digit",
+                                              })}
+                                              {idx === 0 && <span className="ml-2 text-[10px] text-teal font-medium">mais recente</span>}
+                                            </span>
+                                            <span className="text-xs text-purple font-bold">Média: {avg}/5</span>
+                                          </div>
+                                          <div className="grid grid-cols-4 gap-1">
+                                            {ADMIN_DOMAINS.map((d) => {
+                                              const v = Number(snap.ratings[d.id] ?? 1);
+                                              return (
+                                                <div key={d.id} className="text-center">
+                                                  <p className="text-[9px] text-muted truncate">{d.label}</p>
+                                                  <p className={`text-xs font-bold ${ratingColor(v)}`}>{v}</p>
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           )}
 
