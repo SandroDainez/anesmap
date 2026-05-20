@@ -70,6 +70,11 @@ export async function POST(req: NextRequest) {
     referencias: q.referencias?.trim() || null,
   }));
 
+  // Forçar refresh do schema cache com um select primeiro
+  await fetch(`${supabaseUrl}/rest/v1/simulados?select=*&limit=0`, {
+    headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+  });
+
   // Inserir via REST API direta
   const res = await fetch(`${supabaseUrl}/rest/v1/simulados`, {
     method: "POST",
