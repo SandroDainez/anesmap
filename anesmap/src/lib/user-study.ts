@@ -422,9 +422,11 @@ export async function loadAdminUserDetails(userId: string) {
       progress: [],
       attempts: [],
       answers: [],
+      assessmentSnapshots: [],
+      procedureCounts: null,
     };
   }
-  let [profileRes, eventsRes, progressRes, attemptsRes, answersRes] = await Promise.all([
+  let [profileRes, eventsRes, progressRes, attemptsRes, answersRes, snapshotsRes, proceduresRes] = await Promise.all([
     supabase
       .from("profiles")
       .select(
@@ -454,6 +456,17 @@ export async function loadAdminUserDetails(userId: string) {
       .eq("user_id", userId)
       .order("answered_at", { ascending: false })
       .limit(500),
+    supabase
+      .from("self_assessment_snapshots")
+      .select("id, created_at, ratings, me")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(20),
+    supabase
+      .from("procedure_counts")
+      .select("counts, updated_at")
+      .eq("user_id", userId)
+      .maybeSingle(),
   ]);
 
   if (isMissingTrackColumnsError(profileRes.error as { code?: string; message?: string })) {
@@ -488,6 +501,13 @@ export async function loadAdminUserDetails(userId: string) {
     progress: progressRes.data ?? [],
     attempts: (attemptsRes.data as SimuladoAttempt[]) ?? [],
     answers: (answersRes.data as SimuladoAnswer[]) ?? [],
+    assessmentSnapshots: (snapshotsRes.data ?? []) as Array<{
+      id: string;
+      created_at: string;
+      me: string | null;
+      ratings: AssessmentRatings;
+    }>,
+    procedureCounts: (proceduresRes.data as { counts: ProcedureCountsMap; updated_at: string } | null) ?? null,
   };
 }
 
@@ -528,27 +548,27 @@ export async function loadAdminMEStats() {
 export type AssessmentRatings = Record<string, number>; // domain_id → 1-5
 export type ProcedureCountsMap = Record<string, number>; // procedure_id → count
 
-export async function saveAssessmentSnapshot(ratings: AssessmentRatings): Promise<boolean> {
+export async function saveAssessmentSnapshot(ratings: AssessmentRatings, me?: string): Promise<boolean> {
   const supabase = browserSupabase();
   if (!supabase) return false;
   const user = await getCurrentAuthUser();
   if (!user) return false;
   const { error } = await supabase
     .from("self_assessment_snapshots")
-    .insert({ user_id: user.id, ratings });
+    .insert({ user_id: user.id, ratings, me: me ?? null });
   return !error;
 }
 
-export async function loadAssessmentSnapshots(): Promise<Array<{ id: string; created_at: string; ratings: AssessmentRatings }>> {
+export async function loadAssessmentSnapshots(): Promise<Array<{ id: string; created_at: string; ratings: AssessmentRatings; me: string | null }>> {
   const supabase = browserSupabase();
   if (!supabase) return [];
   const { data, error } = await supabase
     .from("self_assessment_snapshots")
-    .select("id, created_at, ratings")
+    .select("id, created_at, ratings, me")
     .order("created_at", { ascending: false })
     .limit(20);
   if (error || !data) return [];
-  return data as Array<{ id: string; created_at: string; ratings: AssessmentRatings }>;
+  return data as Array<{ id: string; created_at: string; ratings: AssessmentRatings; me: string | null }>;
 }
 
 export async function saveProcedureCounts(counts: ProcedureCountsMap): Promise<boolean> {

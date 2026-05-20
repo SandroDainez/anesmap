@@ -8,6 +8,7 @@ import {
   loadAssessmentSnapshots,
   saveProcedureCounts,
   loadProcedureCounts,
+  loadMyProfile,
 } from "@/lib/user-study";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -188,6 +189,7 @@ export default function AvaliacaoPage() {
   const [procedureCounts, setProcedureCounts] = useState<Record<string, number>>({});
   const [history, setHistory] = useState<SnapshotEntry[]>([]);
   const [savedAt, setSavedAt] = useState<string | null>(null);
+  const [userMe, setUserMe] = useState<string | null>(null);
 
   useEffect(() => {
     // 1) Load from localStorage immediately for fast display
@@ -202,10 +204,17 @@ export default function AvaliacaoPage() {
 
     // 2) Then load from Supabase (source of truth) and override local
     void (async () => {
-      const [remoteSnapshots, remoteProcedures] = await Promise.all([
+      const [remoteSnapshots, remoteProcedures, profile] = await Promise.all([
         loadAssessmentSnapshots(),
         loadProcedureCounts(),
+        loadMyProfile(),
       ]);
+
+      // Store user's ME for tagging snapshots
+      if (profile) {
+        const me = profile.assigned_track_simulados ?? profile.assigned_track ?? null;
+        if (me && me !== "ALL") setUserMe(me);
+      }
 
       if (remoteSnapshots.length > 0) {
         // Build history from remote snapshots
@@ -247,8 +256,8 @@ export default function AvaliacaoPage() {
     setHistory(next);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
     setSavedAt(entry.date);
-    // Save to Supabase (fire-and-forget)
-    void saveAssessmentSnapshot(ratings);
+    // Save to Supabase with ME tag (fire-and-forget)
+    void saveAssessmentSnapshot(ratings, userMe ?? undefined);
   }
 
   const avgRating = useMemo(() => {

@@ -804,49 +804,80 @@ export function AdminPanel() {
                     ) : selectedDetails ? (
                       <>
                         {/* Resumo em linguagem humana */}
-                        <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
-                          <h3 className="text-sm font-semibold text-foreground">Resumo do desempenho (linguagem humana)</h3>
-                          <p className="text-sm text-muted leading-relaxed">
-                            {selectedUser.name ?? "Este usuário"} está com trilha de cards em{" "}
-                            <span className="text-foreground font-medium">
-                              {humanTrackName(
-                                (selectedUser.assigned_track_cards ??
-                                  selectedUser.assigned_track ??
-                                  "ALL") as string,
-                              )}
-                            </span>{" "}
-                            e trilha de simulados em{" "}
-                            <span className="text-foreground font-medium">
-                              {humanTrackName(
-                                (selectedUser.assigned_track_simulados ??
-                                  selectedUser.assigned_track ??
-                                  "ALL") as string,
-                              )}
-                            </span>.
-                            Até agora, ele(a) estudou{" "}
-                            <span className="text-foreground font-semibold">{detailedStats.cards.uniqueCards}</span> cards diferentes
-                            (total de {selectedDetails.events.length} interações),
-                            consolidou progresso em{" "}
-                            <span className="text-foreground font-semibold">{selectedDetails.progress.length}</span> cards,
-                            realizou{" "}
-                            <span className="text-foreground font-semibold">{selectedDetails.attempts.length}</span> simulados
-                            e enviou{" "}
-                            <span className="text-foreground font-semibold">{detailedStats.simulados.totalAnswers}</span> respostas,
-                            com taxa de acerto geral de{" "}
-                            <span className="text-foreground font-semibold">{detailedStats.simulados.accuracy}%</span>.
-                          </p>
-                          <div className="grid grid-cols-3 gap-2">
-                            {perTrackStats.map(({ track, total, avg }) => (
-                              <div key={track} className={`rounded-xl border p-3 ${TRACK_STYLE[track as Track]}`}>
-                                <p className="text-xs font-semibold">{track}</p>
-                                <p className="mt-1 text-lg font-bold">{avg !== null ? `${avg}%` : "Sem nota"}</p>
-                                <p className="text-[11px] opacity-80">{total} tentativa{total !== 1 ? "s" : ""}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        {(() => {
+                          const DOMAINS_SUMMARY = [
+                            { id: "farmacologia", label: "Farmacologia" },
+                            { id: "via_aerea", label: "Via Aérea" },
+                            { id: "anestesia_geral", label: "Anest. Geral" },
+                            { id: "anestesia_regional", label: "Regional" },
+                            { id: "hemodinamica", label: "Hemodinâmica" },
+                            { id: "ventilacao", label: "Ventilação" },
+                            { id: "emergencias", label: "Emergências" },
+                            { id: "pediatria", label: "Pediatria" },
+                          ];
+                          const snapshots = selectedDetails.assessmentSnapshots ?? [];
+                          const latestSnap = snapshots[0] ?? null;
+                          const avgComp = latestSnap
+                            ? (DOMAINS_SUMMARY.map((d) => Number(latestSnap.ratings[d.id] ?? 1)).reduce((a, b) => a + b, 0) / DOMAINS_SUMMARY.length).toFixed(1)
+                            : null;
+                          const weakAreas = latestSnap
+                            ? DOMAINS_SUMMARY.filter((d) => Number(latestSnap.ratings[d.id] ?? 1) <= 2).map((d) => d.label)
+                            : [];
 
-                        <div className="grid grid-cols-2 gap-5">
+                          return (
+                            <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
+                              <h3 className="text-sm font-semibold text-foreground">Resumo do desempenho (linguagem humana)</h3>
+                              <p className="text-sm text-muted leading-relaxed">
+                                {selectedUser.name ?? "Este usuário"} está com trilha de cards em{" "}
+                                <span className="text-foreground font-medium">
+                                  {humanTrackName(
+                                    (selectedUser.assigned_track_cards ??
+                                      selectedUser.assigned_track ??
+                                      "ALL") as string,
+                                  )}
+                                </span>{" "}
+                                e trilha de simulados em{" "}
+                                <span className="text-foreground font-medium">
+                                  {humanTrackName(
+                                    (selectedUser.assigned_track_simulados ??
+                                      selectedUser.assigned_track ??
+                                      "ALL") as string,
+                                  )}
+                                </span>.
+                                Até agora, ele(a) estudou{" "}
+                                <span className="text-foreground font-semibold">{detailedStats.cards.uniqueCards}</span> cards diferentes
+                                (total de {selectedDetails.events.length} interações),
+                                realizou{" "}
+                                <span className="text-foreground font-semibold">{selectedDetails.attempts.length}</span> simulados
+                                com taxa de acerto de{" "}
+                                <span className="text-foreground font-semibold">{detailedStats.simulados.accuracy}%</span>.
+                                {avgComp !== null && (
+                                  <>
+                                    {" "}Na autoavaliação de competências, a média é{" "}
+                                    <span className="text-foreground font-semibold">{avgComp}/5</span>
+                                    {weakAreas.length > 0 ? (
+                                      <>
+                                        {" "}— áreas com atenção necessária:{" "}
+                                        <span className="font-semibold text-rose">{weakAreas.join(", ")}</span>.
+                                      </>
+                                    ) : "."}
+                                  </>
+                                )}
+                              </p>
+                              <div className="grid grid-cols-3 gap-2">
+                                {perTrackStats.map(({ track, total, avg }) => (
+                                  <div key={track} className={`rounded-xl border p-3 ${TRACK_STYLE[track as Track]}`}>
+                                    <p className="text-xs font-semibold">{track}</p>
+                                    <p className="mt-1 text-lg font-bold">{avg !== null ? `${avg}%` : "Sem nota"}</p>
+                                    <p className="text-[11px] opacity-80">{total} tentativa{total !== 1 ? "s" : ""}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })()}
+
+                        <div className="grid grid-cols-3 gap-5">
                           <div className="rounded-2xl border border-border bg-background/40 p-5">
                             <h3 className="mb-3 text-sm font-semibold text-foreground">Estatísticas de cards</h3>
                             <ul className="space-y-1.5 text-sm text-muted">
@@ -868,9 +899,134 @@ export function AdminPanel() {
                               <li>• Respostas corretas: <span className="font-semibold text-teal">{detailedStats.simulados.correctAnswers}</span></li>
                               <li>• Respostas erradas: <span className="font-semibold text-rose">{detailedStats.simulados.wrongAnswers}</span></li>
                               <li>• Taxa de acerto: <span className="font-semibold text-foreground">{detailedStats.simulados.accuracy}%</span></li>
-                              <li>• Média de nota (simulados finalizados): <span className="font-semibold text-foreground">{detailedStats.simulados.avgScoreFinished}%</span></li>
+                              <li>• Média de nota (finalizados): <span className="font-semibold text-foreground">{detailedStats.simulados.avgScoreFinished}%</span></li>
                             </ul>
                           </div>
+                          {/* ── 3ª coluna: Autoavaliação de competências ── */}
+                          {(() => {
+                            const DOMAINS_CARD = [
+                              { id: "farmacologia", label: "Farmacologia" },
+                              { id: "via_aerea", label: "Via Aérea" },
+                              { id: "anestesia_geral", label: "Anest. Geral" },
+                              { id: "anestesia_regional", label: "Regional" },
+                              { id: "hemodinamica", label: "Hemodinâmica" },
+                              { id: "ventilacao", label: "Ventilação" },
+                              { id: "emergencias", label: "Emergências" },
+                              { id: "pediatria", label: "Pediatria" },
+                            ];
+                            const PROCS_CARD = [
+                              { id: "iot_laringoscopia", label: "IOT laringoscopia direta", meta: 50 },
+                              { id: "iot_video", label: "IOT videolaringoscopia", meta: 20 },
+                              { id: "dsg_insercao", label: "Dispositivo supraglótico", meta: 30 },
+                              { id: "cricotireoidostomia", label: "Cricotireoidostomia", meta: 5 },
+                              { id: "raquianestesia", label: "Raquianestesia", meta: 50 },
+                              { id: "peridural", label: "Anestesia peridural", meta: 30 },
+                              { id: "peridural_cateter", label: "Cateter peridural", meta: 20 },
+                              { id: "bloqueio_plexo", label: "Bloqueio plexo braquial", meta: 20 },
+                              { id: "bloqueio_us", label: "Bloqueio periférico US", meta: 20 },
+                              { id: "acesso_central", label: "Acesso venoso central", meta: 20 },
+                              { id: "arteria_radial", label: "Cateter arterial radial", meta: 30 },
+                              { id: "rcpbasica", label: "RCP básica (BLS)", meta: 1 },
+                              { id: "rcpavancada", label: "RCP avançada (ACLS)", meta: 1 },
+                              { id: "cardioversao", label: "Cardioversão elétrica", meta: 5 },
+                              { id: "pediatria_inducao", label: "Indução inalatória pediátrica", meta: 20 },
+                            ];
+                            const snapshots = selectedDetails.assessmentSnapshots ?? [];
+                            const procData = selectedDetails.procedureCounts;
+                            const latestSnap = snapshots[0] ?? null;
+
+                            if (!latestSnap && !procData) {
+                              return (
+                                <div className="rounded-2xl border border-border bg-background/40 p-5 flex flex-col gap-3">
+                                  <h3 className="text-sm font-semibold text-foreground">Autoavaliação</h3>
+                                  <p className="text-xs text-muted">Nenhuma autoavaliação registrada.</p>
+                                </div>
+                              );
+                            }
+
+                            const avgComp = latestSnap
+                              ? (DOMAINS_CARD.map((d) => Number(latestSnap.ratings[d.id] ?? 1)).reduce((a, b) => a + b, 0) / DOMAINS_CARD.length).toFixed(1)
+                              : null;
+                            const weakDomains = latestSnap
+                              ? DOMAINS_CARD.filter((d) => Number(latestSnap.ratings[d.id] ?? 1) <= 2)
+                              : [];
+                            const strongDomain = latestSnap
+                              ? DOMAINS_CARD.reduce((best, d) =>
+                                  Number(latestSnap.ratings[d.id] ?? 1) > Number(latestSnap.ratings[best.id] ?? 1) ? d : best
+                                )
+                              : null;
+
+                            const procsCompleted = procData
+                              ? PROCS_CARD.filter((p) => (procData.counts[p.id] ?? 0) >= p.meta).length
+                              : null;
+                            const procsTotal = PROCS_CARD.length;
+
+                            return (
+                              <div className="rounded-2xl border border-purple/30 bg-purple/5 p-5 flex flex-col gap-3">
+                                <div className="flex items-center justify-between">
+                                  <h3 className="text-sm font-semibold text-foreground">Autoavaliação</h3>
+                                  <span className="rounded-lg border border-purple/30 bg-purple/10 px-2 py-0.5 text-[10px] font-bold text-purple">
+                                    {snapshots.length} avaliação{snapshots.length !== 1 ? "ões" : ""}
+                                  </span>
+                                </div>
+
+                                {avgComp !== null && (
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-2xl font-bold text-purple">{avgComp}<span className="text-sm font-normal text-muted">/5</span></span>
+                                    <div className="text-xs text-muted">média de competências</div>
+                                  </div>
+                                )}
+
+                                {/* Barras de competência coloridas por nível */}
+                                {latestSnap && (
+                                  <div className="space-y-1">
+                                    {DOMAINS_CARD.map((d) => {
+                                      const val = Number(latestSnap.ratings[d.id] ?? 1);
+                                      const barColor = val >= 5 ? "#a78bfa" : val >= 4 ? "#2dd4bf" : val >= 3 ? "#facc15" : val >= 2 ? "#fb923c" : "#f87171";
+                                      const isWeak = val <= 2;
+                                      return (
+                                        <div key={d.id} className={`flex items-center gap-2 ${isWeak ? "opacity-100" : "opacity-75"}`}>
+                                          <span className={`w-[80px] shrink-0 text-[10px] truncate ${isWeak ? "text-rose font-semibold" : "text-muted"}`}>{d.label}</span>
+                                          <div className="flex-1 h-1.5 rounded-full bg-background/40 overflow-hidden">
+                                            <div className="h-full rounded-full" style={{ width: `${(val / 5) * 100}%`, backgroundColor: barColor }} />
+                                          </div>
+                                          <span className="text-[10px] font-bold w-3" style={{ color: barColor }}>{val}</span>
+                                          {isWeak && <span className="text-[9px] text-rose font-bold">!</span>}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+
+                                {/* Áreas fracas em destaque */}
+                                {weakDomains.length > 0 && (
+                                  <div className="rounded-lg border border-rose/30 bg-rose/10 px-2.5 py-2">
+                                    <p className="text-[10px] font-bold text-rose mb-1">⚠ Foco de ensino necessário:</p>
+                                    {weakDomains.map((d) => (
+                                      <p key={d.id} className="text-[10px] text-rose/80">• {d.label} (nota {latestSnap!.ratings[d.id] ?? 1}/5)</p>
+                                    ))}
+                                  </div>
+                                )}
+
+                                {/* Procedimentos */}
+                                {procsCompleted !== null && (
+                                  <div className="text-xs text-muted">
+                                    Procedimentos concluídos:{" "}
+                                    <span className={`font-semibold ${procsCompleted === procsTotal ? "text-teal" : "text-amber"}`}>
+                                      {procsCompleted}/{procsTotal}
+                                    </span>
+                                  </div>
+                                )}
+
+                                {strongDomain && (
+                                  <div className="text-xs text-muted">
+                                    Ponto forte:{" "}
+                                    <span className="font-semibold text-teal">{strongDomain.label} ({latestSnap!.ratings[strongDomain.id] ?? 1}/5)</span>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })()}
                         </div>
 
                         {/* Timelines separadas */}
@@ -1038,6 +1194,200 @@ export function AdminPanel() {
                             )}
                           </div>
                         </div>
+                        {/* ── AUTOAVALIAÇÃO DETALHADA DO USUÁRIO (colapsável) ── */}
+                        {(() => {
+                          const DOMAINS_DEF = [
+                            { id: "farmacologia", label: "Farmacologia", color: "#2dd4bf" },
+                            { id: "via_aerea", label: "Via Aérea", color: "#60a5fa" },
+                            { id: "anestesia_geral", label: "Anest. Geral", color: "#a78bfa" },
+                            { id: "anestesia_regional", label: "Regional", color: "#f472b6" },
+                            { id: "hemodinamica", label: "Hemodinâmica", color: "#fb923c" },
+                            { id: "ventilacao", label: "Ventilação", color: "#facc15" },
+                            { id: "emergencias", label: "Emergências", color: "#f87171" },
+                            { id: "pediatria", label: "Pediatria", color: "#34d399" },
+                          ];
+                          const PROCS_DEF = [
+                            { id: "iot_laringoscopia", label: "IOT laringoscopia direta", meta: 50 },
+                            { id: "iot_video", label: "IOT videolaringoscopia", meta: 20 },
+                            { id: "dsg_insercao", label: "Dispositivo supraglótico", meta: 30 },
+                            { id: "cricotireoidostomia", label: "Cricotireoidostomia", meta: 5 },
+                            { id: "raquianestesia", label: "Raquianestesia", meta: 50 },
+                            { id: "peridural", label: "Anestesia peridural", meta: 30 },
+                            { id: "peridural_cateter", label: "Cateter peridural", meta: 20 },
+                            { id: "bloqueio_plexo", label: "Bloqueio plexo braquial", meta: 20 },
+                            { id: "bloqueio_us", label: "Bloqueio periférico US", meta: 20 },
+                            { id: "acesso_central", label: "Acesso venoso central", meta: 20 },
+                            { id: "arteria_radial", label: "Cateter arterial radial", meta: 30 },
+                            { id: "rcpbasica", label: "RCP básica (BLS)", meta: 1 },
+                            { id: "rcpavancada", label: "RCP avançada (ACLS)", meta: 1 },
+                            { id: "cardioversao", label: "Cardioversão elétrica", meta: 5 },
+                            { id: "pediatria_inducao", label: "Indução inalatória pediátrica", meta: 20 },
+                          ];
+                          const RATING_LABELS_U: Record<number, string> = {
+                            1: "Sem experiência", 2: "Teórico", 3: "Supervisionado", 4: "Autônomo", 5: "Referência",
+                          };
+                          const snapshots = selectedDetails.assessmentSnapshots ?? [];
+                          const procData = selectedDetails.procedureCounts;
+                          const hasAny = snapshots.length > 0 || procData !== null;
+                          const rColor = (v: number) => {
+                            if (v >= 5) return "#a78bfa";
+                            if (v >= 4) return "#2dd4bf";
+                            if (v >= 3) return "#facc15";
+                            if (v >= 2) return "#fb923c";
+                            return "#f87171";
+                          };
+
+                          return (
+                            <details className="group rounded-2xl border border-border bg-background/40 overflow-hidden">
+                              <summary className="flex cursor-pointer items-center justify-between p-5 hover:bg-background/20 transition select-none">
+                                <h3 className="text-sm font-semibold text-foreground">Autoavaliação — detalhe completo</h3>
+                                <div className="flex items-center gap-2">
+                                  {snapshots.length > 0 && (
+                                    <span className="rounded-lg border border-purple/30 bg-purple/10 px-2 py-0.5 text-xs text-purple">
+                                      {snapshots.length} avaliação{snapshots.length !== 1 ? "ões" : ""}
+                                    </span>
+                                  )}
+                                  <span className="text-muted text-xs group-open:rotate-180 transition-transform">▼</span>
+                                </div>
+                              </summary>
+                            <div className="px-5 pb-5 space-y-4">
+                              {!hasAny ? (
+                                <p className="text-xs text-muted">Nenhuma autoavaliação registrada ainda.</p>
+                              ) : (
+                                <>
+                                  {/* Última avaliação de competências — mostra botões clicados */}
+                                  {snapshots.length > 0 && (() => {
+                                    const latest = snapshots[0];
+                                    const me = latest.me;
+                                    const avg = (
+                                      DOMAINS_DEF.map((d) => Number(latest.ratings[d.id] ?? 1))
+                                        .reduce((a, b) => a + b, 0) / DOMAINS_DEF.length
+                                    ).toFixed(1);
+                                    return (
+                                      <div className="space-y-3">
+                                        <div className="flex items-center gap-2">
+                                          <p className="text-xs text-muted">
+                                            Última avaliação:{" "}
+                                            <span className="text-foreground font-medium">
+                                              {new Date(latest.created_at).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                                            </span>
+                                          </p>
+                                          {me && (
+                                            <span className={`rounded-md border px-1.5 py-0.5 text-[10px] font-bold ${TRACK_STYLE[me as Track] ?? "border-border text-muted"}`}>
+                                              {me}
+                                            </span>
+                                          )}
+                                          <span className="ml-auto rounded-lg border border-purple/30 bg-purple/10 px-2 py-0.5 text-xs font-bold text-purple">
+                                            Média: {avg}/5
+                                          </span>
+                                        </div>
+                                        {/* Grid de competências com botões visuais */}
+                                        <div className="grid grid-cols-2 gap-2">
+                                          {DOMAINS_DEF.map((d) => {
+                                            const val = Number(latest.ratings[d.id] ?? 1);
+                                            return (
+                                              <div key={d.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
+                                                <div className="flex items-center justify-between mb-1.5">
+                                                  <p className="text-xs font-medium text-foreground">{d.label}</p>
+                                                  <span className="text-xs font-bold" style={{ color: d.color }}>{val}/5</span>
+                                                </div>
+                                                {/* Botões 1-5 mostrando qual foi clicado */}
+                                                <div className="flex gap-1">
+                                                  {[1, 2, 3, 4, 5].map((r) => (
+                                                    <div
+                                                      key={r}
+                                                      className="flex-1 rounded-lg py-1 text-center text-[10px] font-bold transition"
+                                                      style={
+                                                        val === r
+                                                          ? { backgroundColor: d.color, color: "#0f172a" }
+                                                          : { backgroundColor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.25)" }
+                                                      }
+                                                    >
+                                                      {r}
+                                                    </div>
+                                                  ))}
+                                                </div>
+                                                <p className="mt-1 text-[10px] text-muted">{RATING_LABELS_U[val]}</p>
+                                              </div>
+                                            );
+                                          })}
+                                        </div>
+
+                                        {/* Histórico de avaliações anteriores */}
+                                        {snapshots.length > 1 && (
+                                          <details className="group">
+                                            <summary className="cursor-pointer text-xs text-muted hover:text-foreground transition">
+                                              Ver histórico ({snapshots.length - 1} avaliação{snapshots.length - 1 !== 1 ? "ões" : ""} anterior{snapshots.length - 1 !== 1 ? "es" : ""})
+                                            </summary>
+                                            <div className="mt-2 space-y-2 max-h-60 overflow-auto">
+                                              {snapshots.slice(1).map((snap) => {
+                                                const snapAvg = (
+                                                  DOMAINS_DEF.map((d) => Number(snap.ratings[d.id] ?? 1))
+                                                    .reduce((a, b) => a + b, 0) / DOMAINS_DEF.length
+                                                ).toFixed(1);
+                                                return (
+                                                  <div key={snap.id} className="rounded-xl border border-border bg-background/20 px-3 py-2">
+                                                    <div className="flex items-center justify-between mb-1.5">
+                                                      <span className="text-[11px] text-muted">
+                                                        {new Date(snap.created_at).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" })}
+                                                        {snap.me && <span className="ml-1 font-bold" style={{ color: "#2dd4bf" }}>{snap.me}</span>}
+                                                      </span>
+                                                      <span className="text-[11px] font-bold text-purple">Média: {snapAvg}/5</span>
+                                                    </div>
+                                                    <div className="grid grid-cols-4 gap-1">
+                                                      {DOMAINS_DEF.map((d) => {
+                                                        const v = Number(snap.ratings[d.id] ?? 1);
+                                                        return (
+                                                          <div key={d.id} className="text-center">
+                                                            <p className="text-[9px] text-muted truncate">{d.label}</p>
+                                                            <p className="text-xs font-bold" style={{ color: rColor(v) }}>{v}</p>
+                                                          </div>
+                                                        );
+                                                      })}
+                                                    </div>
+                                                  </div>
+                                                );
+                                              })}
+                                            </div>
+                                          </details>
+                                        )}
+                                      </div>
+                                    );
+                                  })()}
+
+                                  {/* Procedimentos realizados */}
+                                  {procData && (
+                                    <div className="space-y-2">
+                                      <p className="text-xs font-semibold text-foreground border-t border-border pt-3">Procedimentos realizados</p>
+                                      <div className="grid grid-cols-2 gap-1.5">
+                                        {PROCS_DEF.map((proc) => {
+                                          const count = (procData.counts[proc.id] ?? 0) as number;
+                                          const pct = Math.min(100, Math.round((count / proc.meta) * 100));
+                                          const barColor = pct >= 100 ? "#2dd4bf" : pct >= 50 ? "#60a5fa" : count > 0 ? "#fb923c" : "rgba(255,255,255,0.1)";
+                                          return (
+                                            <div key={proc.id} className="rounded-lg border border-border bg-background/25 px-2.5 py-1.5">
+                                              <div className="flex items-center justify-between mb-1">
+                                                <p className="text-[10px] text-muted leading-tight truncate">{proc.label}</p>
+                                                <span className={`text-[10px] font-bold ml-1 shrink-0 ${pct >= 100 ? "text-teal" : count > 0 ? "text-amber" : "text-muted"}`}>
+                                                  {count}/{proc.meta}
+                                                  {pct >= 100 ? " ✓" : ""}
+                                                </span>
+                                              </div>
+                                              <div className="h-1 rounded-full bg-background/40 overflow-hidden">
+                                                <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: barColor }} />
+                                              </div>
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                            </details>
+                          );
+                        })()}
                       </>
                     ) : null}
                   </div>
