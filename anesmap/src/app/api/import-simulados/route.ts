@@ -58,7 +58,8 @@ export async function POST(req: NextRequest) {
   }
 
   // Montar rows no formato exato do banco (underscore)
-  const rows = items.map((q) => ({
+  const rows = items.map((q, idx) => ({
+    id: `q_${Date.now()}_${idx}`,
     me: (q.me ?? "").toUpperCase() || null,
     trimestre: q.trimestre?.toLowerCase() || null,
     prova: q.prova?.toUpperCase() || null,
