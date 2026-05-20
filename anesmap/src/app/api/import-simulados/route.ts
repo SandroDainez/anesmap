@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const IMPORT_SECRET = process.env.IMPORT_API_SECRET;
+const IMPORT_SECRET = proces…RET;
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization") ?? "";
@@ -19,7 +19,42 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Supabase não configurado." }, { status: 500 });
   }
 
-  // Ler body
+  const headers = {
+    apikey: supabaseKey,
+    Authorization: `Bearer ${supabaseKey}`,
+    "Content-Type": "application/json",
+  };
+
+  // 1. Adicionar colunas que faltam na tabela
+  const missingColumns = [
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS alternativa_c text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS alternativa_d text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS alternativa_e text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS correta text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_a text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_b text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_c text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_d text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS explicacao_e text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS referencias text;",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS trimestre text default 't1';",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS prova text default 'A1';",
+    "ALTER TABLE public.simulados ADD COLUMN IF NOT EXISTS created_at timestamptz default now();",
+    "ALTER TABLE public.simulados ALTER COLUMN id TYPE bigint USING id::bigint;",
+  ];
+
+  for (const sql of missingColumns) {
+    await fetch(`${supabaseUrl}/rest/v1/rpc/`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ sql }),
+    });
+  }
+
+  // 2. Forçar refresh do schema cache
+  await fetch(`${supabaseUrl}/rest/v1/simulados?select=*&limit=0`, { headers });
+
+  // 3. Ler body
   let body: unknown;
   try {
     body = await req.json();
@@ -27,14 +62,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Body JSON inválido." }, { status: 400 });
   }
 
-  const items = Array.isArray(body) ? body : [body] as any[];
+  const items: any[] = Array.isArray(body) ? body : [body];
   if (items.length === 0) {
     return NextResponse.json({ error: "Nenhuma questão recebida." }, { status: 400 });
   }
 
-  // Validar
+  // 4. Validar
   const invalid = items.filter(
-    (q: any) =>
+    (q) =>
       !q.enunciado?.trim() ||
       !q.alternativaA?.trim() ||
       !q.alternativaB?.trim() ||
@@ -49,93 +84,37 @@ export async function POST(req: NextRequest) {
     }, { status: 400 });
   }
 
-  // Montar rows com nomes minúsculos (padrão Postgres)
-  const rows = items.map((q: any) => ({
+  // 5. Montar rows (formato com underscore = como está no DB)
+  const rows = items.map((q) => ({
     me: (q.me ?? "").toUpperCase() || null,
     trimestre: q.trimestre?.toLowerCase() || null,
     prova: q.prova?.toUpperCase() || null,
     tema: q.tema?.trim() || null,
     enunciado: q.enunciado.trim(),
-    "alternativaa": q.alternativaA.trim(),
-    "alternativab": q.alternativaB.trim(),
-    "alternativac": q.alternativaC.trim(),
-    "alternativad": q.alternativaD.trim(),
-    "alternativae": q.alternativaE?.trim() || null,
+    alternativa_a: q.alternativaA.trim(),
+    alternativa_b: q.alternativaB.trim(),
+    alternativa_c: q.alternativaC.trim(),
+    alternativa_d: q.alternativaD.trim(),
+    alternativa_e: q.alternativaE?.trim() || null,
     correta: q.correta.toUpperCase(),
-    "explicacaoa": q.explicacaoA?.trim() || null,
-    "explicacaob": q.explicacaoB?.trim() || null,
-    "explicacaoc": q.explicacaoC?.trim() || null,
-    "explicacaod": q.explicacaoD?.trim() || null,
-    "explicacaoe": q.explicacaoE?.trim() || null,
+    explicacao_a: q.explicacaoA?.trim() || null,
+    explicacao_b: q.explicacaoB?.trim() || null,
+    explicacao_c: q.explicacaoC?.trim() || null,
+    explicacao_d: q.explicacaoD?.trim() || null,
+    explicacao_e: q.explicacaoE?.trim() || null,
     referencias: q.referencias?.trim() || null,
   }));
 
-  // Forçar refresh do schema cache com um select primeiro
-  await fetch(`${supabaseUrl}/rest/v1/simulados?select=*&limit=0`, {
-    headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
-  });
-
-  // Inserir via REST API direta
+  // 6. Inserir
   const res = await fetch(`${supabaseUrl}/rest/v1/simulados`, {
     method: "POST",
-    headers: {
-      apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=representation",
-    },
+    headers: { ...headers, Prefer: "return=representation" },
     body: JSON.stringify(rows),
   });
 
   if (!res.ok) {
-    const errText = await res.text();
-    // Se deu erro de coluna, tentar com nomes maiúsculos
-    if (errText.includes("column")) {
-      const rowsUpper = items.map((q: any) => ({
-        me: (q.me ?? "").toUpperCase() || null,
-        trimestre: q.trimestre?.toLowerCase() || null,
-        prova: q.prova?.toUpperCase() || null,
-        tema: q.tema?.trim() || null,
-        enunciado: q.enunciado.trim(),
-        alternativaA: q.alternativaA.trim(),
-        alternativaB: q.alternativaB.trim(),
-        alternativaC: q.alternativaC.trim(),
-        alternativaD: q.alternativaD.trim(),
-        alternativaE: q.alternativaE?.trim() || null,
-        correta: q.correta.toUpperCase(),
-        explicacaoA: q.explicacaoA?.trim() || null,
-        explicacaoB: q.explicacaoB?.trim() || null,
-        explicacaoC: q.explicacaoC?.trim() || null,
-        explicacaoD: q.explicacaoD?.trim() || null,
-        explicacaoE: q.explicacaoE?.trim() || null,
-        referencias: q.referencias?.trim() || null,
-      }));
-
-      const res2 = await fetch(`${supabaseUrl}/rest/v1/simulados`, {
-        method: "POST",
-        headers: {
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`,
-          "Content-Type": "application/json",
-          Prefer: "return=representation",
-        },
-        body: JSON.stringify(rowsUpper),
-      });
-
-      if (!res2.ok) {
-        const err2 = await res2.text();
-        return NextResponse.json({ error: `Erro ao salvar: ${err2}` }, { status: 500 });
-      }
-
-      const data = await res2.json();
-      return NextResponse.json({
-        ok: true,
-        inserted: data?.length ?? rows.length,
-        message: `${data?.length ?? rows.length} questão(ões) salva(s) com sucesso.`,
-      });
-    }
-
-    return NextResponse.json({ error: `Erro ao salvar: ${errText}` }, { status: 500 });
+    const err = await res.text();
+    return NextResponse.json({ error: `Erro ao salvar: ${err}` }, { status: 500 });
   }
 
   const data = await res.json();
