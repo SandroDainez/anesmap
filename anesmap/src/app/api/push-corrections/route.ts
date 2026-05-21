@@ -40,10 +40,13 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-async function upsertInChunks<T extends Record<string, unknown>>(
-  supabase: ReturnType<typeof createClient>,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnySupabaseClient = ReturnType<typeof createClient<any>>;
+
+async function upsertInChunks(
+  supabase: AnySupabaseClient,
   table: string,
-  rows: T[],
+  rows: Record<string, unknown>[],
 ): Promise<{ updated: number; error: string | null }> {
   let updated = 0;
   for (let i = 0; i < rows.length; i += CHUNK_SIZE) {
@@ -78,7 +81,7 @@ export async function POST(req: NextRequest) {
   const results: Record<string, unknown> = {};
 
   if (body.flashcards?.length) {
-    const { updated, error } = await upsertInChunks(supabase, "flashcards", body.flashcards);
+    const { updated, error } = await upsertInChunks(supabase, "flashcards", body.flashcards as Record<string, unknown>[]);
     results.flashcards = error ? { error } : { updated };
     if (error) {
       return NextResponse.json({ error: `Flashcards: ${error}`, partial: results }, { status: 500 });
@@ -86,7 +89,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (body.simulados?.length) {
-    const { updated, error } = await upsertInChunks(supabase, "simulados", body.simulados);
+    const { updated, error } = await upsertInChunks(supabase, "simulados", body.simulados as Record<string, unknown>[]);
     results.simulados = error ? { error } : { updated };
     if (error) {
       return NextResponse.json({ error: `Simulados: ${error}`, partial: results }, { status: 500 });
