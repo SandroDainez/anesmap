@@ -227,10 +227,44 @@ export default function AvaliacaoPage() {
         setHistory(remoteHistory);
         // Set current ratings to the most recent snapshot
         setRatings(remoteSnapshots[0].ratings as Record<string, Rating>);
+      } else {
+        // Supabase vazio — migrar automaticamente dados do localStorage
+        try {
+          const localRaw = localStorage.getItem(STORAGE_KEY);
+          const localHistRaw = localStorage.getItem(HISTORY_KEY);
+          const localHistory: SnapshotEntry[] = localHistRaw ? JSON.parse(localHistRaw) : [];
+          const baseRatings: Record<string, Rating> = localRaw ? JSON.parse(localRaw) : {};
+
+          if (localHistory.length > 0) {
+            // Upload cada snapshot do histórico local (do mais antigo para o mais recente)
+            const toUpload = [...localHistory].reverse();
+            for (const snap of toUpload) {
+              await saveAssessmentSnapshot(snap.ratings as Record<string, Rating>, profile?.assigned_track_simulados ?? profile?.assigned_track ?? undefined);
+            }
+          } else if (Object.keys(baseRatings).length > 0) {
+            // Sem histórico mas tem ratings atuais
+            await saveAssessmentSnapshot(baseRatings, profile?.assigned_track_simulados ?? profile?.assigned_track ?? undefined);
+          }
+        } catch {
+          // Falha silenciosa — dados locais continuam disponíveis
+        }
       }
 
       if (remoteProcedures) {
         setProcedureCounts(remoteProcedures);
+      } else {
+        // Migrar contagem de procedimentos do localStorage
+        try {
+          const localProcRaw = localStorage.getItem(PROCEDURES_KEY);
+          if (localProcRaw) {
+            const localCounts = JSON.parse(localProcRaw) as Record<string, number>;
+            if (Object.keys(localCounts).length > 0) {
+              await saveProcedureCounts(localCounts);
+            }
+          }
+        } catch {
+          // Falha silenciosa
+        }
       }
     })();
   }, []);
