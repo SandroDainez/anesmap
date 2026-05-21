@@ -668,6 +668,25 @@ export async function updateFlashcardRemote(
   if (error) throw new Error(error.message);
 }
 
+export async function updateSimuladoRemote(
+  id: string,
+  patch: Partial<Pick<SimuladoQuestion, "tema" | "enunciado" | "alternativaA" | "alternativaB" | "alternativaC" | "alternativaD" | "correta" | "explicacao">>,
+): Promise<void> {
+  const supabase = getSupabaseClient();
+  if (!supabase) throw new Error("Supabase não configurado");
+  const dbPatch: Record<string, unknown> = {};
+  if (patch.tema !== undefined) dbPatch.tema = patch.tema;
+  if (patch.enunciado !== undefined) dbPatch.enunciado = patch.enunciado;
+  if (patch.alternativaA !== undefined) dbPatch.alternativa_a = patch.alternativaA;
+  if (patch.alternativaB !== undefined) dbPatch.alternativa_b = patch.alternativaB;
+  if (patch.alternativaC !== undefined) dbPatch.alternativa_c = patch.alternativaC;
+  if (patch.alternativaD !== undefined) dbPatch.alternativa_d = patch.alternativaD;
+  if (patch.correta !== undefined) dbPatch.correta = patch.correta;
+  if (patch.explicacao !== undefined) dbPatch.explicacao = patch.explicacao;
+  const { error } = await supabase.from("simulados").update(dbPatch).eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
 export async function deleteFlashcardsRemoteByIds(ids: string[]) {
   if (ids.length === 0) return;
   const supabase = getSupabaseClient();

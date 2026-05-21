@@ -17,7 +17,7 @@ import {
   type InviteCode,
   type ContentStats,
 } from "@/lib/user-study";
-import { loadFlashcardsRemote, loadSimuladosRemote, updateFlashcardRemote } from "@/lib/study-data";
+import { loadFlashcardsRemote, loadSimuladosRemote, updateFlashcardRemote, updateSimuladoRemote } from "@/lib/study-data";
 
 function downloadFile(filename: string, content: string, mime: string) {
   const blob = new Blob([content], { type: mime });
@@ -51,7 +51,7 @@ function simuladosToCSV(qs: Awaited<ReturnType<typeof loadSimuladosRemote>>): st
   return [header, ...rows].join("\n");
 }
 
-type Tab = "overview" | "users" | "duplicados" | "content" | "export" | "invites" | "revisar";
+type Tab = "overview" | "users" | "duplicados" | "content" | "export" | "invites" | "revisar" | "revisar-simulados";
 type AdminUserDetails = Awaited<ReturnType<typeof loadAdminUserDetails>>;
 type Track = "ME1" | "ME2" | "ME3" | "ALL";
 
@@ -133,6 +133,7 @@ const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
   { id: "export", label: "Exportar", icon: "↓" },
   { id: "invites", label: "Convites", icon: "⌘" },
   { id: "revisar", label: "Revisar Cards", icon: "✎" },
+  { id: "revisar-simulados", label: "Revisar Simulados", icon: "✎" },
 ];
 
 export function AdminPanel() {
@@ -196,8 +197,21 @@ export function AdminPanel() {
   const [editingCard, setEditingCard] = useState<RevisarCard | null>(null);
   const [editFrente, setEditFrente] = useState("");
   const [editVerso, setEditVerso] = useState("");
+  const [editEspecialidade, setEditEspecialidade] = useState("");
   const [savingCard, setSavingCard] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+
+  // Revisar simulados state
+  type RevisarSimulado = NonNullable<Awaited<ReturnType<typeof loadSimuladosRemote>>>[number];
+  const [revisarSimulados, setRevisarSimulados] = useState<RevisarSimulado[] | null>(null);
+  const [revisarSimuladosLoading, setRevisarSimuladosLoading] = useState(false);
+  const [revisarSimuladosSearch, setRevisarSimuladosSearch] = useState("");
+  const [revisarSimuladosTrack, setRevisarSimuladosTrack] = useState<Track | "">("");
+  const [revisarSimuladosPage, setRevisarSimuladosPage] = useState(0);
+  const [editingSimulado, setEditingSimulado] = useState<RevisarSimulado | null>(null);
+  const [editSimuladoTema, setEditSimuladoTema] = useState("");
+  const [savingSimulado, setSavingSimulado] = useState(false);
+  const [saveSimuladoSuccess, setSaveSimuladoSuccess] = useState(false);
 
   useEffect(() => {
     void (async () => {
@@ -236,6 +250,28 @@ export function AdminPanel() {
       setDupLoading(false);
     })();
   }, [tab, dupCards, dupSimulados]);
+
+  useEffect(() => {
+    if (tab !== "revisar-simulados") return;
+    if (revisarSimulados !== null) return;
+    void handleLoadRevisarSimulados();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]);
+
+  const revisarSimuladosFiltered = useMemo(() => {
+    if (!revisarSimulados) return [];
+    return revisarSimulados.filter((s) => {
+      const matchTrack = !revisarSimuladosTrack || s.me === revisarSimuladosTrack;
+      const q = revisarSimuladosSearch.toLowerCase();
+      const matchSearch = !q || s.enunciado.toLowerCase().includes(q) || (s.tema ?? "").toLowerCase().includes(q);
+      return matchTrack && matchSearch;
+    });
+  }, [revisarSimulados, revisarSimuladosTrack, revisarSimuladosSearch]);
+
+  const revisarSimuladosPageItems = useMemo(
+    () => revisarSimuladosFiltered.slice(revisarSimuladosPage * REVISAR_PAGE_SIZE, (revisarSimuladosPage + 1) * REVISAR_PAGE_SIZE),
+    [revisarSimuladosFiltered, revisarSimuladosPage],
+  );
 
   const filteredUsers = useMemo(() => {
     let list = users;
@@ -563,6 +599,7 @@ export function AdminPanel() {
     setEditingCard(card);
     setEditFrente(card.frente);
     setEditVerso(card.verso);
+    setEditEspecialidade(card.especialidade ?? "");
     setSaveSuccess(false);
   }
 
@@ -570,16 +607,49 @@ export function AdminPanel() {
     if (!editingCard) return;
     setSavingCard(true);
     try {
-      await updateFlashcardRemote(editingCard.id, { frente: editFrente, verso: editVerso });
+      const esp = editEspecialidade.trim() || null;
+      await updateFlashcardRemote(editingCard.id, { frente: editFrente, verso: editVerso, especialidade: esp ?? undefined });
       setRevisarCards((prev) =>
-        prev ? prev.map((c) => (c.id === editingCard.id ? { ...c, frente: editFrente, verso: editVerso } : c)) : prev,
+        prev ? prev.map((c) => (c.id === editingCard.id ? { ...c, frente: editFrente, verso: editVerso, especialidade: esp } as typeof c : c)) : prev,
       );
       setSaveSuccess(true);
-      setTimeout(() => setEditingCard(null), 800);
+      setTimeout(() => {
+        setEditingCard(null);
+        // Recarregar stats
+        void loadAdminContentStats().then(setContentStats);
+      }, 800);
     } catch (e) {
       alert(e instanceof Error ? e.message : "Erro ao salvar");
     } finally {
       setSavingCard(false);
+    }
+  }
+
+  async function handleLoadRevisarSimulados() {
+    setRevisarSimuladosLoading(true);
+    const data = await loadSimuladosRemote();
+    setRevisarSimulados(data ?? []);
+    setRevisarSimuladosLoading(false);
+  }
+
+  async function handleSaveSimulado() {
+    if (!editingSimulado) return;
+    setSavingSimulado(true);
+    try {
+      const tema = editSimuladoTema.trim() || null;
+      await updateSimuladoRemote(editingSimulado.id, { tema: tema ?? undefined });
+      setRevisarSimulados((prev) =>
+        prev ? prev.map((s) => (s.id === editingSimulado.id ? { ...s, tema: tema } as typeof s : s)) : prev,
+      );
+      setSaveSimuladoSuccess(true);
+      setTimeout(() => {
+        setEditingSimulado(null);
+        void loadAdminContentStats().then(setContentStats);
+      }, 800);
+    } catch (e) {
+      alert(e instanceof Error ? e.message : "Erro ao salvar");
+    } finally {
+      setSavingSimulado(false);
     }
   }
 
@@ -1813,17 +1883,28 @@ export function AdminPanel() {
                     )}
                     {contentStats.flashcards.byEspecialidade.length > 0 && (
                       <div>
-                        <p className="text-xs font-semibold text-muted mb-1.5">Por especialidade</p>
-                        <div className="max-h-36 space-y-1 overflow-auto pr-1">
-                          {contentStats.flashcards.byEspecialidade.map((item) => (
-                            <div key={item.label} className="flex items-center gap-2">
-                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
-                                <div className="h-full rounded-full bg-teal/50" style={{ width: `${Math.round((item.count / contentStats.flashcards.total) * 100)}%` }} />
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="text-xs font-semibold text-muted">Por especialidade</p>
+                          <button type="button" onClick={() => setTab("revisar")} className="text-xs text-teal hover:underline">Editar cards →</button>
+                        </div>
+                        <div className="max-h-48 space-y-1.5 overflow-auto pr-1">
+                          {contentStats.flashcards.byEspecialidade.map((item) => {
+                            const pct = Math.round((item.count / contentStats.flashcards.total) * 100);
+                            const isSem = item.label.toLowerCase().startsWith("sem ");
+                            return (
+                              <div key={item.label} className="flex items-center gap-2">
+                                <div className="h-2 flex-1 overflow-hidden rounded-full bg-border/60">
+                                  <div
+                                    className={`h-full rounded-full ${isSem ? "bg-amber/50" : "bg-teal/60"}`}
+                                    style={{ width: `${Math.max(pct, 1)}%` }}
+                                  />
+                                </div>
+                                <span className={`w-8 shrink-0 rounded px-1 text-right text-xs font-bold ${isSem ? "text-amber" : "text-teal"}`}>{pct}%</span>
+                                <span className={`w-7 shrink-0 text-right text-xs ${isSem ? "text-amber/80" : "text-foreground"}`}>{item.count}</span>
+                                <span className={`w-36 shrink-0 truncate text-xs ${isSem ? "text-amber/80 italic" : "text-muted"}`} title={item.label}>{item.label}</span>
                               </div>
-                              <span className="w-6 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
-                              <span className="w-28 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       </div>
                     )}
@@ -1859,17 +1940,28 @@ export function AdminPanel() {
                     )}
                     {contentStats.simulados.byTema.length > 0 && (
                       <div>
-                        <p className="text-xs font-semibold text-muted mb-1.5">Por tema</p>
-                        <div className="max-h-36 space-y-1 overflow-auto pr-1">
-                          {contentStats.simulados.byTema.map((item) => (
-                            <div key={item.label} className="flex items-center gap-2">
-                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
-                                <div className="h-full rounded-full bg-blue/50" style={{ width: `${Math.round((item.count / contentStats.simulados.total) * 100)}%` }} />
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="text-xs font-semibold text-muted">Por tema</p>
+                          <button type="button" onClick={() => setTab("revisar")} className="text-xs text-blue hover:underline">Editar simulados →</button>
+                        </div>
+                        <div className="max-h-48 space-y-1.5 overflow-auto pr-1">
+                          {contentStats.simulados.byTema.map((item) => {
+                            const pct = Math.round((item.count / contentStats.simulados.total) * 100);
+                            const isSem = item.label.toLowerCase().startsWith("sem ");
+                            return (
+                              <div key={item.label} className="flex items-center gap-2">
+                                <div className="h-2 flex-1 overflow-hidden rounded-full bg-border/60">
+                                  <div
+                                    className={`h-full rounded-full ${isSem ? "bg-amber/50" : "bg-blue/60"}`}
+                                    style={{ width: `${Math.max(pct, 1)}%` }}
+                                  />
+                                </div>
+                                <span className={`w-8 shrink-0 rounded px-1 text-right text-xs font-bold ${isSem ? "text-amber" : "text-blue"}`}>{pct}%</span>
+                                <span className={`w-7 shrink-0 text-right text-xs ${isSem ? "text-amber/80" : "text-foreground"}`}>{item.count}</span>
+                                <span className={`w-36 shrink-0 truncate text-xs ${isSem ? "text-amber/80 italic" : "text-muted"}`} title={item.label}>{item.label}</span>
                               </div>
-                              <span className="w-6 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
-                              <span className="w-28 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       </div>
                     )}
@@ -2270,6 +2362,82 @@ export function AdminPanel() {
             </div>
           )}
 
+          {/* ── REVISAR SIMULADOS ── */}
+          {tab === "revisar-simulados" && (
+            <div className="space-y-4 max-w-4xl">
+              <h2 className="text-xl font-bold text-foreground">Revisar Simulados</h2>
+              <p className="text-xs text-muted">Edite o tema de cada questão para melhorar a classificação.</p>
+
+              <div className="flex flex-wrap gap-2">
+                <input
+                  type="text"
+                  value={revisarSimuladosSearch}
+                  onChange={(e) => { setRevisarSimuladosSearch(e.target.value); setRevisarSimuladosPage(0); }}
+                  placeholder="Buscar enunciado ou tema..."
+                  className="flex-1 min-w-48 rounded-xl border border-border bg-background/35 px-3 py-2 text-sm"
+                />
+                <div className="flex gap-1">
+                  <button type="button" onClick={() => { setRevisarSimuladosTrack(""); setRevisarSimuladosPage(0); }} className={`rounded-lg border px-3 py-1.5 text-xs ${!revisarSimuladosTrack ? "border-teal/40 bg-teal/10 text-teal" : "border-border text-muted"}`}>Todos</button>
+                  {(["ME1","ME2","ME3"] as Track[]).map((t) => (
+                    <button key={t} type="button" onClick={() => { setRevisarSimuladosTrack(t); setRevisarSimuladosPage(0); }} className={`rounded-lg border px-3 py-1.5 text-xs ${revisarSimuladosTrack === t ? TRACK_STYLE[t] : "border-border text-muted"}`}>{t}</button>
+                  ))}
+                </div>
+              </div>
+
+              {revisarSimuladosLoading ? (
+                <p className="text-sm text-muted">Carregando simulados...</p>
+              ) : (
+                <>
+                  <p className="text-xs text-muted">{revisarSimuladosFiltered.length} questões encontradas</p>
+                  <div className="space-y-2">
+                    {revisarSimuladosPageItems.map((s) => (
+                      <div key={s.id} className="flex items-start justify-between gap-3 rounded-xl border border-border bg-background/35 px-4 py-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`rounded-md border px-1.5 py-0.5 text-xs shrink-0 ${TRACK_STYLE[(s.me ?? "ALL") as Track]}`}>{s.me}</span>
+                            {s.tema ? (
+                              <span className="rounded-md border border-teal/20 bg-teal/10 px-2 py-0.5 text-xs text-teal truncate">{s.tema}</span>
+                            ) : (
+                              <span className="rounded-md border border-amber/20 bg-amber/10 px-2 py-0.5 text-xs text-amber italic">Sem tema</span>
+                            )}
+                          </div>
+                          <p className="text-xs text-muted line-clamp-2">{s.enunciado}</p>
+                        </div>
+                        <button type="button" onClick={() => { setEditingSimulado(s); setEditSimuladoTema(s.tema ?? ""); setSaveSimuladoSuccess(false); }} className="shrink-0 rounded-lg border border-border bg-background/35 px-3 py-1.5 text-xs hover:bg-background/60">Editar tema</button>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <button type="button" disabled={revisarSimuladosPage === 0} onClick={() => setRevisarSimuladosPage((p) => p - 1)} className="rounded-lg border border-border px-3 py-1.5 text-xs disabled:opacity-40">← Anterior</button>
+                    <span className="text-xs text-muted">Página {revisarSimuladosPage + 1} de {Math.max(1, Math.ceil(revisarSimuladosFiltered.length / REVISAR_PAGE_SIZE))}</span>
+                    <button type="button" disabled={(revisarSimuladosPage + 1) * REVISAR_PAGE_SIZE >= revisarSimuladosFiltered.length} onClick={() => setRevisarSimuladosPage((p) => p + 1)} className="rounded-lg border border-border px-3 py-1.5 text-xs disabled:opacity-40">Próxima →</button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Edit simulado tema modal */}
+          {editingSimulado && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+              <div className="w-full max-w-lg rounded-xl border border-border bg-background p-6 shadow-xl flex flex-col gap-4">
+                <h3 className="font-semibold">Editar tema da questão</h3>
+                <p className="text-xs text-muted line-clamp-3">{editingSimulado.enunciado}</p>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-medium text-muted-foreground">Tema</label>
+                  <input type="text" value={editSimuladoTema} onChange={(e) => setEditSimuladoTema(e.target.value)} placeholder="Ex: Ventilação, Neuroanestesia, Sepse..." className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm" />
+                </div>
+                {saveSimuladoSuccess && <p className="text-sm text-green-500">Salvo com sucesso!</p>}
+                <div className="flex gap-2 justify-end">
+                  <button type="button" onClick={() => setEditingSimulado(null)} className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-muted">Cancelar</button>
+                  <button type="button" onClick={() => void handleSaveSimulado()} disabled={savingSimulado} className="rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+                    {savingSimulado ? "Salvando..." : "Salvar"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Edit modal */}
           {editingCard && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -2282,6 +2450,10 @@ export function AdminPanel() {
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-medium text-muted-foreground">Verso</label>
                   <textarea value={editVerso} onChange={(e) => setEditVerso(e.target.value)} rows={6} className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm resize-y" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-medium text-muted-foreground">Especialidade</label>
+                  <input type="text" value={editEspecialidade} onChange={(e) => setEditEspecialidade(e.target.value)} placeholder="Ex: Anestesiologia, Neuroanestesia..." className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm" />
                 </div>
                 {saveSuccess && <p className="text-sm text-green-500">Salvo com sucesso!</p>}
                 <div className="flex gap-2 justify-end">
