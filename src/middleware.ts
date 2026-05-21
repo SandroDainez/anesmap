@@ -4,6 +4,8 @@ import { createServerClient } from "@supabase/ssr";
 const publicRoutes = new Set(["/login", "/signup"]);
 
 export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
   const response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -35,7 +37,7 @@ export async function middleware(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const pathname = request.nextUrl.pathname;
+
   const isPublic = publicRoutes.has(pathname);
 
   if (!user && !isPublic) {
@@ -46,7 +48,6 @@ export async function middleware(request: NextRequest) {
   }
 
   if (user && isPublic) {
-    // Verifica o papel para redirecionar admin corretamente
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -75,5 +76,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api/import-simulados|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api/import-simulados|api/import-flashcards|_next/static|_next/image|favicon.ico).*)"],
 };

@@ -443,13 +443,27 @@ export async function loadFlashcardsRemote(): Promise<Flashcard[] | null> {
   const supabase = getSupabaseClient();
   if (!supabase) return null;
 
-  const { data, error } = await supabase
-    .from("flashcards")
-    .select("id, me, frente, verso, tags, especialidade")
-    .order("id", { ascending: true });
+  // Pagination: fetch all pages (default Supabase limit is 1000)
+  const PAGE_SIZE = 1000;
+  let allData: any[] = [];
+  let page = 0;
 
-  if (error || !data) return null;
-  return (data as Flashcard[]).map((item) => ({
+  while (true) {
+    const { data, error } = await supabase
+      .from("flashcards")
+      .select("id, me, frente, verso, tags, especialidade")
+      .order("id", { ascending: true })
+      .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+
+    if (error) return null;
+    if (!data || data.length === 0) break;
+
+    allData = allData.concat(data);
+    if (data.length < PAGE_SIZE) break;
+    page++;
+  }
+
+  return (allData as Flashcard[]).map((item) => ({
     ...item,
     references: parseReferenceBlock(item.verso),
   }));
@@ -475,14 +489,27 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
   const supabase = getSupabaseClient();
   if (!supabase) return null;
 
-  const { data, error } = await supabase
-    .from("simulados")
-    .select(
-      "id, me, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, correta, explicacao",
-    )
-    .order("id", { ascending: true });
+  // Pagination: fetch all pages
+  const PAGE_SIZE = 1000;
+  let allData: any[] = [];
+  let page = 0;
 
-  if (error || !data) return null;
+  while (true) {
+    const { data, error } = await supabase
+      .from("simulados")
+      .select(
+        "id, me, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, correta, explicacao",
+      )
+      .order("id", { ascending: true })
+      .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+
+    if (error) return null;
+    if (!data || data.length === 0) break;
+
+    allData = allData.concat(data);
+    if (data.length < PAGE_SIZE) break;
+    page++;
+  }
 
   return data.map((item) => ({
     id: item.id,

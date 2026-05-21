@@ -25,9 +25,6 @@ export async function POST(req: NextRequest) {
     "Content-Type": "application/json",
   };
 
-  // Forçar refresh do schema cache
-  await fetch(`${supabaseUrl}/rest/v1/simulados?select=*&limit=0`, { headers });
-
   let body: unknown;
   try {
     body = await req.json();
@@ -35,12 +32,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Body JSON inválido." }, { status: 400 });
   }
 
-  const items: any[] = Array.isArray(body) ? body : [body];
+  const items: Record<string, string>[] = Array.isArray(body) ? body : [body as Record<string, string>];
   if (items.length === 0) {
     return NextResponse.json({ error: "Nenhuma questão recebida." }, { status: 400 });
   }
 
-  // Validar
+  // Validar campos obrigatórios
   const invalid = items.filter(
     (q) =>
       !q.enunciado?.trim() ||
@@ -61,7 +58,7 @@ export async function POST(req: NextRequest) {
   const rows = items.map((q, idx) => ({
     id: `q_${Date.now()}_${idx}`,
     me: (q.me ?? "").toUpperCase() || null,
-    trimestre: q.trimestre?.toLowerCase() || null,
+    trimestre: q.trimestre?.toUpperCase() || null,
     prova: q.prova?.toUpperCase() || null,
     tema: q.tema?.trim() || null,
     enunciado: q.enunciado.trim(),
@@ -76,6 +73,7 @@ export async function POST(req: NextRequest) {
     explicacao_c: q.explicacaoC?.trim() || null,
     explicacao_d: q.explicacaoD?.trim() || null,
     explicacao_e: q.explicacaoE?.trim() || null,
+    explicacao: q.explicacao?.trim() || null,
   }));
 
   const res = await fetch(`${supabaseUrl}/rest/v1/simulados`, {
@@ -89,7 +87,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: `Erro ao salvar: ${err}` }, { status: 500 });
   }
 
-  const data = await res.json();
+  const data = await res.json() as { id: string }[];
   return NextResponse.json({
     ok: true,
     inserted: data?.length ?? rows.length,
