@@ -511,7 +511,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
     page++;
   }
 
-  return data.map((item) => ({
+  return allData.map((item: any) => ({
     id: item.id,
     me: item.me as StudyTrack,
     tema: item.tema ?? undefined,
