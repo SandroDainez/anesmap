@@ -641,6 +641,29 @@ export type ContentStats = {
   simulados: { total: number; byMe: ContentGroupStat[]; byTema: ContentGroupStat[] };
 };
 
+async function fetchAllRows<T>(
+  supabase: ReturnType<typeof browserSupabase>,
+  table: string,
+  columns: string,
+): Promise<T[]> {
+  if (!supabase) return [];
+  const PAGE = 1000;
+  let all: T[] = [];
+  let page = 0;
+  while (true) {
+    const { data, error } = await supabase
+      .from(table)
+      .select(columns)
+      .order("id", { ascending: true })
+      .range(page * PAGE, (page + 1) * PAGE - 1);
+    if (error || !data || data.length === 0) break;
+    all = all.concat(data as T[]);
+    if (data.length < PAGE) break;
+    page++;
+  }
+  return all;
+}
+
 export async function loadAdminContentStats(): Promise<ContentStats> {
   const supabase = browserSupabase();
   const empty: ContentStats = {
@@ -649,12 +672,11 @@ export async function loadAdminContentStats(): Promise<ContentStats> {
   };
   if (!supabase) return empty;
 
-  const [fcRes, simRes] = await Promise.all([
-    supabase.from("flashcards").select("me, especialidade"),
-    supabase.from("simulados").select("me, tema"),
+  const [fcRows, simRows] = await Promise.all([
+    fetchAllRows<{ me: string; especialidade: string | null }>(supabase, "flashcards", "id, me, especialidade"),
+    fetchAllRows<{ me: string; tema: string | null }>(supabase, "simulados", "id, me, tema"),
   ]);
 
-  const fcRows = (fcRes.data ?? []) as { me: string; especialidade: string | null }[];
   const fcByMe = new Map<string, number>();
   const fcByEsp = new Map<string, number>();
   for (const row of fcRows) {
@@ -663,7 +685,6 @@ export async function loadAdminContentStats(): Promise<ContentStats> {
     fcByEsp.set(esp, (fcByEsp.get(esp) ?? 0) + 1);
   }
 
-  const simRows = (simRes.data ?? []) as { me: string; tema: string | null }[];
   const simByMe = new Map<string, number>();
   const simByTema = new Map<string, number>();
   for (const row of simRows) {
