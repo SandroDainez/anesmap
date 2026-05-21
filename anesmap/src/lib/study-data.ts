@@ -658,6 +658,16 @@ export async function clearStudyDataRemote() {
   }
 }
 
+export async function updateFlashcardRemote(
+  id: string,
+  patch: Partial<Pick<Flashcard, "frente" | "verso" | "tags" | "especialidade">>,
+): Promise<void> {
+  const supabase = getSupabaseClient();
+  if (!supabase) throw new Error("Supabase não configurado");
+  const { error } = await supabase.from("flashcards").update(patch).eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
 export async function deleteFlashcardsRemoteByIds(ids: string[]) {
   if (ids.length === 0) return;
   const supabase = getSupabaseClient();

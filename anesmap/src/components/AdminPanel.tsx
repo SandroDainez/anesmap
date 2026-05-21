@@ -15,7 +15,7 @@ import {
   type UserProfile,
   type InviteCode,
 } from "@/lib/user-study";
-import { loadFlashcardsRemote, loadSimuladosRemote } from "@/lib/study-data";
+import { loadFlashcardsRemote, loadSimuladosRemote, updateFlashcardRemote } from "@/lib/study-data";
 
 function downloadFile(filename: string, content: string, mime: string) {
   const blob = new Blob([content], { type: mime });
@@ -49,7 +49,7 @@ function simuladosToCSV(qs: Awaited<ReturnType<typeof loadSimuladosRemote>>): st
   return [header, ...rows].join("\n");
 }
 
-type Tab = "overview" | "users" | "duplicados" | "content" | "export" | "invites";
+type Tab = "overview" | "users" | "duplicados" | "content" | "export" | "invites" | "revisar";
 type AdminUserDetails = Awaited<ReturnType<typeof loadAdminUserDetails>>;
 type Track = "ME1" | "ME2" | "ME3" | "ALL";
 
@@ -130,6 +130,7 @@ const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
   { id: "content", label: "Conteúdo", icon: "⊞" },
   { id: "export", label: "Exportar", icon: "↓" },
   { id: "invites", label: "Convites", icon: "⌘" },
+  { id: "revisar", label: "Revisar Cards", icon: "✎" },
 ];
 
 export function AdminPanel() {
@@ -168,6 +169,21 @@ export function AdminPanel() {
   const [dupKind, setDupKind] = useState<"cards" | "simulados">("simulados");
   const [selectedDupIds, setSelectedDupIds] = useState<string[]>([]);
   const [dupDeleteStatus, setDupDeleteStatus] = useState<string | null>(null);
+
+  // Revisar Cards state
+  type RevisarCard = NonNullable<Awaited<ReturnType<typeof loadFlashcardsRemote>>>[number];
+  const REVISAR_PAGE_SIZE = 20;
+  const [revisarCards, setRevisarCards] = useState<RevisarCard[] | null>(null);
+  const [revisarLoading, setRevisarLoading] = useState(false);
+  const [revisarError, setRevisarError] = useState<string | null>(null);
+  const [revisarSearch, setRevisarSearch] = useState("");
+  const [revisarTrack, setRevisarTrack] = useState<Track | "">("");
+  const [revisarPage, setRevisarPage] = useState(0);
+  const [editingCard, setEditingCard] = useState<RevisarCard | null>(null);
+  const [editFrente, setEditFrente] = useState("");
+  const [editVerso, setEditVerso] = useState("");
+  const [savingCard, setSavingCard] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   useEffect(() => {
     void (async () => {
@@ -513,6 +529,59 @@ export function AdminPanel() {
   }
 
   const selectedUser = users.find((u) => u.id === selectedUserId);
+
+  async function handleLoadRevisarCards() {
+    setRevisarLoading(true);
+    setRevisarError(null);
+    try {
+      const cards = await loadFlashcardsRemote();
+      setRevisarCards(cards ?? []);
+      setRevisarPage(0);
+    } catch (e) {
+      setRevisarError(e instanceof Error ? e.message : "Erro ao carregar cards");
+    } finally {
+      setRevisarLoading(false);
+    }
+  }
+
+  function handleOpenEdit(card: NonNullable<typeof revisarCards>[number]) {
+    setEditingCard(card);
+    setEditFrente(card.frente);
+    setEditVerso(card.verso);
+    setSaveSuccess(false);
+  }
+
+  async function handleSaveCard() {
+    if (!editingCard) return;
+    setSavingCard(true);
+    try {
+      await updateFlashcardRemote(editingCard.id, { frente: editFrente, verso: editVerso });
+      setRevisarCards((prev) =>
+        prev ? prev.map((c) => (c.id === editingCard.id ? { ...c, frente: editFrente, verso: editVerso } : c)) : prev,
+      );
+      setSaveSuccess(true);
+      setTimeout(() => setEditingCard(null), 800);
+    } catch (e) {
+      alert(e instanceof Error ? e.message : "Erro ao salvar");
+    } finally {
+      setSavingCard(false);
+    }
+  }
+
+  const revisarFiltered = useMemo(() => {
+    if (!revisarCards) return [];
+    return revisarCards.filter((c) => {
+      const matchTrack = !revisarTrack || c.me === revisarTrack;
+      const q = revisarSearch.toLowerCase();
+      const matchSearch = !q || c.frente.toLowerCase().includes(q) || c.verso.toLowerCase().includes(q);
+      return matchTrack && matchSearch;
+    });
+  }, [revisarCards, revisarTrack, revisarSearch]);
+
+  const revisarPageCards = useMemo(
+    () => revisarFiltered.slice(revisarPage * REVISAR_PAGE_SIZE, (revisarPage + 1) * REVISAR_PAGE_SIZE),
+    [revisarFiltered, revisarPage],
+  );
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
@@ -1945,6 +2014,92 @@ export function AdminPanel() {
                     </tbody>
                   </table>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* Revisar Cards tab */}
+          {tab === "revisar" && (
+            <div className="flex flex-col gap-4 p-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold">Revisar Cards</h2>
+                <button
+                  type="button"
+                  onClick={() => void handleLoadRevisarCards()}
+                  disabled={revisarLoading}
+                  className="rounded-lg border border-border bg-background px-4 py-2 text-sm transition hover:bg-muted disabled:opacity-50"
+                >
+                  {revisarLoading ? "Carregando..." : revisarCards ? "Recarregar" : "Carregar Cards"}
+                </button>
+              </div>
+              {revisarError && <p className="text-sm text-rose">{revisarError}</p>}
+              {revisarCards && (
+                <>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Buscar frente/verso..."
+                      value={revisarSearch}
+                      onChange={(e) => { setRevisarSearch(e.target.value); setRevisarPage(0); }}
+                      className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                    />
+                    <select
+                      value={revisarTrack}
+                      onChange={(e) => { setRevisarTrack(e.target.value as Track | ""); setRevisarPage(0); }}
+                      className="rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                    >
+                      <option value="">Todos os módulos</option>
+                      {(["ME1", "ME2", "ME3"] as Track[]).map((t) => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{revisarFiltered.length} cards • Página {revisarPage + 1}/{Math.max(1, Math.ceil(revisarFiltered.length / REVISAR_PAGE_SIZE))}</p>
+                  <div className="flex flex-col gap-2">
+                    {revisarPageCards.map((card) => (
+                      <div key={card.id} className="flex items-start gap-3 rounded-lg border border-border bg-background/60 p-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium text-muted-foreground mb-1">[{card.me}]</p>
+                          <p className="text-sm font-medium line-clamp-2">{card.frente}</p>
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{card.verso}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleOpenEdit(card)}
+                          className="shrink-0 rounded border border-border px-2 py-1 text-xs hover:bg-muted"
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 justify-center">
+                    <button type="button" disabled={revisarPage === 0} onClick={() => setRevisarPage((p) => p - 1)} className="rounded border border-border px-3 py-1 text-sm disabled:opacity-40">← Anterior</button>
+                    <button type="button" disabled={(revisarPage + 1) * REVISAR_PAGE_SIZE >= revisarFiltered.length} onClick={() => setRevisarPage((p) => p + 1)} className="rounded border border-border px-3 py-1 text-sm disabled:opacity-40">Próximo →</button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Edit modal */}
+          {editingCard && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+              <div className="w-full max-w-lg rounded-xl border border-border bg-background p-6 shadow-xl flex flex-col gap-4">
+                <h3 className="font-semibold">Editar Card</h3>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-medium text-muted-foreground">Frente</label>
+                  <textarea value={editFrente} onChange={(e) => setEditFrente(e.target.value)} rows={4} className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm resize-y" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-medium text-muted-foreground">Verso</label>
+                  <textarea value={editVerso} onChange={(e) => setEditVerso(e.target.value)} rows={6} className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm resize-y" />
+                </div>
+                {saveSuccess && <p className="text-sm text-green-500">Salvo com sucesso!</p>}
+                <div className="flex gap-2 justify-end">
+                  <button type="button" onClick={() => setEditingCard(null)} className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-muted">Cancelar</button>
+                  <button type="button" onClick={() => void handleSaveCard()} disabled={savingCard} className="rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+                    {savingCard ? "Salvando..." : "Salvar"}
+                  </button>
+                </div>
               </div>
             </div>
           )}

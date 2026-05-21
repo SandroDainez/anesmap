@@ -2,6 +2,13 @@ import { createClient } from "@supabase/supabase-js";
 
 export type StudyTrack = "ME1" | "ME2" | "ME3";
 
+/**
+ * Trimestre dentro de uma trilha.
+ * T1–T4 = provas trimestrais (simulados de 30 questões / flashcards daquele período)
+ * "anual" = conteúdo do ano inteiro (simulados de 50 questões / todos os cards)
+ */
+export type Trimestre = "T1" | "T2" | "T3" | "T4" | "anual";
+
 export type StudyReference = {
   title: string;
   url?: string;
@@ -12,6 +19,8 @@ export type StudyReference = {
 export type Flashcard = {
   id: string;
   me: StudyTrack;
+  /** Trimestre ao qual o card pertence. Undefined = exibido em todos os filtros. */
+  trimestre?: Trimestre;
   frente: string;
   verso: string;
   tags?: string[];
@@ -30,14 +39,25 @@ export type FlashcardProgress = {
 export type SimuladoQuestion = {
   id: string;
   me: StudyTrack;
+  /** Trimestre: T1–T4 para simulados de 30q; "anual" para simulados de 50q. */
+  trimestre?: Trimestre;
+  /** Prova dentro do trimestre: A1, A2, A3 ou A4. */
+  prova?: string;
   tema?: string;
   enunciado: string;
   alternativaA: string;
   alternativaB: string;
   alternativaC: string;
   alternativaD: string;
-  correta: "A" | "B" | "C" | "D";
+  alternativaE?: string;
+  correta: "A" | "B" | "C" | "D" | "E";
   explicacao?: string;
+  /** Justificativa individual por alternativa (mostrada ao responder) */
+  explicacaoA?: string;
+  explicacaoB?: string;
+  explicacaoC?: string;
+  explicacaoD?: string;
+  explicacaoE?: string;
   references?: StudyReference[];
 };
 
@@ -302,32 +322,30 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
     const gabarito = answerMap.get(questionNumber);
     const corretaOriginal = (inlineLetter ?? gabarito?.correta ?? "A").toUpperCase();
 
-    // Current schema supports up to A-D; when source has E, we keep E info in D/explicacao.
-    const alternativaDOriginal = altMap.get("D") ?? "";
-    const alternativaEOriginal = altMap.get("E") ?? "";
-    let alternativaD = alternativaDOriginal;
-    let correta = corretaOriginal;
-    let explicacao =
+    const alternativaD = altMap.get("D") ?? "";
+    const alternativaE = altMap.get("E") ?? "";
+    const correta = ["A", "B", "C", "D", "E"].includes(corretaOriginal) ? corretaOriginal : "A";
+    const explicacao =
       gabarito?.explicacao ??
       stripTags(inlineGabaritoText.replace(/^\s*gabarito\s*:\s*[A-E]\s*/i, ""));
 
-    if (!alternativaD && alternativaEOriginal) {
-      alternativaD = alternativaEOriginal;
-      if (correta === "E") correta = "D";
-      explicacao = [explicacao, "Correta original no arquivo: E."]
-        .filter(Boolean)
-        .join(" ");
-    } else if (alternativaD && alternativaEOriginal) {
-      alternativaD = `${alternativaDOriginal} || E) ${alternativaEOriginal}`;
-      if (correta === "E") correta = "D";
-      explicacao = [explicacao, "Alternativa E preservada junto da D para compatibilidade."]
-        .filter(Boolean)
-        .join(" ");
-    } else if (!["A", "B", "C", "D"].includes(correta)) {
-      correta = "A";
-    }
-
     if (!alternativaD) return;
+
+    // Extract per-alternative justifications from interactive HTML format (.alt divs)
+    const explicacaoDiv = question.querySelector(".explicacao");
+    const perAltExplicacoes: Record<string, string> = {};
+    if (explicacaoDiv) {
+      const altDivs = Array.from(explicacaoDiv.querySelectorAll(".alt"));
+      altDivs.forEach((div) => {
+        const strong = div.querySelector("strong");
+        const letter = strong?.textContent?.match(/^([A-E])/i)?.[1]?.toUpperCase();
+        if (!letter) return;
+        const fullText = (div.textContent ?? "").trim();
+        const labelText = (strong?.textContent ?? "").trim();
+        const explanation = fullText.slice(labelText.length).replace(/^\s*:\s*/, "").trim();
+        if (explanation) perAltExplicacoes[letter] = explanation;
+      });
+    }
 
     rows.push({
       id: `simulado-html-${questionNumber}`,
@@ -336,8 +354,14 @@ export function parseSimuladoHtml(text: string): Record<string, string>[] {
       alternativab: altMap.get("B") ?? "",
       alternativac: altMap.get("C") ?? "",
       alternativad: alternativaD,
+      alternativae: alternativaE,
       correta,
       explicacao,
+      explicacaoa: perAltExplicacoes["A"] ?? "",
+      explicacaob: perAltExplicacoes["B"] ?? "",
+      explicacaoc: perAltExplicacoes["C"] ?? "",
+      explicacaod: perAltExplicacoes["D"] ?? "",
+      explicacaoe: perAltExplicacoes["E"] ?? "",
     });
   });
 
@@ -451,7 +475,7 @@ export async function loadFlashcardsRemote(): Promise<Flashcard[] | null> {
   while (true) {
     const { data, error } = await supabase
       .from("flashcards")
-      .select("id, me, frente, verso, tags, especialidade")
+      .select("id, me, trimestre, frente, verso, tags, especialidade")
       .order("id", { ascending: true })
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
 
@@ -498,7 +522,7 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
     const { data, error } = await supabase
       .from("simulados")
       .select(
-        "id, me, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, correta, explicacao",
+        "id, me, trimestre, prova, tema, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, alternativa_e, correta, explicacao, explicacao_a, explicacao_b, explicacao_c, explicacao_d, explicacao_e",
       )
       .order("id", { ascending: true })
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
@@ -514,14 +538,22 @@ export async function loadSimuladosRemote(): Promise<SimuladoQuestion[] | null> 
   return allData.map((item: any) => ({
     id: item.id,
     me: item.me as StudyTrack,
+    trimestre: (item.trimestre ?? undefined) as Trimestre | undefined,
+    prova: item.prova ?? undefined,
     tema: item.tema ?? undefined,
     enunciado: item.enunciado,
     alternativaA: item.alternativa_a,
     alternativaB: item.alternativa_b,
     alternativaC: item.alternativa_c,
     alternativaD: item.alternativa_d,
-    correta: item.correta as "A" | "B" | "C" | "D",
+    alternativaE: item.alternativa_e ?? undefined,
+    correta: item.correta as "A" | "B" | "C" | "D" | "E",
     explicacao: item.explicacao ?? undefined,
+    explicacaoA: item.explicacao_a ?? undefined,
+    explicacaoB: item.explicacao_b ?? undefined,
+    explicacaoC: item.explicacao_c ?? undefined,
+    explicacaoD: item.explicacao_d ?? undefined,
+    explicacaoE: item.explicacao_e ?? undefined,
     references: parseReferenceBlock(item.explicacao ?? ""),
   }));
 }
@@ -540,6 +572,7 @@ export async function saveFlashcardsRemote(data: Flashcard[]) {
   const payload = data.map((item) => ({
     id: item.id,
     me: item.me,
+    trimestre: item.trimestre ?? null,
     frente: item.frente,
     verso: item.verso,
     tags: item.tags ?? [],
@@ -573,14 +606,22 @@ export async function saveSimuladosRemote(data: SimuladoQuestion[]) {
   const payload = data.map((item) => ({
     id: item.id,
     me: item.me,
+    trimestre: item.trimestre ?? null,
+    prova: item.prova ?? null,
     tema: item.tema ?? null,
     enunciado: item.enunciado,
     alternativa_a: item.alternativaA,
     alternativa_b: item.alternativaB,
     alternativa_c: item.alternativaC,
     alternativa_d: item.alternativaD,
+    alternativa_e: item.alternativaE ?? null,
     correta: item.correta,
     explicacao: item.explicacao ?? null,
+    explicacao_a: item.explicacaoA ?? null,
+    explicacao_b: item.explicacaoB ?? null,
+    explicacao_c: item.explicacaoC ?? null,
+    explicacao_d: item.explicacaoD ?? null,
+    explicacao_e: item.explicacaoE ?? null,
   }));
 
   const chunkSize = 200;
@@ -615,6 +656,16 @@ export async function clearStudyDataRemote() {
   if (simuladosError) {
     throw new Error(simuladosError.message);
   }
+}
+
+export async function updateFlashcardRemote(
+  id: string,
+  patch: Partial<Pick<Flashcard, "frente" | "verso" | "tags" | "especialidade">>,
+): Promise<void> {
+  const supabase = getSupabaseClient();
+  if (!supabase) throw new Error("Supabase não configurado");
+  const { error } = await supabase.from("flashcards").update(patch).eq("id", id);
+  if (error) throw new Error(error.message);
 }
 
 export async function deleteFlashcardsRemoteByIds(ids: string[]) {
@@ -1013,7 +1064,14 @@ function canonicalHeaderKey(header: string) {
   if (normalized.includes("alternativab") || normalized === "b") return "alternativab";
   if (normalized.includes("alternativac") || normalized === "c") return "alternativac";
   if (normalized.includes("alternativad") || normalized === "d") return "alternativad";
+  if (normalized.includes("alternativae") || normalized === "e") return "alternativae";
   if (normalized.includes("correta") || normalized.includes("gabarito")) return "correta";
+  if (normalized === "trimestre" || normalized.includes("trimestre") || normalized === "quarter") return "trimestre";
+  if (normalized.includes("explicacaoa") || normalized === "explicacaoa") return "explicacaoa";
+  if (normalized.includes("explicacaob") || normalized === "explicacaob") return "explicacaob";
+  if (normalized.includes("explicacaoc") || normalized === "explicacaoc") return "explicacaoc";
+  if (normalized.includes("explicacaod") || normalized === "explicacaod") return "explicacaod";
+  if (normalized.includes("explicacaoe") || normalized === "explicacaoe") return "explicacaoe";
   if (normalized.includes("referenciatitulo") || normalized === "reftitulo") {
     return "referenciatitulo";
   }
