@@ -1778,6 +1778,105 @@ export function AdminPanel() {
             <div className="space-y-5 max-w-4xl">
               <h2 className="text-xl font-bold text-foreground">Gerenciar Conteúdo</h2>
 
+              {/* ── Estatísticas de conteúdo ── */}
+              {contentStats === null ? (
+                <p className="text-xs text-muted">Carregando estatísticas...</p>
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Flashcards */}
+                  <div className="rounded-2xl border border-border bg-background/40 p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-foreground">Flashcards</p>
+                      <span className="rounded-full border border-teal/30 bg-teal/10 px-2.5 py-0.5 text-sm font-bold text-teal">{contentStats.flashcards.total}</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {contentStats.flashcards.byMe.map((item, i) => {
+                        const textColors = ["text-blue", "text-purple", "text-teal"];
+                        const bgColors = ["border-blue/20 bg-blue/5", "border-purple/20 bg-purple/5", "border-teal/20 bg-teal/5"];
+                        return (
+                          <div key={item.label} className={`rounded-xl border px-2 py-2 text-center ${bgColors[i]}`}>
+                            <p className="text-xs font-semibold text-foreground">{item.label}</p>
+                            <p className={`text-xl font-bold ${textColors[i]}`}>{item.count}</p>
+                            <p className="text-xs text-muted">{contentStats.flashcards.total > 0 ? Math.round((item.count / contentStats.flashcards.total) * 100) : 0}%</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    {contentStats.flashcards.total > 0 && (
+                      <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-border">
+                        {contentStats.flashcards.byMe.map((item, i) => {
+                          const bg = ["bg-blue", "bg-purple", "bg-teal"];
+                          const pct = (item.count / contentStats.flashcards.total) * 100;
+                          return pct > 0 ? <div key={item.label} className={`${bg[i]} h-full`} style={{ width: `${pct}%` }} /> : null;
+                        })}
+                      </div>
+                    )}
+                    {contentStats.flashcards.byEspecialidade.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-muted mb-1.5">Por especialidade</p>
+                        <div className="max-h-36 space-y-1 overflow-auto pr-1">
+                          {contentStats.flashcards.byEspecialidade.map((item) => (
+                            <div key={item.label} className="flex items-center gap-2">
+                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
+                                <div className="h-full rounded-full bg-teal/50" style={{ width: `${Math.round((item.count / contentStats.flashcards.total) * 100)}%` }} />
+                              </div>
+                              <span className="w-6 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
+                              <span className="w-28 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Simulados */}
+                  <div className="rounded-2xl border border-border bg-background/40 p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-foreground">Simulados</p>
+                      <span className="rounded-full border border-blue/30 bg-blue/10 px-2.5 py-0.5 text-sm font-bold text-blue">{contentStats.simulados.total}</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {contentStats.simulados.byMe.map((item, i) => {
+                        const textColors = ["text-blue", "text-purple", "text-teal"];
+                        const bgColors = ["border-blue/20 bg-blue/5", "border-purple/20 bg-purple/5", "border-teal/20 bg-teal/5"];
+                        return (
+                          <div key={item.label} className={`rounded-xl border px-2 py-2 text-center ${bgColors[i]}`}>
+                            <p className="text-xs font-semibold text-foreground">{item.label}</p>
+                            <p className={`text-xl font-bold ${textColors[i]}`}>{item.count}</p>
+                            <p className="text-xs text-muted">{contentStats.simulados.total > 0 ? Math.round((item.count / contentStats.simulados.total) * 100) : 0}%</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    {contentStats.simulados.total > 0 && (
+                      <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-border">
+                        {contentStats.simulados.byMe.map((item, i) => {
+                          const bg = ["bg-blue", "bg-purple", "bg-teal"];
+                          const pct = (item.count / contentStats.simulados.total) * 100;
+                          return pct > 0 ? <div key={item.label} className={`${bg[i]} h-full`} style={{ width: `${pct}%` }} /> : null;
+                        })}
+                      </div>
+                    )}
+                    {contentStats.simulados.byTema.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-muted mb-1.5">Por tema</p>
+                        <div className="max-h-36 space-y-1 overflow-auto pr-1">
+                          {contentStats.simulados.byTema.map((item) => (
+                            <div key={item.label} className="flex items-center gap-2">
+                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
+                                <div className="h-full rounded-full bg-blue/50" style={{ width: `${Math.round((item.count / contentStats.simulados.total) * 100)}%` }} />
+                              </div>
+                              <span className="w-6 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
+                              <span className="w-28 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-5">
                 <p className="text-sm text-muted">
                   Use em dois passos simples: <strong className="text-foreground">1) baixar</strong> os arquivos que você quer usar,
@@ -1873,102 +1972,6 @@ export function AdminPanel() {
                 </div>
               ) : null}
 
-              {/* Stats de conteúdo */}
-              {contentStats && (
-                <div className="space-y-4">
-                  {/* Flashcards */}
-                  <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-foreground">Flashcards</p>
-                      <span className="rounded-full border border-teal/30 bg-teal/10 px-2.5 py-0.5 text-sm font-bold text-teal">{contentStats.flashcards.total} total</span>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {contentStats.flashcards.byMe.map((item, i) => {
-                        const colors = ["text-blue", "text-purple", "text-teal"];
-                        const borders = ["border-blue/20 bg-blue/5", "border-purple/20 bg-purple/5", "border-teal/20 bg-teal/5"];
-                        return (
-                          <div key={item.label} className={`rounded-xl border px-3 py-2.5 text-center ${borders[i]}`}>
-                            <p className="text-xs font-semibold text-foreground">{item.label}</p>
-                            <p className={`mt-0.5 text-2xl font-bold ${colors[i]}`}>{item.count}</p>
-                            <p className="text-xs text-muted">{contentStats.flashcards.total > 0 ? Math.round((item.count / contentStats.flashcards.total) * 100) : 0}%</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    {contentStats.flashcards.total > 0 && (
-                      <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-border">
-                        {contentStats.flashcards.byMe.map((item, i) => {
-                          const colors = ["bg-blue", "bg-purple", "bg-teal"];
-                          const pct = (item.count / contentStats.flashcards.total) * 100;
-                          return pct > 0 ? <div key={item.label} className={`${colors[i]} h-full`} style={{ width: `${pct}%` }} /> : null;
-                        })}
-                      </div>
-                    )}
-                    {contentStats.flashcards.byEspecialidade.length > 0 && (
-                      <div>
-                        <p className="text-xs font-semibold text-muted mb-2">Por especialidade</p>
-                        <div className="max-h-44 space-y-1.5 overflow-auto pr-1">
-                          {contentStats.flashcards.byEspecialidade.map((item) => (
-                            <div key={item.label} className="flex items-center gap-2">
-                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
-                                <div className="h-full rounded-full bg-teal/50" style={{ width: `${Math.round((item.count / contentStats.flashcards.total) * 100)}%` }} />
-                              </div>
-                              <span className="w-7 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
-                              <span className="w-36 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Simulados */}
-                  <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-foreground">Simulados</p>
-                      <span className="rounded-full border border-blue/30 bg-blue/10 px-2.5 py-0.5 text-sm font-bold text-blue">{contentStats.simulados.total} total</span>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {contentStats.simulados.byMe.map((item, i) => {
-                        const colors = ["text-blue", "text-purple", "text-teal"];
-                        const borders = ["border-blue/20 bg-blue/5", "border-purple/20 bg-purple/5", "border-teal/20 bg-teal/5"];
-                        return (
-                          <div key={item.label} className={`rounded-xl border px-3 py-2.5 text-center ${borders[i]}`}>
-                            <p className="text-xs font-semibold text-foreground">{item.label}</p>
-                            <p className={`mt-0.5 text-2xl font-bold ${colors[i]}`}>{item.count}</p>
-                            <p className="text-xs text-muted">{contentStats.simulados.total > 0 ? Math.round((item.count / contentStats.simulados.total) * 100) : 0}%</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    {contentStats.simulados.total > 0 && (
-                      <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-border">
-                        {contentStats.simulados.byMe.map((item, i) => {
-                          const colors = ["bg-blue", "bg-purple", "bg-teal"];
-                          const pct = (item.count / contentStats.simulados.total) * 100;
-                          return pct > 0 ? <div key={item.label} className={`${colors[i]} h-full`} style={{ width: `${pct}%` }} /> : null;
-                        })}
-                      </div>
-                    )}
-                    {contentStats.simulados.byTema.length > 0 && (
-                      <div>
-                        <p className="text-xs font-semibold text-muted mb-2">Por tema</p>
-                        <div className="max-h-44 space-y-1.5 overflow-auto pr-1">
-                          {contentStats.simulados.byTema.map((item) => (
-                            <div key={item.label} className="flex items-center gap-2">
-                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
-                                <div className="h-full rounded-full bg-blue/50" style={{ width: `${Math.round((item.count / contentStats.simulados.total) * 100)}%` }} />
-                              </div>
-                              <span className="w-7 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
-                              <span className="w-36 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
 
               <div className="grid grid-cols-3 gap-4">
                 <div className="rounded-2xl border border-border bg-background/40 p-5">
