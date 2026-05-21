@@ -7,6 +7,7 @@ import {
   loadAdminUsers,
   loadAdminMEStats,
   loadAdminAssessmentData,
+  loadAdminContentStats,
   loadInviteCodes,
   createInviteCode,
   deleteInviteCode,
@@ -14,6 +15,7 @@ import {
   updateUserRole,
   type UserProfile,
   type InviteCode,
+  type ContentStats,
 } from "@/lib/user-study";
 import { loadFlashcardsRemote, loadSimuladosRemote, updateFlashcardRemote } from "@/lib/study-data";
 
@@ -155,6 +157,18 @@ export function AdminPanel() {
   // Export state
   const [exportStatus, setExportStatus] = useState<Record<string, "idle" | "loading" | "done">>({});
 
+  // Content stats
+  const [contentStats, setContentStats] = useState<ContentStats | null>(null);
+
+  // Add/delete user state
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [addForm, setAddForm] = useState({ name: "", email: "", password: "", role: "student" });
+  const [addLoading, setAddLoading] = useState(false);
+  const [addError, setAddError] = useState<string | null>(null);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
   // ME Stats state
   type MEStatsData = Awaited<ReturnType<typeof loadAdminMEStats>>;
   const [meStatsData, setMeStatsData] = useState<MEStatsData>(null);
@@ -187,12 +201,13 @@ export function AdminPanel() {
 
   useEffect(() => {
     void (async () => {
-      const [ov, list, codes] = await Promise.all([
-        loadAdminOverview(), loadAdminUsers(), loadInviteCodes(),
+      const [ov, list, codes, stats] = await Promise.all([
+        loadAdminOverview(), loadAdminUsers(), loadInviteCodes(), loadAdminContentStats(),
       ]);
       setOverview(ov);
       setUsers(list);
       setInviteCodes(codes);
+      setContentStats(stats);
       if (list[0]?.id) setSelectedUserId(list[0].id);
     })();
   }, []);
@@ -568,6 +583,41 @@ export function AdminPanel() {
     }
   }
 
+  async function handleAddUser(e: React.FormEvent) {
+    e.preventDefault();
+    setAddLoading(true);
+    setAddError(null);
+    try {
+      const res = await fetch("/api/admin/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(addForm),
+      });
+      const json = await res.json();
+      if (!res.ok) { setAddError(json.error ?? "Erro ao criar usuário."); return; }
+      setAddForm({ name: "", email: "", password: "", role: "student" });
+      setShowAddUser(false);
+      const list = await loadAdminUsers();
+      setUsers(list);
+    } catch { setAddError("Erro inesperado."); }
+    finally { setAddLoading(false); }
+  }
+
+  async function handleDeleteUser(userId: string) {
+    setDeleteLoading(true);
+    setDeleteError(null);
+    try {
+      const res = await fetch(`/api/admin/users/${userId}`, { method: "DELETE" });
+      const json = await res.json();
+      if (!res.ok) { setDeleteError(json.error ?? "Erro ao excluir."); return; }
+      setDeleteTargetId(null);
+      if (selectedUserId === userId) { setSelectedUserId(null); setSelectedDetails(null); }
+      const list = await loadAdminUsers();
+      setUsers(list);
+    } catch { setDeleteError("Erro inesperado."); }
+    finally { setDeleteLoading(false); }
+  }
+
   const revisarFiltered = useMemo(() => {
     if (!revisarCards) return [];
     return revisarCards.filter((c) => {
@@ -728,7 +778,35 @@ export function AdminPanel() {
             <div className="flex h-full gap-5">
               {/* User list */}
               <div className="flex w-72 shrink-0 flex-col gap-3">
-                <h2 className="text-lg font-bold text-foreground">Usuários</h2>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-lg font-bold text-foreground">Usuários</h2>
+                  <button
+                    type="button"
+                    onClick={() => { setShowAddUser((v) => !v); setAddError(null); }}
+                    className="rounded-lg border border-teal/30 bg-teal/10 px-2.5 py-1 text-xs font-medium text-teal hover:opacity-80"
+                  >
+                    {showAddUser ? "Cancelar" : "+ Novo"}
+                  </button>
+                </div>
+
+                {/* Formulário de adicionar usuário */}
+                {showAddUser && (
+                  <form onSubmit={handleAddUser} className="space-y-2 rounded-xl border border-teal/20 bg-teal/5 p-3">
+                    <p className="text-xs font-semibold text-teal">Novo usuário</p>
+                    <input type="text" value={addForm.name} onChange={(e) => setAddForm((f) => ({ ...f, name: e.target.value }))} placeholder="Nome" required className="w-full rounded-xl border border-border bg-background/35 px-3 py-1.5 text-xs" />
+                    <input type="email" value={addForm.email} onChange={(e) => setAddForm((f) => ({ ...f, email: e.target.value }))} placeholder="E-mail" required className="w-full rounded-xl border border-border bg-background/35 px-3 py-1.5 text-xs" />
+                    <input type="password" value={addForm.password} onChange={(e) => setAddForm((f) => ({ ...f, password: e.target.value }))} placeholder="Senha inicial" required minLength={6} className="w-full rounded-xl border border-border bg-background/35 px-3 py-1.5 text-xs" />
+                    <select value={addForm.role} onChange={(e) => setAddForm((f) => ({ ...f, role: e.target.value }))} className="w-full rounded-xl border border-border bg-background/35 px-3 py-1.5 text-xs">
+                      <option value="student">Usuário</option>
+                      <option value="admin">Administrador</option>
+                    </select>
+                    {addError && <p className="text-xs text-rose">{addError}</p>}
+                    <button type="submit" disabled={addLoading} className="w-full rounded-xl border border-teal/30 bg-teal/15 py-1.5 text-xs font-medium text-teal disabled:opacity-40">
+                      {addLoading ? "Criando..." : "Criar usuário"}
+                    </button>
+                  </form>
+                )}
+
                 <input
                   type="text"
                   value={query}
@@ -759,24 +837,50 @@ export function AdminPanel() {
                   {filteredUsers.map((user) => {
                     const track = (user.assigned_track ?? "ALL") as Track;
                     return (
-                      <button
-                        key={user.id}
-                        type="button"
-                        onClick={() => setSelectedUserId(user.id)}
-                        className={`w-full rounded-xl border px-3 py-2.5 text-left transition ${
-                          selectedUserId === user.id ? "border-blue/40 bg-blue/10" : "border-border bg-background/35 hover:bg-background/60"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-medium text-foreground truncate">{user.name ?? "Sem nome"}</p>
-                          <span className={`ml-2 shrink-0 rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
-                        </div>
-                        <p className="text-xs text-muted">{humanRoleName(user.role)}</p>
-                      </button>
+                      <div key={user.id} className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setSelectedUserId(user.id)}
+                          className={`flex-1 rounded-xl border px-3 py-2.5 text-left transition ${
+                            selectedUserId === user.id ? "border-blue/40 bg-blue/10" : "border-border bg-background/35 hover:bg-background/60"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <p className="text-sm font-medium text-foreground truncate">{user.name ?? "Sem nome"}</p>
+                            <span className={`ml-2 shrink-0 rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
+                          </div>
+                          <p className="text-xs text-muted">{humanRoleName(user.role)}</p>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => { setDeleteTargetId(user.id); setDeleteError(null); }}
+                          title="Excluir usuário"
+                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-rose/20 bg-rose/10 text-rose hover:opacity-80"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                        </button>
+                      </div>
                     );
                   })}
                   {filteredUsers.length === 0 && <p className="text-xs text-muted">Nenhum usuário encontrado.</p>}
                 </div>
+
+                {/* Modal confirmação de exclusão */}
+                {deleteTargetId && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+                    <div className="w-full max-w-sm rounded-2xl border border-border bg-background p-5 shadow-xl">
+                      <p className="font-semibold text-foreground">Excluir usuário</p>
+                      <p className="mt-2 text-sm text-muted">Tem certeza que deseja excluir <span className="font-medium text-foreground">{users.find((u) => u.id === deleteTargetId)?.name ?? "este usuário"}</span>? Esta ação é permanente.</p>
+                      {deleteError && <p className="mt-2 text-xs text-rose">{deleteError}</p>}
+                      <div className="mt-4 flex gap-2">
+                        <button type="button" onClick={() => setDeleteTargetId(null)} disabled={deleteLoading} className="flex-1 rounded-xl border border-border bg-background/35 py-2 text-sm text-muted disabled:opacity-40">Cancelar</button>
+                        <button type="button" onClick={() => handleDeleteUser(deleteTargetId)} disabled={deleteLoading} className="flex-1 rounded-xl border border-rose/30 bg-rose/15 py-2 text-sm font-medium text-rose disabled:opacity-40">
+                          {deleteLoading ? "Excluindo..." : "Excluir"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* User detail */}
@@ -1769,21 +1873,104 @@ export function AdminPanel() {
                 </div>
               ) : null}
 
+              {/* Stats de conteúdo */}
+              {contentStats && (
+                <div className="space-y-4">
+                  {/* Flashcards */}
+                  <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-foreground">Flashcards</p>
+                      <span className="rounded-full border border-teal/30 bg-teal/10 px-2.5 py-0.5 text-sm font-bold text-teal">{contentStats.flashcards.total} total</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {contentStats.flashcards.byMe.map((item, i) => {
+                        const colors = ["text-blue", "text-purple", "text-teal"];
+                        const borders = ["border-blue/20 bg-blue/5", "border-purple/20 bg-purple/5", "border-teal/20 bg-teal/5"];
+                        return (
+                          <div key={item.label} className={`rounded-xl border px-3 py-2.5 text-center ${borders[i]}`}>
+                            <p className="text-xs font-semibold text-foreground">{item.label}</p>
+                            <p className={`mt-0.5 text-2xl font-bold ${colors[i]}`}>{item.count}</p>
+                            <p className="text-xs text-muted">{contentStats.flashcards.total > 0 ? Math.round((item.count / contentStats.flashcards.total) * 100) : 0}%</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    {contentStats.flashcards.total > 0 && (
+                      <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-border">
+                        {contentStats.flashcards.byMe.map((item, i) => {
+                          const colors = ["bg-blue", "bg-purple", "bg-teal"];
+                          const pct = (item.count / contentStats.flashcards.total) * 100;
+                          return pct > 0 ? <div key={item.label} className={`${colors[i]} h-full`} style={{ width: `${pct}%` }} /> : null;
+                        })}
+                      </div>
+                    )}
+                    {contentStats.flashcards.byEspecialidade.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-muted mb-2">Por especialidade</p>
+                        <div className="max-h-44 space-y-1.5 overflow-auto pr-1">
+                          {contentStats.flashcards.byEspecialidade.map((item) => (
+                            <div key={item.label} className="flex items-center gap-2">
+                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
+                                <div className="h-full rounded-full bg-teal/50" style={{ width: `${Math.round((item.count / contentStats.flashcards.total) * 100)}%` }} />
+                              </div>
+                              <span className="w-7 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
+                              <span className="w-36 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Simulados */}
+                  <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-foreground">Simulados</p>
+                      <span className="rounded-full border border-blue/30 bg-blue/10 px-2.5 py-0.5 text-sm font-bold text-blue">{contentStats.simulados.total} total</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {contentStats.simulados.byMe.map((item, i) => {
+                        const colors = ["text-blue", "text-purple", "text-teal"];
+                        const borders = ["border-blue/20 bg-blue/5", "border-purple/20 bg-purple/5", "border-teal/20 bg-teal/5"];
+                        return (
+                          <div key={item.label} className={`rounded-xl border px-3 py-2.5 text-center ${borders[i]}`}>
+                            <p className="text-xs font-semibold text-foreground">{item.label}</p>
+                            <p className={`mt-0.5 text-2xl font-bold ${colors[i]}`}>{item.count}</p>
+                            <p className="text-xs text-muted">{contentStats.simulados.total > 0 ? Math.round((item.count / contentStats.simulados.total) * 100) : 0}%</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    {contentStats.simulados.total > 0 && (
+                      <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-border">
+                        {contentStats.simulados.byMe.map((item, i) => {
+                          const colors = ["bg-blue", "bg-purple", "bg-teal"];
+                          const pct = (item.count / contentStats.simulados.total) * 100;
+                          return pct > 0 ? <div key={item.label} className={`${colors[i]} h-full`} style={{ width: `${pct}%` }} /> : null;
+                        })}
+                      </div>
+                    )}
+                    {contentStats.simulados.byTema.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-muted mb-2">Por tema</p>
+                        <div className="max-h-44 space-y-1.5 overflow-auto pr-1">
+                          {contentStats.simulados.byTema.map((item) => (
+                            <div key={item.label} className="flex items-center gap-2">
+                              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
+                                <div className="h-full rounded-full bg-blue/50" style={{ width: `${Math.round((item.count / contentStats.simulados.total) * 100)}%` }} />
+                              </div>
+                              <span className="w-7 shrink-0 text-right text-xs font-medium text-foreground">{item.count}</span>
+                              <span className="w-36 shrink-0 truncate text-xs text-muted" title={item.label}>{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               <div className="grid grid-cols-3 gap-4">
-                <div className="rounded-2xl border border-border bg-background/40 p-5">
-                  <p className="text-xs text-muted mb-1">Cards importados</p>
-                  <p className="text-3xl font-bold text-teal">{overview.totalCardEvents > 0 ? "✓" : "—"}</p>
-                  <p className="mt-2 text-xs text-muted">
-                    Acesse o gerenciador para ver o total exato e importar novos arquivos CSV ou HTML.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-border bg-background/40 p-5">
-                  <p className="text-xs text-muted mb-1">Simulados</p>
-                  <p className="text-3xl font-bold text-blue">{overview.totalAttempts > 0 ? "✓" : "—"}</p>
-                  <p className="mt-2 text-xs text-muted">
-                    Importe questões no formato TEA. Suporte a ME1, ME2 e ME3.
-                  </p>
-                </div>
                 <div className="rounded-2xl border border-border bg-background/40 p-5">
                   <p className="text-xs text-muted mb-1">Formatos aceitos</p>
                   <div className="mt-2 flex flex-wrap gap-1">

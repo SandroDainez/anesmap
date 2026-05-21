@@ -634,6 +634,58 @@ export async function loadAdminAssessmentData() {
   };
 }
 
+export type ContentGroupStat = { label: string; count: number };
+
+export type ContentStats = {
+  flashcards: { total: number; byMe: ContentGroupStat[]; byEspecialidade: ContentGroupStat[] };
+  simulados: { total: number; byMe: ContentGroupStat[]; byTema: ContentGroupStat[] };
+};
+
+export async function loadAdminContentStats(): Promise<ContentStats> {
+  const supabase = browserSupabase();
+  const empty: ContentStats = {
+    flashcards: { total: 0, byMe: [], byEspecialidade: [] },
+    simulados: { total: 0, byMe: [], byTema: [] },
+  };
+  if (!supabase) return empty;
+
+  const [fcRes, simRes] = await Promise.all([
+    supabase.from("flashcards").select("me, especialidade"),
+    supabase.from("simulados").select("me, tema"),
+  ]);
+
+  const fcRows = (fcRes.data ?? []) as { me: string; especialidade: string | null }[];
+  const fcByMe = new Map<string, number>();
+  const fcByEsp = new Map<string, number>();
+  for (const row of fcRows) {
+    fcByMe.set(row.me, (fcByMe.get(row.me) ?? 0) + 1);
+    const esp = (row.especialidade ?? "").trim() || "Sem especialidade";
+    fcByEsp.set(esp, (fcByEsp.get(esp) ?? 0) + 1);
+  }
+
+  const simRows = (simRes.data ?? []) as { me: string; tema: string | null }[];
+  const simByMe = new Map<string, number>();
+  const simByTema = new Map<string, number>();
+  for (const row of simRows) {
+    simByMe.set(row.me, (simByMe.get(row.me) ?? 0) + 1);
+    const tema = (row.tema ?? "").trim() || "Sem tema";
+    simByTema.set(tema, (simByTema.get(tema) ?? 0) + 1);
+  }
+
+  return {
+    flashcards: {
+      total: fcRows.length,
+      byMe: ["ME1", "ME2", "ME3"].map((me) => ({ label: me, count: fcByMe.get(me) ?? 0 })),
+      byEspecialidade: Array.from(fcByEsp.entries()).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count })),
+    },
+    simulados: {
+      total: simRows.length,
+      byMe: ["ME1", "ME2", "ME3"].map((me) => ({ label: me, count: simByMe.get(me) ?? 0 })),
+      byTema: Array.from(simByTema.entries()).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count })),
+    },
+  };
+}
+
 export async function migrateLocalHistoryToAccount() {
   if (typeof window === "undefined") return { migrated: false, reason: "NO_WINDOW" };
   const markerKey = "anesmap.migrated.localToAccount.v1";
