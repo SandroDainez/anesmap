@@ -354,6 +354,92 @@ export async function loadAdminUserDetails(userId: string) {
   };
 }
 
+export type ContentGroupStat = { label: string; count: number };
+
+export type ContentStats = {
+  flashcards: {
+    total: number;
+    byMe: ContentGroupStat[];
+    byEspecialidade: ContentGroupStat[];
+  };
+  simulados: {
+    total: number;
+    byMe: ContentGroupStat[];
+    byTema: ContentGroupStat[];
+  };
+};
+
+export async function loadAdminContentStats(): Promise<ContentStats> {
+  const supabase = browserSupabase();
+
+  const empty: ContentStats = {
+    flashcards: { total: 0, byMe: [], byEspecialidade: [] },
+    simulados: { total: 0, byMe: [], byTema: [] },
+  };
+
+  if (!supabase) return empty;
+
+  const [flashcardsRes, simuladosRes] = await Promise.all([
+    supabase.from("flashcards").select("me, especialidade"),
+    supabase.from("simulados").select("me, tema"),
+  ]);
+
+  // ── Flashcards ──────────────────────────────────────────────
+  const flashcardRows = (flashcardsRes.data ?? []) as { me: string; especialidade: string | null }[];
+
+  const fcByMe = new Map<string, number>();
+  const fcByEsp = new Map<string, number>();
+
+  for (const row of flashcardRows) {
+    fcByMe.set(row.me, (fcByMe.get(row.me) ?? 0) + 1);
+    const esp = (row.especialidade ?? "").trim() || "Sem especialidade";
+    fcByEsp.set(esp, (fcByEsp.get(esp) ?? 0) + 1);
+  }
+
+  const sortedFcByMe = ["ME1", "ME2", "ME3"].map((me) => ({
+    label: me,
+    count: fcByMe.get(me) ?? 0,
+  }));
+
+  const sortedFcByEsp = Array.from(fcByEsp.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([label, count]) => ({ label, count }));
+
+  // ── Simulados ────────────────────────────────────────────────
+  const simuladoRows = (simuladosRes.data ?? []) as { me: string; tema: string | null }[];
+
+  const simByMe = new Map<string, number>();
+  const simByTema = new Map<string, number>();
+
+  for (const row of simuladoRows) {
+    simByMe.set(row.me, (simByMe.get(row.me) ?? 0) + 1);
+    const tema = (row.tema ?? "").trim() || "Sem tema";
+    simByTema.set(tema, (simByTema.get(tema) ?? 0) + 1);
+  }
+
+  const sortedSimByMe = ["ME1", "ME2", "ME3"].map((me) => ({
+    label: me,
+    count: simByMe.get(me) ?? 0,
+  }));
+
+  const sortedSimByTema = Array.from(simByTema.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([label, count]) => ({ label, count }));
+
+  return {
+    flashcards: {
+      total: flashcardRows.length,
+      byMe: sortedFcByMe,
+      byEspecialidade: sortedFcByEsp,
+    },
+    simulados: {
+      total: simuladoRows.length,
+      byMe: sortedSimByMe,
+      byTema: sortedSimByTema,
+    },
+  };
+}
+
 export async function migrateLocalHistoryToAccount() {
   if (typeof window === "undefined") return { migrated: false, reason: "NO_WINDOW" };
   const markerKey = "anesmap.migrated.localToAccount.v1";
