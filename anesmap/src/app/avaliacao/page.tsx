@@ -426,11 +426,9 @@ export default function AvaliacaoPage() {
               <div className="space-y-2">
                 {PROCEDURES.filter((p) => p.categoria === cat).map((proc) => {
                   const count = procedureCounts[proc.id] ?? 0;
-                  const pct = Math.min(100, Math.round((count / proc.meta) * 100));
-                  const barColor = pct >= 100 ? "bg-teal" : pct >= 50 ? "bg-blue" : "bg-amber";
                   return (
                     <AppCard key={proc.id}>
-                      <div className="flex items-start justify-between gap-2 mb-2">
+                      <div className="flex items-center justify-between gap-2">
                         <p className="text-sm text-foreground leading-tight">{proc.label}</p>
                         <div className="flex items-center gap-1 shrink-0">
                           <button
@@ -449,18 +447,6 @@ export default function AvaliacaoPage() {
                             +
                           </button>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="flex-1 h-1.5 rounded-full bg-background/40 overflow-hidden">
-                          <div
-                            className={`h-full rounded-full transition-all ${barColor}`}
-                            style={{ width: `${pct}%` }}
-                          />
-                        </div>
-                        <span className={`text-xs font-medium ${pct >= 100 ? "text-teal" : "text-muted"}`}>
-                          {count}/{proc.meta}
-                          {pct >= 100 ? " ✓" : ""}
-                        </span>
                       </div>
                     </AppCard>
                   );
