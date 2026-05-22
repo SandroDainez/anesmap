@@ -148,6 +148,8 @@ export function AdminPanel() {
   const [selectedDetails, setSelectedDetails] = useState<AdminUserDetails | null>(null);
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [trackFilter, setTrackFilter] = useState<Track | "">("");
+  const [cardMeFilter, setCardMeFilter] = useState<Track | "">("");
+  const [expandedAttemptId, setExpandedAttemptId] = useState<string | null>(null);
 
   const [inviteCodes, setInviteCodes] = useState<InviteCode[]>([]);
   const [newLabel, setNewLabel] = useState("");
@@ -344,6 +346,50 @@ export function AdminPanel() {
       cards: { cardViews, cardFlips, cardGrades: cardGrades.length, cardEasy, cardMedium, cardHard, uniqueCards },
       simulados: { totalAnswers, correctAnswers, wrongAnswers, accuracy, finishedAttempts, avgScoreFinished, answersByAttempt },
     };
+  }, [selectedDetails]);
+
+  // Sumariza cards únicos estudados com ME, views, flips e avaliação
+  const cardSummaries = useMemo(() => {
+    if (!selectedDetails) return [];
+    const map = new Map<string, {
+      cardId: string; cardNum: string; me: Track | null;
+      views: number; flips: number; quality: number | null; lastActivity: string;
+    }>();
+    for (const ev of selectedDetails.events) {
+      const existing = map.get(ev.card_id) ?? {
+        cardId: ev.card_id,
+        cardNum: humanItemLabel(ev.card_id, "Card"),
+        me: (() => {
+          const lower = ev.card_id.toLowerCase();
+          if (lower.includes("me1")) return "ME1" as Track;
+          if (lower.includes("me2")) return "ME2" as Track;
+          if (lower.includes("me3")) return "ME3" as Track;
+          return null;
+        })(),
+        views: 0, flips: 0, quality: null, lastActivity: ev.created_at,
+      };
+      if (ev.event_type === "view") existing.views++;
+      if (ev.event_type === "flip") existing.flips++;
+      if (ev.event_type === "grade" && ev.quality !== null) existing.quality = Number(ev.quality);
+      if (ev.created_at > existing.lastActivity) existing.lastActivity = ev.created_at;
+      map.set(ev.card_id, existing);
+    }
+    return Array.from(map.values()).sort((a, b) =>
+      new Date(b.lastActivity).getTime() - new Date(a.lastActivity).getTime()
+    );
+  }, [selectedDetails]);
+
+  // Agrupa respostas por tentativa de simulado
+  const simuladosComRespostas = useMemo(() => {
+    if (!selectedDetails) return [];
+    return selectedDetails.attempts
+      .map((attempt) => ({
+        ...attempt,
+        answers: selectedDetails.answers
+          .filter((ans) => ans.attempt_id === attempt.id)
+          .sort((a, b) => new Date(a.answered_at).getTime() - new Date(b.answered_at).getTime()),
+      }))
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }, [selectedDetails]);
 
   function handleDownloadUserPdf() {
@@ -1271,171 +1317,175 @@ export function AdminPanel() {
                           })()}
                         </div>
 
-                        {/* Timelines separadas */}
-                        <div className="grid grid-cols-2 gap-5">
-                          <div className="rounded-2xl border border-border bg-background/40 p-5">
-                            <h3 className="mb-3 text-sm font-semibold text-foreground">
-                              Histórico de Cards (item a item)
+                        {/* ── CARDS ESTUDADOS ── */}
+                        <div className="rounded-2xl border border-border bg-background/40 p-5">
+                          <div className="mb-3 flex items-center justify-between">
+                            <h3 className="text-sm font-semibold text-foreground">
+                              Cards estudados <span className="ml-1 text-xs font-normal text-muted">({cardSummaries.length} únicos)</span>
                             </h3>
-                            {(() => {
-                              const cardTimeline = selectedDetails.events
-                                .map((ev) => ({
-                                  id: `card-${ev.id}`,
-                                  when: ev.created_at,
-                                  text: `${humanCardEvent(ev.event_type, ev.quality)} no ${humanItemLabel(ev.card_id, "Card")}${ev.quality !== null ? ` (qualidade ${ev.quality})` : ""}.`,
-                                }))
-                                .sort((a, b) => new Date(b.when).getTime() - new Date(a.when).getTime())
-                                .slice(0, 80);
-
-                              if (cardTimeline.length === 0) {
-                                return <p className="text-xs text-muted">Nenhuma atividade de card registrada.</p>;
-                              }
-
-                              return (
-                                <div className="max-h-[420px] space-y-2 overflow-auto pr-1">
-                                  {cardTimeline.map((item) => (
-                                    <div key={item.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
-                                      <div className="mb-1 flex items-center justify-between gap-2">
-                                        <span className="rounded-md border border-teal/30 bg-teal/10 px-1.5 py-0.5 text-[10px] font-medium text-teal">
-                                          Card
-                                        </span>
-                                        <span className="text-[11px] text-muted">{fmtDate(item.when)}</span>
-                                      </div>
-                                      <p className="text-xs leading-relaxed text-muted">
-                                        <span className="font-medium text-foreground">{selectedUser.name ?? "Usuário"}</span> {item.text}
-                                      </p>
-                                    </div>
-                                  ))}
-                                </div>
-                              );
-                            })()}
+                            <div className="flex gap-1">
+                              {(["", "ME1", "ME2", "ME3"] as const).map((f) => (
+                                <button
+                                  key={f}
+                                  type="button"
+                                  onClick={() => setCardMeFilter(f as Track | "")}
+                                  className={`rounded-lg border px-2 py-0.5 text-[10px] font-medium transition ${
+                                    cardMeFilter === f
+                                      ? f === "ME1" ? "border-blue/40 bg-blue/10 text-blue"
+                                        : f === "ME2" ? "border-purple/40 bg-purple/10 text-purple"
+                                        : f === "ME3" ? "border-teal/40 bg-teal/10 text-teal"
+                                        : "border-foreground/30 bg-foreground/10 text-foreground"
+                                      : "border-border text-muted hover:text-foreground"
+                                  }`}
+                                >
+                                  {f || "Todos"}
+                                </button>
+                              ))}
+                            </div>
                           </div>
-
-                          <div className="rounded-2xl border border-border bg-background/40 p-5">
-                            <h3 className="mb-3 text-sm font-semibold text-foreground">
-                              Histórico de Simulados e Respostas
-                            </h3>
-                            {(() => {
-                              const simTimeline = selectedDetails.attempts.map((a) => {
-                                const score = Math.round(Number(a.score_percent ?? 0));
-                                const scoreText = a.score_percent === null ? "ainda sem nota final" : `${score}%`;
-                                const attemptAnswers = detailedStats.simulados.answersByAttempt.get(a.id) ?? {
-                                  total: 0,
-                                  correct: 0,
-                                  wrong: 0,
-                                };
-                                return {
-                                  id: `attempt-${a.id}`,
-                                  when: a.created_at,
-                                  badge: "Simulado",
-                                  badgeClass: "border-blue/30 bg-blue/10 text-blue",
-                                  text: `realizou simulado ${a.track} com resultado ${scoreText} em ${fmtSec(a.duration_sec)}. Respondeu ${attemptAnswers.total} questões (${attemptAnswers.correct} acertos e ${attemptAnswers.wrong} erros).`,
-                                };
-                              });
-                              const answerTimeline = selectedDetails.answers.map((ans) => ({
-                                id: `answer-${ans.id}`,
-                                when: ans.answered_at,
-                                badge: "Resposta",
-                                badgeClass: ans.correct
-                                  ? "border-teal/30 bg-teal/10 text-teal"
-                                  : "border-rose/30 bg-rose/10 text-rose",
-                                text: `respondeu ${humanItemLabel(ans.question_id, "Questão")} e marcou alternativa ${ans.selected} (${ans.correct ? "acertou" : "errou"}).`,
-                              }));
-
-                              const timeline = [...simTimeline, ...answerTimeline]
-                                .sort((a, b) => new Date(b.when).getTime() - new Date(a.when).getTime())
-                                .slice(0, 120);
-
-                              if (timeline.length === 0) {
-                                return <p className="text-xs text-muted">Nenhuma atividade de simulado/resposta registrada.</p>;
-                              }
-
-                              return (
-                                <div className="max-h-[420px] space-y-2 overflow-auto pr-1">
-                                  {timeline.map((item) => (
-                                    <div key={item.id} className="rounded-xl border border-border bg-background/35 px-3 py-2">
-                                      <div className="mb-1 flex items-center justify-between gap-2">
-                                        <span className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${item.badgeClass}`}>
-                                          {item.badge}
-                                        </span>
-                                        <span className="text-[11px] text-muted">{fmtDate(item.when)}</span>
-                                      </div>
-                                      <p className="text-xs leading-relaxed text-muted">
-                                        <span className="font-medium text-foreground">{selectedUser.name ?? "Usuário"}</span> {item.text}
-                                      </p>
-                                    </div>
-                                  ))}
-                                </div>
-                              );
-                            })()}
-                          </div>
-                        </div>
-
-                        {/* Tabela objetiva também mantida */}
-                        <div className="grid grid-cols-2 gap-5">
-                          <div className="rounded-2xl border border-border bg-background/40 p-5">
-                            <h3 className="mb-3 text-sm font-semibold text-foreground">Simulados recentes (tabela)</h3>
-                            {selectedDetails.attempts.length === 0 ? (
-                              <p className="text-xs text-muted">Nenhum simulado realizado.</p>
-                            ) : (
-                              <table className="w-full text-xs">
-                                <thead>
-                                  <tr className="border-b border-border text-muted">
-                                    <th className="pb-2 text-left">Trilha</th>
-                                    <th className="pb-2 text-right">Score</th>
-                                    <th className="pb-2 text-right">Tempo</th>
-                                    <th className="pb-2 text-right">Data</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {selectedDetails.attempts.slice(0, 15).map((a) => {
-                                    const score = Math.round(Number(a.score_percent ?? 0));
-                                    const scoreColor = score >= 70 ? "text-teal" : score >= 50 ? "text-amber" : "text-rose";
-                                    return (
-                                      <tr key={a.id} className="border-b border-border/40 last:border-0">
-                                        <td className="py-1.5">
-                                          <span className={`rounded border px-1 text-[10px] ${TRACK_STYLE[a.track as Track]}`}>{a.track}</span>
-                                        </td>
-                                        <td className={`py-1.5 text-right font-bold ${scoreColor}`}>{score}%</td>
-                                        <td className="py-1.5 text-right text-muted">{fmtSec(a.duration_sec)}</td>
-                                        <td className="py-1.5 text-right text-muted">{fmtDate(a.created_at)}</td>
-                                      </tr>
-                                    );
-                                  })}
-                                </tbody>
-                              </table>
-                            )}
-                          </div>
-
-                          <div className="rounded-2xl border border-border bg-background/40 p-5">
-                            <h3 className="mb-3 text-sm font-semibold text-foreground">Eventos de cards recentes (tabela)</h3>
-                            {selectedDetails.events.length === 0 ? (
-                              <p className="text-xs text-muted">Nenhum evento registrado.</p>
-                            ) : (
-                              <table className="w-full text-xs">
-                                <thead>
-                                  <tr className="border-b border-border text-muted">
-                                    <th className="pb-2 text-left">Card</th>
-                                    <th className="pb-2 text-left">Evento</th>
-                                    <th className="pb-2 text-right">Data</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {selectedDetails.events.slice(0, 20).map((ev) => (
-                                    <tr key={ev.id} className="border-b border-border/40 last:border-0">
-                                      <td className="py-1.5 text-[11px] text-muted">{humanItemLabel(ev.card_id, "Card")}</td>
-                                      <td className="py-1.5 text-foreground">
-                                        {humanCardEvent(ev.event_type, ev.quality)}
-                                        {ev.quality !== null ? <span className="ml-1 text-muted">Q{ev.quality}</span> : null}
-                                      </td>
-                                      <td className="py-1.5 text-right text-muted">{fmtDate(ev.created_at)}</td>
+                          {(() => {
+                            const filtered = cardMeFilter
+                              ? cardSummaries.filter((c) => c.me === cardMeFilter)
+                              : cardSummaries;
+                            if (filtered.length === 0) return <p className="text-xs text-muted">Nenhum card estudado.</p>;
+                            return (
+                              <div className="max-h-80 overflow-auto">
+                                <table className="w-full text-xs">
+                                  <thead className="sticky top-0 bg-card">
+                                    <tr className="border-b border-border text-left text-muted">
+                                      <th className="pb-2 pr-2">Trilha</th>
+                                      <th className="pb-2 pr-2">Card</th>
+                                      <th className="pb-2 pr-2 text-center">Views</th>
+                                      <th className="pb-2 pr-2 text-center">Virou</th>
+                                      <th className="pb-2 pr-2">Avaliação</th>
+                                      <th className="pb-2 text-right">Último acesso</th>
                                     </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            )}
-                          </div>
+                                  </thead>
+                                  <tbody>
+                                    {filtered.map((card) => {
+                                      const gradeInfo = card.quality === null ? null
+                                        : card.quality >= 4 ? { label: "Fácil", cls: "text-teal border-teal/30 bg-teal/10" }
+                                        : card.quality === 3 ? { label: "Médio", cls: "text-amber border-amber/30 bg-amber/10" }
+                                        : { label: "Difícil", cls: "text-rose border-rose/30 bg-rose/10" };
+                                      return (
+                                        <tr key={card.cardId} className="border-b border-border/40 last:border-0 hover:bg-background/20">
+                                          <td className="py-1.5 pr-2">
+                                            {card.me
+                                              ? <span className={`rounded border px-1 text-[10px] font-bold ${TRACK_STYLE[card.me]}`}>{card.me}</span>
+                                              : <span className="text-muted">—</span>}
+                                          </td>
+                                          <td className="py-1.5 pr-2 font-medium text-foreground">{card.cardNum}</td>
+                                          <td className="py-1.5 pr-2 text-center text-muted">{card.views}</td>
+                                          <td className="py-1.5 pr-2 text-center text-muted">{card.flips}</td>
+                                          <td className="py-1.5 pr-2">
+                                            {gradeInfo
+                                              ? <span className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold ${gradeInfo.cls}`}>{gradeInfo.label}</span>
+                                              : <span className="text-[10px] text-muted">Não avaliado</span>}
+                                          </td>
+                                          <td className="py-1.5 text-right text-muted">{fmtDate(card.lastActivity)}</td>
+                                        </tr>
+                                      );
+                                    })}
+                                  </tbody>
+                                </table>
+                              </div>
+                            );
+                          })()}
                         </div>
+
+                        {/* ── SIMULADOS POR TENTATIVA ── */}
+                        <div className="rounded-2xl border border-border bg-background/40 p-5">
+                          <h3 className="mb-3 text-sm font-semibold text-foreground">
+                            Simulados realizados <span className="ml-1 text-xs font-normal text-muted">({simuladosComRespostas.length} tentativas)</span>
+                          </h3>
+                          {simuladosComRespostas.length === 0 ? (
+                            <p className="text-xs text-muted">Nenhum simulado realizado.</p>
+                          ) : (
+                            <div className="max-h-[520px] space-y-2 overflow-auto pr-1">
+                              {simuladosComRespostas.map((attempt) => {
+                                const score = Math.round(Number(attempt.score_percent ?? 0));
+                                const scoreColor = attempt.score_percent === null ? "text-muted"
+                                  : score >= 70 ? "text-teal" : score >= 50 ? "text-amber" : "text-rose";
+                                const isExpanded = expandedAttemptId === attempt.id;
+                                const correct = attempt.answers.filter((a) => a.correct).length;
+                                const wrong = attempt.answers.length - correct;
+                                return (
+                                  <div key={attempt.id} className="rounded-xl border border-border bg-background/30 overflow-hidden">
+                                    <button
+                                      type="button"
+                                      onClick={() => setExpandedAttemptId(isExpanded ? null : attempt.id)}
+                                      className="flex w-full items-center gap-3 px-3 py-2.5 text-left transition hover:bg-background/20"
+                                    >
+                                      <span className={`shrink-0 rounded border px-1.5 py-0.5 text-[10px] font-bold ${TRACK_STYLE[attempt.track as Track]}`}>{attempt.track}</span>
+                                      <span className={`text-sm font-bold ${scoreColor}`}>
+                                        {attempt.score_percent === null ? "—" : `${score}%`}
+                                      </span>
+                                      {attempt.answers.length > 0 && (
+                                        <span className="text-[11px] text-muted">
+                                          <span className="text-teal font-semibold">{correct}✓</span>
+                                          {" / "}
+                                          <span className="text-rose font-semibold">{wrong}✗</span>
+                                          {" de "}{attempt.answers.length}
+                                        </span>
+                                      )}
+                                      <span className="text-[11px] text-muted">{fmtSec(attempt.duration_sec)}</span>
+                                      <span className="ml-auto text-[11px] text-muted">{fmtDate(attempt.created_at)}</span>
+                                      <span className={`text-[10px] text-muted transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}>▼</span>
+                                    </button>
+                                    {isExpanded && (
+                                      <div className="border-t border-border/50 px-3 pb-3 pt-2">
+                                        {attempt.answers.length === 0 ? (
+                                          <p className="text-xs text-muted">Simulado iniciado sem respostas registradas.</p>
+                                        ) : (
+                                          <table className="w-full text-xs">
+                                            <thead>
+                                              <tr className="border-b border-border/50 text-muted">
+                                                <th className="pb-1.5 text-left">Questão</th>
+                                                <th className="pb-1.5 text-center">Trilha</th>
+                                                <th className="pb-1.5 text-center">Marcou</th>
+                                                <th className="pb-1.5 text-left">Resultado</th>
+                                                <th className="pb-1.5 text-right">Horário</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              {attempt.answers.map((ans) => {
+                                                const qMe = (() => {
+                                                  const lower = ans.question_id.toLowerCase();
+                                                  if (lower.includes("me1")) return "ME1" as Track;
+                                                  if (lower.includes("me2")) return "ME2" as Track;
+                                                  if (lower.includes("me3")) return "ME3" as Track;
+                                                  return null;
+                                                })();
+                                                return (
+                                                  <tr key={ans.id} className={`border-b border-border/30 last:border-0 ${ans.correct ? "" : "bg-rose/5"}`}>
+                                                    <td className="py-1.5 font-medium text-foreground">{humanItemLabel(ans.question_id, "Questão")}</td>
+                                                    <td className="py-1.5 text-center">
+                                                      {qMe
+                                                        ? <span className={`rounded border px-1 text-[9px] font-bold ${TRACK_STYLE[qMe]}`}>{qMe}</span>
+                                                        : <span className="text-muted">—</span>}
+                                                    </td>
+                                                    <td className="py-1.5 text-center font-bold text-foreground">{ans.selected}</td>
+                                                    <td className="py-1.5">
+                                                      <span className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold ${ans.correct ? "border-teal/30 bg-teal/10 text-teal" : "border-rose/30 bg-rose/10 text-rose"}`}>
+                                                        {ans.correct ? "Acertou" : "Errou"}
+                                                      </span>
+                                                    </td>
+                                                    <td className="py-1.5 text-right text-muted">{fmtDate(ans.answered_at)}</td>
+                                                  </tr>
+                                                );
+                                              })}
+                                            </tbody>
+                                          </table>
+                                        )}
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+
                         {/* ── AUTOAVALIAÇÃO DETALHADA DO USUÁRIO (colapsável) ── */}
                         {(() => {
                           const DOMAINS_DEF = [
