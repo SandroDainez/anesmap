@@ -796,13 +796,20 @@ export function AdminPanel() {
             </button>
           ))}
 
-          <div className="border-t border-border pt-4 px-1 mb-2">
+          <div className="border-t border-border pt-4 px-1 mb-2 space-y-1">
             <a
               href="/admin/simulacoes"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-background/60 hover:text-foreground"
             >
               <span className="text-base">🩺</span>
               Simulação Clínica
+            </a>
+            <a
+              href="/admin/casos"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-background/60 hover:text-foreground"
+            >
+              <span className="text-base">✦</span>
+              Criar Casos
             </a>
           </div>
 
