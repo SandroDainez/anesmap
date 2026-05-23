@@ -27,7 +27,7 @@ export async function PATCH(req: NextRequest) {
     Prefer: "return=minimal",
   };
 
-  let body: { id: string; explicacaoA?: string; explicacaoB?: string; explicacaoC?: string; explicacaoD?: string; explicacaoE?: string; referencias?: string }[];
+  let body: Record<string, string | undefined>[];
   
   try {
     body = await req.json();
