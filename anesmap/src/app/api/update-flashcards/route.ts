@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const IMPORT_SECRET = proces…RET;
+const IMPORT_SECRET = proce$$.env.IMPORT_API_SECRET;
 
 export async function PATCH(req: NextRequest) {
   const authHeader = req.headers.get("authorization") ?? "";
