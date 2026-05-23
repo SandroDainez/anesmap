@@ -27,10 +27,22 @@ export async function PATCH(req: NextRequest) {
     Prefer: "return=minimal",
   };
 
-  let body: Record<string, string | undefined>[];
-  
+  type UpdateItem = {
+    id?: string;
+    frente?: string;
+    verso?: string;
+    explicacaoA?: string;
+    explicacaoB?: string;
+    explicacaoC?: string;
+    explicacaoD?: string;
+    explicacaoE?: string;
+    referencias?: string;
+  };
+
+  let body: UpdateItem[];
+
   try {
-    body = await req.json();
+    body = await req.json() as UpdateItem[];
   } catch {
     return NextResponse.json({ error: "JSON inválido." }, { status: 400 });
   }
