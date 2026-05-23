@@ -33,7 +33,7 @@ type Caso = {
   situacao_inicial: string;
   sinais_vitais_iniciais: SinaisVitais;
   opcoes_iniciais: string[];
-  fases: Fase[];
+  fases: Fase[] | null;
   ativo: boolean;
   revisado: boolean;
   created_at?: string;
@@ -89,7 +89,7 @@ function emptyForm(): CasoPayload {
 
 /** Before saving, auto-populate legacy top-level fields from fases[0] */
 function buildPayload(form: CasoPayload): CasoPayload {
-  const f0 = form.fases[0];
+  const f0 = (form.fases ?? [])[0];
   return {
     ...form,
     situacao_inicial: f0?.situacao ?? "",
@@ -593,7 +593,7 @@ function CamposForm({
 
       {/* Fases */}
       <FasesEditor
-        fases={form.fases}
+        fases={form.fases ?? [emptyFase(0)]}
         onChange={(fases) => set("fases", fases)}
       />
     </div>

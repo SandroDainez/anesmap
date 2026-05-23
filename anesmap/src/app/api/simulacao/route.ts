@@ -53,12 +53,13 @@ export async function POST(request: NextRequest) {
       // Look up case: first in hardcoded library, then in DB
       let caso = CASOS_SIMULACAO.find((c) => c.id === caso_id);
       if (!caso && caso_id) {
-        const { data: dbCaso } = await supabase
-          .from("casos_simulacao")
-          .select("*")
-          .or(`slug.eq.${caso_id},id.eq.${caso_id}`)
-          .eq("ativo", true)
-          .single();
+        // caso_id from URL is always a slug for DB cases; only use id lookup if it's a valid UUID
+        const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const isUuid = UUID_RE.test(caso_id);
+        const dbQuery = supabase.from("casos_simulacao").select("*").eq("ativo", true);
+        const { data: dbCaso } = await (
+          isUuid ? dbQuery.eq("id", caso_id) : dbQuery.eq("slug", caso_id)
+        ).single();
         if (dbCaso) {
           const row = dbCaso as Record<string, unknown>;
           caso = {
@@ -119,12 +120,12 @@ export async function POST(request: NextRequest) {
 
       let casoAtual = CASOS_SIMULACAO.find((c) => c.id === caso_id);
       if (!casoAtual && caso_id) {
-        const { data: dbRow } = await supabase
-          .from("casos_simulacao")
-          .select("*")
-          .or(`slug.eq.${caso_id},id.eq.${caso_id}`)
-          .eq("ativo", true)
-          .single();
+        const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const isUuid = UUID_RE.test(caso_id);
+        const dbQuery = supabase.from("casos_simulacao").select("*").eq("ativo", true);
+        const { data: dbRow } = await (
+          isUuid ? dbQuery.eq("id", caso_id) : dbQuery.eq("slug", caso_id)
+        ).single();
         if (dbRow) {
           const row = dbRow as Record<string, unknown>;
           casoAtual = {
