@@ -424,9 +424,11 @@ export async function loadAdminUserDetails(userId: string) {
       answers: [],
       assessmentSnapshots: [],
       procedureCounts: null,
+      simSessoes: [],
+      simUso: [],
     };
   }
-  let [profileRes, eventsRes, progressRes, attemptsRes, answersRes, snapshotsRes, proceduresRes] = await Promise.all([
+  let [profileRes, eventsRes, progressRes, attemptsRes, answersRes, snapshotsRes, proceduresRes, simSessoesRes, simUsoRes] = await Promise.all([
     supabase
       .from("profiles")
       .select(
@@ -467,6 +469,18 @@ export async function loadAdminUserDetails(userId: string) {
       .select("counts, updated_at")
       .eq("user_id", userId)
       .maybeSingle(),
+    supabase
+      .from("simulacao_sessoes")
+      .select("id, caso_id, caso_titulo, status, desfecho, pontuacao_final, iniciada_em, concluida_em")
+      .eq("usuario_id", userId)
+      .order("iniciada_em", { ascending: false })
+      .limit(50),
+    supabase
+      .from("uso_simulacao")
+      .select("mes_ano, quantidade, ultima_simulacao")
+      .eq("usuario_id", userId)
+      .order("mes_ano", { ascending: false })
+      .limit(12),
   ]);
 
   if (isMissingTrackColumnsError(profileRes.error as { code?: string; message?: string })) {
@@ -508,6 +522,21 @@ export async function loadAdminUserDetails(userId: string) {
       ratings: AssessmentRatings;
     }>,
     procedureCounts: (proceduresRes.data as { counts: ProcedureCountsMap; updated_at: string } | null) ?? null,
+    simSessoes: (simSessoesRes.data ?? []) as Array<{
+      id: string;
+      caso_id: string;
+      caso_titulo: string;
+      status: string;
+      desfecho: string | null;
+      pontuacao_final: number | null;
+      iniciada_em: string;
+      concluida_em: string | null;
+    }>,
+    simUso: (simUsoRes.data ?? []) as Array<{
+      mes_ano: string;
+      quantidade: number;
+      ultima_simulacao: string | null;
+    }>,
   };
 }
 

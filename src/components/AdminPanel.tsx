@@ -1503,6 +1503,102 @@ export function AdminPanel() {
                           )}
                         </div>
 
+                        {/* ── SIMULAÇÃO CLÍNICA ── */}
+                        {(() => {
+                          const sessoes = selectedDetails.simSessoes ?? [];
+                          const uso = selectedDetails.simUso ?? [];
+                          const concluidas = sessoes.filter(s => s.status === "concluida");
+                          const pontuacoes = concluidas.filter(s => s.pontuacao_final !== null).map(s => s.pontuacao_final as number);
+                          const mediaPts = pontuacoes.length > 0 ? Math.round(pontuacoes.reduce((a, b) => a + b, 0) / pontuacoes.length) : null;
+                          const desfechos = { recuperacao: 0, complicacao: 0, obito: 0 };
+                          concluidas.forEach(s => { if (s.desfecho && s.desfecho in desfechos) desfechos[s.desfecho as keyof typeof desfechos]++; });
+                          const mesAtual = new Date().toISOString().slice(0, 7);
+                          const usoMes = uso.find(u => u.mes_ano === mesAtual)?.quantidade ?? 0;
+
+                          return (
+                            <div className="rounded-2xl border border-border bg-background/40 p-5">
+                              <div className="mb-4 flex items-center justify-between">
+                                <h3 className="text-sm font-semibold text-foreground">🩺 Simulação Clínica</h3>
+                                <a href="/admin/simulacoes" className="text-xs text-teal hover:underline">Ver painel completo →</a>
+                              </div>
+
+                              {sessoes.length === 0 ? (
+                                <p className="text-xs text-muted">Nenhuma simulação clínica realizada.</p>
+                              ) : (
+                                <>
+                                  {/* Resumo */}
+                                  <div className="mb-4 grid grid-cols-4 gap-3">
+                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                      <p className="text-2xl font-bold text-foreground">{sessoes.length}</p>
+                                      <p className="mt-0.5 text-[11px] text-muted">realizadas</p>
+                                    </div>
+                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                      <p className="text-2xl font-bold text-teal">{concluidas.length}</p>
+                                      <p className="mt-0.5 text-[11px] text-muted">concluídas</p>
+                                    </div>
+                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                      <p className="text-2xl font-bold text-foreground">{mediaPts !== null ? `${mediaPts}` : "—"}</p>
+                                      <p className="mt-0.5 text-[11px] text-muted">média pts</p>
+                                    </div>
+                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                      <p className="text-2xl font-bold text-amber">{usoMes}</p>
+                                      <p className="mt-0.5 text-[11px] text-muted">este mês</p>
+                                    </div>
+                                  </div>
+
+                                  {/* Desfechos */}
+                                  {concluidas.length > 0 && (
+                                    <div className="mb-4 flex gap-3">
+                                      <span className="flex items-center gap-1.5 rounded-lg border border-green-500/20 bg-green-500/10 px-3 py-1.5 text-xs text-green-400">
+                                        ✅ {desfechos.recuperacao} recuperações
+                                      </span>
+                                      <span className="flex items-center gap-1.5 rounded-lg border border-amber-500/20 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-400">
+                                        ⚠️ {desfechos.complicacao} complicações
+                                      </span>
+                                      <span className="flex items-center gap-1.5 rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-1.5 text-xs text-red-400">
+                                        ❌ {desfechos.obito} óbitos
+                                      </span>
+                                    </div>
+                                  )}
+
+                                  {/* Histórico por caso */}
+                                  <div className="max-h-64 space-y-1.5 overflow-auto pr-1">
+                                    {sessoes.map(s => {
+                                      const pts = s.pontuacao_final;
+                                      const ptsColor = pts === null ? "text-muted" : pts >= 70 ? "text-teal" : pts >= 50 ? "text-amber" : "text-rose";
+                                      const desfechoEmoji: Record<string, string> = { recuperacao: "✅", complicacao: "⚠️", obito: "❌" };
+                                      return (
+                                        <div key={s.id} className="flex items-center gap-3 rounded-lg border border-border/50 bg-background/20 px-3 py-2">
+                                          <span className="text-sm">{s.desfecho ? (desfechoEmoji[s.desfecho] ?? "🔄") : "🔄"}</span>
+                                          <span className="flex-1 truncate text-xs text-foreground">{s.caso_titulo}</span>
+                                          <span className={`shrink-0 text-sm font-bold ${ptsColor}`}>
+                                            {pts !== null ? `${pts} pts` : "—"}
+                                          </span>
+                                          <span className="shrink-0 text-[10px] text-muted">{new Date(s.iniciada_em).toLocaleDateString("pt-BR")}</span>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+
+                                  {/* Uso por mês */}
+                                  {uso.length > 1 && (
+                                    <div className="mt-3 border-t border-border pt-3">
+                                      <p className="mb-2 text-[11px] text-muted">Histórico mensal</p>
+                                      <div className="flex flex-wrap gap-2">
+                                        {uso.map(u => (
+                                          <span key={u.mes_ano} className="rounded-lg border border-border bg-background/30 px-2 py-1 text-[11px] text-muted">
+                                            {u.mes_ano}: <span className="font-semibold text-foreground">{u.quantidade}</span>
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+
                         {/* ── AUTOAVALIAÇÃO DETALHADA DO USUÁRIO (colapsável) ── */}
                         {(() => {
                           const DOMAINS_DEF = [
