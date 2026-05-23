@@ -63,10 +63,18 @@ export function CasoCard({ caso, onClick, bloqueado = false }: Props) {
         ))}
       </div>
 
-      <div className="flex items-center justify-between text-xs text-muted">
+      <div className="mb-3 flex items-center justify-between text-xs text-muted">
         <span>⏱ {caso.duracao_estimada}</span>
         <span>{caso.nivel_recomendado.join(" · ")}</span>
       </div>
+
+      {!bloqueado && (
+        <div className="flex justify-end">
+          <span className="rounded-lg bg-teal px-4 py-1.5 text-xs font-semibold text-black">
+            Iniciar Simulação →
+          </span>
+        </div>
+      )}
     </button>
   );
 }

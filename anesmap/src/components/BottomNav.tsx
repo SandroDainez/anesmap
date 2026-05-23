@@ -16,11 +16,11 @@ import { useEffect, useMemo, useState } from "react";
 import { loadMyProfile } from "@/lib/user-study";
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: Home, adminOnly: false },
-  { href: "/flashcards", label: "Flashcards", icon: Layers, adminOnly: false },
-  { href: "/simulados", label: "Simulados", icon: ClipboardList, adminOnly: false },
+  { href: "/dashboard", label: "Início", icon: Home, adminOnly: false },
+  { href: "/flashcards", label: "Cards", icon: Layers, adminOnly: false },
+  { href: "/simulados", label: "Provas", icon: ClipboardList, adminOnly: false },
   { href: "/simulacao", label: "Simulação", icon: Activity, adminOnly: false },
-  { href: "/complicacoes", label: "Complicações", icon: Siren, adminOnly: false },
+  { href: "/complicacoes", label: "Complic.", icon: Siren, adminOnly: false },
   { href: "/avaliacao", label: "Avaliação", icon: Target, adminOnly: false },
   { href: "/admin", label: "Admin", icon: BarChart3, adminOnly: true },
 ] as const;
