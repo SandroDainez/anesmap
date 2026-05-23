@@ -6,6 +6,7 @@ export type UserProfile = {
   id: string;
   name: string | null;
   role: "student" | "admin";
+  nivel?: string;
   weekly_goal_minutes: number;
   assigned_track_cards: "ME1" | "ME2" | "ME3" | "ALL";
   assigned_track_simulados: "ME1" | "ME2" | "ME3" | "ALL";
@@ -69,7 +70,7 @@ export async function loadMyProfile(): Promise<UserProfile | null> {
   let { data, error } = await supabase
     .from("profiles")
     .select(
-      "id, name, role, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
+      "id, name, role, nivel, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
     )
     .eq("id", user.id)
     .single();
@@ -78,7 +79,7 @@ export async function loadMyProfile(): Promise<UserProfile | null> {
   if (isMissingTrackColumnsError(error)) {
     const legacyRes = await supabase
       .from("profiles")
-      .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+      .select("id, name, role, nivel, weekly_goal_minutes, assigned_track, created_at")
       .eq("id", user.id)
       .single();
     data = legacyRes.data as typeof data;
@@ -304,9 +305,12 @@ export async function loadMyDashboardMetrics() {
 async function loadMyFlashcardEventsCount() {
   const supabase = browserSupabase();
   if (!supabase) return 0;
+  const user = await getCurrentAuthUser();
+  if (!user) return 0;
   const { count } = await supabase
     .from("flashcard_events")
-    .select("id", { count: "exact", head: true });
+    .select("id", { count: "exact", head: true })
+    .eq("user_id", user.id);
   return count ?? 0;
 }
 

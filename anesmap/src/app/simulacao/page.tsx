@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CasoCard } from "@/components/simulacao/CasoCard";
 import { ContadorSimulacoes } from "@/components/simulacao/ContadorSimulacoes";
 import { CASOS_SIMULACAO } from "@/lib/simulacao/casos";
+import type { CasoSimulacao } from "@/lib/simulacao/systemPrompt";
 import type { LimiteInfo } from "@/lib/simulacao/limite";
 import { loadMyProfile } from "@/lib/user-study";
 
@@ -17,21 +18,37 @@ export default function SimulacaoPage() {
   const [userNivel, setUserNivel] = useState<string>("ME1");
   const [filtro, setFiltro] = useState("todos");
   const [modalLimite, setModalLimite] = useState(false);
+  const [todosCasos, setTodosCasos] = useState<CasoSimulacao[]>(CASOS_SIMULACAO);
 
   useEffect(() => {
     void (async () => {
-      const [perfil, res] = await Promise.all([
+      const [perfil, resLimite, resCasos] = await Promise.all([
         loadMyProfile(),
         fetch("/api/simulacao"),
+        fetch("/api/simulacao/casos"),
       ]);
-      const data = await res.json() as LimiteInfo;
-      setLimite(data);
-      const nivel = (perfil as { nivel?: string } | null)?.nivel ?? "ME1";
+      const limiteData = await resLimite.json() as LimiteInfo;
+      setLimite(limiteData);
+      const nivel = perfil?.nivel ?? "ME1";
       setUserNivel(nivel);
+
+      if (resCasos.ok) {
+        const dbCasos = await resCasos.json() as CasoSimulacao[];
+        if (dbCasos.length > 0) {
+          // Merge: DB cases override hardcoded ones with same id; extras appended
+          const hardcodedById = new Map(CASOS_SIMULACAO.map((c) => [c.id, c]));
+          const dbById = new Map(dbCasos.map((c) => [c.id, c]));
+          const merged = [
+            ...CASOS_SIMULACAO.map((c) => dbById.get(c.id) ?? c),
+            ...dbCasos.filter((c) => !hardcodedById.has(c.id)),
+          ];
+          setTodosCasos(merged);
+        }
+      }
     })();
   }, []);
 
-  const casosFiltrados = CASOS_SIMULACAO.filter(
+  const casosFiltrados = todosCasos.filter(
     (c) => filtro === "todos" || c.dificuldade === filtro,
   );
 

@@ -63,8 +63,12 @@ export default function LoginPage() {
     }
 
     const requestedRedirect = searchParams.get("redirect");
+    // Only allow relative paths (starts with "/" but not "//") — prevents open redirect
+    const isRelativePath = (url: string) =>
+      url.startsWith("/") && !url.startsWith("//") && !url.includes("://");
     const safeRequestedRedirect =
       requestedRedirect &&
+      isRelativePath(requestedRedirect) &&
       requestedRedirect !== "/logout" &&
       ((mode === "admin" && requestedRedirect.startsWith("/admin")) ||
         (mode === "student" && !requestedRedirect.startsWith("/admin")))

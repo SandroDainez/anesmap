@@ -1,25 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { checkAdminAccess } from "@/lib/auth";
 import { resetarLimiteUsuario, ajustarLimiteUsuario } from "@/lib/simulacao/limite";
 
-async function requireAdmin() {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) return null;
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-  if ((profile as { role?: string } | null)?.role !== "admin") return null;
-  return { user, supabase };
-}
-
 export async function GET(request: NextRequest) {
-  const ctx = await requireAdmin();
+  const ctx = await checkAdminAccess();
   if (!ctx) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
   const { supabase } = ctx;
 
@@ -59,7 +43,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
-  const ctx = await requireAdmin();
+  const ctx = await checkAdminAccess();
   if (!ctx) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
 
   const { searchParams } = new URL(request.url);

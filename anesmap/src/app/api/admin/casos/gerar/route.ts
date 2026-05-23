@@ -1,22 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { checkAdminAccess } from "@/lib/auth";
 import { gerarRespostaSimulacao } from "@/lib/ai/deepseek";
-
-async function requireAdmin() {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) return null;
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-  if ((profile as { role?: string } | null)?.role !== "admin") return null;
-  return { user, supabase };
-}
 
 const SYSTEM_PROMPT = `Você é um especialista em anestesiologia e simulação clínica. Gere um caso de simulação clínica completo e realista em JSON.
 
@@ -35,7 +19,7 @@ Retorne EXATAMENTE este JSON:
 }`;
 
 export async function POST(request: NextRequest) {
-  const ctx = await requireAdmin();
+  const ctx = await checkAdminAccess();
   if (!ctx) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
 
   let body: { topico?: string; nivel?: string; dificuldade?: string };

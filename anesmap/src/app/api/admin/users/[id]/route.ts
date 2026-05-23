@@ -1,23 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { checkAdminAccess } from "@/lib/auth";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
-
-async function requireAdmin() {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) return null;
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-  if (profile?.role !== "admin") return null;
-  return user;
-}
 
 export async function DELETE(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const caller = await requireAdmin();
-  if (!caller) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
+  const ctx = await checkAdminAccess();
+  if (!ctx) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
+  const caller = ctx.user;
 
   const { id } = await params;
   if (!id) return NextResponse.json({ error: "ID obrigatório." }, { status: 400 });

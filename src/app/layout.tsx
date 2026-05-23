@@ -21,7 +21,7 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "AnesMap",
-  description: "Design system app for anesthesiology study and practice.",
+  description: "Plataforma de estudos para residentes de anestesiologia — flashcards SM-2, simulados TEA e simulação clínica com IA.",
 };
 
 export default function RootLayout({
@@ -59,12 +59,22 @@ async function Header({
       <p className="text-xs text-muted">{auth ? `Olá, ${auth.name ?? "Usuário"}` : "AnesMap"}</p>
       <div className="flex items-center gap-2 text-xs">
         {auth ? (
-          <Link
-            href="/logout"
-            className="rounded-lg border border-border bg-background/35 px-2 py-1 text-muted hover:text-foreground"
-          >
-            Sair
-          </Link>
+          <>
+            {auth.role === "admin" && (
+              <Link
+                href="/admin"
+                className="rounded-lg border border-purple/30 bg-purple/10 px-2 py-1 text-purple hover:opacity-80"
+              >
+                Admin
+              </Link>
+            )}
+            <Link
+              href="/logout"
+              className="rounded-lg border border-border bg-background/35 px-2 py-1 text-muted hover:text-foreground"
+            >
+              Sair
+            </Link>
+          </>
         ) : (
           <>
             <Link

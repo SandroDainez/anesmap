@@ -6,26 +6,12 @@ import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
-async function readRoleWithRetry(
-  supabase: NonNullable<ReturnType<typeof createSupabaseBrowserClient>>,
-  userId: string,
-  attempts = 5,
-): Promise<string | null> {
-  for (let i = 0; i < attempts; i++) {
-    const { data } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", userId)
-      .single();
-    if (data?.role) return data.role as string;
-    await new Promise((r) => setTimeout(r, 400));
-  }
-  return null;
-}
+type LoginMode = "student" | "admin";
 
 export default function LoginPage() {
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const searchParams = useSearchParams();
+  const [mode, setMode] = useState<LoginMode>("student");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -53,20 +39,44 @@ export default function LoginPage() {
       return;
     }
 
-    const userId = signInData.user?.id;
-    let destination = searchParams.get("redirect") ?? "/dashboard";
-
-    if (userId) {
-      const role = await readRoleWithRetry(supabase, userId);
-      if (role === "admin") {
-        destination = "/admin";
-      } else {
-        destination = searchParams.get("redirect") ?? "/dashboard";
-      }
+    const user = signInData.user;
+    if (!user?.id) {
+      setError("Falha ao carregar sessão após login. Tente novamente.");
+      setIsLoading(false);
+      return;
     }
 
-    // Hard navigation para propagar o cookie de sessão corretamente
-    window.location.href = destination;
+    const role = await readRoleWithRetry(supabase, user.id);
+
+    if (role && mode === "admin" && role !== "admin") {
+      await supabase.auth.signOut();
+      setError("Esta conta não possui acesso de admin.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (role && mode === "student" && role === "admin") {
+      await supabase.auth.signOut();
+      setError("Conta admin deve entrar pelo modo Admin.");
+      setIsLoading(false);
+      return;
+    }
+
+    const requestedRedirect = searchParams.get("redirect");
+    // Only allow relative paths (starts with "/" but not "//") — prevents open redirect
+    const isRelativePath = (url: string) =>
+      url.startsWith("/") && !url.startsWith("//") && !url.includes("://");
+    const safeRequestedRedirect =
+      requestedRedirect &&
+      isRelativePath(requestedRedirect) &&
+      requestedRedirect !== "/logout" &&
+      ((mode === "admin" && requestedRedirect.startsWith("/admin")) ||
+        (mode === "student" && !requestedRedirect.startsWith("/admin")))
+        ? requestedRedirect
+        : null;
+    const redirect = safeRequestedRedirect ?? (mode === "admin" ? "/admin" : "/dashboard");
+    // Hard navigation keeps session cookies intact for the next page
+    window.location.href = redirect;
   }
 
   return (
@@ -78,6 +88,30 @@ export default function LoginPage() {
       />
 
       <AppCard>
+        <div className="mb-3 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => setMode("student")}
+            className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all duration-150 ${
+              mode === "student"
+                ? "border-teal/60 bg-teal/20 text-teal ring-2 ring-teal/60 shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                : "border-border bg-background/35 text-muted hover:text-foreground hover:bg-background/55"
+            }`}
+          >
+            Login Usuário
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode("admin")}
+            className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all duration-150 ${
+              mode === "admin"
+                ? "border-purple/60 bg-purple/20 text-purple ring-2 ring-purple/60 shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                : "border-border bg-background/35 text-muted hover:text-foreground hover:bg-background/55"
+            }`}
+          >
+            Login Admin
+          </button>
+        </div>
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
             type="email"
@@ -100,11 +134,33 @@ export default function LoginPage() {
             disabled={isLoading}
             className="w-full rounded-xl border border-teal/30 bg-teal/15 px-3 py-2 text-sm font-medium text-teal transition hover:opacity-90 disabled:opacity-40"
           >
-            {isLoading ? "Entrando..." : "Entrar"}
+            {isLoading
+              ? "Entrando..."
+              : mode === "admin"
+                ? "Entrar como admin"
+                : "Entrar como usuário"}
           </button>
         </form>
         {error ? <p className="mt-3 text-sm text-rose">{error}</p> : null}
       </AppCard>
     </main>
   );
+}
+
+async function readRoleWithRetry(
+  supabase: NonNullable<ReturnType<typeof createSupabaseBrowserClient>>,
+  userId: string,
+) {
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
+      .maybeSingle();
+    if (data?.role === "admin" || data?.role === "student") {
+      return data.role as LoginMode;
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 150));
+  }
+  return null;
 }

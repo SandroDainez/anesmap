@@ -14,6 +14,21 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { loadMyProfile } from "@/lib/user-study";
+import type { UserProfile } from "@/lib/user-study";
+
+// Module-level cache — avoids re-fetching profile on every navigation
+const PROFILE_TTL = 60_000; // 1 minute
+let _profileCache: { data: UserProfile | null; ts: number } | null = null;
+
+async function getCachedProfile(): Promise<UserProfile | null> {
+  const now = Date.now();
+  if (_profileCache && now - _profileCache.ts < PROFILE_TTL) {
+    return _profileCache.data;
+  }
+  const profile = await loadMyProfile();
+  _profileCache = { data: profile, ts: now };
+  return profile;
+}
 
 const navItems = [
   { href: "/dashboard", label: "Início", icon: Home, adminOnly: false },
@@ -31,7 +46,7 @@ export function BottomNav() {
 
   useEffect(() => {
     void (async () => {
-      const profile = await loadMyProfile();
+      const profile = await getCachedProfile();
       if (profile?.role === "admin") {
         setRole("admin");
       } else {

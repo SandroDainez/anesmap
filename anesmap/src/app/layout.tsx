@@ -21,7 +21,7 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "AnesMap",
-  description: "Design system app for anesthesiology study and practice.",
+  description: "Plataforma de estudos para residentes de anestesiologia — flashcards SM-2, simulados TEA e simulação clínica com IA.",
 };
 
 export default function RootLayout({

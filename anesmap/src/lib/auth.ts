@@ -48,3 +48,23 @@ export async function requireAdmin() {
   }
   return ctx;
 }
+
+/**
+ * Lightweight admin guard for API routes — returns null instead of throwing.
+ * Usage: const ctx = await checkAdminAccess(); if (!ctx) return 401;
+ */
+export async function checkAdminAccess() {
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) return null;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+  if ((profile as { role?: string } | null)?.role !== "admin") return null;
+  return { user, supabase };
+}

@@ -38,7 +38,7 @@ export default function SimulacaoAtiva() {
   const { caso_id } = useParams<{ caso_id: string }>();
   const router = useRouter();
 
-  const caso = CASOS_SIMULACAO.find((c) => c.id === caso_id);
+  const [caso, setCaso] = useState(CASOS_SIMULACAO.find((c) => c.id === caso_id) ?? null);
 
   const [sessaoId, setSessaoId] = useState<string | null>(null);
   const [userNivel, setUserNivel] = useState("ME1");
@@ -57,15 +57,47 @@ export default function SimulacaoAtiva() {
 
   const [condutaTexto, setCondutaTexto] = useState("");
   const [enviando, setEnviando] = useState(false);
+  const [erroEnvio, setErroEnvio] = useState<string | null>(null);
+  const [resetKey, setResetKey] = useState(0);
 
   const tempoInicio = useRef<number>(Date.now());
 
   useEffect(() => {
-    if (!caso) return;
+    // Reset state on re-start
+    setSessaoId(null);
+    setSinaisAtuais(null);
+    setSituacaoAtual("");
+    setOpcoesAtuais([]);
+    setHistorico([]);
+    setTurno(1);
+    setPontuacaoTotal(0);
+    setUltimoFeedback(null);
+    setDesfecho(null);
+    setErroInicio(null);
+    setErroEnvio(null);
+    setIniciando(true);
+
     void (async () => {
       const perfil = await loadMyProfile();
-      const nivel = (perfil as { nivel?: string } | null)?.nivel ?? "ME1";
+      const nivel = perfil?.nivel ?? "ME1";
       setUserNivel(nivel);
+
+      // If case not found in hardcoded list, try DB
+      let resolvedCaso = caso;
+      if (!resolvedCaso) {
+        const res = await fetch("/api/simulacao/casos").catch(() => null);
+        if (res?.ok) {
+          const dbCasos = await res.json() as import("@/lib/simulacao/systemPrompt").CasoSimulacao[];
+          resolvedCaso = dbCasos.find((c) => c.id === caso_id) ?? null;
+          if (resolvedCaso) setCaso(resolvedCaso);
+        }
+      }
+
+      if (!resolvedCaso) {
+        setErroInicio("Caso clínico não encontrado.");
+        setIniciando(false);
+        return;
+      }
 
       const res = await fetch("/api/simulacao", {
         method: "POST",
@@ -82,80 +114,85 @@ export default function SimulacaoAtiva() {
       }
 
       setSessaoId(data.sessao_id);
-      setSinaisAtuais(caso.sinais_vitais_iniciais);
-      setSituacaoAtual(caso.situacao_inicial);
-      setOpcoesAtuais(caso.opcoes_iniciais);
+      setSinaisAtuais(resolvedCaso.sinais_vitais_iniciais);
+      setSituacaoAtual(resolvedCaso.situacao_inicial);
+      setOpcoesAtuais(resolvedCaso.opcoes_iniciais);
       setIniciando(false);
       tempoInicio.current = Date.now();
     })();
-  }, [caso, caso_id]);
+  }, [caso_id, resetKey]);
 
   async function enviarConduta(conduta: string) {
     if (!sessaoId || !caso || enviando) return;
     setEnviando(true);
+    setErroEnvio(null);
     const tempo_resposta_segundos = Math.round((Date.now() - tempoInicio.current) / 1000);
 
-    const historicoParaApi: HistoricoItem[] = historico.map((h) => ({
-      situacao: h.situacao,
-      conduta: h.conduta,
-      avaliacao: h.avaliacao,
-      feedback: h.feedback,
-      nova_situacao: h.nova_situacao,
-      pontuacao_turno: h.pontuacao_turno,
-    }));
+    try {
+      const historicoParaApi: HistoricoItem[] = historico.map((h) => ({
+        situacao: h.situacao,
+        conduta: h.conduta,
+        avaliacao: h.avaliacao,
+        feedback: h.feedback,
+        nova_situacao: h.nova_situacao,
+        pontuacao_turno: h.pontuacao_turno,
+      }));
 
-    const res = await fetch("/api/simulacao", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        acao: "continuar",
-        caso_id,
-        sessao_id: sessaoId,
+      const res = await fetch("/api/simulacao", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          acao: "continuar",
+          caso_id,
+          sessao_id: sessaoId,
+          conduta,
+          historico: historicoParaApi,
+          turno,
+          nivel_residente: userNivel,
+          tempo_resposta_segundos,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json() as { mensagem?: string; erro?: string };
+        throw new Error(errData.mensagem ?? errData.erro ?? `Erro ${res.status}`);
+      }
+
+      const resultado = await res.json() as TurnoResposta;
+      setCondutaTexto("");
+      tempoInicio.current = Date.now();
+
+      const novoHistorico: HistoricoLocal = {
+        situacao: situacaoAtual,
         conduta,
-        historico: historicoParaApi,
+        avaliacao: resultado.avaliacao,
+        feedback: resultado.feedback,
+        nova_situacao: resultado.nova_situacao,
+        pontuacao_turno: resultado.pontuacao_turno,
+        avaliacao_ia: resultado.avaliacao,
+        conduta_usuario: conduta,
         turno,
-        nivel_residente: userNivel,
-        tempo_resposta_segundos,
-      }),
-    });
+      };
 
-    const resultado = await res.json() as TurnoResposta;
-    setEnviando(false);
-    setCondutaTexto("");
-    tempoInicio.current = Date.now();
+      setHistorico((h) => [...h, novoHistorico]);
+      setPontuacaoTotal((p) => p + (resultado.pontuacao_turno ?? 0));
+      setUltimoFeedback(resultado);
 
-    const novoHistorico: HistoricoLocal = {
-      situacao: situacaoAtual,
-      conduta,
-      avaliacao: resultado.avaliacao,
-      feedback: resultado.feedback,
-      nova_situacao: resultado.nova_situacao,
-      pontuacao_turno: resultado.pontuacao_turno,
-      avaliacao_ia: resultado.avaliacao,
-      conduta_usuario: conduta,
-      turno,
-    };
-
-    setHistorico((h) => [...h, novoHistorico]);
-    setPontuacaoTotal((p) => p + (resultado.pontuacao_turno ?? 0));
-    setUltimoFeedback(resultado);
-
-    if (resultado.desfecho) {
-      setDesfecho(resultado);
-    } else {
-      setSinaisAtuais(resultado.sinais_vitais);
-      setSituacaoAtual(resultado.nova_situacao);
-      setOpcoesAtuais(resultado.opcoes ?? []);
-      setTurno((t) => t + 1);
+      if (resultado.desfecho) {
+        setDesfecho(resultado);
+      } else {
+        setSinaisAtuais(resultado.sinais_vitais);
+        setSituacaoAtual(resultado.nova_situacao);
+        setOpcoesAtuais(resultado.opcoes ?? []);
+        setTurno((t) => t + 1);
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Erro desconhecido.";
+      setErroEnvio(`Falha ao processar conduta: ${msg}. Tente novamente.`);
+      console.error("[enviarConduta]", err);
+    } finally {
+      setEnviando(false);
     }
-  }
-
-  if (!caso) {
-    return (
-      <main className="flex min-h-screen items-center justify-center px-4">
-        <p className="text-muted">Caso não encontrado.</p>
-      </main>
-    );
   }
 
   if (iniciando) {
@@ -202,7 +239,7 @@ export default function SimulacaoAtiva() {
           resumo_final={desfecho.resumo_final ?? ""}
           pontos_fortes={desfecho.pontos_fortes ?? []}
           pontos_melhorar={desfecho.pontos_melhorar ?? []}
-          onTentarNovamente={() => router.refresh()}
+          onTentarNovamente={() => setResetKey((k) => k + 1)}
           onEscolherOutro={() => router.push("/simulacao")}
         />
       </main>
@@ -226,7 +263,7 @@ export default function SimulacaoAtiva() {
         </div>
       </div>
 
-      <h1 className="mb-4 text-base font-bold text-foreground">{caso.titulo}</h1>
+      <h1 className="mb-4 text-base font-bold text-foreground">{caso?.titulo ?? "Simulação Clínica"}</h1>
 
       {/* Monitor de sinais vitais */}
       {sinaisAtuais && (
@@ -301,6 +338,12 @@ export default function SimulacaoAtiva() {
           )}
         </button>
       </div>
+
+      {erroEnvio && (
+        <p className="mt-3 rounded-xl border border-rose/30 bg-rose/10 px-3 py-2 text-xs text-rose">
+          {erroEnvio}
+        </p>
+      )}
 
       {enviando && (
         <motion.p

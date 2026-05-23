@@ -1,90 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { checkAdminAccess } from "@/lib/auth";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
-async function requireAdmin() {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) return null;
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-  if (profile?.role !== "admin") return null;
-  return user;
-}
-
 export async function POST(request: NextRequest) {
-  const caller = await requireAdmin();
-  if (!caller) {
-    return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
-  }
+  const ctx = await checkAdminAccess();
+  if (!ctx) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
+  const caller = ctx.user;
 
   const admin = createSupabaseAdminClient();
-  if (!admin) {
-    return NextResponse.json(
-      { error: "SUPABASE_SERVICE_ROLE_KEY não configurada no servidor." },
-      { status: 500 },
-    );
-  }
+  if (!admin) return NextResponse.json({ error: "SUPABASE_SERVICE_ROLE_KEY não configurada." }, { status: 500 });
 
   let body: { name?: string; email?: string; password?: string; role?: string };
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Corpo inválido." }, { status: 400 });
-  }
+  try { body = await request.json(); } catch { return NextResponse.json({ error: "Corpo inválido." }, { status: 400 }); }
 
   const { name, email, password, role = "student" } = body;
+  if (!name || !email || !password) return NextResponse.json({ error: "Nome, e-mail e senha são obrigatórios." }, { status: 400 });
+  if (!["student", "admin"].includes(role)) return NextResponse.json({ error: "Role inválido." }, { status: 400 });
 
-  if (!name || !email || !password) {
-    return NextResponse.json({ error: "Nome, e-mail e senha são obrigatórios." }, { status: 400 });
-  }
-
-  if (!["student", "admin"].includes(role)) {
-    return NextResponse.json({ error: "Role inválido." }, { status: 400 });
-  }
-
-  // Criar usuário no Supabase Auth
   const { data: authData, error: authError } = await admin.auth.admin.createUser({
-    email: email.trim(),
-    password,
-    email_confirm: true,
-    user_metadata: { name: name.trim() },
+    email: email.trim(), password, email_confirm: true, user_metadata: { name: name.trim() },
   });
+  if (authError || !authData.user) return NextResponse.json({ error: authError?.message ?? "Erro ao criar usuário." }, { status: 400 });
 
-  if (authError || !authData.user) {
-    return NextResponse.json(
-      { error: authError?.message ?? "Erro ao criar usuário." },
-      { status: 400 },
-    );
-  }
-
-  // Inserir/atualizar perfil com o role correto
-  const { error: profileError } = await admin
-    .from("profiles")
-    .upsert({
-      id: authData.user.id,
-      name: name.trim(),
-      role,
-      weekly_goal_minutes: 300,
-    });
-
+  const { error: profileError } = await admin.from("profiles").upsert({ id: authData.user.id, name: name.trim(), role, weekly_goal_minutes: 300 });
   if (profileError) {
-    // Reverter: deletar o usuário criado
     await admin.auth.admin.deleteUser(authData.user.id);
-    return NextResponse.json(
-      { error: "Erro ao salvar perfil: " + profileError.message },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Erro ao salvar perfil: " + profileError.message }, { status: 500 });
   }
 
-  return NextResponse.json({
-    id: authData.user.id,
-    email: authData.user.email,
-    name: name.trim(),
-    role,
-  });
+  return NextResponse.json({ id: authData.user.id, email: authData.user.email, name: name.trim(), role });
 }

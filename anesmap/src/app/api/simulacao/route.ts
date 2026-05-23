@@ -50,7 +50,34 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const caso = CASOS_SIMULACAO.find((c) => c.id === caso_id);
+      // Look up case: first in hardcoded library, then in DB
+      let caso = CASOS_SIMULACAO.find((c) => c.id === caso_id);
+      if (!caso && caso_id) {
+        const { data: dbCaso } = await supabase
+          .from("casos_simulacao")
+          .select("*")
+          .or(`slug.eq.${caso_id},id.eq.${caso_id}`)
+          .eq("ativo", true)
+          .single();
+        if (dbCaso) {
+          const row = dbCaso as Record<string, unknown>;
+          caso = {
+            id: row.slug as string ?? row.id as string,
+            titulo: row.titulo as string,
+            descricao: row.descricao as string ?? "",
+            dificuldade: row.dificuldade as string ?? "iniciante",
+            nivel_recomendado: (row.nivel_recomendado as string[]) ?? ["ME1"],
+            nivel_residente: ((row.nivel_recomendado as string[])?.[0]) ?? "ME1",
+            duracao_estimada: row.duracao_estimada as string ?? "15 min",
+            tags: (row.tags as string[]) ?? [],
+            situacao_inicial: row.situacao_inicial as string ?? "",
+            sinais_vitais_iniciais: (row.sinais_vitais_iniciais as CasoSimulacao["sinais_vitais_iniciais"]) ?? {
+              PA: "120/80", FC: 72, SpO2: 98, ETCO2: 35, FR: 14, Temp: 36.5,
+            },
+            opcoes_iniciais: (row.opcoes_iniciais as string[]) ?? [],
+          };
+        }
+      }
       if (!caso) {
         return NextResponse.json({ erro: "caso_nao_encontrado" }, { status: 404 });
       }
@@ -89,7 +116,33 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ erro: "parametros_invalidos" }, { status: 400 });
       }
 
-      const casoAtual = CASOS_SIMULACAO.find((c) => c.id === caso_id);
+      let casoAtual = CASOS_SIMULACAO.find((c) => c.id === caso_id);
+      if (!casoAtual && caso_id) {
+        const { data: dbRow } = await supabase
+          .from("casos_simulacao")
+          .select("*")
+          .or(`slug.eq.${caso_id},id.eq.${caso_id}`)
+          .eq("ativo", true)
+          .single();
+        if (dbRow) {
+          const row = dbRow as Record<string, unknown>;
+          casoAtual = {
+            id: row.slug as string ?? row.id as string,
+            titulo: row.titulo as string,
+            descricao: row.descricao as string ?? "",
+            dificuldade: row.dificuldade as string ?? "iniciante",
+            nivel_recomendado: (row.nivel_recomendado as string[]) ?? ["ME1"],
+            nivel_residente: ((row.nivel_recomendado as string[])?.[0]) ?? "ME1",
+            duracao_estimada: row.duracao_estimada as string ?? "15 min",
+            tags: (row.tags as string[]) ?? [],
+            situacao_inicial: row.situacao_inicial as string ?? "",
+            sinais_vitais_iniciais: (row.sinais_vitais_iniciais as CasoSimulacao["sinais_vitais_iniciais"]) ?? {
+              PA: "120/80", FC: 72, SpO2: 98, ETCO2: 35, FR: 14, Temp: 36.5,
+            },
+            opcoes_iniciais: (row.opcoes_iniciais as string[]) ?? [],
+          };
+        }
+      }
       if (!casoAtual) {
         return NextResponse.json({ erro: "caso_nao_encontrado" }, { status: 404 });
       }
