@@ -133,7 +133,7 @@ const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
   { id: "export", label: "Exportar", icon: "↓" },
   { id: "invites", label: "Convites", icon: "⌘" },
   { id: "revisar", label: "Revisar Cards", icon: "✎" },
-  { id: "revisar-simulados", label: "Revisar Simulados", icon: "✎" },
+  { id: "revisar-simulados", label: "Revisar Provas", icon: "✎" },
 ];
 
 export function AdminPanel() {
@@ -796,6 +796,16 @@ export function AdminPanel() {
             </button>
           ))}
 
+          <div className="border-t border-border pt-4 px-1 mb-2">
+            <a
+              href="/admin/simulacoes"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-background/60 hover:text-foreground"
+            >
+              <span className="text-base">🩺</span>
+              Simulação Clínica
+            </a>
+          </div>
+
           <div className="mt-auto border-t border-border pt-5 space-y-3 px-1">
             <p className="font-mono uppercase tracking-widest text-xs text-muted">Resumo</p>
             <div className="space-y-3">
@@ -809,7 +819,7 @@ export function AdminPanel() {
               </div>
               <div>
                 <p className="text-3xl font-bold text-purple leading-none">{overview.totalAttempts}</p>
-                <p className="mt-1 text-xs text-muted">simulados realizados</p>
+                <p className="mt-1 text-xs text-muted">provas realizadas</p>
               </div>
             </div>
           </div>
@@ -1393,13 +1403,13 @@ export function AdminPanel() {
                           })()}
                         </div>
 
-                        {/* ── SIMULADOS POR TENTATIVA ── */}
+                        {/* ── PROVAS POR TENTATIVA ── */}
                         <div className="rounded-2xl border border-border bg-background/40 p-5">
                           <h3 className="mb-3 text-sm font-semibold text-foreground">
-                            Simulados realizados <span className="ml-1 text-xs font-normal text-muted">({simuladosComRespostas.length} tentativas)</span>
+                            Provas realizadas <span className="ml-1 text-xs font-normal text-muted">({simuladosComRespostas.length} tentativas)</span>
                           </h3>
                           {simuladosComRespostas.length === 0 ? (
-                            <p className="text-xs text-muted">Nenhum simulado realizado.</p>
+                            <p className="text-xs text-muted">Nenhuma prova realizada.</p>
                           ) : (
                             <div className="max-h-[520px] space-y-2 overflow-auto pr-1">
                               {simuladosComRespostas.map((attempt) => {
@@ -2412,11 +2422,11 @@ export function AdminPanel() {
             </div>
           )}
 
-          {/* ── REVISAR SIMULADOS ── */}
+          {/* ── REVISAR PROVAS ── */}
           {tab === "revisar-simulados" && (
             <div className="space-y-4 max-w-4xl">
-              <h2 className="text-xl font-bold text-foreground">Revisar Simulados</h2>
-              <p className="text-xs text-muted">Edite o tema de cada questão para melhorar a classificação.</p>
+              <h2 className="text-xl font-bold text-foreground">Revisar Provas</h2>
+              <p className="text-xs text-muted">Edite o tema de cada questão de prova para melhorar a classificação.</p>
 
               <div className="flex flex-wrap gap-2">
                 <input
