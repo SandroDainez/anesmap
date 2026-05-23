@@ -18,7 +18,7 @@ import { loadMyProfile } from "@/lib/user-study";
 const navItems = [
   { href: "/dashboard", label: "Início", icon: Home, adminOnly: false },
   { href: "/flashcards", label: "Cards", icon: Layers, adminOnly: false },
-  { href: "/simulados", label: "Provas", icon: ClipboardList, adminOnly: false },
+  { href: "/simulados", label: "Simulados", icon: ClipboardList, adminOnly: false },
   { href: "/simulacao", label: "Simulação", icon: Activity, adminOnly: false },
   { href: "/complicacoes", label: "Complic.", icon: Siren, adminOnly: false },
   { href: "/avaliacao", label: "Avaliação", icon: Target, adminOnly: false },
