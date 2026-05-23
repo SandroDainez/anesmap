@@ -50,6 +50,7 @@ export async function PATCH(req: NextRequest) {
 
     // Build the update payload with Supabase column names (snake_case)
     const payload: Record<string, string> = {};
+    const isFlashcard = item.frente !== undefined || item.verso !== undefined;
     if (item.explicacaoA !== undefined) payload.explicacao_a = item.explicacaoA;
     if (item.explicacaoB !== undefined) payload.explicacao_b = item.explicacaoB;
     if (item.explicacaoC !== undefined) payload.explicacao_c = item.explicacaoC;
@@ -62,7 +63,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     const res = await fetch(
-      `${supabaseUrl}/rest/v1/simulados?id=eq.${encodeURIComponent(item.id)}`,
+      `${supabaseUrl}/rest/v1/${isFlashcard ? "flashcards" : "simulados"}?id=eq.${encodeURIComponent(item.id)}`,
       {
         method: "PATCH",
         headers,
