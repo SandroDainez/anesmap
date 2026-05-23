@@ -1,0 +1,1754 @@
+[
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-10",
+    "enunciado": "Paciente de 68 anos, cardiopata, submetido a cirurgia de revascularização do miocárdio. Monitorização com cateter de Swan-Ganz mostra: PAP = 42/18 mmHg, POAP = 22 mmHg, DC = 2,8 L/min, RVS = 2000 dyn·s·cm⁻⁵, SvO₂ = 58%.\n\nQual é o diagnóstico hemodinâmico e a conduta inicial mais adequada?",
+    "a": "Choque distributivo; vasopressor",
+    "b": "Insuficiência ventricular esquerda com baixo débito; considerar inotrópico (dobutamina)",
+    "c": "Hipovolemia; expansão volêmica agressiva",
+    "d": "Tamponamento cardíaco; pericardiocentese imediata || E) Choque obstrutivo por TEP; anticoagulação"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-2",
+    "enunciado": "Um pesquisador conduz um ensaio clínico randomizado comparando dois analgésicos pós-operatórios. Ao final do estudo, ele conclui que não há diferença entre os tratamentos (p = 0,3). Entretanto, o tamanho amostral calculado foi de 200 pacientes por grupo, e o estudo incluiu apenas 40 pacientes por grupo.\n\nQual é o principal problema metodológico desse estudo e qual tipo de erro estatístico ele cometeu?",
+    "a": "Viés de seleção; erro tipo I (falso positivo)",
+    "b": "Poder estatístico insuficiente (beta elevado); erro tipo II (falso negativo)",
+    "c": "Confundimento; erro tipo I (falso positivo)",
+    "d": "Viés de aferição; erro tipo II (falso negativo) || E) Tamanho amostral adequado; não há erro"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-3",
+    "enunciado": "Em um estudo sobre profilaxia de náuseas pós-operatórias, a ondansetrona reduziu a incidência de NVPO de 40% (grupo controle) para 20% (grupo tratamento). Cada paciente recebeu 1 dose do medicamento ou placebo.\n\nQual é o NNT (número necessário para tratar) nesse estudo?",
+    "a": "2",
+    "b": "5",
+    "c": "10",
+    "d": "20 || E) 40"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-4",
+    "enunciado": "Um anestesiologista deseja saber se a exposição a óxido nitroso durante a gravidez aumenta o risco de aborto espontâneo em enfermeiras de centro cirúrgico. Devido à raridade do desfecho e à dificuldade de seguimento prospectivo, ele opta por identificar mulheres com e sem aborto e averiguar a exposição prévia a N₂O.\n\nQual tipo de estudo epidemiológico está sendo descrito?",
+    "a": "Coorte prospectiva",
+    "b": "Ensaio clínico randomizado",
+    "c": "Caso-controle",
+    "d": "Transversal (cross-sectional) || E) Coorte retrospectiva"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-5",
+    "enunciado": "Uma meta-análise avalia 12 ECRs sobre ketamina como adjuvante analgésico. A análise estatística revela heterogeneidade importante (I² = 78%). Os autores decidem usar modelo de efeitos aleatórios em vez de modelo de efeitos fixos.\n\nQual é a principal razão para escolher o modelo de efeitos aleatórios nessa situação?",
+    "a": "Ele aumenta artificialmente o poder estatístico da análise",
+    "b": "Ele assume que todos os estudos estimam o mesmo efeito verdadeiro subjacente",
+    "c": "Ele acomoda a variabilidade real entre os estudos, assumindo que os efeitos verdadeiros variam entre populações",
+    "d": "Ele elimina os outliers automaticamente da análise || E) É obrigatório quando há mais de 10 estudos incluídos"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-6",
+    "enunciado": "Um pesquisador define alfa = 0,05 em um estudo clínico e obtém p = 0,03. Ele conclui que há diferença estatisticamente significativa entre os grupos. Contudo, a diferença absoluta entre médias foi de 0,2 mmHg na pressão arterial média.\n\nQual conceito melhor complementa a interpretação desse resultado?",
+    "a": "Erro tipo II: o resultado negativo não tem importância",
+    "b": "Significância estatística não implica necessariamente relevância clínica",
+    "c": "O valor de p < 0,05 garante que o resultado é clinicamente relevante",
+    "d": "O intervalo de confiança não precisa ser avaliado nesse cenário || E) A diferença é clinicamente relevante porque p < alfa"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-7",
+    "enunciado": "Um estudo observacional acompanha 500 anestesiologistas por 10 anos para avaliar a incidência de síndrome de burnout. Os participantes são recrutados em um momento inicial (sem o desfecho) e seguidos no tempo até o evento ocorrer ou o estudo terminar.\n\nQual tipo de estudo é esse e qual medida de associação é mais adequada para seus resultados?",
+    "a": "Caso-controle; odds ratio",
+    "b": "Coorte prospectiva; risco relativo (ou hazard ratio)",
+    "c": "Transversal; prevalência",
+    "d": "Ecológico; correlação de Pearson || E) Ensaio clínico; diferença de médias"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-8",
+    "enunciado": "Um novo teste para identificar pacientes em risco de broncoespasmo intraoperatório é avaliado. Em 200 pacientes de alto risco, o teste é positivo em 90 dos 100 que realmente desenvolveram broncoespasmo. Entre os 100 que NÃO desenvolveram broncoespasmo, o teste foi positivo em 10.\n\nQuais são, respectivamente, a sensibilidade e a especificidade desse teste?",
+    "a": "Sensibilidade 90%, especificidade 90%",
+    "b": "Sensibilidade 90%, especificidade 10%",
+    "c": "Sensibilidade 10%, especificidade 90%",
+    "d": "Sensibilidade 50%, especificidade 50% || E) Sensibilidade 80%, especificidade 80%"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaa30qpontos2023html-9",
+    "enunciado": "Pesquisadores comparam três grupos de analgesia (paracetamol, ibuprofeno, dipirona) em relação à escala numérica de dor (0–10) no pós-operatório. Os dados apresentam distribuição não-normal.\n\nQual teste estatístico não-paramétrico é mais indicado para comparar os três grupos simultaneamente?",
+    "a": "Teste t de Student não-pareado",
+    "b": "ANOVA one-way",
+    "c": "Teste de Kruskal-Wallis",
+    "d": "Teste de Mann-Whitney || E) Correlação de Spearman"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovaahtml-20",
+    "enunciado": "19) O coeficiente de partição sangue/gás do desflurano é de aproximadamente 0,45. O que este valor implica clinicamente?",
+    "a": "Alta solubilidade no sangue, com indução e recuperação lentas",
+    "b": "Baixa solubilidade no sangue, com indução e recuperação rápidas; ideal para cirurgias ambulatoriais",
+    "c": "Solubilidade intermediária, semelhante ao isoflurano, sem vantagem cinética",
+    "d": "Alta solubilidade lipídica que favorece acúmulo tecidual e prolongamento da recuperação || E) O coeficiente sangue/gás não influencia a velocidade de indução ou recuperação"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-10",
+    "enunciado": "Paciente com insuficiência cardíaca descompensada em UTI é monitorado com cateter de Swan-Ganz. Os dados mostram: PAP = 55/30 mmHg, POAP = 8 mmHg, DC = 4,5 L/min, RVP calculada = 800 dyn·s·cm⁻⁵.\n\nQual é o diagnóstico hemodinâmico desse paciente?",
+    "a": "Insuficiência ventricular esquerda com hipertensão venocapilar pulmonar",
+    "b": "Hipertensão pulmonar pré-capilar (ex: HAPI, TEP crônico) — PAP elevada com POAP normal e RVP alta",
+    "c": "Hipovolemia com vasoconstrição pulmonar reflexa",
+    "d": "Choque cardiogênico biventricular com congestão pulmonar || E) Tamponamento cardíaco com equalização das pressões de câmaras"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-2",
+    "enunciado": "Um ensaio clínico randomizado avalia se dexametasona pré-operatória reduz a intensidade de dor pós-operatória. O comitê de ética aprova o estudo sem consentimento individual porque o risco é mínimo e o benefício coletivo é alto. No entanto, a alocação é feita por dia da semana: grupo A nas segundas e quartas, grupo B nas terças e quintas.\n\nQual é o principal problema metodológico desse desenho de estudo?",
+    "a": "Ausência de cegamento dos participantes",
+    "b": "Falta de randomização adequada — a alocação por dia da semana é previsível e permite seleção sistemática (viés de seleção)",
+    "c": "Tamanho amostral insuficiente",
+    "d": "Desfecho subjetivo (dor) não pode ser utilizado em ECR || E) A ausência de consentimento individual invalida completamente o estudo"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-3",
+    "enunciado": "Em um estudo sobre profilaxia de broncoespasmo intraoperatório com salbutamol inalatório pré-indução, a incidência de broncoespasmo foi de 12% no grupo controle e de 4% no grupo tratamento. O estudo incluiu 200 pacientes por grupo.\n\nQual é o NNT e qual é o risco relativo (RR) de broncoespasmo no grupo tratamento?",
+    "a": "NNT = 8; RR = 0,25",
+    "b": "NNT = 12,5; RR = 0,33",
+    "c": "NNT = 8; RR = 0,33",
+    "d": "NNT = 25; RR = 0,50 || E) NNT = 4; RR = 0,12"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-4",
+    "enunciado": "Pesquisadores avaliam a prevalência de síndrome de apneia obstrutiva do sono (SAOS) em pacientes submetidos a cirurgia bariátrica em um único momento, coletando dados de história clínica, polissonografia e dados antropométricos.\n\nQual tipo de estudo é esse e qual é sua principal limitação?",
+    "a": "Coorte prospectiva; tempo de seguimento longo",
+    "b": "Transversal (cross-sectional); não permite estabelecer relação causal (exposição e desfecho medidos simultaneamente)",
+    "c": "Caso-controle; dificuldade de recrutar controles adequados",
+    "d": "Ensaio clínico; impossibilidade de randomização || E) Ecológico; unidade de análise são grupos, não indivíduos"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-5",
+    "enunciado": "Um pesquisador analisa um forest plot de meta-análise sobre uso de dexmedetomidina intraoperatória. O diamond (losango) do resultado combinado cruza a linha de nulidade (OR = 1,0). O I² é de 25%.\n\nQual é a interpretação correta do forest plot?",
+    "a": "Há heterogeneidade significativa entre os estudos; resultado inconclusivo",
+    "b": "Não há evidência de efeito significativo da dexmedetomidina no desfecho avaliado; I² baixo indica homogeneidade aceitável",
+    "c": "O resultado positivo favorece a dexmedetomidina; o diamond deve ser interpretado isoladamente",
+    "d": "I² = 25% indica heterogeneidade grave; usar modelo de efeitos aleatórios obrigatório || E) Diamond cruzando a linha de nulidade indica erro tipo I"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-6",
+    "enunciado": "Em um estudo de validação de um novo escore de risco perioperatório, os autores constroem uma curva ROC. A área sob a curva (AUC) é de 0,82.\n\nQual é a interpretação correta da AUC = 0,82 para esse escore de risco?",
+    "a": "O teste tem sensibilidade de 82% para identificar pacientes de risco",
+    "b": "O escore tem boa capacidade discriminativa: existe 82% de probabilidade de que o escore classifique corretamente um par aleatório de pacientes (um com e outro sem o evento)",
+    "c": "O ponto de corte ótimo do escore é 0,82",
+    "d": "A especificidade do teste é 82% || E) AUC de 0,82 indica desempenho insatisfatório; valores > 0,9 são necessários"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-7",
+    "enunciado": "Dois anestesiologistas avaliam de forma independente 50 radiografias de tórax pós-operatórias para classificar atelectasias como ausentes, leves ou graves. Deseja-se avaliar a concordância entre os dois observadores, além do acaso.\n\nQual medida estatística é mais adequada para avaliar essa concordância?",
+    "a": "Coeficiente de Pearson",
+    "b": "Kappa de Cohen",
+    "c": "Coeficiente de correlação intraclasse (CCI)",
+    "d": "Teste de McNemar || E) Rho de Spearman"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-8",
+    "enunciado": "Um artigo relata que o uso de lidocaína IV intraoperatória reduziu significativamente a intensidade de dor pós-operatória (p = 0,01; IC 95% da diferença de médias: −1,8 a −0,3 na escala VAS 0-10). O tamanho do efeito (d de Cohen) calculado foi de 0,32.\n\nComo se interpreta um d de Cohen = 0,32?",
+    "a": "Tamanho de efeito grande; clinicamente muito relevante",
+    "b": "Tamanho de efeito pequeno (d < 0,5); estatisticamente significativo mas com relevância clínica limitada",
+    "c": "O valor de d não pode ser calculado para escalas de dor",
+    "d": "d = 0,32 indica que o resultado é espúrio (falso positivo) || E) Tamanho de efeito médio (d entre 0,5 e 0,8)"
+  },
+  {
+    "id": "sim-me2simulado1trimestreprovab30qpontos2023html-9",
+    "enunciado": "Uma revisão sistemática sobre profilaxia de NVPO inclui 20 estudos e realiza avaliação do risco de viés usando a ferramenta RoB 2.0 (Cochrane). A maioria dos estudos apresenta alto risco de viés de detecção por ausência de cegamento dos avaliadores de desfecho.\n\nO que é \"viés de detecção\" e como ele se diferencia do \"viés de performance\"?",
+    "a": "Viés de detecção: diferença no tratamento recebido; viés de performance: diferença na mensuração do desfecho",
+    "b": "Viés de detecção: diferença sistemática na mensuração/avaliação do desfecho entre grupos; viés de performance: diferença sistemática nos cuidados prestados além da intervenção",
+    "c": "São sinônimos; ambos resultam de ausência de randomização",
+    "d": "Viés de detecção afeta apenas desfechos objetivos; viés de performance apenas desfechos subjetivos || E) Ambos são corrigidos pela análise por intenção de tratar"
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-10",
+    "enunciado": "Paciente de 72 anos com fratura de colo de fêmur, ASA III, aguarda artroplastia total de quadril. Discute-se bloqueio femoral versus bloqueio do canal adutor para analgesia.\n\nPaciente de 72 anos com fratura de colo de fêmur, ASA III, aguarda artroplastia total de quadril. Discute-se bloqueio femoral versus bloqueio do canal adutor para analgesia. Qual é a principal DIFERENÇA clínica entre bloqueio femoral (BNF) e bloqueio do canal adutor (BCA)?",
+    "a": "O BNF bloqueia femoral e obturatório simultaneamente; o BCA bloqueia apenas o safeno.",
+    "b": "O BCA preserva melhor a força do quadríceps que o BNF, reduzindo o risco de quedas e favorecendo reabilitação precoce.",
+    "c": "O BNF tem maior duração de ação que o BCA pela anatomia do canal adutor, que permite maior dispersão.",
+    "d": "O BCA é tecnicamente mais simples, pois o canal adutor é facilmente palpável sem ultrassom. || E) BNF e BCA têm perfil motor equivalente; a diferença é apenas a cobertura sensitiva da coxa lateral."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-11",
+    "enunciado": "Sobre a abordagem infraclavicular do plexo braquial guiada por ultrassom, qual afirmativa é CORRETA?",
+    "a": "Os três cordões (lateral, posterior e medial) são visualizados ao redor da artéria axilar; a injeção-alvo é posterior à artéria.",
+    "b": "O pneumotórax é a complicação mais frequente, com incidência superior à da abordagem interescalênica.",
+    "c": "É contraindicada em obesos pela profundidade que impede visualização adequada.",
+    "d": "O bloqueio do nervo musculocutâneo é consistentemente obtido pela abordagem infraclavicular, ao contrário da abordagem axilar, onde frequentemente exige injeção separada. || E) Cobre bem cotovelo e mão, mas não cobre ombro e terço proximal do braço."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-12",
+    "enunciado": "Paciente feminina, 48 anos, submetida a mastectomia total direita com linfadenectomia axilar. A anestesiologista opta por PECS II para analgesia perioperatória.\n\nPaciente feminina, 48 anos, submetida a mastectomia total direita com linfadenectomia axilar. A anestesiologista opta por PECS II para analgesia perioperatória. Sobre o bloqueio PECS II, qual afirmativa é CORRETA?",
+    "a": "O PECS II consiste em injeção entre peitoral maior e menor (nervos peitorais) e entre peitoral menor e serrátil (intercostais T2–T6 e toracodorsal), cobrindo parede torácica e axila.",
+    "b": "O PECS II cobre somente os nervos peitorais medial e lateral, sendo insuficiente para linfadenectomia axilar sem bloqueio de plexo braquial.",
+    "c": "PECS I e II são equivalentes; a diferença é apenas o volume injetado em cada plano.",
+    "d": "O PECS II não exige ultrassom, podendo ser realizado por referências anatômicas com segurança equivalente. || E) A injeção entre peitoral menor e serrátil visa exclusivamente os nervos intercostais T3–T5, sem cobertura da axila."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-13",
+    "enunciado": "Paciente de 34 anos com lesão de tendão de Aquiles submetido a reparo por via posterior. O anestesiologista planeja bloqueio do nervo ciático por abordagem poplítea.\n\nPaciente de 34 anos com lesão de tendão de Aquiles submetido a reparo por via posterior. O anestesiologista planeja bloqueio do nervo ciático por abordagem poplítea. Sobre a divisão do nervo ciático na abordagem poplítea por ultrassom, qual afirmativa é CORRETA?",
+    "a": "A divisão ocorre imediatamente posterior ao côndilo femoral, 2–3 cm acima da prega poplítea.",
+    "b": "A divisão ocorre no canal adutor, impossibilitando visualização por abordagem poplítea.",
+    "c": "Em média 5–7 cm acima da prega poplítea, permitindo bloqueio do tronco indiviso com injeção proximal ao ponto de divisão.",
+    "d": "A divisão ocorre sempre abaixo da prega poplítea, exigindo bloqueio separado das duas divisões. || E) O nervo ciático não se divide na fossa poplítea; continua como tronco único até o tornozelo."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-14",
+    "enunciado": "Sobre o bloqueio do plano transverso abdominal (TAP block), qual afirmativa é CORRETA?",
+    "a": "É realizado entre oblíquo interno e transverso abdominal, anestesiando os nervos toracoabdominais (T6–L1) que inervam a parede abdominal anterior.",
+    "b": "O TAP subcostal cobre dermátomos infra-umbilicais (T10–L1); o TAP lateral cobre os supra-umbilicais (T8–T10).",
+    "c": "Proporciona analgesia visceral eficaz, equivalente à peridural em cirurgias abdominais abertas.",
+    "d": "É realizado entre reto abdominal e oblíquo externo, por referência anatômica no triângulo de Petit. || E) Volumes acima de 10 mL por lado são desnecessários, pois o espaço fascial é pequeno."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-15",
+    "enunciado": "Paciente de 60 anos programado para safenectomia endovenosa de membro inferior esquerdo (coxa medial e perna medial). O anestesiologista planeja combinar bloqueio femoral com bloqueio do nervo safeno por abordagem do canal adutor.\n\nPaciente de 60 anos programado para safenectomia endovenosa de membro inferior esquerdo (coxa medial e perna medial). O anestesiologista planeja combinar bloqueio femoral com bloqueio do nervo safeno por abordagem do canal adutor. Sobre o nervo safeno e seu bloqueio, assinale a afirmativa CORRETA:",
+    "a": "O nervo safeno é o único ramo terminal sensitivo do nervo femoral; o bloqueio no canal adutor anestesia a face medial da perna e do pé até o maléolo medial.",
+    "b": "O nervo safeno é ramo do nervo obturatório, razão pela qual o bloqueio femoral isolado não cobre a face medial da perna.",
+    "c": "O bloqueio do canal adutor produz bloqueio motor significativo do quadríceps, semelhante ao femoral três-em-um.",
+    "d": "O nervo safeno inerva a face plantar medial do pé; o bloqueio safeno é suficiente para cirurgias no hálux. || E) O bloqueio do canal adutor é realizado ao nível do ligamento inguinal, entre artéria femoral e veia safena magna."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-16",
+    "enunciado": "Sobre o uso de ultrassonografia em bloqueios periféricos comparado à neuroestimulação isolada, qual afirmativa MELHOR representa o estado atual da evidência?",
+    "a": "O ultrassom reduz a latência do bloqueio, o volume de anestésico necessário e diminui risco de punção vascular e de bloqueio intraneural acidental.",
+    "b": "O ultrassom não oferece vantagens em taxa de sucesso ou complicações; sua vantagem principal é o conforto do paciente.",
+    "c": "O ultrassom é mandatório por regulamentação do CFM para todos os bloqueios periféricos em território nacional.",
+    "d": "A neuroestimulação é mais segura para detecção de injeção intraneural, pois ausência de resposta a 0,2 mA confirma que a agulha não está no nervo. || E) O ultrassom aumenta o risco de bloqueio intraneural por levar o anestesiologista a aproximar excessivamente a agulha ao nervo."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-17",
+    "enunciado": "Paciente masculino, 28 anos, 85 kg, 178 cm, ASA I, programado para uretrocistoscopia rígida em posição de litotomia. Decide-se por raquianestesia com bupivacaína hiperbárica.\n\nPaciente masculino, 28 anos, 85 kg, 178 cm, ASA I, programado para uretrocistoscopia rígida em posição de litotomia. Decide-se por raquianestesia com bupivacaína hiperbárica. Para nível sensitivo de T10 com bloqueio motor mínimo de membros inferiores, qual é a estratégia MAIS ADEQUADA?",
+    "a": "Bupivacaína hiperbárica 15 mg em L3–L4 com decúbito dorsal imediato após a punção.",
+    "b": "Bupivacaína hiperbárica 7,5–10 mg em L3–L4, paciente sentado por 3–5 minutos (sela) para restringir ao períneo e sacro.",
+    "c": "Bupivacaína hiperbárica 7,5–10 mg em L3–L4, decúbito dorsal imediato após a injeção para dispersão até T10.",
+    "d": "Lidocaína hiperbárica 100 mg em L2–L3, única opção para cistoscopia de curta duração. || E) Bupivacaína isobárica 12,5 mg em L1–L2 com Trendelenburg de 15° para dispersão cefálica."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-18",
+    "enunciado": "Parturiente de 38 anos, 38 semanas, IMC 38 kg/m², com rotura prematura de membranas, é submetida a cesariana sob raquianestesia. Após a injeção de bupivacaína hiperbárica 10 mg + fentanil 20 mcg em L3–L4, a paciente apresenta nível sensitivo em T2 e PA 70/40 mmHg (queda de 42% em relação ao basal).\n\nParturiente de 38 anos, 38 semanas, IMC 38 kg/m², com rotura prematura de membranas, é submetida a cesariana sob raquianestesia. Após a injeção de bupivacaína hiperbárica 10 mg + fentanil 20 mcg em L3–L4, a paciente apresenta nível sensitivo em T2 e PA 70/40 mmHg (queda de 42% em relação ao basal). Qual é a conduta IMEDIATA mais adequada?",
+    "a": "Trendelenburg acentuado para deslocar o anestésico cefálico e elevar a PA pela pressão hidrostática.",
+    "b": "Deslocamento uterino para esquerda, infusão rápida de cristaloide, efedrina 5–10 mg IV (ou fenilefrina 50–100 mcg IV) e oxigênio por máscara.",
+    "c": "Administrar atropina 0,5 mg IV e aguardar resolução espontânea da hipotensão enquanto prepara para cesariana.",
+    "d": "Reposicionar a paciente em decúbito lateral esquerdo total (90°) e infundir 1.000 mL de solução salina em 10 minutos. || E) Administrar adrenalina 0,1 mg IV imediatamente, pois a hipotensão sugere reação anafilática ao anestésico local."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-19",
+    "enunciado": "Sobre a síndrome de irritação neurológica transitória (TNS) após raquianestesia, qual afirmativa é CORRETA?",
+    "a": "A TNS é causada por desmielinização permanente das raízes lombossacras e cursa com déficit motor nos membros inferiores.",
+    "b": "A TNS se manifesta por dor ou disestesia em nádegas e membros inferiores, sem déficit neurológico, com início nas primeiras 24h após a recuperação do bloqueio e resolução espontânea em 72h a 1 semana.",
+    "c": "A TNS é mais frequente com bupivacaína hiperbárica em alta concentração (0,75%) do que com lidocaína.",
+    "d": "A posição de litotomia não é fator de risco para TNS; o único fator de risco estabelecido é a escolha do anestésico. || E) A TNS pode evoluir para síndrome de cauda equina se não tratada com corticosteroides nas primeiras 6 horas."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-2",
+    "enunciado": "Paciente de 68 anos, 70 kg, com insuficiência renal crônica estágio 3 (ClCr 32 mL/min), será submetido a fistulização arteriovenosa para hemodiálise no antebraço esquerdo sob bloqueio do plexo braquial.\n\nPaciente de 68 anos, 70 kg, com insuficiência renal crônica estágio 3 (ClCr 32 mL/min), será submetido a fistulização arteriovenosa para hemodiálise no antebraço esquerdo sob bloqueio do plexo braquial. Em relação ao perfil farmacocinético dos anestésicos locais do tipo éster, qual afirmativa é CORRETA?",
+    "a": "São metabolizados por esterases plasmáticas (pseudocolinesterases), gerando PABA como metabólito principal, que pode causar reações alérgicas verdadeiras.",
+    "b": "Possuem metabolismo hepático predominante via citocromo P450, semelhante às amidas.",
+    "c": "A meia-vida plasmática prolongada em pacientes com deficiência de colinesterase plasmática não tem relevância clínica.",
+    "d": "São mais estáveis em solução que as amidas, dispensando conservantes nas formulações comerciais. || E) A tetracaína tem metabolismo mais rápido que a lidocaína, tornando-a mais segura para bloqueios de grande volume."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-20",
+    "enunciado": "Paciente de 65 anos submetida a artroplastia de joelho sob raquianestesia. No segundo dia pós-operatório queixa-se de cefaleia frontal e occipital, intensa (8/10 em escala visual analógica), de caráter postural — piora em ortostatismo e melhora em decúbito — e acompanhada de náuseas e fotofobia.\n\nPaciente de 65 anos submetida a artroplastia de joelho sob raquianestesia. No segundo dia pós-operatório queixa-se de cefaleia frontal e occipital, intensa (8/10 em escala visual analógica), de caráter postural — piora em ortostatismo e melhora em decúbito — e acompanhada de náuseas e fotofobia. Sobre a cefaleia pós-punção dural (CPPD), qual afirmativa é CORRETA?",
+    "a": "A CPPD resulta de tração das estruturas meníngeas pela perda de LCR, e o tratamento definitivo é o tampão hemático peridural (blood patch) com 15–20 mL de sangue autólogo.",
+    "b": "A CPPD é causada por irritação química das meninges pelo anestésico local; o tampão hemático é contraindicado porque pode causar aracnoidite.",
+    "c": "Agulhas de ponta de lápis (Whitacre, Sprotte) têm maior incidência de CPPD que as agulhas cortantes (Quincke) de mesmo calibre.",
+    "d": "A CPPD não tem caráter postural; a piora em ortostatismo sugere diagnóstico diferencial de enxaqueca. || E) A cafeína é o tratamento de primeira linha recomendado pelas principais diretrizes por ser superior ao tampão hemático em termos de taxa de cura."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-21",
+    "enunciado": "Sobre o uso de morfina intratecal para analgesia pós-operatória, assinale a afirmativa CORRETA:",
+    "a": "A morfina intratecal produz analgesia de curta duração (2–4h) comparável ao fentanil intratecal, sendo pouco útil para analgesia pós-operatória prolongada.",
+    "b": "A dose de morfina intratecal para cesariana é tipicamente 100–200 mcg; doses maiores não aumentam a analgesia e elevam os efeitos adversos (prurido, náuseas, depressão respiratória tardia).",
+    "c": "A depressão respiratória tardia por morfina intratecal ocorre exclusivamente nas primeiras 2 horas após a administração, não exigindo monitorização prolongada.",
+    "d": "O prurido induzido por opioides intratecais é causado por liberação de histamina e deve ser tratado com difenidramina. || E) A morfina intratecal está contraindicada em cesarianas por atravessar a placenta e causar depressão respiratória neonatal."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-22",
+    "enunciado": "Paciente do sexo masculino, 75 anos, com estenose espinhal lombar grave, ASA III, é submetido a ressecção transuretral de próstata (RTUP) sob raquianestesia com bupivacaína hiperbárica 10 mg. Durante o procedimento o paciente refere dor abdominal súbita, agitação e confusão mental, sem alteração hemodinâmica significativa.\n\nPaciente do sexo masculino, 75 anos, com estenose espinhal lombar grave, ASA III, é submetido a ressecção transuretral de próstata (RTUP) sob raquianestesia com bupivacaína hiperbárica 10 mg. Durante o procedimento o paciente refere dor abdominal súbita, agitação e confusão mental, sem alteração hemodinâmica significativa. Qual é o diagnóstico MAIS PROVÁVEL e a conduta inicial?",
+    "a": "Bloqueio alto/total — elevar as pernas e administrar efedrina 10 mg IV.",
+    "b": "Síndrome de absorção de glicina (síndrome pós-RTUP) — interromper irrigação, medir sódio sérico, tratar hiponatremia conforme magnitude.",
+    "c": "Reação alérgica ao anestésico local — administrar adrenalina 0,3 mg IM e anti-histamínico IV.",
+    "d": "TNS em fase aguda — administrar AINEs e observar. || E) Perfuração vesical extraperitoneal — solicitar urologista para avaliação endoscópica imediata."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-23",
+    "enunciado": "Sobre os fatores que determinam o nível do bloqueio subaracnóideo, qual afirmativa é INCORRETA?",
+    "a": "A barricidade da solução anestésica é o principal fator modificável pelo anestesiologista para controlar o nível do bloqueio.",
+    "b": "A posição do paciente após a injeção influencia a dispersão apenas de soluções hiperbáricas e hipobáricas, não de soluções isobáricas.",
+    "c": "A velocidade de injeção e o volume injetado têm impacto mínimo no nível do bloqueio quando comparados à barricidade e à posição do paciente.",
+    "d": "A curvatura da coluna vertebral (lordose lombar e cifose torácica) é irrelevante para a dispersão de soluções hiperbáricas em decúbito dorsal. || E) A dose total do anestésico (concentração × volume) influencia tanto a intensidade quanto a duração do bloqueio."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-24",
+    "enunciado": "Paciente de 52 anos, obeso (IMC 42 kg/m²), ASA II, é submetido a gastrectomia vertical laparoscópica. O anestesiologista planeja analgesia peridural torácica (APT) com cateter em T7–T8.\n\nPaciente de 52 anos, obeso (IMC 42 kg/m²), ASA II, é submetido a gastrectomia vertical laparoscópica. O anestesiologista planeja analgesia peridural torácica (APT) com cateter em T7–T8. Sobre a identificação do espaço peridural pela técnica de perda de resistência (LOR), assinale a afirmativa CORRETA:",
+    "a": "A LOR com solução salina e com ar são equivalentes em segurança e confiabilidade; a preferência é arbitrária.",
+    "b": "A LOR com ar tem maior risco de embolia gasosa, cefaleia pós-punção por deslocamento de LCR e bloqueio incompleto por formação de bolhas de ar no espaço peridural.",
+    "c": "Em pacientes obesos, a profundidade do espaço peridural é invariavelmente menor (2–3 cm), facilitando a identificação pela técnica de LOR.",
+    "d": "O uso de ultrassom pré-procedimento é contraindicado antes de punções peridurais em pacientes obesos por não acrescentar informação útil. || E) A LOR com ar é o método padrão-ouro recomendado pelo SBA para punções peridurais torácicas em adultos."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-25",
+    "enunciado": "Sobre o teste de dose peridural com epinefrina (3 mL de lidocaína 1,5% + epinefrina 1:200.000), qual afirmativa é CORRETA?",
+    "a": "Um aumento de FC ≥ 20 bpm em 60 segundos após a injeção do teste de dose sugere posicionamento intravascular do cateter.",
+    "b": "O teste de dose com epinefrina é altamente confiável em gestantes em trabalho de parto, pois a FC materna é estável e não sofre variações durante as contrações.",
+    "c": "A ausência de sinais de toxicidade sistêmica após o teste de dose garante posição extravascular do cateter, dispensando monitorização subsequente.",
+    "d": "Um bloqueio motor dos membros inferiores 3–5 minutos após a injeção do teste de dose indica que o cateter está no espaço subaracnóideo. || E) O teste de dose deve ser realizado apenas na primeira injeção peridural; reinjeções após reposicionamento do cateter não exigem novo teste."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-26",
+    "enunciado": "Parturiente de 26 anos, nulípara, 40 semanas, 4 cm de dilatação, solicita analgesia de parto. Opta-se por analgesia peridural com ropivacaína 0,1% + fentanil 2 mcg/mL em infusão contínua de 10 mL/h.\n\nParturiente de 26 anos, nulípara, 40 semanas, 4 cm de dilatação, solicita analgesia de parto. Opta-se por analgesia peridural com ropivacaína 0,1% + fentanil 2 mcg/mL em infusão contínua de 10 mL/h. Sobre a analgesia peridural para trabalho de parto, qual afirmativa é CORRETA?",
+    "a": "A analgesia peridural precoce (antes de 4–5 cm de dilatação) aumenta a taxa de cesariana, sendo contraindicada antes da fase ativa estabelecida.",
+    "b": "A analgesia peridural prolonga significativamente o segundo estágio do trabalho de parto, aumentando a taxa de cesariana em estudos randomizados recentes.",
+    "c": "A analgesia peridural pode ser iniciada em qualquer fase do trabalho de parto sem aumentar a taxa de cesariana; a evidência mais recente não sustenta a restrição baseada em dilatação cervical.",
+    "d": "A infusão peridural contínua é superior à PCEA (patient-controlled epidural analgesia) em todos os desfechos, sendo o método de escolha. || E) O uso de opioides no espaço peridural está associado a depressão respiratória neonatal consistentemente quando usados em doses analgésicas para trabalho de parto."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-27",
+    "enunciado": "Paciente de 44 anos submetido a esofagectomia aberta por câncer de esôfago. Foi instalado cateter peridural torácico em T5–T6 para analgesia pós-operatória. No segundo dia pós-operatório, o paciente apresenta febre (38,8°C), dor lombar local intensa e leucocitose.\n\nPaciente de 44 anos submetido a esofagectomia aberta por câncer de esôfago. Foi instalado cateter peridural torácico em T5–T6 para analgesia pós-operatória. No segundo dia pós-operatório, o paciente apresenta febre (38,8°C), dor lombar local intensa e leucocitose. Qual é a conduta MAIS ADEQUADA?",
+    "a": "Manter o cateter peridural, iniciar antibioticoterapia empírica e monitorar a temperatura a cada 4 horas.",
+    "b": "Remover o cateter imediatamente, coletar ponta do cateter para cultura e hemoculturas, solicitar RNM de coluna torácica e iniciar antibioticoterapia de amplo espectro.",
+    "c": "Administrar analgésico sistêmico e aguardar 24 horas para verificar se há progressão antes de remover o cateter.",
+    "d": "Injetar solução antiséptica no cateter peridural para tratar possível colonização local. || E) Solicitar tomografia computadorizada de tórax para excluir complicação cirúrgica como causa da febre, sem intervir no cateter."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-28",
+    "enunciado": "Sobre a técnica raquiperidural combinada (RPC), assinale a afirmativa CORRETA:",
+    "a": "Na técnica needle-through-needle, a agulha espinhal é introduzida através da agulha de Tuohy após identificação do espaço peridural, realizando-se primeiro a injeção intratecal e depois a passagem do cateter peridural.",
+    "b": "A RPC tem maior incidência de CPPD que a raquianestesia isolada, pois a agulha de Tuohy atravessa inevitavelmente a dura-máter.",
+    "c": "O cateter peridural na RPC não pode ser testado com dose-teste, pois a punção dural recente aumenta a chance de falso-positivo.",
+    "d": "A principal indicação da RPC em obstetrícia é a cesariana eletiva de pacientes sem cateter peridural prévio, pois elimina a necessidade de raquianestesia separada. || E) A RPC é contraindicada em pacientes em uso de heparina de baixo peso molecular, mesmo que o último uso tenha sido há mais de 12 horas."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-29",
+    "enunciado": "Paciente de 70 anos submetido a ressecção anterior de reto por neoplasia colorretal sob anestesia geral combinada com peridural torácica (T9–T10). No período pós-operatório imediato, o paciente apresenta hipotensão refratária (PA 75/40 mmHg) sem resposta adequada a fluidos (1.500 mL cristaloide) nem a efedrina 30 mg IV fracionada.\n\nPaciente de 70 anos submetido a ressecção anterior de reto por neoplasia colorretal sob anestesia geral combinada com peridural torácica (T9–T10). No período pós-operatório imediato, o paciente apresenta hipotensão refratária (PA 75/40 mmHg) sem resposta adequada a fluidos (1.500 mL cristaloide) nem a efedrina 30 mg IV fracionada. Qual é o vasopressor de escolha para hipotensão refratária no contexto de bloqueio simpático peridural torácico?",
+    "a": "Efedrina em infusão contínua, pois é o único vasoconstritor seguro na presença de bloqueio peridural.",
+    "b": "Fenilefrina em altas doses (>200 mcg/min), pois o bloqueio peridural aumenta a sensibilidade aos vasoconstritores alfa-adrenérgicos.",
+    "c": "Norepinefrina (0,05–0,3 mcg/kg/min) ou vasopressina (0,03–0,04 U/min) como vasopressores de resgate em hipotensão refratária a fluidos e efedrina.",
+    "d": "Dopamina em dose dopaminérgica (1–3 mcg/kg/min), pois restaura o tônus vascular sem risco de bradicardia reflexa. || E) Adrenalina 1 mg IV em bolus a cada 3–5 minutos conforme protocolo de PCR, pois hipotensão refratária representa parada circulatória iminente."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-3",
+    "enunciado": "Sobre o mecanismo de ação dos anestésicos locais nos canais de sódio voltagem-dependentes, assinale a afirmativa CORRETA:",
+    "a": "A forma não ionizada (base livre) atravessa a membrana celular e, já no citoplasma, re-ioniza-se em cátion que se liga ao receptor interno do canal de Na+.",
+    "b": "Apenas a forma ionizada (catiônica) é ativa; a forma lipossolúvel serve somente para o transporte transmembrana.",
+    "c": "Canais no estado de repouso (fechados) são bloqueados com maior afinidade que canais nos estados aberto ou inativo.",
+    "d": "O bloqueio uso-dependente é mais pronunciado em tecidos com baixa frequência de disparo. || E) Anestésicos com maior pKa têm latência mais curta porque a maior fração ionizada facilita a abertura do canal."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-30",
+    "enunciado": "Paciente de 38 anos, sem comorbidades, submetido a prostatectomia radical retropúbica sob anestesia geral. Ao final do procedimento, o anestesiologista realiza bloqueio peridural caudal com ropivacaína 0,375% 20 mL para analgesia pós-operatória.\n\nPaciente de 38 anos, sem comorbidades, submetido a prostatectomia radical retropúbica sob anestesia geral. Ao final do procedimento, o anestesiologista realiza bloqueio peridural caudal com ropivacaína 0,375% 20 mL para analgesia pós-operatória. Sobre o bloqueio peridural caudal no adulto, qual afirmativa é CORRETA?",
+    "a": "O hiato sacral é facilmente identificável por ultrassom, que aumenta a taxa de sucesso especialmente em adultos obesos onde o hiato não é palpável.",
+    "b": "O bloqueio peridural caudal no adulto apresenta a mesma taxa de sucesso e distribuição do bloqueio que em crianças, pois a anatomia sacral é equivalente.",
+    "c": "O espaço peridural caudal termina no nível S1; injeções além deste nível causam inevitavelmente punção do saco dural.",
+    "d": "A posição de decúbito ventral é contraindicada para o bloqueio caudal em adultos; apenas o decúbito lateral é adequado. || E) O bloqueio caudal não pode ser usado para analgesia pós-operatória em cirurgias pélvicas no adulto, pois o volume necessário é excessivamente alto."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-31",
+    "enunciado": "Parturiente de 32 anos, nuligesta, 39 semanas, em trabalho de parto ativo com cateter peridural funcional (ropivacaína 0,1% + sufentanil 0,5 mcg/mL em PCEA). Evolui para indicação de cesariana de urgência (sofrimento fetal agudo — desacelerações tardias recorrentes). O obstetra solicita cesariana em 20 minutos.\n\nParturiente de 32 anos, nuligesta, 39 semanas, em trabalho de parto ativo com cateter peridural funcional (ropivacaína 0,1% + sufentanil 0,5 mcg/mL em PCEA). Evolui para indicação de cesariana de urgência (sofrimento fetal agudo — desacelerações tardias recorrentes). O obstetra solicita cesariana em 20 minutos. Qual é a estratégia MAIS ADEQUADA para converter a analgesia de parto em anestesia cirúrgica pelo cateter peridural já instalado?",
+    "a": "Administrar lidocaína 2% com epinefrina 1:200.000 (15–20 mL) pelo cateter peridural, com dose de teste inicial de 3 mL e aguardar 10–15 minutos para bloqueio cirúrgico de T4.",
+    "b": "Remover o cateter peridural e realizar raquianestesia imediata, pois a conversão de analgesia peridural em anestesia cirúrgica é ineficiente e demorada.",
+    "c": "Injetar ropivacaína 0,75% 20 mL diretamente pelo cateter sem dose de teste, pois o cateter já está funcionando e o tempo é crítico.",
+    "d": "Administrar bupivacaína 0,25% 20 mL pelo cateter, aguardar 20 minutos e complementar com fentanil intratecal se o nível for insuficiente. || E) Realizar anestesia geral imediatamente com sequência rápida, pois cateter peridural não permite conversão adequada para cesariana de urgência em menos de 30 minutos."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-4",
+    "enunciado": "Durante bloqueio supraclavicular com 40 mL de bupivacaína 0,5% (200 mg), o paciente apresenta — 3 minutos após a injeção — sabor metálico, zumbido, tontura e confusão mental. FC 88 bpm; PA 110/70 mmHg.\n\nDurante bloqueio supraclavicular com 40 mL de bupivacaína 0,5% (200 mg), o paciente apresenta — 3 minutos após a injeção — sabor metálico, zumbido, tontura e confusão mental. FC 88 bpm; PA 110/70 mmHg. Qual é a conduta MAIS ADEQUADA neste momento?",
+    "a": "Diazepam 10 mg IV imediatamente para prevenir convulsões e aguardar resolução espontânea.",
+    "b": "Intubação orotraqueal imediata com succinilcolina e propofol em infusão contínua.",
+    "c": "Interromper qualquer injeção adicional, oferecer O₂ suplementar, garantir acesso venoso calibroso, administrar midazolam 1–2 mg IV e ter emulsão lipídica 20% pronta para uso imediato.",
+    "d": "Epinefrina 1 mg IV em bolus imediatamente para antecipar toxicidade cardiovascular. || E) Observar por 5 minutos — sintomas leves de SNC são esperados nesse bloqueio e não requerem intervenção."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-5",
+    "enunciado": "Sobre o uso de vasoconstritores associados a anestésicos locais, qual afirmativa é INCORRETA?",
+    "a": "A epinefrina reduz a absorção sistêmica do anestésico local, diminuindo picos plasmáticos e prolongando o bloqueio.",
+    "b": "A concentração de epinefrina habitualmente empregada é 1:200.000 (5 mcg/mL).",
+    "c": "A felipressina (octapressina) é vasoconstritor de escolha em gestantes por não ter efeito uterotônico relevante.",
+    "d": "A adição de epinefrina à lidocaína intratecal aumenta a duração do bloqueio subaracnóideo de forma consistente e é amplamente recomendada para cirurgias longas. || E) O uso de vasoconstritores é contraindicado em bloqueios de extremidades terminais (dedos, pênis) pela maioria dos protocolos tradicionais."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-6",
+    "enunciado": "Gestante de 32 semanas com pré-eclâmpsia grave necessita de cesariana de emergência. Discute-se bupivacaína versus ropivacaína para a anestesia regional.\n\nGestante de 32 semanas com pré-eclâmpsia grave necessita de cesariana de emergência. Discute-se bupivacaína versus ropivacaína para a anestesia regional. Qual característica da ropivacaína representa sua principal VANTAGEM em relação à bupivacaína nesse contexto?",
+    "a": "Maior potência intrínseca, permitindo concentrações mais baixas e redução do risco de toxicidade fetal.",
+    "b": "É formulada como mistura racêmica, enquanto a bupivacaína é S(−)-enantiopura, conferindo maior segurança cardiovascular.",
+    "c": "É S(−)-enantiopura, com menor cardiotoxicidade que a bupivacaína racêmica e menor propensão a arritmias malignas por injeção intravascular acidental.",
+    "d": "Atravessa menos a barreira placentária por ser mais ionizada em pH fisiológico. || E) Tem duração de ação muito mais curta que a bupivacaína, sendo inadequada para procedimentos superiores a 60 minutos."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-7",
+    "enunciado": "Sobre a emulsão lipídica 20% (Intralipid) no tratamento de toxicidade sistêmica por anestésicos locais, assinale a afirmativa CORRETA:",
+    "a": "O mecanismo envolve exclusivamente sequestração do anestésico local do plasma (\"lipid sink\"), sem outros efeitos metabólicos.",
+    "b": "O bolus recomendado é 3 mL/kg em 2–3 minutos, seguido de infusão de 0,25 mL/kg/min.",
+    "c": "O bolus recomendado é 1,5 mL/kg em 1 minuto, seguido de infusão de 0,25 mL/kg/min; pode-se repetir o bolus até 3 vezes se não houver resposta.",
+    "d": "A emulsão lipídica não deve ser administrada concomitantemente à RCP, pois interfere na eficácia das compressões. || E) O Intralipid é eficaz apenas para toxicidade por bupivacaína; para lidocaína e ropivacaína, outros antídotos são necessários."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-8",
+    "enunciado": "Sobre o bloqueio diferencial sensitivo-motor de ropivacaína versus bupivacaína, qual afirmativa é CORRETA?",
+    "a": "A bupivacaína produz bloqueio motor mais intenso que a ropivacaína em concentrações equimolares, sendo preferida quando relaxamento muscular intraoperatório é necessário.",
+    "b": "Ambos têm perfil sensitivo-motor idêntico; a diferença clínica decorre apenas da maior potência da bupivacaína.",
+    "c": "A ropivacaína tem maior propensão ao bloqueio diferencial (sensitivo preservando motor) em baixas concentrações, sendo preferida para analgesia de parto.",
+    "d": "A bupivacaína tem menor cardiotoxicidade porque sua dissociação dos canais de Na⁺ cardíacos é mais rápida. || E) A ropivacaína é contraindicada em bloqueio peridural obstétrico por causar bradicardia fetal direta."
+  },
+  {
+    "id": "sim-me2simulado2trimestreprovabhtml-9",
+    "enunciado": "Paciente de 55 anos, DPOC moderada (VEF1 55%), programado para osteossíntese de úmero distal (3h). Considera-se bloqueio interescalênico.\n\nPaciente de 55 anos, DPOC moderada (VEF1 55%), programado para osteossíntese de úmero distal (3h). Considera-se bloqueio interescalênico. Qual é a principal limitação desta abordagem nesse paciente?",
+    "a": "Risco de síndrome de Horner ipsilateral, que compromete a visão intraoperatória.",
+    "b": "Bloqueio frénico ipsilateral quase universal (≈100%), reduzindo ≈25% da CV, podendo descompensar paciente com reserva respiratória limítrofe.",
+    "c": "O interescalênico não cobre adequadamente o nervo ulnar (C8–T1), sendo insuficiente para úmero distal.",
+    "d": "Risco de punção da artéria carótida é proibitivo em pacientes com DPOC sob anticoagulação. || E) A latência excessiva (>60 min) inviabiliza a técnica em situações urgentes."
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-10",
+    "enunciado": "Síndrome RTU | Caso Clínico\n\nPaciente do sexo masculino, 72 anos, submetido a ressecção transuretral de próstata (RTUP) com solução de irrigação não condutora (glicina 1,5%). Após 90 minutos de cirurgia, o anestesiologista (anestesia raquidiana) nota que o paciente apresenta confusão mental, bradicardia e hipotensão. O sódio sérico colhido mostra 122 mEq/L. Qual é o diagnóstico e o tratamento inicial?",
+    "a": "Reação alérgica à glicina; adrenalina IV",
+    "b": "Síndrome de absorção do irrigante (síndrome RTU); restrição hídrica, furosemida, solução salina hipertônica se sintomas neurológicos graves",
+    "c": "Embolia gasosa; posição de Trendelenburg e aspiração do ar pelo CVC",
+    "d": "Sepse urinária; antibióticos e vasopressores || E) Hipotensão ortostática por raqui alta; efedrina e expansão volêmica"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-11",
+    "enunciado": "Diuréticos | Conceitual\n\nDurante cirurgia de neurocirurgia, o neuroanestesiologista utiliza manitol 20% para redução da pressão intracraniana. Em relação ao manitol, qual das afirmações abaixo é INCORRETA?",
+    "a": "É um diurético osmótico que age no túbulo proximal e alça de Henle",
+    "b": "Pode causar expansão inicial do volume intravascular antes da diurese",
+    "c": "É filtrado e reabsorvido pelo túbulo proximal",
+    "d": "Contraindicado em anúria por risco de edema pulmonar || E) A dose habitual é de 0,25 a 1 g/kg IV"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-12",
+    "enunciado": "Urologia | Caso Clínico\n\nPaciente de 55 anos com litíase renal múltipla bilateral submetido a nefrolitotripsia percutânea. Durante o procedimento em posição de Trendelenburg reverso com o paciente pronado, o anestesiologista identifica queda abrupta de SpO2 para 88%, crepitações na ausculta pulmonar e abaulamento no flanco ipsilateral ao acesso cirúrgico. Qual é a complicação mais provável?",
+    "a": "Tromboembolismo pulmonar",
+    "b": "Hidrotórax por extravasamento de solução de irrigação",
+    "c": "Pneumotórax espontâneo",
+    "d": "Pneumonia aspirativa || E) Atelectasia por posição prona"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-13",
+    "enunciado": "IRC | Caso Clínico\n\nPaciente renal crônico em hemodiálise (DRC estágio 5) programado para transplante renal. Em relação ao manejo anestésico, qual afirmativa é CORRETA?",
+    "a": "O succinilcolina é contraindicado apenas se K+ > 6,5 mEq/L",
+    "b": "O rocurônio deve ser evitado pois sua eliminação é exclusivamente renal",
+    "c": "O atracúrio e o cisatracúrio são drogas de escolha pois sofrem eliminação de Hofmann independente de função renal ou hepática",
+    "d": "A morfina é preferida ao fentanil por não acumular metabólitos ativos || E) Sevoflurano é contraindicado por produzir composto A nefrotóxico em qualquer fluxo de gás"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-14",
+    "enunciado": "Obstetrícia | Caso Clínico\n\nGestante de 36 semanas, 78 kg, programada para cesariana eletiva. Após raquianestesia com bupivacaína hiperbárica 10 mg + fentanil 20 mcg + morfina 80 mcg, a paciente evolui com PA 70/40 mmHg, frequência cardíaca 110 bpm e náuseas. Qual é a causa mais provável e o tratamento de primeira linha?",
+    "a": "Reação alérgica à bupivacaína; adrenalina IM",
+    "b": "Hipotensão espinal; fenilefrina IV (100 mcg bolus) ou norepinefrina",
+    "c": "Síndrome de compressão aortocava; apenas decúbito lateral esquerdo",
+    "d": "Bradicardia reflexa; atropina 0,5 mg IV || E) Bloqueio espinal total; intubação imediata e ressuscitação"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-15",
+    "enunciado": "Pré-eclâmpsia | Caso Clínico\n\nGestante de 34 semanas com pré-eclâmpsia grave (PA 170/110 mmHg, proteinúria 3+, cefaleia intensa). Iniciou sulfato de magnésio IV para profilaxia de eclâmpsia. Após 2 horas de infusão, a equipe de enfermagem relata que a paciente apresenta perda dos reflexos patelar, frequência respiratória de 10 rpm e confusão. O nível de magnésio sérico é provavelmente:",
+    "a": "2–3 mEq/L — nível terapêutico",
+    "b": "4–7 mEq/L — nível terapêutico ideal",
+    "c": "7–10 mEq/L — toxicidade com perda de reflexos",
+    "d": "> 15 mEq/L — parada cardíaca iminente || E) 1–2 mEq/L — nível subterapêutico"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-16",
+    "enunciado": "HELLP | Caso Clínico\n\nPuérpera de 30 anos, 24 horas após cesariana, apresenta dor em hipocôndrio direito, icterícia leve e mal-estar. Exames: plaquetas 68.000/mm³, TGO 320 U/L, TGP 280 U/L, LDH 850 U/L, hemoglobina 9,2 g/dL com esquizócitos no esfregaço. Qual é o diagnóstico?",
+    "a": "Colecistite aguda pós-operatória",
+    "b": "Síndrome HELLP",
+    "c": "Hepatite viral aguda",
+    "d": "Trombocitopenia imune pós-transfusional || E) Insuficiência hepática por halotano"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-17",
+    "enunciado": "Hemorragia pós-parto | Caso Clínico\n\nParturiente de 28 anos, após parto vaginal com feto de 4.200 g, apresenta sangramento vaginal estimado em 1.200 mL, útero hipotônico, PA 90/55 mmHg e FC 125 bpm. Ocitocina IV já foi administrada sem resposta adequada. Qual é o próximo passo no algoritmo de manejo da atonia uterina?",
+    "a": "Histerectomia de emergência imediata",
+    "b": "Misoprostol retal 800 mcg e/ou ergotamina IV + metilergometrina",
+    "c": "Administração de tranexâmico 1 g IV e reavaliação",
+    "d": "Ergometrina IM 0,2 mg e/ou carboprost (análogo PGF2α) IM || E) Embolização de artérias uterinas de emergência"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-18",
+    "enunciado": "Embolia LA | Caso Clínico\n\nParturiente de 26 anos em pleno trabalho de parto, logo após rotura de membranas, apresenta colapso cardiovascular súbito, cianose, convulsão e CIVD. O diagnóstico mais provável é embolia de líquido amniótico (ELA). Sobre esta condição, qual afirmativa é CORRETA?",
+    "a": "Tem tratamento específico com antídoto disponível",
+    "b": "O diagnóstico é confirmado por achado de células escamosas fetais no sangue materno por cateter de artéria pulmonar",
+    "c": "O manejo é de suporte: ressuscitação cardiopulmonar, suporte hemodinâmico, correção de CIVD e parto imediato",
+    "d": "É causa rara de mortalidade materna, com taxa menor que 10% || E) Ocorre exclusivamente no pós-parto imediato"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-19",
+    "enunciado": "Adaptações gestacionais | Conceitual\n\nEm relação às adaptações fisiológicas da gestação com impacto direto no manejo anestésico, qual das afirmativas abaixo está INCORRETA?",
+    "a": "A CRF reduz cerca de 20% no termo, diminuindo a reserva de oxigênio durante apneia",
+    "b": "O volume de distribuição de drogas hidrossolúveis aumenta pelo aumento do volume plasmático",
+    "c": "A CAM dos agentes inalatórios aumenta em cerca de 30% devido à progesterona",
+    "d": "O esvaziamento gástrico está retardado a partir do 2º trimestre, aumentando risco de broncoaspiração || E) Edema de mucosa das vias aéreas superiores pode dificultar a laringoscopia"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-2",
+    "enunciado": "Hemostasia | Caso Clínico\n\nPaciente de 58 anos, submetido a cirurgia de revascularização miocárdica com circulação extracorpórea (CEC). Recebeu 400 UI/kg de heparina não fracionada para heparinização sistêmica. Após o término da CEC, o cirurgião solicita reversão da anticoagulação. O TCA pré-heparina era de 120 s e, após heparina, foi de 480 s. A dose de protamina a ser calculada baseia-se em qual relação?",
+    "a": "1 mg de protamina para cada 100 UI de heparina administrada",
+    "b": "1 mg de protamina para cada 200 UI de heparina administrada",
+    "c": "2 mg de protamina para cada 100 UI de heparina administrada",
+    "d": "0,5 mg de protamina para cada 100 UI de heparina administrada || E) 1,5 mg de protamina para cada 100 UI de heparina administrada"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-20",
+    "enunciado": "Cimento ósseo | Caso Clínico\n\nPaciente de 78 anos submetido a artroplastia total de quadril cimentada. Imediatamente após a inserção do cimento ósseo (PMMA) e impactação da prótese, o anestesiologista observa queda abrupta da pressão arterial de 135/75 para 70/40 mmHg, SpO2 para 88% e aumento do ETCO2 seguido de queda brusca. Qual é o diagnóstico e a fisiopatologia deste evento?",
+    "a": "Reação alérgica ao PMMA; mecanismo IgE-mediado",
+    "b": "Síndrome de implantação do cimento ósseo; embolia de monômero de metilmetacrilato, gordura, ar e medula para circulação pulmonar",
+    "c": "Crise hipertensiva por dor; mecanismo adrenérgico",
+    "d": "Bloqueio espinal ascendente tardio; vasodilatação neuraxial || E) IAM perioperatório; oclusão coronariana por embolia"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-21",
+    "enunciado": "Embolia gordurosa | Caso Clínico\n\nJovem de 22 anos, politraumatizado, fratura de fêmur bilateral, imobilizado por 36 horas. Evolui com dispneia progressiva, confusão mental, petéquias em conjuntiva e axila, e hipoxemia (PaO2/FiO2 = 180). Qual é o diagnóstico e o critério diagnóstico mais específico?",
+    "a": "TEP; angiotomografia de tórax com falha de enchimento",
+    "b": "Síndrome de embolia gordurosa; critérios de Gurd (critério maior: petéquias + insuficiência respiratória + manifestações neurológicas)",
+    "c": "SARA de outra causa; critérios de Berlim",
+    "d": "Pneumonia por aspiração; infiltrado lobar na radiografia || E) Contusão pulmonar bilateral; tomografia de tórax"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-22",
+    "enunciado": "Tríade letal | Caso Clínico\n\nVítima de trauma múltiplo em laparotomia de controle de danos: temperatura 34,2°C, pH 7,18, BE -12, fibrinogênio 80 mg/dL, plaquetas 55.000/mm³ e TTPA alargado. A tríade letal do trauma é composta por:",
+    "a": "Hipovolemia, hipóxia e hipoglicemia",
+    "b": "Hipotermia, acidose e coagulopatia",
+    "c": "Anemia, trombocitopenia e hipotensão",
+    "d": "Sepse, SARA e insuficiência renal || E) Hipotermia, hipocalcemia e CIVD"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-23",
+    "enunciado": "Torniquete | Caso Clínico\n\nPaciente submetido a cirurgia de joelho com torniquete pneumático em 350 mmHg por 95 minutos. Após a liberação do torniquete, o anestesiologista antecipa as consequências sistêmicas. Quais alterações são esperadas IMEDIATAMENTE após a deflação do torniquete?",
+    "a": "Hipercapnia, queda da temperatura central, hipercalemia transitória e hipotensão",
+    "b": "Hipocapnia, hipertermia, hipocalemia e hipertensão",
+    "c": "Sem alterações hemodinâmicas relevantes em torniquetes < 2 horas",
+    "d": "Queda do ETCO2 por consumo de CO2 no membro isquêmico || E) Alcalose metabólica por liberação de bicarbonato do membro"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-24",
+    "enunciado": "Ortopedia | Caso Clínico\n\nPaciente de 68 anos com fratura de quadril (colo femoral) aguarda cirurgia há 48 horas por instabilidade hemodinâmica prévia. Em relação ao tipo de anestesia preferencial e os benefícios para este perfil de paciente, qual é a afirmativa mais correta?",
+    "a": "Anestesia geral com intubação orotraqueal é preferível para controle da via aérea em idosos",
+    "b": "Anestesia neuroaxial (raqui ou peridural) está associada a menor mortalidade em 30 dias, menor incidência de TEP e menor perda sanguínea em metanálises",
+    "c": "Bloqueio de nervo femoral isolado é suficiente para analgesia intraoperatória de quadril",
+    "d": "A escolha do tipo de anestesia não influencia desfechos em cirurgia de quadril no idoso || E) Anestesia peridural contínua é contraindicada por risco de hematoma em pacientes com anticoagulação profilática"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-25",
+    "enunciado": "Ortopedia | Conceitual\n\nEm relação ao uso de torniquete pneumático em cirurgia dos membros, qual é a pressão de insuflação recomendada para membro inferior e qual a condição que CONTRAINDICA seu uso?",
+    "a": "250–300 mmHg; contraindicado em cirurgia de joelho",
+    "b": "200–250 mmHg para MMII; contraindicado em doença vascular periférica grave e TVP",
+    "c": "300–350 mmHg; contraindicado apenas em pacientes hipertensos",
+    "d": "150–200 mmHg; contraindicado em obesos || E) Sem contraindicações absolutas documentadas"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-26",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 45 anos, gestante de 32 semanas, com pré-eclâmpsia grave, necessita de cesárea de urgência. Plaquetas: 85.000/mm³. O anestesiologista considera raquianestesia. Qual é o limite mínimo de plaquetas geralmente aceito para realização de bloqueio neuroaxial neste contexto?",
+    "a": "150.000/mm³",
+    "b": "100.000/mm³",
+    "c": "50.000/mm³ — controverso, maioria aceita ≥ 70.000–80.000/mm³ com tendência estável",
+    "d": "Qualquer contagem de plaquetas, se coagulação normal || E) 200.000/mm³ para bloqueio neuroaxial em gestante"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-27",
+    "enunciado": "Hemostasia | Caso Clínico\n\nPaciente de 52 anos, hepatopata grave (Child-Pugh C), TP = 38% (INR 2,1), plaquetas 62.000/mm³, fibrinogênio 140 mg/dL. Necessita de laparotomia exploradora de urgência. Em relação ao manejo hemostático pré-operatório, qual é a abordagem mais racional?",
+    "a": "Corrigir INR com PFC 4 unidades e plaquetas se < 50.000/mm³",
+    "b": "Aguardar normalização espontânea da coagulação",
+    "c": "Administrar vitamina K oral e aguardar 48–72 horas",
+    "d": "Hemostasia cirúrgica é suficiente; não há necessidade de hemoderivados || E) Hemodiálise prévia para remoção de fatores pró-coagulantes"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-28",
+    "enunciado": "Urologia | Caso Clínico\n\nPaciente de 60 anos com hiperplasia prostática benigna submetido a RTUP endoscópica. O cirurgião utiliza solução de sorbitol-manitol como irrigante. Após 60 minutos, o paciente (em raquianestesia) refere visão turva e o anestesiologista nota hiponatremia de 126 mEq/L. Qual substância da solução de irrigação pode causar toxicidade específica quando absorvida em excesso?",
+    "a": "Manitol — toxicidade neurológica direta",
+    "b": "Glicina — metabolizada em amônia e glioxilato, causando encefalopatia e visão turva",
+    "c": "Sorbitol — causa rabdomiólise",
+    "d": "Água destilada — lise de hemácias || E) Cloreto de sódio hipertônico — hipernatremia"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-29",
+    "enunciado": "Obstetrícia | Conceitual\n\nEm relação à anestesia geral para cesariana de emergência, qual sequência de indução é preconizada e por quê?",
+    "a": "Indução inalatória lenta com sevoflurano; menor risco de hipotensão",
+    "b": "Indução de sequência rápida (propofol ou cetamina + succinilcolina ou rocurônio alta dose + pressão cricoide); risco de aspiração e hipóxia rápida pela CRF reduzida",
+    "c": "Sedação consciente com midazolam + fentanil; mantém reflexos protetores",
+    "d": "Anestesia total intravenosa com propofol e remifentanil em TCI; menor transferência placentária || E) Bloqueio de nervo infraorbitário bilateral; evita riscos da intubação"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-3",
+    "enunciado": "Hemostasia | Caso Clínico\n\nPaciente do sexo feminino, 42 anos, com fibrilação atrial crônica em uso de rivaroxabana 20 mg/dia, necessita de cirurgia de emergência por abdome agudo. A última dose foi há 6 horas. O anestesiologista preocupa-se com o risco hemorrágico. Qual agente de reversão específico está disponível para este anticoagulante?",
+    "a": "Vitamina K IV",
+    "b": "Idarucizumabe",
+    "c": "Andexanet alfa",
+    "d": "Protamina || E) Plasma fresco congelado"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-30",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente com fratura exposta de tíbia recebe heparina profilática 5.000 UI SC. 18 horas depois, necessita de desbridamento cirúrgico urgente. O anestesiologista planeja bloqueio do nervo ciático-femoral. Em relação à segurança do bloqueio de nervo periférico profundo neste contexto, qual é a conduta correta segundo diretrizes ASRA?",
+    "a": "Bloqueio de nervo periférico é contraindicado com qualquer nível de anticoagulação",
+    "b": "Heparina não fracionada SC profilática (< 10.000 UI/dia) não é contraindicação para bloqueios de nervo periférico superficiais e profundos",
+    "c": "Aguardar 24 horas após última dose de heparina SC para qualquer bloqueio",
+    "d": "Heparina SC profilática exige TCA < 180 s antes do bloqueio || E) Protamina deve ser administrada antes de qualquer bloqueio de nervo periférico"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-31",
+    "enunciado": "Hemostasia | Caso Clínico\n\nPaciente de 67 anos com fibrilação atrial em uso de dabigatrana 150 mg 12/12h, última dose há 10 horas, sofre trauma cranioencefálico grave com hematoma extradural. Neurocirurgião indica drenagem cirúrgica de emergência. Qual é o agente de reversão específico e a dose?",
+    "a": "Andexanet alfa 400 mg IV bolus",
+    "b": "Idarucizumabe 5 g IV (2 frascos de 2,5 g)",
+    "c": "CCP 4 fatores 50 UI/kg",
+    "d": "Protamina 1 mg/100 UI || E) Plasma fresco congelado 15 mL/kg"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-4",
+    "enunciado": "ROTEM | Conceitual\n\nDurante cirurgia de fígado de grande porte, a tromboelastometria rotacional (ROTEM) é realizada. O resultado mostra: EXTEM com CT prolongado (> 80 s), CFT prolongado e MCF reduzido. O FIBTEM apresenta MCF reduzido (< 8 mm). O INTEM é normal. Qual é o componente deficiente que melhor explica este padrão?",
+    "a": "Plaquetas",
+    "b": "Fibrinogênio",
+    "c": "Fator VIII",
+    "d": "Fator XIII || E) Via extrínseca de coagulação"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-5",
+    "enunciado": "CIVD | Caso Clínico\n\nPaciente de 29 anos, primigesta, no pós-parto imediato após descolamento prematuro de placenta, evolui com sangramento difuso em lençol nos sítios de punção, mucosas e campo cirúrgico. Exames: plaquetas 42.000/mm³, TP prolongado, TTPA prolongado, fibrinogênio 68 mg/dL, D-dímero muito elevado. Qual é o diagnóstico e a conduta prioritária?",
+    "a": "Hemofilia A adquirida; administrar fator VIII recombinante",
+    "b": "CIVD; tratar a causa base e repor hemoderivados guiados por exames",
+    "c": "Plaquetopenia gestacional; transfundir plaquetas isoladamente",
+    "d": "Deficiência de vitamina K; administrar vitamina K IV || E) Púrpura trombocitopênica imune; plasmaférese de urgência"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-6",
+    "enunciado": "Anticoagulação | Conceitual\n\nPaciente em uso de warfarina (INR = 4,8) necessita de cirurgia de urgência por trauma abdominal. Não há tempo para aguardar efeito da vitamina K. Qual é a estratégia mais rápida e eficaz para reverter a anticoagulação?",
+    "a": "Vitamina K 10 mg IV em infusão lenta",
+    "b": "Plasma fresco congelado 15 mL/kg",
+    "c": "Concentrado de complexo protrombínico (CCP) 4 fatores",
+    "d": "Crioprecipitado 10 unidades || E) Protamina 50 mg IV"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-7",
+    "enunciado": "Heparina | Caso Clínico\n\nDurante CEC para troca valvar mitral, o perfusionista informa que o TCA apresenta queda progressiva abaixo de 400 s apesar da heparinização adequada inicial. O cirurgião solicita dose adicional de heparina, mas o TCA não responde. Qual é o diagnóstico mais provável e a conduta correta?",
+    "a": "Superdosagem de protamina prévia; administrar heparina adicional",
+    "b": "Resistência à heparina por deficiência de antitrombina III; repor AT III ou PFC",
+    "c": "Trombocitopenia induzida por heparina tipo II; trocar por bivalirudina",
+    "d": "Coagulopatia dilucional; transfundir plasma fresco || E) Hipotermia reduzindo efeito da heparina; aquecer o paciente"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-8",
+    "enunciado": "TFG | Conceitual\n\nPaciente de 70 anos com creatinina sérica de 1,4 mg/dL, peso 65 kg. Pela fórmula de Cockcroft-Gault, a TFG estimada é de 42 mL/min. Qual estágio de DRC (KDIGO) e quais precauções anestésicas são mais relevantes?",
+    "a": "Estágio 1; sem restrições anestésicas",
+    "b": "Estágio 2; apenas monitorar diurese",
+    "c": "Estágio 3b; ajuste de drogas, evitar NSAIDs e nefrotóxicos, hidratação cuidadosa",
+    "d": "Estágio 4; diálise pré-operatória obrigatória || E) Estágio 5; contraindicação absoluta à anestesia geral"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovaa30qpontos2832html-9",
+    "enunciado": "IRA-KDIGO | Caso Clínico\n\nPaciente de 65 anos, submetido a cirurgia de aorta abdominal aberta. No 2º dia de pós-operatório, apresenta creatinina de 2,8 mg/dL (basal 1,0 mg/dL) e diurese de 0,3 mL/kg/h nas últimas 8 horas. De acordo com os critérios KDIGO, qual é o estágio da IRA?",
+    "a": "Estágio 1 — critério de diurese apenas",
+    "b": "Estágio 2 — critério de creatinina apenas",
+    "c": "Estágio 2 pelo critério de creatinina (aumento > 2x basal) e estágio 2 por diurese",
+    "d": "Estágio 3 pelo critério de creatinina (> 3x basal) || E) Estágio 1 por ambos critérios"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-10",
+    "enunciado": "Urologia | Caso Clínico\n\nPaciente de 55 anos com massa renal direita submetido a nefrectomia radical laparoscópica. Durante o pneumoperitônio em posição de Trendelenburg reverso e decúbito lateral, o anestesiologista observa PA de pico de 38 cmH2O, Vt 350 mL, capnografia ETCO2 52 mmHg. Qual é a causa mais provável e a conduta?",
+    "a": "Pneumotórax hipertensivo; descompressão imediata",
+    "b": "Absorção de CO2 pelo pneumoperitônio + posição desfavorável; aumentar frequência respiratória para normalizar ETCO2",
+    "c": "Intubação seletiva; redirecionar sonda orotraqueal",
+    "d": "Broncoespasmo; salbutamol inalatório || E) Tamponamento cardíaco; pericardiocentese"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-11",
+    "enunciado": "IRA | Caso Clínico\n\nPaciente de 74 anos em pós-operatório de cirurgia cardíaca com CEC. No 1º dia PO: creatinina 2,1 mg/dL (basal 0,9 mg/dL), diurese 0,4 mL/kg/h, sódio urinário 8 mEq/L, osmolaridade urinária 580 mOsm/kg. O índice de falência renal (IFR = Na urinário / creatinina urinária × creatinina sérica) é < 1. Qual é o diagnóstico mais provável?",
+    "a": "IRA intrínseca por NTA isquêmica",
+    "b": "IRA pré-renal; hipovolemia funcional pós-CEC",
+    "c": "IRA obstrutiva por coágulo em pelve renal",
+    "d": "NTA por contraste iodado intraoperatório || E) Glomerulonefrite aguda pós-infecciosa"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-12",
+    "enunciado": "Urologia | Caso Clínico\n\nPaciente de 48 anos com cálculo ureteral impactado submetido a ureterorrenoscopia flexível. Para analgesia pós-operatória, o urologista pede dipirona + ketorolaco IV. O anestesiologista sabe que o paciente tem TFG de 38 mL/min (DRC 3b). Qual é a consideração correta sobre o uso de AINEs neste contexto?",
+    "a": "Ketorolaco é nefroprotegedor em doses baixas em pacientes com DRC",
+    "b": "AINEs são contraindicados relativos em DRC por inibição das prostaglandinas vasodilatadoras, causando vasoconstrição aferente e piora da função renal",
+    "c": "Ketorolaco pode ser utilizado em dose plena por 5 dias em DRC 3b",
+    "d": "AINEs não afetam a função renal em pacientes sem diabetes || E) Ibuprofeno oral é mais seguro que ketorolaco IV em nefropatas"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-13",
+    "enunciado": "IRC | Conceitual\n\nEm relação ao manejo farmacológico em pacientes com insuficiência renal grave (DRC 4-5), qual afirmativa está CORRETA?",
+    "a": "Morfina é segura pois não tem metabólitos ativos",
+    "b": "Neostigmina deve ser evitada pois tem eliminação predominantemente renal",
+    "c": "Midazolam acumula significativamente pois é eliminado por via renal",
+    "d": "A morfina-6-glucuronídeo (M6G) acumula em IRC e pode causar depressão respiratória prolongada; preferir hidromorfona ou fentanil || E) Succinilcolina é absolutamente contraindicada em qualquer grau de IRC"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-14",
+    "enunciado": "Obstetrícia | Caso Clínico\n\nGestante de 38 semanas com placenta prévia totalmente oclusiva e suspeita de acretismo placentário (placenta acreta/increta/percreta) à ressonância magnética. O planejamento anestésico-cirúrgico é discutido em equipe multidisciplinar. Qual é a abordagem anestésica mais recomendada para este caso?",
+    "a": "Raquianestesia isolada com dose alta de bupivacaína para maior duração",
+    "b": "Peridural contínua com possibilidade de conversão para geral se sangramento maciço",
+    "c": "Anestesia geral com ISR planejada desde o início, com banco de sangue disponível, célula-tronco intraoperatória (cell salvage) e equipe de radiologia intervencionista de prontidão",
+    "d": "Anestesia local com sedação por ser procedimento laparoscópico || E) Peridural com bupivacaína 0,5% sem opioide para evitar depressão neonatal"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-15",
+    "enunciado": "Pré-eclâmpsia | Caso Clínico\n\nGestante de 32 semanas com pré-eclâmpsia grave, laringoespasmo pós-extubação após cesariana emergencial. A anestesiologista tenta reintubação e encontra edema glótico grave (Cormack-Lehane IV). Qual é a via de resgate para esta via aérea difícil inesperada em gestante?",
+    "a": "Máscara laríngea classic e ventilação até resolução do edema",
+    "b": "Cricotireoidotomia de emergência como último recurso após falha de dispositivos supraglóticos de segunda geração (LMA Proseal/Supreme)",
+    "c": "Sedação com propofol e aguardar resolução do laringoespasmo",
+    "d": "Succinilcolina IV pode ser administrada para relaxar o laringoespasmo mesmo após já ter sido usada na indução || E) Reiniciar máscara facial e aguardar recuperação da consciência"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-16",
+    "enunciado": "Obstetrícia | Conceitual\n\nEm relação à analgesia de parto com peridural contínua, qual complicação está corretamente pareada com sua causa e tratamento?",
+    "a": "Hipotensão — vasodilatação por bloqueio simpático — efedrina ou fenilefrina IV",
+    "b": "Febre intraparto — infecção por punção — antibióticos de amplo espectro",
+    "c": "Prurido — reação alérgica ao anestésico local — anti-histamínico IV",
+    "d": "Cefaleia pós-punção dural (CPPD) — lesão dural — repouso em decúbito dorsal por 48h como único tratamento || E) Bloqueio motor intenso — dose excessiva de bupivacaína 0,5% — reverter com lipídio 20%"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-17",
+    "enunciado": "Hemorragia obstétrica | Caso Clínico\n\nPuérpera de 35 anos, 4 horas após parto vaginal normal, retorna ao centro obstétrico com sangramento vaginal de 900 mL. O exame mostra laceração de trajeto grau III (esfincter externo do ânus). Hemoglobina 8,5 g/dL, PA 100/65 mmHg, FC 108 bpm. A paciente necessita de sutura cirúrgica. Qual é a melhor técnica anestésica?",
+    "a": "Anestesia geral com IOT — maior segurança em paciente instável",
+    "b": "Bloqueio do nervo pudendo bilateral — suficiente para lacerações de trajeto grau I-II apenas",
+    "c": "Raquianestesia com bupivacaína hiperbárica 7,5 mg — rápida, eficaz, sem risco de aspiração em paciente em jejum",
+    "d": "Sedação com ketamina IV sem intubação || E) Anestesia local com lidocaína infiltrada sem nenhum outro suporte"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-18",
+    "enunciado": "Obstetrícia | Caso Clínico\n\nGestante de 28 semanas, 90 kg, com diabetes gestacional e síndrome do túnel do carpo bilateral, necessita de anestesia para cerclagem cervical de urgência. Qual é a técnica anestésica mais apropriada considerando o risco-benefício gestacional?",
+    "a": "Anestesia geral com halogenado — tocólise como efeito colateral benéfico",
+    "b": "Raquianestesia baixa (sela) com bupivacaína hiperbárica 5–7,5 mg — mínima repercussão hemodinâmica, menor risco fetal",
+    "c": "Peridural com ropivacaína 0,75% em dose única — maior segurança neonatal",
+    "d": "Anestesia geral com propofol e fentanil sem intubação — menor risco de contração uterina || E) Anestesia local com lidocaína 2% cervical — suficiente para cerclagem"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-19",
+    "enunciado": "Sulfato de magnésio | Conceitual\n\nGestante recebe sulfato de magnésio IV para tratamento de eclâmpsia. O neonatologista da equipe pergunta sobre os efeitos neonatais do sulfato de magnésio. Quais são os efeitos esperados no recém-nascido exposto?",
+    "a": "Sem efeitos neonatais pois o magnésio não atravessa a barreira placentária",
+    "b": "Hipotonia, hipoventilação, hiporreflexia e hipocalcemia transitória no RN exposto ao magnésio materno",
+    "c": "Somente hipocalcemia transitória, sem depressão neurológica",
+    "d": "Convulsões neonatais por rebote após retirada do magnésio || E) Taquicardia e hipertensão neonatal por estimulação adrenérgica"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-2",
+    "enunciado": "NOACs | Caso Clínico\n\nPaciente de 70 anos com fibrilação atrial não valvar em uso de apixabana 5 mg 12/12h, última dose há 14 horas, apresenta-se com fratura de quadril. A cirurgia é urgente (< 12h). O circulograma de coagulação está disponível e o nível anti-Xa é de 68 ng/mL (zona de risco moderado). Qual é a conduta mais adequada?",
+    "a": "Aguardar 48 horas para eliminação completa da apixabana",
+    "b": "Administrar vitamina K 10 mg IV e operar em 6 horas",
+    "c": "Administrar andexanet alfa para reversão e realizar cirurgia com monitorização hemostática",
+    "d": "Realizar cirurgia sem intervenção, pois apixabana não prolonga TP/TTPA significativamente || E) Hemodiálise para remoção da apixabana"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-20",
+    "enunciado": "Ortopedia | Caso Clínico\n\nPaciente de 16 anos com escoliose idiopática severa (Cobb 75°) submetido a instrumentação de coluna com monitorização neurofisiológica intraoperatória (PESS e MEPs). O anestesiologista é solicitado a adequar a anestesia para melhor qualidade de potenciais evocados. Quais drogas são mais adequadas?",
+    "a": "Halogenados em alta concentração (> 1 CAM) + óxido nitroso — excelente perfil para monitorização",
+    "b": "Propofol TIVA + remifentanil + baixa dose de halogenado (< 0,5 CAM) — menor supressão dos potenciais evocados motores",
+    "c": "Cetamina bolus + midazolam — potencializa amplitude dos MEPs",
+    "d": "Relaxantes musculares não despolarizantes em infusão — necessários para qualidade dos MEPs || E) Dexmedetomidina em alta dose como agente único — mantém MEPs sem outros agentes"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-21",
+    "enunciado": "Ortopedia | Caso Clínico\n\nPaciente de 55 anos submetido a artroplastia total de joelho bilateral simultânea. Após a deflação do segundo torniquete (2h de isquemia cada), o anestesiologista observa ETCO2 subindo de 35 para 52 mmHg em 5 minutos, queda da PA de 120/75 para 80/50 mmHg e SpO2 92%. Qual é a principal hipótese diagnóstica?",
+    "a": "Pneumotórax bilateral iatrogênico",
+    "b": "Embolia gordurosa ou de cimento ósseo com acometimento pulmonar",
+    "c": "Reação transfusional hemolítica aguda",
+    "d": "Tamponamento cardíaco || E) Crise tireotóxica intraoperatória"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-22",
+    "enunciado": "Tríade letal | Caso Clínico\n\nEm cirurgia de controle de danos para trauma abdominal, o cirurgião encerra a operação em 45 min com packing abdominal e fáscia temporariamente fechada. O paciente chega à UTI: Temp 33,8°C, BE -15, pH 7,12, plaquetas 48.000, fibrinogênio 95 mg/dL. Qual é o objetivo prioritário nas próximas horas?",
+    "a": "Retornar ao CO imediatamente para anastomose intestinal definitiva",
+    "b": "Reaquecimento ativo, correção da acidose com bicarbonato de sódio em bolus, e transfusão de plaquetas",
+    "c": "Ressuscitação hemostática (plasma:plaquetas:CH 1:1:1), reaquecimento ativo, correção da acidose pela restauração da perfusão tecidual",
+    "d": "Hemodiálise de urgência para correção de acidose || E) Vasopressores em alta dose para manter PAM > 80 mmHg"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-23",
+    "enunciado": "Analgesia ortopedia | Caso Clínico\n\nPaciente de 62 anos submetido a artroplastia total de joelho. Para analgesia multimodal perioperatória, o anestesiologista planeja bloqueio do nervo femoral + nervo ciático e analgesia sistêmica. Qual opção de analgesia regional de membro inferior apresenta melhor perfil de mobilidade precoce para reabilitação?",
+    "a": "Bloqueio femoral contínuo — analgesia eficaz sem comprometer mobilidade do quadríceps",
+    "b": "Bloqueio do canal do adutor (nervo safeno) — analgesia predominantemente sensorial, preserva força do quadríceps para fisioterapia precoce",
+    "c": "Bloqueio ciático poplíteo — abrange toda dor de ATJ sem necessidade de outros bloqueios",
+    "d": "Peridural lombar contínua — melhor analgesia bilateral para cirurgia simultânea || E) Infiltração local com ropivacaína 0,2% — equivalente ao bloqueio femoral em todos os estudos"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-24",
+    "enunciado": "Ortopedia | Conceitual\n\nSobre a síndrome de embolia gordurosa após fratura de ossos longos, qual é o intervalo típico entre o trauma e o aparecimento dos sintomas?",
+    "a": "Imediatamente após o trauma (< 1 hora)",
+    "b": "12–72 horas após o evento traumático",
+    "c": "5–7 dias após o trauma",
+    "d": "Apenas no período intraoperatório durante manipulação do foco de fratura || E) 2–4 semanas após o trauma"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-25",
+    "enunciado": "Cimento | Conceitual\n\nEm relação à prevenção da síndrome de implantação do cimento ósseo, qual medida intraoperatória tem maior impacto na redução da embolia durante a cimentação da prótese femoral?",
+    "a": "Uso de óxido nitroso para melhorar oxigenação",
+    "b": "Cimentação com técnica de terceira geração (lavagem e secagem do canal, cimento pressurizado, plug distal e cânula central para escape de medula)",
+    "c": "Hipotensão deliberada para reduzir pressão no canal femoral",
+    "d": "Reposição hídrica agressiva prévia à cimentação || E) Uso exclusivo de próteses não cimentadas em todos os pacientes"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-26",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente obeso mórbido (IMC 45 kg/m²) com DRC estágio 3b necessita de colecistectomia videolaparoscópica urgente (colecistite aguda litiásica). Quais bloqueios neuromusculares são mais apropriados e por quê?",
+    "a": "Succinilcolina para ISR + vecurônio para manutenção — melhor perfil hemodinâmico",
+    "b": "Rocurônio 1,2 mg/kg para ISR (com sugammadex disponível) + atracúrio ou cisatracúrio para manutenção — reversão previsível e eliminação de Hofmann",
+    "c": "Mivacúrio para ISR — metabolização por colinesterase plasmática independente de rins",
+    "d": "Pancurônio para ISR e manutenção — meia-vida prolongada, dose única || E) Vecurônio em dose padrão sem necessidade de ajuste em DRC"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-27",
+    "enunciado": "Hemostasia | Caso Clínico\n\nDurante cirurgia cardíaca com CEC, após reversão da heparina com protamina, o TCA está normal (120 s) porém o campo cirúrgico apresenta sangramento difuso em lençol sem ponto cirúrgico identificado. O ROTEM mostra: EXTEM MCF 35 mm, FIBTEM MCF 12 mm, INTEM CT normal. Qual é o diagnóstico e conduta?",
+    "a": "Heparina residual; dose adicional de protamina",
+    "b": "Trombocitopenia pós-CEC; transfundir plaquetas",
+    "c": "Hiperfibrinólise; ácido tranexâmico",
+    "d": "Deficiência de fibrinogênio pós-CEC com plaquetopenia funcional; crioprecipitado + plaquetas || E) Deficiência de vitamina K; vitamina K IV"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-28",
+    "enunciado": "Urologia | Caso Clínico\n\nPaciente de 66 anos em diálise peritoneal (DRC estágio 5) submetido a nefrectomia laparoscópica de rim nativo para controle de hipertensão refratária. Em relação ao acesso venoso e monitorização, qual é a consideração mais importante?",
+    "a": "Acesso venoso central obrigatório em todos os renais crônicos",
+    "b": "Preservação do capital venoso (evitar punção em veias do antebraço e braço destinados à fístula arteriovenosa futura ou existente)",
+    "c": "Pressão arterial invasiva obrigatória em todo renal crônico em diálise",
+    "d": "BIS obrigatório para titulação de anestesia em IRC || E) Sonda vesical desnecessária pois o paciente é oligúrico"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-29",
+    "enunciado": "Obstetrícia | Conceitual\n\nGestante de 39 semanas em trabalho de parto ativo solicita analgesia peridural. O obstetra informa que ela está com 7 cm de dilatação. Em relação ao momento ideal para realização da peridural, qual afirmativa é CORRETA baseada em evidências atuais?",
+    "a": "Peridural só deve ser realizada com ≥ 4 cm de dilatação para não inibir o trabalho de parto",
+    "b": "Peridural realizada precocemente (< 4 cm) aumenta taxa de cesariana",
+    "c": "A peridural pode ser realizada a qualquer momento do trabalho de parto desde que solicitada pela parturiente; não aumenta taxa de cesariana independente da dilatação",
+    "d": "Com 7 cm de dilatação, a peridural está contraindicada pois o parto é iminente || E) Peridural aumenta duração do 1º estágio do trabalho de parto em mais de 4 horas"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-3",
+    "enunciado": "TEG/ROTEM | Caso Clínico\n\nPaciente em pós-operatório de transplante hepático apresenta sangramento difuso. O ROTEM mostra: EXTEM e INTEM com CT normais, CFT normal, MCF reduzido em ambos (EXTEM MCF 32 mm; FIBTEM MCF 14 mm). O APTEM (com aprotinina) apresenta MCF igual ao EXTEM. O que estes achados indicam?",
+    "a": "Hiperfibrinólise grave; tratar com ácido tranexâmico",
+    "b": "Deficiência de fibrinogênio; repor crioprecipitado",
+    "c": "Trombocitopenia funcional; transfundir plaquetas",
+    "d": "Deficiência de fatores da via extrínseca; repor PFC || E) Anticoagulação por heparina residual; protamina"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-30",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 58 anos com câncer de próstata metastático submetido a prostatectomia radical robótica em posição de Trendelenburg acentuado (30°) por 4 horas com pneumoperitônio 15 mmHg. O anestesiologista preocupa-se com complicações oculares. Qual é a principal complicação oftalmológica associada a esta posição prolongada?",
+    "a": "Ceratite por exposição corneal",
+    "b": "Neuropatia óptica isquêmica posterior e oclusão de artéria central da retina por hipertensão ocular + hipotensão",
+    "c": "Descolamento de retina por pressão positiva intracraniana",
+    "d": "Glaucoma agudo de ângulo fechado por midríase || E) Neurite óptica inflamatória por posição"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-31",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente politraumatizada, 22 anos, grávida de 26 semanas, vítima de acidente de carro com fratura pélvica instável e suspeita de hemorragia retroperitoneal. PA 75/40 mmHg, FC 135 bpm, SpO2 94% em O2 com máscara. Qual é a prioridade no manejo desta paciente segundo ATLS e adaptações para gestante?",
+    "a": "Realizar tocólise imediata para prevenir parto prematuro antes de qualquer outra intervenção",
+    "b": "Realizar ultrassonografia obstétrica antes de qualquer tratamento cirúrgico",
+    "c": "Ressuscitar a mãe primeiro — a melhor maneira de salvar o feto é salvar a mãe; ABCDE do ATLS com deslocamento uterino manual para esquerda",
+    "d": "Realizar cesariana imediata para \"salvar\" o feto de 26 semanas antes da cirurgia de trauma || E) Evitar tomografia computadorizada para não expor o feto à radiação, mesmo com instabilidade hemodinâmica"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-4",
+    "enunciado": "Hemostasia | Caso Clínico\n\nPaciente de 8 anos com hemofilia A grave (fator VIII < 1%) submetido a apendicectomia de emergência. Qual é o nível mínimo de fator VIII necessário para cirurgia de grande porte e a forma de reposição?",
+    "a": "Fator VIII > 30%; concentrado de fator VIII recombinante para atingir este nível",
+    "b": "Fator VIII > 80–100%; concentrado de fator VIII recombinante perioperatório",
+    "c": "Fator VIII > 50%; plasma fresco congelado é suficiente",
+    "d": "Fator VIII > 30%; DDAVP é o tratamento de escolha || E) Fator VIII > 80%; CCP de 4 fatores pode ser utilizado"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-5",
+    "enunciado": "Anticoagulação | Conceitual\n\nSobre as heparinas de baixo peso molecular (HBPM), qual afirmativa é CORRETA em relação ao manejo perioperatório?",
+    "a": "O TTPA é o exame padrão para monitorização da HBPM",
+    "b": "A protamina reverte completamente a atividade anti-Xa da HBPM",
+    "c": "Para cirurgia de alto risco hemorrágico, o intervalo recomendado após última dose de HBPM profilática é de 12h e terapêutica é de 24h (ASRA)",
+    "d": "HBPM pode ser utilizada em gestantes com válvulas mecânicas sem restrições || E) A HBPM apresenta biodisponibilidade oral de 80%"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-6",
+    "enunciado": "Coagulação | Caso Clínico\n\nPaciente submetido a colectomia total com anastomose apresenta no 3º dia pós-operatório: TP alargado (INR 1,8), TTPA 52 s, plaquetas 380.000/mm³, fibrinogênio normal. Hemograma sem anemia. Qual é o diagnóstico mais provável?",
+    "a": "CIVD incipiente",
+    "b": "Deficiência de vitamina K por antibioticoterapia prolongada e jejum",
+    "c": "Coagulopatia dilucional por transfusão maciça",
+    "d": "Inibidor adquirido do fator VIII || E) Doença de von Willebrand tipo 3"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-7",
+    "enunciado": "TIH | Caso Clínico\n\nPaciente internado há 10 dias em uso de heparina não fracionada IV para TVP, apresenta queda de plaquetas de 280.000 para 85.000/mm³ (> 50% de queda) associada a nova trombose venosa em membro superior. A suspeita é de Trombocitopenia Induzida por Heparina tipo II (TIH). Qual é a conduta imediata?",
+    "a": "Transfundir plaquetas para manter > 100.000/mm³",
+    "b": "Suspender heparina e trocar por anticoagulante alternativo não heparinoide (argatrobana ou bivalirudina)",
+    "c": "Reduzir dose de heparina pela metade e repetir plaquetas em 24h",
+    "d": "Trocar por HBPM, que não causa TIH || E) Iniciar warfarina imediatamente"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-8",
+    "enunciado": "Proteção renal | Caso Clínico\n\nPaciente de 68 anos, diabético, hipertenso, com TFG 52 mL/min (estágio 3a), submetido a cirurgia de revascularização periférica com clampeamento aórtico infrarrenal por 45 min. Quais medidas têm evidência para proteção renal perioperatória neste contexto?",
+    "a": "Dopamina em dose renal (1–3 mcg/kg/min) previne IRA com forte evidência",
+    "b": "Manitol profilático administrado antes do clampeamento previne IRA com forte evidência",
+    "c": "Manutenção da normovolemia, PAM ≥ 65–80 mmHg, evitar nefrotóxicos e contraste iodado são as medidas com maior evidência",
+    "d": "Furosemida profilática aumenta o fluxo urinário e previne IRA oligúrica || E) N-acetilcisteína IV previne IRA em cirurgia vascular de grande porte"
+  },
+  {
+    "id": "sim-me2simulado3trimestreprovab30qpontos2832html-9",
+    "enunciado": "Diuréticos | Conceitual\n\nSobre os diuréticos de alça (furosemida), qual afirmativa é INCORRETA?",
+    "a": "Age no ramo ascendente espesso da alça de Henle inibindo o cotransportador Na-K-2Cl",
+    "b": "Pode causar hipocalemia, hipomagnesemia e alcalose metabólica hipoclorêmica",
+    "c": "É eficaz mesmo em insuficiência renal moderada-grave, necessitando doses maiores",
+    "d": "Causa ototoxicidade especialmente em altas doses IV ou associado a aminoglicosídeos || E) Retém potássio ao bloquear a aldosterona no túbulo coletor"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-10",
+    "enunciado": "ORL | Caso Clínico\n\nCriança de 4 anos submetida a tonsilectomia (amigdalectomia). No pós-operatório imediato, após extubação, apresenta estridor inspiratório progressivo, tiragem subcostal e SpO2 88%. Qual é o diagnóstico mais provável e a conduta imediata?",
+    "a": "Broncoespasmo; salbutamol inalatório",
+    "b": "Laringoespasmo pós-extubação; posição de olfação, O2, pressão positiva pela máscara, succinilcolina 2 mg/kg IM ou 0,1 mg/kg IV se necessário",
+    "c": "Edema subglótico; adrenalina nebulizada e dexametasona IV",
+    "d": "Corpo estranho aspirado; broncoscopia rígida de urgência || E) Sangramento de tonsilas com obstrução; reintubação e hemostasia cirúrgica"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-11",
+    "enunciado": "LMA | Conceitual\n\nEm relação à máscara laríngea (LMA) de segunda geração (LMA Supreme, LMA ProSeal), qual característica a diferencia da LMA clássica e qual é sua principal vantagem clínica?",
+    "a": "Menor custo; vantagem econômica",
+    "b": "Canal de drenagem gástrica que permite passagem de sonda orogástrica e reduz risco de regurgitação/aspiração; indicada em procedimentos com maior risco",
+    "c": "Inflável com CO2 para maior vedação; vantagem em laparoscopia de longa duração",
+    "d": "Descartável por design; previne infecção cruzada || E) Menor pressão de cuff; mais confortável no despertar"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-12",
+    "enunciado": "ORL | Caso Clínico\n\nPaciente de 62 anos com câncer de laringe avançado submetido a laringectomia total. Em relação ao manejo da via aérea no pós-operatório imediato, qual é a particularidade desta cirurgia?",
+    "a": "Paciente necessita de traqueostomia temporária que será fechada em 6 semanas",
+    "b": "Após laringectomia total, a traqueia é diretamente anastomosada à pele (traqueostoma permanente); o paciente nunca mais poderá ser ventilado pela boca ou nariz",
+    "c": "Reintubação orotraqueal de urgência é sempre possível no pós-operatório",
+    "d": "Traqueostomia temporária com cânula de Shiley número 8; fechamento em 7 dias || E) Via aérea convencional mantida pois a laringe é reconstruída com retalho"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-13",
+    "enunciado": "ORL | Caso Clínico\n\nDurante microlaringoscopia de suspensão com jet ventilation, o anestesiologista observa distensão abdominal progressiva, queda da SpO2 e dificuldade de ventilação. Qual é a complicação mais provável da jet ventilation e como preveni-la?",
+    "a": "Barotrauma por aprisionamento aéreo (air trapping/auto-PEEP); garantir alinhamento do jato, frequência adequada e tempo expiratório suficiente; contraindicada em obstrução subglótica grave",
+    "b": "Hipocapnia grave; aumentar FiO2 para compensar",
+    "c": "Embolia gasosa; posição Durant imediata",
+    "d": "Hipotermia por gases não aquecidos; aquecimento ativo || E) Intoxicação por CO2; reduzir frequência do jato"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-14",
+    "enunciado": "PIO | Caso Clínico\n\nPaciente de 70 anos com glaucoma crônico de ângulo aberto em uso de timolol colírio (bloqueador beta) e latanoprosta, submetido a facoemulsificação de catarata. Qual é o efeito sistêmico relevante do timolol colírio que o anestesiologista deve considerar?",
+    "a": "Nenhum, pois colírios não têm absorção sistêmica",
+    "b": "Absorção pela mucosa nasolacrimal causa efeito beta-bloqueador sistêmico (bradicardia, broncoespasmo, hipotensão); pode mascarar taquicardia e interagir com outros beta-bloqueadores",
+    "c": "Midríase que dificulta o procedimento cirúrgico",
+    "d": "Aumento da glicemia intraoperatória || E) Hipertensão rebote ao suspender o colírio no perioperatório"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-15",
+    "enunciado": "Reflexo oculocardíaco | Caso Clínico\n\nDurante cirurgia de estrabismo em criança de 6 anos, o cirurgião traciona o músculo reto medial. Imediatamente o monitor cardíaco mostra bradicardia sinusal de 38 bpm com escape juncional. Qual é o reflexo em questão, seu arco e o tratamento?",
+    "a": "Reflexo barorreceptor; arc via seio carotídeo; atropina IM",
+    "b": "Reflexo oculocardíaco (ROC); arco aferente: nervo ciliar curto/longo → trigêmio (V1) → núcleo do trigêmio; eferente: vago → sino-atrial; tratamento: solicitar ao cirurgião que cesse a tração; atropina IV se persistir",
+    "c": "Reflexo oculocardíaco; tratamento: propranolol IV",
+    "d": "Taquicardia ventricular por hipercapnia; cardioversão sincronizada || E) Bloqueio AV por anestésico local retrobulbar; marca-passo transcutâneo"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-16",
+    "enunciado": "Globo aberto | Caso Clínico\n\nCriança de 8 anos, vítima de trauma ocular penetrante com laceração de esclera, chega para cirurgia de urgência com estômago cheio (jantou há 2 horas). O anestesiologista enfrenta o dilema clássico: risco de broncoaspiração (justifica ISR com succinilcolina) versus risco de aumento da PIO com succinilcolina (pode extrudar conteúdo vítreo). Qual é a conduta mais aceita atualmente?",
+    "a": "Anestesia local retrobulbar para evitar ambos os riscos",
+    "b": "Indução inalatória lenta com sevoflurano; menor aumento de PIO",
+    "c": "ISR com rocurônio 1,2 mg/kg (com sugammadex disponível); o aumento de PIO pela succinilcolina é transitório e pode ser atenuado por pré-tratamento; rocurônio ISR é alternativa segura sem aumento de PIO",
+    "d": "Succinilcolina é contraindicada absolutamente em qualquer trauma ocular || E) Aguardar 6 horas para esvaziamento gástrico antes de operar"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-17",
+    "enunciado": "SF6 + N2O | Caso Clínico\n\nPaciente de 55 anos foi submetido a vitrectomia com injeção intravítrea de gás SF6 (hexafluoreto de enxofre) há 3 semanas para retinopeia por descolamento de retina. Necessita agora de cirurgia abdominal de urgência. Qual é a contraindicação anestésica crítica neste contexto?",
+    "a": "Uso de cetamina, que aumenta a PIO",
+    "b": "Uso de óxido nitroso (N2O), que difunde para a bolha de gás intravítreo, aumentando seu volume e causando hipertensão ocular aguda com risco de oclusão da artéria central da retina e cegueira",
+    "c": "Uso de succinilcolina, que aumenta transientemente a PIO",
+    "d": "Anestesia regional, que causa hipotensão e reduz fluxo retiniano || E) Qualquer opioide, que causa miose e dificulta avaliação pupilar pós-operatória"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-18",
+    "enunciado": "PIO | Conceitual\n\nQuais fatores aumentam a pressão intraocular (PIO) e são relevantes no manejo anestésico de pacientes oftalmológicos?",
+    "a": "Hiperventilação (hipocapnia), hipotensão e propofol",
+    "b": "Hipercapnia, hipertensão, tosse, manobra de Valsalva, laringoscopia, succinilcolina, cetamina e posição de Trendelenburg",
+    "c": "Apenas posição de Trendelenburg e tosse",
+    "d": "Somente drogas anticolinesterásicas || E) Propofol, opioides e halogenados aumentam a PIO"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-19",
+    "enunciado": "Oftalmologia | Caso Clínico\n\nPaciente de 78 anos com glaucoma agudo de ângulo fechado (PIO = 52 mmHg) necessita de iridotomia a laser. Está nauseado, com dor ocular intensa e vômitos. Qual é a preocupação anestésica caso seja necessária sedação para o procedimento?",
+    "a": "A ketamina é a droga de escolha pois aumenta o fluxo ocular",
+    "b": "Vômitos e tosse durante sedação podem elevar ainda mais a PIO; uso criterioso de antiemético (ondansetrona), sedação leve com propofol/midazolam, evitar depressão respiratória e hipercapnia",
+    "c": "Atropina sistêmica está indicada para midríase e facilitar a iridotomia",
+    "d": "N2O pode ser utilizado pois não afeta a PIO em glaucoma agudo || E) Succinilcolina é a única forma de imobilização ocular aceitável"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-2",
+    "enunciado": "Pneumoperitônio | Caso Clínico\n\nPaciente de 42 anos submetido a colecistectomia videolaparoscópica eletiva. Logo após insuflação de CO2 (pressão 14 mmHg), o anestesiologista observa: bradicardia de 45 bpm, hipertensão 175/95 mmHg e aumento da resistência vascular periférica. Após alguns minutos, a PA cai para 90/55 mmHg. Qual é a sequência fisiopatológica correta das alterações cardiovasculares do pneumoperitônio?",
+    "a": "Vasodilatação imediata → hipotensão → taquicardia reflexa",
+    "b": "Estimulação vagal pelo estiramento peritoneal (bradicardia/hipotensão) → hipertensão por compressão aórtica → queda do débito cardíaco por aumento pós-carga",
+    "c": "Aumento do retorno venoso → hipervolemia → taquicardia e hipertensão",
+    "d": "Aumento da pressão abdominal → aumento do retorno venoso → aumento do débito cardíaco || E) Absorção de CO2 → hipercapnia → broncoespasmo → hipoxemia"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-20",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 58 anos, ASA III (HAS controlada, DM2 com HbA1c 7,2%, obesidade grau I com IMC 32 kg/m²) solicita herniorrafia inguinal ambulatorial. O anestesiologista avalia a elegibilidade. Qual critério é CONTRAINDICAÇÃO para anestesia ambulatorial segundo diretrizes atuais?",
+    "a": "Idade > 50 anos",
+    "b": "IMC > 30 kg/m²",
+    "c": "ASA III com comorbidades estáveis e bem controladas não é contraindicação; contraindicações incluem: ASA IV-V, apneia obstrutiva do sono grave não tratada sem CPAP disponível em casa, procedimento de alto risco, ausência de suporte domiciliar adequado",
+    "d": "DM2 em uso de insulina || E) Cirurgia com duração prevista > 45 minutos"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-21",
+    "enunciado": "PADSS | Caso Clínico\n\nPaciente submetido a artroscopia de joelho ambulatorial. Ao avaliar alta hospitalar usando a escala PADSS (Post-Anesthetic Discharge Scoring System), quais critérios são avaliados?",
+    "a": "Apenas dor e náuseas",
+    "b": "Sinais vitais, atividade/nível de consciência, náuseas/vômitos, dor e sangramento cirúrgico — cada domínio pontuado de 0 a 2; alta com pontuação ≥ 9/10",
+    "c": "Apenas SpO2 e nível de consciência",
+    "d": "Capacidade de ingerir líquidos, urinar e deambular sem assistência || E) Escala de Aldrete modificada: saturação, atividade, respiração, consciência, PA"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-22",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 35 anos sem comorbidades, submetido a videolaparoscopia diagnóstica ambulatorial. No período de recuperação, apresenta náuseas e vômitos intratáveis (NV pós-operatórios) que impedem a alta. Quais são os principais fatores de risco para NVPO (Escore de Apfel)?",
+    "a": "Sexo masculino, não fumante, uso de opioides, cirurgia abdominal",
+    "b": "Sexo feminino, não fumante, histórico de NVPO ou cinetose, uso de opioides pós-operatórios — cada fator = 1 ponto; score 3-4 = alto risco (> 60%)",
+    "c": "Anestesia regional, ASA III, cirurgia laparoscópica e duração > 2h",
+    "d": "Hipotensão intraoperatória, uso de N2O e hipercapnia || E) Apenas histórico de NVPO e uso de propofol"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-23",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 28 anos, ex-prematuro (32 semanas de gestação), atualmente com 48 semanas de idade pós-concepcional (IPC), submetido a herniorrafia inguinal ambulatorial. Qual é a consideração específica para este paciente e a recomendação atual?",
+    "a": "Sem contraindicação; prematuridade não é fator de risco após 44 semanas IPC",
+    "b": "Ex-prematuro < 60 semanas IPC tem risco aumentado de apneia pós-anestésica; internação mínima de 12–24h com monitorização de apneia é recomendada",
+    "c": "Risco apenas em < 44 semanas IPC; acima disto alta ambulatorial é segura",
+    "d": "Contraindicação absoluta à cirurgia eletiva até 1 ano de IPC || E) Anestesia local com sedação leve resolve o problema da apneia pós-anestésica"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-24",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 45 anos submetido a colonoscopia diagnóstica com sedação profunda (propofol + fentanil). No pós-procedimento, apresenta SpO2 de 88% e FR 8 rpm, sem responsividade a estímulo verbal. Qual é a causa e a conduta?",
+    "a": "Laringoespasmo; CPAP com máscara facial",
+    "b": "Broncoespasmo por contraste; salbutamol inalatório",
+    "c": "Depressão respiratória por opioides; naloxona 0,1–0,2 mg IV titulada; se necessário: flumazenil para benzodiazepínico",
+    "d": "PCR por fibrilação ventricular; desfibrilação imediata || E) Pneumotórax por pressão positiva; drenagem torácica"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-25",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 50 anos, obeso grau II (IMC 37 kg/m²), com apneia obstrutiva do sono moderada-grave (SAOS) confirmada por polissonografia, submetido a colecistectomia laparoscópica ambulatorial. Quais são as precauções anestésicas específicas para SAOS neste contexto?",
+    "a": "Opioides em dose alta são necessários para analgesia adequada em SAOS",
+    "b": "SAOS moderada-grave pode exigir internação para monitorização noturna; analgesia multimodal com minimização de opioides (paracetamol, AINEs, dexametasona, bloqueios regionais); CPAP doméstico disponível no pós-operatório",
+    "c": "N2O deve ser usado para minimizar opioides em SAOS",
+    "d": "Intubação nasais é contraindicada em SAOS || E) Benzodiazepínicos para sedação pré-operatória são recomendados em SAOS"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-26",
+    "enunciado": "ORL | Caso Clínico\n\nPaciente de 12 anos submetido a adenotonsilectomia. No 6º dia pós-operatório, retorna à emergência com sangramento orofaríngeo ativo (tonsilectomia de sangramento tardio). Engoliu sangue e está agitado. Qual é a principal preocupação anestésica neste cenário e a estratégia de indução?",
+    "a": "Anemia aguda; transfusão antes da indução",
+    "b": "Estômago cheio com sangue deglutido + hipovolemia; ISR ou indução em sequência rápida modificada com posição semi-sentada, pressão cricoide, aspiração orofaríngea ativa",
+    "c": "Coagulopatia pós-operatória; PFC antes da cirurgia",
+    "d": "Edema de laringe tardio; adrenalina nebulizada e dexametasona || E) Laringoespasmo reflexo; pré-medicar com atropina IM"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-27",
+    "enunciado": "Laparoscopia | Conceitual\n\nEm relação à embolia gasosa durante laparoscopia, qual gás é preferido para o pneumoperitônio e por quê?",
+    "a": "Ar atmosférico; menor custo e maior disponibilidade",
+    "b": "Óxido nitroso; menor dor pós-operatória e menor absorção",
+    "c": "CO2; altamente solúvel no sangue (absorvido e eliminado rapidamente pelos pulmões), não combustível, menos letal em caso de embolia gasosa comparado a ar ou N2O",
+    "d": "Hélio; menor absorção e menor hipercapnia || E) Argônio; inerte e sem efeitos metabólicos"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-28",
+    "enunciado": "Bariátrica | Caso Clínico\n\nPaciente de 38 anos com IMC 55 kg/m², síndrome metabólica e SAOS grave (IAH 62/h) submetido a sleeve gástrico laparoscópico. Na indução, após propofol + succinilcolina, a laringoscopia revela Cormack-Lehane grau III com visualização apenas da epiglote. Qual é o próximo passo no algoritmo de via aérea difícil inesperada?",
+    "a": "Traqueostomia de emergência imediata",
+    "b": "Segunda tentativa com videolaringoscópio (GlideScope/C-MAC) com bougie; manter oxigenação; se falha: dispositivo supraglótico como ponte; algoritmo DAS/ASA para via aérea difícil inesperada",
+    "c": "Anestesia local cervical e acordar o paciente",
+    "d": "Múltiplas tentativas com laringoscópio Macintosh em lâminas crescentes || E) Fibroscopia rígida com paciente já em apneia"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-29",
+    "enunciado": "Oftalmologia | Caso Clínico\n\nCriança de 3 anos com catarata congênita bilateral submetida a lensectomia bilateral sob anestesia geral. Em relação ao bloqueio do reflexo oculocardíaco e ao manejo anestésico em cirurgia oftalmológica pediátrica, qual é a afirmativa CORRETA?",
+    "a": "O ROC não ocorre em crianças menores de 5 anos",
+    "b": "Propofol previne o ROC de forma mais eficaz que halogenados em cirurgia de estrabismo",
+    "c": "Atropina IV profilática (0,02 mg/kg) elimina completamente o risco de ROC",
+    "d": "N2O aumenta o risco de NVPO em cirurgia estrabológica; sua omissão reduz NVPO || E) LMA clássica é contraindicada em cirurgia oftalmológica infantil"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-3",
+    "enunciado": "Laparoscopia | Caso Clínico\n\nDurante laparoscopia em posição de Trendelenburg acentuado (30°), paciente de 55 anos com DPOC moderado apresenta SpO2 caindo progressivamente de 98% para 90%. A pressão de plateau é de 34 cmH2O. Qual é a principal causa desta deterioração respiratória e a medida corretiva inicial?",
+    "a": "Pneumotórax iatrogênico; descompressão imediata no 2° espaço intercostal",
+    "b": "Comprometimento da mecânica respiratória: deslocamento cefálico do diafragma pelo pneumoperitônio + posição de Trendelenburg; considerar redução da pressão do pneumoperitônio e PEEP incremental",
+    "c": "Intubação seletiva tardia; verificar posição da sonda",
+    "d": "Reação alérgica ao CO2; suspender pneumoperitônio e administrar adrenalina || E) Edema pulmonar por sobrecarga hídrica; furosemida IV"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-30",
+    "enunciado": "Reinternação | Conceitual\n\nPaciente submetido a laparoscopia ambulatorial recebe alta 4 horas após o procedimento. Na manhã seguinte, retorna à emergência. Quais são as principais causas de reinternação não planejada após cirurgia ambulatorial?",
+    "a": "Apenas NVPO e dor",
+    "b": "Dor inadequadamente controlada, NVPO persistentes, sangramento, complicações cirúrgicas (perfuração, hematoma), retenção urinária e eventos anestésicos (sedação excessiva, laringoespasmo tardio)",
+    "c": "Somente complicações cirúrgicas",
+    "d": "Hipertensão e taquicardia de rebote || E) Apenas hipotensão ortostática pós-raquianestesia"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-31",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 66 anos com glaucoma crônico bilateral, submetido a trabeculectomia bilateral sob anestesia geral com LMA. Durante o procedimento, o cirurgião solicita hipotoniaocular e PIO mais baixa possível. Quais agentes anestésicos reduzem a PIO e quais a aumentam?",
+    "a": "Todos os anestésicos gerais reduzem a PIO igualmente",
+    "b": "Reduzem a PIO: propofol, halogenados, opioides, benzodiazepínicos, acetazolamida; Aumentam a PIO: succinilcolina, cetamina, tosse, laringoscopia, hipercapnia, Trendelenburg",
+    "c": "Somente propofol reduz a PIO de forma significativa",
+    "d": "Ketamina reduz a PIO por vasoconstrição ocular || E) N2O tem efeito neutro sobre a PIO em todos os contextos"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-4",
+    "enunciado": "Bariátrica | Caso Clínico\n\nPaciente obeso mórbido (IMC 52 kg/m², 145 kg, altura 1,67 m) submetido a bypass gástrico laparoscópico (BGYR). Em posição de rampa (30°), após indução anestésica com IOT. Em relação ao cálculo de doses de drogas no obeso, qual é a abordagem CORRETA para o propofol em infusão contínua (TIVA)?",
+    "a": "Usar peso total (PT) para todas as drogas no obeso",
+    "b": "Usar peso ideal (PI) para todas as drogas",
+    "c": "Propofol em TIVA: usar peso total para dose de indução e peso total ajustado (PTA = PI + 0,4 × [PT - PI]) para manutenção; a gordura tem algum compartimento para propofol",
+    "d": "Propofol deve ser evitado em obesos por risco de síndrome de infusão do propofol || E) Doses baseadas no IMC em mg/m² são superiores às baseadas em peso"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-5",
+    "enunciado": "Bariátrica | Caso Clínico\n\nPaciente obeso (IMC 48 kg/m²) em cirurgia bariátrica. Em relação ao manejo de via aérea, qual posição é recomendada para a laringoscopia e quais são os critérios de extubação específicos?",
+    "a": "Posição neutra (flat) como em pacientes não obesos; extubação com SpO2 > 92%",
+    "b": "Posição de rampa (cabeça e tronco elevados 30–40°, meato auditivo alinhado à fúrcula esternal); extubação acordado, cooperativo, com recuperação neuromuscular completa (TOF ratio > 0,9) e SpO2 > 95% em ar ambiente",
+    "c": "Posição de Trendelenburg reverso apenas; extubação com capnografia normal",
+    "d": "Posição de Rose (hiperextensão cervical); extubação quando eye-opening || E) Posição sentada a 90°; extubação com PaO2 > 60 mmHg em FiO2 0,4"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-6",
+    "enunciado": "Laparoscopia | Caso Clínico\n\nDurante laparoscopia pélvica, o cirurgião inadvertidamente punciona um vaso e injeta CO2 intravascular. Rapidamente o anestesiologista detecta: queda catastrófica da ETCO2 (de 35 para 8 mmHg), hipotensão grave, som de \"moinho de água\" na ausculta precordial. Qual é o diagnóstico e a conduta imediata?",
+    "a": "Pneumotórax de tensão; descompressão com agulha no 2° EIC",
+    "b": "Embolia gasosa venosa maciça; dessuflação imediata, posição Durant (decúbito lateral esquerdo + Trendelenburg), aspiração de ar pelo CVC, suporte hemodinâmico",
+    "c": "PCR por estimulação vagal; RCP imediata e adrenalina",
+    "d": "Tamponamento cardíaco; pericardiocentese de urgência || E) Hipercapnia grave; hiperventilação e bicarbonato IV"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-7",
+    "enunciado": "Bariátrica | Conceitual\n\nEm relação ao cálculo de doses de bloqueadores neuromusculares no paciente obeso mórbido, qual afirmativa é CORRETA?",
+    "a": "Succinilcolina: usar peso total (a colinesterase plasmática aumenta proporcionalmente ao peso total)",
+    "b": "Rocurônio para ISR (1,2 mg/kg): usar peso ideal para evitar dose excessiva",
+    "c": "Vecurônio: usar peso total",
+    "d": "Atracúrio: usar peso total por sofrer eliminação de Hofmann || E) Todos os bloqueadores neuromusculares devem ser calculados pelo peso total"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-8",
+    "enunciado": "ORL | Caso Clínico\n\nPaciente de 45 anos submetido a microcirurgia de laringe (polipectomia de prega vocal) com laringoscopia de suspensão. O cirurgião ORL solicita campo cirúrgico com tubo endotraqueal de menor calibre possível. Qual é a estratégia ventilatória mais adequada?",
+    "a": "Ventilação espontânea com máscara facial e sedação profunda",
+    "b": "Ventilação a jato de alta frequência (jet ventilation) ou tubo microlaríngeo (MLT 4,0 ou 5,0 mm); TIVA obrigatória (halogenados não podem ser usados com tubo aberto)",
+    "c": "LMA clássica com ventilação controlada",
+    "d": "Tubo orotraqueal 7,5 mm com proteção com compressa || E) Anestesia local com sedação consciente para evitar intubação"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovaa30qpontos3336html-9",
+    "enunciado": "Laser | Caso Clínico\n\nPaciente de 58 anos com papilomatose recorrente de laringe submetido a tratamento com laser CO2 endoscópico. Qual é o principal risco anestésico específico deste procedimento e as medidas de prevenção?",
+    "a": "Intoxicação por CO2 do laser; usar O2 100% para compensar",
+    "b": "Incêndio endotraqueal (airway fire); usar tubo resistente a laser, FiO2 mínima ≤ 0,3 (diluída com ar ou hélio), evitar N2O, proteger tecidos com compressas úmidas",
+    "c": "Hipotermia por vapor de água do laser; aquecer paciente ativamente",
+    "d": "Laringoespasmo por estimulação do laser; relaxante muscular em infusão contínua || E) Queimadura ocular do paciente; óculos de proteção para o cirurgião apenas"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-10",
+    "enunciado": "LMA | Caso Clínico\n\nPaciente de 40 anos submetido a broncoscopia flexível diagnóstica ambulatorial com LMA clássica n° 4 e propofol em infusão. O pneumologista deseja avançar broncoscópio de 4,9 mm de diâmetro externo pela LMA até a carina. Qual é a limitação desta abordagem?",
+    "a": "LMA não permite passagem de qualquer broncoscópio",
+    "b": "O broncoscópio de 4,9 mm ocupa parte significativa do lúmen da LMA n° 4 (diâmetro interno ~12 mm), reduzindo o espaço ventilatório; a ventilação pode ser comprometida e deve ser monitorizada — utilizar ventilação assistida manual intermitente",
+    "c": "LMA impede visualização da carina por angulação intrínseca",
+    "d": "LMA clássica está contraindicada em broncoscopia diagnóstica de adultos || E) Não há limitação; LMA é o dispositivo padrão para broncoscopia em adultos"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-11",
+    "enunciado": "ORL | Caso Clínico\n\nCriança de 7 anos com corpo estranho endobrônquico (pedaço de brinquedo) no brônquio fonte esquerdo com atelectasia total do pulmão esquerdo na radiografia. Indicada broncoscopia rígida de urgência. Qual é a técnica anestésica mais adequada?",
+    "a": "Anestesia local com sedação leve; criança cooperativa é necessária",
+    "b": "TIVA com propofol e remifentanil, ventilação espontânea ou controlada a jato através do broncoscópio rígido; succinilcolina disponível para emergências; evitar N2O; SpO2 contínua",
+    "c": "Anestesia geral com IOT e sevoflurano; broncoscópio passa lateral ao TOT",
+    "d": "Sedação com midazolam e ketamina IM; oxigênio por cateter nasal || E) Fibrobroncoscopia flexível com anestesia local tópica em criança não sedada"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-12",
+    "enunciado": "ORL | Caso Clínico\n\nPaciente de 68 anos submetido a faringolaringectomia total com reconstrução por retalho livre microvascular (retalho radial). Cirurgia de 11 horas. Quais são as prioridades anestésicas para viabilidade do retalho livre?",
+    "a": "Hipotensão deliberada (PAM 50 mmHg) para reduzir sangramento no campo",
+    "b": "Normotermia, normovolemia, PAM maior ou igual a 70–80 mmHg, hematócrito 25–30% (hemodiluição leve favorece microcirculação), evitar vasoconstritores alfa-adrenérgicos, dexametasona para edema",
+    "c": "Hipervolemia agressiva com cristaloide (mais de 20 mL/kg/h) melhora fluxo no retalho",
+    "d": "Vasopressores em dose alta são preferíveis a fluidos para manter PAM || E) Hipotermia leve (34°C) protege o retalho de lesão de isquemia-reperfusão"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-13",
+    "enunciado": "Laser | Conceitual\n\nDurante cirurgia de laringe com laser CO2, ocorre incêndio endotraqueal (airway fire). Qual é a sequência de ações imediatas CORRETA?",
+    "a": "Aumentar FiO2 para 1,0 e ventilar para \"apagar\" o fogo com pressão positiva",
+    "b": "Desconectar o circuito (interromper fonte de O2), retirar o TOT em chamas imediatamente, inundar a via aérea com soro fisiológico, ventilar por máscara facial, laringoscopia para avaliar lesões, reintubação e suporte intensivo",
+    "c": "Reduzir FiO2 para 0,21 e continuar procedimento com temperatura monitorizada",
+    "d": "Injetar água pela sonda endotraqueal sem retirar o tubo em chamas || E) Acionar o CO2 do laser para extinguir as chamas com o gás inerte"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-14",
+    "enunciado": "Oftalmologia | Caso Clínico\n\nPaciente de 75 anos submetido a cirurgia de catarata sob bloqueio retrobulbar (bupivacaína 0,5% + lidocaína 2%). Trinta segundos após a injeção, o paciente perde consciência, apresenta bradicardia, hipotensão e apneia. Qual é o diagnóstico e o mecanismo?",
+    "a": "Reação alérgica à bupivacaína; adrenalina IM imediata",
+    "b": "Síndrome vasovagal; posição de Trendelenburg e atropina IV",
+    "c": "Injeção intratecal acidental pelo espaço subaracnoideo do nervo óptico, causando bloqueio espinal cranial (anestesia do tronco cerebral); suporte respiratório e cardiovascular, ventilação com máscara ou IOT, vasopressores",
+    "d": "Embolia gordurosa por injeção no tecido adiposo orbitário || E) Hematoma retrobulbar com compressão do nervo óptico e reflexo vagal"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-15",
+    "enunciado": "PIO | Caso Clínico\n\nPaciente de 65 anos com glaucoma de ângulo aberto submetido a trabeculectomia sob anestesia geral. Na extubação, o paciente tosse vigorosamente e faz manobra de Valsalva por 20 segundos. Quais são as consequências potenciais sobre o olho operado?",
+    "a": "Nenhuma, pois a cirurgia já foi concluída e o olho está suturado",
+    "b": "Elevação aguda da PIO pelo aumento da pressão venosa epiescleral durante Valsalva pode causar ruptura da bolha de filtração recém-confeccionada ou deiscência de sutura; extubação suave com lidocaína IV (1,5 mg/kg) prévia é recomendada",
+    "c": "Apenas desconforto leve; PIO não se altera significativamente com tosse",
+    "d": "Risco apenas de infecção, não de complicação mecânica || E) Hipotonia ocular pela tosse que pode causar colapso da câmara anterior"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-16",
+    "enunciado": "Globo aberto | Caso Clínico\n\nAdulto de 30 anos com trauma ocular por estilhaço de vidro, laceração corneoescleral extensa, com conteúdo vítreo prolapsado. Última refeição há 1 hora. A melhor estratégia de indução anestésica é:",
+    "a": "Aguardar 6 horas para esvaziamento gástrico antes de operar o olho",
+    "b": "Indução inalatória lenta com sevoflurano; causa menor aumento de PIO que ISR",
+    "c": "Anestesia local retrobulbar para evitar os riscos da anestesia geral",
+    "d": "ISR com rocurônio 1,2 mg/kg (com sugammadex disponível); pré-tratamento com lidocaína 1,5 mg/kg + fentanil + propofol titulado para atenuar resposta pressórica da laringoscopia; rocurônio ISR é a alternativa mais aceita ao dilema clássico globo aberto + estômago cheio || E) Succinilcolina 3 mg/kg para garantir condições perfeitas de intubação, aceitando o aumento transitório de PIO"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-17",
+    "enunciado": "SF6 + N2O | Conceitual\n\nPaciente submetido a vitrectomia com injeção de C3F8 (perfluoropropano) há 4 semanas necessita de cirurgia de urgência (apendicite aguda). O anestesiologista deve evitar óxido nitroso. Por quantas semanas após a injeção do gás C3F8 o N2O permanece contraindicado?",
+    "a": "Apenas 24–48 horas após a injeção",
+    "b": "7–10 dias (equivalente ao SF6)",
+    "c": "Até 8–10 semanas, pois C3F8 tem reabsorção muito mais lenta que SF6 (que dura ~10–14 dias)",
+    "d": "Apenas durante o ato cirúrgico em que foi injetado || E) Permanentemente; qualquer cirurgia futura deve evitar N2O após vitrectomia"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-18",
+    "enunciado": "ROC | Caso Clínico\n\nDurante cirurgia de estrabismo em adulto de 25 anos sob anestesia geral com sevoflurano 1,8%, o cirurgião traciona o músculo reto superior. O monitor mostra bradicardia de 32 bpm sem instabilidade hemodinâmica imediata. Qual é a sequência de condutas correta?",
+    "a": "Adrenalina 1 mg IV imediata para bradicardia grave",
+    "b": "Solicitar ao cirurgião que cesse a tração; se bradicardia não reverter espontaneamente em 20–30 segundos, atropina 0,5–1 mg IV; se PCR: RCP padrão",
+    "c": "Propranolol IV para estabilizar o ritmo cardíaco",
+    "d": "Aprofundar anestesia imediatamente com propofol bolus || E) Aguardar resolução espontânea sem nenhuma intervenção por até 5 minutos"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-19",
+    "enunciado": "Oftalmologia | Conceitual\n\nEm relação ao bloqueio retrobulbar versus peribulbar para cirurgia de catarata, qual afirmativa é CORRETA?",
+    "a": "O bloqueio retrobulbar é mais seguro pois usa menor volume de anestésico",
+    "b": "O bloqueio peribulbar utiliza maior volume (6–12 mL) fora do cone muscular, tem menor risco de perfuração ocular e injeção intratecal que o retrobulbar (injeção intraconal), mas produz bloqueio mais lento e incompleto, exigindo volume maior e às vezes complementação",
+    "c": "O bloqueio retrobulbar é feito fora do cone muscular com agulha curta",
+    "d": "Bloqueio peribulbar tem maior risco de hematoma retrobulbar que o retrobulbar || E) Ambas as técnicas são equivalentes em segurança e eficácia segundo todas as metanálises"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-2",
+    "enunciado": "Laparoscopia | Caso Clínico\n\nPaciente de 48 anos submetido a nefrectomia parcial robótica em posição de Trendelenburg acentuado (25°) por 3,5 horas. Ao final, a equipe nota edema facial importante e quemose bilateral. O anestesiologista planeja extubação. Qual é a principal preocupação neste contexto?",
+    "a": "Hipertensão de rebote após Trendelenburg prolongado",
+    "b": "Edema de vias aéreas superiores (glote/subglote) por posição prolongada e pneumoperitônio, com risco de obstrução pós-extubação; avaliar cuff-leak test e ter recursos para reintubação imediata disponíveis",
+    "c": "Hipotensão ortostática ao sentar após Trendelenburg prolongado",
+    "d": "Hipoglicemia por jejum prolongado em posição de cabeça abaixo || E) Bradicardia reflexa por distensão ventricular após retorno à posição neutra"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-20",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 72 anos, ASA III (IC compensada com FE 45%, DM2 controlado), submetido a ressecção de carcinoma basocelular cutâneo facial sob anestesia local com sedação leve (midazolam 1 mg + propofol em TCI 0,8 mcg/mL). É candidato à cirurgia ambulatorial?",
+    "a": "Não; qualquer paciente acima de 70 anos deve ser internado independente da ASA",
+    "b": "Sim; ASA III estável com procedimento de mínimo risco sob anestesia local é adequado para ambulatório, com avaliação pré-anestésica e acompanhante adulto responsável",
+    "c": "Não; IC com FE reduzida contraindica cirurgia ambulatorial absolutamente",
+    "d": "Não; DM2 em uso de qualquer medicação oral contraindica ambulatório || E) Sim, mas apenas se FE > 50%; FE 45% exige monitorização hospitalar de 48h"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-21",
+    "enunciado": "NVPO | Caso Clínico\n\nPaciente do sexo feminino, 32 anos, não fumante, com histórico de cinetose intensa, submetida a laparoscopia diagnóstica ambulatorial com anestesia geral (sevoflurano + fentanil). Qual é o escore de Apfel e qual profilaxia de NVPO é recomendada?",
+    "a": "Apfel 1 (apenas sexo feminino); sem profilaxia necessária",
+    "b": "Apfel 3 (sexo feminino + não fumante + cinetose); profilaxia com 2–3 agentes de diferentes classes: ondansetrona + dexametasona ± droperidol; considerar substituir sevoflurano por propofol TIVA e reduzir opioides",
+    "c": "Apfel 2; monoterapia com ondansetrona ao final da cirurgia",
+    "d": "Escore de Apfel não se aplica a laparoscopia ambulatorial || E) Apfel 4; profilaxia apenas com escopolamina transdérmica"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-22",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 55 anos submetido a colposcopia e biópsia cervical ambulatorial. Recebe raquianestesia com bupivacaína hiperbárica 7,5 mg. Após 3 horas na recuperação, ainda apresenta bloqueio motor residual nos membros inferiores (Bromage 2). Pode ter alta hospitalar?",
+    "a": "Sim; tempo de 3 horas é suficiente independente do bloqueio motor",
+    "b": "Não; alta só após resolução completa do bloqueio motor (Bromage 0) e sensitivo, capacidade de deambular sem assistência e cumprimento dos demais critérios do PADSS",
+    "c": "Sim se tiver acompanhante; bloqueio motor residual não impede alta",
+    "d": "Sim se PADSS maior ou igual a 9 mesmo com bloqueio motor residual || E) Alta após 2 horas independente de bloqueio residual por ser dose baixa de bupivacaína"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-23",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 6 meses (ex-prematuro de 28 semanas, agora com 46 semanas de idade pós-concepcional) submetido a herniorrafia inguinal. Em relação ao manejo pós-operatório:",
+    "a": "Alta ambulatorial 2 horas após procedimento; risco de apneia não existe após 44 semanas IPC",
+    "b": "Internação com monitorização cardiorrespiratória por 12–24 horas; ex-prematuros com menos de 60 semanas IPC têm risco aumentado de apneia pós-anestésica; cafeína intraoperatória pode ser considerada",
+    "c": "Alta ambulatorial se SpO2 > 95% na SRPA por 1 hora",
+    "d": "Contraindicação absoluta a qualquer cirurgia até completar 1 ano de IPC || E) Risco de apneia apenas com anestesia geral; anestesia espinal elimina o risco"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-24",
+    "enunciado": "Ambulatorial | Caso Clínico\n\nPaciente de 45 anos submetido a vasectomia ambulatorial sob bloqueio do cordão espermático com lidocaína 1%. Ao injetar a segunda dose de lidocaína (total 8 mL 1%), o paciente refere zunido nos ouvidos, sabor metálico e apresenta tremores finos de membros superiores. Qual é o diagnóstico e conduta?",
+    "a": "Reação vasovagal; decúbito dorsal e atropina IM",
+    "b": "Toxicidade sistêmica de anestésico local (LAST) em fase inicial (SNC: pródromos); interromper injeção, oxigênio 100%, monitorização contínua, ter emulsão lipídica 20% disponível; se evoluir para convulsão: benzodiazepínico; se PCR: lipid rescue + RCP",
+    "c": "Reação alérgica à lidocaína; adrenalina IM 0,3 mg",
+    "d": "Hipoglicemia por jejum; glicose 50% IV || E) Ansiedade; midazolam 2 mg IV e continuar o procedimento"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-25",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 58 anos com SAOS grave (IAH 55/h, usa CPAP domiciliar) submetido a septoplastia + turbinectomia bilateral ambulatorial. No pós-operatório, o tamponamento nasal bilateral impede o uso do CPAP nasal habitual. Qual é a orientação e o manejo correto?",
+    "a": "Alta imediata; SAOS não representa risco em cirurgia de pequeno porte",
+    "b": "Internação para monitorização noturna; orientar uso de CPAP oral/máscara full-face adaptada ao tamponamento nasal; analgesia multimodal com minimização de opioides; posição elevada a 30–45°",
+    "c": "Prescrever benzodiazepínico para ansiedade noturna sem preocupação com SAOS",
+    "d": "Alta com oxímetro de pulso domiciliar é suficiente para monitorização || E) Administrar opioides em dose alta no pós-operatório imediato para garantir conforto; CPAP é dispensável com tamponamento"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-26",
+    "enunciado": "ORL | Caso Clínico\n\nPaciente de 55 anos com câncer de laringe subglótico, disfonia progressiva e estridor leve. Programado para laringoscopia de suspensão diagnóstica. Na avaliação pré-anestésica, o anestesiologista decide não realizar intubação convencional de rotina antes de avaliar a via aérea. Qual é a técnica mais segura para este paciente?",
+    "a": "ISR com succinilcolina sem avaliação prévia; rapidez é prioritária",
+    "b": "Intubação acordada com fibroscópio flexível (FOI awake) sob anestesia tópica e sedação leve, com cirurgião ORL e conjunto de traqueostomia de stand-by; preserva a via aérea em caso de obstrução durante indução",
+    "c": "Indução inalatória lenta com sevoflurano em ventilação espontânea; segura em qualquer grau de obstrução laríngea",
+    "d": "Traqueostomia profilática local sob anestesia local antes de qualquer tentativa de intubação || E) LMA clássica; evita manipulação direta da laringe tumoral"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-27",
+    "enunciado": "Bariátrica | Caso Clínico\n\nPaciente de 46 anos (IMC 44 kg/m²) com bypass gástrico há 3 anos, perda de 45 kg, necessita de colecistectomia por colelitíase sintomática. Qual peculiaridade farmacocinética deve ser considerada em um ex-obeso com bypass gástrico?",
+    "a": "Sem alterações farmacocinéticas relevantes após cirurgia bariátrica",
+    "b": "Absorção oral de medicamentos pode estar alterada pela exclusão do duodeno e jejuno proximal (local de absorção de muitos fármacos); drogas de liberação controlada podem ter biodisponibilidade imprevisível; preferir formulações IV no perioperatório",
+    "c": "Metabolismo hepático está acelerado após perda de peso, exigindo doses maiores",
+    "d": "Clearance renal aumentado; doses de aminoglicosídeos devem ser aumentadas || E) Somente anticoagulantes orais têm absorção alterada; demais drogas são normais"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-28",
+    "enunciado": "Ambulatorial | Conceitual\n\nEm relação ao jejum pré-operatório em cirurgia ambulatorial eletiva em adultos saudáveis, quais são as recomendações atuais da ASA (2023)?",
+    "a": "Jejum de 8 horas para líquidos claros e 12 horas para sólidos",
+    "b": "Líquidos claros: 2 horas; leite materno: 4 horas; fórmula infantil/leite não materno/refeição leve: 6 horas; refeição com frituras ou carne: 8 horas",
+    "c": "Qualquer ingestão oral libera o estômago em 2 horas em adultos saudáveis",
+    "d": "Jejum de 4 horas para qualquer tipo de alimento || E) Apenas agua e isotônicos liberados até o momento da cirurgia"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-29",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 62 anos com DM2, HAS, obesidade grau I, submetido a herniorrafia inguinal videolaparoscópica. No pós-operatório imediato, apresenta PA 185/105 mmHg, FC 98 bpm, dor EVA 7/10, SpO2 97%. Qual é a causa mais provável da hipertensão e conduta inicial?",
+    "a": "Crise hipertensiva por suspensão abrupta do anti-hipertensivo; nitroprussiato IV imediato",
+    "b": "Hipertensão pós-operatória por dor inadequadamente controlada; analgesia adequada (dipirona IV + ketorolaco + opioide se necessário) como primeira medida; reavaliação da PA após controle da dor",
+    "c": "Hipertensão por hipervolemia iatrogênica; furosemida IV 40 mg",
+    "d": "IAM perioperatório; ECG de urgência e aspirina 300 mg || E) Crise de feocromocitoma não diagnosticada; fentolamina IV"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-3",
+    "enunciado": "Bariátrica | Caso Clínico\n\nPaciente de 44 anos (IMC 46 kg/m², 128 kg, 1,66 m) submetido a bypass gástrico laparoscópico. Para analgesia pós-operatória com morfina IV, qual é o princípio correto de dosagem?",
+    "a": "Dose baseada em peso total: morfina 0,1 mg/kg de PT a cada 4h",
+    "b": "Morfina calculada pelo peso ideal (PI); evitar superdosagem e depressão respiratória — o volume de distribuição para morfina corresponde ao compartimento magro",
+    "c": "Dose baseada em IMC em mg/m² de superfície corporal",
+    "d": "Morfina contraindicada no pós-bariátrico; usar apenas AINEs || E) Titulação clínica sem cálculo inicial; peso é irrelevante para morfina"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-30",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 38 anos submetido a rinoplastia estética ambulatorial sob anestesia geral com propofol TIVA. O cirurgião irriga abundantemente com solução de adrenalina 1:100.000 para hemostasia. Após 20 minutos, o paciente apresenta taquicardia de 142 bpm, PA 175/105 mmHg e extrassístoles ventriculares frequentes. Qual é o diagnóstico e conduta?",
+    "a": "Crise de pânico intraoperatória; midazolam 2 mg IV",
+    "b": "Absorção sistêmica de adrenalina subcutânea; conduta: suspender novas injeções, aprofundar anestesia (propofol, lidocaína IV), esmolol IV para taquicardia/arritmias se necessário; evitar halogenados que sensibilizam o miocárdio",
+    "c": "Taquicardia supraventricular; adenosina 6 mg IV bolus",
+    "d": "Crise hipertensiva por dor; aumentar dose de remifentanil || E) Hipercapnia por hipoventilação; aumentar volume minuto"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-31",
+    "enunciado": "Integração | Caso Clínico\n\nPaciente de 50 anos com IMC 39 kg/m² submetido a gastroplastia sleeve laparoscópica. No 2° dia pós-operatório, apresenta taquicardia 118 bpm, febre 38,7°C, dor abdominal e leucocitose. O cirurgião suspeita de fistula gástrica. O anestesiologista é chamado para reoperação de urgência. Qual é a consideração mais importante para indução neste cenário?",
+    "a": "Anestesia peridural isolada; evitar anestesia geral no pós-operatório imediato de bariátrica",
+    "b": "ISR obrigatória: estômago possivelmente cheio (obeso, fístula, íleo paralítico), paciente séptico com potencial instabilidade hemodinâmica; escolha de indução: ketamina (se instável) ou propofol (se estável); rocurônio 1,2 mg/kg pelo peso ideal ajustado com sugammadex disponível",
+    "c": "Indução inalatória com sevoflurano; segura em reoperações bariátricas",
+    "d": "Sedação com midazolam e fentanil sem intubação; paciente já tem TOT de cirurgia anterior || E) Aguardar estabilização clínica por 24h antes de qualquer reoperação"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-4",
+    "enunciado": "Laparoscopia | Caso Clínico\n\nDurante colecistectomia laparoscópica, o ETCO2 sobe subitamente de 38 para 70 mmHg sem deterioração hemodinâmica. A pressão de pico das vias aéreas aumenta levemente. O cirurgião informa que realizou dissecção extensa no leito hepático. Qual é a causa mais provável?",
+    "a": "Embolia gasosa venosa massiva",
+    "b": "Pneumotórax hipertensivo",
+    "c": "Capnomediastino ou capnotórax por dissecção de CO2 retroperitoneal para espaços adjacentes; geralmente autolimitado após dessuflação",
+    "d": "Hipertermia maligna || E) Broncoespasmo grave com retenção de CO2"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-5",
+    "enunciado": "Bariátrica | Caso Clínico\n\nPaciente de 52 anos (IMC 50 kg/m², 152 kg) em cirurgia bariátrica. Após extubação, apresenta obstrução de via aérea com SpO2 caindo para 84% apesar de cânula orofaríngea e máscara com O2 100%. A ventilação com máscara é ineficaz. Qual é o próximo passo?",
+    "a": "Administrar naloxona IV para reverter depressão residual",
+    "b": "Inserir LMA de segunda geração (ProSeal/Supreme) para via aérea de resgate, posicionar em rampa, e preparar para reintubação com videolaringoscópio se necessário",
+    "c": "Aguardar recuperação espontânea da consciência em 5 minutos",
+    "d": "Cricotireoidotomia imediata como primeira medida || E) Administrar flumazenil IV para reverter sedação residual"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-6",
+    "enunciado": "Laparoscopia | Conceitual\n\nEm relação às alterações da função renal durante laparoscopia com pneumoperitônio, qual é a resposta fisiológica esperada?",
+    "a": "Aumento do fluxo renal por aumento do débito cardíaco",
+    "b": "Redução da TFG e oligúria intraoperatória por compressão venosa renal e ativação do SRAA; oligúria transitória não indica obrigatoriamente hipovolemia e corrige com a dessuflação",
+    "c": "Nenhum efeito renal; o retroperitônio protege os rins",
+    "d": "Hipervolemia por reabsorção de CO2 com efeito oncótico || E) IRA permanente em qualquer laparoscopia de duração maior que 2 horas"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-7",
+    "enunciado": "Bariátrica | Conceitual\n\nQual é a estratégia de ventilação mecânica protetora recomendada para o paciente obeso mórbido (IMC > 40 kg/m²) durante cirurgia?",
+    "a": "VT 10 mL/kg de peso total, PEEP 0, FR 12/min",
+    "b": "VT 6–8 mL/kg de peso ideal, PEEP 8–12 cmH2O com recrutamento alveolar periódico, FiO2 mínima para SpO2 > 95%, pressão de driving (plateau – PEEP) menor que 15 cmH2O",
+    "c": "VT 12 mL/kg de peso total sem limite de pressão de plateau",
+    "d": "Ventilação espontânea preservada com halogenado 2% durante todo o procedimento || E) VT 6 mL/kg de peso total, PEEP 0 para minimizar barotrauma"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-8",
+    "enunciado": "ORL | Caso Clínico\n\nCriança de 5 anos com estridor inspiratório, febre alta, dificuldade de deglutição e posição em tripé. Laringoscopia indireta mostra epiglote edemaciada \"em polegar\". Qual é a conduta imediata correta?",
+    "a": "Coleta de hemograma e hemocultura antes de qualquer intervenção na via aérea",
+    "b": "Emergência de via aérea: manter criança calma, não realizar procedimentos que agitem, acionar CO com cirurgião ORL disponível; intubação sob inalação de sevoflurano com criança sentada é a técnica preferida; traqueostomia de stand-by",
+    "c": "Tomografia cervical para delimitar extensão do edema antes de intubar",
+    "d": "Adrenalina nebulizada como primeira medida para reduzir edema || E) Decúbito dorsal e oxigênio por cateter nasal para reduzir agitação"
+  },
+  {
+    "id": "sim-me2simulado4trimestreprovab30qpontos33361html-9",
+    "enunciado": "ORL | Caso Clínico\n\nPaciente de 55 anos apresenta paralisia bilateral das pregas vocais em adução após tireoidectomia total, com estridor grave e SpO2 87% em ar ambiente. Qual é a conduta imediata?",
+    "a": "Adrenalina nebulizada e observação por 24 horas",
+    "b": "Intubação orotraqueal de emergência; se não houver recuperação em 48–72h, traqueostomia eletiva até reabilitação laríngea ou cirurgia de aritenoidectomia",
+    "c": "Dexametasona IV e alta com follow-up ambulatorial em 48h",
+    "d": "Cricotireoidotomia como abordagem cirúrgica inicial de eleição || E) Fibrobroncoscopia diagnóstica antes de qualquer intervenção terapêutica"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-10",
+    "enunciado": "Caso Clínico: Paciente politraumatizado, hemodinamicamente instável (PA 70/40 mmHg, FC 128 bpm), necessita de intubação de emergência. A equipe decide usar etomidato 0,3 mg/kg para indução.\n\nPonto 21 — Q9 — CASO CLÍNICO Caso Clínico: Paciente politraumatizado, hemodinamicamente instável (PA 70/40 mmHg, FC 128 bpm), necessita de intubação de emergência. A equipe decide usar etomidato 0,3 mg/kg para indução. 9. Qual é a principal preocupação com o uso de etomidato nesse contexto clínico, especialmente em pacientes críticos?",
+    "a": "Risco de broncoespasmo grave por liberação de histamina",
+    "b": "Supressão da síntese de cortisol por inibição da 11-beta-hidroxilase adrenal, mesmo após dose única",
+    "c": "Hipertensão intracraniana aguda por aumento do fluxo sanguíneo cerebral",
+    "d": "Prolongamento do intervalo QT com risco de torsades de pointes || E) Hiperpotassemia grave em pacientes com lesão muscular extensa"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-11",
+    "enunciado": "Ponto 21 — Q10 10. Sobre a dexmedetomidina, é INCORRETO afirmar:",
+    "a": "É um agonista seletivo dos receptores alfa-2 adrenérgicos (razão alfa-2:alfa-1 de 1600:1)",
+    "b": "Produz sedação e analgesia sem depressão respiratória clinicamente significativa",
+    "c": "Pode causar bradicardia e hipotensão, especialmente com bolus de ataque rápido",
+    "d": "Possui propriedades analgésicas mediadas por receptores alfa-2 espinhais no corno posterior || E) É um agente anestésico completo que abole reflexos laríngeos, sendo ideal para intubação sem associação a outros fármacos"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-12",
+    "enunciado": "Caso Clínico: Após 4 horas de TIVA com propofol 6 mg/kg/h em paciente de 38 anos, 95 kg, observa-se urina marrom-avermelhada, acidose metabólica com ânion gap aumentado, hiperlactacidemia e bradicardia refratária.\n\nPonto 21 — Q11 — CASO CLÍNICO Caso Clínico: Após 4 horas de TIVA com propofol 6 mg/kg/h em paciente de 38 anos, 95 kg, observa-se urina marrom-avermelhada, acidose metabólica com ânion gap aumentado, hiperlactacidemia e bradicardia refratária. 11. Qual síndrome deve ser imediatamente reconhecida e qual é a medida mais importante?",
+    "a": "Hipertermia maligna — suspender halogenado e administrar dantrolene",
+    "b": "Síndrome da infusão de propofol (PRIS) — suspender imediatamente o propofol e suporte hemodinâmico",
+    "c": "Rabdomiólise por posicionamento — hidratação vigorosa e alcalinização urinária",
+    "d": "Reação anafilática tardia — adrenalina e corticoide || E) Insuficiência adrenal aguda por supressão pelo propofol — hidrocortisona IV"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-13",
+    "enunciado": "Ponto 21 — Q12 12. A cetamina produz anestesia dissociativa por qual mecanismo predominante?",
+    "a": "Agonismo nos receptores GABA-A com aumento da condutância ao cloro",
+    "b": "Bloqueio não-competitivo (uso-dependente) dos receptores NMDA, impedindo a entrada de cálcio",
+    "c": "Antagonismo dos receptores muscarínicos M1 no córtex cerebral",
+    "d": "Agonismo opioide mu e kappa com efeito analgésico supraespinhal || E) Inibição dos canais de sódio voltagem-dependentes no sistema nervoso central"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-14",
+    "enunciado": "Ponto 22 — Q13 13. Os receptores opioides mu (μ) são os principais mediadores de:",
+    "a": "Analgesia espinhal, miose e disforia",
+    "b": "Analgesia supraespinhal, depressão respiratória, euforia, miose e dependência física",
+    "c": "Sedação profunda, alucinações e rigidez muscular",
+    "d": "Bradicardia intensa, hipotensão e broncoespasmo || E) Analgesia periférica exclusiva sem efeitos centrais"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-15",
+    "enunciado": "Caso Clínico: Durante colecistectomia laparoscópica, paciente de 30 anos recebe remifentanil 0,3 mcg/kg/min durante toda a cirurgia (2 horas). O cirurgião avisa que faltam 10 minutos. O anestesiologista desliga a infusão sem providenciar analgesia de resgate.\n\nPonto 22 — Q14 — CASO CLÍNICO Caso Clínico: Durante colecistectomia laparoscópica, paciente de 30 anos recebe remifentanil 0,3 mcg/kg/min durante toda a cirurgia (2 horas). O cirurgião avisa que faltam 10 minutos. O anestesiologista desliga a infusão sem providenciar analgesia de resgate. 14. Qual característica farmacocinética do remifentanil explica a dor intensa esperada no pós-operatório imediato?",
+    "a": "Alta ligação a proteínas plasmáticas retardando sua eliminação após infusão prolongada",
+    "b": "Metabolismo por esterases plasmáticas inespecíficas com meia-vida contexto-dependente de 3–5 minutos, independente da duração da infusão",
+    "c": "Redistribuição para tecido adiposo com liberação lenta e acúmulo progressivo",
+    "d": "Eliminação renal dependente do clearance de creatinina com grande variabilidade || E) Metabolismo hepático via CYP3A4 acelerado em jovens com função hepática preservada"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-16",
+    "enunciado": "Ponto 22 — Q15 15. Sobre tolerância a opioides e hiperalgesia induzida por opioides (HIO), é CORRETO que:",
+    "a": "HIO e tolerância são clinicamente idênticas e ambas respondem ao aumento de dose do opioide",
+    "b": "A tolerância envolve downregulation de receptores mu e desacoplamento da proteína G; a HIO envolve sensibilização central via receptores NMDA e pode ser atenuada por cetamina",
+    "c": "A metadona não apresenta vantagem no tratamento da HIO por ser agonista mu puro sem ação NMDA",
+    "d": "A HIO ocorre apenas com uso crônico oral, não sendo relevante em infusões intraoperatórias de remifentanil || E) O uso perioperatório de cetamina não influencia o desenvolvimento de HIO pós-operatória"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-17",
+    "enunciado": "Caso Clínico: Paciente de 58 anos chega à SRPA após cirurgia abdominal com morfina 0,15 mg/kg intraoperatória. Apresenta: FR 5 irpm, SpO₂ 86%, pupilas puntiformes, responde apenas a estímulos dolorosos intensos.\n\nPonto 22 — Q16 — CASO CLÍNICO Caso Clínico: Paciente de 58 anos chega à SRPA após cirurgia abdominal com morfina 0,15 mg/kg intraoperatória. Apresenta: FR 5 irpm, SpO₂ 86%, pupilas puntiformes, responde apenas a estímulos dolorosos intensos. 16. A conduta imediata mais adequada é:",
+    "a": "Flumazenil 0,2 mg IV — suspeita de depressão por benzodiazepínico associado",
+    "b": "Naloxona 0,4 mg IV em bolus único e alta da SRPA após melhora",
+    "c": "Naloxona 0,04–0,1 mg IV diluída, titulada a cada 2–3 minutos até melhora da ventilação, com monitorização prolongada pelo risco de renarcotização",
+    "d": "Ventilação não-invasiva com BIPAP e aguardar metabolização espontânea || E) Sugammadex 200 mg IV — suspeita de residual de bloqueio neuromuscular"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-18",
+    "enunciado": "Ponto 22 — Q17 17. Qual opioide possui meia-vida de eliminação de 24–36 horas, atividade antagonista NMDA intrínseca e é utilizado no tratamento da dor crônica e dependência de opioides?",
+    "a": "Fentanil transdérmico",
+    "b": "Tramadol",
+    "c": "Metadona",
+    "d": "Buprenorfina || E) Alfentanil"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-19",
+    "enunciado": "Ponto 22 — Q18 18. O tramadol atua por mecanismo duplo. Além do agonismo opioide fraco (mu), sua ação analgésica é complementada por:",
+    "a": "Bloqueio dos canais de sódio Na⁺ voltagem-dependentes periféricos",
+    "b": "Inibição da recaptação de serotonina e noradrenalina nas sinapses descendentes inibitórias",
+    "c": "Agonismo nos receptores GABA-B espinhais",
+    "d": "Antagonismo competitivo dos receptores NMDA || E) Agonismo nos receptores kappa periféricos com analgesia visceral"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-2",
+    "enunciado": "Ponto 20 — Q1 1. Sobre a Concentração Alveolar Mínima (CAM), é CORRETO afirmar:",
+    "a": "Representa a concentração que impede resposta a estímulo verbal em 50% dos pacientes",
+    "b": "É aumentada por opioides, benzodiazepínicos e cetamina",
+    "c": "Diminui progressivamente com o aumento da idade e é reduzida pelo uso concomitante de N₂O",
+    "d": "É independente da pressão barométrica e do estado ácido-base || E) Aumenta na gestação a partir do segundo trimestre por efeito da progesterona"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-20",
+    "enunciado": "Ponto 23 — Q19 19. Qual é o mecanismo de ação da succinilcolina como bloqueador neuromuscular despolarizante?",
+    "a": "Antagonismo competitivo nos receptores nicotínicos da placa motora impedindo ligação da ACh",
+    "b": "Agonismo nos receptores nicotínicos com despolarização mantida da placa motora, prevenindo a repolarização necessária para nova contração",
+    "c": "Bloqueio dos canais de sódio voltagem-dependentes na fibra muscular",
+    "d": "Inibição da liberação de acetilcolina no terminal pré-sináptico || E) Inibição irreversível da acetilcolinesterase na fenda sináptica"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-21",
+    "enunciado": "Caso Clínico: Criança de 5 anos, 20 kg, ASA I, para adenoamigdalectomia. Após indução com sevoflurano e succinilcolina 2 mg/kg IV, desenvolve rigidez de masseter, rigidez generalizada progressiva, SpO₂ 93%, taquicardia sinusal 160 bpm, ETCO₂ 68 mmHg e temperatura axilar 39,8°C em ascensão rápida.\n\nPonto 23 — Q20 — CASO CLÍNICO Caso Clínico: Criança de 5 anos, 20 kg, ASA I, para adenoamigdalectomia. Após indução com sevoflurano e succinilcolina 2 mg/kg IV, desenvolve rigidez de masseter, rigidez generalizada progressiva, SpO₂ 93%, taquicardia sinusal 160 bpm, ETCO₂ 68 mmHg e temperatura axilar 39,8°C em ascensão rápida. 20. O diagnóstico e a conduta IMEDIATA são:",
+    "a": "Reação anafilática grave — adrenalina 0,01 mg/kg IM e corticoide IV",
+    "b": "Hipertermia maligna — suspender imediatamente sevoflurano, hiperventilar com O₂ 100%, administrar dantrolene 2,5 mg/kg IV e repetir conforme necessário",
+    "c": "Síndrome neuroléptica maligna — resfriamento externo passivo e bromocriptina oral",
+    "d": "Bloqueio de fase II por succinilcolina — neostigmina 0,05 mg/kg IV || E) Laringoespasmo com hipóxia — propofol 0,8 mg/kg IV e pressão positiva com máscara"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-22",
+    "enunciado": "Caso Clínico: Ao final de laparotomia exploradora de 3,5 horas com rocurônio 0,6 mg/kg + manutenção, a aceleromiorafia quantitativa mostra TOF ratio 0,72. O paciente respira espontaneamente mas com padrão irregular e uso de musculatura acessória.\n\nPonto 23 — Q21 — CASO CLÍNICO Caso Clínico: Ao final de laparotomia exploradora de 3,5 horas com rocurônio 0,6 mg/kg + manutenção, a aceleromiorafia quantitativa mostra TOF ratio 0,72. O paciente respira espontaneamente mas com padrão irregular e uso de musculatura acessória. 21. Qual a conduta mais segura para reversão do bloqueio residual nesse momento?",
+    "a": "A neostigmina é suficiente pois o TOF está acima de 0,7 — não há bloqueio residual clinicamente relevante",
+    "b": "Aguardar TOF espontâneo de 0,9 antes de qualquer reversão farmacológica",
+    "c": "Neostigmina 0,05 mg/kg + atropina — eficaz e segura com TOF entre 0,7 e 0,9",
+    "d": "Sugammadex 2 mg/kg IV — encapsula especificamente o rocurônio e garante TOF ≥ 0,9 de forma confiável || E) Fisostigmina IV — único agente que atravessa a BHE e reverte bloqueio central e periférico"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-23",
+    "enunciado": "Ponto 23 — Q22 22. No monitoramento neuromuscular com TOF, qual valor de razão T4/T1 indica recuperação adequada com risco mínimo de complicações respiratórias por bloqueio residual?",
+    "a": "T4/T1 ≥ 0,5 — ausência de paralisia clínica visível",
+    "b": "T4/T1 ≥ 0,7 — critério clássico histórico de reversão",
+    "c": "T4/T1 ≥ 0,9 — padrão atual recomendado por diretrizes internacionais",
+    "d": "T4/T1 ≥ 0,6 com capacidade de elevar a cabeça por 5 segundos || E) Presença de todas as 4 respostas ao TOF, independentemente do fade"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-24",
+    "enunciado": "Ponto 23 — Q23 23. Qual bloqueador neuromuscular não despolarizante tem o início de ação mais rápido, sendo o principal candidato a substituir a succinilcolina na intubação em sequência rápida, e pode ser revertido especificamente pelo sugammadex em dose de 16 mg/kg?",
+    "a": "Atracúrio 0,5 mg/kg",
+    "b": "Vecurônio 0,1 mg/kg",
+    "c": "Pancurônio 0,1 mg/kg",
+    "d": "Rocurônio 1,2 mg/kg || E) Cisatracúrio 0,15 mg/kg"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-25",
+    "enunciado": "Ponto 23 — Q24 24. Qual bloqueador neuromuscular não despolarizante sofre degradação de Hofmann (eliminação espontânea pH e temperatura-dependente) e hidrólise por esterases plasmáticas, sendo preferido em pacientes com insuficiência hepática e renal graves?",
+    "a": "Rocurônio",
+    "b": "Vecurônio",
+    "c": "Pancurônio",
+    "d": "Cisatracúrio || E) Mivacúrio"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-26",
+    "enunciado": "Ponto 24 — Q25 25. O mecanismo de ação dos anestésicos locais é:",
+    "a": "Antagonismo dos receptores GABA-A na membrana neuronal",
+    "b": "Bloqueio dos canais de sódio voltagem-dependentes no estado inativado, impedindo a despolarização do potencial de ação",
+    "c": "Bloqueio dos canais de potássio retificadores com hiperpolarização",
+    "d": "Inibição da bomba Na⁺/K⁺-ATPase na membrana neuronal || E) Agonismo nos receptores alfa-2 adrenérgicos espinhais"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-27",
+    "enunciado": "Caso Clínico: Paciente de 52 anos recebe bloqueio do plexo braquial via axilar com bupivacaína 0,5% 30 mL sem adrenalina. Cerca de 60 segundos após a injeção, apresenta convulsão tônico-clônica generalizada e logo depois colapso cardiovascular (assistolia).\n\nPonto 24 — Q26 — CASO CLÍNICO Caso Clínico: Paciente de 52 anos recebe bloqueio do plexo braquial via axilar com bupivacaína 0,5% 30 mL sem adrenalina. Cerca de 60 segundos após a injeção, apresenta convulsão tônico-clônica generalizada e logo depois colapso cardiovascular (assistolia). 26. Qual é a conduta imediata mais importante nesse caso de toxicidade sistêmica por anestésico local (LAST)?",
+    "a": "Lidocaína IV 1 mg/kg para tratar a arritmia precipitada pelo anestésico local",
+    "b": "Emulsão lipídica 20% (Intralipid) — bolus 1,5 mL/kg IV seguido de infusão contínua 0,25 mL/kg/min, além de suporte de ACLS com adrenalina em doses reduzidas",
+    "c": "Bicarbonato de sódio 8,4% 2 mEq/kg IV para alcalinizar e ionizar a bupivacaína",
+    "d": "Amiodarona 300 mg IV e cardioversão imediata || E) Naloxona 0,4 mg IV pela possível associação de opioide peridural"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-28",
+    "enunciado": "Ponto 24 — Q27 27. Qual propriedade físico-química dos anestésicos locais determina principalmente a DURAÇÃO de ação?",
+    "a": "pKa — determina a fração ionizada em pH fisiológico",
+    "b": "Lipossolubilidade — determina a afinidade pela membrana lipídica e potência, mas a duração depende principalmente da ligação a proteínas plasmáticas",
+    "c": "Peso molecular — moléculas maiores difundem mais lentamente e agem mais tempo",
+    "d": "pH da solução — soluções mais alcalinas agem por mais tempo || E) Concentração da solução — concentrações maiores sempre prolongam a duração"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-29",
+    "enunciado": "Caso Clínico: Durante bloqueio intercostal bilateral para analgesia pós-toracotomia, utiliza-se lidocaína 1,5% com adrenalina 1:200.000 em volumes bilaterais. Após 10 minutos, o paciente queixa-se de zumbido, sabor metálico e visão turva; em seguida apresenta agitação psicomotora.\n\nPonto 24 — Q28 — CASO CLÍNICO Caso Clínico: Durante bloqueio intercostal bilateral para analgesia pós-toracotomia, utiliza-se lidocaína 1,5% com adrenalina 1:200.000 em volumes bilaterais. Após 10 minutos, o paciente queixa-se de zumbido, sabor metálico e visão turva; em seguida apresenta agitação psicomotora. 28. Os sinais descritos representam toxicidade por anestésico local no SNC. Qual a sequência correta de manifestações em ordem crescente de gravidade?",
+    "a": "Convulsões → depressão respiratória → zumbido/formigamento → coma",
+    "b": "Zumbido, visão turva, gosto metálico → agitação/tremores → convulsões → depressão do SNC → parada respiratória",
+    "c": "Colapso cardiovascular → convulsões → zumbido → depressão do SNC",
+    "d": "Bradicardia → hipotensão → bloqueio AV → assistolia → convulsões || E) Coma súbito → convulsões → zumbido → recuperação espontânea"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-3",
+    "enunciado": "Ponto 20 — Q2 2. Qual anestésico inalatório possui o menor coeficiente de solubilidade sangue:gás, proporcionando a indução e recuperação mais rápidas?",
+    "a": "Isoflurano (1,46)",
+    "b": "Sevoflurano (0,65)",
+    "c": "Desflurano (0,42)",
+    "d": "Óxido nitroso (0,47) || E) Halotano (2,4)"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-30",
+    "enunciado": "Ponto 24 — Q29 29. Qual anestésico local é o ÚNICO que causa vasoconstrição intrínseca (sem adrenalina), resultando em menor absorção sistêmica e duração de ação prolongada na mucosa nasal?",
+    "a": "Bupivacaína",
+    "b": "Ropivacaína",
+    "c": "Lidocaína",
+    "d": "Cocaína || E) Mepivacaína"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-31",
+    "enunciado": "Caso Clínico: Paciente de 40 anos necessita de cirurgia no antebraço distal e mão. O anestesiologista planeja bloqueio do plexo braquial. Considerando que o procedimento envolve apenas a superfície ulnar da mão e 4º e 5º dedos, qual abordagem é mais adequada?\n\nPonto 25 — Q30 — CASO CLÍNICO Caso Clínico: Paciente de 40 anos necessita de cirurgia no antebraço distal e mão. O anestesiologista planeja bloqueio do plexo braquial. Considerando que o procedimento envolve apenas a superfície ulnar da mão e 4º e 5º dedos, qual abordagem é mais adequada? 30. O bloqueio do plexo braquial que fornece melhor cobertura para a região ulnar da mão com menor risco de pneumotórax é:",
+    "a": "Interescalênico — aborda o plexo entre os músculos escalenos anterior e médio, cobrindo C5-C7",
+    "b": "Supraclavicular — aborda o plexo no \"ponto de convergência\", com cobertura de C5-T1 mas risco de pneumotórax",
+    "c": "Infraclavicular — aborda os fascículos e tem boa cobertura de C8-T1 com baixo risco de pneumotórax",
+    "d": "Axilar — aborda os nervos terminais na axila, com boa cobertura de C8-T1 (ulnar/mediano) sem risco de pneumotórax || E) Interescalênico baixo (C8-T1) — melhor cobertura para o nervo ulnar sem riscos pleurais"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-32",
+    "enunciado": "Ponto 25 — Q31 31. Para analgesia em cirurgia de joelho (ATJ), o bloqueio seletivo que preserva a força do quadríceps (possibilitando deambulação precoce) e bloqueia a dor anterior do joelho é:",
+    "a": "Bloqueio do nervo ciático proximal",
+    "b": "Bloqueio do nervo femoral 3-em-1",
+    "c": "Bloqueio do canal dos adutores (nervo safeno + ramos do nervo para o vasto medial)",
+    "d": "Bloqueio do compartimento do psoas || E) Bloqueio do nervo obturador isolado"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-33",
+    "enunciado": "Caso Clínico: Paciente de 65 anos, submetida a mastectomia radical com esvaziamento axilar, recebe bloqueio do plano do serrátil anterior (SAP block) para analgesia multimodal pós-operatória.\n\nPonto 25 — Q32 — CASO CLÍNICO Caso Clínico: Paciente de 65 anos, submetida a mastectomia radical com esvaziamento axilar, recebe bloqueio do plano do serrátil anterior (SAP block) para analgesia multimodal pós-operatória. 32. Qual nervo é o principal alvo do bloqueio do plano do serrátil (SAP block superficial) e qual é sua origem?",
+    "a": "Nervo torácico longo (C5-C7) — motor para o serrátil anterior",
+    "b": "Nervo intercostobraquial (T2) — sensitivo para a axila e face medial do braço",
+    "c": "Nervo torácico lateral e medial — motores para o peitoral",
+    "d": "Nervos intercostais T2-T6 (ramos cutâneos laterais) — sensitivos para a parede torácica lateral || E) Nervo torácico dorsal (C6-C8) — motor para o grande dorsal"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-34",
+    "enunciado": "Ponto 25 — Q33 33. A vantagem do uso de ultrassonografia guiada em bloqueios de nervos periféricos inclui TODOS os seguintes, EXCETO:",
+    "a": "Visualização direta da agulha, nervo e estruturas vasculares adjacentes",
+    "b": "Redução do volume de anestésico local necessário",
+    "c": "Diminuição da incidência de injeção intravascular acidental",
+    "d": "Eliminação completa do risco de toxicidade sistêmica por anestésico local || E) Capacidade de visualizar a dispersão do anestésico local ao redor do nervo"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-35",
+    "enunciado": "Caso Clínico: Paciente de 55 anos com fratura de fêmur proximal aguarda cirurgia. Para analgesia preoperatória, o residente propõe bloqueio do nervo femoral. O staff propõe bloqueio do plano da fáscia ilíaca (FICB).\n\nPonto 25 — Q34 — CASO CLÍNICO Caso Clínico: Paciente de 55 anos com fratura de fêmur proximal aguarda cirurgia. Para analgesia preoperatória, o residente propõe bloqueio do nervo femoral. O staff propõe bloqueio do plano da fáscia ilíaca (FICB). 34. Qual a principal vantagem do FICB em relação ao bloqueio do nervo femoral isolado para esta situação?",
+    "a": "Menor risco de hematoma por ser feito mais distante da artéria femoral",
+    "b": "Bloqueio simultâneo dos nervos femoral, cutâneo lateral da coxa e obturador, cobrindo melhor a dor do quadril e coxofemoral",
+    "c": "Maior duração de ação por depositar o anestésico em compartimento fascial fechado",
+    "d": "Não requer guia de ultrassom, sendo mais seguro que o bloqueio femoral guiado || E) Bloqueia exclusivamente o nervo femoral com menor volume de anestésico"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-36",
+    "enunciado": "Caso Clínico: Paciente de 32 anos, 68 kg, recebe raquianestesia com bupivacaína hiperbárica 0,5% 15 mg + fentanil 20 mcg para cesariana. Dois minutos após o decúbito dorsal, desenvolve hipotensão (PA 80/45 mmHg) e náusea intensa.\n\nPonto 26 — Q35 — CASO CLÍNICO Caso Clínico: Paciente de 32 anos, 68 kg, recebe raquianestesia com bupivacaína hiperbárica 0,5% 15 mg + fentanil 20 mcg para cesariana. Dois minutos após o decúbito dorsal, desenvolve hipotensão (PA 80/45 mmHg) e náusea intensa. 35. O mecanismo principal da hipotensão arterial na raquianestesia para cesariana é:",
+    "a": "Cardiotoxicidade direta da bupivacaína com disfunção miocárdica",
+    "b": "Bloqueio simpático com vasodilatação + compressão aortocava pelo útero gravídico, reduzindo o retorno venoso",
+    "c": "Depressão do centro vasomotor bulbar pelo fentanil intratecal",
+    "d": "Reação vagal por punção da dura-máter com agulha de grande calibre || E) Vasodilatação cutânea excessiva com redistribuição periférica do volume"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-37",
+    "enunciado": "Ponto 26 — Q36 36. Qual é a complicação mais comum da raquianestesia, com incidência maior após uso de agulhas de grande calibre e ponta cortante, e que se manifesta como cefaleia postural?",
+    "a": "Síndrome da cauda equina",
+    "b": "Cefaleia pós-punção dural (CPPD)",
+    "c": "Meningite asséptica química",
+    "d": "Aracnoidite adesiva || E) Neurotoxicidade por lidocaína (TNS — Transient Neurologic Symptoms)"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-38",
+    "enunciado": "Caso Clínico: Paciente de 28 anos submetida a parto vaginal sob raquianestesia. No 2º dia pós-operatório, queixa-se de cefaleia intensa frontal e occipital, pior na posição sentada e ortostática, que melhora completamente em decúbito dorsal. FR 16 irpm, sem febre.\n\nPonto 26 — Q37 — CASO CLÍNICO Caso Clínico: Paciente de 28 anos submetida a parto vaginal sob raquianestesia. No 2º dia pós-operatório, queixa-se de cefaleia intensa frontal e occipital, pior na posição sentada e ortostática, que melhora completamente em decúbito dorsal. FR 16 irpm, sem febre. 37. Após falha do tratamento conservador (repouso, hidratação, analgésicos), qual é o tratamento de segunda linha mais eficaz para cefaleia pós-punção dural?",
+    "a": "Corticoide sistêmico (dexametasona 8 mg IV) por 3 dias",
+    "b": "Blood patch epidural (injeção de 15–20 mL de sangue autólogo no espaço peridural)",
+    "c": "Cafeína oral 300 mg 3x/dia por 5 dias",
+    "d": "Retomada da raquianestesia com agulha de menor calibre para redistribuir o LCR || E) Gabapentina 300 mg 8/8h por 7 dias"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-39",
+    "enunciado": "Ponto 26 — Q38 38. A adição de morfina intratecal à raquianestesia para cirurgia de grande porte promove analgesia prolongada. Qual é o principal efeito adverso tardio (6–12 horas) que exige monitorização específica?",
+    "a": "Hipotensão ortostática por vasodilatação sistêmica",
+    "b": "Depressão respiratória tardia por migração rostral da morfina no LCR até o centro respiratório bulbar",
+    "c": "Bloqueio motor residual dos membros inferiores",
+    "d": "Convulsões por toxicidade do preservante (morfina com conservante) || E) Hipertensão intracraniana por aumento da pressão do LCR"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-4",
+    "enunciado": "Caso Clínico: Paciente de 72 anos, 58 kg, submetido a colecistectomia laparoscópica sob sevoflurano com fluxo de gás fresco baixo (0,5 L/min) por 2 horas. A cal sodada está seca e com temperatura elevada.\n\nPonto 20 — Q3 — CASO CLÍNICO Caso Clínico: Paciente de 72 anos, 58 kg, submetido a colecistectomia laparoscópica sob sevoflurano com fluxo de gás fresco baixo (0,5 L/min) por 2 horas. A cal sodada está seca e com temperatura elevada. 3. Qual composto nefrotóxico produzido pela degradação do sevoflurano em cal sodada aquecida representa risco nessa situação?",
+    "a": "Ácido tricloroacético",
+    "b": "Composto A (fluorometil-2,2-difluoro-1-(trifluorometil)vinil éter)",
+    "c": "Monóxido de carbono",
+    "d": "Flúor inorgânico em concentração hepatotóxica isolada || E) Brometo de metila"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-40",
+    "enunciado": "Caso Clínico: Para analgesia de parto, cateter peridural é inserido em L3-L4. Antes da dose terapêutica, administra-se dose-teste com lidocaína 1,5% 3 mL + adrenalina 1:200.000 (15 mcg). Em 60 segundos, a parturiente apresenta FC 128 bpm (aumento de 30 bpm), relata palpitações e sensação de \"coração acelerado\".\n\nPonto 27 — Q39 — CASO CLÍNICO Caso Clínico: Para analgesia de parto, cateter peridural é inserido em L3-L4. Antes da dose terapêutica, administra-se dose-teste com lidocaína 1,5% 3 mL + adrenalina 1:200.000 (15 mcg). Em 60 segundos, a parturiente apresenta FC 128 bpm (aumento de 30 bpm), relata palpitações e sensação de \"coração acelerado\". 39. O resultado da dose-teste indica:",
+    "a": "Reação vagal por ansiedade — prosseguir com dose plena",
+    "b": "Posicionamento intravascular do cateter — a taquicardia por adrenalina intravascular confirma injeção IV",
+    "c": "Bloqueio peridural adequado com início de analgesia — a taquicardia é reflexa por vasodilatação",
+    "d": "Absorção sistêmica de lidocaína com efeito cronotrópico positivo || E) Falso positivo — aguardar 5 minutos e repetir a dose-teste antes de concluir"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-41",
+    "enunciado": "Ponto 27 — Q40 40. A principal diferença farmacodinâmica entre a anestesia peridural e a subaracnóidea em relação à velocidade de instalação e ao risco de hipotensão é:",
+    "a": "A peridural instala mais lentamente, pois o anestésico precisa difundir pela dura-máter; esse início gradual permite ajuste hemodinâmico mais progressivo com menor queda pressórica súbita",
+    "b": "A peridural e a raquianestesia têm instalação igualmente rápida quando se usa bupivacaína nas duas técnicas",
+    "c": "A peridural causa hipotensão mais grave por bloquear um número maior de dermátomos",
+    "d": "A raquianestesia tem instalação mais lenta por a bupivacaína hiperbárica precisar migrar pelo LCR || E) Não há diferença clínica relevante no padrão hemodinâmico entre as duas técnicas"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-42",
+    "enunciado": "Caso Clínico: Paciente em trabalho de parto com analgesia peridural recebe acidentalmente 20 mL de bupivacaína 0,5% no espaço subaracnóideo (punção inadvertida da dura-máter com a agulha de Tuohy). Em segundos, apresenta apneia, hipotensão severa e perda de consciência.\n\nPonto 27 — Q41 — CASO CLÍNICO Caso Clínico: Paciente em trabalho de parto com analgesia peridural recebe acidentalmente 20 mL de bupivacaína 0,5% no espaço subaracnóideo (punção inadvertida da dura-máter com a agulha de Tuohy). Em segundos, apresenta apneia, hipotensão severa e perda de consciência. 41. Este quadro corresponde a qual complicação e qual é a conduta imediata?",
+    "a": "Toxicidade sistêmica por bupivacaína — Intralipid 20% bolus 1,5 mL/kg",
+    "b": "Raquianestesia total (high spinal) — intubação orotraqueal imediata, vasopressores e suporte hemodinâmico agressivo",
+    "c": "Embolia pulmonar maciça — adrenalina e trombólise",
+    "d": "Síncope vasovagal por dor — Trendelenburg e atropina 0,5 mg IV || E) Reação anafilática à bupivacaína — adrenalina 0,3 mg IM"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-43",
+    "enunciado": "Ponto 27 — Q42 42. Qual anestésico local é o preferido para analgesia peridural em obstetrícia por apresentar maior bloqueio diferencial (sensitivo > motor), menor toxicidade cardíaca em relação à bupivacaína racêmica e boa duração de ação?",
+    "a": "Lidocaína 1% — início rápido e bom diferencial sensitivo/motor",
+    "b": "Bupivacaína 0,5% — concentração padrão para analgesia de parto",
+    "c": "Ropivacaína 0,1–0,2% — enantiômero S puro com menor cardiotoxicidade e bom bloqueio diferencial",
+    "d": "Mepivacaína 0,5% — meia-vida curta favorece progressão para o parto || E) Clorprocaína 3% — rapidez de ação é a principal vantagem em obstetrícia"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-44",
+    "enunciado": "Caso Clínico: Paciente em uso de enoxaparina 40 mg SC 1x/dia para TVP profilática. Necessita de anestesia peridural para cirurgia eletiva de quadril.\n\nPonto 27 — Q43 — CASO CLÍNICO Caso Clínico: Paciente em uso de enoxaparina 40 mg SC 1x/dia para TVP profilática. Necessita de anestesia peridural para cirurgia eletiva de quadril. 43. Segundo as diretrizes de anestesia regional em pacientes anticoagulados (ASRA), o intervalo mínimo entre a ÚLTIMA dose de enoxaparina profilática e a punção peridural deve ser de:",
+    "a": "4 horas",
+    "b": "8 horas",
+    "c": "12 horas",
+    "d": "24 horas || E) 48 horas"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-45",
+    "enunciado": "Ponto 28 — Q44 44. Na escala de Mallampati modificada (Samsoon & Young), qual achado classifica o paciente como Mallampati IV e indica alta probabilidade de laringoscopia difícil?",
+    "a": "Visualização do palato mole, fauces, úvula e pilares amigdalianos",
+    "b": "Visualização do palato mole, fauces e úvula apenas",
+    "c": "Visualização do palato mole e base da úvula",
+    "d": "Visualização apenas do palato duro, sem visibilidade do palato mole || E) Visualização do palato mole com úvula desviada para a direita"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-46",
+    "enunciado": "Caso Clínico: Paciente de 48 anos, 110 kg, IMC 38 kg/m², pescoço curto (distância tireomentoniana 5 cm), abertura bucal 3 cm, Mallampati III, história de ronco e SAOS. Laringoscopia direta classifica Cormack-Lehane III (visualização apenas da epiglote).\n\nPonto 28 — Q45 — CASO CLÍNICO Caso Clínico: Paciente de 48 anos, 110 kg, IMC 38 kg/m², pescoço curto (distância tireomentoniana 5 cm), abertura bucal 3 cm, Mallampati III, história de ronco e SAOS. Laringoscopia direta classifica Cormack-Lehane III (visualização apenas da epiglote). 45. Qual dispositivo de segunda geração é recomendado como primeira escolha resgate após 2 tentativas malsucedidas de intubação orotraqueal por laringoscopia direta neste paciente?",
+    "a": "Cânula orofaríngea de Guedel de tamanho maior",
+    "b": "Videolaringoscópio (ex: GlideScope, C-MAC) — melhora o ângulo de visão e aumenta a taxa de sucesso",
+    "c": "Fibrobroncoscópio flexível sob anestesia tópica com paciente acordado",
+    "d": "Cricotireoidostomia cirúrgica de emergência || E) Máscara laríngea clássica de 2ª geração e extubação diferida"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-47",
+    "enunciado": "Caso Clínico: Paciente de 60 anos com câncer de laringe supraglótica, radioterapia prévia, trismo (abertura bucal 2 cm) e Mallampati não avaliável. Cirurgia eletiva de laringectomia total programada.\n\nPonto 28 — Q46 — CASO CLÍNICO Caso Clínico: Paciente de 60 anos com câncer de laringe supraglótica, radioterapia prévia, trismo (abertura bucal 2 cm) e Mallampati não avaliável. Cirurgia eletiva de laringectomia total programada. 46. A estratégia de manejo de via aérea mais segura para este paciente é:",
+    "a": "Intubação em sequência rápida com succinilcolina, pois qualquer técnica é igualmente segura em mãos experientes",
+    "b": "Intubação orotraqueal com videolaringoscópio após indução inalatória com sevoflurano",
+    "c": "Intubação com fibrobroncoscópio flexível com paciente acordado e anestesia tópica (awake FOI), preservando ventilação espontânea",
+    "d": "Traqueostomia sob anestesia geral padrão como primeira escolha em qualquer neoplasia de laringe || E) Máscara laríngea de 2ª geração com canal gástrico e gastroscópio guia para intubação"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-48",
+    "enunciado": "Ponto 28 — Q47 47. Na intubação em sequência rápida (ISR), qual é o objetivo da pressão cricóidea (manobra de Sellick) e qual é sua principal limitação?",
+    "a": "Melhorar a visualização laringoscópica; limitação: pode causar broncoespasmo ao comprimir a traqueia",
+    "b": "Ocluir o esôfago pelo deslocamento posterior da cartilagem cricóidea, prevenindo regurgitação; limitação: pode piorar a visão laringoscópica e não previne completamente a regurgitação — uso controverso",
+    "c": "Estabilizar a laringe para facilitar a passagem do tubo; não tem limitações relevantes em adultos",
+    "d": "Prevenir bradicardia vagal durante laringoscopia; limitação: ineficaz em pacientes em uso de betabloqueadores || E) Comprimir a traqueia para prevenir broncoaspiração de conteúdo gástrico; sem evidência de benefício apenas em crianças"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-49",
+    "enunciado": "Caso Clínico: Após indução anestésica em paciente de 55 anos (estômago cheio, trauma abdominal), a laringoscopia direta mostra Cormack-Lehane IV. A tentativa com videolaringoscópio também falha. O paciente apresenta SpO₂ 82% e não pode ser ventilado com máscara facial.\n\nPonto 28 — Q48 — CASO CLÍNICO Caso Clínico: Após indução anestésica em paciente de 55 anos (estômago cheio, trauma abdominal), a laringoscopia direta mostra Cormack-Lehane IV. A tentativa com videolaringoscópio também falha. O paciente apresenta SpO₂ 82% e não pode ser ventilado com máscara facial. 48. Segundo o algoritmo de via aérea difícil (DAS/ASA), esta situação (não intubo/não ventilo — CICV) exige como conduta definitiva imediata:",
+    "a": "Terceira tentativa de laringoscopia direta com lâmina diferente",
+    "b": "Inserção de máscara laríngea Supreme e aguardar SpO₂ melhorar antes de nova tentativa",
+    "c": "Acesso cirúrgico de emergência à via aérea: cricotireoidostomia (incisão ou técnica de Scalpel-Bougie-Tube)",
+    "d": "Ventilação jet transtraqueal como medida definitiva || E) Chamar ajuda e aguardar recuperação espontânea da consciência"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-5",
+    "enunciado": "Caso Clínico: Durante manutenção anestésica com desflurano 6%, o anestesiologista aumenta rapidamente a concentração para 9% sem reduzir outros agentes. Imediatamente o paciente apresenta taquicardia (FC 118 bpm) e hipertensão (PA 165/95 mmHg).\n\nPonto 20 — Q4 — CASO CLÍNICO Caso Clínico: Durante manutenção anestésica com desflurano 6%, o anestesiologista aumenta rapidamente a concentração para 9% sem reduzir outros agentes. Imediatamente o paciente apresenta taquicardia (FC 118 bpm) e hipertensão (PA 165/95 mmHg). 4. O mecanismo responsável por essa resposta hemodinâmica ao aumento agudo do desflurano é:",
+    "a": "Bloqueio dos receptores alfa-1 adrenérgicos periféricos",
+    "b": "Ativação simpática reflexa por irritação das vias aéreas superiores e receptores pulmonares irritantes",
+    "c": "Efeito inotrópico positivo direto e aumento do débito cardíaco",
+    "d": "Inibição dos barorreceptores carotídeos com taquicardia reflexa || E) Liberação de catecolaminas por ação direta sobre a medula adrenal"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-50",
+    "enunciado": "Ponto 28 — Q49 49. Qual máscara laríngea de segunda geração possui canal de drenagem gástrica, cuff orofaríngeo e esofágico e permite pressão de vedamento mais elevada (≥ 30 cmH₂O), sendo recomendada em cirurgias laparoscópicas?",
+    "a": "LMA Classic (1ª geração)",
+    "b": "LMA Fastrach (LMA de intubação)",
+    "c": "LMA ProSeal ou LMA Supreme (2ª geração)",
+    "d": "Cânula de Guedel com insuflação orofaríngea || E) Máscara facial com PEEP valve"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-51",
+    "enunciado": "Caso Clínico: Paciente de 35 anos, ASA I, para apendicectomia de emergência. Última refeição há 3 horas (sólidos). Mallampati I, DTM 7 cm, abertura bucal normal. O plantonista propõe ISR com succinilcolina para intubação rápida e prevenir broncoaspiração.\n\nPonto 28 — Q50 — CASO CLÍNICO Caso Clínico: Paciente de 35 anos, ASA I, para apendicectomia de emergência. Última refeição há 3 horas (sólidos). Mallampati I, DTM 7 cm, abertura bucal normal. O plantonista propõe ISR com succinilcolina para intubação rápida e prevenir broncoaspiração. 50. Sobre a técnica de ISR, qual das afirmativas abaixo é CORRETA?",
+    "a": "Deve-se realizar ventilação manual com máscara entre a administração dos fármacos e a intubação para prevenir dessaturação",
+    "b": "A pré-oxigenação adequada (FiO₂ 1,0 por 3 minutos em VE normal ou 8 respirações de CVF) é etapa essencial que deve preceder os fármacos de indução, sem ventilação manual após os relaxantes até confirmar intubação",
+    "c": "O rocurônio 0,6 mg/kg pode substituir a succinilcolina na ISR com o mesmo tempo de início de ação",
+    "d": "A ISR não é necessária com intervalo de jejum de 3 horas para sólidos em adultos || E) A aplicação da manobra de Sellick deve ser iniciada imediatamente após a intubação para prevenir extubação acidental"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-6",
+    "enunciado": "Ponto 20 — Q5 5. Sobre os efeitos cardiovasculares dos anestésicos inalatórios, qual afirmativa é CORRETA?",
+    "a": "O isoflurano aumenta a frequência cardíaca por reflexo barorreceptor e é associado à síndrome do roubo coronariano em pacientes com doença coronária",
+    "b": "O halotano sensibiliza o miocárdio às catecolaminas, mas não aumenta o risco de arritmias ventriculares",
+    "c": "O sevoflurano prolonga significativamente o QT, sendo formalmente contraindicado em síndrome de Brugada",
+    "d": "O desflurano aumenta o débito cardíaco por efeito inotrópico positivo dose-dependente || E) O óxido nitroso reduz a pressão arterial sistêmica por vasodilatação direta potente"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-7",
+    "enunciado": "Ponto 20 — Q6 6. Em relação aos efeitos dos anestésicos inalatórios sobre a ventilação e vias aéreas, é CORRETO que:",
+    "a": "Todos os halogenados causam broncoespasmo dose-dependente relevante clinicamente",
+    "b": "O sevoflurano é preferido para indução inalatória em pediatria pelo odor agradável e baixa irritabilidade de vias aéreas",
+    "c": "O desflurano é o agente de escolha para indução inalatória em crianças por sua baixa solubilidade e recuperação rápida",
+    "d": "Os halogenados aumentam a resposta ventilatória à hipercapnia de forma dose-dependente || E) O isoflurano é broncodilatador mais potente que o sevoflurano em modelos experimentais"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-8",
+    "enunciado": "Caso Clínico: Paciente de 45 anos, 80 kg, ASA I, recebe propofol 2 mg/kg em bolus rápido para indução. Secondos após, PA cai para 80/50 mmHg e FC reduz de 78 para 58 bpm.\n\nPonto 21 — Q7 — CASO CLÍNICO Caso Clínico: Paciente de 45 anos, 80 kg, ASA I, recebe propofol 2 mg/kg em bolus rápido para indução. Secondos após, PA cai para 80/50 mmHg e FC reduz de 78 para 58 bpm. 7. O principal mecanismo da hipotensão induzida pelo propofol é:",
+    "a": "Bloqueio dos canais de cálcio tipo L no músculo cardíaco",
+    "b": "Vasodilatação arterial e venosa por inibição do tônus simpático e efeito direto no músculo liso vascular",
+    "c": "Liberação maciça de histamina mediada por IgE",
+    "d": "Inibição da síntese de catecolaminas na medula adrenal || E) Bloqueio competitivo dos receptores beta-1 adrenérgicos miocárdicos"
+  },
+  {
+    "id": "sim-me2simuladosemestral150questoeshtml-9",
+    "enunciado": "Ponto 21 — Q8 8. Qual anestésico venoso está associado a manutenção ou aumento da pressão arterial, broncodilatação e analgesia dissociativa, sendo útil em pacientes hemodinamicamente instáveis?",
+    "a": "Propofol",
+    "b": "Etomidato",
+    "c": "Cetamina",
+    "d": "Dexmedetomidina || E) Midazolam"
+  }
+]

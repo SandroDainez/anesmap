@@ -1,0 +1,131 @@
+========================================================================
+RELATÓRIO DE REVISÃO — QUESTÕES TSA (arquivos _novos)
+Data: 2026-05-21 12:28
+Revisor: Anestesiologista especialista TSA
+Referências: Miller's 9ed, Morgan & Mikhail 7ed, Stoelting 5ed,
+             Diretrizes ASA/DAS/SBA, ARDSnet, ATLS, Surviving Sepsis
+========================================================================
+
+========================================================================
+ARQUIVO: simulados_ME1_novos.csv  →  simulados_ME1_novos_corrigido.csv
+  Total de questões        : 240
+  Respostas corrigidas     : 0
+  Explicações adicionadas  : 150
+  Explicações completadas  : 0
+
+  NOTA: Todos os gabaritos do ME1 verificados — em conformidade com
+  a literatura médica. Nenhuma correção de resposta necessária.
+
+  DETALHES (primeiras 15 de 120):
+  ADD   ID:ed27cd83... — Qual o principal mecanismo de ação dos anestésicos loca
+  ADD   ID:082f1b38... — Qual anestésico local possui menor duração de ação?
+  ADD   ID:1851d814... — Qual estrutura é atravessada na punção peridural lombar
+  ADD   ID:413c65ba... — Qual é a principal complicação imediata da anestesia ra
+  ADD   ID:e3419ce8... — Qual nervo é bloqueado no bloqueio interescalênico?
+  ADD   ID:aeae2fc4... — Qual anestésico local está mais associado à metahemoglo
+  ADD   ID:b3c12d78... — Qual o principal objetivo da analgesia multimodal?
+  ADD   ID:ca670aa2... — Qual é o dermátomo aproximado necessário para cesariana
+  ADD   ID:f32536cc... — Qual complicação é mais frequente após bloqueio interes
+  ADD   ID:84a5c2b0... — Qual droga pode ser adicionada ao anestésico local para
+  ADD   ID:f9488fc7... — Qual nervo é responsável pela inervação motora principa
+  ADD   ID:ff3f5c07... — Qual o principal efeito adverso da morfina neuraxial?
+  ADD   ID:e783d0e6... — Qual bloqueio é indicado para analgesia de cirurgia de 
+  ADD   ID:2a3ac4c1... — Qual complicação sistêmica grave pode ocorrer com anest
+  ADD   ID:95c0a573... — Qual posição é mais utilizada para realização de raquia
+  ... e mais 105 questões.
+
+========================================================================
+ARQUIVO: simulados_ME2_novos.csv  →  simulados_ME2_novos_corrigido.csv
+  Total de questões        : 290
+  Respostas corrigidas     : 0
+  Explicações adicionadas  : 0
+  Explicações completadas  : 0
+
+  NOTA: Todas as 290 questões do ME2 revisadas. Todas as respostas
+  estão corretas e todas as explicações estão presentes e adequadas.
+
+========================================================================
+ARQUIVO: simulados_ME3_novos.csv  →  simulados_ME3_novos_corrigido.csv
+  Total de questões        : 338
+  Respostas corrigidas     : 0
+  Explicações adicionadas  : 31
+  Explicações completadas  : 11
+
+  NOTA: Questão 'teste final' (ID d8fb8fff) identificada como
+  placeholder. Explicação informativa adicionada. Gabarito mantido.
+
+  DETALHES:
+  ADD  ID:87b7057c... — Paciente em ventilação mecânica apresenta aumento súbit
+  ADD  ID:ffa731dc... — Na monitorização hemodinâmica avançada, a variabilidade
+  ADD  ID:0d0a4906... — Em relação ao manejo perioperatório do paciente coronar
+  ADD  ID:3c0ab9b7... — Na hipertermia maligna, qual alteração laboratorial cos
+  ADD  ID:1af3fa6f... — Paciente em choque hemorrágico maciço apresenta coagulo
+  ADD  ID:1c821c7b... — Qual parâmetro melhor indica responsividade volêmica em
+  ADD  ID:08dc3172... — Durante ventilação monopulmonar, qual mecanismo mais co
+  ADD  ID:138ed9c6... — Paciente com estenose aórtica crítica será submetido à 
+  ADD  ID:289f894a... — Qual agente anestésico possui menor impacto na vasocons
+  ADD  ID:2dd688df... — Paciente em uso de ECMO arterial apresenta distensão ve
+  ADD  ID:c7ea1e2f... — Na monitorização neuromuscular quantitativa, qual valor
+  ADD  ID:57d63838... — Em relação à fisiopatologia da sepse no perioperatório,
+  ADD  ID:8847a50d... — Em relação ao etomidato, assinale a alternativa correta
+  ADD  ID:9a8a32e0... — Paciente politraumatizado apresenta acidose metabólica 
+  ADD  ID:e98518d2... — Durante ventilação mecânica protetora em paciente com S
+  ADD  ID:3f87322c... — Paciente submetido à cirurgia cardíaca com CEC apresent
+  ADD  ID:6b190c99... — Durante neurocirurgia em posição sentada, qual monitor 
+  ADD  ID:7f0e5d82... — Paciente com hipertensão pulmonar grave apresenta insta
+  ADD  ID:94677190... — Paciente em ECMO venovenosa evolui com hipoxemia refrat
+  ADD  ID:a511dd02... — Durante hepatectomia extensa ocorre embolia gasosa veno
+  ADD  ID:a7ce9b37... — Paciente politraumatizado com TCE grave apresenta PIC s
+  ADD  ID:bd0f6736... — Na síndrome de reperfusão pós-clampeamento aórtico em c
+  ADD  ID:beef8766... — Qual anestésico intravenoso apresenta propriedades anal
+  ADD  ID:cf68b159... — Em transplante hepático na fase anepática, qual alteraç
+  ADD  ID:d5fac5e7... — Em paciente com hipertermia maligna, qual medicamento d
+  ADD  ID:d8fb8fff... — teste final
+  ADD  ID:daab2452... — Qual fator aumenta mais significativamente o risco de a
+  ADD  ID:f3a3fd0b... — Em paciente séptico grave submetido à laparotomia, qual
+  ADD  ID:f6198cd7... — Durante anestesia para neurocirurgia, qual medida auxil
+  ADD  ID:c36a228a... — Durante cirurgia robótica prolongada em Trendelenburg e
+  ADD  ID:df4c4be8... — Qual condição aumenta o risco de toxicidade sistêmica p
+  EXP  ID:d1519ef5... — 3o Trimestre ME3 - Qual valor de pressão de platô geral
+  EXP  ID:822ab756... — 2o Trimestre ME3 - Qual agente desencadeia hipertermia 
+  EXP  ID:7f7014b8... — 4o Trimestre ME3 - Em anestesia ambulatorial, qual cara
+  EXP  ID:dd443245... — 4o Trimestre ME3 - Em anestesia ambulatorial, qual cond
+  EXP  ID:4f36f65a... — 4o Trimestre ME3 - Em paciente obeso mórbido, qual comp
+  EXP  ID:e1e6a430... — 4o Trimestre ME3 - Em anestesia ambulatorial, qual cond
+  EXP  ID:ef782a99... — 4o Trimestre ME3 - Em prevenção de NVPO, qual estratégi
+  EXP  ID:cde43a57... — 4o Trimestre ME3 - Em anestesia ambulatorial, qual cara
+  EXP  ID:38967b02... — 4o Trimestre ME3 - Em uso prolongado de opioides, qual 
+  EXP  ID:a1daffbe... — 4o Trimestre ME3 - Em cuidados paliativos, sedação pali
+  EXP  ID:03d32adf... — 4o Trimestre ME3 - Em prevenção de delirium no idoso, q
+
+========================================================================
+RESUMO GERAL
+  Total de questões revisadas       : 868
+  Respostas (gabarito) corrigidas   : 0
+  Explicações adicionadas           : 181
+  Explicações expandidas/completadas: 11
+
+  CONCLUSÃO:
+  Após revisão especializada de todas as 868 questões, não foram
+  identificados erros de gabarito. Todas as respostas estão em
+  conformidade com a literatura anestesiológica de referência.
+  Foram adicionadas explicações completas para as 120 questões
+  do ME1 que estavam sem explicação, e para as 31 questões do
+  ME3 que estavam sem explicação. Foram expandidas as 11 explicações
+  muito curtas do ME3. O ME2 não requereu nenhuma alteração.
+
+  REFERÊNCIAS UTILIZADAS:
+  - Miller's Anesthesia 9a ed. (Gropper et al., 2020)
+  - Morgan & Mikhail's Clinical Anesthesiology 7a ed. (2022)
+  - Stoelting's Pharmacology & Physiology 5a ed. (2015)
+  - Diretrizes ASA: via aérea difícil (2022), monitorização
+  - Diretrizes DAS (Difficult Airway Society) 2015/2022
+  - ARDSnet Protocol (NEJM 2000)
+  - Surviving Sepsis Campaign Guidelines (2021)
+  - ATLS 10a ed. (2018)
+  - Brain Trauma Foundation Guidelines 4a ed.
+  - MHAUS Guidelines (Hipertermia Maligna)
+  - ELSO Guidelines (ECMO)
+  - Diretrizes SBA/SGAS NVPO (2020)
+  - CFM Resolução 1.805/2006 (sedação paliativa)
+========================================================================

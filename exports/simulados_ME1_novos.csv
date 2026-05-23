@@ -1,0 +1,781 @@
+"id","me","tema","enunciado","alternativa_a","alternativa_b","alternativa_c","alternativa_d","correta","explicacao"
+"ed27cd83-568f-470d-bd1e-55b45eaba112","ME1","Qual o principal mecanismo de ação dos anestésicos","Qual o principal mecanismo de ação dos anestésicos locais?","Bloqueio dos canais de cálcio","Bloqueio dos canais de sódio","Ativação dos receptores GABA","Inibição dos receptores NMDA","B",""
+"082f1b38-0624-4cfb-87e4-d2cb5b023d2c","ME1","Qual anestésico local possui menor duração de ação","Qual anestésico local possui menor duração de ação?","Bupivacaína","Ropivacaína","Lidocaína","Tetracaína","C",""
+"1851d814-d5b2-4d71-9145-603eea6cdfa0","ME1","Qual estrutura é atravessada na punção peridural l","Qual estrutura é atravessada na punção peridural lombar?","Pia-máter","Aracnoide","Ligamento amarelo","Medula espinhal","C",""
+"413c65ba-7699-4125-8cd4-00e07d18bd0e","ME1","Qual é a principal complicação imediata da anestes","Qual é a principal complicação imediata da anestesia raquidiana?","Hipertensão","Hipotensão arterial","Hiperglicemia","Broncoespasmo","B",""
+"e3419ce8-8263-4f07-ab0f-9a2cd01a3506","ME1","Qual nervo é bloqueado no bloqueio interescalênico","Qual nervo é bloqueado no bloqueio interescalênico?","Nervo femoral","Plexo braquial","Nervo tibial","Nervo facial","B",""
+"aeae2fc4-1fe2-445d-8180-accbb6cd243d","ME1","Qual anestésico local está mais associado à metahe","Qual anestésico local está mais associado à metahemoglobinemia?","Lidocaína","Prilocaína","Bupivacaína","Ropivacaína","B",""
+"b3c12d78-1a9c-4b18-8e68-e5c08bc3d6a8","ME1","Qual o principal objetivo da analgesia multimodal?","Qual o principal objetivo da analgesia multimodal?","Aumentar consumo de opioides","Reduzir efeitos adversos e melhorar analgesia","Substituir anestesia geral","Produzir sedação profunda","B",""
+"ca670aa2-cd5b-42b4-83c2-b4744c6d701e","ME1","Qual é o dermátomo aproximado necessário para cesa","Qual é o dermátomo aproximado necessário para cesariana sob raquianestesia?","T12","T10","T6","T4","D",""
+"f32536cc-d841-47ed-a260-50735feba758","ME1","Qual complicação é mais frequente após bloqueio in","Qual complicação é mais frequente após bloqueio interescalênico?","Pneumotórax bilateral","Paralisia frênica","Lesão medular","Hipertensão pulmonar","B",""
+"84a5c2b0-2164-4ee5-a063-340bb9835f68","ME1","Qual droga pode ser adicionada ao anestésico local","Qual droga pode ser adicionada ao anestésico local para prolongar bloqueio regional?","Atropina","Adrenalina","Flumazenil","Naloxona","B",""
+"f9488fc7-8487-436e-bae7-631faf99c96f","ME1","Qual nervo é responsável pela inervação motora pri","Qual nervo é responsável pela inervação motora principal do diafragma?","Vago","Frênico","Hipoglosso","Facial","B",""
+"ff3f5c07-5528-44f7-b497-d771b35756c1","ME1","Qual o principal efeito adverso da morfina neuraxi","Qual o principal efeito adverso da morfina neuraxial?","Hipertensão","Depressão respiratória tardia","Hiperglicemia","Arritmia ventricular","B",""
+"e783d0e6-7ad5-41f6-83ab-4b30b0ea2070","ME1","Qual bloqueio é indicado para analgesia de cirurgi","Qual bloqueio é indicado para analgesia de cirurgia de ombro?","Femoral","Intercostal","Interescalênico","Ciático","C",""
+"2a3ac4c1-5c1d-409f-bab2-d9491057829f","ME1","Qual complicação sistêmica grave pode ocorrer com","Qual complicação sistêmica grave pode ocorrer com anestésicos locais?","Hipotireoidismo","Toxicidade sistêmica","Hiperglicemia","Hipocalemia","B",""
+"95c0a573-ac89-4ab4-a0c0-53e2e419e8d3","ME1","Qual posição é mais utilizada para realização de r","Qual posição é mais utilizada para realização de raquianestesia?","Trendelenburg","Decúbito ventral","Sentado ou lateral","Ortostática","C",""
+"6a735ce8-89a6-4cbe-b7b6-a9c292ad9171","ME1","Qual anestésico local possui menor cardiotoxicidad","Qual anestésico local possui menor cardiotoxicidade entre os de longa duração?","Bupivacaína","Ropivacaína","Tetracaína","Cloroprocaína","B",""
+"1663be5a-83ae-469e-9255-c74d4fc7ea7b","ME1","Qual a principal indicação do bloqueio do nervo fe","Qual a principal indicação do bloqueio do nervo femoral?","Cirurgia de ombro","Cirurgia de joelho","Cirurgia de mão","Cirurgia ocular","B",""
+"b1fd58dc-b81a-4a31-9035-d81a2b09b4ad","ME1","Qual o principal sinal precoce de toxicidade sistê","Qual o principal sinal precoce de toxicidade sistêmica por anestésico local?","Cianose","Zumbido e gosto metálico","Hiperglicemia","Edema pulmonar","B",""
+"2af8ac54-f649-444a-9828-92e3c6464b76","ME1","Qual opioide possui maior potência analgésica?","Qual opioide possui maior potência analgésica?","Codeína","Morfina","Fentanil","Tramadol","C",""
+"6ed62981-4099-4212-90af-3e116c92682e","ME1","Qual bloqueio regional é frequentemente associado","Qual bloqueio regional é frequentemente associado à síndrome de Horner?","Femoral","Intercostal","Interescalênico","Ciático","C",""
+"b06625a2-626a-4880-956f-c79120c31875","ME1","Qual fármaco é utilizado para tratamento inicial d","Qual fármaco é utilizado para tratamento inicial da toxicidade sistêmica grave por anestésico local?","Protamina","Emulsão lipídica","Naloxona","Flumazenil","B",""
+"6f2f8bef-51c1-445e-939a-36574dded481","ME1","Qual a principal vantagem do ultrassom em anestesi","Qual a principal vantagem do ultrassom em anestesia regional?","Aumentar toxicidade","Visualizar estruturas anatômicas","Eliminar necessidade de assepsia","Impedir totalmente complicações","B",""
+"f492c0f6-d5df-4f46-918f-33a472b274ed","ME1","Qual anestésico local possui início de ação mais r","Qual anestésico local possui início de ação mais rápido?","Bupivacaína","Ropivacaína","Lidocaína","Tetracaína","C",""
+"2f55c46a-5184-4a1e-b49d-544e1a2b40fb","ME1","Qual o principal mecanismo da hipotensão após raqu","Qual o principal mecanismo da hipotensão após raquianestesia?","Hipovolemia absoluta","Bloqueio simpático","Depressão miocárdica intensa","Hipoxemia","B",""
+"1a460398-4f84-4f1c-9a6a-eefd39417fc5","ME1","Qual nervo deve ser bloqueado para analgesia da fa","Qual nervo deve ser bloqueado para analgesia da face lateral da coxa?","Obturatório","Cutâneo lateral da coxa","Femoral","Ciático","B",""
+"54bd7208-3da2-4f9a-8fc5-957b4ad51ba2","ME1","Qual opioide é mais associado à liberação de hista","Qual opioide é mais associado à liberação de histamina?","Fentanil","Remifentanil","Morfina","Sufentanil","C",""
+"fbfe1f04-3a19-4a33-b0cc-2759efdb0821","ME1","Qual é a principal contraindicação absoluta para r","Qual é a principal contraindicação absoluta para raquianestesia?","Hipertensão arterial","Infecção no local da punção","Diabetes mellitus","Obesidade","B",""
+"f0ceaf95-adc6-4b13-bd01-a490e2c5d9b6","ME1","Qual complicação respiratória pode ocorrer após bl","Qual complicação respiratória pode ocorrer após bloqueio interescalênico?","Bronquiectasia","Paralisia hemidiafragmática","Edema agudo pulmonar","Pneumonia","B",""
+"8c21649b-661f-4a08-8bed-c988c2a54cb1","ME1","Qual adjuvante pode aumentar duração da analgesia","Qual adjuvante pode aumentar duração da analgesia neuraxial?","Clonidina","Flumazenil","Atropina","Protamina","A",""
+"45d3ad10-39ab-450d-aad5-a2b0813707cd","ME1","Qual o principal benefício da analgesia regional n","Qual o principal benefício da analgesia regional no pós-operatório?","Aumento do consumo de opioides","Melhor controle da dor","Maior incidência de náuseas","Hiperglicemia","B",""
+"9500a4ae-b327-45cf-844c-43984c62aae3","ME1","Qual o principal objetivo da ventilação mecânica n","Qual o principal objetivo da ventilação mecânica no intraoperatório?","Produzir alcalose respiratória","Garantir adequada oxigenação e ventilação","Aumentar consumo de oxigênio","Induzir hipercapnia","B",""
+"45cf981c-91f5-46f2-ab35-8045a2a0b3f7","ME1","Qual parâmetro é utilizado para avaliar ventilação","Qual parâmetro é utilizado para avaliar ventilação alveolar?","Pressão arterial","Capnografia","Temperatura","Hemoglobina","B",""
+"8ab7f23a-e19a-4832-9685-0b153e28674f","ME1","Qual modo ventilatório fornece volume corrente fix","Qual modo ventilatório fornece volume corrente fixo?","Ventilação espontânea","CPAP","Ventilação controlada a volume","PSV","C",""
+"21845ece-d469-45d6-bec0-47863b1668f1","ME1","Qual é o principal risco da pressão excessiva no c","Qual é o principal risco da pressão excessiva no cuff do tubo traqueal?","Hipertensão arterial","Lesão traqueal","Hiperglicemia","Broncodilatação","B",""
+"41365870-3493-4432-ad0b-2183eb1a2446","ME1","Qual complicação é mais comum na intubação seletiv","Qual complicação é mais comum na intubação seletiva inadvertida?","Ventilação de um único pulmão","Broncoespasmo","Edema cerebral","Hipoglicemia","A",""
+"e85f638a-012e-4689-a115-5e90189d96b2","ME1","Qual valor normal aproximado do ETCO2 em adultos s","Qual valor normal aproximado do ETCO2 em adultos saudáveis?","10 mmHg","20 mmHg","35-45 mmHg","60-70 mmHg","C",""
+"92a28193-a11a-4bc9-ab3c-567b7573e36d","ME1","Qual é a principal função da PEEP na ventilação me","Qual é a principal função da PEEP na ventilação mecânica?","Reduzir oxigenação","Prevenir colapso alveolar","Produzir acidose","Aumentar espaço morto","B",""
+"2ba65170-705f-441d-a19e-c276f6861d02","ME1","Qual complicação pode ocorrer com volumes corrente","Qual complicação pode ocorrer com volumes correntes excessivos?","Volutrauma","Hipoglicemia","Bradicardia vagal","Hipotireoidismo","A",""
+"0efb745f-1349-4828-87b5-4a75f8a18ccf","ME1","Qual estrutura impede a entrada de alimentos na tr","Qual estrutura impede a entrada de alimentos na traqueia durante deglutição?","Cordas vocais","Epiglote","Palato mole","Úvula","B",""
+"75019665-05e5-4c90-8893-656daa2d513a","ME1","Qual fator aumenta risco de aspiração pulmonar?","Qual fator aumenta risco de aspiração pulmonar?","Jejum adequado","Obesidade e refluxo gastroesofágico","Uso de oxigênio suplementar","Hipervolemia","B",""
+"3b155d6e-f221-481f-b463-5d9da7c82439","ME1","Qual dispositivo é considerado via aérea supraglót","Qual dispositivo é considerado via aérea supraglótica?","Tubo orotraqueal","Máscara laríngea","Fibroscópio","Laringoscópio","B",""
+"a89ac0e4-9dc8-4937-bca9-51b9359b8c9c","ME1","Qual é o principal efeito fisiológico do pneumoper","Qual é o principal efeito fisiológico do pneumoperitônio laparoscópico?","Redução da pressão intra-abdominal","Aumento da pressão intratorácica","Hipotermia cerebral","Redução da resistência vascular","B",""
+"e86c2c01-1a36-4edf-985f-923beb2c2f97","ME1","Qual gás é mais utilizado para pneumoperitônio?","Qual gás é mais utilizado para pneumoperitônio?","Oxigênio","Nitrogênio","Dióxido de carbono","Hélio","C",""
+"2f1d53fc-c41e-4828-bd14-d2543752ca51","ME1","Qual complicação pode ocorrer durante inserção de","Qual complicação pode ocorrer durante inserção de acesso venoso central em jugular interna?","Pneumotórax","Hiperglicemia","Edema cerebral","Bronquiectasia","A",""
+"df546ef6-b6da-4fae-bf56-01ac6d875239","ME1","Qual monitorização avalia atividade elétrica cardí","Qual monitorização avalia atividade elétrica cardíaca continuamente?","Capnografia","ECG","Oximetria","Temperatura","B",""
+"e13615f5-2c3c-4c7e-9af6-e6d760f7a4ad","ME1","Qual complicação está relacionada ao posicionament","Qual complicação está relacionada ao posicionamento inadequado intraoperatório?","Lesão nervosa periférica","Hipertireoidismo","Hiperglicemia","Broncodilatação","A",""
+"3f1ad952-64fc-4096-85f2-28607c2725d9","ME1","Qual posição cirúrgica aumenta risco de embolia aé","Qual posição cirúrgica aumenta risco de embolia aérea venosa?","Trendelenburg","Sentada","Decúbito dorsal","Litotomia","B",""
+"f8210187-fc28-4d98-aee5-ab62b4cbbcc2","ME1","Qual é a principal indicação da pressão arterial i","Qual é a principal indicação da pressão arterial invasiva?","Cirurgias sem risco","Monitorização contínua da PA","Controle de glicemia","Monitorização da temperatura","B",""
+"6fb5a854-407c-45b1-b743-4153d8478b27","ME1","Qual complicação metabólica pode ocorrer após tran","Qual complicação metabólica pode ocorrer após transfusão maciça?","Hipocalcemia","Hipercalcemia","Hipoglicemia obrigatória","Alcalose respiratória","A",""
+"8d23fda8-7cf7-4add-be97-693c596e722d","ME1","Qual exame avalia oxigenação arterial diretamente?","Qual exame avalia oxigenação arterial diretamente?","Capnografia","Gasometria arterial","ECG","Hemograma","B",""
+"3e8cf35e-208e-4925-9488-d9c4acf35143","ME1","Qual é a principal causa de hipoxemia no pós-opera","Qual é a principal causa de hipoxemia no pós-operatório imediato?","Atelectasia","Hipertensão arterial","Hiperglicemia","Bronquiectasia","A",""
+"2c0941a5-bab3-4004-bd01-4e7047e9b04a","ME1","Qual é a principal função do surfactante pulmonar?","Qual é a principal função do surfactante pulmonar?","Aumentar tensão superficial","Reduzir colapso alveolar","Produzir muco","Aumentar espaço morto","B",""
+"bd129d40-1595-41dc-a3fe-16f385093b89","ME1","Qual complicação respiratória pode ocorrer após ex","Qual complicação respiratória pode ocorrer após extubação precoce?","Hipoventilação","Hiperglicemia","Hipertireoidismo","Acidose metabólica obrigatória","A",""
+"a86fa9fc-4df7-4e55-9566-76989e94b410","ME1","Qual fator desloca a curva de dissociação da hemog","Qual fator desloca a curva de dissociação da hemoglobina para a direita?","Hipotermia","Hipocapnia","Acidose","Alcalose","C",""
+"0e28db47-77fc-4765-bcd7-223bd22b2c1a","ME1","Qual o principal efeito da hipercapnia?","Qual o principal efeito da hipercapnia?","Vasoconstrição cerebral","Broncodilatação leve","Hipotermia","Hipoglicemia","B",""
+"2f980ae7-0e7c-4036-9039-f619ffda3d7a","ME1","Qual estrutura anatômica é mais frequentemente les","Qual estrutura anatômica é mais frequentemente lesionada na punção da veia subclávia?","Pleura","Fígado","Baço","Traqueia","A",""
+"f3075dd8-c8b0-41f0-bc9d-5bfdd740538b","ME1","Qual valor de pressão do cuff é considerado seguro","Qual valor de pressão do cuff é considerado seguro?","0-5 cmH2O","20-30 cmH2O","40-50 cmH2O","60-70 cmH2O","B",""
+"41441fd0-92ce-412c-b6b8-a0c8d5471264","ME1","Qual complicação pode ocorrer em posição litotômic","Qual complicação pode ocorrer em posição litotômica prolongada?","Síndrome compartimental","Hipotireoidismo","Broncoespasmo","Hiperglicemia","A",""
+"e3a71512-8474-48a9-bd24-1800f0583941","ME1","Qual dispositivo é utilizado para confirmação da i","Qual dispositivo é utilizado para confirmação da intubação traqueal?","Estetoscópio isoladamente","Capnografia","Termômetro","Esfigmomanômetro","B",""
+"fb84f144-1837-4100-9439-7c8d060d4644","ME1","Qual o principal mecanismo da atelectasia durante","Qual o principal mecanismo da atelectasia durante anestesia geral?","Aumento da capacidade residual funcional","Redução da capacidade residual funcional","Hiperglicemia","Broncodilatação intensa","B",""
+"972874b6-2f17-48a7-bfaf-b15708c6bffd","ME1","Paciente obeso mórbido em ventilação mecânica apre","Paciente obeso mórbido em ventilação mecânica apresenta aumento progressivo da pressão de pico, porém pressão platô normal. Qual a causa mais provável?","Redução da complacência pulmonar","Broncoespasmo","Pneumotórax hipertensivo","Edema agudo pulmonar","B",""
+"94933a97-970b-45dd-accf-d1a4dc5f53b9","ME1","Durante ventilação controlada a volume ocorre aume","Durante ventilação controlada a volume ocorre aumento simultâneo da pressão de pico e pressão platô. Qual condição é mais provável?","Obstrução do tubo orotraqueal","Broncoespasmo leve","Redução da complacência pulmonar","Acúmulo de secreção no filtro","C",""
+"52bad495-f95f-417a-8fde-5f063f51dd29","ME1","Qual alteração fisiológica é mais esperada durante","Qual alteração fisiológica é mais esperada durante posição de Trendelenburg acentuado?","Redução da pressão intracraniana","Aumento do retorno venoso e pressão intracraniana","Hipovolemia absoluta","Redução da pressão intraocular","B",""
+"69fa2231-2fe0-4d5b-85c1-1b196b9e3a2c","ME1","Paciente apresenta ETCO2 progressivamente reduzido","Paciente apresenta ETCO2 progressivamente reduzido associado à hipotensão súbita e dessaturação durante artroplastia cimentada. Qual hipótese diagnóstica é mais provável?","Broncoespasmo","Embolia pulmonar por cimento","Intubação seletiva","Hipotermia","B",""
+"0fb850bd-03af-4df6-b44e-3dc4872fe45e","ME1","Qual fator aumenta mais significativamente o risco","Qual fator aumenta mais significativamente o risco de auto-PEEP?","Frequência respiratória elevada","Volume corrente reduzido","Tempo expiratório prolongado","PEEP baixa","A",""
+"5a5ad7a3-4419-48b9-9250-db49f010a1fb","ME1","Durante laparoscopia ocorre aumento abrupto do ETC","Durante laparoscopia ocorre aumento abrupto do ETCO2 sem alteração hemodinâmica importante. Qual a causa mais provável?","Embolia gasosa maciça","Absorção sistêmica de CO2","Hipovolemia","Intubação esofágica","B",""
+"a52e20cb-74f5-4f3b-8459-5bf2bcd7b87c","ME1","Qual alteração gasométrica é mais compatível com h","Qual alteração gasométrica é mais compatível com hipoventilação alveolar?","PaCO2 reduzida","PaCO2 elevada","pH elevado e PaCO2 baixa","Alcalose respiratória","B",""
+"cb35a811-fb42-4a3e-ab79-7918ced63d8a","ME1","Na ventilação monopulmonar, qual pulmão recebe pre","Na ventilação monopulmonar, qual pulmão recebe preferencialmente maior perfusão em decúbito lateral?","Pulmão não dependente","Pulmão superior","Pulmão dependente","Ambos igualmente","C",""
+"fd6cab84-2e7d-467c-aa52-6532d533b7bd","ME1","Qual condição mais favorece dessaturação rápida du","Qual condição mais favorece dessaturação rápida durante apneia?","Obesidade mórbida","Baixo consumo metabólico","Pré-oxigenação adequada","Posição sentada","A",""
+"ea29cb6c-6fad-4fe5-a02e-cbd15f9ae388","ME1","Qual mecanismo explica hipotensão após indução ane","Qual mecanismo explica hipotensão após indução anestésica com propofol?","Vasoconstrição periférica","Aumento do retorno venoso","Vasodilatação e depressão miocárdica","Liberação intensa de catecolaminas","C",""
+"5a440ccd-52d6-4c3a-bd4a-d17d19298bd8","ME1","Durante ventilação mecânica, qual parâmetro melhor","Durante ventilação mecânica, qual parâmetro melhor representa complacência estática?","Pressão de pico","Diferença entre pressão platô e PEEP","Frequência respiratória","Fluxo inspiratório","B",""
+"c711be14-d1d8-403e-ba17-4053ab91c53a","ME1","Paciente asmático apresenta broncoespasmo grave ap","Paciente asmático apresenta broncoespasmo grave após intubação. Qual medida inicial é mais apropriada?","Suspender oxigênio","Aumentar fluxo de gases e aprofundar anestesia","Extubar imediatamente","Reduzir tempo expiratório","B",""
+"9d537d3e-c988-4aa6-92ce-9fb6698c653e","ME1","Qual situação aumenta o risco de barotrauma durant","Qual situação aumenta o risco de barotrauma durante ventilação mecânica?","Baixas pressões inspiratórias","Volumes correntes excessivos","PEEP ausente","Hipocapnia","B",""
+"622ff806-7cf4-4767-a963-4b2f9aa8f4f3","ME1","Durante anestesia geral ocorre redução da capacida","Durante anestesia geral ocorre redução da capacidade residual funcional principalmente devido a:","Aumento do volume residual","Deslocamento cefálico do diafragma","Broncodilatação intensa","Aumento da complacência torácica","B",""
+"93d08163-4a4b-4d37-a5f9-e07ef2b241df","ME1","Qual alteração hemodinâmica é mais comum após apli","Qual alteração hemodinâmica é mais comum após aplicação de pressão positiva nas vias aéreas?","Aumento importante do retorno venoso","Redução do retorno venoso","Aumento do débito cardíaco em todos os pacientes","Bradicardia obrigatória","B",""
+"adc616f0-af4a-4215-8d6e-667fe79584b2","ME1","Qual fator aumenta mais significativamente o risco","Qual fator aumenta mais significativamente o risco de aspiração pulmonar perioperatória?","Jejum prolongado","Gestação","Uso de máscara laríngea","Hiperventilação","B",""
+"cd8e623c-8709-4278-9a6e-f7c4ab6f5c83","ME1","Na embolia aérea venosa, qual alteração auscultató","Na embolia aérea venosa, qual alteração auscultatória clássica pode ocorrer?","Sopro tubário","Sopro em roda d’água","Estridor inspiratório","Atrito pleural","B",""
+"8bf51617-1629-44ba-a990-4f94fff1581d","ME1","Qual estratégia reduz risco de atelectasia intraop","Qual estratégia reduz risco de atelectasia intraoperatória?","FiO2 100% contínua","PEEP adequada","Ventilação com baixos volumes sem recrutamento","Hipoventilação permissiva","B",""
+"ffcc8678-df3d-4da2-ad7e-50a154de0a59","ME1","Qual complicação pode ocorrer após remoção rápida","Qual complicação pode ocorrer após remoção rápida de pneumoperitônio?","Hipotensão arterial","Hiperglicemia","Hipertensão intracraniana","Broncoespasmo obrigatório","A",""
+"992b9472-874d-4955-91cb-db5bcbf79924","ME1","Qual alteração ventilatória é esperada em paciente","Qual alteração ventilatória é esperada em paciente com DPOC grave?","Tempo expiratório reduzido","Aprisionamento aéreo","Baixa resistência de vias aéreas","Hipocapnia persistente","B",""
+"8308b518-8a82-494e-9d63-0520b5f79e76","ME1","Qual parâmetro sugere adequadamente posicionamento","Qual parâmetro sugere adequadamente posicionamento traqueal do tubo após intubação?","Expansão torácica isolada","Visualização do tubo passando pelas cordas","Capnografia sustentada","Ausculta gástrica negativa","C",""
+"7ddaf4e8-69c2-4814-86f5-5fcbb6ddaf05","ME1","Qual condição aumenta consumo de oxigênio perioper","Qual condição aumenta consumo de oxigênio perioperatório?","Hipotermia","Febre","Sedação profunda","Bloqueio neuromuscular","B",""
+"528d3f57-612a-4e71-a868-b1f1d435768c","ME1","Durante ventilação controlada, qual alteração ocor","Durante ventilação controlada, qual alteração ocorre em hipovolemia importante?","Elevação da variação da pressão de pulso","Redução da variação respiratória","Hipertensão sustentada","Aumento do ETCO2","A",""
+"eff12fc2-b04a-4696-9af2-0a208fac8bba","ME1","Qual alteração fisiológica ocorre durante hipercap","Qual alteração fisiológica ocorre durante hipercapnia aguda?","Vasoconstrição cerebral","Aumento do fluxo cerebral","Redução da atividade simpática","Hipocalemia importante","B",""
+"3e20f739-bc64-4db3-9424-dc11ab93976e","ME1","Qual o principal mecanismo de hipoxemia durante an","Qual o principal mecanismo de hipoxemia durante anestesia geral?","Shunt intrapulmonar","Hiperventilação","Aumento da difusão alveolar","Redução do consumo de oxigênio","A",""
+"d2525468-8dad-46f8-89a0-f8727484bf3c","ME1","Qual situação contraindica máscara laríngea como p","Qual situação contraindica máscara laríngea como primeira escolha?","Cirurgia de curta duração","Jejum adequado","Alto risco de aspiração","Paciente ASA I","C",""
+"238b9508-7cf8-4a56-9e80-a9a5b32863ed","ME1","Qual alteração pode ocorrer em pneumotórax hiperte","Qual alteração pode ocorrer em pneumotórax hipertensivo intraoperatório?","Aumento unilateral do murmúrio vesicular","Hipotensão e aumento da pressão de vias aéreas","Redução da pressão intratorácica","Bradicardia vagal isolada","B",""
+"0e924c1e-be52-4815-bc9b-dbeff1194def","ME1","Qual medida reduz risco de lesão pulmonar induzida","Qual medida reduz risco de lesão pulmonar induzida pela ventilação?","Volumes correntes elevados","Ventilação protetora","PEEP zero","Hiperventilação intensa","B",""
+"62ce8f95-7502-4035-ad84-44bf3b474f03","ME1","Qual condição favorece redução do ETCO2 sem altera","Qual condição favorece redução do ETCO2 sem alteração da ventilação?","Aumento do débito cardíaco","Embolia pulmonar","Febre","Hipermetabolismo","B",""
+"dcb9dfdc-c5d1-49d4-8c52-ae78b538e590","ME1","Qual a principal consequência fisiológica da compr","Qual a principal consequência fisiológica da compressão aortocava na gestante?","Hipertensão grave","Redução do retorno venoso","Aumento do débito cardíaco","Hiperglicemia","B",""
+"739de4a8-8e7c-41c5-9421-1034c96c5ee6","ME1","Qual alteração ventilatória é mais comum após indu","Qual alteração ventilatória é mais comum após indução anestésica geral?","Aumento da capacidade residual funcional","Redução da complacência pulmonar","Hiperventilação espontânea","Aumento do volume residual","B",""
+"cdfa99fe-8d8d-433b-8349-dc65651c1453","ME1","Qual é o principal objetivo da pré-oxigenação ante","Qual é o principal objetivo da pré-oxigenação antes da indução anestésica?","Aumentar produção de CO2","Prolongar tempo seguro de apneia","Reduzir complacência pulmonar","Produzir alcalose respiratória","B",""
+"6748b5f7-b306-4819-a2a0-10b919c62394","ME1","Qual condição aumenta o risco de via aérea difícil","Qual condição aumenta o risco de via aérea difícil?","Distância tireomentoniana reduzida","Pescoço longo","Boa abertura oral","Mallampati I","A",""
+"5bcb30a0-e481-4252-931b-b756da5ba6a4","ME1","Qual é a principal causa de hipercapnia durante an","Qual é a principal causa de hipercapnia durante anestesia?","Hiperventilação","Hipoventilação alveolar","Hipotermia","Hipoglicemia","B",""
+"bf58f84d-f1af-4d0d-b2c5-86a746b1f63b","ME1","Qual monitor é mais útil para detecção precoce de","Qual monitor é mais útil para detecção precoce de desconexão do circuito anestésico?","ECG","Capnografia","Temperatura","Pressão arterial","B",""
+"08dfdf1a-4b3f-4d0d-a10d-05d3b8b92e64","ME1","Qual a principal complicação da intubação seletiva","Qual a principal complicação da intubação seletiva do brônquio principal direito?","Hiperventilação bilateral","Hipoxemia","Hiperglicemia","Broncodilatação","B",""
+"ba321d5e-3233-4819-87b7-37e1fc756160","ME1","Qual alteração ocorre com o aumento da PEEP?","Qual alteração ocorre com o aumento da PEEP?","Redução da pressão intratorácica","Melhora do recrutamento alveolar","Aumento do retorno venoso","Hipocapnia obrigatória","B",""
+"9bfb33b1-44af-42cd-a305-8abe3543e520","ME1","Qual dispositivo é considerado definitivo para pro","Qual dispositivo é considerado definitivo para proteção de via aérea?","Máscara facial","Cânula nasal","Tubo orotraqueal","Máscara de Venturi","C",""
+"014348c8-20a5-4f5c-9c36-8a62cef029b9","ME1","Qual posição melhora oxigenação em pacientes obeso","Qual posição melhora oxigenação em pacientes obesos durante indução anestésica?","Trendelenburg","Posição em rampa","Decúbito ventral","Litotomia","B",""
+"f9725198-7455-4396-b81d-ba3c0472fd51","ME1","Qual a principal função do capnógrafo?","Qual a principal função do capnógrafo?","Avaliar oxigenação","Avaliar ventilação","Medir pressão arterial","Avaliar glicemia","B",""
+"4f21e489-63c9-4db3-92bd-6926f5eef597","ME1","Qual alteração é típica da broncoaspiração pulmona","Qual alteração é típica da broncoaspiração pulmonar?","Hipoxemia e broncoespasmo","Hiperglicemia","Hipotermia","Bradicardia isolada","A",""
+"9fa495d5-33c8-4caf-8202-0028d7218ed0","ME1","Qual gás anestésico possui odor irritante para via","Qual gás anestésico possui odor irritante para vias aéreas?","Sevoflurano","Desflurano","Óxido nitroso","Oxigênio","B",""
+"57f84671-2dbe-4eb6-8b5b-f777b2c471cc","ME1","Qual condição favorece atelectasia intraoperatória","Qual condição favorece atelectasia intraoperatória?","PEEP adequada","Ventilação espontânea","FiO2 elevada","Posição sentada","C",""
+"11f6ff2e-2a75-4c89-9a4d-d86842d12757","ME1","Qual estrutura anatômica é utilizada como referênc","Qual estrutura anatômica é utilizada como referência para cricotireoidostomia?","Membrana cricotireóidea","Cartilagem aritenoide","Úvula","Palato mole","A",""
+"1c901117-a081-4499-beb7-b89c69a3be28","ME1","Qual complicação pode ocorrer com ventilação exces","Qual complicação pode ocorrer com ventilação excessiva em asmáticos?","Aprisionamento aéreo","Hipoglicemia","Hipotermia","Redução da resistência aérea","A",""
+"11804208-a6b5-458b-922e-0bb9d1019a10","ME1","Qual parâmetro é mais utilizado para avaliar oxige","Qual parâmetro é mais utilizado para avaliar oxigenação periférica continuamente?","ECG","Capnografia","Oximetria de pulso","Gasometria venosa","C",""
+"2c3e37a5-a562-46be-92b0-bcd6fb29cc66","ME1","Qual alteração ocorre durante hiperventilação?","Qual alteração ocorre durante hiperventilação?","Elevação da PaCO2","Redução da PaCO2","Acidose respiratória","Hipercapnia","B",""
+"cf19f8f2-ceb3-4546-b4f1-829777130d50","ME1","Qual situação aumenta risco de pneumotórax em anes","Qual situação aumenta risco de pneumotórax em anestesia?","Punção de veia subclávia","Cateter nasal","Máscara facial","Raquianestesia","A",""
+"afd595bd-9ba7-4bd6-924c-f6ee20b6b70a","ME1","Qual o principal benefício da ventilação protetora","Qual o principal benefício da ventilação protetora?","Aumentar volutrauma","Reduzir lesão pulmonar","Produzir hipercapnia grave","Eliminar necessidade de PEEP","B",""
+"c04c1bc9-4f3a-4117-b0cc-c7f38dee5515","ME1","Qual complicação está relacionada ao posicionament","Qual complicação está relacionada ao posicionamento em litotomia prolongada?","Síndrome compartimental","Hipertireoidismo","Hiperglicemia","Edema cerebral","A",""
+"63d3d359-ceaf-4e54-84bf-2e55bc3a8370","ME1","Qual é o principal estímulo químico da ventilação","Qual é o principal estímulo químico da ventilação em indivíduos saudáveis?","PaO2","PaCO2","Lactato","Bicarbonato","B",""
+"61aa1682-4400-4929-b095-0a1fe8b26c2a","ME1","Qual condição reduz rapidamente o ETCO2?","Qual condição reduz rapidamente o ETCO2?","Febre","Embolia pulmonar","Hipermetabolismo","Convulsão","B",""
+"0c5db5bd-16aa-4e8b-b337-3ec19c27bf43","ME1","Qual fator aumenta risco de laringoespasmo?","Qual fator aumenta risco de laringoespasmo?","Anestesia profunda","Manipulação de via aérea superficial","Uso de relaxante muscular","Extubação profunda","B",""
+"9c5a2543-119d-4598-b099-c9e15a031cd7","ME1","Qual a principal consequência da hipoxemia prolong","Qual a principal consequência da hipoxemia prolongada?","Lesão tecidual","Hiperglicemia","Broncodilatação","Alcalose metabólica","A",""
+"e6fc6f2f-80f0-4a4c-b742-a76a3ed4026a","ME1","Qual alteração pode ocorrer após insuflação abdomi","Qual alteração pode ocorrer após insuflação abdominal laparoscópica?","Hipocapnia","Aumento do ETCO2","Redução da pressão intra-abdominal","Hipotensão intracraniana","B",""
+"c68a2f83-73d3-48aa-8f98-4d66ddc65294","ME1","Qual estrutura anatômica é visualizada na laringos","Qual estrutura anatômica é visualizada na laringoscopia direta?","Cordas vocais","Esôfago distal","Brônquio esquerdo","Pleura","A",""
+"d4989309-c2c7-4448-b8f6-0ebba02f3dc4","ME1","Qual complicação está relacionada ao cuff insufici","Qual complicação está relacionada ao cuff insuficientemente insuflado?","Aspiração pulmonar","Hipertensão arterial","Hiperglicemia","Hipotermia","A",""
+"a2e09799-0b9d-47b1-a89d-95c4247a273b","ME1","Qual alteração hemodinâmica é mais comum na ventil","Qual alteração hemodinâmica é mais comum na ventilação com pressão positiva?","Aumento do retorno venoso","Redução da pré-carga","Hipertensão arterial obrigatória","Aumento do débito cardíaco","B",""
+"ca7d2f25-0e99-44ce-bfd1-c8a037c160c2","ME1","Qual fator favorece broncoaspiração perioperatória","Qual fator favorece broncoaspiração perioperatória?","Jejum adequado","Gestação avançada","Posição sentada","Pré-oxigenação","B",""
+"ad16b481-8ce1-4d01-9302-a434ce649930","ME1","Qual medida reduz risco de lesão traqueal pelo cuf","Qual medida reduz risco de lesão traqueal pelo cuff?","Pressão do cuff acima de 50 cmH2O","Monitorização da pressão do cuff","Insuflação máxima do cuff","Uso de ar ambiente sem monitorização","B",""
+"ccd5563a-3a8f-4e01-a19f-75558be64c63","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Em anestesia obstétrica, qual é a principal causa de hipotensão após raquianestesia para cesariana?","Hipovolemia absoluta","Bloqueio simpático","Depressão miocárdica direta","Bradicardia vagal primária","B","Hipovolemia pode contribuir, mas não é a principal causa.
+
+Correta. O bloqueio simpático provoca vasodilatação e redução do retorno venoso.
+
+A depressão miocárdica não é o principal mecanismo.
+
+Bradicardia pode ocorrer secundariamente."
+"4a36cc9c-27b5-47e5-8df2-ecdab58fce44","ME1","Neuroanestesia","4º Trimestre ME1 - Em neuroanestesia, a hiperventilação reduz pressão intracraniana principalmente por:","Aumento da PaO2","Vasodilatação cerebral","Vasoconstrição cerebral","Aumento do débito cardíaco","C","PaO2 não é principal mecanismo.
+
+Hiperventilação causa vasoconstrição.
+
+Correta. A redução da PaCO2 provoca vasoconstrição cerebral e diminui volume sanguíneo cerebral.
+
+Débito cardíaco não é mecanismo principal."
+"7ef701f2-7ea8-458b-96d4-bccb1f3c445e","ME1","Farmacologia","4º Trimestre ME1 - Qual anestésico intravenoso é mais indicado em paciente hemodinamicamente instável?","Propofol","Etomidato","Tiopental","Midazolam","B","Propofol pode causar hipotensão importante.
+
+Correta. Etomidato possui maior estabilidade cardiovascular.
+
+Tiopental pode deprimir miocárdio.
+
+Midazolam possui início mais lento."
+"17f47219-6924-4ce1-9b70-9c1fe53c1ddb","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Qual alteração fisiológica da gestação reduz o tempo até dessaturação?","Redução do consumo de oxigênio","Aumento da CRF","Redução da capacidade residual funcional","Hipocapnia severa","C","Consumo de O2 aumenta.
+
+CRF diminui na gestação.
+
+Correta. A menor CRF reduz reserva de oxigênio.
+
+Hipocapnia não é principal fator."
+"46f647fa-5203-4b3c-a527-f1130f84eb48","ME1","Pós-Operatório","4º Trimestre ME1 - Qual complicação respiratória é mais comum no pós-operatório imediato?","Pneumotórax hipertensivo","Atelectasia","Fibrose pulmonar","Bronquiectasia","B","Menos frequente.
+
+Correta. Atelectasia é complicação pulmonar pós-operatória frequente.
+
+Fibrose não é aguda.
+
+Bronquiectasia não ocorre agudamente."
+"7022f77c-e5d6-4548-a01c-0e5fb6d4ade4","ME1","NVPO","4º Trimestre ME1 - Qual situação aumenta risco de náusea e vômito pós-operatório?","Tabagismo","Sexo masculino","Uso de opioides","Idade avançada","C","Tabagismo reduz risco relativo.
+
+Sexo feminino possui maior risco.
+
+Correta. Opioides aumentam incidência de NVPO.
+
+Jovens apresentam maior risco."
+"ac326088-3755-4b97-ad8e-dfe77ebfd64a","ME1","Anestésicos Locais","4º Trimestre ME1 - Qual anestésico local possui maior cardiotoxicidade?","Lidocaína","Bupivacaína","Prilocaína","Cloroprocaína","B","Lidocaína é menos cardiotóxica.
+
+Correta. Bupivacaína possui maior afinidade cardíaca.
+
+Prilocaína associa-se à metahemoglobinemia.
+
+Menor cardiotoxicidade."
+"d3552e7b-c616-43bd-bcde-e482e29f43b5","ME1","Sepse","4º Trimestre ME1 - Em paciente séptico, qual alteração hemodinâmica é frequentemente observada na fase inicial?","Baixo débito cardíaco obrigatório","Aumento da resistência vascular sistêmica","Vasodilatação periférica","Bradicardia severa","C","Débito pode estar aumentado inicialmente.
+
+RVS geralmente reduz-se.
+
+Correta. O choque séptico inicial cursa com vasodilatação.
+
+Taquicardia é mais comum."
+"4549f2fe-e095-459a-8a0d-e03ca8ba389b","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Qual vasopressor é atualmente considerado de primeira escolha para tratamento da hipotensão na cesariana sob raquianestesia?","Dopamina","Fenilefrina","Nitroprussiato","Dobutamina","B","Dopamina não é primeira escolha nesse contexto.
+
+Correta. Fenilefrina apresenta eficácia e melhor perfil fetal.
+
+Nitroprussiato é vasodilatador.
+
+Dobutamina é inotrópico."
+"a2978f50-b0bb-46f7-9693-18be1e5ef2a6","ME1","Neuroanestesia","4º Trimestre ME1 - Qual solução é preferível em pacientes neurocirúrgicos para evitar edema cerebral?","Glicose 5%","Soro hipotônico","Soro fisiológico 0,9%","Água destilada","C","Soluções com glicose podem agravar edema cerebral.
+
+Hipotônicos aumentam edema cerebral.
+
+Correta. Cristaloides isotônicos são preferíveis.
+
+Contraindicada intravenosamente."
+"64d66054-8e0d-42ea-b671-2de56190f186","ME1","Monitorização","4º Trimestre ME1 - Em anestesia cardíaca, o cateter de artéria pulmonar mede diretamente:","Débito urinário","Pressão intracraniana","Pressão de artéria pulmonar","Fluxo cerebral","C","Não possui relação.
+
+Não mede PIC.
+
+Correta. Swan-Ganz permite monitorização hemodinâmica pulmonar.
+
+Não avalia fluxo cerebral."
+"59f8874f-ba76-4055-9f82-efa72770c94e","ME1","Anestesia Pediátrica","4º Trimestre ME1 - Em pediatria, a principal causa de parada cardíaca é:","Arritmia ventricular primária","Hipoxemia","IAM","Tromboembolismo","B","Menos comum em crianças.
+
+Correta. Hipóxia é principal causa de PCR pediátrica.
+
+IAM é raro em crianças.
+
+Tromboembolismo não é principal causa."
+"f783beaa-df7c-4d23-baf1-c31a8bfb8a6c","ME1","Recuperação Anestésica","4º Trimestre ME1 - Na recuperação pós-anestésica, qual escala é amplamente utilizada para alta da SRPA?","Ramsay","Glasgow","Aldrete-Kroulik","Apache II","C","Ramsay avalia sedação.
+
+Glasgow avalia consciência.
+
+Correta. Escala de Aldrete-Kroulik é padrão na SRPA.
+
+Apache II é utilizado em UTI."
+"c977833d-9254-48c8-8f3f-3a6303fc5468","ME1","Anestesia no Queimado","4º Trimestre ME1 - Em anestesia para paciente queimado, a succinilcolina deve ser evitada após 24-48h devido ao risco de:","Hipoglicemia","Hipercalemia","Hiponatremia","Hipocalcemia","B","Não é principal complicação.
+
+Correta. Up regulation de receptores nicotínicos aumenta risco de hipercalemia fatal.
+
+Hiponatremia não é principal risco.
+
+Hipocalcemia não é típica."
+"950a484d-16c6-4729-95b1-9a2717664cc6","ME1","Neuroanestesia","4º Trimestre ME1 - Em neurocirurgia, qual posição aumenta maior risco de embolia gasosa venosa?","Decúbito dorsal","Prona","Sentada","Litotomia","C","Menor risco.
+
+Pode ocorrer, mas menos frequente.
+
+Correta. A posição sentada favorece entrada de ar venoso.
+
+Não é principal fator de risco."
+"fa1a7396-7f05-4a40-9020-f60fa0a089e0","ME1","Segurança do Paciente","4º Trimestre ME1 - Qual medida reduz risco de lesão por pressão no intraoperatório prolongado?","Hipotensão permissiva","Posicionamento adequado e coxins","Restrição hídrica intensa","Hiperventilação","B","Hipotensão pode agravar lesão tecidual.
+
+Correta. Proteção de proeminências ósseas reduz lesões.
+
+Não previne lesão por pressão.
+
+Sem relação direta."
+"ca9ac7fa-4b74-4894-b628-d799ab274aa4","ME1","Anestesia Pediátrica","4º Trimestre ME1 - Em relação à anestesia pediátrica, lactentes apresentam maior risco de hipoxemia porque possuem:","Maior capacidade residual funcional","Menor consumo de oxigênio","Maior consumo de oxigênio e menor reserva pulmonar","Menor complacência torácica","C","A CRF é relativamente menor.
+
+O consumo de oxigênio é aumentado.
+
+Correta. Lactentes dessaturam rapidamente devido à alta demanda metabólica e menor reserva.
+
+A complacência torácica é elevada no lactente."
+"82d2311a-86d5-4edc-b6b6-f62ba51fa64a","ME1","Anestesia no Trauma","4º Trimestre ME1 - Na anestesia para trauma, qual a principal prioridade inicial?","Correção da anemia","Controle da via aérea e oxigenação","Sedação profunda","Correção da temperatura","B","Importante, mas não prioritário inicial.
+
+Correta. Garantir oxigenação e ventilação é prioridade no trauma.
+
+Sedação não precede estabilização.
+
+Hipotermia é relevante, mas secundária inicialmente."
+"3ca21520-329f-4c95-9987-e47a128ec20d","ME1","Cardiologia","4º Trimestre ME1 - Qual achado é mais sugestivo de tamponamento cardíaco?","Pulso amplo","Hipertensão arterial","Turgência jugular","Hipervolemia pulmonar","C","Pulso tende a ser filiforme.
+
+Hipotensão é mais comum.
+
+Correta. Turgência jugular integra a tríade de Beck.
+
+Não é achado típico."
+"b757ead4-6345-407a-962a-73472f298fd0","ME1","Anestesia Oftálmica","4º Trimestre ME1 - Qual agente é classicamente associado à neurotoxicidade retiniana em cirurgias oftalmológicas prolongadas em posição prona?","Hipotensão prolongada","Hiperglicemia","Hipercalemia","Hipervolemia","A","Correta. Hipotensão e hipoperfusão ocular aumentam risco de neuropatia óptica.
+
+Não é principal causa.
+
+Não tem associação direta.
+
+Não é principal fator."
+"49a28cb3-39be-4876-8c8d-7eb06fa1994b","ME1","Dor Aguda","4º Trimestre ME1 - Em dor pós-operatória, qual abordagem reduz melhor consumo de opioides?","Uso isolado de morfina","Analgesia multimodal","Suspensão de anti-inflamatórios","Sedação contínua","B","Opioide isolado aumenta efeitos adversos.
+
+Correta. Analgesia multimodal reduz necessidade opioide.
+
+AINES fazem parte da estratégia multimodal.
+
+Sedação não substitui analgesia."
+"2543c94c-aadd-41b8-acb4-0cc4455c1d79","ME1","Fisiologia","4º Trimestre ME1 - Qual alteração acidobásica é esperada em hipoventilação?","Alcalose respiratória","Acidose metabólica","Acidose respiratória","Alcalose metabólica","C","Hiperventilação causaria alcalose.
+
+Não é alteração primária.
+
+Correta. Retenção de CO2 leva à acidose respiratória.
+
+Não corresponde ao mecanismo."
+"4e4ea99b-153c-4bf0-8ed5-79f30232d5a8","ME1","Farmacologia","4º Trimestre ME1 - Qual é a principal indicação do uso de dexametasona no perioperatório?","Broncodilatação imediata","Prevenção de NVPO","Reversão de opioides","Tratamento da hipercalemia","B","Não é principal uso perioperatório.
+
+Correta. Dexametasona é amplamente utilizada para profilaxia de náuseas e vômitos.
+
+Naloxona faz reversão opioide.
+
+Não trata hipercalemia."
+"25bd62d6-d363-4fa1-936a-1d4f6d953769","ME1","Anestesia Pediátrica","4º Trimestre ME1 - Qual é o local mais comum para punção em anestesia caudal pediátrica?","Espaço L1-L2","Hiato sacral","Espaço T12-L1","Forame obturador","B","Não é o local da técnica caudal.
+
+Correta. A anestesia caudal utiliza acesso pelo hiato sacral.
+
+Não corresponde à técnica caudal.
+
+Sem relação anatômica com anestesia regional."
+"12861131-d5e8-48b2-a1bf-96703e7ba07e","ME1","Choque Hemorrágico","4º Trimestre ME1 - Em choque hemorrágico, qual alteração fisiológica é esperada inicialmente?","Bradicardia intensa","Aumento do débito urinário","Taquicardia compensatória","Hipertensão arterial","C","Bradicardia ocorre tardiamente.
+
+Débito urinário reduz-se.
+
+Correta. A ativação simpática gera taquicardia compensatória.
+
+Hipotensão é mais comum."
+"05cbf4ef-e9cf-4e3b-97a0-b0d144d775ca","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Em anestesia obstétrica, qual complicação é mais temida após anestesia geral em gestantes?","Broncoespasmo","Aspiração pulmonar","Hipotermia","Hiperglicemia","B","Pode ocorrer, mas menos frequente.
+
+Correta. Gestantes possuem maior risco de broncoaspiração.
+
+Não é principal complicação.
+
+Não é evento predominante."
+"8d6d0348-aa0e-478f-8a61-f002a8c23b48","ME1","Cirurgia Laparoscópica","4º Trimestre ME1 - Em cirurgia laparoscópica, o pneumoperitônio geralmente provoca:","Redução do ETCO2","Aumento da PaCO2","Hipotermia grave imediata","Redução da pressão intra-abdominal","B","ETCO2 tende a aumentar.
+
+Correta. Absorção de CO2 aumenta PaCO2.
+
+Não é consequência imediata principal.
+
+A pressão intra-abdominal aumenta."
+"66d4ff79-2695-4edd-97bd-131b457cda91","ME1","NVPO","4º Trimestre ME1 - Qual antiemético atua predominantemente em receptores 5-HT3?","Droperidol","Metoclopramida","Ondansetrona","Dexametasona","C","Droperidol atua em receptores dopaminérgicos.
+
+Metoclopramida atua predominantemente em dopamina.
+
+Correta. Ondansetrona bloqueia receptores serotoninérgicos 5-HT3.
+
+Dexametasona possui mecanismo diferente."
+"5b02ca09-429e-46ce-bfa1-e601496f5b27","ME1","Anestesia no Obeso","4º Trimestre ME1 - Em pacientes obesos, a pré-oxigenação é especialmente importante porque:","Possuem maior CRF","Dessaturam mais lentamente","Possuem menor reserva funcional pulmonar","Apresentam menor consumo de oxigênio","C","CRF é reduzida.
+
+Dessaturam rapidamente.
+
+Correta. A obesidade reduz reserva pulmonar e acelera dessaturação.
+
+Consumo de O2 é aumentado."
+"07894117-eaaa-4182-b633-acf46294def9","ME1","Anestesia Regional","4º Trimestre ME1 - Qual complicação pode ocorrer com anestesia raquidiana alta?","Hipertensão grave","Parada respiratória","Hiperglicemia","Broncodilatação","B","Hipotensão é mais comum.
+
+Correta. Bloqueio alto pode comprometer musculatura respiratória e tronco cerebral.
+
+Não é manifestação típica.
+
+Não é principal efeito."
+"7d6717d8-fdfb-42b3-b75d-3b1fcbf3c324","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Durante anestesia para cesariana, qual medida reduz mais efetivamente o risco de broncoaspiração?","Uso de atropina","Jejum adequado e sequência rápida","Hiperventilação","Uso de dexametasona","B","Atropina não reduz broncoaspiração.
+
+Correta. Jejum e indução em sequência rápida reduzem risco de aspiração pulmonar.
+
+Hiperventilação não previne aspiração.
+
+Dexametasona não possui essa função principal."
+"391bb795-e296-4ae8-80f8-3af00e7addf7","ME1","Neuroanestesia","4º Trimestre ME1 - Em trauma cranioencefálico, hipotensão arterial deve ser evitada porque:","Reduz edema pulmonar","Diminui pressão intracraniana","Piora perfusão cerebral","Melhora autorregulação cerebral","C","Não é principal efeito.
+
+Hipotensão pode até reduzir PIC, porém piora prognóstico.
+
+Correta. Hipotensão reduz pressão de perfusão cerebral.
+
+Autorregulação frequentemente está comprometida."
+"f2fd6226-2411-406d-bbf3-ef1d2e12edf8","ME1","Anestesia Pediátrica","4º Trimestre ME1 - Em anestesia pediátrica, a principal causa de bradicardia durante laringoscopia é:","Estimulação vagal","Hipercalcemia","Hiperglicemia","Acidose metabólica","A","Correta. Crianças apresentam intensa resposta vagal.
+
+Hipercalcemia não é principal causa.
+
+Hiperglicemia não tem relação direta.
+
+Acidose pode contribuir secundariamente."
+"edbe6679-de0d-4c7c-be21-e81c62cf076a","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Em anestesia obstétrica, a compressão aortocaval é reduzida por:","Posição supina horizontal","Deslocamento uterino à esquerda","Trendelenburg acentuado","Hiperventilação","B","Posição supina piora compressão.
+
+Correta. O deslocamento uterino reduz compressão da veia cava.
+
+Trendelenburg não resolve adequadamente.
+
+Hiperventilação não interfere."
+"cecae09a-d01a-449c-a48d-7b8ae10beeb3","ME1","Posicionamento","4º Trimestre ME1 - Qual nervo é mais frequentemente lesionado na posição de litotomia prolongada?","Nervo radial","Nervo fibular comum","Nervo facial","Nervo mediano","B","Radial não é o mais acometido.
+
+Correta. Compressão na cabeça da fíbula é frequente.
+
+Nervo facial não se relaciona.
+
+Mediano é menos comum."
+"b8d99248-15eb-4cc2-8a87-11c90b113e8a","ME1","Pediatria","4º Trimestre ME1 - Em paciente pediátrico, qual sinal é frequentemente precoce de hipoxemia?","Cianose","Bradicardia","Taquicardia","Hipotensão","C","Cianose é sinal tardio.
+
+Bradicardia ocorre mais tardiamente.
+
+Correta. Taquicardia pode preceder deterioração.
+
+Hipotensão é sinal tardio em crianças."
+"6ea9118a-1f1b-4f55-ace6-9c49ea092681","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Em anestesia obstétrica, qual opioide intratecal é amplamente utilizado em cesarianas?","Codeína","Morfina","Naloxona","Tramadol","B","Codeína não é utilizada intratecalmente.
+
+Correta. Morfina intratecal fornece analgesia prolongada.
+
+Naloxona antagoniza opioides.
+
+Tramadol não é padrão intratecal."
+"99bf2ca5-1a27-4293-9bef-60bca8bdfef6","ME1","Neuroanestesia","4º Trimestre ME1 - Em paciente neurocirúrgico, qual solução deve ser evitada devido ao risco de edema cerebral?","Soro fisiológico","Albumina isotônica","Glicose 5%","Ringer lactato","C","Soro fisiológico é frequentemente utilizado.
+
+Albumina isotônica pode ser utilizada em situações específicas.
+
+Correta. Soluções hipotônicas favorecem edema cerebral.
+
+Ringer pode ser utilizado dependendo do contexto."
+"8a41cee2-0f3a-474b-a937-2a59fa068506","ME1","Anestesia Pediátrica","4º Trimestre ME1 - Qual fator aumenta risco de apneia pós-operatória em recém-nascidos prematuros?","Idade pós-conceptual reduzida","Hipertensão arterial","Obesidade","Hiperglicemia","A","Correta. Prematuros com baixa idade pós-conceptual apresentam maior risco de apneia.
+
+Hipertensão não é principal fator.
+
+Obesidade é rara nesse contexto.
+
+Hiperglicemia não é fator principal."
+"9d566c55-8e3b-43fc-93e6-80c854270aee","ME1","Cirurgia Laparoscópica","4º Trimestre ME1 - Qual alteração é típica da resposta fisiológica ao pneumoperitônio laparoscópico?","Redução da pressão arterial pulmonar","Aumento da resistência vascular sistêmica","Bradicardia obrigatória","Hipocapnia","B","A pressão pulmonar tende a aumentar.
+
+Correta. Pneumoperitônio aumenta resistência vascular sistêmica.
+
+Bradicardia pode ocorrer, mas não obrigatoriamente.
+
+Absorção de CO2 aumenta PaCO2."
+"72e02b6f-1976-4a89-b184-b6079f775a4b","ME1","Posicionamento","4º Trimestre ME1 - Qual posição cirúrgica apresenta maior risco de neuropatia ulnar?","Decúbito dorsal com braços abduzidos","Posição sentada","Litotomia","Prona com cabeça elevada","A","Correta. Compressão do nervo ulnar no cotovelo é frequente.
+
+Menor relação direta.
+
+Litotomia relaciona-se mais ao fibular.
+
+Não é a principal associação."
+"733208db-fd74-4766-8fca-0c3c79376fbd","ME1","Anestesia no Queimado","4º Trimestre ME1 - Em pacientes queimados extensos, qual alteração farmacológica é esperada após alguns dias?","Maior sensibilidade à succinilcolina","Resistência a bloqueadores não despolarizantes","Redução do débito cardíaco obrigatório","Hipocalemia persistente","B","O risco principal é hipercalemia.
+
+Correta. Há aumento de receptores nicotínicos e resistência relativa.
+
+Débito pode aumentar na fase hipermetabólica.
+
+Hipercalemia é mais frequente."
+"c88d0583-21bf-4130-a735-d24e452b3f51","ME1","Geriatria","4º Trimestre ME1 - Qual fator aumenta risco de delirium pós-operatório em idosos?","Privação de sono","Idade avançada","Uso de benzodiazepínicos","Todas as alternativas","D","Contribui para delirium.
+
+É fator de risco importante.
+
+Benzodiazepínicos aumentam incidência.
+
+Correta. Todos são fatores associados."
+"b5bf5d1e-0ac1-4fcb-8926-ed093f2e3591","ME1","RCP","4º Trimestre ME1 - Qual antiarrítmico é frequentemente utilizado no tratamento da fibrilação ventricular durante PCR?","Verapamil","Amiodarona","Atropina","Dobutamina","B","Verapamil não é indicado na PCR.
+
+Correta. Amiodarona é recomendada em FV refratária.
+
+Atropina não trata FV.
+
+Dobutamina é inotrópico."
+"c6f01925-7bff-4366-809d-38edd302d216","ME1","Obesidade","4º Trimestre ME1 - Qual alteração ventilatória ocorre frequentemente na obesidade mórbida?","Aumento da complacência pulmonar","Redução da capacidade residual funcional","Hipocapnia crônica","Aumento da reserva expiratório","B","Complacência reduz-se.
+
+Correta. A obesidade reduz volumes pulmonares.
+
+Hipercapnia pode ocorrer.
+
+Reserva expiratória reduz-se."
+"33b37b7f-c98e-47e1-9140-f3925dd8dcf3","ME1","Ventilação","4º Trimestre ME1 - Qual intervenção reduz incidência de atelectasia no intraoperatório?","Uso de PEEP","Hiperventilação intensa","Redução da FiO2 para 21%","Suspensão da ventilação mecânica","A","Correta. PEEP auxilia recrutamento alveolar.
+
+Hiperventilação não previne atelectasia.
+
+FiO2 isoladamente não resolve.
+
+Ventilação é essencial."
+"586b40f0-b3dc-4cf2-bcc5-09a11e6c1dcd","ME1","Neuroanestesia","4º Trimestre ME1 - Em neuroanestesia, qual objetivo principal do manejo ventilatório?","Hipercapnia permissiva","Evitar aumento da pressão intracraniana","Produzir alcalose metabólica","Aumentar consumo cerebral de oxigênio","B","Hipercapnia aumenta fluxo sanguíneo cerebral.
+
+Correta. Controle da PaCO2 auxilia no controle da PIC.
+
+Não é objetivo anestésico.
+
+Busca-se reduzir consumo cerebral."
+"b63f7837-e1ac-4365-a530-7f816ffe6b73","ME1","Recuperação Anestésica","4º Trimestre ME1 - Em recuperação pós-anestésica, o principal objetivo da monitorização é:","Diagnosticar diabetes","Detectar precocemente complicações","Avaliar função renal isoladamente","Realizar sedação contínua","B","Não é objetivo principal.
+
+Correta. A SRPA visa detectar e tratar complicações precocemente.
+
+Função renal não é foco isolado.
+
+Sedação contínua não é rotina."
+"117c2a1c-aff8-4dab-a55c-92363d11615c","ME1","Sepse","4º Trimestre ME1 - Em paciente séptico, qual marcador laboratorial é frequentemente utilizado para avaliação de hipoperfusão?","Bilirrubina","Lactato","Potássio","Amilase","B","Não é marcador principal de perfusão.
+
+Correta. Lactato elevado sugere hipoperfusão tecidual.
+
+Potássio não é marcador específico.
+
+Amilase não se relaciona diretamente."
+"f5b05116-50ca-4d38-82cd-86192132f046","ME1","Hipotermia","4º Trimestre ME1 - Qual medida reduz risco de hipotermia perioperatória?","Infusão de líquidos aquecidos","Hiperventilação","Restrição hídrica","Uso de FiO2 elevada","A","Correta. Aquecimento ativo ajuda manter normotermia.
+
+Hiperventilação favorece perda térmica.
+
+Restrição hídrica não previne hipotermia.
+
+FiO2 não tem esse objetivo."
+"e69d7f49-c3f3-48f0-b97e-9b4955e97398","ME1","Anestesia no Trauma","4º Trimestre ME1 - Em anestesia para trauma, a tríade letal é composta por:","Hipotermia, acidose e coagulopatia","Hiperglicemia, hipertensão e alcalose","Bradicardia, hipocalemia e acidose","Hipercalcemia, hipotermia e alcalose","A","Correta. Esses fatores aumentam mortalidade no trauma.
+
+Não corresponde à tríade letal.
+
+Não é combinação clássica.
+
+Não corresponde ao conceito."
+"08476e49-1b51-488c-865a-029eb8f1c757","ME1","Anestesia Regional","4º Trimestre ME1 - Em anestesia regional, qual é um sinal precoce de toxicidade sistêmica por anestésico local?","Hiperglicemia","Zumbido e gosto metálico","Hipotermia","Broncodilatação","B","Não é manifestação inicial.
+
+Correta. Sintomas neurológicos iniciais incluem zumbido e gosto metálico.
+
+Hipotermia não é típica.
+
+Broncodilatação não é sinal de toxicidade."
+"d3de44c9-6f3b-46ef-9da9-2807956af0aa","ME1","Sepse","4º Trimestre ME1 - Em sepse grave, a oligúria geralmente indica:","Boa perfusão renal","Hipervolemia","Hipoperfusão orgânica","Alcalose respiratória","C","Oligúria sugere perfusão inadequada.
+
+Hipervolemia não é principal causa.
+
+Correta. Débito urinário baixo sugere disfunção circulatória.
+
+Não é interpretação adequada."
+"94aa270d-accf-4cf1-8c01-f0e9d9ed95ba","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Qual agente é mais utilizado para profilaxia de aspiração ácida em gestantes?","Midazolam","Ranitidina","Atracúrio","Cetamina","B","Midazolam não reduz acidez gástrica.
+
+Correta. Bloqueadores H2 reduzem secreção ácida gástrica.
+
+Atracúrio é bloqueador neuromuscular.
+
+Cetamina não possui essa indicação."
+"1a090f72-d060-43c2-91d3-39aa29c00f4c","ME1","Anestésicos Locais","4º Trimestre ME1 - Qual anestésico local apresenta maior duração de ação?","Lidocaína","Cloroprocaína","Bupivacaína","Procaína","C","Lidocaína possui duração intermediária.
+
+Cloroprocaína possui curta duração.
+
+Correta. Bupivacaína apresenta longa duração anestésica.
+
+Procaína possui curta duração."
+"614a487e-0ad6-4708-8783-324a9a999cab","ME1","NVPO","4º Trimestre ME1 - Qual antiemético possui mecanismo predominantemente dopaminérgico?","Ondansetrona","Metoclopramida","Dexametasona","Escopolamina","B","Ondansetrona bloqueia 5HT3.
+
+Correta. Metoclopramida atua principalmente em receptores dopaminérgicos.
+
+Dexametasona possui mecanismo multifatorial.
+
+Escopolamina atua em receptores muscarínicos."
+"488c3076-80ea-45b5-b3e4-fa16f28b2925","ME1","Neuroanestesia","4º Trimestre ME1 - Em neurocirurgia, qual efeito a hipercapnia provoca no cérebro?","Vasoconstrição cerebral","Redução do fluxo cerebral","Aumento do fluxo sanguíneo cerebral","Redução da PIC","C","Hipercapnia promove vasodilatação.
+
+Fluxo cerebral aumenta.
+
+Correta. CO2 elevado causa vasodilatação cerebral.
+
+PIC tende a aumentar."
+"d1a7429b-795a-4571-be7d-9f6594b4b3fd","ME1","Farmacologia","4º Trimestre ME1 - Qual anestésico venoso reduz mais intensamente o metabolismo cerebral?","Cetamina","Propofol","Óxido nitroso","Dexmedetomidina","B","Cetamina pode aumentar fluxo cerebral.
+
+Correta. Propofol reduz metabolismo e fluxo cerebral.
+
+Óxido nitroso pode aumentar PIC.
+
+Dexmedetomidina reduz menos intensamente."
+"5f4d5dbf-f124-4c7f-9c6d-f3d4525d41fb","ME1","Posicionamento","4º Trimestre ME1 - Qual posição cirúrgica aumenta risco de lesão do plexo braquial?","Abdução excessiva dos braços","Flexão plantar","Elevação discreta da cabeça","Posição neutra cervical","A","Correta. Abdução >90 graus aumenta risco de estiramento.
+
+Não se relaciona diretamente.
+
+Não é principal fator.
+
+Posição neutra reduz risco."
+"6f2cd805-2eb6-4229-997d-601540e7a225","ME1","Farmacologia","4º Trimestre ME1 - Qual agente é utilizado para reversão de benzodiazepínicos?","Naloxona","Sugamadex","Flumazenil","Atropina","C","Naloxona reverte opioides.
+
+Sugamadex reverte aminosteroides.
+
+Correta. Flumazenil antagoniza benzodiazepínicos.
+
+Atropina é anticolinérgico."
+"e783ea79-df8b-40e7-8a34-06cfefd866e4","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Em anestesia obstétrica, qual alteração fisiológica aumenta o risco de intubação difícil na gestante?","Redução do edema de vias aéreas","Aumento do diâmetro laríngeo","Edema de mucosas e ganho ponderal","Diminuição da vascularização nasal","C","Na gestação há maior edema de vias aéreas.
+
+O diâmetro das vias aéreas tende a reduzir.
+
+Correta. Edema mucoso e alterações anatômicas dificultam manejo de via aérea.
+
+A vascularização aumenta na gestação."
+"b2075e8f-d376-4e12-b131-9ba8a1eafdca","ME1","Recuperação Anestésica","4º Trimestre ME1 - Em recuperação pós-anestésica, qual complicação respiratória é mais comum após uso de opioides?","Hiperventilação","Depressão respiratória","Broncodilatação","Pneumotórax","B","Opioides reduzem ventilação.
+
+Correta. Depressão respiratória é importante complicação pós-operatória.
+
+Broncodilatação não é efeito principal.
+
+Pneumotórax não é efeito típico."
+"8e880938-1a34-48a0-897d-2cc51775e0c9","ME1","Segurança do Paciente","4º Trimestre ME1 - Qual medida reduz risco de lesão ocular em anestesia geral?","Uso de vasodilatadores","Proteção e fechamento ocular","Hiperventilação","Redução da FiO2","B","Não previne abrasão ocular.
+
+Correta. Lubrificação e fechamento ocular reduzem abrasão de córnea.
+
+Sem relação direta.
+
+FiO2 não interfere nesse risco."
+"1a16b9b9-85d7-4ec1-8872-401440c17c45","ME1","Anestesia no Trauma","4º Trimestre ME1 - Em trauma torácico, qual situação sugere pneumotórax hipertensivo?","Hipotensão e ausência de murmúrio vesicular unilateral","Bradicardia isolada","Hiperglicemia","Hipertensão arterial","A","Correta. Instabilidade hemodinâmica associada à ausência de MV é sugestiva.
+
+Bradicardia isolada não é típica.
+
+Hiperglicemia não possui relação.
+
+Hipotensão é mais comum."
+"79cccd91-1835-4a95-8749-f885c251f476","ME1","Pediatria","4º Trimestre ME1 - Em anestesia pediátrica, qual tubo endotraqueal geralmente é utilizado atualmente?","Sempre sem cuff","Sempre metálico","Com cuff de baixa pressão","Exclusivamente nasal","C","Tubos sem cuff não são obrigatórios atualmente.
+
+Não é prática padrão.
+
+Correta. Tubos com cuff modernos são amplamente utilizados.
+
+Via nasal depende da indicação."
+"e6a86cdf-d7dd-4314-b705-9e6d5b2b9577","ME1","Sepse","4º Trimestre ME1 - Em sepse, qual alteração microcirculatória contribui para disfunção orgânica?","Vasoconstrição uniforme","Má distribuição do fluxo sanguíneo","Hipervolemia isolada","Redução do metabolismo celular","B","A sepse cursa com heterogeneidade perfusional.
+
+Correta. A microcirculação torna-se desorganizada.
+
+Hipervolemia não explica isoladamente.
+
+Metabolismo frequentemente aumenta."
+"077fae66-943d-4bac-a1d9-61d06c63c86d","ME1","Dor Aguda","4º Trimestre ME1 - Em analgesia pós-operatória, qual benefício principal do bloqueio regional?","Maior incidência de NVPO","Redução do consumo opioide","Hiperglicemia","Maior depressão respiratória","B","Bloqueios podem reduzir NVPO.
+
+Correta. Analgesia regional reduz necessidade de opioides.
+
+Não é benefício esperado.
+
+Depressão respiratória tende a ser menor."
+"f63a632e-7ca1-40fa-beb2-7bc6e602e6dd","ME1","Pós-Operatório","4º Trimestre ME1 - Qual medida reduz risco de atelectasia no pós-operatório?","Mobilização precoce","Restrição ventilatória","Sedação contínua","Hipoventilação","A","Correta. Deambulação e fisioterapia reduzem complicações pulmonares.
+
+Restrição piora atelectasia.
+
+Sedação favorece hipoventilação.
+
+Hipoventilação aumenta risco."
+"6a69ae18-19fc-4b53-809b-ba39f92280a1","ME1","Pediatria","4º Trimestre ME1 - Em crianças, a principal causa de obstrução de via aérea durante anestesia é:","Laringoespasmo","Broncoespasmo","Corpo estranho","Edema pulmonar","A","Correta. Laringoespasmo é evento relativamente frequente em pediatria.
+
+Broncoespasmo ocorre menos frequentemente.
+
+Corpo estranho não é principal causa intraoperatória.
+
+Edema pulmonar é menos frequente."
+"4d0746a5-f150-43c3-8305-3ab68312e5d2","ME1","Sedação","4º Trimestre ME1 - Qual parâmetro é mais utilizado para avaliar profundidade de sedação em UTI?","Aldrete","Ramsay","Mallampati","ASA físico","B","Aldrete é usada na SRPA.
+
+Correta. Ramsay é escala clássica de sedação.
+
+Mallampati avalia via aérea.
+
+ASA físico avalia risco perioperatório."
+"134b1d2d-b163-40f2-8db3-7569b27874a4","ME1","Sepse","4º Trimestre ME1 - Em choque séptico, qual vasopressor é considerado primeira escolha?","Dobutamina","Nitroglicerina","Noradrenalina","Nitroprussiato","C","Dobutamina é inotrópico adjuvante.
+
+Nitroglicerina é vasodilatador.
+
+Correta. Noradrenalina é o vasopressor inicial recomendado.
+
+Nitroprussiato reduz pressão arterial."
+"dd12d72d-c713-4d61-a3be-8c077ed496a5","ME1","Dor Aguda","4º Trimestre ME1 - Em analgesia multimodal, qual classe reduz consumo de opioides no pós-operatório?","AINES","Antibióticos","Anticoagulantes","Vasopressores","A","Correta. Anti-inflamatórios auxiliam no controle multimodal da dor.
+
+Não possuem função analgésica principal.
+
+Não são utilizados com esse objetivo.
+
+Sem relação analgésica."
+"331999be-68df-480b-acaf-9302dc79f986","ME1","Tromboembolismo","4º Trimestre ME1 - Qual fator aumenta risco de tromboembolismo venoso no pós-operatório?","Deambulação precoce","Imobilização prolongada","Hidratação adequada","Uso de meias compressivas","B","Deambulação reduz risco.
+
+Correta. Imobilidade favorece estase venosa.
+
+Hidratação ajuda prevenção.
+
+Meias reduzem risco."
+"1ef4cb64-b0cb-4d02-987a-bba78c23e3e6","ME1","Posicionamento","4º Trimestre ME1 - Qual nervo pode ser lesionado na posição de litotomia extrema?","Fibular comum","Frênico","Hipoglosso","Radial","A","Correta. Compressão lateral da cabeça da fíbula favorece lesão.
+
+Frênico raramente é acometido.
+
+Hipoglosso não é típico.
+
+Radial relaciona-se mais aos braços."
+"9c4d946f-ab7a-4caa-be37-1ecdfcf44bbd","ME1","Neuroanestesia","4º Trimestre ME1 - Em neurocirurgia, qual agente intravenoso pode aumentar fluxo sanguíneo cerebral?","Propofol","Tiopental","Cetamina","Etomidato","C","Propofol reduz fluxo cerebral.
+
+Tiopental reduz metabolismo cerebral.
+
+Correta. Cetamina pode aumentar FSC e PIC.
+
+Etomidato reduz metabolismo cerebral."
+"c580ba73-7dfc-4f28-b25e-9ff725bfaf69","ME1","Cirurgia Laparoscópica","4º Trimestre ME1 - Em anestesia para cirurgia laparoscópica, qual efeito hemodinâmico pode ocorrer com pneumoperitônio?","Aumento do retorno venoso obrigatório","Redução do débito cardíaco","Bradicardia permanente","Hipervolemia","B","Retorno venoso pode inicialmente aumentar, mas não obrigatoriamente.
+
+Correta. Aumento da pressão intra-abdominal pode reduzir débito cardíaco.
+
+Bradicardia não é permanente.
+
+Hipervolemia não é efeito direto."
+"5be1725d-1c9e-42ee-8c75-53358780305d","ME1","Neuroanestesia","4º Trimestre ME1 - Qual posição cirúrgica aumenta maior risco de embolia gasosa venosa em neurocirurgia?","Trendelenburg","Prona","Sentada","Litotomia","C","Trendelenburg reduz risco de entrada aérea.
+
+Pode ocorrer, mas menos frequentemente.
+
+Correta. A posição sentada favorece gradiente para entrada de ar venoso.
+
+Não é principal posição associada."
+"aa5151b4-6be1-4ef8-883d-3dc324f5ef2c","ME1","Neuroanestesia","4º Trimestre ME1 - Em neuroanestesia, qual condição aumenta o consumo cerebral de oxigênio?","Hipotermia","Convulsão","Propofol","Barbitúricos","B","Hipotermia reduz metabolismo cerebral.
+
+Correta. Crises convulsivas aumentam significativamente demanda metabólica cerebral.
+
+Propofol reduz metabolismo cerebral.
+
+Barbitúricos também reduzem metabolismo."
+"66b4dff0-2240-4235-b44b-4398a33e5f3c","ME1","Posicionamento","4º Trimestre ME1 - Qual complicação está associada ao posicionamento prolongado em prona?","Lesão ocular","Hipoglicemia","Hipocalcemia","Broncodilatação","A","Correta. Compressão ocular pode causar neuropatia óptica.
+
+Não possui associação direta.
+
+Não é complicação típica.
+
+Broncodilatação não se relaciona."
+"860404e4-977b-49bd-ac92-b97e032ff932","ME1","Obesidade","4º Trimestre ME1 - Em pacientes obesos, qual posição melhora pré-oxigenação antes da indução?","Trendelenburg","Rampa","Prona","Litotomia","B","Trendelenburg pode piorar mecânica ventilatória.
+
+Correta. A posição em rampa melhora alinhamento e ventilação.
+
+Prona não é utilizada para indução.
+
+Litotomia não auxilia."
+"da16d751-e97d-4bfb-acf1-ce1e862012f8","ME1","Neuroanestesia","4º Trimestre ME1 - Em neuroanestesia, qual medida ajuda reduzir pressão intracraniana?","Hipercapnia","Cabeceira elevada","Hipotensão severa","Hipoxemia","B","Hipercapnia aumenta PIC.
+
+Correta. Elevação da cabeça favorece drenagem venosa cerebral.
+
+Hipotensão reduz PPC.
+
+Hipoxemia aumenta vasodilatação cerebral."
+"ad50a9d8-448b-4400-bd1f-d7793b959d5a","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Qual alteração ocorre frequentemente na gestação avançada?","Redução do débito cardíaco","Aumento do débito cardíaco","Hipovolemia intensa fisiológica","Redução do volume plasmático","B","Débito aumenta na gestação.
+
+Correta. Há aumento significativo do débito cardíaco materno.
+
+Volume plasmático aumenta.
+
+Não ocorre redução plasmática."
+"1b94ccdd-0861-4277-9751-c3dd6b284f82","ME1","Hipotermia","4º Trimestre ME1 - Qual complicação é mais associada à hipotermia perioperatória?","Coagulopatia","Hiperglicemia","Broncodilatação","Hipocalcemia","A","Correta. Hipotermia prejudica coagulação e aumenta sangramento.
+
+Não é principal efeito.
+
+Não é característica típica.
+
+Hipocalcemia não é principal consequência."
+"47eebacd-3528-4e94-ab14-385f1eb7c036","ME1","Anestesia no Trauma","4º Trimestre ME1 - Qual é o principal objetivo da estratégia de controle de danos no trauma?","Correção definitiva imediata","Redução do tempo cirúrgico inicial","Realização de procedimentos eletivos","Indução de hipotermia","B","Controle definitivo pode ocorrer posteriormente.
+
+Correta. Busca-se estabilizar fisiologia antes da cirurgia definitiva.
+
+Não se aplica ao trauma agudo.
+
+Hipotermia deve ser evitada."
+"3052a151-bd95-40d3-9ee5-07d272402ec8","ME1","Pediatria","4º Trimestre ME1 - Em anestesia pediátrica, qual característica anatômica favorece obstrução de vias aéreas?","Epiglote curta e rígida","Língua proporcionalmente maior","Traqueia calcificada","Laringe baixa","B","A epiglote infantil é longa e mais flácida.
+
+Correta. Língua relativamente maior favorece obstrução.
+
+Traqueia não é calcificada.
+
+A laringe é mais alta."
+"1918e20b-2726-43f8-a3ed-3584488d7d31","ME1","Anestesia Obstétrica","4º Trimestre ME1 - Em anestesia obstétrica, qual alteração gastrointestinal aumenta risco de aspiração?","Aumento do esvaziamento gástrico","Redução da pressão intra-abdominal","Redução do tônus do esfíncter esofágico inferior","Aumento do pH gástrico","C","Esvaziamento pode estar retardado.
+
+Pressão intra-abdominal aumenta.
+
+Correta. Progesterona reduz tônus do esfíncter esofágico.
+
+O pH tende a ser mais ácido."
+"9b6059d3-bcb3-4772-8912-fa17e862c103","ME1","Anestesia em RTU","4º Trimestre ME1 - Qual alteração laboratorial pode ocorrer na síndrome de absorção de glicina durante RTU de próstata?","Hipernatremia","Hiponatremia","Hipercalcemia","Acidose respiratória obrigatória","B","Ocorre diluição do sódio.
+
+Correta. Absorção de líquidos hipotônicos pode gerar hiponatremia.
+
+Hipercalcemia não é típica.
+
+Acidose respiratória não é obrigatória."
+"f922c50c-ca71-43bf-b171-1e781e26b3ba","ME1","Farmacologia","4º Trimestre ME1 - Qual anestésico inalatório possui menor pungência e melhor tolerabilidade para indução?","Desflurano","Isoflurano","Sevoflurano","Halotano","C","Desflurano é irritante.
+
+Isoflurano também irrita vias aéreas.
+
+Correta. Sevoflurano apresenta melhor tolerabilidade inalatória.
+
+Halotano é pouco utilizado atualmente."
+"66e1eeeb-cede-4401-955b-b523652c5da1","ME1","Anestesia no Trauma","4º Trimestre ME1 - Em trauma hemorrágico, qual solução sanguínea contém maior concentração de fatores de coagulação?","Concentrado de hemácias","Plaquetas","Plasma fresco congelado","Albumina","C","Hemácias não concentram fatores.
+
+Plaquetas possuem função específica.
+
+Correta. PFC fornece fatores de coagulação.
+
+Albumina não contém fatores relevantes."
+"0fd7569b-2cbf-49b5-99d8-b0cfbeb26b3d","ME1","Pediatria","4º Trimestre ME1 - Em crianças, qual sinal sugere fadiga respiratória iminente?","Taquicardia leve","Agitação","Bradicardia","Hipertensão","C","Taquicardia pode ser compensatória inicial.
+
+Agitação pode preceder deterioração.
+
+Correta. Bradicardia em criança hipóxica é sinal grave.
+
+Hipertensão não é principal marcador."
+"c8cd8618-cb08-4a1c-ba57-0bddee29279b","ME1","","Qual monitorização é obrigatória durante anestesia geral?","Pressão intracraniana","Capnografia","Ecocardiografia","Débito cardíaco","B","Questao de revisao geral do modulo."
+"1fd1d27d-c0ef-49f5-8284-bd9ea3de9dcc","ME1","","Qual o principal mecanismo de ação do propofol?","Bloqueio NMDA","Potencialização GABA-A","Bloqueio canais Na","Agonista opioide","B","Questao de revisao geral do modulo."
+"ec460fdd-eeea-4f6a-ad0b-cc9557b07299","ME1","","Em que consiste a escala de Ramsay?","Avaliar dor","Avaliar sedação","Avaliar via aérea","Avaliar risco cirúrgico","B","Questao de revisao geral do modulo."
+"e6d36be0-43a2-4335-afaa-60eee8ea4932","ME1","","Qual a principal causa de hipoxemia no pós-operatório imediato?","Pneumotórax","Atelectasia","Edema pulmonar","Embolia","B","Questao de revisao geral do modulo."
+"0ed72e98-e062-402c-9cd3-2f7cfa1b955e","ME1","","Qual escala é padrão para alta da SRPA?","Ramsay","Glasgow","Aldrete-Kroulik","Apfel","C","Questao de revisao geral do modulo."
+"9ba3b816-002b-43e9-90dc-e0362a7a5796","ME1","","Qual a principal causa de parada cardíaca em crianças?","Arritmia primária","Hipoxemia","IAM","Tromboembolismo","B","Questao de revisao geral do modulo."
+"2b8a106c-79d4-413b-9500-d9e9f763fb9e","ME1","","Qual complicação está mais associada à punção inadvertida da dura na peridural?","Cefaleia pós-punção","Hiperglicemia","Edema pulmonar","Crise hipertensiva","A","Questao de revisao geral do modulo."
+"f94ad5d5-b8f2-4132-94db-9af05c9fde1e","ME1","","O que significa MAC em anestesiologia?","Monitorização avançada cardíaca","Concentração alveolar mínima","Mínima atividade cortical","Mecanismo anticonvulsivante","B","Questao de revisao geral do modulo."
+"3a402f4e-be61-486e-84a7-54ef5ba77a88","ME1","","Qual o melhor parâmetro para avaliar ventilação alveolar?","FiO2","SpO2","ETCO2","PEEP","C","Questao de revisao geral do modulo."
+"98ea19e1-b76c-4902-befb-1c2a6f5b3bab","ME1","","Qual o antagonista específico dos opioides?","Flumazenil","Naloxona","Atropina","Sugamadex","B","Questao de revisao geral do modulo."
+"cd78b384-9969-4220-8962-f62b9dbf4e46","ME1","","Qual a principal vantagem da analgesia multimodal?","Maior uso de opioides","Redução de efeitos adversos","Monoterapia simplificada","Menor custo","B","Questao de revisao geral do modulo."
+"3742c4a5-2a92-4a53-a003-e0b13f5d2342","ME1","","Qual solução é preferível em neurocirurgia?","Glicose 5%","SF 0,9%","Água destilada","Soro hipotônico","B","Questao de revisao geral do modulo."
+"610ea0ae-7788-4504-ab4b-664874b08264","ME1","","Qual a principal função do vaporizador no aparelho de anestesia?","Aquecer gases","Vaporizar anestésico líquido","Medir fluxo","Filtrar CO2","B","Questao de revisao geral do modulo."
+"0a17c41b-f78a-4e3b-b0f1-e6b3a872158e","ME1","","Qual o valor normal de SpO2 em paciente hígido?","85-89%","90-94%","95-100%","80-84%","C","Questao de revisao geral do modulo."
+"ecbbb6df-e25c-4373-bae1-f1d2002f63a7","ME1","","Qual fármaco é utilizado para reverter benzodiazepínicos?","Naloxona","Atropina","Flumazenil","Sugamadex","C","Questao de revisao geral do modulo."
+"446fdada-d40d-45ec-9460-73e0dc5e4a64","ME1","","Qual posição melhora a via aérea em obesos?","Trendelenburg","Rampa","Prona","Litotomia","B","Questao de revisao geral do modulo."
+"ae2937ea-a256-4cab-84f2-3a86ef59aadd","ME1","","Qual o principal fator de risco para NVPO?","Sexo masculino","Tabagismo","Uso de opioides","Idade avançada","C","Questao de revisao geral do modulo."
+"bdabe8f3-183e-4be6-9015-b4c93a12efd5","ME1","","Qual o principal local de ação dos bloqueadores neuromusculares?","SNC","Junção neuromuscular","Músculo liso","Gânglios autonômicos","B","Questao de revisao geral do modulo."
+"f9b6cf8c-de54-4c59-a025-8403d0b331ba","ME1","","Qual via de administração mais comum da succinilcolina?","Oral","Intramuscular","Intravenosa","Subcutânea","C","Questao de revisao geral do modulo."
+"1cd035d1-41ad-4b38-9cad-38eee5036564","ME1","","Qual anestésico local possui maior cardiotoxicidade?","Lidocaína","Ropivacaína","Bupivacaína","Prilocaína","C","Questao de revisao geral do modulo."
+"6fc545e3-dacd-4e9d-880b-b94eb516f1cd","ME1","","Qual o principal efeito hemodinâmico do propofol?","Hipertensão","Hipotensão","Bradicardia isolada","Aumento do DC","B","Questao de revisao geral do modulo."
+"7bf50f63-e61d-4c41-89eb-6c6465ea29a8","ME1","","Qual antiemético atua em receptores 5-HT3?","Metoclopramida","Droperidol","Ondansetrona","Dexametasona","C","Questao de revisao geral do modulo."
+"f8210c37-0034-48f5-b93e-8c56296859a3","ME1","","Qual droga é considerada de escolha para tratamento de hipertermia maligna?","Naloxona","Dantrolene","Flumazenil","Sugamadex","B","Questao de revisao geral do modulo."
+"aa3d14e2-6228-414b-b5e6-88b00e3c93d9","ME1","","Qual o principal efeito adverso dos opioides?","Hipertensão","Depressão respiratória","Taquicardia","Hiperglicemia","B","Questao de revisao geral do modulo."
+"dbc0e976-0e43-4e16-b2da-22834c63009b","ME1","","O que significa TOF na monitorização neuromuscular?","Train of four","Total oxygen flow","Tracheal opening force","Tidal output factor","A","Questao de revisao geral do modulo."
+"780d5a57-1c32-4f2e-8722-97b534347862","ME1","","Quais gases são monitorados no circuito anestésico?","O2, CO2 e N2O","Apenas O2","Apenas CO2","N2, He, Ar","A","Questao de revisao geral do modulo."
+"2b8f6d56-fbd9-493a-8303-e49f53890003","ME1","","Qual complicação pode ocorrer com raquianestesia alta?","Hipertensão","Parada respiratória","Hiperglicemia","Midríase","B","Questao de revisao geral do modulo."
+"f31084fa-e2c2-401c-a539-b2d590574624","ME1","","Qual nervo é mais bloqueado no interescalênico?","Femoral","Frênico","Vago","Hipoglosso","B","Questao de revisao geral do modulo."
+"83edaf82-ccdd-4221-b329-6fcd5ed4bdf0","ME1","","Qual o tratamento da toxicidade por anestésico local?","Flumazenil","Naloxona","Emulsão lipídica","Atropina","C","Questao de revisao geral do modulo."
+"561ddb66-cfab-443d-9691-c397c6dbc6b9","ME1","","Qual vasopressor é primeira escolha no choque séptico?","Dobutamina","Dopamina","Noradrenalina","Nitroprussiato","C","Questao de revisao geral do modulo."

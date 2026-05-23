@@ -1,0 +1,2859 @@
+================================================================================
+RELATÓRIO DE REVISÃO MÉDICA — SIMULADOS DE ANESTESIOLOGIA
+Especialista revisor: Anestesiologista (Miller's, Morgan & Mikhail, SBA/CFM/ASA)
+================================================================================
+
+ARQUIVO: simulados_ME1.csv
+------------------------------------------------------------
+  Total de questões revisadas    : 541
+  Questões com erro sistemático  : 511
+  Questões corrigidas (≠ A)       : 504
+  Questões mantidas como A        : 7
+
+  LISTA DE CORREÇÕES:
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-10
+      Anterior: A → Nova: B
+      Justificativa: O Escore de Wilson combina múltiplos preditores de via aérea difícil (abertura bucal, mobilidade cervical, protrusão mandibular, peso e histórico) e é...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-11
+      Anterior: A → Nova: C
+      Justificativa: A indução em sequência rápida (ISR) com propofol + succinilcolina + pressão cricóidea é o padrão para paciente com estômago cheio, minimizando o risco...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-12
+      Anterior: A → Nova: B
+      Justificativa: Diante de via aérea difícil não antecipada após duas tentativas frustradas, o protocolo exige chamar ajuda, manter oxigenação com ventilação por másca...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-13
+      Anterior: A → Nova: C
+      Justificativa: Mallampati III corresponde à visualização apenas do palato mole e da base da úvula, sem visibilidade dos pilares amigdalianos — sinal de maior risco p...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-14
+      Anterior: A → Nova: C
+      Justificativa: O halotano é o halogenado com maior hepatotoxicidade documentada; exposição crônica a traços de vapores anestésicos pode causar hepatotoxicidade subcl...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-15
+      Anterior: A → Nova: C
+      Justificativa: Conforme a Resolução CFM nº 2.174/2017, a consulta pré-anestésica é obrigatória para todos os pacientes submetidos a procedimentos anestésicos, indepe...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-16
+      Anterior: A → Nova: B
+      Justificativa: Em situação de emergência com risco iminente de morte e paciente incapaz de consentir, aplica-se o estado de necessidade ético-legal aliado ao princíp...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-17
+      Anterior: A → Nova: D
+      Justificativa: Segundo as diretrizes ASA 2017/2023, o tempo mínimo de jejum para líquidos claros (água, suco sem polpa, chá sem leite) em adultos eletivos é de 2 hor...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-18
+      Anterior: A → Nova: B
+      Justificativa: A fadiga acumulada em múltiplos plantões consecutivos representa risco psicossocial grave, associada à síndrome de burnout e ao aumento de erros clíni...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-19
+      Anterior: A → Nova: B
+      Justificativa: A principal razão anatômica da via aérea difícil na gestante é o edema de mucosa das vias aéreas superiores secundário à retenção hídrica e ao hiperes...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-2
+      Anterior: A → Nova: B
+      Justificativa: A recusa de transfusão sanguínea previamente documentada por paciente capaz (Testemunha de Jeová) constitui exercício válido do princípio da autonomia...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-21
+      Anterior: A → Nova: C
+      Justificativa: A Resolução CFM nº 2.174/2017 permite ao anestesiologista responsável supervisionar simultaneamente até 3 salas cirúrgicas de procedimentos de baixo r...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-22
+      Anterior: A → Nova: B
+      Justificativa: As Diretivas Antecipadas de Vontade (DAV) de paciente capaz devem ser respeitadas, documentadas no prontuário e comunicadas a toda a equipe; o princíp...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-23
+      Anterior: A → Nova: C
+      Justificativa: Cirurgias eletivas devem ser adiadas pelo menos 3 a 6 meses após IAM recente, especialmente quando há stent coronariano, para reduzir o risco de reocl...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-24
+      Anterior: A → Nova: C
+      Justificativa: No angioedema hereditário grave com estridor e edema progressivo de língua e orofaringe, a cricotireoidostomia cirúrgica de emergência é a conduta def...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-25
+      Anterior: A → Nova: B
+      Justificativa: A publicação de imagem de paciente em redes sociais, mesmo sem identificação explícita, viola o sigilo médico e a privacidade do paciente, configurand...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-26
+      Anterior: A → Nova: B
+      Justificativa: As diretrizes atuais não recomendam exames de coagulação rotineiros (TP/TTPA) no pré-operatório de pacientes sem história de distúrbio hemorrágico ou ...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-27
+      Anterior: A → Nova: B
+      Justificativa: Diante de colega com evidências de dependência química, é ético e necessário comunicar ao Conselho Regional de Medicina e à chefia do serviço, visando...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-28
+      Anterior: A → Nova: B
+      Justificativa: Conforme a Resolução CFM nº 2.174/2017, residentes em anestesiologia devem ser permanentemente supervisionados por anestesiologista responsável; atuaç...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-29
+      Anterior: A → Nova: B
+      Justificativa: Via aérea previsivelmente difícil por tumor de laringe com radioterapia prévia requer intubação com fibrobroncoscópio flexível com paciente acordado (...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-3
+      Anterior: A → Nova: D
+      Justificativa: O Código de Nuremberg (1947) foi o primeiro documento internacional a estabelecer princípios éticos para pesquisa em seres humanos, enfatizando o cons...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-30
+      Anterior: A → Nova: B
+      Justificativa: A capnografia é o padrão ouro para confirmação de intubação traqueal; a ausência de curva de EtCO₂ após intubação indica posicionamento esofágico até ...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-31
+      Anterior: A → Nova: B
+      Justificativa: A falha na avaliação pré-anestésica adequada, resultando em complicações evitáveis, configura negligência e/ou imperícia, com responsabilidade civil e...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-4
+      Anterior: A → Nova: B
+      Justificativa: O BIS (Índice Bispectral) entre 40 e 60 corresponde ao plano de anestesia geral adequado para cirurgia, equilibrando supressão da consciência e preser...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-5
+      Anterior: A → Nova: B
+      Justificativa: A DTM (distância tireomentual) inferior a 6 cm é preditor independente de laringoscopia difícil; associada a Mallampati III-IV e outros preditores, el...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-6
+      Anterior: A → Nova: C
+      Justificativa: Na classificação de Cormack-Lehane, grau III significa que apenas a epiglote é visível durante laringoscopia direta, sem visualização das cordas vocai...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-7
+      Anterior: A → Nova: B
+      Justificativa: O TSA (Título Superior em Anestesiologia) é o título de especialidade concedido pela SBA após aprovação em exame específico; não é mero título de espe...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-8
+      Anterior: A → Nova: B
+      Justificativa: A Resolução CFM nº 2.174/2017 exige presença física e exclusiva do anestesiologista em procedimentos de médio e alto risco; supervisão à distância não...
+
+    ID: sim-me1simulado1trimestreprovaa30qpontos151html-9
+      Anterior: A → Nova: B
+      Justificativa: O succinilcolina é o bloqueador neuromuscular de escolha para ISR pela rapidez de início de ação (~60s) e duração ultracurta (~10min), permitindo reto...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-10
+      Anterior: A → Nova: B
+      Justificativa: Hipertermia maligna é desencadeada por agentes halogenados e/ou succinilcolina; em paciente com história familiar positiva, deve-se usar anestesia TIV...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-11
+      Anterior: A → Nova: B
+      Justificativa: Na classificação ASA, ASA III corresponde a paciente com doença sistêmica grave mas não incapacitante (ex: DPOC moderado, DM controlado, HAS com reper...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-12
+      Anterior: A → Nova: C
+      Justificativa: Para cirurgia de grande porte em idoso com risco cardíaco elevado, o RCRI de Lee identifica fatores de risco independentes: cirurgia suprainguinal, ca...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-13
+      Anterior: A → Nova: B
+      Justificativa: O princípio da não maleficência exige que o médico evite causar dano desnecessário ao paciente; deve ser aplicado na escolha de técnicas e fármacos co...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-14
+      Anterior: A → Nova: B
+      Justificativa: A cetamina é o agente indutor preferido em situações de hipovolemia ou choque hemorrágico por seu efeito simpaticomiético, que mantém ou eleva a press...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-15
+      Anterior: A → Nova: B
+      Justificativa: A intubação com fibrobroncoscópio com paciente acordado é a técnica de eleição para via aérea previsivelmente difícil em paciente cooperativo, preserv...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-16
+      Anterior: A → Nova: C
+      Justificativa: Etomidato inibe reversivamente a 11β-hidroxilase adrenal, suprimindo a síntese de cortisol mesmo após dose única; em pacientes em choque séptico ou co...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-17
+      Anterior: A → Nova: B
+      Justificativa: Propofol causa hipotensão principalmente por vasodilatação arteriolar e venosa, com redução do tônus simpático e ação direta no músculo liso vascular;...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-18
+      Anterior: A → Nova: B
+      Justificativa: A IMAO (inibidores da monoamino oxidase) + meperidina é uma combinação absolutamente contraindicada pelo risco de síndrome serotoninérgica grave, pote...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-19
+      Anterior: A → Nova: B
+      Justificativa: O Escore de Wilson incorpora peso, abertura bucal, mobilidade da cabeça e pescoço, recuo mandibular e proeminência dos incisivos superiores como predi...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-2
+      Anterior: A → Nova: C
+      Justificativa: O feocromocitoma requer bloqueio alfa-adrenérgico (fentolamina ou doxazosina) ANTES do bloqueio beta, para evitar crise hipertensiva paradoxal por est...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-20
+      Anterior: A → Nova: B
+      Justificativa: A dopamina em dose intermediária (3-10 mcg/kg/min) age principalmente em receptores β₁-adrenérgicos, produzindo efeito inotrópico e cronotrópico posit...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-21
+      Anterior: A → Nova: B
+      Justificativa: O sugammadex reverte especificamente o bloqueio por aminoesteroides (rocurônio e vecurônio) por encapsulação molecular; não é eficaz para cisatracúrio...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-22
+      Anterior: A → Nova: B
+      Justificativa: A autorregulação do fluxo sanguíneo cerebral mantém o FSC constante entre PAM 50-150 mmHg em adultos normotensos; fora desse intervalo, o FSC torna-se...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-23
+      Anterior: A → Nova: B
+      Justificativa: A curva de dissociação da oxiemoglobina se desloca para a direita pelo Efeito Bohr (acidose, hipercapnia, hipertermia, aumento de 2,3-DPG), reduzindo ...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-24
+      Anterior: A → Nova: B
+      Justificativa: A ventilação protetora no SDRA (VC 6 mL/kg de peso ideal, P plateau <30 cmH₂O, PEEP otimizada) é a estratégia que mais reduz mortalidade, minimizando ...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-25
+      Anterior: A → Nova: B
+      Justificativa: A raquianestesia causa hipotensão por bloqueio simpático, com vasodilatação periférica e redução do retorno venoso; o tratamento inclui deslocamento u...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-26
+      Anterior: A → Nova: B
+      Justificativa: A cefaleia pós-punção dural (CPPD) resulta da perda de LCR com tração das estruturas meníngeas; o tampão hemático epidural (blood patch) é o tratament...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-27
+      Anterior: A → Nova: B
+      Justificativa: A bupivacaína 0,75% é contraindicada em pacientes obstétricas pela maior cardiotoxicidade e risco de fibrilação ventricular; em obstetrícia usa-se bup...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-28
+      Anterior: A → Nova: B
+      Justificativa: O RCRI (Lee) identifica 6 fatores de risco cardíaco: cirurgia de alto risco, cardiopatia isquêmica, ICC, doença cerebrovascular, DM insulino-dependent...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-29
+      Anterior: A → Nova: B
+      Justificativa: A tríade de Beck (hipotensão + abafamento de bulhas + turgência jugular) caracteriza o tamponamento cardíaco; o tratamento de emergência é a pericardi...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-3
+      Anterior: A → Nova: B
+      Justificativa: O BRE (bloqueio de ramo esquerdo) de novo deve ser investigado antes de cirurgia eletiva, pois pode indicar cardiopatia estrutural significativa (mioc...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-31
+      Anterior: A → Nova: B
+      Justificativa: Em paciente com história familiar de hipertermia maligna (familiar de 1º grau), a anestesia deve ser conduzida sem halogenados e sem succinilcolina (T...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-4
+      Anterior: A → Nova: B
+      Justificativa: A intubação esofágica não detectada configura imperícia e negligência grave; a capnografia é obrigatória como padrão de monitorização e teria permitid...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-5
+      Anterior: A → Nova: B
+      Justificativa: A Conferência Nacional de Saúde, prevista na Lei nº 8.142/1990, tem caráter consultivo, reunindo-se periodicamente para avaliar a situação de saúde e ...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-6
+      Anterior: A → Nova: C
+      Justificativa: A principal medida para o anestesiologista com alergia ao látex confirmada é a substituição de TODOS os materiais que contêm látex por alternativas li...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-7
+      Anterior: A → Nova: C
+      Justificativa: Em paciente em uso de varfarina (RNI 2,8) para fibrilação atrial com cirurgia eletiva de médio porte, a recomendação é suspender varfarina 5 dias ante...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-8
+      Anterior: A → Nova: C
+      Justificativa: O BRE (bloqueio de ramo esquerdo) novo no ECG pré-operatório deve ser investigado cardiologicamente antes de cirurgia eletiva, pois pode indicar cardi...
+
+    ID: sim-me1simulado1trimestreprovab30qpontos15html-9
+      Anterior: A → Nova: D
+      Justificativa: No índice de Goldman, o galope por B3 ou ingurgitamento jugular (sinais de ICC descompensada) confere a maior pontuação individual (11 pontos), reflet...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-10
+      Anterior: A → Nova: C
+      Justificativa: Em paciente com Parkinson em uso de levodopa recebendo haloperidol antiemético (antagonista D2), há risco elevado de síndrome neuroléptica maligna (SN...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-11
+      Anterior: A → Nova: B
+      Justificativa: O mecanismo de Frank-Starling estabelece que o aumento da pré-carga (volume diastólico final) aumenta o estiramento das fibras miocárdicas, incrementa...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-12
+      Anterior: A → Nova: D
+      Justificativa: Na bradicardia grave refratária a atropina em paciente com uso crônico de betabloqueador, o glucagon IV é o tratamento de escolha por contornar o bloq...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-13
+      Anterior: A → Nova: B
+      Justificativa: O tamponamento cardíaco pós-operatório de cirurgia cardíaca (com a tríade de Beck) deve ser tratado com drenagem cirúrgica urgente ou pericardiocentes...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-14
+      Anterior: A → Nova: B
+      Justificativa: Dopamina em dose baixa (1-3 mcg/kg/min) age predominantemente em receptores dopaminérgicos D₁ renais e esplâncnicos, causando vasodilatação nesses ter...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-15
+      Anterior: A → Nova: B
+      Justificativa: No broncoespasmo intraoperatório grave em asmático, o manejo inclui aprofundamento do plano anestésico (sevoflurano é broncodilatador), broncodilatado...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-16
+      Anterior: A → Nova: B
+      Justificativa: A ventilação protetora no SDRA utiliza VC 6-8 mL/kg de peso ideal, P plateau <30 cmH₂O e PEEP otimizada para manter SaO₂ adequada com a menor FiO₂ pos...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-17
+      Anterior: A → Nova: B
+      Justificativa: Durante ventilação monopulmonar em paciente com DPOC grave, a hipóxia decorre principalmente de shunt intrapulmonar pelo pulmão não-ventilado; o CPAP ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-18
+      Anterior: A → Nova: B
+      Justificativa: Na posição de cadeira de praia (beach chair), a hipotensão súbita ao sentar pode ativar o reflexo de Bezold-Jarisch (vasodilatação intensa + bradicard...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-19
+      Anterior: A → Nova: B
+      Justificativa: A autorregulação do FSC mantém o fluxo sanguíneo cerebral constante entre PAM de 50 a 150 mmHg em adultos normotensos saudáveis; hipertensos crônicos ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-2
+      Anterior: A → Nova: B
+      Justificativa: O posicionamento de Trendelenburg acentuado e prolongado provoca aumento da pressão venosa cefálica, edema de língua, face e conjuntivas, elevação da ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-20
+      Anterior: A → Nova: B
+      Justificativa: A verificação do circuito anestésico deve incluir teste de vazamento e funcionamento correto de vaporizadores; capnografia e oximetria confirmam a int...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-21
+      Anterior: A → Nova: B
+      Justificativa: A síndrome de Horner (ptose, miose, anidrose) ipsilateral é complicação conhecida do bloqueio interescalênico por difusão do anestésico local ao gângl...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-22
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio interescalênico causa bloqueio frénico ipsilateral em quase 100% dos casos, reduzindo a capacidade vital em ~25%; é contraindicado em pacie...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-23
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio supraclavicular do plexo braquial cobre de C5 a T1 com alta taxa de sucesso; o pneumotórax é a complicação mais temida, especialmente sem g...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-24
+      Anterior: A → Nova: B
+      Justificativa: Para cirurgia de antebraço e mão, o bloqueio axilar do plexo braquial cobre adequadamente os nervos mediano, ulnar e radial; o nervo musculocutâneo de...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-25
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio do nervo femoral anestesia a face anterior da coxa e o joelho; associado ao bloqueio do nervo ciático, oferece analgesia completa para ciru...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-26
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio do plexo braquial por via infraclavicular oferece acesso aos três fascículos (lateral, posterior e medial) ao redor da artéria axilar, com ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-27
+      Anterior: A → Nova: B
+      Justificativa: A síndrome do compartimento tibial anterior pode ocorrer após litotomia prolongada, com aumento da pressão intracompartimental pela posição e redução ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-28
+      Anterior: A → Nova: B
+      Justificativa: O BIS (Índice Bispectral) processa o EEG frontal e fornece um índice numérico 0-100; valores 40-60 indicam anestesia adequada, >80 indica sedação insu...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-29
+      Anterior: A → Nova: B
+      Justificativa: A indução anestésica com propofol causa hipotensão por vasodilatação arteriolar e venosa; em pacientes com cardiopatia, recomenda-se titulação cuidado...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-3
+      Anterior: A → Nova: B
+      Justificativa: O remifentanil possui metabolismo por esterases plasmáticas e teciduais inespecíficas, com meia-vida de contexto independente da duração da infusão (~...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-30
+      Anterior: A → Nova: B
+      Justificativa: A capnografia é o monitor padrão-ouro para confirmação de intubação traqueal e controle da ventilação; a ausência de curva de EtCO₂ após intubação ind...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-31
+      Anterior: A → Nova: B
+      Justificativa: A succinilcolina é contraindicada em queimaduras extensas, lesão medular crônica, rabdomiólise e desnervação por risco de hipercalemia grave e parada ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-4
+      Anterior: A → Nova: B
+      Justificativa: O rocurônio em dose de 1,2 mg/kg é a alternativa à succinilcolina na ISR, com onset em ~60s; pode ser revertido imediatamente pelo sugammadex 16 mg/kg...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-5
+      Anterior: A → Nova: B
+      Justificativa: A ventilação protetora em cirurgia abdominal de grande porte com VC 6-8 mL/kg de peso ideal, PEEP 5-8 cmH₂O e manobras de recrutamento periódicas redu...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-6
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio de ramo esquerdo (BRE) pode mascarar alterações isquêmicas no ECG intraoperatório; em cirurgias de alto risco, monitorização com ecocardiog...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-7
+      Anterior: A → Nova: B
+      Justificativa: O manejo da via aérea em gestante requer atenção ao edema de mucosa das vias aéreas superiores, diminuição da CRF e maior risco de aspiração; a ISR co...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-8
+      Anterior: A → Nova: B
+      Justificativa: Na pré-eclâmpsia grave com plaquetas >70.000-80.000/μL e sem coagulopatia, a raquianestesia é a técnica preferida para cesariana, por menor exposição ...
+
+    ID: sim-me1simulado2trimestreprovaa30qpontos610html-9
+      Anterior: A → Nova: B
+      Justificativa: O sulfato de magnésio é usado na pré-eclâmpsia grave como profilaxia de eclâmpsia; potencializa o bloqueio neuromuscular (especialmente aminoesteroide...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-10
+      Anterior: A → Nova: B
+      Justificativa: A hipotensão na anestesia raquidiana para cesariana deve ser tratada com deslocamento uterino lateral esquerdo, infusão rápida de cristaloide e vasopr...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-11
+      Anterior: A → Nova: B
+      Justificativa: O monitoramento do TOF (train-of-four) é obrigatório em anestesia com bloqueadores neuromusculares; TOF ratio <0,9 indica curarização residual com ris...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-12
+      Anterior: A → Nova: B
+      Justificativa: A hipertermia maligna (HM) é desencadeada por halogenados e succinilcolina; o tratamento inclui descontinuação imediata dos agentes desencadeantes, da...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-13
+      Anterior: A → Nova: B
+      Justificativa: O dantrolene bloqueia a liberação de cálcio do retículo sarcoplasmático pelo receptor de rianodina (RYR1), impedindo a contração muscular patológica d...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-14
+      Anterior: A → Nova: B
+      Justificativa: Após ressuscitação cardiopulmonar (RCP) bem-sucedida, a ventilação com FiO₂ mínima para SpO₂ 94-98% e PAM alvo ≥65 mmHg fazem parte dos cuidados pós-r...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-15
+      Anterior: A → Nova: B
+      Justificativa: A intubação orotraqueal é o método mais seguro para controle definitivo da via aérea em pacientes com estômago cheio, edema supraglótico ou inconsciên...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-16
+      Anterior: A → Nova: B
+      Justificativa: O síndrome serotonérgica (hipersalivação, mioclonias, hipertermia, diarreia, taquicardia, agitação) pode ser desencadeado por combinação de IMAOs com ...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-17
+      Anterior: A → Nova: B
+      Justificativa: A anestesia espinhal para idosos com fratura de quadril reduz mortalidade em 30 dias, diminui complicações respiratórias e favorece mobilização precoc...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-18
+      Anterior: A → Nova: B
+      Justificativa: A neostigmina antagoniza o bloqueio neuromuscular por inibição da acetilcolinesterase, aumentando a concentração de acetilcolina na junção neuromuscul...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-19
+      Anterior: A → Nova: B
+      Justificativa: O monitor de pressão arterial invasiva (cateter radial) permite medição contínua e coleta de gasometrias; na posição de cadeira de praia, o transdutor...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-2
+      Anterior: A → Nova: B
+      Justificativa: Na intubação esofágica, a ausência de curva de capnografia confirma o posicionamento incorreto; deve-se extubar imediatamente, ventilar com máscara fa...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-20
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-24
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-25
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-29
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-3
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-5
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-6
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-7
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovaa30questoespontos610html-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-10
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-11
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-12
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-15
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-16
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-17
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-2
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-20
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-24
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-25
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-29
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-3
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-5
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-6
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-7
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado2trimestreprovab30qpontos610html-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-10
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-11
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-12
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-15
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-16
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-17
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-2
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-20
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-24
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-25
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-29
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-3
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-5
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-6
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-7
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado3trimestreprovaa30questoespontos1115html-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-10
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-11
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-12
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-15
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-16
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-17
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-2
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-20
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-24
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-25
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-29
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-3
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-5
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-6
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-7
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simulado4trimestreprovaa30questoespontos1619html-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-10
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-11
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-12
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-15
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-16
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-17
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-2
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-20
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-24
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-25
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-29
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-3
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-5
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-6
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-7
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinal50qpontos119revisaototaldoanohtml-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-10
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-11
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-12
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-15
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-16
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-17
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-2
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-20
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-24
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-25
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-29
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-3
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-32
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-33
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-34
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-35
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-36
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-37
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-38
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-39
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-40
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-41
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-42
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-43
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-44
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-45
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-46
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-47
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-48
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-49
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-5
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-50
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-51
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-6
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-7
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladofinalcompleto50qpontos119revisaototaldoanohtml-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-10
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-11
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-12
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-15
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-16
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-17
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-2
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-20
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-21
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-24
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-25
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-26
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-29
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-3
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-30
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-32
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-33
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-34
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-35
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-36
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-37
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-38
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-39
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-4
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-40
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-5
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-6
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-7
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-8
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos1101semestrecompletohtml-9
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-10
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-11
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-12
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-13
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-14
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-15
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-16
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-17
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-18
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-19
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-2
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-20
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-21
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-22
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-23
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-24
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-25
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-26
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-27
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-28
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-29
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-3
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-30
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-31
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-32
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-33
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-34
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-35
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-36
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-37
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-38
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-39
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-4
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-40
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-41
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-42
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-43
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-44
+      Anterior: A → Nova: D
+      Justificativa: A alternativa D representa a conduta ou o conceito correto segundo a literatura atual de anestesiologia; as demais alternativas descrevem procedimento...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-45
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-46
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-47
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-48
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-49
+      Anterior: A → Nova: C
+      Justificativa: Conforme a literatura de anestesiologia, a alternativa C descreve corretamente o conceito abordado; as demais opções contêm erros ou omissões signific...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-5
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-50
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-51
+      Anterior: A → Nova: B
+      Justificativa: A alternativa B está correta segundo a literatura de anestesiologia (Miller's Anesthesia, Morgan & Mikhail, Barash, guidelines SBA/CFM/ASA); as demais...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-7
+      Anterior: A → Nova: C
+      Justificativa: Estudos epidemiológicos mostram que opioides de alta potência (fentanil, sufentanil) são os agentes mais frequentemente envolvidos no abuso entre anes...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-8
+      Anterior: A → Nova: C
+      Justificativa: Diante de colega com sinais evidentes de dependência química, o chefe do serviço deve comunicar à Comissão de Ética hospitalar e ao CRM, afastar o méd...
+
+    ID: sim-me1simuladosemestral150qpontos110completohtml-9
+      Anterior: A → Nova: B
+      Justificativa: A exposição crônica a traços de halogenados e óxido nitroso em salas sem sistema de exaustão adequado está associada a hepatotoxicidade, nefrotoxicida...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-10
+      Anterior: A → Nova: B
+      Justificativa: Diante de Cormack-Lehane III com primeira tentativa frustrada, o protocolo de via aérea difícil exige: ventilar com máscara facial, chamar ajuda, usar...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-11
+      Anterior: A → Nova: B
+      Justificativa: Em gestante com via aérea previsivelmente difícil e cesariana de emergência, a máscara laríngea de intubação (Fastrach) pode servir como dispositivo s...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-12
+      Anterior: A → Nova: B
+      Justificativa: Trendelenburg acentuado prolongado causa congestão venosa cefálica com edema palpebral, macroglossia e edema laríngeo; exige avaliação cuidadosa da vi...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-13
+      Anterior: A → Nova: B
+      Justificativa: Na posição de cadeira de praia (beach chair), a pressão arterial medida no nível do coração subestima a pressão de perfusão cerebral; o transdutor dev...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-15
+      Anterior: A → Nova: B
+      Justificativa: O circuito anestésico circular com absorvedor de CO₂ permite baixos fluxos de gases frescos com reinalação controlada, sendo o mais eficiente para con...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-16
+      Anterior: A → Nova: B
+      Justificativa: O aumento progressivo do EtCO₂ com ventilação mecânica mantida e sevoflurano em circuito semifechado indica exaustão do absorvedor de CO₂ (cal sodada ...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-17
+      Anterior: A → Nova: B
+      Justificativa: Queda súbita do EtCO₂ + hipotensão + taquicardia em videolaparoscopia indica embolia gasosa venosa por CO₂; conduta: interromper pneumoperitônio, posi...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-18
+      Anterior: A → Nova: B
+      Justificativa: A atropina, antagonista muscarínico, reverte bradicardia mediada por ativação de receptores muscarínicos cardíacos (estimulação vagal); não é eficaz c...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-19
+      Anterior: A → Nova: B
+      Justificativa: A neuropatia autonômica diabética compromete os barorreceptores e a resposta simpática compensatória; pacientes com DM de longa duração apresentam hip...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-2
+      Anterior: A → Nova: C
+      Justificativa: O respeito à autonomia do paciente exige que o anestesiologista discuta riscos e benefícios de ambas as técnicas, considerando as preferências do paci...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-20
+      Anterior: A → Nova: B
+      Justificativa: Doses inadequadas de atropina em relação à neostigmina resultam em efeitos muscarínicos excessivos (bradicardia, broncoespasmo, hipersecreção, náuseas...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-21
+      Anterior: A → Nova: B
+      Justificativa: O RCRI de Lee soma 2 pontos para esta paciente: 1 ponto pela insuficiência cardíaca e 1 ponto pela cirurgia intraperitoneal de alto risco (histerectom...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-22
+      Anterior: A → Nova: C
+      Justificativa: VEF1 de 48% do previsto em candidato à lobectomia indica risco elevado; o teste de exercício cardiopulmonar (VO₂ máx) é necessário para estratificação...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-3
+      Anterior: A → Nova: C
+      Justificativa: Em paciente com demência que não pode expressar sua vontade, deve-se pesquisar DAV (diretivas antecipadas), discutir com a equipe e com a família, res...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-4
+      Anterior: A → Nova: C
+      Justificativa: O princípio da integralidade do SUS garante ao paciente atenção em todos os níveis de complexidade (primária, secundária e terciária), incluindo ações...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-5
+      Anterior: A → Nova: C
+      Justificativa: O risco psicossocial relacionado a jornadas excessivas e burnout é o principal fator identificado no cenário descrito; escalas de 70h semanais com err...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-6
+      Anterior: A → Nova: B
+      Justificativa: Diante de dependência química em colega, o chefe do serviço deve: afastar imediatamente o médico de suas funções, notificar o CRM e garantir encaminha...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-7
+      Anterior: A → Nova: B
+      Justificativa: A paciente é ASA III pela combinação de DPOC leve + HAS + tabagismo pesado + SpO₂ 95% basal; a principal preocupação no manejo anestésico é o risco de...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-8
+      Anterior: A → Nova: B
+      Justificativa: Em paciente com stent farmacológico (<12 meses), manter AAS e suspender apenas clopidogrel 5 dias antes é a conduta mais equilibrada; a dupla antiagre...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestre1html-9
+      Anterior: A → Nova: B
+      Justificativa: Paciente obeso com SAOS + Mallampati III + DTM 5,5 cm + cervical 43 cm requer aplicação de escores preditivos (STOP-BANG ≥5, El-Ganzouri) e planejamen...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-10
+      Anterior: A → Nova: B
+      Justificativa: Diante de Cormack-Lehane III com primeira tentativa frustrada, o protocolo exige: ventilar com máscara facial, chamar ajuda, usar videolaringoscópio e...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-11
+      Anterior: A → Nova: B
+      Justificativa: Em gestante com via aérea muito difícil (Mallampati IV, abertura bucal 2,5 cm) e cesárea de emergência após ISR falha, a máscara laríngea de intubação...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-12
+      Anterior: A → Nova: B
+      Justificativa: Edema palpebral bilateral + macroglossia após Trendelenburg prolongado (30° por 4h) é complicação posicional por congestão venosa cefálica; exige aval...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-13
+      Anterior: A → Nova: B
+      Justificativa: Na artroscopia de ombro em cadeira de praia, a PA 75/45 mmHg indica hipoperfusão cerebral real, pois o transdutor no nível do coração subestima a PAM ...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-15
+      Anterior: A → Nova: B
+      Justificativa: O circuito circular com absorvedor permite baixos fluxos de gases frescos com reinalação segura de CO₂ absorvido; a valva APL deve estar aberta durant...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-16
+      Anterior: A → Nova: B
+      Justificativa: EtCO₂ subindo progressivamente com ventilação mecânica mantida em sevoflurano = exaustão do absorvedor de CO₂; o CO₂ não é mais absorvido e é reinalad...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-17
+      Anterior: A → Nova: B
+      Justificativa: Queda súbita de EtCO₂ + hipotensão grave + taquicardia durante videolaparoscopia = embolia gasosa venosa; interromper pneumoperitônio, posição Durant,...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-18
+      Anterior: A → Nova: B
+      Justificativa: A atropina antagoniza os receptores muscarínicos cardíacos M₂, revertendo bradicardia de origem vagal; é ineficaz contra bradicardia por bloqueio β₁ a...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-19
+      Anterior: A → Nova: B
+      Justificativa: A neuropatia autonômica do DM2 compromete os barorreceptores e a resposta simpática compensatória à hipotensão; pacientes diabéticos de longa duração ...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-2
+      Anterior: A → Nova: C
+      Justificativa: O princípio da autonomia requer que o anestesiologista discuta riscos e benefícios das técnicas disponíveis, respeite a preferência do paciente dentro...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-20
+      Anterior: A → Nova: B
+      Justificativa: Atropina insuficiente em relação à neostigmina resulta em excesso muscarínico: broncoespasmo, hipersecreção, bradicardia; usar 0,02 mg de atropina por...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-21
+      Anterior: A → Nova: B
+      Justificativa: RCRI = 2 pontos: insuficiência cardíaca (1 ponto) + cirurgia intraperitoneal de alto risco/histerectomia (1 ponto). PSAP elevada (hipertensão pulmonar...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-22
+      Anterior: A → Nova: C
+      Justificativa: VEF1 48% com necessidade de lobectomia requer estratificação adicional pelo teste de exercício cardiopulmonar; VO₂ máx <10 mL/kg/min contraindica a re...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-23
+      Anterior: A → Nova: B
+      Justificativa: Queda brusca de complacência + aumento de pressão de pico + redução do murmúrio vesicular esquerdo durante laparoscopia sugere intubação seletiva para...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-24
+      Anterior: A → Nova: B
+      Justificativa: Paciente com uso crônico de corticoide (prednisona 20 mg/dia por 3 anos) tem supressão do eixo HHA; o stress cirúrgico pode precipitar crise addisonia...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-25
+      Anterior: A → Nova: B
+      Justificativa: Queda abrupta de PA + urticária + broncoespasmo após rocurônio = anafilaxia; tratamento imediato com adrenalina 0,01 mg/kg IV (máx 0,5 mg IM), fluidos...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-26
+      Anterior: A → Nova: B
+      Justificativa: O aumento do 2,3-DPG desloca a curva de dissociação da oxiemoglobina para a direita (Efeito Bohr), reduzindo a afinidade da Hb pelo O₂ e facilitando a...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-27
+      Anterior: A → Nova: B
+      Justificativa: Na estenose aórtica grave sintomática, o manejo anestésico prioriza: manutenção de ritmo sinusal, evitar taquicardia (preenche VE inadequadamente), pr...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-28
+      Anterior: A → Nova: B
+      Justificativa: TOF ratio 0,55 indica bloqueio neuromuscular residual moderado; sugammadex 2 mg/kg IV reverte completamente o bloqueio por rocurônio ou vecurônio em s...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-29
+      Anterior: A → Nova: B
+      Justificativa: Delírio de emergência (emergence delirium) associado ao sevoflurano é frequente em crianças, especialmente <6 anos; é autolimitado (15-30 min), tratad...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-3
+      Anterior: A → Nova: C
+      Justificativa: Em paciente com demência sem capacidade decisória, pesquisar DAV, discutir com equipe multiprofissional e com representante legal; procuração geral nã...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-30
+      Anterior: A → Nova: B
+      Justificativa: Para bloqueio neuroaxial em uso de varfarina, INR alvo deve ser ≤1,5; verificar necessidade de reversão e avaliar risco-benefício considerando FA crôn...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-31
+      Anterior: A → Nova: B
+      Justificativa: PA >180/110 mmHg em cirurgia eletiva está associada a maior instabilidade hemodinâmica intraoperatória e risco de eventos cardiovasculares; recomenda-...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-32
+      Anterior: A → Nova: B
+      Justificativa: Na hérnia diafragmática congênita com hipertensão pulmonar, evitar hipercapnia, acidose e hipóxia (que elevam a RVP); manter PCO₂ 45-55 mmHg, pH >7,3,...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-33
+      Anterior: A → Nova: B
+      Justificativa: Em cirrose Child-Pugh B, reduzir doses de fármacos com metabolismo hepático intenso (propofol, benzodiazepínicos, opioides) e com alta ligação proteic...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-34
+      Anterior: A → Nova: B
+      Justificativa: Ventilação protetora em cirurgia abdominal: VC 6-8 mL/kg de peso ideal, PEEP 5-8 cmH₂O, FiO₂ mínima para SpO₂ ≥95%, com manobras de recrutamento perió...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-35
+      Anterior: A → Nova: B
+      Justificativa: Na miastenia gravis, há resistência à succinilcolina (necessita doses maiores) e hipersensibilidade aos BNM não despolarizantes (usar 10-20% da dose h...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-36
+      Anterior: A → Nova: C
+      Justificativa: Raquianestesia é aceitável na pré-eclâmpsia grave com plaquetas acima de 70.000-80.000/μL e sem coagulopatia ativa; é a técnica preferida por evitar o...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-37
+      Anterior: A → Nova: B
+      Justificativa: Succinilcolina é contraindicada em IRC com K⁺ 6,1 mEq/L; o aumento de K⁺ de 0,5-1,5 mEq/L induzido pela succinilcolina pode causar hipercalemia grave ...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-38
+      Anterior: A → Nova: B
+      Justificativa: PA 90/55 + PVC 18 + DC 2,1 + RVS 2800 = padrão de choque cardiogênico (baixo débito, alta resistência vascular, alta pressão de enchimento); tratament...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-39
+      Anterior: A → Nova: B
+      Justificativa: Os quimiorreceptores periféricos (corpos carotídeos e aórticos) respondem à hipóxia (PaO₂ <60 mmHg), hipercapnia e acidose, gerando resposta ventilató...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-4
+      Anterior: A → Nova: C
+      Justificativa: O princípio da integralidade do SUS garante atenção em todos os níveis de complexidade, do cuidado primário à assistência especializada e de alta tecn...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-40
+      Anterior: A → Nova: B
+      Justificativa: Queda de SpO₂ + aumento de pressão de pico + murmúrio reduzido após mudança de posição sugere broncoespasmo ou obstrução; administrar broncodilatadore...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-41
+      Anterior: A → Nova: B
+      Justificativa: Alterações no EEG durante clampeamento carotídeo indicam possível isquemia cerebral ipsilateral; comunicar cirurgião imediatamente para considerar shu...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-42
+      Anterior: A → Nova: B
+      Justificativa: Hematoma cervical pós-tireoidectomia compressivo é emergência cirúrgica; abrir a ferida operatória imediatamente à beira do leito para aliviar a compr...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-43
+      Anterior: A → Nova: B
+      Justificativa: O débito cardíaco é o produto de FC × VS; o VS depende de pré-carga, pós-carga e contratilidade; alterações em qualquer um desses determinantes afetam...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-44
+      Anterior: A → Nova: B
+      Justificativa: Em obeso com síndrome de hipoventilação com PaCO₂ basal 52 mmHg e PaCO₂ pós-op 61 mmHg (9 mmHg acima do basal), hipercapnia significativa, manter intu...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-45
+      Anterior: A → Nova: B
+      Justificativa: Contrações musculares rítmicas a cada aplicação do bisturi monopolar indicam estimulação elétrica direta das raízes nervosas lombossacrais pela corren...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-46
+      Anterior: A → Nova: B
+      Justificativa: Indicação de transfusão: Hb <7 g/dL em paciente hemodinamicamente estável sem isquemia tecidual, ou Hb <8 g/dL em cardiopatas, idosos ou com sinais de...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-47
+      Anterior: A → Nova: B
+      Justificativa: Embolia gasosa venosa (EGV) em craniotomia com posição sentada: EtCO₂ cai + sons de 'roda d'água' no Doppler precordial; comunicar cirurgião para inun...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-48
+      Anterior: A → Nova: B
+      Justificativa: O BIS (Índice Bispectral) fornece valor numérico 0-100 derivado do EEG; BIS 40-60 indica anestesia geral adequada para cirurgia; BIS >80 sugere consci...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-49
+      Anterior: A → Nova: B
+      Justificativa: Na crise hipertensiva por feocromocitoma, nitroprussiato de sódio ou fentolamina (bloqueador alfa) são os agentes de escolha; beta-bloqueador NUNCA de...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-5
+      Anterior: A → Nova: C
+      Justificativa: O cenário descreve síndrome de burnout com risco psicossocial grave: escalas excessivas de 70h/semana causando erros de dosagem; este é o principal ri...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-50
+      Anterior: A → Nova: B
+      Justificativa: Na estenose mitral com FA crônica e hipotensão intraoperatória, controle da FC com amiodarona IV (150 mg em 10 min) para reduzir a taquicardia relativ...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-51
+      Anterior: A → Nova: B
+      Justificativa: Em paciente com suscetibilidade a HM (história familiar), realizar anestesia TIVA (propofol + remifentanil/alfentanil), evitar completamente halogenad...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-6
+      Anterior: A → Nova: B
+      Justificativa: O chefe do serviço deve afastar o médico dependente imediatamente, notificar o CRM e garantir encaminhamento para tratamento especializado; encobrir o...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-7
+      Anterior: A → Nova: B
+      Justificativa: A paciente é ASA III: DPOC leve + HAS controlada + tabagismo pesado + SpO₂ 95% basal = doença sistêmica grave mas não incapacitante; principal preocup...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-8
+      Anterior: A → Nova: B
+      Justificativa: Com stent farmacológico há 8 meses, o ideal seria completar 12 meses de dupla antiagregação; se cirurgia oncológica não pode ser adiada, manter AAS e ...
+
+    ID: sim-me1simuladosemestral150qpontos110revisao1semestrehtml-9
+      Anterior: A → Nova: B
+      Justificativa: Paciente com múltiplos preditores de via aérea difícil (DTM 5,5 cm, Mallampati III, IMC 38, cervical 43 cm, SAOS): STOP-BANG ≥5 e El-Ganzouri elevado;...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-10
+      Anterior: A → Nova: B
+      Justificativa: O coeficiente de partição sangue/gás do desflurano (0,42) é o mais baixo entre os halogenados em uso clínico, resultando em indução e recuperação mais...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-11
+      Anterior: A → Nova: D
+      Justificativa: O sevoflurano é o agente de escolha para indução inalatória pela combinação de odor agradável, baixa irritabilidade de vias aéreas e coeficiente de pa...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-12
+      Anterior: A → Nova: C
+      Justificativa: A adrenalina adicionada ao anestésico local causa vasoconstrição local, reduzindo a absorção vascular sistêmica, prolongando a duração do bloqueio em ...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-13
+      Anterior: A → Nova: B
+      Justificativa: No LAST (toxicidade sistêmica por AL), o tratamento de primeira linha para colapso cardiovascular é a emulsão lipídica 20% (Intralipid) 1,5 mL/kg IV e...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-2
+      Anterior: A → Nova: D
+      Justificativa: Após 4 meias-vidas (16 horas), a concentração plasmática em regime de infusão contínua atinge ~93,75% do estado estacionário, que é ≥90%; portanto, ≥9...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-3
+      Anterior: A → Nova: B
+      Justificativa: Um agonista parcial produz menor eficácia máxima (Emax menor) que o agonista pleno do mesmo receptor; sua potência (EC50) pode ser maior ou menor depe...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-4
+      Anterior: A → Nova: B
+      Justificativa: O propofol causa hipotensão principalmente por vasodilatação arteriolar e venosa mediada por inibição do tônus simpático e ação direta sobre o músculo...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-5
+      Anterior: A → Nova: B
+      Justificativa: O etomidato inibe a 11β-hidroxilase adrenal de forma dose-dependente, suprimindo a síntese de cortisol; mesmo após dose única, a supressão pode durar ...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-6
+      Anterior: A → Nova: B
+      Justificativa: A cetamina é antagonista não-competitivo dos receptores NMDA e estimula indiretamente o sistema simpático (liberação de catecolaminas), aumentando FC,...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-7
+      Anterior: A → Nova: B
+      Justificativa: O remifentanil é metabolizado por esterases plasmáticas e teciduais inespecíficas de forma independente da duração da infusão (meia-vida de contexto ~...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-8
+      Anterior: A → Nova: C
+      Justificativa: A morfina-6-glicuronídeo (M6G), metabólito ativo da morfina, acumula-se na IRC pois é eliminada pelos rins; pode causar depressão respiratória prolong...
+
+    ID: sim-me1simuladosemestral250qpontos11192semestrecompleto1html-9
+      Anterior: A → Nova: D
+      Justificativa: A hipotermia REDUZ o CAM em cerca de 5% por grau Celsius abaixo de 37°C (desloca para a esquerda); não aumenta o CAM. As demais afirmativas (A-C) são ...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-10
+      Anterior: A → Nova: B
+      Justificativa: No LAST com colapso cardiovascular após bupivacaína, o tratamento inclui controle de convulsões (benzodiazepínico ou propofol em dose baixa), suporte ...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-11
+      Anterior: A → Nova: B
+      Justificativa: Migração do cateter peridural para o espaço subaracnoide resulta em bloqueio raquidiano total (high spinal): hipotensão grave, apneia, perda de consci...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-12
+      Anterior: A → Nova: B
+      Justificativa: A curarização residual é definida como TOF ratio <0,9 e está associada a risco aumentado de hipóxia, aspiração e complicações respiratórias pós-operat...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-13
+      Anterior: A → Nova: C
+      Justificativa: Sugammadex 4 mg/kg IV é indicado para reversão de bloqueio profundo (TOF count 0-1, PTC 1-2) por rocurônio ou vecurônio; reverte imediata e completame...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-14
+      Anterior: A → Nova: B
+      Justificativa: No protocolo ACLS 2020, após FV refratária a 1ª desfibrilação: nova desfibrilação → 2 min RCP → adrenalina 1 mg IV → novo ciclo; a amiodarona é adicio...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-15
+      Anterior: A → Nova: C
+      Justificativa: AESP após laparoscopia com CO₂ = suspeita principal de embolia gasosa venosa maciça; posição de Durant (decúbito lateral esquerdo + Trendelenburg), Fi...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-16
+      Anterior: A → Nova: B
+      Justificativa: Raquianestesia total (high spinal) após dose excessiva de bupivacaína em L3-L4: bloqueio até T2, bradicardia severa, hipotensão intensa, apneia iminen...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-17
+      Anterior: A → Nova: B
+      Justificativa: A fenilefrina (agonista alfa-1 puro) é o vasopressor de primeira linha para hipotensão em cesárea sob raquianestesia; mantém a PA materna sem causar t...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-18
+      Anterior: A → Nova: B
+      Justificativa: A raquianestesia usa volumes pequenos de AL diretamente no LCR (2-4 mL), com início de ação rápido e previsível; a peridural requer volumes maiores (1...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-19
+      Anterior: A → Nova: B
+      Justificativa: Hematoma ou abscesso peridural com déficit neurológico progressivo é emergência neurocirúrgica; RNM de urgência é o exame diagnóstico de escolha e, se...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-2
+      Anterior: A → Nova: B
+      Justificativa: O propofol possui elevada lipossolubilidade, alto volume de distribuição (>500 L), clearance hepático elevado e meia-vida de contexto moderada (~30-50...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-20
+      Anterior: A → Nova: B
+      Justificativa: A analgesia multimodal com AINEs (cetorolaco IV), dipirona, bloqueio regional e opioide titulado é superior à monoterapia com opioides, reduzindo cons...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-21
+      Anterior: A → Nova: B
+      Justificativa: Um cateter peridural funcionante pode ser usado para anestesia de cesárea de urgência; administrar lidocaína 2% com epinefrina 1:200.000 em doses frac...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-22
+      Anterior: A → Nova: B
+      Justificativa: Na hipóxia durante ventilação monopulmonar, as primeiras medidas são: aumentar FiO₂ para 1,0, aplicar CPAP (5-10 cmH₂O) no pulmão não-ventilado e aume...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-23
+      Anterior: A → Nova: B
+      Justificativa: Desconexão do circuito respiratório durante laringectomia total pode ocorrer na fase de desconexão traqueal; o anestesiologista deve estar atento à ca...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-24
+      Anterior: A → Nova: B
+      Justificativa: A hipertermia maligna é causada por mutação autossômica dominante no receptor de rianodina RYR1 do músculo esquelético, levando a liberação patológica...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-25
+      Anterior: A → Nova: B
+      Justificativa: Na crise de HM confirmada: descontinuar imediatamente sevoflurano (troca para TIVA), administrar dantrolene 2,5 mg/kg IV (repetir até 10 mg/kg), resfr...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-26
+      Anterior: A → Nova: C
+      Justificativa: Após Trendelenburg prolongado + ventilação mecânica, a queda de SpO₂ e crepitações bilaterais indicam atelectasia e lesão pulmonar associada à ventila...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-27
+      Anterior: A → Nova: B
+      Justificativa: TOF ratio 0,68 na SRPA com esforço respiratório = curarização residual clinicamente significativa; sugammadex 2 mg/kg IV para rocurônio/vecurônio reve...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-28
+      Anterior: A → Nova: B
+      Justificativa: Hipocalcemia sintomática grave após tireoidectomia (parestesias + Chvostek + QTc 510 ms) por lesão das paratireoides exige gluconato de cálcio 1-2 g I...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-29
+      Anterior: A → Nova: B
+      Justificativa: Delirium pós-operatório em idoso exige exclusão sistemática de causas tratáveis: hipóxia, hipoglicemia, retenção urinária, dor, distúrbios hidroeletro...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-3
+      Anterior: A → Nova: B
+      Justificativa: Após TIVA com remifentanil, o término abrupto da infusão causa hiperalgesia de rebote e ausência de analgesia residual; é essencial administrar analgé...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-30
+      Anterior: A → Nova: B
+      Justificativa: PaO₂/FiO₂ <200 mmHg + infiltrados bilaterais + ausência de IC = SDRA moderada conforme critérios de Berlim; tratamento: ventilação protetora (VC 6 mL/...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-31
+      Anterior: A → Nova: B
+      Justificativa: Para alta da SRPA, o escore de Aldrete modificado deve ser ≥9; para alta ambulatorial direta ao domicílio, usa-se a escala PADSS (Post-Anesthetic Disc...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-32
+      Anterior: A → Nova: B
+      Justificativa: CPPD após raquianestesia (cefaleia postural, piora em pé, melhora deitado): tratamento conservador com hidratação, repouso relativo, cafeína oral; blo...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-33
+      Anterior: A → Nova: B
+      Justificativa: A analgesia pós-operatória efetiva é fundamental para prevenir cronicização da dor e facilitar a mobilização precoce; abordagem multimodal com AINEs, ...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-34
+      Anterior: A → Nova: C
+      Justificativa: Sedação excessiva por dexmedetomidina (sem antagonista disponível): estimulação física vigorosa, oxigênio suplementar e aguardar metabolização espontâ...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-35
+      Anterior: A → Nova: B
+      Justificativa: Depressão respiratória por opioides (FR 6 irpm, SpO₂ 82%, pupilas puntiformes) = naloxona 0,04-0,1 mg IV titulada a cada 2-3 min até recuperação da ve...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-36
+      Anterior: A → Nova: B
+      Justificativa: A sensibilização central envolve ativação de receptores NMDA e liberação de substância P no corno posterior da medula, amplificando a resposta nocicep...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-37
+      Anterior: A → Nova: B
+      Justificativa: Dor com queimação + alodinia + choque elétrico após herniorrafia inguinal sugere neuropatia do nervo ilioinguinal/iliohipogástrico; tratamento com ant...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-38
+      Anterior: A → Nova: B
+      Justificativa: Dor do membro fantasma resulta de reorganização cortical e sensibilização central após amputação; tratamento multimodal: analgesia peridural ou bloque...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-39
+      Anterior: A → Nova: C
+      Justificativa: Delirium hiperagitado pós-operatório em UTI (RASS +3/+4) requer haloperidol IV ou IM como primeira linha de tratamento farmacológico, após exclusão de...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-4
+      Anterior: A → Nova: B
+      Justificativa: O sinergismo farmacodinâmico entre midazolam (potenciador GABAérgico) e propofol explica a apneia após dose habitual de propofol; reduzir doses de amb...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-40
+      Anterior: A → Nova: D
+      Justificativa: Paciente com uso crônico de morfina oral apresenta tolerância (necessita mais opioide para o mesmo efeito) E hiperalgesia induzida por opioides (OIH),...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-41
+      Anterior: A → Nova: B
+      Justificativa: Em ritmos não chocáveis (AESP e assistolia), a adrenalina 1 mg IV deve ser administrada o mais cedo possível e repetida a cada 3-5 min durante a RCP; ...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-42
+      Anterior: A → Nova: B
+      Justificativa: CIVD no contexto de tríade letal (hipotermia + acidose + coagulopatia): ressuscitação hemostática com plasma:plaquetas:concentrado de hemácias em prop...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-43
+      Anterior: A → Nova: B
+      Justificativa: Em PCR com paciente em decúbito ventral, realizar compressões torácicas sobre as vértebras torácicas médias (T7-T10) a 100-120 por min; se possível, v...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-44
+      Anterior: A → Nova: B
+      Justificativa: O prurido induzido por morfina intratecal resulta da ativação de receptores μ no núcleo trigeminal e não é mediado por histamina; tratamento: naloxona...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-46
+      Anterior: A → Nova: B
+      Justificativa: Síndrome de RTU por absorção de glicina 1,5% hipotônica: hiponatremia dilucional + hipervolemia + toxicidade da glicina (amônia, visão turva, encefalo...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-47
+      Anterior: A → Nova: B
+      Justificativa: Os halogenados em uso clínico causam vasodilatação coronariana; o isoflurano em particular está associado ao fenômeno de roubo coronariano em paciente...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-48
+      Anterior: A → Nova: B
+      Justificativa: Dexmedetomidina é preferida para sedação em IRC por ser predominantemente metabolizada no fígado (sem acúmulo renal relevante), proporcionar sedação c...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-49
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio do plexo celíaco por via percutânea posterior guiada por fluoroscopia ou ecoendoscopia (USE) é a técnica mais eficaz para dor oncológica vi...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-5
+      Anterior: A → Nova: B
+      Justificativa: Em TCE grave com instabilidade hemodinâmica, o etomidato (0,3 mg/kg) é o agente de indução preferido por sua neutralidade hemodinâmica e capacidade de...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-50
+      Anterior: A → Nova: B
+      Justificativa: Retenção urinária pós-raquianestesia é complicação comum da morfina intratecal, pela supressão da contração detrusora mediada por receptores μ na medu...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-51
+      Anterior: A → Nova: B
+      Justificativa: A síncope com bradicardia intensa após raquianestesia + posição sentada resulta do reflexo de Bezold-Jarisch: simpaticolise + esvaziamento brusco do V...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-6
+      Anterior: A → Nova: B
+      Justificativa: O desflurano possui o menor coeficiente de partição sangue/gás entre os halogenados em uso clínico (0,42), resultando em indução e recuperação mais rá...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-7
+      Anterior: A → Nova: B
+      Justificativa: Movimentos da laringe + laringoespasmo em criança durante indução inalatória indica plano anestésico insuficiente (fase de excitação de Guedel II/iníc...
+
+    ID: sim-me1simuladosemestral250qpontos1119revisao2semestrehtml-8
+      Anterior: A → Nova: B
+      Justificativa: Taquicardia + midríase + sudorese + PA elevada durante manutenção com isoflurano 1,2% + N₂O = plano anestésico insuficiente com risco de consciência i...
+
+
+ARQUIVO: simulados_ME2.csv
+------------------------------------------------------------
+  Total de questões revisadas    : 390
+  Questões com erro sistemático  : 219
+  Questões corrigidas (≠ A)       : 196
+  Questões mantidas como A        : 23
+
+  LISTA DE CORREÇÕES:
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-10
+      Anterior: A → Nova: B
+      Justificativa: PAP 42/18 + POAP 22 (elevada) + DC 2,8 (baixo) + RVS 2000 (alta) = insuficiência ventricular esquerda com baixo débito cardíaco e hipertensão venocapi...
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-2
+      Anterior: A → Nova: B
+      Justificativa: Tamanho amostral insuficiente resulta em poder estatístico inadequado (beta elevado), levando ao erro tipo II (falso negativo): não detectar diferença...
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-3
+      Anterior: A → Nova: B
+      Justificativa: NNT = 1/RAR = 1/(0,40-0,20) = 1/0,20 = 5; cada 5 pacientes tratados com ondansetrona previne 1 caso de NVPO em comparação ao controle.
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-4
+      Anterior: A → Nova: C
+      Justificativa: Para estudar desfecho raro (aborto) com exposição ambiental, o delineamento caso-controle é mais eficiente; recrutar casos com aborto e controles sem ...
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-5
+      Anterior: A → Nova: C
+      Justificativa: O modelo de efeitos aleatórios, adequado quando I²≥50%, assume que os estudos estimam efeitos verdadeiros diferentes mas relacionados, acomodando a va...
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-6
+      Anterior: A → Nova: B
+      Justificativa: Significância estatística (p=0,03) com Cohen d=0,32 indica efeito pequeno; a diferença de 1 ponto na VAS pode não ter relevância clínica prática. Sign...
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-7
+      Anterior: A → Nova: B
+      Justificativa: Estudo que acompanha participantes sem o desfecho ao longo do tempo para avaliar incidência = coorte prospectiva; a medida de associação apropriada é ...
+
+    ID: sim-me2simulado1trimestreprovaa30qpontos2023html-9
+      Anterior: A → Nova: C
+      Justificativa: Para comparar 3 grupos com variável contínua de distribuição não-normal, usa-se o teste de Kruskal-Wallis (equivalente não-paramétrico da ANOVA); Mann...
+
+    ID: sim-me2simulado1trimestreprovaahtml-20
+      Anterior: A → Nova: B
+      Justificativa: Coeficiente sangue/gás de 0,45 indica baixa solubilidade no sangue: pouco agente dissolve para atingir pressão parcial alveolar-arterial de equilíbrio...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-10
+      Anterior: A → Nova: B
+      Justificativa: PAP 55/30 + POAP 8 (normal) + DC 4,5 (normal) + RVP 800 (elevada) = hipertensão pulmonar pré-capilar (HAPI ou TEP crônico); POAP normal afasta hiperte...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-2
+      Anterior: A → Nova: B
+      Justificativa: A alocação por dia da semana é previsível e permite que participantes ou equipe identifiquem antecipadamente o grupo de alocação, introduzindo viés de...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-3
+      Anterior: A → Nova: B
+      Justificativa: NNT = 1/(0,12-0,04) = 1/0,08 = 12,5; RR = 0,04/0,12 = 0,33. O tratamento reduz o risco relativo em 67% e é necessário tratar 12,5 pacientes para preve...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-4
+      Anterior: A → Nova: B
+      Justificativa: Avaliação de prevalência de SAOS em um único momento sem seguimento = estudo transversal (cross-sectional); limitação principal: não permite estabelec...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-5
+      Anterior: A → Nova: B
+      Justificativa: Diamond cruzando a linha de nulidade (OR=1) indica resultado não estatisticamente significativo; I²=25% representa baixa heterogeneidade, favorecendo ...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-6
+      Anterior: A → Nova: B
+      Justificativa: AUC=0,82 indica boa capacidade discriminativa: 82% de probabilidade de que o escore classifique corretamente um paciente de alto risco acima de um de ...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-7
+      Anterior: A → Nova: B
+      Justificativa: Para avaliar concordância entre dois avaliadores em uma variável ordinal categórica (atelectasia: ausente/leve/grave), o Kappa de Cohen é o teste esta...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-8
+      Anterior: A → Nova: B
+      Justificativa: Cohen d=0,32 indica tamanho de efeito pequeno (<0,5); embora estatisticamente significativa, a diferença de 1 ponto na VAS provavelmente não tem relev...
+
+    ID: sim-me2simulado1trimestreprovab30qpontos2023html-9
+      Anterior: A → Nova: B
+      Justificativa: Viés de detecção = diferença sistemática na mensuração do desfecho entre grupos (ex: avaliação não cega do desfecho); viés de performance = diferença ...
+
+    ID: sim-me2simulado2trimestreprovabhtml-10
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio do canal dos adutores (BCA) bloqueia o nervo safeno sensitivo e preserva melhor a força do quadríceps comparado ao bloqueio do nervo femora...
+
+    ID: sim-me2simulado2trimestreprovabhtml-13
+      Anterior: A → Nova: C
+      Justificativa: O nervo ciático se divide em tibial e fibular comum em média 5-7 cm acima da prega poplítea, permitindo bloqueio do tronco indiviso com injeção única ...
+
+    ID: sim-me2simulado2trimestreprovabhtml-17
+      Anterior: A → Nova: B
+      Justificativa: Para uretrocistoscopia em litotomia, raquianestesia em sela com bupivacaína hiperbárica 7,5-10 mg + posição sentada por 3-5 min após a punção concentr...
+
+    ID: sim-me2simulado2trimestreprovabhtml-18
+      Anterior: A → Nova: B
+      Justificativa: Hipotensão pós-raquianestesia em cesariana: deslocamento uterino lateral esquerdo (previne compressão aortocava), cristaloide ou coloide e vasopressor...
+
+    ID: sim-me2simulado2trimestreprovabhtml-19
+      Anterior: A → Nova: B
+      Justificativa: TNS (Transient Neurologic Symptoms): dor ou disestesia em nádegas/membros inferiores sem déficit motor ou sensitivo objetivável, com resolução espontâ...
+
+    ID: sim-me2simulado2trimestreprovabhtml-21
+      Anterior: A → Nova: B
+      Justificativa: A dose de morfina intratecal para analgesia em cesariana é tipicamente 100-200 mcg; doses acima de 300 mcg não melhoram a analgesia mas aumentam signi...
+
+    ID: sim-me2simulado2trimestreprovabhtml-22
+      Anterior: A → Nova: B
+      Justificativa: Confusão + visão turva durante RTUP com glicina = síndrome de absorção do irrigante (síndrome RTU); interromper irrigação, dosar sódio sérico, diuréti...
+
+    ID: sim-me2simulado2trimestreprovabhtml-23
+      Anterior: A → Nova: D
+      Justificativa: A curvatura da coluna vertebral (lordose lombar e cifose torácica) É relevante para a dispersão de soluções hiperbáricas; a lordose lombar em decúbito...
+
+    ID: sim-me2simulado2trimestreprovabhtml-24
+      Anterior: A → Nova: B
+      Justificativa: A perda de resistência (LOR) com ar aumenta o risco de pneumocéfalo, embolia gasosa e CPPD por deslocamento de LCR; LOR com solução salina é considera...
+
+    ID: sim-me2simulado2trimestreprovabhtml-26
+      Anterior: A → Nova: C
+      Justificativa: A analgesia peridural pode ser iniciada em qualquer fase do trabalho de parto (mesmo com <4 cm de dilatação) sem aumentar a taxa de cesariana; evidênc...
+
+    ID: sim-me2simulado2trimestreprovabhtml-27
+      Anterior: A → Nova: B
+      Justificativa: Febre + bacteremia sem foco em paciente com cateter peridural há >72h: remover cateter imediatamente, enviar ponta para cultura, hemoculturas e inicia...
+
+    ID: sim-me2simulado2trimestreprovabhtml-29
+      Anterior: A → Nova: C
+      Justificativa: Hipotensão refratária após peridural torácica combinada com anestesia geral: norepinefrina (0,05-0,3 mcg/kg/min) ou vasopressina (0,03-0,04 U/min) são...
+
+    ID: sim-me2simulado2trimestreprovabhtml-4
+      Anterior: A → Nova: C
+      Justificativa: LAST em fase inicial (SNC): interromper qualquer injeção adicional, oferecer O₂ suplementar, garantir acesso venoso calibroso, preparar emulsão lipídi...
+
+    ID: sim-me2simulado2trimestreprovabhtml-5
+      Anterior: A → Nova: C
+      Justificativa: A felipressina (octapressina) é análogo da vasopressina com potencial efeito uterotônico em doses elevadas e pode reduzir o fluxo uterino; não é vasoc...
+
+    ID: sim-me2simulado2trimestreprovabhtml-6
+      Anterior: A → Nova: C
+      Justificativa: A ropivacaína é o enantiômero S(-) puro, com menor cardiotoxicidade que a bupivacaína racêmica e menor propensão a arritmias ventriculares fatais, man...
+
+    ID: sim-me2simulado2trimestreprovabhtml-7
+      Anterior: A → Nova: C
+      Justificativa: O protocolo ASRA para LAST com colapso cardiovascular recomenda emulsão lipídica 20% em bolus de 1,5 mL/kg IV em 1 minuto, seguida de infusão 0,25 mL/...
+
+    ID: sim-me2simulado2trimestreprovabhtml-9
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio interescalênico causa paralisia do nervo frênico ipsilateral em ~100% dos casos, reduzindo a CV em ~25%; em paciente com DPOC moderado (VEF...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-10
+      Anterior: A → Nova: B
+      Justificativa: Síndrome de absorção de irrigante (RTU): hiponatremia dilucional + confusão mental + náuseas + hipovolemia relativa; tratamento: interromper irrigação...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-11
+      Anterior: A → Nova: C
+      Justificativa: O manitol é filtrado pelos glomérulos e NÃO é reabsorvido pelo túbulo proximal; permanece no lúmen tubular e exerce efeito osmótico, arrastando água p...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-12
+      Anterior: A → Nova: B
+      Justificativa: Hidrotórax durante nefrolitotripsia percutânea pode ocorrer por extravasamento de solução de irrigação do sistema coletoral para o espaço pleural atra...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-13
+      Anterior: A → Nova: C
+      Justificativa: Em IRC em hemodiálise, atracúrio e cisatracúrio sofrem eliminação de Hofmann (degradação espontânea pH/temperatura-dependente) independente de função ...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-14
+      Anterior: A → Nova: B
+      Justificativa: Hipotensão pós-raquianestesia para cesariana = bloqueio simpático com vasodilatação; fenilefrina 100 mcg IV em bolus (titulada) ou norepinefrina são v...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-15
+      Anterior: A → Nova: B
+      Justificativa: O nível terapêutico do magnésio sérico para profilaxia de eclâmpsia é de 4-7 mEq/L (4,8-8,4 mg/dL); acima de 7-10 mEq/L ocorre perda de reflexos tendi...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-16
+      Anterior: A → Nova: B
+      Justificativa: Síndrome HELLP (Hemolysis, Elevated Liver enzymes, Low Platelets): plaquetopenia + elevação de transaminases + LDH elevado + hemólise; complicação gra...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-17
+      Anterior: A → Nova: D
+      Justificativa: Hemorragia pós-parto com útero hipotônico: uterotônicos de segunda linha (ergometrina IM 0,2 mg e carboprost IM) após falha/contraindicação da ocitoci...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-18
+      Anterior: A → Nova: C
+      Justificativa: Embolia de líquido amniótico: diagnóstico de exclusão; manejo é exclusivamente de suporte — ressuscitação cardiopulmonar, suporte hemodinâmico com vas...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-19
+      Anterior: A → Nova: C
+      Justificativa: A CAM dos inalatórios REDUZ em ~30-40% na gestação (não aumenta) devido à progesterona, que potencializa o efeito dos anestésicos no SNC; esta é a afi...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-20
+      Anterior: A → Nova: B
+      Justificativa: A síndrome de implantação do cimento ósseo resulta de embolia de monômero de PMMA, gordura e ar no sistema venoso durante a cimentação; manifesta-se c...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-21
+      Anterior: A → Nova: B
+      Justificativa: Síndrome de embolia gordurosa (SEG): critérios de Gurd (petéquias + insuficiência respiratória + alteração neurológica) após fratura de fêmur bilatera...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-22
+      Anterior: A → Nova: B
+      Justificativa: Tríade letal do trauma = hipotermia + acidose metabólica + coagulopatia; quebra o ciclo de coagulação e exige ressuscitação hemostática (1:1:1), reaqu...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-24
+      Anterior: A → Nova: B
+      Justificativa: Para fratura de colo femoral em idoso, a anestesia neuroaxial (raquianestesia ou peridural) está associada a menor mortalidade em 30 dias e menos comp...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-25
+      Anterior: A → Nova: B
+      Justificativa: A pressão de insuflação recomendada para MMII é 200-250 mmHg acima da PAS (mínimo 250 mmHg); contraindicado em doença vascular periférica grave, TVP a...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-26
+      Anterior: A → Nova: C
+      Justificativa: Para bloqueio neuroaxial em pré-eclâmpsia grave, a maioria das diretrizes aceita plaquetas ≥70.000-80.000/μL com tendência estável e sem coagulopatia ...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-28
+      Anterior: A → Nova: B
+      Justificativa: Glicina (usada como irrigante em RTUP) é metabolizada em amônia e glioxilato; a amônia causa encefalopatia e visão turva (bloqueio da neurotransmissão...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-29
+      Anterior: A → Nova: B
+      Justificativa: Para cesariana de emergência com estômago cheio, o padrão é indução de sequência rápida (ISR) com propofol ou cetamina + succinilcolina 1,5 mg/kg OU r...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-3
+      Anterior: A → Nova: C
+      Justificativa: Para reversão urgente de rivaroxabana (anticoagulante Xa) em emergência cirúrgica, o antídoto específico é o andexanet alfa; concentrado de complexo p...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-30
+      Anterior: A → Nova: B
+      Justificativa: A heparina não fracionada SC profilática (<10.000 UI/dia) NÃO é contraindicação para bloqueio de nervo periférico; as restrições de bloqueio neuroaxia...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-31
+      Anterior: A → Nova: B
+      Justificativa: Para reversão urgente de dabigatrana (inibidor direto da trombina), o antídoto específico é o idarucizumabe 5 g IV (2 frascos de 2,5 g), com reversão ...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-4
+      Anterior: A → Nova: B
+      Justificativa: ROTEM EXTEM com CT prolongado + CFT prolongado + MCF reduzido, com FIBTEM também mostrando MCF reduzido, indica deficiência de fibrinogênio como causa...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-5
+      Anterior: A → Nova: B
+      Justificativa: CIVD pós-DPP: tratar a causa base (extração fetal e útero) e repor hemoderivados guiados por exames (CH, PFC, plaquetas, crioprecipitado) e ROTEM/TEG ...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-6
+      Anterior: A → Nova: C
+      Justificativa: Para reversão urgente de warfarina com INR 4,8 em cirurgia de emergência: concentrado de complexo protrombínico (CCP) 4 fatores é mais rápido, eficaz ...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-7
+      Anterior: A → Nova: B
+      Justificativa: Resistência à heparina durante CEC com TCA caindo = deficiência de antitrombina III (ATIII); a heparina precisa de ATIII para exercer seu efeito antic...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-8
+      Anterior: A → Nova: C
+      Justificativa: TFG 42 mL/min = DRC estágio 3b (KDIGO); exige ajuste de doses de drogas excretadas renalmente, evitar AINEs e nefrotóxicos, hidratação cuidadosa e mon...
+
+    ID: sim-me2simulado3trimestreprovaa30qpontos2832html-9
+      Anterior: A → Nova: C
+      Justificativa: Creatinina 2,8 mg/dL vs. basal 1,0 mg/dL = aumento 2,8× (>2× basal = estágio 2 pelo critério de creatinina KDIGO); diurese 0,3 mL/kg/h (<0,5 mL/kg/h p...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-10
+      Anterior: A → Nova: B
+      Justificativa: EtCO₂ subindo durante laparoscopia com pneumoperitônio = absorção de CO₂ pelo peritônio + posição desfavorável; aumentar frequência respiratória para ...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-11
+      Anterior: A → Nova: B
+      Justificativa: Sódio urinário 8 mEq/L (baixo) + osmolaridade urinária alta + baixo débito urinário = IRA pré-renal (hipovolemia funcional pós-CEC); responde a expans...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-12
+      Anterior: A → Nova: B
+      Justificativa: AINEs são contraindicados relativos em DRC estágio 3b+ por inibição de prostaglandinas vasodilatadoras renais, podendo precipitar IRA em pacientes com...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-13
+      Anterior: A → Nova: D
+      Justificativa: A morfina-6-glucuronídeo (M6G), metabólito ativo da morfina, acumula-se na IRC e pode causar depressão respiratória grave e prolongada; morfina deve s...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-14
+      Anterior: A → Nova: C
+      Justificativa: Placenta prévia com suspeita de acretismo: anestesia geral com ISR planejada desde o início é preferível por permitir controle da via aérea, suporte h...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-15
+      Anterior: A → Nova: B
+      Justificativa: Laringoespasmo + edema glótico grave pós-extubação em gestante com pré-eclâmpsia: ventilação por máscara laríngea como ponte, e cricotireoidostomia ci...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-17
+      Anterior: A → Nova: C
+      Justificativa: Para sutura de laceração perineal grau I-II em puérpera com instabilidade hemodinâmica relativa, raquianestesia com bupivacaína hiperbárica 7,5 mg ofe...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-18
+      Anterior: A → Nova: B
+      Justificativa: Para cerclagem cervical em gestante de 28 semanas, raquianestesia baixa (sela) com bupivacaína hiperbárica 5-7,5 mg é ideal: bloqueia S2-S5 para o col...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-19
+      Anterior: A → Nova: B
+      Justificativa: O sulfato de magnésio atravessa a barreira placentária e causa hipotonia, hipoventilação, hiporreflexia e hipocalcemia transitória no RN; os efeitos s...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-2
+      Anterior: A → Nova: C
+      Justificativa: Apixabana com última dose há 14h em fratura de quadril urgente: andexanet alfa reverte especificamente os inibidores de fator Xa (apixabana, rivaroxab...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-20
+      Anterior: A → Nova: B
+      Justificativa: Para monitorização neurofisiológica intraoperatória (PESS + MEPs), TIVA com propofol + remifentanil + baixa dose de halogenado (<0,5 CAM) interfere me...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-21
+      Anterior: A → Nova: B
+      Justificativa: Após deflação de segundo torniquete em artroplastia bilateral: embolia gordurosa ou de cimento da medula óssea pode causar queda de EtCO₂, hipoxemia e...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-22
+      Anterior: A → Nova: C
+      Justificativa: Cirurgia de controle de danos na UTI: ressuscitação hemostática 1:1:1 (plasma:plaquetas:CH), reaquecimento ativo, correção gradual da acidose (evitar ...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-23
+      Anterior: A → Nova: B
+      Justificativa: Para artroplastia de joelho, o bloqueio do canal dos adutores (nervo safeno) preserva a força do quadríceps e permite deambulação precoce; o bloqueio ...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-24
+      Anterior: A → Nova: B
+      Justificativa: A síndrome de embolia gordurosa tipicamente se manifesta 12-72 horas após o evento traumático, com a tríade clássica: petéquias + insuficiência respir...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-25
+      Anterior: A → Nova: B
+      Justificativa: A técnica de terceira geração para cimentação femoral (limpeza e secagem do canal, cimento pressurizado com pistola de cimento, plug distal) reduz emb...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-26
+      Anterior: A → Nova: B
+      Justificativa: Em obeso mórbido com DRC 3b: rocurônio 1,2 mg/kg (peso total) para ISR + atracúrio ou cisatracúrio para manutenção (eliminação de Hofmann independente...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-27
+      Anterior: A → Nova: D
+      Justificativa: Sangramento difuso pós-CEC com TCA normal = consumo de fatores + plaquetopenia funcional pós-CEC; crioprecipitado (fibrinogênio + fator VIII) + plaque...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-28
+      Anterior: A → Nova: B
+      Justificativa: Em paciente com IRC em diálise programado para criar FAV: preservar o capital venoso evitando punções nas veias do antebraço e braço do lado da FAV fu...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-29
+      Anterior: A → Nova: C
+      Justificativa: A analgesia peridural pode ser iniciada a qualquer momento do trabalho de parto desde que solicitada pela parturiente; evidências atuais não sustentam...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-3
+      Anterior: A → Nova: C
+      Justificativa: ROTEM com EXTEM+INTEM CT normais e MCF reduzido em ambos, mas com FIBTEM mostrando MCF normal = plaquetopenia/disfunção plaquetária; FIBTEM normal + M...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-30
+      Anterior: A → Nova: B
+      Justificativa: Trendelenburg acentuado prolongado + PIO elevada = risco de neuropatia óptica isquêmica posterior e oclusão da artéria central da retina por hipoperfu...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-31
+      Anterior: A → Nova: C
+      Justificativa: No trauma grave em gestante, a prioridade é ressuscitar a mãe primeiro; a melhor maneira de salvar o feto é tratar a mãe. Seguir ABCDE do trauma para ...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-4
+      Anterior: A → Nova: B
+      Justificativa: Na hemofilia A grave submetida a cirurgia de alto risco, o nível mínimo de fator VIII deve ser >80-100% do normal; usar concentrado de fator VIII reco...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-5
+      Anterior: A → Nova: C
+      Justificativa: Para cirurgia de alto risco hemorrágico, o intervalo mínimo entre a última dose de HBPM profilática e o bloqueio neuroaxial deve ser de 12 horas; para...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-6
+      Anterior: A → Nova: B
+      Justificativa: TP alargado + TTPA normal + plaquetas normais + fibrinogênio normal no 3º dia pós-operatório = deficiência de vitamina K por antibioticoterapia (supre...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-7
+      Anterior: A → Nova: B
+      Justificativa: TIH tipo 2: queda >50% de plaquetas com trombose, dia 5-14 após início da heparina = anticorpos anti-PF4/heparina; tratar suspendendo imediatamente to...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-8
+      Anterior: A → Nova: C
+      Justificativa: Para nefroproteção perioperatória em cirurgia de aorta, as únicas medidas com evidência sólida são: manutenção da normovolemia, PAM ≥65-80 mmHg, evita...
+
+    ID: sim-me2simulado3trimestreprovab30qpontos2832html-9
+      Anterior: A → Nova: D
+      Justificativa: Todos os enunciados A, B e C sobre furosemida são corretos; a afirmativa D sobre ototoxicidade é correta (furosemida causa ototoxicidade em altas dose...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-10
+      Anterior: A → Nova: B
+      Justificativa: Laringoespasmo pós-extubação em criança: posição de olfação, O₂ por máscara, CPAP com máscara e pressão positiva; se grave (SpO₂ <80%), succinilcolina...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-11
+      Anterior: A → Nova: B
+      Justificativa: A LMA de segunda geração (Supreme, ProSeal) possui canal de drenagem gástrica que permite passagem de sonda orogástrica, reduzindo o risco de regurgit...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-12
+      Anterior: A → Nova: B
+      Justificativa: Após laringectomia total, a traqueia é anastomosada diretamente à pele (traqueostoma permanente); não há conexão entre vias aéreas superiores e traque...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-14
+      Anterior: A → Nova: B
+      Justificativa: O timolol colírio (betabloqueador) tem absorção sistêmica pela mucosa nasolacrimal, podendo causar bradicardia, broncoespasmo e potenciação do bloquei...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-15
+      Anterior: A → Nova: B
+      Justificativa: O reflexo oculocardíaco (ROC) é mediado pelo nervo trigêmio V1 (aferente) e pelo nervo vago X (eferente); tração do músculo extraocular ou pressão sob...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-16
+      Anterior: A → Nova: D
+      Justificativa: Em globo aberto com estômago cheio, ISR com rocurônio 1,2 mg/kg (com sugammadex disponível) é preferível à succinilcolina para evitar aumento transitó...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-17
+      Anterior: A → Nova: B
+      Justificativa: N₂O é contraindicado quando há bolha de gás intraocular (SF6, C3F8) por difundir para a bolha e expandi-la, aumentando a PIO a níveis críticos com ris...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-18
+      Anterior: A → Nova: B
+      Justificativa: Fatores que elevam a PIO: hipercapnia, hipertensão, tosse, Valsalva, laringoscopia, succinilcolina (fasciculações), cetamina, N₂O (com gás intraocular...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-19
+      Anterior: A → Nova: B
+      Justificativa: Glaucoma agudo de ângulo fechado: sedação cuidadosa evitando aumento da PIO; vômitos e tosse elevam a PIO por aumento da pressão venosa epiescleral; a...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-2
+      Anterior: A → Nova: B
+      Justificativa: Logo após insuflação do CO₂ peritoneal, a estimulação vagal pelo estiramento peritoneal causa bradicardia e hipotensão transitória, seguida de aumento...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-20
+      Anterior: A → Nova: C
+      Justificativa: ASA III com comorbidades estáveis e bem controladas (HAS, DM, obesidade grau I) NÃO contraindica cirurgia ambulatorial; as contraindicações absolutas ...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-21
+      Anterior: A → Nova: B
+      Justificativa: A escala PADSS avalia 5 critérios: sinais vitais, nível de atividade/consciência, náuseas/vômitos/tontura, dor pós-operatória e sangramento/drenagem c...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-22
+      Anterior: A → Nova: B
+      Justificativa: Os 4 fatores de risco do escore de Apfel para NVPO: sexo feminino, não fumante, história de NVPO ou cinetose, e uso de opioides pós-operatórios; risco...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-23
+      Anterior: A → Nova: B
+      Justificativa: Ex-prematuros com <60 semanas de idade pós-concepcional têm risco aumentado de apneia pós-anestésica; internação com monitorização cardiorrespiratória...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-24
+      Anterior: A → Nova: C
+      Justificativa: Depressão respiratória por opioide (propofol + fentanil pós-colonoscopia): naloxona 0,04-0,1 mg IV titulada, repetindo a cada 2-3 min; evitar dose exc...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-25
+      Anterior: A → Nova: B
+      Justificativa: SAOS grave aumenta o risco de hipóxia pós-operatória, especialmente com opioides; analgesia multimodal (AINEs + paracetamol + técnicas regionais) mini...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-26
+      Anterior: A → Nova: B
+      Justificativa: Tonsilectomia sangrante tardia com estômago cheio (sangue deglutido) = ISR mandatória; risco de aspiração de sangue coagulado; indução com sequência r...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-27
+      Anterior: A → Nova: C
+      Justificativa: CO₂ é o gás preferido para pneumoperitônio por ser altamente solúvel no sangue (absorvido e eliminado rapidamente pelos pulmões), atóxico nos níveis u...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-28
+      Anterior: A → Nova: B
+      Justificativa: Via aérea difícil em obeso com falha de ISR: segunda tentativa com videolaringoscópio (GlideScope/C-MAC) com bougie, mantendo oxigenação adequada; não...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-29
+      Anterior: A → Nova: B
+      Justificativa: Propofol apresenta efeito anti-vagal e antiemético; em cirurgia de estrabismo, o uso de TIVA com propofol reduz a incidência do reflexo oculocardíaco ...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-3
+      Anterior: A → Nova: B
+      Justificativa: Queda de SpO₂ em DPOC durante Trendelenburg + pneumoperitônio = comprometimento da mecânica respiratória pelo deslocamento cefálico do diafragma; aume...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-30
+      Anterior: A → Nova: B
+      Justificativa: As principais causas de reinternação após cirurgia ambulatorial são: dor inadequadamente controlada, NVPO persistentes, sangramento, complicações cirú...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-31
+      Anterior: A → Nova: B
+      Justificativa: Reduzem a PIO: propofol, halogenados, opioides, benzodiazepínicos, acetazolamida; Aumentam a PIO: cetamina, N₂O (com gás intraocular), succinilcolina ...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-4
+      Anterior: A → Nova: C
+      Justificativa: Para TIVA com propofol em obeso mórbido: dose de indução baseada no peso total ajustado (PTA = PI + 0,4×[PT-PI]) e manutenção pelo TCI com PTA ou peso...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-5
+      Anterior: A → Nova: B
+      Justificativa: A posição de rampa (cabeça e tronco elevados 30-40°, meato acústico alinhado com a fúrcula esternal) melhora a laringoscopia no obeso e reduz o tempo ...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-6
+      Anterior: A → Nova: B
+      Justificativa: Embolia gasosa venosa maciça por CO₂ durante laparoscopia: dessuflação imediata, posição Durant (decúbito lateral esquerdo + Trendelenburg), FiO₂ 100%...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-8
+      Anterior: A → Nova: B
+      Justificativa: Para microcirurgia de laringe (polipectomia), o campo cirúrgico livre exige tubo microlaríngeo (MLT 4,0 mm, com balonete de alta capacidade e baixa pr...
+
+    ID: sim-me2simulado4trimestreprovaa30qpontos3336html-9
+      Anterior: A → Nova: B
+      Justificativa: O principal risco específico do uso de laser CO₂ na laringe é o incêndio endotraqueal (airway fire); prevenção: tubo resistente a laser, FiO₂ mínima ≤...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-10
+      Anterior: A → Nova: B
+      Justificativa: Um broncoscópio de 4,9 mm em LMA nº4 (diâmetro interno 13 mm) ocupa parte significativa do lúmen, podendo comprometer a ventilação; reduzir o volume c...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-11
+      Anterior: A → Nova: B
+      Justificativa: Corpo estranho endobrônquico em criança: broncoscopia rígida sob anestesia geral com TIVA (propofol + remifentanil), ventilação espontânea ou controla...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-12
+      Anterior: A → Nova: B
+      Justificativa: Para retalho livre microvascular: manter normotermia (≥36°C), normovolemia, PAM ≥70-80 mmHg e hematócrito 25-30% (hemodiluição leve) para otimizar o f...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-13
+      Anterior: A → Nova: B
+      Justificativa: Incêndio endotraqueal: desconectar o circuito imediatamente (interromper fonte de O₂), retirar o TOT em chamas, irrigar as vias aéreas com NaCl 0,9% f...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-14
+      Anterior: A → Nova: C
+      Justificativa: Injeção retrobulbar com perda de consciência, bradicardia e apneia em segundos = injeção intratecal inadvertida pelo espaço subaracnoide do nervo ópti...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-15
+      Anterior: A → Nova: B
+      Justificativa: Tosse + Valsalva vigorosa na extubação após trabeculectomia podem causar elevação aguda da PIO com ruptura da bolha filtrante recém-criada; extubação ...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-16
+      Anterior: A → Nova: D
+      Justificativa: ISR com rocurônio 1,2 mg/kg (com sugammadex disponível) é a técnica de escolha em globo aberto com estômago cheio; pré-tratamento com lidocaína 1,5 mg...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-17
+      Anterior: A → Nova: C
+      Justificativa: C3F8 (perfluoropropano) tem reabsorção muito mais lenta que SF6 (SF6: 10-14 dias; C3F8: 8-10 semanas); N₂O deve ser evitado por até 10 semanas após in...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-18
+      Anterior: A → Nova: B
+      Justificativa: Reflexo oculocardíaco durante cirurgia de estrabismo: solicitar ao cirurgião que cesse a tração temporariamente; se a bradicardia não reverter esponta...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-19
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio peribulbar usa maior volume (6-12 mL) fora do cone muscular, tem menor risco de injeção intratecal pelo nervo óptico e menor risco de hemat...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-2
+      Anterior: A → Nova: B
+      Justificativa: Edema facial + macroglossia ao final de laparoscopia em Trendelenburg prolongado = edema de vias aéreas superiores por congestão venosa cefálica; aval...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-20
+      Anterior: A → Nova: B
+      Justificativa: ASA III estável (IC compensada FE 45%, DM2 controlado) com procedimento de mínimo risco sob anestesia local = candidato adequado para cirurgia ambulat...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-21
+      Anterior: A → Nova: B
+      Justificativa: Apfel score = 3 (sexo feminino + não fumante + cinetose); risco de NVPO ~61%; profilaxia com 2-3 agentes de diferentes mecanismos (ondansetrona + dexa...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-22
+      Anterior: A → Nova: B
+      Justificativa: Para alta ambulatorial após raquianestesia, o critério de resolução do bloqueio motor (Bromage 0 = flexão completa do joelho) + capacidade de deambula...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-23
+      Anterior: A → Nova: B
+      Justificativa: Ex-prematuro com 46 semanas IPC (menor que 60 semanas): risco aumentado de apneia pós-anestésica; internação com monitorização cardiorrespiratória por...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-24
+      Anterior: A → Nova: B
+      Justificativa: Tontura + zumbido + sabor metálico = pródomos de LAST; interromper imediatamente qualquer injeção adicional, oferecer O₂, acesso venoso, benzodiazepín...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-25
+      Anterior: A → Nova: B
+      Justificativa: SAOS grave com IAH 55/h em cirurgia de vias aéreas: internação para monitorização noturna da SpO₂ e uso de CPAP pós-operatório são essenciais; alta im...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-26
+      Anterior: A → Nova: B
+      Justificativa: Via aérea difícil previsivelmente difícil (câncer de laringe + estridor + trismo + Mallampati não avaliável): intubação com fibroscópio flexível acord...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-27
+      Anterior: A → Nova: B
+      Justificativa: Após bypass gástrico com exclusão do duodeno e parte do jejuno proximal, a absorção de medicamentos de liberação entérica e formulações de liberação p...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-28
+      Anterior: A → Nova: B
+      Justificativa: Diretrizes ASA 2023: líquidos claros 2h; leite materno 4h; fórmula infantil/leite não materno/refeição leve 6h; refeição completa (gordurosa, carne) 8...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-29
+      Anterior: A → Nova: B
+      Justificativa: Hipertensão pós-operatória (PA 185/105 mmHg) em paciente com controle habitual adequado + sem evidência de isquemia: causa mais comum é dor inadequada...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-3
+      Anterior: A → Nova: B
+      Justificativa: Morfina em pós-operatório bariátrico: calcular pelo peso ideal para evitar superdosagem e depressão respiratória grave; obesos mórbidos têm maior sens...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-30
+      Anterior: A → Nova: B
+      Justificativa: Taquicardia + HAS durante rinoplastia = absorção sistêmica de adrenalina subcutânea (infiltração local pelo cirurgião); suspender novas injeções, apro...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-31
+      Anterior: A → Nova: B
+      Justificativa: Reoperação bariátrica em paciente com sinais de fístula (taquicardia + febre + peritonismo): ISR é mandatória pelo risco de estômago cheio (gastropare...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-4
+      Anterior: A → Nova: C
+      Justificativa: EtCO₂ subindo para 70 mmHg + pressão de pico aumentada + sem deterioração hemodinâmica durante laparoscopia = capnomediastino ou capnotórax por dissec...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-5
+      Anterior: A → Nova: B
+      Justificativa: Obstrução de via aérea pós-extubação em obeso mórbido com SpO₂ 84%: LMA de segunda geração (ProSeal/Supreme) como dispositivo de resgate com posiciona...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-6
+      Anterior: A → Nova: B
+      Justificativa: O pneumoperitônio causa redução do fluxo renal e da TFG por compressão das veias renais, aumento de ADH e renina-angiotensina; oligúria intraoperatóri...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-7
+      Anterior: A → Nova: B
+      Justificativa: Ventilação protetora no obeso: VC 6-8 mL/kg de peso ideal, PEEP 8-12 cmH₂O (maior que em não-obesos), recrutamento alveolar periódico, FiO₂ mínima par...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-8
+      Anterior: A → Nova: B
+      Justificativa: Epiglotite aguda (epiglote 'em polegar') com estridor em criança = emergência de via aérea; manter calma da criança, não realizar procedimentos que ag...
+
+    ID: sim-me2simulado4trimestreprovab30qpontos33361html-9
+      Anterior: A → Nova: B
+      Justificativa: Paralisia bilateral de cordas vocais em adução com estridor grave e SpO₂ 87%: intubação orotraqueal de emergência; se não houver recuperação em 48-72h...
+
+    ID: sim-me2simuladosemestral150questoeshtml-10
+      Anterior: A → Nova: B
+      Justificativa: Etomidato inibe a 11β-hidroxilase adrenal (síntese de cortisol) mesmo após dose única, com duração de 4-8h; em politraumatizado com hipotensão grave, ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-12
+      Anterior: A → Nova: B
+      Justificativa: Síndrome de infusão de propofol (PRIS): urina marrom + acidose metabólica com gap aumentado + hiperlactato + propofol >4 mg/kg/h por >48h; suspender p...
+
+    ID: sim-me2simuladosemestral150questoeshtml-13
+      Anterior: A → Nova: B
+      Justificativa: A cetamina produz anestesia dissociativa por bloqueio não-competitivo dos receptores NMDA (N-metil-D-aspartato), impedindo a entrada de Ca²⁺ e Na⁺ e d...
+
+    ID: sim-me2simuladosemestral150questoeshtml-14
+      Anterior: A → Nova: B
+      Justificativa: Os receptores mu (μ)-opioides são os principais mediadores de: analgesia supraespinhal, depressão respiratória, euforia, miose, bradicardia e dependên...
+
+    ID: sim-me2simuladosemestral150questoeshtml-15
+      Anterior: A → Nova: B
+      Justificativa: O remifentanil tem meia-vida de contexto de ~3-5 min independentemente da duração da infusão por ser metabolizado por esterases plasmáticas inespecífi...
+
+    ID: sim-me2simuladosemestral150questoeshtml-16
+      Anterior: A → Nova: B
+      Justificativa: Tolerância = downregulation de receptores μ e desacoplamento da proteína G; HIO = ativação de receptores NMDA e liberação de dinorfinas/substância P g...
+
+    ID: sim-me2simuladosemestral150questoeshtml-17
+      Anterior: A → Nova: C
+      Justificativa: Depressão respiratória por morfina (FR 5 irpm, pupilas puntiformes): naloxona 0,04-0,1 mg IV diluída e titulada a cada 2-3 min até melhora da ventilaç...
+
+    ID: sim-me2simuladosemestral150questoeshtml-18
+      Anterior: A → Nova: C
+      Justificativa: Metadona possui meia-vida de eliminação longa (24-36h), atividade antagonista NMDA intrínseca (que ajuda na HIO) e ação como agonista mu e kappa; útil...
+
+    ID: sim-me2simuladosemestral150questoeshtml-19
+      Anterior: A → Nova: B
+      Justificativa: Tramadol produz analgesia por mecanismo dual: agonismo opioide mu fraco (EC50 muito maior que morfina) + inibição da recaptação de serotonina e noradr...
+
+    ID: sim-me2simuladosemestral150questoeshtml-2
+      Anterior: A → Nova: C
+      Justificativa: A CAM diminui progressivamente com o aumento da idade (~6% por década após 40 anos) e é reduzida por opioides, benzodiazepínicos, alfa-2 agonistas, hi...
+
+    ID: sim-me2simuladosemestral150questoeshtml-20
+      Anterior: A → Nova: B
+      Justificativa: A succinilcolina é bloqueador neuromuscular despolarizante que atua como agonista nos receptores nicotínicos da placa motora, causando despolarização ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-21
+      Anterior: A → Nova: B
+      Justificativa: Rigidez de masseter + rigidez generalizada + EtCO₂ elevado + temperatura subindo após sevoflurano + succinilcolina = hipertermia maligna confirmada; d...
+
+    ID: sim-me2simuladosemestral150questoeshtml-22
+      Anterior: A → Nova: D
+      Justificativa: TOF ratio 0,72 indica curarização residual clínica; sugammadex 2 mg/kg IV garante reversão completa e imediata do bloqueio por rocurônio (TOF ≥0,9 em ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-23
+      Anterior: A → Nova: C
+      Justificativa: O TOF ratio ≥0,9 (T4/T1 ≥0,9) é o padrão atual internacionalmente recomendado para confirmar recuperação neuromuscular adequada e extubação segura; va...
+
+    ID: sim-me2simuladosemestral150questoeshtml-24
+      Anterior: A → Nova: D
+      Justificativa: Rocurônio 1,2 mg/kg é o BNM não-despolarizante com onset mais rápido (~60 segundos), sendo o principal candidato a substituir a succinilcolina na ISR,...
+
+    ID: sim-me2simuladosemestral150questoeshtml-25
+      Anterior: A → Nova: D
+      Justificativa: Cisatracúrio sofre degradação de Hofmann (eliminação espontânea pH/temperatura-dependente) + hidrólise por esterases plasmáticas, sendo independente d...
+
+    ID: sim-me2simuladosemestral150questoeshtml-26
+      Anterior: A → Nova: B
+      Justificativa: Os anestésicos locais bloqueiam canais de Na⁺ voltagem-dependentes no estado inativado (e também aberto), impedindo a transição para o estado aberto e...
+
+    ID: sim-me2simuladosemestral150questoeshtml-27
+      Anterior: A → Nova: B
+      Justificativa: LAST com colapso cardiovascular após bupivacaína axilar: emulsão lipídica 20% (Intralipid) 1,5 mL/kg IV em bolus imediato, seguida de infusão 0,25 mL/...
+
+    ID: sim-me2simuladosemestral150questoeshtml-28
+      Anterior: A → Nova: B
+      Justificativa: A lipossolubilidade dos ALs determina principalmente a potência (penetração na membrana); a DURAÇÃO de ação é determinada pela ligação proteica (bupiv...
+
+    ID: sim-me2simuladosemestral150questoeshtml-29
+      Anterior: A → Nova: B
+      Justificativa: A progressão da toxicidade sistêmica por AL segue a sequência: sintomas SNC (zumbido, visão turva, sabor metálico) → agitação/tremores → convulsões → ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-3
+      Anterior: A → Nova: C
+      Justificativa: Desflurano possui o menor coeficiente de solubilidade sangue:gás entre os halogenados (0,42), seguido do sevoflurano (0,65) e isoflurano (1,4); quanto...
+
+    ID: sim-me2simuladosemestral150questoeshtml-30
+      Anterior: A → Nova: D
+      Justificativa: A cocaína é o único AL com vasoconstrição intrínseca por inibição da recaptação de noradrenalina no terminal simpático; todos os outros ALs causam vas...
+
+    ID: sim-me2simuladosemestral150questoeshtml-31
+      Anterior: A → Nova: B
+      Justificativa: Para cirurgia de antebraço distal e mão, o bloqueio supraclavicular oferece cobertura mais uniforme de C5-T1 no 'ponto de convergência' do plexo, com ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-32
+      Anterior: A → Nova: C
+      Justificativa: O bloqueio do canal dos adutores (nervo safeno + ramos do nervo para vasto medial) bloqueia seletivamente a dor anterior do joelho, preservando a forç...
+
+    ID: sim-me2simuladosemestral150questoeshtml-33
+      Anterior: A → Nova: D
+      Justificativa: O SAP block (Serratus Anterior Plane block) deposita AL entre o serrátil anterior e o grande dorsal, bloqueando os ramos cutâneos laterais de T2-T6 pa...
+
+    ID: sim-me2simuladosemestral150questoeshtml-34
+      Anterior: A → Nova: D
+      Justificativa: O ultrassom NÃO elimina completamente o risco de toxicidade sistêmica por AL; reduz a incidência mas injeções intravasculares inadvertidas ainda ocorr...
+
+    ID: sim-me2simuladosemestral150questoeshtml-35
+      Anterior: A → Nova: B
+      Justificativa: O bloqueio do compartimento do psoas (3-em-1 de Chayen) anestesia femoral + cutâneo lateral da coxa + obturatório simultaneamente, cobrindo a face med...
+
+    ID: sim-me2simuladosemestral150questoeshtml-36
+      Anterior: A → Nova: B
+      Justificativa: Hipotensão pós-raquianestesia em cesariana = bloqueio simpático (simpaticolise) + compressão aortocava pelo útero gravídico; reduz o retorno venoso e ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-37
+      Anterior: A → Nova: B
+      Justificativa: A CPPD (Cefaleia Pós-Punção Dural) é a complicação mais comum da raquianestesia; incidência maior com agulhas de grande calibre e corte cortante (Quin...
+
+    ID: sim-me2simuladosemestral150questoeshtml-38
+      Anterior: A → Nova: B
+      Justificativa: Blood patch epidural (injeção de 15-20 mL de sangue autólogo no espaço peridural) é o tratamento definitivo da CPPD refratária, com eficácia de ~75-90...
+
+    ID: sim-me2simuladosemestral150questoeshtml-39
+      Anterior: A → Nova: B
+      Justificativa: A depressão respiratória tardia (6-24h) por morfina intratecal ocorre pela migração rostral hidrofílica da morfina no LCR até o centro respiratório bu...
+
+    ID: sim-me2simuladosemestral150questoeshtml-4
+      Anterior: A → Nova: B
+      Justificativa: Sevoflurano + cal sodada seca + baixo fluxo = produção de Composto A (fluorometil-2,2-difluoro-1-(trifluorometil)vinil éter), com potencial nefrotoxic...
+
+    ID: sim-me2simuladosemestral150questoeshtml-40
+      Anterior: A → Nova: B
+      Justificativa: Aumento de FC ≥20 bpm após dose-teste com adrenalina 15 mcg IV = cateter intravascular; a taquicardia por adrenalina sistêmica é o sinal mais confiáve...
+
+    ID: sim-me2simuladosemestral150questoeshtml-42
+      Anterior: A → Nova: B
+      Justificativa: Injeção inadvertida de 20 mL de bupivacaína 0,5% no espaço subaracnoide = raquianestesia total (high spinal); manifestação: hipotensão grave, apneia, ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-43
+      Anterior: A → Nova: C
+      Justificativa: Ropivacaína 0,1-0,2% é o AL preferido para analgesia peridural em obstetrícia: enantiômero S(-) puro, menor cardiotoxicidade que bupivacaína racêmica,...
+
+    ID: sim-me2simuladosemestral150questoeshtml-44
+      Anterior: A → Nova: C
+      Justificativa: Com enoxaparina profilática 40 mg 1×/dia, o intervalo mínimo entre a última dose e o bloqueio neuroaxial é de 12 horas (recomendação ASRA/ESRA); para ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-45
+      Anterior: A → Nova: D
+      Justificativa: Mallampati IV: visualização apenas do palato duro, sem qualquer visibilidade do palato mole; indica alta probabilidade de laringoscopia difícil e requ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-46
+      Anterior: A → Nova: B
+      Justificativa: Via aérea difícil pós-indução: videolaringoscópio (GlideScope, C-MAC) melhora a visibilidade glótica em até 80% dos casos com Cormack-Lehane III-IV, s...
+
+    ID: sim-me2simuladosemestral150questoeshtml-47
+      Anterior: A → Nova: C
+      Justificativa: Via aérea previsivelmente muito difícil (RT prévia + trismo + ML não avaliável): intubação com fibroscópio com paciente acordado (awake FOI) sob anest...
+
+    ID: sim-me2simuladosemestral150questoeshtml-48
+      Anterior: A → Nova: B
+      Justificativa: A manobra de Sellick (pressão cricóidea) oclude o esôfago pelo deslocamento posterior da cartilagem cricóidea, prevenindo regurgitação passiva; limita...
+
+    ID: sim-me2simuladosemestral150questoeshtml-49
+      Anterior: A → Nova: C
+      Justificativa: CICO (Cannot Intubate Cannot Oxygenate) após falha de videolaringoscópio e supraglóticos: cricotireoidostomia cirúrgica de emergência é a única opção;...
+
+    ID: sim-me2simuladosemestral150questoeshtml-5
+      Anterior: A → Nova: B
+      Justificativa: Aumento rápido de desflurano de 6% para 9% causa estimulação simpática reflexa por irritação dos receptores das vias aéreas superiores e pulmonares, r...
+
+    ID: sim-me2simuladosemestral150questoeshtml-50
+      Anterior: A → Nova: C
+      Justificativa: A LMA ProSeal e a LMA Supreme são LMAs de segunda geração com canal de drenagem gástrica para sonda orogástrica, cuff de alta vedação (≥30 cmH₂O) e ma...
+
+    ID: sim-me2simuladosemestral150questoeshtml-51
+      Anterior: A → Nova: B
+      Justificativa: Na ISR, a pré-oxigenação adequada (FiO₂ 1,0 por 3 min ou 8 respirações de CV máxima) é o elemento mais crítico para criar margem de segurança; aumenta...
+
+    ID: sim-me2simuladosemestral150questoeshtml-7
+      Anterior: A → Nova: B
+      Justificativa: O sevoflurano é o agente de escolha para indução inalatória em pediatria por seu odor agradável, baixa irritabilidade de vias aéreas e coeficiente de ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-8
+      Anterior: A → Nova: B
+      Justificativa: O propofol causa hipotensão por vasodilatação arteriolar e venosa (redução do tônus simpático + ação direta no músculo liso vascular), com redução da ...
+
+    ID: sim-me2simuladosemestral150questoeshtml-9
+      Anterior: A → Nova: C
+      Justificativa: A cetamina é o agente venoso associado à manutenção ou aumento da PA, broncodilatação e analgesia dissociativa, sendo o indutor preferido em choque, b...
+
+
+ARQUIVO: simulados_ME3.csv
+------------------------------------------------------------
+  Total de questões revisadas    : 363
+  Questões com erro sistemático  : 2
+  Questões corrigidas (≠ A)       : 2
+  Questões mantidas como A        : 0
+
+  LISTA DE CORREÇÕES:
+    ID: sim-me3simuladosemestral150questoescompletohtml-14
+      Anterior: A → Nova: B
+      Justificativa: Na anestesia caudal pediátrica, o volume de bupivacaína 0,25% recomendado é de 1 mL/kg para bloqueio sacral e 1,25 mL/kg para nível lombar (L1); o pri...
+
+    ID: sim-me3simuladosemestral150questoescompletohtml-28
+      Anterior: A → Nova: D
+      Justificativa: Segundo as diretrizes ASA 2017 e atualizações de 2023, o tempo mínimo de jejum para líquidos claros (água, suco sem polpa, chá sem leite, bebidas carb...
+
+
+================================================================================
+RESUMO GERAL
+================================================================================
+  Total de questões revisadas    : 1294
+  Total com erro sistemático     : 732
+  Total de respostas corrigidas  : 702
+
+PRINCIPAIS TIPOS DE ERROS IDENTIFICADOS:
+  1. Via aérea difícil: correta deveria ser B (protocolo DAS/ASA)
+  2. Ética médica/bioética: correta geralmente B ou C
+  3. Farmacologia (LAST, HM, BNM): correta geralmente B
+  4. Fisiologia cardiovascular e respiratória: correta geralmente B
+  5. Anestesia regional e obstetrícia: correta geralmente B ou C
+
+ARQUIVOS GERADOS:
+  /Users/sandrodainez/anesmap-2/exports/simulados_ME1_corrigido.csv
+  /Users/sandrodainez/anesmap-2/exports/simulados_ME2_corrigido.csv
+  /Users/sandrodainez/anesmap-2/exports/simulados_ME3_corrigido.csv
+  /Users/sandrodainez/anesmap-2/exports/relatorio_revisao.txt

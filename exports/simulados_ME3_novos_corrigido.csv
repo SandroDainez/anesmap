@@ -1,0 +1,2115 @@
+"id","me","tema","enunciado","alternativa_a","alternativa_b","alternativa_c","alternativa_d","correta","explicacao"
+"87b7057c-c587-490c-b205-36188677efb8","ME3","Procedimentos","Paciente em ventilação mecânica apresenta aumento súbito da pressão de pico, queda da saturação e hipotensão após inserção de cateter venoso central. Qual o diagnóstico mais provável?","Broncoespasmo","Edema agudo pulmonar","Pneumotórax hipertensivo","Tamponamento cardíaco","C","Aumento súbito de pressão de pico em ventilação mecânica, queda de saturação e hipotensão após inserção de CVC é clássico para pneumotórax hipertensivo. Tratamento imediato: descompressão com agulha no 2° EIC MCL, seguida de drenagem torácica. Referência: ATLS 10ed, Miller's 9ed."
+"ffa731dc-75f9-4655-9719-9b0c7ad06be1","ME3","Monitorização","Na monitorização hemodinâmica avançada, a variabilidade da pressão de pulso é mais útil para:","Avaliar profundidade anestésica","Predizer responsividade volêmica em pacientes selecionados","Diagnosticar isquemia miocárdica","Mensurar pressão intracraniana","B","A variação da pressão de pulso (VPP) é o parâmetro dinâmico mais acurado para predizer responsividade volêmica em pacientes sob ventilação mecânica controlada e ritmo sinusal. VPP >13% prediz que o paciente responderá ao volume com aumento do DC. Referência: Michard F, Anesthesiology 2005."
+"0d0a4906-9f9d-455a-862b-11f9de7df290","ME3","Cardiologia","Em relação ao manejo perioperatório do paciente coronariopata, qual afirmativa é correta?","Betabloqueadores devem ser sempre suspensos no pré-operatório","Taquicardia aumenta consumo miocárdico de oxigênio","Hipotensão reduz risco de isquemia miocárdica","Anemia não interfere na oferta de oxigênio ao miocárdio","B","No coronariopata, a taquicardia aumenta o consumo miocárdico de O2 (MVO2) pelos maiores ciclos contráteis e reduz o tempo diastólico de enchimento coronariano. FC alvo perioperatória: 60-80 bpm. Beta-bloqueadores devem ser mantidos. Referência: Diretrizes ACC/AHA 2024."
+"3c0ab9b7-2b75-4fa1-874f-b86d050eecc1","ME3","Na hipertermia maligna, qual alteração l","Na hipertermia maligna, qual alteração laboratorial costuma ocorrer precocemente?","Hipocalemia","Elevação do ETCO2","Hipoglicemia","Redução da CK","B","Na hipertermia maligna, o hipermetabolismo muscular produz CO2 maciçamente, causando elevação rápida do ETCO2 — frequentemente o primeiro sinal detectável no paciente intubado. Outros achados: rigidez muscular, acidose mista, hipercalemia, rabdomiólise e CK elevada. Tratamento: dantrolene imediato. Referência: Diretrizes MHAUS."
+"1af3fa6f-3b70-4653-911e-ce14bfa512f2","ME3","Paciente em choque hemorrágico maciço ap","Paciente em choque hemorrágico maciço apresenta coagulopatia. Qual estratégia transfusional é mais recomendada?","Cristaloides em grande volume","Reposição balanceada de hemocomponentes","Suspender plasma fresco","Transfundir apenas concentrado de hemácias","B","A reposição balanceada (ratio 1:1:1 de hemácias:PFC:plaquetas) é a estratégia de referência para coagulopatia traumática — previne coagulopatia dilucional e restaura a hemostasia. Cristaloides em grande volume pioram a coagulopatia e hipotermia. Referência: ATLS 10ed, Damage Control Resuscitation."
+"1c821c7b-37c9-40dc-8c27-1ab75b6c2bda","ME3","Qual parâmetro melhor indica responsivid","Qual parâmetro melhor indica responsividade volêmica em ventilação mecânica controlada?","PVC","Variação da pressão de pulso","Frequência cardíaca isolada","Temperatura periférica","B","A VPP (variação da pressão de pulso) é o parâmetro dinâmico mais acurado para predizer responsividade volêmica em pacientes sob ventilação controlada e ritmo sinusal. A PVC isolada tem baixa acurácia para predizer resposta ao volume. Referência: Michard F, Anesthesiology 2005."
+"08dc3172-9e1f-4c28-bdc4-33c02c899678","ME3","Durante ventilação monopulmonar, qual me","Durante ventilação monopulmonar, qual mecanismo mais contribui para manutenção da oxigenação?","Aumento do espaço morto","Vasoconstrição pulmonar hipóxica","Hipercapnia permissiva","PEEP zero","B","A vasoconstrição pulmonar hipóxica (VPH) redireciona o fluxo sanguíneo das regiões hipoventiladas para as bem ventiladas, reduzindo o shunt e mantendo a oxigenação. É o principal mecanismo de adaptação durante ventilação monopulmonar. Referência: Miller's Anesthesia 9ed, cap. 66."
+"138ed9c6-ca96-4905-b0c5-f409bdaa4be9","ME3","Paciente com estenose aórtica crítica se","Paciente com estenose aórtica crítica será submetido à anestesia geral. Qual objetivo hemodinâmico é prioritário?","Taquicardia sustentada","Redução importante da pós-carga","Manutenção do ritmo sinusal e pré-carga","Bradicardia extrema","C","Na estenose aórtica crítica, o VE hipertrofiado depende de pré-carga adequada, ritmo sinusal e FC baixa-normal (60-80 bpm). Hipotensão e taquicardia são especialmente deletérias. A pós-carga não deve ser reduzida abruptamente. Referência: Miller's Anesthesia 9ed, cap. 62."
+"289f894a-4dd4-4568-8d83-84048ac642e1","ME3","Qual agente anestésico possui menor impa","Qual agente anestésico possui menor impacto na vasoconstrição pulmonar hipóxica?","Isoflurano","Sevoflurano","Propofol","Halotano","C","O propofol tem menor impacto na vasoconstrição pulmonar hipóxica (VPH) em comparação aos anestésicos inalatórios (que a inibem dose-dependentemente). Isso o torna vantajoso em cirurgias com ventilação monopulmonar. Referência: Miller's Anesthesia 9ed, cap. 66."
+"2dd688df-0af0-45f8-a7e0-32cbc638f9ad","ME3","Paciente em uso de ECMO arterial apresen","Paciente em uso de ECMO arterial apresenta distensão ventricular esquerda importante. Qual complicação pode ocorrer?","Hipoperfusão coronariana","Redução da pressão capilar pulmonar","Hipovolemia absoluta","Bradicardia vagal obrigatória","A","Na ECMO VA, o fluxo mecânico contínuo pode não proporcionar descarregamento adequado do VE se o coração ainda ejeta contra o fluxo retrógrado, causando distensão do VE, aumento da PCP e risco de trombo intracardíaco. Referência: ELSO Guidelines."
+"c7ea1e2f-6a8d-4fc3-974f-1fb51f433751","ME3","Na monitorização neuromuscular quantitat","Na monitorização neuromuscular quantitativa, qual valor TOF é considerado adequado para extubação segura?","0,4","0,5","0,7","≥0,9","D","O TOF ratio (T4/T1) ≥0,9 é o limiar mínimo para reversão adequada do bloqueio neuromuscular antes da extubação, reduzindo risco de curarização residual e insuficiência respiratória pós-operatória. A monitorização quantitativa (aceleromiografia) é superior à avaliação clínica. Referência: Diretrizes ESAIC, Miller's Anesthesia 9ed, cap. 38."
+"5f091743-1df1-4c01-86d2-490d02eba015","ME3","Farmacologia AL","1o Trimestre ME3 - Em farmacologia dos anestésicos locais, qual fator mais aumenta risco de cardiotoxicidade grave?","Baixa lipossolubilidade","Elevada ligação aos canais de sódio cardíacos","Baixa potência anestésica","Baixa ligação proteica","B","Baixa lipossolubilidade reduz potência e toxicidade.
+
+Correta. Alta afinidade pelos canais cardíacos prolonga dissociação e favorece arritmias.
+
+Baixa potência não aumenta cardiotoxicidade.
+
+Ligação proteica baixa reduz duração."
+"36ea7bdb-3647-41cc-b187-7c90f264beb2","ME3","Anestesia Regional","1o Trimestre ME3 - Em anestesia regional, qual característica aumenta velocidade de início do anestésico local?","Maior pKa","Maior fração não ionizada","Maior ligação proteica","Maior peso molecular","B","Maior pKa reduz fração não ionizada.
+
+Correta. A forma não ionizada atravessa membranas mais rapidamente.
+
+Ligação proteica relaciona-se mais à duração.
+
+Peso molecular não é principal fator."
+"c635d046-b11a-48af-9192-ba35338397a7","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, pós-carga ventricular esquerda depende principalmente de:","Pré-carga","Resistência vascular sistêmica","Pressão venosa central","Volume residual pulmonar","B","Pré-carga é conceito distinto.
+
+Correta. A resistência à ejeção ventricular define pós-carga.
+
+PVC não determina pós-carga esquerda.
+
+Sem relação principal."
+"59f11b70-c312-4587-9660-8045031977ab","ME3","Halogenados","1o Trimestre ME3 - Qual agente inalatório possui menor metabolismo hepático?","Halotano","Sevoflurano","Isoflurano","Desflurano","D","Halotano apresenta metabolismo significativo.
+
+Sevoflurano possui metabolismo intermediário.
+
+Isoflurano apresenta baixo metabolismo.
+
+Correta. Desflurano possui metabolismo mínimo."
+"b02fbf99-8707-4fef-9110-d46942300a40","ME3","Fisiologia Pulmonar","1o Trimestre ME3 - Em fisiologia pulmonar, shunt intrapulmonar corresponde a:","Perfusão sem ventilação","Ventilação sem perfusão","Hiperventilação compensatória","Aumento do espaço morto","A","Correta. O sangue passa por áreas não ventiladas.
+
+Ventilação sem perfusão define espaço morto.
+
+Não define shunt.
+
+Espaço morto é conceito diferente."
+"04193713-56ff-4758-8ae8-11db7b7bc5ab","ME3","Opioides","1o Trimestre ME3 - Qual opioide apresenta metabolismo independente da função hepática e renal?","Morfina","Remifentanil","Metadona","Codeína","B","Morfina depende metabolismo hepático.
+
+Correta. Esterases plasmáticas metabolizam remifentanil rapidamente.
+
+Metadona possui meia-vida longa.
+
+Codeína depende metabolismo hepático."
+"a5bf41ac-43a1-482e-9903-cca3a1139c33","ME3","Bloqueadores NM","1o Trimestre ME3 - Qual característica diferencia os bloqueadores neuromusculares despolarizantes?","Competem sem ativar receptor","Produzem despolarização sustentada","São revertidos por sugamadex","Não causam fasciculações","B","Isso caracteriza bloqueadores não despolarizantes.
+
+Correta. A succinilcolina mantém a placa motora despolarizada.
+
+Sugamadex atua em aminosteroides.
+
+Fasciculações são frequentes."
+"1522da33-432e-42c9-b9dc-376c629a9473","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, débito cardíaco corresponde a:","FC x volume sistólico","PAM x RVS","PVC x FC","FSC x PAM","A","Correta. Débito cardíaco depende da frequência e volume sistólico.
+
+PAM depende de DC e RVS.
+
+PVC não entra diretamente na fórmula.
+
+FSC não participa."
+"07e86a68-9217-4680-adfd-86cfe02e0fc5","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, qual variável mais influencia pressão arterial média?","Débito cardíaco e resistência vascular sistêmica","Volume residual pulmonar","Temperatura corporal","Concentração de hemoglobina","A","Correta. PAM depende principalmente de DC e RVS.
+
+Não possui relação principal.
+
+Influência secundária.
+
+Hemoglobina não determina diretamente PAM."
+"e11b604b-34cf-4b59-b066-468e7d9c9574","ME3","Opioides","1o Trimestre ME3 - Qual opioide possui maior risco de rigidez torácica após administração rápida?","Codeína","Fentanil","Nalbufina","Tramadol","B","Codeína não causa tipicamente esse efeito.
+
+Correta. Altas doses rápidas de fentanil podem causar rigidez muscular.
+
+Nalbufina apresenta menor associação.
+
+Tramadol raramente produz rigidez."
+"2255776c-9f8a-4f3b-a182-f30a1f454dc4","ME3","Fisiologia Respiratória","1o Trimestre ME3 - Em fisiologia respiratória, qual fator reduz espaço morto fisiológico?","Aumento da perfusão pulmonar","Embolia pulmonar","Hipotensão grave","Ventilação sem perfusão","A","Correta. Melhor perfusão reduz áreas ventiladas sem fluxo.
+
+Embolia aumenta espaço morto.
+
+Hipotensão reduz perfusão pulmonar.
+
+Define aumento de espaço morto."
+"51b50c82-48e9-4461-aa11-24930c9d62dc","ME3","Fisiologia Respiratória","1o Trimestre ME3 - Em fisiologia respiratória, qual mecanismo melhora oxigenação com PEEP?","Aumento do espaço morto","Recrutamento alveolar","Broncoconstrição","Redução da capacidade residual funcional","B","PEEP não visa aumentar espaço morto.
+
+Correta. A PEEP mantém alvéolos abertos e reduz atelectasia.
+
+PEEP não causa broncoconstrição.
+
+A CRF geralmente aumenta."
+"62812d79-a8a2-42f2-b89b-b425f6e920aa","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, qual variável mais influencia consumo miocárdico de oxigênio?","Débito urinário","Frequência cardíaca","Volume residual pulmonar","Saturação venosa central","B","Não possui relação direta.
+
+Correta. Frequência cardíaca e tensão parietal são determinantes principais do VO2 miocárdico.
+
+Sem relação principal.
+
+SvO2 não determina diretamente consumo miocárdico."
+"ed5748d4-a0dd-4b9a-9543-a3ba5aaa895c","ME3","Halogenados","1o Trimestre ME3 - Qual agente inalatório possui maior potencial arritmogênico clássico?","Sevoflurano","Desflurano","Halotano","Isoflurano","C","Sevoflurano possui perfil mais seguro.
+
+Desflurano pode causar taquicardia simpática.
+
+Correta. Halotano sensibiliza o miocárdio às catecolaminas.
+
+Isoflurano possui menor arritmogenicidade."
+"ee94eec6-f86a-4544-91c8-7877adadb304","ME3","Opioides","1o Trimestre ME3 - Qual opioide possui metabólito ativo associado a neurotoxicidade em insuficiência renal?","Remifentanil","Morfina","Fentanil","Alfentanil","B","Remifentanil possui metabólitos inativos clinicamente.
+
+Correta. Morfina-6-glicuronídeo pode acumular-se.
+
+Fentanil possui menor dependência renal.
+
+Alfentanil depende mais do metabolismo hepático."
+"3d2c61e5-a632-4a55-8822-bd8005be2c25","ME3","Opioides","1o Trimestre ME3 - Em farmacologia dos opioides, qual receptor está mais relacionado à depressão respiratória?","Mu","NMDA","Nicotínico","Muscarínico","A","Correta. Receptores mu mediam analgesia e depressão respiratória.
+
+NMDA não é receptor opioide.
+
+Nicotínicos relacionam-se à acetilcolina.
+
+Muscarínicos não pertencem ao sistema opioide."
+"e1ad325c-c415-4572-bc97-821c0cea2f1a","ME3","Anestésicos IV","1o Trimestre ME3 - Qual anestésico venoso possui propriedades simpatomiméticas?","Propofol","Etomidato","Cetamina","Midazolam","C","Propofol reduz pressão arterial.
+
+Etomidato mantém relativa estabilidade.
+
+Correta. Cetamina aumenta FC e pressão arterial.
+
+Midazolam não possui ação simpatomimética relevante."
+"2cfc3eb4-fdd6-4e9e-a331-9b46de7d8748","ME3","Anestésicos Locais","1o Trimestre ME3 - Em farmacologia dos anestésicos locais, qual propriedade relaciona-se mais à duração de ação?","pKa","Ligação proteica","Peso molecular","Coeficiente sangue:gás","B","pKa relaciona-se ao início de ação.
+
+Correta. Maior ligação proteica prolonga duração.
+
+Peso molecular não é principal fator.
+
+Coeficiente sangue:gás aplica-se aos voláteis."
+"8830d0ef-6131-42a5-a97d-d946be63d900","ME3","Farmacodinâmica","1o Trimestre ME3 - Em farmacodinâmica, índice terapêutico elevado significa:","Maior toxicidade","Maior margem de segurança","Menor potência","Maior metabolismo","B","Não corresponde ao conceito.
+
+Correta. Quanto maior o índice terapêutico, maior segurança relativa.
+
+Potência é conceito distinto.
+
+Metabolismo não define índice terapêutico."
+"8ca75af6-e718-43c0-9af2-cdd310d0493b","ME3","Anestésicos Locais","1o Trimestre ME3 - Qual anestésico local possui menor cardiotoxicidade relativa?","Bupivacaína","Ropivacaína","Etidocaína","Tetracaína","B","Bupivacaína é mais cardiotóxica.
+
+Correta. Ropivacaína apresenta perfil cardiovascular mais seguro.
+
+Etidocaína possui maior toxicidade.
+
+Tetracaína não possui melhor perfil cardiovascular."
+"dff150f2-a374-41e6-8dd0-2b97c4202993","ME3","Bloqueadores NM","1o Trimestre ME3 - Qual bloqueador neuromuscular é revertido especificamente por sugamadex?","Atracúrio","Cisatracúrio","Rocurônio","Succinilcolina","C","Atracúrio não é encapsulado.
+
+Cisatracúrio não possui reversão específica.
+
+Correta. Sugamadex encapsula aminosteroides.
+
+Succinilcolina não é revertida por sugamadex."
+"776c918d-03b4-4507-a336-0d3631a4707e","ME3","Anestésicos Locais","1o Trimestre ME3 - Em farmacologia dos anestésicos locais, qual classe sofre metabolismo plasmático predominante?","Amidas","Ésteres","Aminoálcoois","Benzodiazepínicos","B","Amidas sofrem metabolismo hepático.
+
+Correta. Esterases plasmáticas metabolizam anestésicos locais do tipo éster.
+
+Não corresponde à classificação anestésica.
+
+Benzodiazepínicos não são anestésicos locais."
+"12562096-5315-4ef9-b1f4-245974bd11f6","ME3","Anestésicos Locais","1o Trimestre ME3 - Qual anestésico local possui maior duração de ação?","Cloroprocaína","Lidocaína","Bupivacaína","Procaína","C","Cloroprocaína possui curta duração.
+
+Lidocaína apresenta duração intermediária.
+
+Correta. Bupivacaína possui longa duração anestésica.
+
+Procaína possui curta duração."
+"4396bee1-6780-422a-a916-802c33c2dcd4","ME3","Anestésicos IV","1o Trimestre ME3 - Qual anestésico venoso reduz mais intensamente o metabolismo cerebral?","Cetamina","Propofol","Etomidato","Dexmedetomidina","B","Cetamina pode aumentar FSC.
+
+Correta. Propofol reduz metabolismo cerebral e fluxo sanguíneo cerebral significativamente.
+
+Etomidato reduz metabolismo, porém menos intensamente.
+
+Dexmedetomidina possui efeito menor."
+"9b444847-54e3-42f3-85a5-ce73ec2c71cb","ME3","Fisiologia Respiratória","1o Trimestre ME3 - Em fisiologia respiratória, qual condição aumenta espaço morto fisiológico?","Shunt pulmonar","Embolia pulmonar","Atelectasia","Hipotermia","B","Shunt reduz ventilação relativa.
+
+Correta. Há ventilação sem perfusão adequada.
+
+Atelectasia aumenta shunt.
+
+Hipotermia não é principal causa."
+"4d28b05c-ae8a-47f6-838c-fc9c21d87d29","ME3","Fisiologia AB","1o Trimestre ME3 - Em fisiologia ácido-base, acidose respiratória decorre de:","Hiperventilação","Redução da PaCO2","Hipoventilação","Perda renal de bicarbonato","C","Hiperventilação gera alcalose.
+
+Redução da PaCO2 produz alcalose.
+
+Correta. Retenção de CO2 aumenta acidez plasmática.
+
+Perda de bicarbonato causa acidose metabólica."
+"d134a6fc-65f6-4d2e-b7d3-9c118d03dae4","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, qual vaso contribui mais para resistência vascular sistêmica?","Capilares","Veias","Arteríolas","Átrio esquerdo","C","Capilares possuem menor papel regulatório.
+
+Veias são vasos capacitantes.
+
+Correta. Arteríolas regulam principal resistência periférica.
+
+Átrio não regula RVS."
+"2fe11f4f-bc62-43e9-953e-dbc2660a1d99","ME3","Bloqueadores NM","1o Trimestre ME3 - Em farmacologia dos bloqueadores neuromusculares, qual fármaco pode desencadear fasciculações?","Rocurônio","Atracúrio","Succinilcolina","Vecurônio","C","Rocurônio é não despolarizante.
+
+Atracúrio não provoca fasciculações típicas.
+
+Correta. A despolarização inicial gera fasciculações musculares.
+
+Vecurônio é não despolarizante."
+"66c0b125-6932-4386-b0dd-8d14eb87752f","ME3","Fisiologia","1o Trimestre ME3 - Em fisiologia respiratória, qual alteração ocorre na hipercapnia?","Vasoconstrição cerebral","Redução do FSC","Vasodilatação cerebral","Alcalose respiratória","C","Hipercapnia promove vasodilatação.
+
+O FSC aumenta.
+
+Correta. CO2 elevado aumenta fluxo cerebral.
+
+Hipercapnia causa acidose respiratória."
+"0e2b4e29-1880-4790-9db0-0e5ac8ae908f","ME3","Fisiologia Respiratória","1o Trimestre ME3 - Em fisiologia respiratória, complacência pulmonar representa:","Resistência vascular pulmonar","Facilidade de distensão pulmonar","Fluxo expiratório máximo","Difusão alveolar","B","Não corresponde ao conceito.
+
+Correta. A complacência mede variação volumétrica pela pressão.
+
+Fluxo depende principalmente da resistência.
+
+Difusão não define complacência."
+"a00b2613-c681-474a-8c2c-9a245ec86bf6","ME3","Fisiologia","1o Trimestre ME3 - Em fisiologia respiratória, qual condição reduz afinidade da hemoglobina pelo oxigênio?","Hipotermia","Alcalose","Acidose","Hipocapnia","C","Hipotermia aumenta afinidade.
+
+Alcalose desloca curva para esquerda.
+
+Correta. Acidose favorece liberação tecidual de O2.
+
+Hipocapnia aumenta afinidade."
+"d4891b04-a9a6-48c6-b05c-ff24d8d66c98","ME3","Fisiologia AB","1o Trimestre ME3 - Em fisiologia ácido-base, alcalose respiratória decorre de:","Hipoventilação","Hipercapnia","Hiperventilação","Retenção renal de bicarbonato","C","Hipoventilação produz acidose.
+
+Hipercapnia gera acidose respiratória.
+
+Correta. A eliminação excessiva de CO2 causa alcalose.
+
+Retenção de bicarbonato é compensatória renal."
+"f04b980e-2eee-46a6-8860-719d65caa149","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, qual alteração ocorre inicialmente no choque hemorrágico?","Bradicardia","Hipertensão","Taquicardia compensatória","Hipocalcemia","C","Bradicardia é sinal tardio.
+
+Hipotensão é mais frequente.
+
+Correta. A resposta simpática aumenta FC precocemente.
+
+Hipocalcemia pode ocorrer tardiamente."
+"2d41d02c-6560-4c44-92f5-d36d110ad1c6","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, qual fator reduz retorno venoso?","Hipervolemia","PEEP elevada","Contração muscular periférica","Vasoconstrição venosa","B","Hipervolemia aumenta retorno venoso.
+
+Correta. A pressão intratorácica elevada reduz retorno venoso.
+
+A bomba muscular aumenta retorno venoso.
+
+Vasoconstrição venosa aumenta retorno venoso."
+"48802b9e-7022-402c-888f-170b305c9cda","ME3","Farmacocinética","1o Trimestre ME3 - Em farmacocinética, a meia-vida contexto sensível do remifentanil é caracterizada por:","Aumento progressivo após infusões longas","Independência da duração da infusão","Dependência exclusiva da função hepática","Acúmulo importante em obesidade","B","Remifentanil apresenta recuperação rápida.
+
+Correta. A metabolização por esterases mantém recuperação previsível.
+
+Não depende exclusivamente do fígado.
+
+Acúmulo é mínimo."
+"c2fb183f-e170-4c8d-b661-70b9bc353c82","ME3","Bloqueadores NM","1o Trimestre ME3 - Qual bloqueador neuromuscular apresenta maior dependência renal para eliminação?","Atracúrio","Cisatracúrio","Pancurônio","Mivacúrio","C","Atracúrio sofre Hofmann.
+
+Cisatracúrio possui eliminação organoindependente.
+
+Correta. Pancurônio depende significativamente da função renal.
+
+Mivacúrio depende de pseudocolinesterase."
+"be4c6bc3-f56f-467b-91ff-dc6882166899","ME3","Anestésicos Locais","1o Trimestre ME3 - Qual anestésico local está mais associado à metahemoglobinemia?","Lidocaína","Prilocaína","Bupivacaína","Ropivacaína","B","Lidocaína raramente causa metahemoglobinemia significativa.
+
+Correta. Metabólitos oxidantes da prilocaína geram metahemoglobina.
+
+Bupivacaína associa-se mais à cardiotoxicidade.
+
+Ropivacaína possui perfil mais seguro."
+"3d29e85c-a737-4e66-a2fa-7dc02f96bb63","ME3","Anestésicos Locais","1o Trimestre ME3 - Em farmacologia dos anestésicos locais, alcalinização da solução promove:","Retardo do início","Aumento da fração ionizada","Início de ação mais rápido","Redução da potência","C","A alcalinização acelera início.
+
+Aumenta a fração não ionizada.
+
+Correta. A forma lipossolúvel atravessa membranas rapidamente.
+
+Potência não reduz necessariamente."
+"6353973f-bb97-45ea-89dd-ec2353e0e854","ME3","Farmacologia","1o Trimestre ME3 - Qual condição aumenta a MAC dos anestésicos voláteis?","Idade avançada","Hipotermia","Hipernatremia","Uso agudo de álcool","C","Idosos necessitam menor MAC.
+
+Hipotermia reduz necessidade anestésica.
+
+Correta. Hipernatremia pode aumentar MAC.
+
+Álcool agudo reduz MAC."
+"d0875b8b-6d80-4acc-900f-117c048e3736","ME3","Halogenados","1o Trimestre ME3 - Qual anestésico inalatório possui maior potencial de irritação de vias aéreas?","Sevoflurano","Desflurano","Halotano","Óxido nitroso","B","Sevoflurano é pouco irritante.
+
+Correta. Desflurano pode desencadear tosse e broncoespasmo.
+
+Halotano é menos pungente.
+
+Óxido nitroso é pouco irritante."
+"e09d8a12-547f-4e42-9561-11eaf01c8b0f","ME3","Halogenados","1o Trimestre ME3 - Qual agente inalatório apresenta maior risco de nefrotoxicidade teórica por composto A?","Isoflurano","Desflurano","Sevoflurano","Halotano","C","Isoflurano não produz composto A relevante.
+
+Desflurano possui metabolismo mínimo.
+
+Correta. Sevoflurano pode formar composto A em baixos fluxos.
+
+Halotano não possui essa associação clássica."
+"2bbc9856-cb30-4387-9c2b-945c71b3d9d5","ME3","Fisiologia","1o Trimestre ME3 - Qual alteração desloca a curva de dissociação da oxi-hemoglobina para a direita?","Hipotermia","Alcalose","Hipocapnia","Acidose","D","Hipotermia aumenta afinidade pelo oxigênio.
+
+Alcalose desloca para esquerda.
+
+Hipocapnia desloca para esquerda.
+
+Correta. Acidose facilita liberação de oxigênio aos tecidos."
+"c08b74d6-034f-47b7-be9c-ad8fe4cfc209","ME3","Farmacodinâmica","1o Trimestre ME3 - Em farmacodinâmica, potência refere-se a:","Velocidade de ação","Dose necessária para produzir efeito","Tempo de eliminação","Ligação proteica","B","Velocidade relaciona-se ao início de ação.
+
+Correta. Potência reflete quantidade necessária para determinado efeito.
+
+Não corresponde à definição.
+
+Ligação proteica não define potência."
+"ed3de64d-9518-4789-92ac-a51b7170d545","ME3","Fisiologia Respiratória","1o Trimestre ME3 - Em fisiologia respiratória, o principal estímulo ventilatório em indivíduos normais é:","Hipoxemia","Hipercapnia","Hipocalcemia","Alcalose","B","Hipoxemia torna-se relevante em situações específicas.
+
+Correta. PaCO2 é o principal estímulo central da ventilação.
+
+Hipocalcemia não regula ventilação.
+
+Alcalose reduz drive respiratório."
+"4c2eafb8-d113-41bc-9b03-17f1824604da","ME3","Anestésicos IV","1o Trimestre ME3 - Qual agente intravenoso é mais associado à supressão adrenal transitória?","Cetamina","Propofol","Etomidato","Midazolam","C","Cetamina não suprime adrenal significativamente.
+
+Propofol não possui esse efeito clássico.
+
+Correta. Etomidato inibe a 11-beta-hidroxilase.
+
+Midazolam não possui esse efeito principal."
+"90c74e25-9411-4c08-be57-754a364e4703","ME3","Fisiologia CV","1o Trimestre ME3 - Em fisiologia cardiovascular, pré-carga ventricular corresponde a:","Resistência vascular sistêmica","Volume diastólico ventricular","Contratilidade","Frequência cardíaca","B","RVS corresponde à pós-carga.
+
+Correta. O enchimento ventricular determina pré-carga.
+
+Contratilidade é inotropismo.
+
+FC não define pré-carga."
+"2055f243-d406-470b-8bbf-5b3f5653efb9","ME3","Fisiologia Renal","1o Trimestre ME3 - Em fisiologia renal, qual mecanismo regula principalmente filtração glomerular?","Pressão de perfusão glomerular","Temperatura corporal","Volume residual pulmonar","Concentração de hemoglobina","A","Correta. A TFG depende principalmente da pressão de filtração.
+
+Temperatura possui pouca influência direta.
+
+Sem relação direta.
+
+Hemoglobina não regula TFG."
+"12bdb96a-3b5a-4a3a-aacd-02a371587315","ME3","Opioides","1o Trimestre ME3 - Em farmacologia dos opioides, qual efeito ocorre por ativação dos receptores mu?","Broncodilatação","Midríase","Depressão respiratória","Hiperglicemia","C","Broncodilatação não é efeito típico.
+
+Opioides geralmente causam miose.
+
+Correta. A ativação mu reduz drive ventilatório.
+
+Hiperglicemia não é efeito clássico."
+"cf138716-2c72-45e4-8ee7-2f016373a39a","ME3","Anestésicos Locais","1o Trimestre ME3 - Em farmacologia dos anestésicos locais, qual fator aumenta difusão neural?","Maior lipossolubilidade","Maior ionização","Menor potência","Maior metabolismo plasmático","A","Correta. A lipossolubilidade facilita atravessar membranas neurais.
+
+A forma ionizada atravessa menos membranas.
+
+Potência não define difusão diretamente.
+
+Metabolismo não influencia penetração neural."
+"4f899d4c-f0e6-4a02-bd9d-d68f26b6eee6","ME3","Fisiologia Respiratória","1o Trimestre ME3 - Em fisiologia respiratória, qual fator aumenta resistência de vias aéreas?","Broncodilatação","Aumento do raio brônquico","Broncoespasmo","PEEP moderada","C","Broncodilatação reduz resistência.
+
+Maior raio reduz resistência.
+
+Correta. O broncoespasmo aumenta resistência ao fluxo aéreo.
+
+PEEP moderada não é principal fator."
+"d8572c76-692d-4bbf-b878-8b29deb68f08","ME3","Opioides","1o Trimestre ME3 - Em farmacologia dos opioides, qual efeito adverso resulta da ativação vagal?","Taquicardia","Midríase","Bradicardia","Hiperglicemia","C","Opioides geralmente não causam taquicardia.
+
+Midríase não é típica.
+
+Correta. Opioides podem aumentar tônus vagal e causar bradicardia.
+
+Hiperglicemia não é efeito clássico."
+"42e50ac4-bc81-4061-b9b0-1549bba97aee","ME3","Bloqueadores NM","1o Trimestre ME3 - Em farmacologia dos bloqueadores neuromusculares, qual condição prolonga ação da succinilcolina?","Deficiência de pseudocolinesterase","Hipernatremia","Hiperventilação","Hipercalcemia","A","Correta. A metabolização reduzida prolonga bloqueio.
+
+Hipernatremia não prolonga significativamente.
+
+Hiperventilação não interfere.
+
+Hipercalcemia não é principal fator."
+"c295849c-8b0f-4394-8b5d-c31f07f515fc","ME3","Anestésicos IV","1o Trimestre ME3 - Qual anestésico intravenoso está mais associado à dor à injeção?","Midazolam","Propofol","Cetamina","Etomidato","B","Midazolam raramente provoca dor intensa.
+
+Correta. Propofol frequentemente causa dor venosa.
+
+Cetamina possui baixa incidência.
+
+Etomidato relaciona-se mais à mioclonia."
+"b0bf6904-4cb0-41ec-a6aa-cd1be89f6067","ME3","Farmacologia","1o Trimestre ME3 - Qual agente anestésico apresenta propriedades antieméticas intrínsecas?","Cetamina","Propofol","Etomidato","Óxido nitroso","B","Cetamina pode aumentar NVPO.
+
+Correta. Propofol reduz incidência de náuseas e vômitos.
+
+Etomidato associa-se a NVPO.
+
+Óxido nitroso aumenta NVPO."
+"88dfaf64-75f7-4a0d-a394-c86bcf5a010d","ME3","Halogenados","1o Trimestre ME3 - Qual agente inalatório possui menor pungência e melhor perfil para indução inalatória?","Desflurano","Isoflurano","Sevoflurano","Halotano","C","Desflurano é irritante.
+
+Isoflurano também irrita vias aéreas.
+
+Correta. Sevoflurano possui odor agradável e baixa irritabilidade.
+
+Halotano é pouco utilizado atualmente."
+"66ec02bf-ba03-4b95-9ee0-8449e3cbf208","ME3","Anestésicos IV","1o Trimestre ME3 - Qual anestésico venoso possui maior estabilidade hemodinâmica?","Propofol","Tiopental","Etomidato","Midazolam","C","Propofol reduz pressão arterial significativamente.
+
+Tiopental pode deprimir miocárdio.
+
+Correta. Etomidato preserva estabilidade cardiovascular relativa.
+
+Midazolam pode causar hipotensão."
+"57d63838-c7e1-4123-9b75-4ad3f4a69337","ME3","Sepse","Em relação à fisiopatologia da sepse no perioperatório, qual alteração hemodinâmica é mais característica da fase hiperdinâmica inicial do choque séptico?","Redução do débito cardíaco e aumento da resistência vascular sistêmica","Aumento do débito cardíaco e redução da resistência vascular sistêmica","Aumento da pós-carga ventricular esquerda","Hipovolemia absoluta sem vasodilatação","B","Na fase hiperdinâmica inicial do choque séptico, a vasodilatação maciça (mediada por NO e outros mediadores inflamatórios) reduz a RVS, causando hipotensão. O coração responde aumentando o DC compensatoriamente ('choque quente'). Referência: Surviving Sepsis Campaign 2021."
+"8847a50d-7aba-404f-9e62-e80b5d25f29e","ME3","Farmacologia","Em relação ao etomidato, assinale a alternativa correta:","Promove intensa liberação histamínica","Possui importante efeito broncodilatador","Inibe temporariamente a enzima 11-beta-hidroxilase","Está associado à hipertensão arterial grave durante indução","C","O etomidato inibe temporariamente a 11-beta-hidroxilase adrenal, causando supressão adrenocortical por 12-24h mesmo em dose única de indução. Apesar disso, não libera histamina e é hemodinamicamente muito estável. Referência: Stoelting's Pharmacology 5ed, cap. 4."
+"9a8a32e0-0163-4c9f-8575-a483632612db","ME3","Trauma","Paciente politraumatizado apresenta acidose metabólica grave, hipotermia e coagulopatia durante laparotomia de controle de danos. Essa associação corresponde à:","Tríade letal do trauma","Resposta inflamatória compensatória","Síndrome compartimental abdominal","Tríade de Beck","A","A tríade letal do trauma (hipotermia + acidose + coagulopatia) forma ciclo vicioso: hipotermia inibe enzimas de coagulação, acidose compromete função plaquetária e coagulopatia perpetua o sangramento. A interrupção precoce é fundamental. Referência: ATLS 10ed, Miller's Anesthesia 9ed, cap. 80."
+"e98518d2-5a13-435a-9eac-f0606e95b254","ME3","Ventilação Mecânica","Durante ventilação mecânica protetora em paciente com SDRA moderada, qual estratégia é mais recomendada?","Volume corrente de 10-12 mL/kg de peso predito","PEEP mínima para evitar hipotensão","Volume corrente de 4-6 mL/kg de peso predito","Hiperventilação para normalizar obrigatoriamente o pH","C","Na SDRA, a ventilação protetora ARDSnet usa Vt de 6 mL/kg (peso predito), podendo reduzir a 4 mL/kg em hipercapnia permissiva. Vt 10-12 mL/kg causam volutrauma. A pressão de platô deve ser <30 cmH2O. Referência: ARDSnet 2000."
+"3f87322c-9754-4bce-90b8-54bb7eb9fc6f","ME3","Paciente submetido à cirurgia cardíaca c","Paciente submetido à cirurgia cardíaca com CEC apresenta vasoplegia refratária. Qual droga pode ser utilizada como terapia adjuvante?","Atropina","Azul de metileno","Flumazenil","Protamina em bolus","B","O azul de metileno inibe a guanilil ciclase (bloqueia o efeito vasodilatador do NO), sendo usado como terapia adjuvante na vasoplegia refratária pós-CEC. Dose: 1-2 mg/kg IV. Alternativas: vasopressina, metilazul de metileno. Referência: Miller's Anesthesia 9ed, cap. 63."
+"6b190c99-93d3-43ab-86cf-28a23b88ace5","ME3","Durante neurocirurgia em posição sentada","Durante neurocirurgia em posição sentada, qual monitor possui maior sensibilidade para detecção de embolia aérea venosa?","Pressão arterial invasiva","Oximetria de pulso","Doppler precordial","Temperatura esofágica","C","O Doppler precordial é o monitor mais sensível para embolia aérea venosa, detectando bolhas de 0,25 mL com mudanças características no padrão sonoro. Posicionado no 3°-4° EIC direito, é mais sensível que ETCO2 e ECG para detecção precoce. Referência: Miller's Anesthesia 9ed, cap. 71."
+"7f0e5d82-4880-4b66-a234-4775ba6be263","ME3","Paciente com hipertensão pulmonar grave","Paciente com hipertensão pulmonar grave apresenta instabilidade após indução anestésica. Qual intervenção é mais adequada?","Hipercapnia permissiva","Redução abrupta da FiO2","Óxido nítrico inalatório","PEEP elevada indiscriminadamente","C","O óxido nítrico (NO) inalatório é vasodilatador pulmonar seletivo — atua apenas nos alvéolos ventilados, reduzindo a RVP sem efeito sistêmico (inativado pela hemoglobina). É o tratamento de eleição para crise hipertensiva pulmonar perioperatória. Referência: Miller's Anesthesia 9ed, cap. 62."
+"94677190-d7c8-4db7-868d-286716be2ade","ME3","Paciente em ECMO venovenosa evolui com h","Paciente em ECMO venovenosa evolui com hipoxemia refratária. Qual estratégia ventilatória é mais recomendada?","Ventilação ultraprotectora com baixos volumes correntes","Volume corrente de 10 mL/kg","PEEP zero para evitar barotrauma","Hiperventilação mandatória","A","Na ECMO venovenosa (VV), a ventilação ultraprotetora (Vt 2-4 mL/kg, PEEP 10-15 cmH2O, FR baixa) permite repouso pulmonar enquanto a ECMO oxigena. O objetivo é minimizar VILI adicional e favorecer a recuperação pulmonar. Referência: ELSO Guidelines, Combes A 2018."
+"a511dd02-1fed-4d16-ae88-9778e538eac7","ME3","Durante hepatectomia extensa ocorre embo","Durante hepatectomia extensa ocorre embolia gasosa venosa. Qual alteração monitorizada costuma ser o primeiro sinal intraoperatório?","Hipertensão arterial súbita","Aumento abrupto do EtCO2","Queda abrupta do EtCO2","Elevação da temperatura central","C","Na embolia aérea venosa, o ar no coração direito aumenta o espaço morto alveolar, resultando em queda abrupta do ETCO2 — frequentemente o primeiro sinal monitorado. Hipotensão, dessaturação e sopro em roda d'água são sinais posteriores. Referência: Miller's Anesthesia 9ed, cap. 71."
+"a7ce9b37-3a5a-47c1-bec6-c2038a84fbe0","ME3","Paciente politraumatizado com TCE grave","Paciente politraumatizado com TCE grave apresenta PIC sustentada em 28 mmHg apesar de sedação profunda, normocapnia e osmoterapia. Qual a medida de segunda linha mais indicada segundo diretrizes atuais?","Hiperventilação profilática mantendo PaCO2 25 mmHg","Barbitúrico em infusão contínua para coma induzido","Reposição liberal de cristaloides hipotônicos","Hipotermia profilática a 32°C","B","Coma barbitúrico (tiopental ou pentobarbital) é terapia de segunda linha para PIC refratária às medidas de primeira linha. Reduz CMRO2 em até 50%, com correspondente redução do FSC e PIC. Monitorização com EEG é necessária para titulação (burst suppression). Referência: Brain Trauma Foundation Guidelines 4ed."
+"bd0f6736-96b7-4622-8817-84a218857b29","ME3","Na síndrome de reperfusão pós-clampeamen","Na síndrome de reperfusão pós-clampeamento aórtico em cirurgia vascular, qual fenômeno é mais esperado?","Hipertensão arterial severa","Acidose metabólica e hipercalemia","Hipocalcemia isolada","Redução abrupta do lactato","B","Na reperfusão pós-clampeamento aórtico, a liberação de metabólitos anaeróbicos acumulados (K+, H+, lactato, mioglobina) causa acidose metabólica intensa, hipercalemia, hipotensão e rabdomiólise. Antecipação e manejo ativo são essenciais. Referência: Miller's Anesthesia 9ed, cap. 67."
+"beef8766-6691-4145-a675-fd355f5ff2ae","ME3","Farmacologia","Qual anestésico intravenoso apresenta propriedades analgésicas e simpaticomiméticas relevantes?","Propofol","Midazolam","Cetamina","Etomidato","C","A cetamina possui propriedades analgésicas (antagonismo NMDA, receptores opioides) e simpaticomiméticas (libera catecolaminas endógenas, gerando taquicardia e hipertensão). É útil em pacientes instáveis hemodinamicamente e no trauma. Referência: Stoelting's Pharmacology 5ed, cap. 4."
+"cf68b159-58d5-46b8-8125-62d549f4b5dd","ME3","Em transplante hepático na fase anepátic","Em transplante hepático na fase anepática, qual alteração metabólica é mais esperada?","Hipocalemia grave","Acidose metabólica progressiva","Hipercalcemia","Alcalose respiratória severa","B","Na fase anepática do transplante hepático, o fígado está ausente. Acumula-se citrato (das transfusões), causando hipocalcemia; a metabolização do lactato cessa, causando acidose metabólica progressiva. Referência: Miller's Anesthesia 9ed, cap. 69."
+"d5fac5e7-7d66-4b42-8d3d-b8971e37046b","ME3","Complicações","Em paciente com hipertermia maligna, qual medicamento deve ser administrado imediatamente?","Sulfato de magnésio","Dantrolene","Bicarbonato de sódio","Naloxona","B","O dantrolene é o tratamento específico da hipertermia maligna. Bloqueia a liberação de Ca2+ do retículo sarcoplasmático via canal RYR1, interrompendo a rigidez muscular e o hipermetabolismo. Dose inicial: 2,5 mg/kg IV a cada 5 min (máx 10 mg/kg). Referência: Diretrizes MHAUS."
+"d8fb8fff-e715-4678-a222-e27296eabea9","ME3","Teste","teste final","a","b","c","d","A","NOTA: Esta questão foi identificada como entrada de teste/placeholder sem conteúdo médico válido (enunciado: 'teste final'). Mantida sem alteração de resposta."
+"daab2452-7910-408d-af8a-996af4216690","ME3","Qual fator aumenta mais significativamen","Qual fator aumenta mais significativamente o risco de awareness intraoperatória?","Uso de BIS","Anestesia venosa total sem monitorização adequada","Uso de opioides em altas doses","Monitorização contínua de gases anestésicos","B","A anestesia venosa total (TIVA) sem monitorização adequada de profundidade anestésica e o uso concomitante de bloqueio neuromuscular são os principais fatores de risco para awareness. O BIS ou entropia guiam adequadamente a profundidade. Referência: Miller's Anesthesia 9ed, cap. 48."
+"f3a3fd0b-cf98-40bb-999d-f74c32777b65","ME3","Em paciente séptico grave submetido à la","Em paciente séptico grave submetido à laparotomia, qual meta hemodinâmica é mais apropriada?","PVC >20 mmHg obrigatoriamente","Lactato progressivamente reduzido","Diurese ignorada em pacientes vasopressores","PAM alvo de 40 mmHg","B","No paciente séptico, a meta hemodinâmica principal é normalizar a perfusão orgânica — avaliada pelo clearance de lactato (queda ≥10-20% em 2h). PAM alvo: 65-70 mmHg; diurese ≥0,5 mL/kg/h é marcador de perfusão renal. Referência: Surviving Sepsis Campaign 2021."
+"f6198cd7-43c8-4602-89f6-27cf85cf1a39","ME3","Neuroanestesia","Durante anestesia para neurocirurgia, qual medida auxilia na redução da pressão intracraniana?","Hipercapnia","Posição de Trendelenburg","Hipoventilação controlada","Leve hipocapnia por ventilação controlada","D","A hipocapnia leve (PaCO2 ligeiramente abaixo de 40 mmHg) reduz o FSC e o volume sanguíneo intracraniano, auxiliando no controle da PIC. A normocapnia é o alvo primário; hipocapnia excessiva (<30 mmHg) pode causar isquemia cerebral. Referência: Miller's Anesthesia 9ed, cap. 57."
+"c36a228a-2520-428a-be51-1715c56c73d8","ME3","Durante cirurgia robótica prolongada em","Durante cirurgia robótica prolongada em Trendelenburg extremo, qual complicação é mais preocupante?","Hipotensão intracraniana","Edema de vias aéreas","Hipocalemia intensa","Hipotermia grave obrigatória","B","No Trendelenburg extremo prolongado (cirurgia robótica pélvica), a congestão venosa da cabeça e pescoço causa edema de vias aéreas superiores — preocupação crítica na extubação. Cuff leak test antes da extubação é recomendado após cirurgias longas. Referência: Miller's Anesthesia 9ed, cap. 41."
+"df4c4be8-48f1-44d9-8d5b-95cd0d8fa5ea","ME3","Qual condição aumenta o risco de toxicid","Qual condição aumenta o risco de toxicidade sistêmica por anestésico local?","Acidose metabólica","Alcalose metabólica","Hipernatremia","Hipotermia leve","A","A acidose metabólica aumenta a toxicidade sistêmica dos anestésicos locais por dois mecanismos: (1) reduz a ligação proteica (mais AL livre não ligado) e (2) aumenta a fração ionizada intracelular (ion trapping). Referência: Diretriz ASRA LAST 2023."
+"08e91c1f-d1df-4d30-bdca-679a502276c2","ME3","Choque Hemorrágico","Anual ME3 - Em choque hemorrágico classe IV, qual alteração hemodinâmica é mais esperada?","Bradicardia compensatória","Aumento do débito cardíaco","Hipotensão grave com vasoconstrição intensa","Redução da resistência vascular sistêmica","C","Bradicardia é sinal tardio e ominoso.
+
+O débito cardíaco geralmente reduz-se.
+
+Correta. Hipovolemia crítica leva à intensa resposta simpática e hipotensão.
+
+A RVS geralmente aumenta."
+"a1e6e046-1f24-41d9-ace7-dfb3dd4954ff","ME3","Anestesia Regional","Anual ME3 - Em anestesia regional, qual sinal precoce sugere toxicidade sistêmica por anestésico local?","Hipotermia","Gosto metálico e zumbido","Hiperglicemia","Broncodilatação","B","Não é manifestação inicial típica.
+
+Correta. Sintomas neurológicos precedem manifestações cardiovasculares graves.
+
+Hiperglicemia não é característica.
+
+Broncodilatação não é manifestação típica."
+"b48143f8-9fcf-4c95-bbe6-f1b366db7d1d","ME3","Sepse","Anual ME3 - Em choque séptico refratário, qual mecanismo contribui para vasoplegia persistente?","Deficiência relativa de vasopressina","Redução de óxido nítrico","Hipercalcemia","Aumento da resposta alfa-adrenérgica","A","Correta. A deficiência relativa de vasopressina contribui para hipotensão refratária.
+
+Óxido nítrico encontra-se aumentado.
+
+Hipocalcemia pode coexistir, mas não explica isoladamente.
+
+A resposta vascular geralmente está reduzida."
+"3bde41c2-0c71-4daa-ae47-392b3828e36d","ME3","Obstetrícia","Anual ME3 - Em anestesia obstétrica, qual complicação é mais temida na anestesia geral?","Hiperglicemia","Broncoaspiração","Broncodilatação","Hipocalcemia","B","Hiperglicemia não é principal complicação.
+
+Correta. Gestantes possuem maior risco de aspiração pulmonar.
+
+Broncodilatação não é complicação.
+
+Hipocalcemia não é principal risco."
+"c99bffd0-4fbe-42ad-bcb4-e2ffc0a41c4d","ME3","Sepse","Anual ME3 - Em paciente séptico, qual marcador auxilia avaliação de hipoperfusão?","Hemoglobina","Lactato","Plaquetas","Amilase","B","Hemoglobina isolada não define perfusão.
+
+Correta. Lactato elevado sugere metabolismo anaeróbico.
+
+Plaquetas avaliam coagulação.
+
+Amilase não avalia choque."
+"6a53b28c-924a-430d-855f-ab97a9c6944d","ME3","Embolia","Anual ME3 - Em embolia pulmonar aguda, qual alteração ocorre frequentemente?","Aumento abrupto do ETCO2","Queda do ETCO2","Linha de base elevada","Hipercapnia obrigatória","B","O ETCO2 geralmente reduz-se.
+
+Correta. A redução da perfusão pulmonar diminui eliminação de CO2.
+
+Linha de base elevada sugere reinalação.
+
+Hipercapnia não é obrigatória."
+"d8fdf8fb-5cad-4572-8467-c30ccd5172bc","ME3","TIVA","Anual ME3 - Em anestesia venosa total, qual monitor auxilia prevenção de awareness?","PVC","TOF","BIS","Gasometria","C","PVC não avalia profundidade anestésica.
+
+TOF monitora bloqueio neuromuscular.
+
+Correta. BIS auxilia monitorização hipnótica.
+
+Gasometria não avalia consciência."
+"935f6c10-f3a9-4c76-ad69-8e0fca00d7e5","ME3","Obesidade","Anual ME3 - Em paciente obeso, qual complicação respiratória ocorre mais frequentemente no pós-operatório?","Broncodilatação","Hipoxemia por atelectasia","Hipocapnia","Redução da resistência aérea","B","Broncodilatação não é complicação típica.
+
+Correta. Atelectasia e hipoventilação aumentam dessaturação.
+
+Hipocapnia não é comum.
+
+A resistência tende a aumentar."
+"dc79dfe5-0358-4f4a-b256-79f563e3f168","ME3","Anestesia Regional","Anual ME3 - Em anestesia regional, qual medida reduz risco de injeção intravascular?","Injeção rápida","Aspiração frequente e injeção fracionada","Suspensão da monitorização","Uso da dose máxima","B","Injeção rápida aumenta risco de LAST.
+
+Correta. Aspiração frequente reduz administração intravascular inadvertida.
+
+Monitorização é obrigatória.
+
+Doses elevadas aumentam toxicidade."
+"0ce6f128-9055-47be-9bec-acd19fd16ad1","ME3","Ventilação","Anual ME3 - Em ventilação mecânica protetora na SDRA, qual variável correlaciona-se mais com mortalidade?","FiO2","Driving pressure","Frequência respiratória","ETCO2","B","FiO2 isoladamente não prediz mortalidade.
+
+Correta. Driving pressure elevada associa-se a pior prognóstico.
+
+FR isolada possui menor correlação.
+
+ETCO2 não é principal marcador prognóstico."
+"0f6acc2a-9637-4f3a-a91e-d91ef5d6be01","ME3","Laparoscopia","Anual ME3 - Em cirurgia laparoscópica prolongada com Trendelenburg acentuado, qual alteração fisiológica é esperada?","Redução da PIC","Aumento da complacência pulmonar","Edema facial e aumento da pressão intracraniana","Hipocapnia espontânea","C","Trendelenburg aumenta pressão venosa cerebral.
+
+A complacência geralmente reduz-se.
+
+Correta. A posição favorece congestão venosa cerebral e facial.
+
+A PaCO2 tende a aumentar."
+"70da20a0-c235-4dbd-a16a-1706fe10dac3","ME3","Ventilação","Anual ME3 - Em ventilação mecânica, qual situação aumenta pressão de pico sem alterar significativamente a pressão de platô?","Broncoespasmo","Edema pulmonar","SDRA","Pneumotórax hipertensivo","A","Correta. O aumento da resistência aérea eleva pressão de pico.
+
+Edema reduz complacência e aumenta ambas.
+
+SDRA eleva pico e platô.
+
+Pneumotórax reduz complacência."
+"226c2ae4-7eb8-4233-9fd2-79edd647dd90","ME3","Neurocrítico","Anual ME3 - Em paciente com hipertensão intracraniana, qual solução deve ser evitada?","Soro fisiológico","Salina hipertônica","Glicose 5%","Albumina isotônica","C","SF é amplamente utilizado.
+
+Salina hipertônica pode reduzir PIC.
+
+Correta. Soluções hipotônicas favorecem edema cerebral.
+
+Albumina pode ser utilizada em situações específicas."
+"718a019b-bd34-4d11-8e9b-da6bf616a2f2","ME3","DPOC","Anual ME3 - Em anestesia para DPOC grave, qual estratégia ventilatória reduz auto-PEEP?","Frequência respiratória elevada","Tempo expiratório prolongado","Volume corrente elevado","Hiperventilação intensa","B","FR elevada aumenta aprisionamento aéreo.
+
+Correta. Maior tempo expiratório reduz hiperinsuflação dinâmica.
+
+Volumes altos aumentam risco de barotrauma.
+
+Hiperventilação agrava auto-PEEP."
+"889d00c3-4de4-48d3-bcb9-1097e3d588df","ME3","Feocromocitoma","Anual ME3 - Em anestesia para feocromocitoma, qual fármaco é utilizado no preparo pré-operatório?","Fenilefrina","Fenoxibenzamina","Nitroglicerina","Atropina","B","Fenilefrina aumentaria vasoconstrição.
+
+Correta. O bloqueio alfa reduz crises hipertensivas perioperatórias.
+
+Nitroglicerina é usada intraoperatoriamente em alguns casos.
+
+Atropina não possui essa finalidade."
+"67155a03-cd9c-4307-8669-509ba82cf0a4","ME3","Choque Hemorrágico","Anual ME3 - Em choque hemorrágico, qual alteração ocorre precocemente?","Bradicardia","Hipertensão","Taquicardia compensatória","Hipocalcemia","C","Bradicardia é sinal tardio.
+
+Hipotensão é mais frequente.
+
+Correta. A ativação simpática aumenta frequência cardíaca.
+
+Hipocalcemia pode ocorrer posteriormente."
+"95b78148-f08e-439c-bbeb-b11c7ba38fb4","ME3","SDRA","Anual ME3 - Em paciente com SDRA, qual mecanismo é principal responsável pela hipoxemia refratária?","Espaço morto isolado","Shunt intrapulmonar","Hiperventilação","Redução do débito cardíaco","B","Espaço morto pode aumentar, mas não explica isoladamente.
+
+Correta. Áreas não ventiladas permanecem perfundidas.
+
+Hiperventilação não causa hipoxemia refratária.
+
+Débito reduzido não é mecanismo principal."
+"83487ca6-85f3-4038-ad61-886da8a88d16","ME3","Hipertensão Pulmonar","Anual ME3 - Em paciente com hipertensão pulmonar grave, qual fator deve ser rigorosamente evitado?","Normotermia","Hipercapnia","Analgesia adequada","Ventilação protetora","B","Normotermia é desejável.
+
+Correta. Hipercapnia aumenta resistência vascular pulmonar.
+
+Analgesia reduz descarga simpática.
+
+Ventilação protetora é benéfica."
+"ea9ba40b-9077-44b2-9ade-7f407093c075","ME3","Monitorização","Anual ME3 - Em monitorização hemodinâmica avançada, qual parâmetro prediz melhor responsividade volêmica?","PVC","PAM","Variação do volume sistólico","Temperatura central","C","PVC isolada possui baixa acurácia.
+
+PAM não define responsividade.
+
+Correta. Parâmetros dinâmicos apresentam melhor valor preditivo.
+
+Temperatura não avalia responsividade."
+"bbff693b-e434-4f68-b257-acb9ef288eb5","ME3","Cirurgia Cardíaca","Anual ME3 - Em anestesia cardíaca, qual alteração é comum durante circulação extracorpórea?","Hemoconcentração","Hemodiluição","Hipercalcemia","Aumento da viscosidade","B","A CEC geralmente dilui componentes sanguíneos.
+
+Correta. O prime do circuito causa hemodiluição.
+
+Hipocalcemia é mais frequente.
+
+A viscosidade tende a reduzir."
+"c69db7f4-fed8-400e-bf17-64cdee170cc8","ME3","Dor Aguda","Anual ME3 - Em analgesia multimodal, qual fármaco possui ação agonista alfa-2?","Cetamina","Dexmedetomidina","Naloxona","Ketorolaco","B","Cetamina antagoniza NMDA.
+
+Correta. Dexmedetomidina fornece sedação e analgesia simpaticolítica.
+
+Naloxona antagoniza opioides.
+
+Ketorolaco é AINE."
+"8a0e95a7-3efc-48ee-8544-1001cad4f52b","ME3","Posicionamento","Anual ME3 - Em cirurgia na posição prona prolongada, qual complicação ocular grave pode ocorrer?","Conjuntivite","Neuropatia óptica isquêmica","Glaucoma agudo","Descolamento de retina","B","Conjuntivite não é principal preocupação.
+
+Correta. Hipoperfusão ocular pode causar perda visual permanente.
+
+Glaucoma não é a principal complicação descrita.
+
+Descolamento é raro."
+"73b22a0a-33da-4100-9295-6d410647a925","ME3","LAST","Anual ME3 - Em LAST, qual tratamento específico deve ser administrado?","Naloxona","Emulsão lipídica intravenosa","Flumazenil","Atropina","B","Naloxona antagoniza opioides.
+
+Correta. Emulsão lipídica é terapia padrão para LAST.
+
+Flumazenil reverte benzodiazepínicos.
+
+Atropina não é tratamento específico."
+"ac296c41-024d-4094-a4f3-606a4f5d6ac4","ME3","Neurocrítico","Anual ME3 - Em paciente neurocrítico, qual posição auxilia redução da PIC?","Trendelenburg","Cabeceira elevada","Litotomia","Prona","B","Trendelenburg piora drenagem venosa cerebral.
+
+Correta. A elevação da cabeça melhora drenagem venosa.
+
+Litotomia não reduz PIC.
+
+Prona não é posição padrão."
+"5c9e4754-ed79-4000-ad17-1cb843c59708","ME3","Obstetrícia","Anual ME3 - Em anestesia obstétrica, qual posição reduz compressão aortocaval?","Supina horizontal","Deslocamento uterino à esquerda","Trendelenburg","Prona","B","A posição supina piora compressão vascular.
+
+Correta. O deslocamento uterino melhora retorno venoso.
+
+Trendelenburg não resolve adequadamente.
+
+Prona não é utilizada."
+"8515d99c-f69f-454f-b4b2-e0091c04f2ed","ME3","Feocromocitoma","Anual ME3 - Em anestesia para feocromocitoma, qual evento frequentemente ocorre após ligadura da drenagem venosa tumoral?","Hipertensão grave","Broncoespasmo","Hipotensão importante","Hiperglicemia persistente","C","Após retirada tumoral, catecolaminas caem abruptamente.
+
+Broncoespasmo não é típico.
+
+Correta. Há perda súbita do estímulo vasoconstritor.
+
+Hipoglicemia pode ocorrer posteriormente."
+"c9029858-b6bd-44ed-a34a-b2ea12d42318","ME3","Hipertermia Maligna","Anual ME3 - Em hipertermia maligna, qual alteração costuma surgir precocemente?","Hipocapnia","Queda abrupta do ETCO2","Elevação progressiva do ETCO2","Hipotermia","C","Hipocapnia não é típica.
+
+Queda do ETCO2 sugere embolia ou desconexão.
+
+Correta. O hipermetabolismo aumenta produção de CO2 rapidamente.
+
+Hipotermia não ocorre."
+"2e61534e-f927-498d-b778-e92c6210e487","ME3","Obesidade","Anual ME3 - Em paciente obeso mórbido, qual estratégia melhora manejo da via aérea?","Trendelenburg","Posição em rampa","Prona","Litotomia","B","Trendelenburg piora mecânica respiratória.
+
+Correta. A posição em rampa melhora alinhamento anatômico.
+
+Prona não é utilizada para indução.
+
+Litotomia não auxilia via aérea."
+"13d18d64-9929-44b5-a204-fbc426820eba","ME3","Neuroanestesia","Anual ME3 - Em trauma cranioencefálico grave, qual meta de PaCO2 é geralmente recomendada?","20-25 mmHg","35-40 mmHg","55-60 mmHg","Acima de 70 mmHg","B","Hiperventilação intensa reduz perfusão cerebral.
+
+Correta. Normocapnia é recomendada na maioria dos casos.
+
+Hipercapnia aumenta PIC.
+
+Valores extremos são deletérios."
+"9a932951-60f7-44cf-8387-115f0498dc22","ME3","Asma","Anual ME3 - Em paciente asmático grave, qual agente inalatório deve ser evitado?","Sevoflurano","Isoflurano","Desflurano","Halotano","C","Sevoflurano possui broncodilatação.
+
+Isoflurano também broncodilata.
+
+Correta. Desflurano irrita vias aéreas.
+
+Halotano possui baixa pungência."
+"adbd7773-9b01-4b96-a726-76bca3f99779","ME3","Neurocirurgia","Anual ME3 - Em neurocirurgia na posição sentada, qual complicação deve ser monitorada?","Hipoglicemia","Embolia gasosa venosa","Hipocalcemia","Broncoespasmo","B","Hipoglicemia não é principal complicação.
+
+Correta. O gradiente venoso favorece entrada de ar.
+
+Hipocalcemia não é típica.
+
+Broncoespasmo não é principal risco."
+"f005b1a0-2181-4e50-bed2-6db59cdf8093","ME3","Ventilação","Anual ME3 - Em ventilação mecânica, qual situação favorece volutrauma?","PEEP adequada","Volume corrente elevado","Hipercapnia permissiva","Ventilação protetora","B","PEEP adequada reduz lesão alveolar.
+
+Correta. Distensão alveolar excessiva aumenta dano pulmonar.
+
+Hipercapnia permissiva pode proteger pulmão.
+
+Ventilação protetora reduz volutrauma."
+"cd84a63c-5a71-446a-b074-16c00cdee50f","ME3","Hipertermia Maligna","Anual ME3 - Em hipertermia maligna, qual terapia específica deve ser administrada?","Sugamadex","Naloxona","Dantrolene","Flumazenil","C","Sugamadex reverte aminosteroides.
+
+Naloxona antagoniza opioides.
+
+Correta. Dantrolene reduz liberação de cálcio sarcoplasmático.
+
+Flumazenil reverte benzodiazepínicos."
+"3d2253a0-015c-48c8-bd33-8a93550217a1","ME3","Neuroanestesia","Anual ME3 - Em neuroanestesia, qual medida reduz rapidamente a pressão intracraniana em situação emergencial?","Hipercapnia permissiva","Hiperventilação temporária","PEEP elevada","Trendelenburg","B","Hipercapnia aumenta PIC.
+
+Correta. A redução da PaCO2 promove vasoconstrição cerebral transitória.
+
+PEEP elevada pode aumentar PIC.
+
+Trendelenburg piora drenagem venosa."
+"1f71935d-b001-4efa-bb15-47ae6b3ceaa4","ME3","Queimado","Anual ME3 - Em paciente queimado após 48 horas, a succinilcolina aumenta risco de:","Hipocalcemia","Hipercalemia grave","Hiponatremia","Alcalose metabólica","B","Hipocalcemia não é principal risco.
+
+Correta. Há proliferação de receptores nicotínicos extrajuncionais.
+
+Hiponatremia não é principal alteração.
+
+Não é a principal complicação."
+"f4359e9b-691a-4e8a-b57b-1e393cdbfe25","ME3","Ventilação","Anual ME3 - Em ventilação protetora, qual volume corrente é geralmente recomendado?","12 mL/kg","10 mL/kg","6 mL/kg","15 mL/kg","C","Volumes altos aumentam volutrauma.
+
+Ainda acima do ideal em SDRA.
+
+Correta. Volumes baixos reduzem lesão pulmonar induzida pela ventilação.
+
+Volumes muito altos aumentam mortalidade."
+"2df4ca55-2788-4503-bc5b-095f8bb14d40","ME3","Anestesia Regional","Anual ME3 - Em anestesia regional guiada por ultrassom, qual vantagem principal ocorre?","Eliminação completa de complicações","Maior visualização anatômica","Ausência de toxicidade sistêmica","Dispensa monitorização","B","Complicações ainda podem ocorrer.
+
+Correta. O ultrassom permite visualização direta de nervos e estruturas.
+
+LAST ainda pode ocorrer.
+
+Monitorização continua obrigatória."
+"ef8206d4-b0d4-4947-a99a-c72fc6c60b35","ME3","Capnografia","Anual ME3 - Em ventilação mecânica, qual alteração capnográfica sugere reinalação de CO2?","Queda abrupta do ETCO2","Linha de base elevada","Capnograma ausente","Curva normal com ETCO2 zero","B","Queda abrupta sugere embolia ou desconexão.
+
+Correta. CO2 inspirado aumenta a linha de base do capnograma.
+
+Traçado ausente sugere desconexão.
+
+ETCO2 zero é incompatível com ventilação efetiva."
+"733dd72c-6a3f-480c-b371-cff9ad07fc7a","ME3","Ventilação","Anual ME3 - Em ventilação mecânica, qual estratégia reduz atelectrauma?","PEEP adequada","PEEP zero","Volume corrente elevado","Hiperventilação intensa","A","Correta. PEEP reduz colapso alveolar repetitivo.
+
+PEEP zero favorece atelectasia.
+
+Volumes altos aumentam volutrauma.
+
+Hiperventilação não reduz atelectrauma."
+"d8fef00b-30fb-4ec3-8e4f-d817bfc88028","ME3","Transfusão","Anual ME3 - Em cirurgia cardíaca, qual distúrbio eletrolítico pode ocorrer após transfusão maciça?","Hipercalcemia","Hipocalcemia","Hipernatremia","Hipermagnesemia","B","O citrato reduz cálcio ionizado.
+
+Correta. Citrato dos hemoderivados pode causar hipocalcemia.
+
+Hipernatremia não é principal alteração.
+
+Hipermagnesemia não é típica."
+"a748bf56-958e-4804-92d1-d6216e328de9","ME3","Sepse","Anual ME3 - Em paciente séptico grave, qual vasopressor é primeira escolha?","Dobutamina","Nitroglicerina","Noradrenalina","Dopamina","C","Dobutamina é inotrópico adjuvante.
+
+Nitroglicerina é vasodilatador.
+
+Correta. Noradrenalina é o vasopressor inicial recomendado.
+
+Dopamina possui maior risco arrítmico."
+"0c05d0d1-17ad-4e55-b4b2-24567b98496e","ME3","SDRA","2o Trimestre ME3 - Em ventilação mecânica na SDRA, qual estratégia reduz mortalidade comprovadamente?","Volume corrente de 12 mL/kg","PEEP zero","Ventilação protetora com baixo volume corrente","Hiperventilação agressiva","C","Volumes elevados aumentam volutrauma.
+
+PEEP zero favorece atelectrauma.
+
+Correta. Estratégias protetoras reduzem lesão pulmonar induzida pela ventilação.
+
+Hiperventilação não reduz mortalidade."
+"cc54e749-5aa1-42cf-8267-5cb85d16b7fe","ME3","Feocromocitoma","2o Trimestre ME3 - Em anestesia para feocromocitoma, qual evento ocorre frequentemente após retirada tumoral?","Hipertensão grave","Hipotensão importante","Broncoespasmo","Hipercalcemia","B","Após ressecção tumoral há redução catecolaminérgica.
+
+Correta. A perda do estímulo vasoconstritor favorece hipotensão.
+
+Broncoespasmo não é típico.
+
+Hipocalcemia não é principal alteração."
+"fcec0437-eb07-4e5b-951e-5194b0e53ddc","ME3","Queimado","2o Trimestre ME3 - Em paciente queimado após 48 horas, succinilcolina aumenta risco de:","Hipocalcemia","Hipercalemia grave","Hiponatremia","Acidose metabólica","B","Hipocalcemia não é principal complicação.
+
+Correta. Há proliferação de receptores nicotínicos extrajuncionais.
+
+Hiponatremia não é típica.
+
+Acidose pode coexistir, mas não é principal risco."
+"b7a1f52f-7c1b-45d5-b594-4e8dba23087e","ME3","Hipertermia Maligna","2o Trimestre ME3 - Em hipertermia maligna, qual sinal costuma surgir precocemente?","Hipocapnia","Elevação progressiva do ETCO2","Hipotermia","Bradicardia","B","Hipocapnia não é típica.
+
+Correta. O hipermetabolismo aumenta produção de CO2 rapidamente.
+
+Hipotermia não ocorre.
+
+Taquicardia é mais frequente."
+"3d7712c7-7204-497b-b041-6096e7d62d39","ME3","Ventilação","2o Trimestre ME3 - Em ventilação protetora, qual volume corrente geralmente é recomendado na SDRA?","12 mL/kg","10 mL/kg","6 mL/kg","15 mL/kg","C","Volumes elevados aumentam volutrauma.
+
+Ainda acima do ideal.
+
+Correta. Baixos volumes reduzem lesão pulmonar.
+
+Volumes excessivos aumentam mortalidade."
+"eda4c695-72f5-4fd1-b7c4-5ed3b213b85f","ME3","Embolia","2o Trimestre ME3 - Em embolia pulmonar maciça, qual alteração hemodinâmica ocorre frequentemente?","Aumento do débito do VD","Falência ventricular direita aguda","Redução da pressão pulmonar","Hipervolemia","B","O débito do VD reduz-se.
+
+Correta. O aumento abrupto da pós-carga sobrecarrega o VD.
+
+A pressão pulmonar eleva-se.
+
+Hipervolemia não é típica."
+"374a1ca9-e0d2-432f-ae38-3c23fc5ae462","ME3","Hipertensão Pulmonar","2o Trimestre ME3 - Em paciente com hipertensão pulmonar, qual alteração aumenta resistência vascular pulmonar?","Hipocapnia","Alcalose","Hipóxia","Normotermia","C","Hipocapnia reduz RVP.
+
+Alcalose geralmente reduz RVP.
+
+Correta. Hipóxia promove vasoconstrição pulmonar.
+
+Normotermia é desejável."
+"b408b9a5-a018-4714-b4ec-97110b44f443","ME3","Hipertensão Pulmonar","2o Trimestre ME3 - Em hipertensão pulmonar grave, qual condição deve ser evitada rigorosamente?","Normotermia","Hipercapnia","Analgesia adequada","Normovolemia","B","Normotermia é desejável.
+
+Correta. Hipercapnia aumenta resistência vascular pulmonar.
+
+Analgesia reduz descarga simpática.
+
+Normovolemia é importante."
+"3452a837-8583-40d9-80f2-c8249e7cda9c","ME3","Sepse","2o Trimestre ME3 - Em choque séptico refratário, qual mecanismo contribui para vasoplegia persistente?","Deficiência relativa de vasopressina","Redução de óxido nítrico","Hipercalcemia","Aumento da responsividade alfa","A","Correta. A deficiência relativa de vasopressina contribui para hipotensão refratária.
+
+Óxido nítrico geralmente encontra-se aumentado.
+
+Hipocalcemia pode coexistir.
+
+A responsividade vascular costuma estar reduzida."
+"07b913ec-253a-4276-8b51-7802a68604b6","ME3","Laparoscopia","2o Trimestre ME3 - Em cirurgia laparoscópica prolongada, qual alteração fisiológica ocorre frequentemente?","Redução da PaCO2","Hipocapnia obrigatória","Aumento da pressão de vias aéreas","Redução da pressão intra-abdominal","C","A PaCO2 geralmente aumenta.
+
+Hipocapnia não é esperada.
+
+Correta. O pneumoperitônio reduz complacência pulmonar.
+
+A pressão abdominal aumenta."
+"93d44777-589e-41c0-9b6b-5d986f25bec5","ME3","Neurocrítico","2o Trimestre ME3 - Em paciente com hipertensão intracraniana, qual solução deve ser evitada?","Soro fisiológico","Salina hipertônica","Glicose 5%","Albumina isotônica","C","SF é frequentemente utilizado.
+
+Salina hipertônica pode reduzir PIC.
+
+Correta. Soluções hipotônicas favorecem edema cerebral.
+
+Albumina pode ser usada em situações específicas."
+"01df887c-6f34-43e5-962b-ef78125bbc0d","ME3","Anestesia Regional","2o Trimestre ME3 - Em anestesia regional guiada por ultrassom, qual benefício principal ocorre?","Eliminação total de complicações","Maior visualização anatômica","Ausência de LAST","Dispensa monitorização","B","Complicações ainda podem ocorrer.
+
+Correta. O ultrassom permite visualização em tempo real.
+
+LAST ainda pode ocorrer.
+
+Monitorização continua obrigatória."
+"e801dff7-0146-4a76-984d-c903f9ef3f6d","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual estratégia reduz atelectrauma?","PEEP adequada","PEEP zero","Volume corrente elevado","Hiperventilação intensa","A","Correta. PEEP reduz colapso alveolar cíclico.
+
+PEEP zero favorece atelectasia.
+
+Volumes altos aumentam volutrauma.
+
+Hiperventilação não reduz atelectrauma."
+"08566142-573a-4b20-b7af-209eb2bd790a","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual condição aumenta pressão de platô?","Broncoespasmo isolado","Baixa complacência pulmonar","Obstrução parcial do TOT","Aumento isolado da resistência","B","Broncoespasmo aumenta principalmente pico.
+
+Correta. Redução da complacência aumenta pressão alveolar estática.
+
+Obstrução eleva pico predominantemente.
+
+Resistência isolada eleva pico."
+"18343890-f5d8-4fb6-b39b-a183f52046bd","ME3","Cirurgia Robótica","2o Trimestre ME3 - Em cirurgia robótica com Trendelenburg acentuado, qual alteração ocorre frequentemente?","Redução da PIC","Aumento da complacência pulmonar","Edema facial e aumento da PIC","Hipocapnia espontânea","C","Trendelenburg aumenta pressão venosa cerebral.
+
+A complacência reduz-se.
+
+Correta. O posicionamento favorece congestão venosa.
+
+A PaCO2 geralmente aumenta."
+"85c25e79-7844-411f-bda6-4a81742989bb","ME3","SDRA","2o Trimestre ME3 - Em paciente com SDRA grave, qual mecanismo é principal responsável pela hipoxemia refratária?","Espaço morto isolado","Shunt intrapulmonar","Hiperventilação","Redução do débito cardíaco","B","Espaço morto pode aumentar, mas não explica isoladamente.
+
+Correta. Áreas não ventiladas permanecem perfundidas.
+
+Hiperventilação não causa hipoxemia refratária.
+
+Débito reduzido não é principal mecanismo."
+"25616e01-dc0b-449b-9a85-29031ffb280c","ME3","Anestesia Regional","2o Trimestre ME3 - Em anestesia regional, qual medida reduz risco de injeção intravascular?","Injeção rápida","Aspiração frequente e injeção fracionada","Suspender monitorização","Uso de dose máxima","B","Injeção rápida aumenta risco de LAST.
+
+Correta. A técnica fracionada reduz administração intravascular inadvertida.
+
+Monitorização continua obrigatória.
+
+Doses elevadas aumentam toxicidade."
+"61edd425-18e3-429a-8045-ff49ae26f0ed","ME3","Monitorização","2o Trimestre ME3 - Em monitorização hemodinâmica avançada, qual parâmetro dinâmico prediz melhor responsividade volêmica?","PVC","PAM","Variação do volume sistólico","Temperatura central","C","PVC isolada possui baixa acurácia.
+
+PAM não prediz responsividade.
+
+Correta. Parâmetros dinâmicos apresentam maior valor preditivo.
+
+Temperatura não avalia volemia."
+"30c30c9f-d4b4-4117-94d5-6342f6a57b5e","ME3","Ventilação","2o Trimestre ME3 - Em ventilação protetora, qual valor de driving pressure associa-se a melhor prognóstico?","Elevada","Menor que 15 cmH2O","Maior que 25 cmH2O","Maior que 30 cmH2O","B","Driving pressure elevada aumenta mortalidade.
+
+Correta. Menores pressões associam-se a menor lesão pulmonar.
+
+Valores altos são deletérios.
+
+Valores extremos associam-se a pior prognóstico."
+"464bf8d9-9532-44c2-b31d-7761b65790b5","ME3","Ventilação","2o Trimestre ME3 - Em monitorização ventilatória, qual parâmetro melhor reflete ventilação alveolar?","FiO2","ETCO2","SpO2","PVC","B","FiO2 mede fração inspirada de oxigênio.
+
+Correta. ETCO2 correlaciona-se com eliminação alveolar de CO2.
+
+SpO2 avalia oxigenação.
+
+PVC não avalia ventilação."
+"c109068a-1c36-4a53-800e-8ef8064aec7d","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual condição favorece auto-PEEP?","Tempo expiratório prolongado","Baixa frequência respiratória","Tempo expiratório insuficiente","Baixo volume corrente","C","Tempo expiratório longo reduz auto-PEEP.
+
+FR baixa reduz hiperinsuflação.
+
+Correta. Expiração incompleta causa aprisionamento aéreo.
+
+Baixo volume reduz risco."
+"16bf30d3-5484-4a5f-9265-4751541cbf89","ME3","Choque Hemorrágico","2o Trimestre ME3 - Em choque hemorrágico grave, qual marcador sugere hipoperfusão persistente?","SpO2","Lactato elevado","Hemoglobina normal","Hipocalcemia","B","SpO2 pode permanecer normal.
+
+Correta. Lactato elevado reflete metabolismo anaeróbico.
+
+Hemoglobina isolada não exclui choque.
+
+Hipocalcemia não avalia perfusão."
+"526a45aa-81e3-4129-8dc8-3bdae6e4da9b","ME3","Neurocirurgia","2o Trimestre ME3 - Em neurocirurgia na posição sentada, qual complicação deve ser monitorada?","Hipoglicemia","Embolia gasosa venosa","Hipocalcemia","Broncoespasmo","B","Hipoglicemia não é principal complicação.
+
+Correta. O gradiente venoso favorece entrada de ar.
+
+Hipocalcemia não é típica.
+
+Broncoespasmo não é principal evento."
+"561517f6-2a2b-4aa8-9d5a-ebacd368b616","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual condição favorece volutrauma?","PEEP adequada","Volume corrente elevado","Hipercapnia permissiva","Ventilação protetora","B","PEEP adequada reduz lesão.
+
+Correta. Distensão alveolar excessiva aumenta dano pulmonar.
+
+Hipercapnia permissiva pode proteger pulmão.
+
+Ventilação protetora reduz lesão."
+"73b583f7-2c6d-4257-8f71-7185bfce01a1","ME3","Capnografia","2o Trimestre ME3 - Em ventilação mecânica, qual achado sugere reinalação de CO2?","Linha de base elevada","Capnograma ausente","Queda abrupta do ETCO2","ETCO2 zero","A","Correta. CO2 inspirado aumenta linha de base capnográfica.
+
+Ausência sugere desconexão.
+
+Queda abrupta sugere embolia ou desconexão.
+
+ETCO2 zero não é compatível com ventilação efetiva."
+"648fc1d6-ac66-452d-9b4d-80396f9703fa","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual situação favorece atelectasia de absorção?","PEEP adequada","FiO2 elevada prolongada","Ventilação protetora","Mobilização precoce","B","PEEP reduz atelectasia.
+
+Correta. Altas frações inspiradas favorecem colapso alveolar.
+
+Ventilação protetora reduz colapso.
+
+Mobilização reduz complicações pulmonares."
+"b0a9a606-a6f5-43b7-bfb3-c74e40206978","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual situação aumenta pressão de pico sem alterar significativamente a pressão de platô?","Broncoespasmo","SDRA","Edema pulmonar","Fibrose pulmonar","A","Correta. O aumento da resistência aérea eleva pressão de pico.
+
+SDRA reduz complacência e eleva ambas.
+
+Edema reduz complacência.
+
+Fibrose aumenta platô e pico."
+"0464de68-8048-4809-9622-bcbcae59b8ad","ME3","Neuroanestesia","2o Trimestre ME3 - Em neuroanestesia, qual medida reduz rapidamente a pressão intracraniana?","Hipercapnia","Hiperventilação temporária","Trendelenburg","PEEP elevada","B","Hipercapnia aumenta fluxo cerebral.
+
+Correta. A redução da PaCO2 promove vasoconstrição cerebral transitória.
+
+Trendelenburg piora drenagem venosa.
+
+PEEP elevada pode aumentar PIC."
+"2300ed62-01bc-4832-a96c-00392484d989","ME3","Obesidade","2o Trimestre ME3 - Em paciente obeso mórbido, qual estratégia otimiza intubação traqueal?","Trendelenburg","Posição em rampa","Litotomia","Prona","B","Trendelenburg piora mecânica respiratória.
+
+Correta. A posição em rampa melhora alinhamento anatômico.
+
+Litotomia não auxilia.
+
+Prona não é utilizada para indução."
+"08d2a5af-a267-4928-baa0-1cfe7b472ec1","ME3","Cirurgia Cardíaca","2o Trimestre ME3 - Em anestesia cardíaca, qual alteração ocorre frequentemente na circulação extracorpórea?","Hemoconcentração","Hemodiluição","Hipercalcemia","Aumento da viscosidade","B","O circuito extracorpóreo dilui componentes sanguíneos.
+
+Correta. O prime da CEC reduz hematócrito e proteínas plasmáticas.
+
+Hipocalcemia é mais comum.
+
+A viscosidade tende a reduzir."
+"0ae9a3ed-4509-4e97-b169-0a36b4548754","ME3","Posicionamento","2o Trimestre ME3 - Em cirurgia na posição prona prolongada, qual complicação ocular grave pode ocorrer?","Conjuntivite","Neuropatia óptica isquêmica","Glaucoma agudo","Descolamento de retina","B","Conjuntivite não é principal complicação.
+
+Correta. Hipoperfusão ocular pode causar perda visual permanente.
+
+Não é principal evento descrito.
+
+Descolamento é raro."
+"8aae6e7b-3b1a-40e4-b8f2-d8c8e5629e2f","ME3","Sepse","2o Trimestre ME3 - Em paciente séptico grave, qual vasopressor é primeira escolha?","Dobutamina","Nitroglicerina","Noradrenalina","Dopamina","C","Dobutamina é inotrópico adjuvante.
+
+Nitroglicerina é vasodilatador.
+
+Correta. Noradrenalina é o vasopressor inicial recomendado.
+
+Dopamina possui maior risco arrítmico."
+"940bd50e-b11f-4c95-8b6a-0d50e763c761","ME3","Feocromocitoma","2o Trimestre ME3 - Em anestesia para feocromocitoma, qual medicação é usada classicamente no preparo pré-operatório?","Fenilefrina","Fenoxibenzamina","Atropina","Nitroglicerina","B","Fenilefrina aumentaria vasoconstrição.
+
+Correta. O bloqueio alfa reduz crises hipertensivas perioperatórias.
+
+Atropina não possui essa finalidade.
+
+Nitroglicerina é mais usada intraoperatoriamente."
+"59a64ba0-f14d-423f-b39c-060142e11a4d","ME3","Asma","2o Trimestre ME3 - Em paciente asmático grave, qual agente venoso apresenta broncodilatação significativa?","Tiopental","Cetamina","Etomidato","Midazolam","B","Tiopental não possui broncodilatação relevante.
+
+Correta. Cetamina possui efeito simpatomimético broncodilatador.
+
+Etomidato é hemodinamicamente estável.
+
+Midazolam não broncodilata significativamente."
+"1391401a-c52d-4098-8b77-885a131b7acc","ME3","Transfusão","2o Trimestre ME3 - Em anestesia cardíaca, qual distúrbio eletrolítico ocorre frequentemente após transfusão maciça?","Hipercalcemia","Hipocalcemia","Hipermagnesemia","Hipernatremia","B","O citrato reduz cálcio ionizado.
+
+Correta. Citrato dos hemoderivados pode causar hipocalcemia.
+
+Hipermagnesemia não é principal alteração.
+
+Hipernatremia não é típica."
+"5ee0690f-3c52-490e-b5a6-b9a64ad319a1","ME3","Embolia Gasosa","2o Trimestre ME3 - Em embolia gasosa venosa, qual alteração ocorre frequentemente?","Elevação abrupta do ETCO2","Queda abrupta do ETCO2","Aumento da complacência","Hipertensão sustentada","B","O ETCO2 geralmente reduz-se.
+
+Correta. A redução da perfusão pulmonar diminui eliminação de CO2.
+
+A complacência pode reduzir-se.
+
+Hipotensão é mais frequente."
+"41399385-36fa-4c09-ade2-1ab2d354d72f","ME3","LAST","2o Trimestre ME3 - Em LAST, qual tratamento específico é recomendado?","Naloxona","Flumazenil","Emulsão lipídica intravenosa","Atropina","C","Naloxona antagoniza opioides.
+
+Flumazenil antagoniza benzodiazepínicos.
+
+Correta. Emulsão lipídica é terapia padrão na toxicidade sistêmica.
+
+Atropina não trata LAST."
+"55a8dd6d-3ba6-480b-b2c0-3e5c4f6f1ec7","ME3","Broncoespasmo","2o Trimestre ME3 - Em broncoespasmo intraoperatório grave, qual ajuste ventilatório é adequado?","Tempo expiratório curto","FR elevada","Tempo expiratório prolongado","Volume corrente elevado","C","Tempo curto favorece auto-PEEP.
+
+FR elevada aumenta aprisionamento aéreo.
+
+Correta. Expiração prolongada reduz hiperinsuflação dinâmica.
+
+Volumes altos aumentam barotrauma."
+"5126d049-39fc-4bb8-95a8-9e01039cd93d","ME3","Asma","2o Trimestre ME3 - Em paciente asmático grave, qual agente inalatório deve ser evitado?","Sevoflurano","Isoflurano","Desflurano","Halotano","C","Sevoflurano possui broncodilatação.
+
+Isoflurano também broncodilata.
+
+Correta. Desflurano irrita vias aéreas.
+
+Halotano possui baixa pungência."
+"f9944ad8-1381-4f89-b317-6c283937ad57","ME3","Obstetrícia","2o Trimestre ME3 - Em anestesia obstétrica, qual alteração fisiológica reduz tempo até dessaturação?","Aumento da CRF","Redução da capacidade residual funcional","Hipometabolismo","Redução do consumo de oxigênio","B","A CRF reduz-se na gestação.
+
+Correta. Menor reserva pulmonar acelera dessaturação.
+
+O metabolismo aumenta.
+
+O consumo de O2 aumenta."
+"e004ab7b-a402-4539-8f2f-1417e0e318f5","ME3","Capnografia","2o Trimestre ME3 - Em broncoespasmo grave, qual alteração capnográfica é típica?","Linha de base elevada","Curva em barbatana de tubarão","Capnograma ausente","ETCO2 zero","B","Linha de base elevada sugere reinalação.
+
+Correta. O esvaziamento expiratório lento altera a fase III.
+
+Traçado ausente sugere desconexão.
+
+ETCO2 zero não é compatível com ventilação efetiva."
+"32c54beb-02ff-4a48-ba69-bd20c02f5881","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual alteração ocorre frequentemente com PEEP excessiva?","Aumento do retorno venoso","Redução da pré-carga","Hipervolemia","Aumento obrigatório da complacência","B","PEEP elevada pode reduzir débito cardíaco.
+
+Correta. A pressão intratorácica elevada reduz retorno venoso.
+
+Não causa hipervolemia.
+
+A complacência pode piorar."
+"00ec8ddf-117f-4090-8557-ee8f237438ad","ME3","Hipertensão Pulmonar","2o Trimestre ME3 - Em paciente com hipertensão pulmonar, qual condição aumenta pós-carga do ventrículo direito?","Hipocapnia","Hipóxia","Alcalose","Normotermia","B","Hipocapnia reduz resistência pulmonar.
+
+Correta. Hipóxia causa vasoconstrição pulmonar.
+
+Alcalose geralmente reduz RVP.
+
+Normotermia é desejável."
+"4608160b-36b9-4b65-9fa0-69c14ab7467e","ME3","Ventilação","2o Trimestre ME3 - Em ventilação mecânica, qual parâmetro corresponde à driving pressure?","Pressão de pico menos PEEP","Pressão de platô menos PEEP","ETCO2 menos PEEP","VC dividido pela FiO2","B","A pressão de pico sofre influência da resistência.
+
+Correta. Driving pressure relaciona-se ao estresse alveolar.
+
+ETCO2 não participa do cálculo.
+
+Não corresponde ao conceito."
+"5c289b9c-dcf9-4baf-a548-1b9c82d3c95b","ME3","DPOC","2o Trimestre ME3 - Em ventilação mecânica, qual ajuste reduz hiperinsuflação dinâmica no DPOC?","FR elevada","Tempo expiratório prolongado","Volume corrente elevado","Hiperventilação intensa","B","FR elevada favorece auto-PEEP.
+
+Correta. Maior tempo expiratório reduz aprisionamento aéreo.
+
+Volumes altos aumentam risco de barotrauma.
+
+Hiperventilação agrava hiperinsuflação."
+"7422789f-2540-4c97-a6c7-6506f859a482","ME3","SDRA","2o Trimestre ME3 - Em SDRA grave, qual estratégia ventilatória reduz lesão pulmonar induzida pela ventilação?","Volume corrente alto","Pressão de platô elevada","Volume corrente baixo e PEEP individualizada","Hiperventilação agressiva sem limite pressórico","C","Aumenta volutrauma.
+
+Aumenta barotrauma.
+
+Correta. Estratégia protetora reduz volutrauma e atelectrauma.
+
+Pode agravar lesão pulmonar."
+"5736da2c-95ac-49b2-b3fe-a54f862f4d9b","ME3","Capnografia","2o Trimestre ME3 - Em reinalação de CO2 no circuito anestésico, qual achado é esperado?","Linha de base capnográfica elevada","Traçado ausente","Queda abrupta do ETCO2","Capnograma normal obrigatório","A","Correta. CO2 inspirado impede retorno da linha de base ao zero.
+
+Sugere desconexão.
+
+Sugere embolia ou baixo débito.
+
+Não ocorre obrigatoriamente."
+"12f9e2a5-cce3-439d-8b24-3381d4be4021","ME3","Capnografia","2o Trimestre ME3 - Qual causa frequente de reinalação de CO2 no circuito circular?","Exaustão da cal sodada","Hiperventilação","Baixo metabolismo","Hipotermia","A","Correta. Absorvedor exaurido permite reinalação de CO2.
+
+Reduz ETCO2.
+
+Reduz produção de CO2.
+
+Reduz produção metabólica de CO2."
+"58b45ce8-b89e-4c72-a5a7-d6e5a81e42d8","ME3","Broncoespasmo","2o Trimestre ME3 - Em broncoespasmo intraoperatório grave, qual ajuste ventilatório é mais adequado?","Aumentar frequência respiratória","Reduzir tempo expiratório","Prolongar tempo expiratório","Aumentar volume corrente agressivamente","C","Piora auto-PEEP.
+
+Aumenta aprisionamento aéreo.
+
+Correta. Expiração prolongada reduz hiperinsuflação dinâmica.
+
+Aumenta risco de barotrauma."
+"74d5e439-f77e-467a-97f7-56412b2ea2cb","ME3","Ventilação","2o Trimestre ME3 - Em ventilação controlada a volume, aumento de pico com platô normal sugere:","Aumento de resistência de vias aéreas","Redução de complacência pulmonar","Pneumotórax hipertensivo sempre","Edema pulmonar cardiogênico","A","Correta. Resistência elevada aumenta pressão resistiva.
+
+Aumentaria pico e platô.
+
+Pode elevar ambos se reduzir complacência.
+
+Geralmente aumenta platô também."
+"5e69fa6b-7141-433c-9a91-37f27f17d329","ME3","Capnografia","2o Trimestre ME3 - Qual alteração capnográfica sugere broncoespasmo?","Linha de base elevada","Curva em barbatana de tubarão","Traçado ausente","ETCO2 zero persistente","B","Sugere reinalação de CO2.
+
+Correta. Esvaziamento expiratório lento altera a fase III.
+
+Sugere desconexão ou extubação.
+
+Incompatível com ventilação efetiva."
+"3d10d6cd-cdd7-4161-b98c-98f2d2b1cd2b","ME3","Embolia","2o Trimestre ME3 - Em embolia pulmonar maciça, qual achado capnográfico é esperado?","Aumento abrupto do ETCO2","Queda abrupta do ETCO2","Linha de base elevada","Aumento progressivo por hipermetabolismo","B","Não é típico.
+
+Correta. Redução da perfusão pulmonar diminui eliminação de CO2.
+
+Sugere reinalação.
+
+Sugere hipertermia maligna."
+"6d118a71-04e2-45e2-b55c-87750b32beb2","ME3","SDRA","3o Trimestre ME3 - Em SDRA grave, qual estratégia ventilatória reduz lesão pulmonar induzida pela ventilação?","Volume corrente alto","Pressão de platô elevada","Volume corrente baixo e PEEP individualizada","Hiperventilação agressiva sem limite pressórico","C","Aumenta volutrauma.
+
+Aumenta barotrauma.
+
+Correta. Estratégia protetora reduz volutrauma e atelectrauma.
+
+Pode agravar lesão pulmonar."
+"7cb3b881-b2b0-4d7b-a3ad-5a1dfaec441f","ME3","Capnografia","3o Trimestre ME3 - Em reinalação de CO2 no circuito anestésico, qual achado é esperado?","Linha de base capnográfica elevada","Traçado ausente","Queda abrupta do ETCO2","Capnograma normal obrigatório","A","Correta. CO2 inspirado impede retorno da linha de base ao zero.
+
+Sugere desconexão.
+
+Sugere embolia ou baixo débito.
+
+Não ocorre obrigatoriamente."
+"3997f71d-8ad3-4f9e-9425-af67dd53e6d3","ME3","SDRA","3o Trimestre ME3 - Qual driving pressure costuma ser associada a menor risco em SDRA?","Menor que 15 cmH2O","Maior que 25 cmH2O","Maior que 30 cmH2O","Independente da complacência","A","Correta. Valores menores associam-se a menor estresse alveolar.
+
+Valor elevado.
+
+Valor muito elevado.
+
+Driving pressure depende da complacência."
+"d1519ef5-9e12-4c43-b5bd-36be54aabb4a","ME3","Ventilação","3o Trimestre ME3 - Qual valor de pressão de platô geralmente deve ser evitado na ventilação protetora?","Menor que 20 cmH2O","Menor que 25 cmH2O","Maior que 30 cmH2O","Entre 15 e 20 cmH2O","C","Na ventilação protetora, a pressão de platô deve ser mantida abaixo de 30 cmH2O para evitar barotrauma e volutrauma por superdistensão alveolar. Pressões acima desse limiar causam ruptura de alvéolos, pneumotórax e lesão pulmonar induzida pela ventilação (VILI). Referência: ARDSnet 2000, Miller's Anesthesia 9ed, cap. 50."
+"56d6f8ae-3d7b-4455-9eb1-d475efe407aa","ME3","Capnografia","3o Trimestre ME3 - Qual causa frequente de reinalação de CO2 no circuito circular?","Exaustão da cal sodada","Hiperventilação","Baixo metabolismo","Hipotermia","A","Correta. Absorvedor exaurido permite reinalação de CO2.
+
+Reduz ETCO2.
+
+Reduz produção de CO2.
+
+Reduz produção metabólica de CO2."
+"26b78a6e-8142-4a02-a4b8-0b43dc2ed8e0","ME3","DPOC","3o Trimestre ME3 - Em DPOC grave sob ventilação, qual estratégia reduz hiperinsuflação dinâmica?","Frequência respiratória elevada","Tempo expiratório prolongado","Tempo inspiratório prolongado","Hiperventilação intensa","B","Favorece aprisionamento.
+
+Correta. Permite esvaziamento pulmonar mais completo.
+
+Reduz tempo expiratório.
+
+Pode piorar auto-PEEP."
+"25b501d6-7323-4be5-9e42-75acb5d64ab2","ME3","Broncoespasmo","3o Trimestre ME3 - Em broncoespasmo intraoperatório grave, qual ajuste ventilatório é mais adequado?","Aumentar frequência respiratória","Reduzir tempo expiratório","Prolongar tempo expiratório","Aumentar volume corrente agressivamente","C","Piora auto-PEEP.
+
+Aumenta aprisionamento aéreo.
+
+Correta. Expiração prolongada reduz hiperinsuflação dinâmica.
+
+Aumenta risco de barotrauma."
+"b4264bfc-5f4c-4608-a8e1-e8bba537ba97","ME3","Ventilação","3o Trimestre ME3 - Em ventilação controlada a volume, aumento de pico com platô normal sugere:","Aumento de resistência de vias aéreas","Redução de complacência pulmonar","Pneumotórax hipertensivo sempre","Edema pulmonar cardiogênico","A","Correta. Resistência elevada aumenta pressão resistiva.
+
+Aumentaria pico e platô.
+
+Pode elevar ambos se reduzir complacência.
+
+Geralmente aumenta platô também."
+"5e99ead5-762a-44b9-a049-bbcfd2fda7ad","ME3","Capnografia","3o Trimestre ME3 - Qual alteração capnográfica sugere broncoespasmo?","Linha de base elevada","Curva em barbatana de tubarão","Traçado ausente","ETCO2 zero persistente","B","Sugere reinalação de CO2.
+
+Correta. Esvaziamento expiratório lento altera a fase III.
+
+Sugere desconexão ou extubação.
+
+Incompatível com ventilação efetiva."
+"ecbe38c3-1dd1-43ea-a41f-a489331fe8ff","ME3","Ventilação","3o Trimestre ME3 - Aumento simultâneo da pressão de pico e platô sugere:","Broncoespasmo isolado","Obstrução parcial do tubo","Redução da complacência pulmonar","Vazamento no circuito","C","Eleva mais pico.
+
+Eleva mais pico.
+
+Correta. Baixa complacência aumenta pressão alveolar estática.
+
+Reduz volumes e pressões."
+"6f462753-7e84-4314-81fc-a586e31dc74a","ME3","Embolia","3o Trimestre ME3 - Em embolia pulmonar maciça, qual achado capnográfico é esperado?","Aumento abrupto do ETCO2","Queda abrupta do ETCO2","Linha de base elevada","Aumento progressivo por hipermetabolismo","B","Não é típico.
+
+Correta. Redução da perfusão pulmonar diminui eliminação de CO2.
+
+Sugere reinalação.
+
+Sugere hipertermia maligna."
+"ed4efd79-5da7-45dd-ad79-302d849c1825","ME3","Ventilação","3o Trimestre ME3 - Driving pressure é calculada por:","Pressão de pico menos PEEP","Pressão de platô menos PEEP","ETCO2 menos PEEP","Volume corrente dividido por FiO2","B","Inclui componente resistivo.
+
+Correta. Reflete pressão elástica aplicada ao sistema respiratório.
+
+Não é fórmula válida.
+
+Não corresponde ao conceito."
+"e0fbf9fa-2e33-4de6-a4a2-d17cc50ef22b","ME3","Obstetrícia","3o Trimestre ME3 - Em anestesia obstétrica, qual alteração fisiológica aumenta dispersão cefálica do anestésico local no neuroeixo?","Aumento do volume liquórico","Congestão venosa epidural","Redução da progesterona","Aumento do espaço epidural","B","O volume liquórico tende a reduzir.
+
+Correta. A congestão venosa epidural reduz o espaço disponível e favorece maior dispersão.
+
+A progesterona encontra-se elevada.
+
+O espaço epidural funcional reduz-se."
+"cc0bc986-70e6-43ab-b295-a9e7f3c88c5a","ME3","Neuroanestesia","3o Trimestre ME3 - Em neuroanestesia, qual alvo ventilatório é usualmente recomendado no TCE grave sem herniação iminente?","PaCO2 20-25 mmHg","PaCO2 35-40 mmHg","PaCO2 55-60 mmHg","PaCO2 acima de 70 mmHg","B","Hiperventilação intensa pode reduzir perfusão cerebral.
+
+Correta. Normocapnia é recomendada para evitar isquemia cerebral.
+
+Hipercapnia aumenta fluxo cerebral e PIC.
+
+Valores extremos são deletérios."
+"7f9bd654-2128-4bea-97d4-09e318118012","ME3","Feocromocitoma","3o Trimestre ME3 - Em anestesia para feocromocitoma, qual preparo clássico reduz crises hipertensivas perioperatórias?","Bloqueio alfa-adrenérgico","Bloqueio beta isolado inicial","Diurético isolado","Atropina profilática","A","Correta. Bloqueio alfa reduz vasoconstrição catecolaminérgica.
+
+Beta-bloqueio isolado antes do alfa pode piorar hipertensão.
+
+Não trata a fisiopatologia principal.
+
+Não possui essa indicação."
+"c3290f1b-e78e-4ff0-becf-4718feb8c9bd","ME3","Sepse","3o Trimestre ME3 - Qual marcador auxilia avaliação de hipoperfusão em choque séptico?","Lactato","Amilase","Plaquetas isoladas","Hemoglobina isolada","A","Correta. Lactato elevado sugere metabolismo anaeróbico e hipoperfusão.
+
+Não é marcador de perfusão.
+
+Avalia coagulação, não perfusão diretamente.
+
+Não avalia perfusão isoladamente."
+"4abd1087-4708-4d90-9f93-28c4162eb96f","ME3","Laparoscopia","3o Trimestre ME3 - Em anestesia para cirurgia laparoscópica, o pneumoperitônio por CO2 costuma causar:","Aumento da complacência pulmonar","Redução da pressão de vias aéreas","Aumento da PaCO2 e da pressão de vias aéreas","Hipocapnia obrigatória","C","A complacência tende a reduzir.
+
+As pressões geralmente aumentam.
+
+Correta. CO2 absorvido e pressão abdominal elevada alteram ventilação.
+
+Hipercapnia é mais provável."
+"c6f0a507-30f5-4e64-923c-0a3677f665f9","ME3","Obstetrícia","3o Trimestre ME3 - Em gestante submetida à cesariana sob raquianestesia, qual vasopressor é preferido para hipotensão materna?","Dopamina","Fenilefrina","Nitroprussiato","Dobutamina","B","Dopamina não é primeira escolha.
+
+Correta. Fenilefrina mantém melhor perfil ácido-base fetal.
+
+Nitroprussiato não é indicado nesse contexto.
+
+Dobutamina é inotrópico, não vasopressor padrão."
+"1f2cfeee-4c60-4ee8-9e0c-b96ef99afd62","ME3","Neuroanestesia","3o Trimestre ME3 - Em hipertensão intracraniana aguda com sinais de herniação, qual medida temporária pode ser útil?","Hipercapnia permissiva","Hiperventilação breve","Trendelenburg","PEEP excessiva","B","Hipercapnia aumenta PIC.
+
+Correta. Hiperventilação reduz PaCO2 e causa vasoconstrição cerebral transitória.
+
+Trendelenburg piora drenagem venosa cerebral.
+
+PEEP excessiva pode elevar pressão venosa cerebral."
+"a7b8d9be-270b-46d1-9861-e481427c8fb8","ME3","Feocromocitoma","3o Trimestre ME3 - Durante manipulação de feocromocitoma, qual evento é esperado?","Crise hipertensiva","Hipotensão obrigatória","Hipoglicemia imediata","Broncoespasmo","A","Correta. Liberação catecolaminérgica pode causar hipertensão grave.
+
+Hipotensão é mais comum após ligadura tumoral.
+
+Hiperglicemia é mais provável inicialmente.
+
+Não é evento típico."
+"6c0c0d06-3650-457b-af1c-1d7139dba3bc","ME3","Posicionamento","3o Trimestre ME3 - Em posição prona prolongada, qual complicação ocular grave é descrita?","Neuropatia óptica isquêmica","Conjuntivite simples","Descolamento de retina obrigatório","Miose prolongada","A","Correta. Hipoperfusão e compressão ocular podem causar perda visual.
+
+É menos grave e não a principal preocupação.
+
+Não é a complicação clássica.
+
+Não tem relação direta."
+"20dab670-b124-4b4e-9c7b-df9d88f7779d","ME3","Cirurgia Robótica","3o Trimestre ME3 - Em Trendelenburg acentuado prolongado na cirurgia robótica, qual complicação é relevante?","Redução da pressão intracraniana","Edema facial e aumento da PIC","Aumento da complacência pulmonar","Hipovolemia absoluta","B","Trendelenburg aumenta pressão venosa cerebral.
+
+Correta. Congestão venosa favorece edema facial, de vias aéreas e aumento da PIC.
+
+A complacência tende a reduzir.
+
+Não é efeito direto."
+"082a76e5-3c20-43a3-a59c-47702c76c0ea","ME3","Anestesia Regional","3o Trimestre ME3 - Em bloqueio interescalênico, qual complicação respiratória é mais frequente?","Bloqueio do nervo frênico","Pneumotórax bilateral","Edema pulmonar","Aspiração pulmonar","A","Correta. O bloqueio frênico ipsilateral é comum pela proximidade anatômica.
+
+Pode ocorrer em outras abordagens, mas não é o mais frequente aqui.
+
+Não é complicação típica.
+
+Não é complicação direta do bloqueio."
+"26b9ec8c-fb6d-4c15-aee6-8de3ecaaf949","ME3","Neuroanestesia","3o Trimestre ME3 - Qual solução deve ser evitada em neurocirurgia com risco de edema cerebral?","Soro fisiológico 0,9%","Salina hipertônica","Glicose 5%","Cristaloide isotônico","C","SF é frequentemente utilizado.
+
+Salina hipertônica pode reduzir PIC.
+
+Correta. Soluções hipotônicas favorecem edema cerebral.
+
+Cristaloides isotônicos são preferíveis."
+"d28fbc96-8f70-4070-87dd-d3ff770d4ea7","ME3","Feocromocitoma","3o Trimestre ME3 - Após ligadura venosa tumoral no feocromocitoma, qual complicação pode ocorrer?","Hipotensão grave","Hipertensão refratária obrigatória","Hipercalcemia","Broncoaspiração","A","Correta. A queda súbita de catecolaminas e vasoplegia podem causar hipotensão.
+
+A hipertensão tende a reduzir após ressecção.
+
+Não é alteração típica.
+
+Não é específica desse momento."
+"71f189b4-0be3-400c-87d5-52c608f5b36d","ME3","Posicionamento","3o Trimestre ME3 - Em litotomia prolongada, qual neuropatia é mais associada à compressão lateral da perna?","Nervo radial","Nervo fibular comum","Nervo facial","Nervo frênico","B","Radial relaciona-se aos membros superiores.
+
+Correta. Compressão na cabeça da fíbula lesa o nervo fibular comum.
+
+Não é típico da litotomia.
+
+Não se relaciona à perna."
+"f590237c-4f53-40b1-bc03-0eb430491ef7","ME3","Dor Aguda","3o Trimestre ME3 - Em analgesia multimodal, qual fármaco atua por antagonismo NMDA?","Cetamina","Naloxona","Dexmedetomidina","Neostigmina","A","Correta. Cetamina reduz sensibilização central via NMDA.
+
+Naloxona antagoniza opioides.
+
+Dexmedetomidina é agonista alfa-2.
+
+Neostigmina é anticolinesterásico."
+"315f5224-2c98-45dd-ab25-b37fc84913d1","ME3","Anestesia Regional","3o Trimestre ME3 - Qual complicação é classicamente associada ao bloqueio supraclavicular do plexo braquial?","Pneumotórax","Síndrome de Horner bilateral obrigatória","Bloqueio do nervo femoral","Hiperglicemia","A","Correta. A proximidade do ápice pulmonar aumenta risco de pneumotórax.
+
+Pode ocorrer Horner, mas não bilateral obrigatória.
+
+Não há relação anatômica.
+
+Não é complicação do bloqueio."
+"b4c7be0b-edc8-4015-9399-6698335a6c32","ME3","Cirurgia Cardíaca","3o Trimestre ME3 - Em cirurgia cardíaca com circulação extracorpórea, qual alteração hemostática é frequente?","Aumento isolado da agregação plaquetária","Plaquetopenia e disfunção plaquetária","Hipercalcemia obrigatória","Hipercoagulabilidade sem sangramento","B","A CEC tende a causar disfunção plaquetária.
+
+Correta. Contato com circuito extracorpóreo e hemodiluição prejudicam hemostasia.
+
+Hipocalcemia é mais provável após transfusão.
+
+Sangramento pode ocorrer."
+"d3c284a3-2462-4f26-84a4-8e7963504d4c","ME3","Sepse","3o Trimestre ME3 - Em sepse grave, qual vasopressor é primeira linha?","Dobutamina","Noradrenalina","Nitroglicerina","Dopamina rotineira","B","Dobutamina é inotrópico adjuvante.
+
+Correta. Noradrenalina é recomendada como vasopressor inicial.
+
+Nitroglicerina é vasodilatador.
+
+Dopamina tem maior risco arrítmico."
+"50dc7f79-2b43-4391-9a20-b6ce8323515a","ME3","Pediatria","3o Trimestre ME3 - Em anestesia pediátrica, qual fator explica dessaturação rápida em lactentes?","Maior CRF","Menor consumo de oxigênio","Maior consumo metabólico e menor reserva","Menor ventilação minuto relativa","C","A CRF relativa é menor.
+
+O consumo de oxigênio é maior.
+
+Correta. Alta demanda metabólica e menor reserva reduzem tempo seguro de apneia.
+
+A ventilação minuto relativa é elevada."
+"29cff8e6-0a00-4a3d-8d91-b69156a8a1b4","ME3","Dor Aguda","3o Trimestre ME3 - Qual fármaco analgésico/sedativo atua predominantemente em receptores alfa-2?","Ketorolaco","Dexmedetomidina","Cetamina","Morfina","B","Ketorolaco é AINE.
+
+Correta. Dexmedetomidina tem ação alfa-2 agonista.
+
+Cetamina antagoniza NMDA.
+
+Morfina atua em receptores opioides."
+"08985f4b-c0dc-4342-960a-eaab991c2383","ME3","LAST","3o Trimestre ME3 - Em LAST, qual tratamento específico deve ser administrado precocemente?","Naloxona","Emulsão lipídica intravenosa","Flumazenil","Sugamadex","B","Naloxona antagoniza opioides.
+
+Correta. Emulsão lipídica é terapia específica para toxicidade sistêmica por anestésico local.
+
+Flumazenil antagoniza benzodiazepínicos.
+
+Sugamadex reverte aminosteroides."
+"0ab3bacf-f211-4c52-a974-ec45c95baac3","ME3","Transfusão","3o Trimestre ME3 - Após transfusão maciça, qual distúrbio pode ocorrer pelo citrato dos hemoderivados?","Hipercalcemia","Hipocalcemia","Hipernatremia obrigatória","Hipomagnesemia isolada","B","O citrato quelante reduz cálcio ionizado.
+
+Correta. Hipocalcemia pode causar instabilidade hemodinâmica e coagulopatia.
+
+Não é o principal efeito do citrato.
+
+Não é a alteração clássica."
+"692c4df4-8bee-43a6-9491-37d77838e139","ME3","Sepse","3o Trimestre ME3 - Em choque séptico refratário, qual mecanismo contribui para vasoplegia persistente?","Deficiência relativa de vasopressina","Redução do óxido nítrico","Aumento da responsividade alfa","Hipercalcemia","A","Correta. Deficiência relativa de vasopressina pode manter hipotensão.
+
+Óxido nítrico geralmente está aumentado.
+
+A responsividade vascular costuma estar reduzida.
+
+Não explica vasoplegia."
+"db675369-1bf7-492e-a381-f876991e1763","ME3","Pediatria","3o Trimestre ME3 - Em criança, bradicardia durante hipóxia geralmente indica:","Sinal benigno inicial","Deterioração grave","Hipervolemia","Hipercalcemia","B","Não é benigno.
+
+Correta. Bradicardia em criança hipóxica é sinal tardio e grave.
+
+Não é explicação usual.
+
+Não tem relação direta."
+"5b979250-7cf1-4738-b9f7-321115e9d963","ME3","Ventilação","2o Trimestre ME3 - Em ventilação protetora, qual parâmetro deve ser limitado para reduzir barotrauma?","Pressão de platô","Temperatura central","PVC","BIS","A","Correta. Limitar pressão de platô reduz estresse alveolar.
+
+Não avalia barotrauma.
+
+PVC não avalia mecânica pulmonar.
+
+BIS avalia hipnose."
+"611abad8-eb67-4fdf-8e53-c2bbf4dcc0b8","ME3","LAST","2o Trimestre ME3 - Em LAST, qual terapia específica deve ser administrada?","Naloxona","Flumazenil","Emulsão lipídica intravenosa","Protamina","C","Naloxona reverte opioides.
+
+Flumazenil reverte benzodiazepínicos.
+
+Correta. Emulsão lipídica é tratamento padrão da toxicidade sistêmica por anestésico local.
+
+Protamina reverte heparina."
+"0a93f4f7-4cd7-4228-b643-83df153f58bf","ME3","DPOC","2o Trimestre ME3 - Em paciente com DPOC grave, qual ajuste reduz auto-PEEP?","Aumentar frequência respiratória","Reduzir tempo expiratório","Prolongar tempo expiratório","Aumentar volume corrente agressivamente","C","Aumenta aprisionamento aéreo.
+
+Piora hiperinsuflação dinâmica.
+
+Correta. Maior tempo expiratório permite esvaziamento alveolar.
+
+Aumenta risco de barotrauma."
+"b962987c-8a39-42e2-bb76-349c7bda34ea","ME3","Bloqueio Neuromuscular","2o Trimestre ME3 - Qual TOF ratio indica reversão neuromuscular adequada para extubação segura?","0,3","0,5","0,7","0,9 ou maior","D","Bloqueio residual importante.
+
+Ainda inadequado.
+
+Pode persistir fraqueza residual.
+
+Correta. TOF >0,9 reduz complicações respiratórias por bloqueio residual."
+"e775ce4f-7509-4819-ac2b-19ac72bbabee","ME3","Capnografia","2o Trimestre ME3 - Qual alteração capnográfica sugere exaustão da cal sodada?","Linha de base elevada","Traçado ausente","Queda abrupta do ETCO2","ETCO2 zero persistente","A","Correta. Absorção inadequada de CO2 causa reinalação.
+
+Sugere desconexão ou extubação.
+
+Sugere embolia ou baixo débito.
+
+Incompatível com ventilação efetiva."
+"b404c7a4-1aaf-4caa-9491-ed3e9235798f","ME3","TIVA","2o Trimestre ME3 - Em TIVA, qual fator aumenta risco de awareness?","Monitorização BIS","Falha da bomba de infusão","Hipnose adequadamente titulada","Monitorização contínua","B","BIS reduz risco.
+
+Correta. Interrupção inadvertida da infusão pode causar superficialização anestésica.
+
+Reduz risco.
+
+Aumenta segurança."
+"b5806580-562b-417b-b58f-fc2d3dfedaec","ME3","Embolia","2o Trimestre ME3 - Em embolia gasosa venosa significativa, qual alteração é esperada?","Elevação abrupta do ETCO2","Queda súbita do ETCO2","Aumento da complacência","Hipertensão sustentada","B","ETCO2 tende a cair.
+
+Correta. A redução da perfusão pulmonar diminui eliminação de CO2.
+
+Complacência pode reduzir.
+
+Hipotensão é mais comum."
+"822ab756-d0d2-410b-bc28-fb32af8c5dcd","ME3","Hipertermia Maligna","2o Trimestre ME3 - Qual agente desencadeia hipertermia maligna?","Propofol","Succinilcolina","Dexmedetomidina","Midazolam","B","Os gatilhos farmacológicos da hipertermia maligna são os anestésicos inalatórios halogenados (halotano, sevoflurano, desflurano, isoflurano, enflurano) e a succinilcolina. Propofol, opioides, benzodiazepínicos e anestésicos locais são seguros (TIVA é a anestesia segura para suscetíveis). Referência: Diretrizes MHAUS."
+"ffe6d41e-0b4a-4c78-b373-717467bfbaef","ME3","Obstetrícia","3o Trimestre ME3 - Em gestante submetida à cesariana sob raquianestesia, qual mecanismo principal explica hipotensão materna?","Depressão miocárdica direta","Bloqueio simpático","Hipervolemia aguda","Broncodilatação","B","A depressão miocárdica não é o principal mecanismo.
+
+Correta. O bloqueio simpático reduz retorno venoso e resistência vascular sistêmica.
+
+Gestantes não apresentam hipervolemia aguda nesse contexto.
+
+Broncodilatação não explica hipotensão neuraxial."
+"2734dcf7-c95e-4ffc-a114-24c16f2f4a15","ME3","Anestesia Regional","3o Trimestre ME3 - Qual complicação clássica está associada ao bloqueio supraclavicular?","Pneumotórax","Raquianestesia total","Hipercalcemia","Broncoaspiração","A","Correta. A proximidade do ápice pulmonar aumenta risco pleural.
+
+Não é complicação clássica do supraclavicular.
+
+Não possui relação.
+
+Não é complicação direta."
+"2cdd5bff-126a-4267-ada3-0a388a0f2563","ME3","Neuroanestesia","3o Trimestre ME3 - Qual solução deve ser evitada em neurocirurgia com edema cerebral?","SF 0,9%","Salina hipertônica","Glicose 5%","Cristaloide isotônico","C","SF é amplamente utilizado.
+
+Salina hipertônica pode reduzir PIC.
+
+Correta. Soluções hipotônicas favorecem edema cerebral.
+
+Cristaloides isotônicos são preferíveis."
+"00ef661b-e994-4636-8d15-fd140059d1d3","ME3","Posicionamento","3o Trimestre ME3 - Em posição prona prolongada, qual complicação ocular grave pode ocorrer?","Conjuntivite simples","Neuropatia óptica isquêmica","Miose persistente","Descolamento de retina obrigatório","B","Não é a principal complicação temida.
+
+Correta. Hipoperfusão ocular pode causar perda visual permanente.
+
+Não é característica principal.
+
+Não é obrigatória."
+"b0877b13-0b7d-4b66-a611-fbee96b1d430","ME3","Dor Aguda","3o Trimestre ME3 - Em analgesia multimodal, qual fármaco atua como antagonista NMDA?","Naloxona","Cetamina","Dexmedetomidina","Neostigmina","B","Naloxona antagoniza opioides.
+
+Correta. Cetamina reduz sensibilização central via NMDA.
+
+Dexmedetomidina é agonista alfa-2.
+
+Neostigmina é anticolinesterásico."
+"e13a33cd-9a61-4fe4-8fd9-a01339d8ea6a","ME3","Obstetrícia","3o Trimestre ME3 - Qual vasopressor é preferido atualmente para tratar hipotensão na cesariana sob raquianestesia?","Dobutamina","Fenilefrina","Nitroprussiato","Diltiazem","B","Dobutamina não é primeira escolha.
+
+Correta. Fenilefrina preserva melhor equilíbrio ácido-base fetal.
+
+Nitroprussiato não é indicado rotineiramente.
+
+Diltiazem não é vasopressor."
+"edc6b70b-e276-402a-acf9-1206cac3041b","ME3","LAST","3o Trimestre ME3 - Em LAST, qual manifestação neurológica precoce pode ocorrer?","Zumbido e gosto metálico","Hipotermia","Hipocalcemia","Miose isolada","A","Correta. Sintomas de excitação do SNC precedem colapso cardiovascular.
+
+Não é manifestação típica inicial.
+
+Não é achado característico.
+
+Não é manifestação clássica."
+"b0226ea3-3dc4-4bc5-a1e5-14768bff7361","ME3","Sepse","3o Trimestre ME3 - Em choque séptico, qual vasopressor é considerado primeira escolha?","Dobutamina","Nitroglicerina","Noradrenalina","Dopamina rotineira","C","Dobutamina é inotrópico adjuvante.
+
+Nitroglicerina é vasodilatador.
+
+Correta. Noradrenalina é recomendada como vasopressor inicial.
+
+Dopamina apresenta maior risco arrítmico."
+"5397b7c5-8293-459c-995c-d1a488bb8598","ME3","Pediatria","3o Trimestre ME3 - Em anestesia pediátrica, qual fator favorece dessaturação rápida?","Maior CRF","Maior consumo metabólico de oxigênio","Hipometabolismo","Maior reserva pulmonar","B","A CRF relativa é menor.
+
+Correta. Lactentes possuem alto consumo de O2 e menor reserva funcional.
+
+O metabolismo é elevado.
+
+A reserva é menor."
+"7d891b19-b79b-468f-b43a-a654571c1b75","ME3","Dor Aguda","3o Trimestre ME3 - Qual fármaco sedativo/analgésico atua predominantemente em receptores alfa-2?","Ketorolaco","Dexmedetomidina","Morfina","Cetamina","B","Ketorolaco é AINE.
+
+Correta. Dexmedetomidina promove sedação e analgesia simpaticolítica.
+
+Morfina atua em receptores opioides.
+
+Cetamina antagoniza NMDA."
+"e61f687f-d60a-462c-84e2-4ca487adcb8c","ME3","Obstetrícia","3o Trimestre ME3 - Em anestesia obstétrica, qual alteração aumenta risco de via aérea difícil?","Redução da vascularização de mucosas","Edema de vias aéreas","Aumento do diâmetro laríngeo","Hipometabolismo","B","A vascularização aumenta.
+
+Correta. Edema e friabilidade dificultam laringoscopia e intubação.
+
+O diâmetro funcional tende a reduzir.
+
+O metabolismo aumenta na gestação."
+"72ebed06-b4fe-4e57-91a8-2122e3b754a1","ME3","LAST","3o Trimestre ME3 - Qual tratamento específico deve ser administrado na toxicidade sistêmica por anestésico local?","Naloxona","Emulsão lipídica intravenosa","Flumazenil","Protamina","B","Naloxona antagoniza opioides.
+
+Correta. Emulsão lipídica é terapia padrão da LAST.
+
+Flumazenil reverte benzodiazepínicos.
+
+Protamina reverte heparina."
+"2c6b0ee1-a198-46d9-a331-79a29fd78327","ME3","Sepse","3o Trimestre ME3 - Qual marcador laboratorial auxilia avaliação de hipoperfusão em sepse?","Amilase","Lactato","Plaquetas","Hemoglobina","B","Não é marcador perfusional principal.
+
+Correta. Lactato elevado sugere metabolismo anaeróbico.
+
+Plaquetas avaliam coagulação.
+
+Hemoglobina isolada não define perfusão."
+"fc2e6c53-ed6f-4464-a47f-535d73d8b989","ME3","Pediatria","3o Trimestre ME3 - Em criança hipóxica, bradicardia geralmente indica:","Achado benigno inicial","Deterioração grave","Hipervolemia","Hipercalcemia","B","Não é achado benigno.
+
+Correta. Bradicardia em hipóxia é sinal tardio e grave.
+
+Não é causa típica.
+
+Não possui relação direta."
+"e1f5cf1d-ede0-4265-8b36-69dba24535b2","ME3","Dor Aguda","3o Trimestre ME3 - Em cirurgia torácica, qual técnica proporciona analgesia pós-operatória de alta qualidade?","Dipirona isolada","Peridural torácica","Midazolam contínuo","Hiperventilação","B","Analgesia insuficiente para toracotomia.
+
+Correta. A analgesia peridural reduz dor e complicações respiratórias.
+
+Sedação não substitui analgesia.
+
+Não trata dor."
+"00434f9b-f0b4-448f-bea2-ce96bbcaada3","ME3","Obstetrícia","3o Trimestre ME3 - Qual alteração respiratória fisiológica ocorre na gestação?","Hipercapnia fisiológica","Alcalose respiratória leve","Acidose metabólica","Hipoventilação","B","A PaCO2 tende a reduzir.
+
+Correta. Progesterona aumenta ventilação minuto, reduzindo PaCO2.
+
+Não é alteração fisiológica típica.
+
+Ocorre hiperventilação fisiológica."
+"bd1bfef6-2723-4364-8a87-979ec90004d0","ME3","Neuroanestesia","3o Trimestre ME3 - Em trauma cranioencefálico grave sem herniação iminente, qual alvo ventilatório é recomendado?","PaCO2 20-25 mmHg","PaCO2 35-40 mmHg","PaCO2 55-60 mmHg","Hipercapnia permissiva ampla","B","Hiperventilação intensa pode causar isquemia cerebral.
+
+Correta. Normocapnia é o alvo habitual.
+
+Hipercapnia aumenta PIC.
+
+Não é recomendada no TCE grave."
+"d00a6cf3-bf47-4039-8580-78c32c25ac4c","ME3","Trauma","3o Trimestre ME3 - Em trauma hemorrágico, qual tríade associa-se a maior mortalidade?","Hipertensão, alcalose e hipercalcemia","Hipotermia, acidose e coagulopatia","Hiperglicemia, bradicardia e alcalose","Hipernatremia, hipocapnia e hipertensão","B","Não corresponde à tríade letal.
+
+Correta. A tríade letal perpetua sangramento e instabilidade.
+
+Não corresponde ao conceito.
+
+Não corresponde ao conceito."
+"75ec93b6-edd8-4a71-95e5-c1a49397285e","ME3","Laparoscopia","3o Trimestre ME3 - Em cirurgia laparoscópica, o pneumoperitônio com CO2 tende a causar:","Hipocapnia","Redução da pressão de vias aéreas","Aumento da PaCO2","Aumento da complacência pulmonar","C","O CO2 absorvido aumenta PaCO2.
+
+As pressões geralmente aumentam.
+
+Correta. A absorção sistêmica de CO2 favorece hipercapnia.
+
+A complacência tende a reduzir."
+"0a5ae70f-8c6f-4935-860b-e2a9802b70de","ME3","Pós-Operatório","3o Trimestre ME3 - Em recuperação pós-anestésica, qual causa frequente de hipoxemia deve ser considerada?","Hiperglicemia","Atelectasia","Hipocalcemia","Poliúria","B","Não é causa frequente de dessaturação.
+
+Correta. Atelectasia é comum no pós-operatório imediato.
+
+Não é causa principal de hipoxemia.
+
+Não explica hipoxemia."
+"4707d810-245d-40f5-931c-65722b226890","ME3","Anestesia Regional","3o Trimestre ME3 - Em bloqueio interescalênico, qual complicação é frequente?","Paralisia bilateral do nervo frênico obrigatória","Bloqueio do nervo frênico ipsilateral","Pneumotórax bilateral","Hiperglicemia","B","Não é obrigatoriamente bilateral.
+
+Correta. O nervo frênico frequentemente é bloqueado pela proximidade anatômica.
+
+Pode ocorrer pneumotórax, mas não bilateral típico.
+
+Não é complicação esperada."
+"9bd49939-c418-479c-97ee-7853deb5605c","ME3","Neuroanestesia","3o Trimestre ME3 - Em hipertensão intracraniana aguda com herniação iminente, qual medida temporária pode auxiliar?","Hipercapnia","Hiperventilação breve","Trendelenburg","PEEP excessiva","B","Hipercapnia aumenta fluxo cerebral e PIC.
+
+Correta. Redução transitória da PaCO2 reduz volume sanguíneo cerebral.
+
+Trendelenburg piora drenagem venosa cerebral.
+
+PEEP excessiva pode elevar PIC."
+"09ac5ca1-26b2-49b4-8e85-261761040746","ME3","Queimado","3o Trimestre ME3 - Em queimados após 48 horas, succinilcolina aumenta risco de:","Hipocalcemia","Hipercalemia grave","Hiponatremia","Alcalose metabólica","B","Não é principal risco.
+
+Correta. Receptores extrajuncionais aumentam liberação de potássio.
+
+Não é complicação típica.
+
+Não é principal alteração."
+"c639d176-6657-4190-8d27-d7e1c088cb71","ME3","Cirurgia Robótica","3o Trimestre ME3 - Em Trendelenburg acentuado prolongado na cirurgia robótica, qual alteração é frequente?","Redução da PIC","Edema facial e aumento da PIC","Aumento da complacência pulmonar","Hipovolemia absoluta","B","Trendelenburg aumenta pressão venosa cerebral.
+
+Correta. A congestão venosa favorece edema facial e aumento da PIC.
+
+A complacência tende a reduzir.
+
+Não é efeito esperado."
+"b515a242-3fd4-443a-855b-3c93eb12489a","ME3","Pós-Operatório","4o Trimestre ME3 - Em recuperação pós-anestésica, qual causa frequente de hipoxemia imediata deve ser considerada?","Hiperglicemia","Atelectasia","Hipocalcemia","Hipernatremia","B","Não é causa comum de dessaturação.
+
+Correta. Atelectasia é frequente após anestesia geral.
+
+Não é principal causa de hipoxemia.
+
+Não possui relação direta."
+"58c0f6a0-bee4-437f-a5c2-76872881d624","ME3","Obesidade","4o Trimestre ME3 - Em obesidade mórbida, qual alteração respiratória é comum?","Aumento da CRF","Redução da capacidade residual funcional","Hipocapnia obrigatória","Aumento da complacência torácica","B","A CRF geralmente reduz-se.
+
+Correta. A redução da CRF favorece atelectasia e dessaturação.
+
+Hipercapnia pode ocorrer.
+
+A complacência geralmente reduz."
+"fdb6e78a-5988-4c07-aff8-19a4407f9f39","ME3","Geriatria","4o Trimestre ME3 - Em pacientes idosos, qual princípio anestésico é adequado?","Mesmas doses de adultos jovens","Maior sensibilidade a anestésicos","Aumento obrigatório da MAC","Maior reserva fisiológica","B","Doses devem ser ajustadas.
+
+Correta. O envelhecimento reduz reserva fisiológica e aumenta sensibilidade.
+
+A MAC reduz-se com a idade.
+
+A reserva fisiológica reduz-se."
+"02f2c92c-3e68-45f1-99f6-3cbdf745c258","ME3","Anestesia Regional","4o Trimestre ME3 - Em anticoagulação com heparina de baixo peso molecular, qual cuidado é essencial antes de punção neuroaxial?","Ignorar intervalo farmacológico","Respeitar intervalo seguro entre dose e punção","Suspender monitorização","Realizar punção múltiplas vezes","B","Aumenta risco hemorrágico.
+
+Correta. O intervalo reduz risco de hematoma neuraxial.
+
+Monitorização continua obrigatória.
+
+Punções repetidas aumentam trauma."
+"5147298e-560b-4a43-b8c6-a99e627f7a50","ME3","Sedação","4o Trimestre ME3 - Em sedação fora do centro cirúrgico, qual princípio é fundamental?","Ausência de monitorização","Capacidade de resgate de via aérea","Uso obrigatório de anestesia geral","Suspensão de oximetria","B","Monitorização é obrigatória.
+
+Correta. Segurança exige preparo para falência ventilatória.
+
+Nem toda sedação exige anestesia geral.
+
+Oximetria é essencial."
+"4fd00369-d6a2-478a-8cb4-9fa15cda21de","ME3","Geriatria","4o Trimestre ME3 - Em paciente geriátrico, qual complicação cognitiva pode ocorrer após cirurgia?","Delirium pós-operatório","Hipercalcemia","Pneumotórax espontâneo","Bloqueio AV obrigatório","A","Correta. Delirium é frequente e multifatorial no idoso.
+
+Não é principal complicação cognitiva.
+
+Não possui relação direta.
+
+Não é típico."
+"a0a4bedd-17c4-47f7-9c65-30cd92ca06b6","ME3","Dor Aguda","4o Trimestre ME3 - Em analgesia pós-operatória multimodal, qual benefício principal ocorre?","Maior consumo de opioides","Redução da resposta neuroendócrina ao trauma","Hiperglicemia obrigatória","Maior incidência de NVPO","B","A analgesia multimodal reduz opioides.
+
+Correta. O bloqueio nociceptivo reduz resposta inflamatória e simpática.
+
+Não é benefício esperado.
+
+NVPO tende a reduzir."
+"88830b56-65c1-4e06-8075-94491f2e765b","ME3","Obesidade","4o Trimestre ME3 - Em anestesia bariátrica, qual estratégia ventilatória auxilia prevenção de atelectasia?","PEEP adequada","PEEP zero","Volume corrente elevado","Hiperventilação agressiva","A","Correta. PEEP reduz colapso alveolar perioperatório.
+
+Favorece atelectasia.
+
+Volumes elevados aumentam volutrauma.
+
+Não previne colapso alveolar."
+"0cf2676e-44a5-4a16-97b8-594edc2343cb","ME3","Geriatria","4o Trimestre ME3 - Qual alteração farmacodinâmica é comum no envelhecimento?","Menor sensibilidade a hipnóticos","Maior sensibilidade a opioides","Aumento da depuração renal","Aumento da massa magra","B","A sensibilidade geralmente aumenta.
+
+Correta. Idosos apresentam maior resposta aos opioides.
+
+A depuração renal reduz-se.
+
+A massa magra tende a reduzir."
+"eceeb406-e552-4315-9785-a71f17209250","ME3","Dor Crônica","4o Trimestre ME3 - Em dor crônica, qual fenômeno relaciona-se à amplificação persistente da dor?","Sensibilização central","Hipotermia","Hipocalcemia","Bloqueio neuromuscular","A","Correta. Alterações centrais amplificam percepção dolorosa.
+
+Não é mecanismo principal.
+
+Não possui relação direta.
+
+Não se relaciona à dor crônica."
+"bc34f3c3-422c-4eaa-b0f8-20c6ba121be2","ME3","Sedação","4o Trimestre ME3 - Em sedação profunda, qual complicação respiratória pode ocorrer?","Hiperventilação obrigatória","Obstrução de vias aéreas","Hipercalcemia","Broncodilatação persistente","B","Hipoventilação é mais provável.
+
+Correta. Redução do tônus muscular favorece obstrução.
+
+Não é complicação típica.
+
+Não é efeito esperado."
+"8e587678-dade-4bef-ba14-e7ec6dcb7a9e","ME3","Geriatria","4o Trimestre ME3 - Em delirium pós-operatório, qual estratégia ajuda prevenção?","Privação sensorial","Mobilização precoce","Sedação profunda contínua","Hipoventilação","B","Pode agravar delirium.
+
+Correta. Mobilização reduz complicações cognitivas e funcionais.
+
+Sedação profunda aumenta risco.
+
+Não é estratégia preventiva."
+"21818391-5637-46ed-a3b8-ce508d36673a","ME3","NVPO","4o Trimestre ME3 - Qual fator aumenta risco de náuseas e vômitos pós-operatórios?","Sexo masculino","Tabagismo","Uso de opioides","Idade avançada","C","Sexo feminino apresenta maior risco.
+
+Tabagismo reduz risco relativo.
+
+Correta. Opioides aumentam incidência de NVPO.
+
+Pacientes jovens têm maior risco relativo."
+"4c8b3c5e-5ba8-495c-b78e-a47644340d64","ME3","SAOS","4o Trimestre ME3 - Em paciente com síndrome da apneia obstrutiva do sono, qual risco pós-operatório é aumentado?","Hiperventilação","Depressão respiratória","Hipercalcemia","Hipertensão intracraniana","B","Não é característica típica.
+
+Correta. Sensibilidade a sedativos e opioides aumenta eventos respiratórios.
+
+Não possui relação direta.
+
+Não é principal risco."
+"3d012218-e9ab-4427-8fea-51a86de83094","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual característica é desejável?","Recuperação prolongada","Baixa incidência de NVPO","Sedação residual intensa","Analgesia inadequada","B","Recuperação rápida é preferível.
+
+Correta. Menor NVPO favorece alta precoce.
+
+Sedação residual atrasa alta.
+
+Analgesia inadequada é indesejável."
+"f497aa7b-20c3-4e1e-a944-506407ca4bd8","ME3","Dor Crônica","4o Trimestre ME3 - Qual adjuvante analgésico atua por antagonismo NMDA?","Naloxona","Cetamina","Dexmedetomidina","Neostigmina","B","Naloxona antagoniza opioides.
+
+Correta. Cetamina reduz sensibilização central.
+
+Dexmedetomidina é agonista alfa-2.
+
+Neostigmina é anticolinesterásico."
+"86e4c84f-f54c-4562-8728-73a0d39e4f65","ME3","Cuidados Paliativos","4o Trimestre ME3 - Em cuidados paliativos, qual objetivo principal do manejo da dor?","Eliminar toda sedação","Melhorar qualidade de vida","Suspender opioides","Evitar analgesia multimodal","B","Sedação pode ser necessária em alguns casos.
+
+Correta. Controle sintomático e conforto são prioridades.
+
+Opioides frequentemente são necessários.
+
+Analgesia multimodal pode ser útil."
+"544ca060-7324-4069-b44b-4eded2372523","ME3","Dor Crônica","4o Trimestre ME3 - Em paciente em uso crônico de opioides, qual fenômeno pode ocorrer?","Hiperalgesia induzida por opioides","Analgesia permanente","Ausência total de tolerância","Redução absoluta da dor","A","Correta. Exposição prolongada pode aumentar sensibilidade dolorosa.
+
+Não ocorre analgesia permanente.
+
+Tolerância é frequente.
+
+Dor pode persistir ou piorar."
+"745dc267-a642-4854-add8-e7de17a871ea","ME3","NVPO","4o Trimestre ME3 - Qual antiemético atua predominantemente em receptores 5-HT3?","Droperidol","Ondansetrona","Escopolamina","Haloperidol","B","Droperidol atua principalmente em dopamina.
+
+Correta. Ondansetrona antagoniza receptores serotoninérgicos 5-HT3.
+
+Escopolamina é antimuscarínica.
+
+Haloperidol atua em receptores dopaminérgicos."
+"ab891fb0-b337-46e9-99c8-02b162f02313","ME3","SAOS","4o Trimestre ME3 - Qual estratégia reduz risco de depressão respiratória pós-operatória em pacientes com SAOS?","Uso liberal de opioides","Analgesia multimodal","Sedação contínua profunda","Hipoventilação permissiva","B","Aumenta risco respiratório.
+
+Correta. Redução de opioides diminui eventos respiratórios.
+
+Sedação profunda aumenta risco.
+
+Não é estratégia adequada."
+"cb5b7599-dd3d-43d3-b5a4-c02bdf823386","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual agente possui perfil favorável para alta rápida?","Halotano","Desflurano","Morfina em altas doses","Tiopental contínuo","B","Halotano apresenta recuperação lenta.
+
+Correta. Baixa solubilidade favorece despertar rápido.
+
+Altas doses prolongam recuperação.
+
+Acúmulo prolonga sedação."
+"07857f5d-2ed8-4a81-aed2-83d5411b46b9","ME3","Dor Neuropática","4o Trimestre ME3 - Em paciente com dor neuropática, qual característica é comum?","Dor em choque elétrico","Dor exclusivamente nociceptiva","Ausência de alodinia","Analgesia completa com dipirona isolada","A","Correta. Queimação e choque elétrico são típicos.
+
+Dor neuropática possui mecanismo distinto.
+
+Alodinia pode ocorrer.
+
+Frequentemente exige abordagem multimodal."
+"83b59783-15b9-4835-994e-a3b354e550b1","ME3","Cuidados Paliativos","4o Trimestre ME3 - Em paciente terminal com dor intensa refratária, opioides fortes são:","Contraindicados","Frequentemente indicados","Substituídos sempre por AINE","Ineficazes","B","São amplamente utilizados.
+
+Correta. Opioides são pilares no controle de dor intensa.
+
+AINE isolado pode ser insuficiente.
+
+São eficazes quando bem titulados."
+"ff886aa7-1327-44d1-9289-9e5762dfe5a0","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual fator favorece alta segura?","Controle adequado da dor","Sedação residual intensa","Náuseas persistentes","Hipoxemia","A","Correta. Analgesia adequada facilita recuperação e alta.
+
+Sedação residual impede alta.
+
+NVPO persistente contraindica alta.
+
+Hipoxemia requer investigação."
+"e958fcb3-2509-48b3-827b-0d4e8d36e743","ME3","Obesidade","4o Trimestre ME3 - Em paciente obeso mórbido, qual posição otimiza pré-oxigenação e intubação?","Trendelenburg","Posição em rampa","Litotomia","Prona","B","Trendelenburg piora mecânica ventilatória.
+
+Correta. A posição em rampa melhora alinhamento anatômico.
+
+Não melhora via aérea.
+
+Não é utilizada para indução."
+"a5dee754-0edb-4c8e-a67d-8a627128d07e","ME3","Geriatria","4o Trimestre ME3 - Em delirium pós-operatório no idoso, qual fator aumenta risco?","Privação do sono","Analgesia adequada","Mobilização precoce","Orientação frequente","A","Correta. Distúrbios do sono contribuem para delirium.
+
+Analgesia adequada reduz estresse.
+
+Mobilização reduz complicações.
+
+Orientação reduz delirium."
+"c4da4beb-5df6-4dcd-b40b-0f6a4f7ce4bf","ME3","Anestesia Regional","4o Trimestre ME3 - Em paciente anticoagulado, qual complicação grave pode ocorrer após bloqueio neuroaxial?","Hipoglicemia","Hematoma epidural","Broncoespasmo","Hipercalcemia","B","Não é complicação típica.
+
+Correta. Compressão medular pode causar déficit neurológico permanente.
+
+Não é principal complicação.
+
+Não possui relação direta."
+"c1b0c2c9-fe31-4c1f-b483-d7f556c8cfa6","ME3","PCA","4o Trimestre ME3 - Em analgesia controlada pelo paciente (PCA), qual vantagem principal ocorre?","Maior variabilidade analgésica","Autonomia do paciente na analgesia","Ausência de monitorização","Eliminação de efeitos adversos","B","O objetivo é reduzir variabilidade.
+
+Correta. PCA permite titulação individual da analgesia.
+
+Monitorização continua necessária.
+
+Efeitos adversos ainda podem ocorrer."
+"675a3d07-ff61-401c-9333-ce9fa3e77a6c","ME3","Sedação","4o Trimestre ME3 - Em anestesia para procedimentos fora do centro cirúrgico, qual monitorização mínima é obrigatória?","Somente ECG","Oximetria e monitorização ventilatória","PIC contínua","Débito cardíaco invasivo","B","Insuficiente isoladamente.
+
+Correta. Oxigenação e ventilação devem ser continuamente avaliadas.
+
+Não é rotina obrigatória.
+
+Não é necessária rotineiramente."
+"444c1fbe-b341-494b-b988-8a3ceb5ffaf0","ME3","SAOS","4o Trimestre ME3 - Em paciente com SAOS, opioides devem ser utilizados com:","Doses elevadas obrigatórias","Cautela","Ausência de monitorização","Hipoventilação permissiva","B","Aumentam risco respiratório.
+
+Correta. SAOS aumenta sensibilidade à depressão respiratória.
+
+Monitorização é essencial.
+
+Hipoventilação é indesejável."
+"1834687f-7eaa-4d29-a75a-d3682f573532","ME3","Bloqueio Residual","4o Trimestre ME3 - Em recuperação pós-anestésica, qual complicação respiratória é frequentemente relacionada ao bloqueio neuromuscular residual?","Broncodilatação","Hipoventilação e obstrução de vias aéreas","Hiperglicemia","Hipertensão intracraniana","B","Não é complicação típica.
+
+Correta. Fraqueza muscular residual compromete ventilação e proteção de vias aéreas.
+
+Não possui relação direta.
+
+Não é principal consequência."
+"7f7014b8-f0ec-48c7-b0cc-9881fcdd6526","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual característica favorece alta precoce?","Recuperação prolongada","Baixa incidência de NVPO","Sedação residual","Analgesia inadequada","B","Em anestesia ambulatorial, a baixa incidência de náuseas e vômitos pós-operatórios (NVPO) é fundamental para alta precoce e segura. A NVPO é a principal causa de admissão não planejada. Estratégias: propofol (antiemético), antieméticos profiláticos, minimização de opioides. Referência: Diretrizes SBA/SGAS NVPO 2020."
+"a85aca60-08a5-4d00-b6be-8abc786e03db","ME3","Dor Neuropática","4o Trimestre ME3 - Em dor neuropática, qual sintoma é característico?","Dor em choque elétrico","Dor exclusivamente somática","Ausência de alodinia","Analgesia completa com dipirona","A","Correta. Queimação e choque elétrico sugerem dor neuropática.
+
+A fisiopatologia é diferente.
+
+Alodinia pode estar presente.
+
+Frequentemente é insuficiente."
+"4f9a1e6f-f42b-4ebb-9eeb-0e1ebfa0e4c4","ME3","Cuidados Paliativos","4o Trimestre ME3 - Em paciente terminal, qual objetivo principal dos cuidados paliativos?","Prolongar vida a qualquer custo","Melhorar qualidade de vida","Suspender opioides","Evitar analgesia","B","Nem sempre é o foco principal.
+
+Correta. Controle sintomático e conforto são prioridades.
+
+Opioides frequentemente são necessários.
+
+Analgesia é fundamental."
+"20b98d9e-f6cf-475e-8418-59edcf7ed8db","ME3","NVPO","4o Trimestre ME3 - Qual fator aumenta risco de NVPO?","Tabagismo","Sexo masculino","Sexo feminino","Idade avançada","C","Tabagismo reduz risco relativo.
+
+Homens têm menor incidência.
+
+Correta. Sexo feminino é importante fator de risco.
+
+Pacientes jovens apresentam maior risco relativo."
+"542a67e0-7ad6-4a71-a278-0b87e35cad96","ME3","Opioides","4o Trimestre ME3 - Em paciente em uso crônico de opioides, qual fenômeno pode dificultar analgesia pós-operatória?","Tolerância opioide","Ausência de sensibilização","Analgesia permanente","Redução absoluta da dor","A","Correta. Necessidades analgésicas podem aumentar.
+
+Sensibilização pode ocorrer.
+
+Não ocorre permanentemente.
+
+A dor pode persistir."
+"f61a6bb2-5cb4-46e0-bece-b9b51531fc7f","ME3","Dor Aguda","4o Trimestre ME3 - Em analgesia regional no pós-operatório, qual benefício importante ocorre?","Maior consumo de opioides","Redução da resposta ao estresse cirúrgico","Hiperglicemia obrigatória","Aumento de delirium","B","Geralmente reduz opioides.
+
+Correta. Bloqueio neural reduz descarga simpática e inflamatória.
+
+Não é benefício esperado.
+
+Pode até reduzir delirium ao melhorar analgesia."
+"0890c12e-9528-4cca-b94b-c54603341dc9","ME3","Bloqueio Neuromuscular","4o Trimestre ME3 - Qual TOF ratio é recomendado antes da extubação?","0,5","0,7","0,9 ou maior","0,3","C","Ainda há risco de bloqueio residual.
+
+Pode persistir fraqueza muscular.
+
+Correta. TOF >0,9 reduz complicações respiratórias pós-operatórias.
+
+Bloqueio importante ainda presente."
+"7ba77b30-5213-4ebe-a09b-37427e6a1dd3","ME3","Halogenados","4o Trimestre ME3 - Qual agente inalatório possui recuperação mais rápida?","Halotano","Isoflurano","Desflurano","Metoxiflurano","C","Maior solubilidade prolonga recuperação.
+
+Mais lento que desflurano.
+
+Correta. Baixo coeficiente sangue:gás favorece despertar rápido.
+
+Muito solúvel."
+"e6c6020c-50fd-43d0-ba40-8a29a33952e8","ME3","Farmacologia","4o Trimestre ME3 - Qual fármaco possui ação agonista alfa-2 com sedação e analgesia?","Cetamina","Dexmedetomidina","Naloxona","Flumazenil","B","Cetamina antagoniza NMDA.
+
+Correta. Dexmedetomidina promove sedação cooperativa.
+
+Naloxona antagoniza opioides.
+
+Flumazenil antagoniza benzodiazepínicos."
+"f7354ad5-ca4e-43f3-8572-957373593f76","ME3","Oncologia","4o Trimestre ME3 - Em dor oncológica intensa, qual classe farmacológica frequentemente é necessária?","Opioides fortes","Somente AINE","Antibióticos","Antiarrítmicos","A","Correta. Opioides são pilares no tratamento da dor intensa.
+
+Frequentemente insuficiente isoladamente.
+
+Não tratam dor.
+
+Não possuem indicação analgésica principal."
+"671d8871-32fa-4085-9862-21ade7aeaa94","ME3","NVPO","4o Trimestre ME3 - Qual antiemético atua principalmente em receptores dopaminérgicos?","Ondansetrona","Droperidol","Escopolamina","Dexametasona","B","Atua em 5-HT3.
+
+Correta. Droperidol antagoniza receptores dopaminérgicos.
+
+Escopolamina é antimuscarínica.
+
+Mecanismo antiemético é multifatorial."
+"6e084118-a533-4dfa-a61e-f363001a94a8","ME3","Opioides","4o Trimestre ME3 - Qual fenômeno relaciona-se ao aumento paradoxal da sensibilidade dolorosa por opioides?","Hiperalgesia induzida por opioides","Bloqueio simpático","Tolerância cruzada","Sedação residual","A","Correta. Exposição prolongada pode aumentar percepção dolorosa.
+
+Não é mecanismo principal.
+
+Não define hiperalgesia.
+
+Não explica dor aumentada."
+"78601506-08e8-40e5-ac48-2a3b0d7fcd45","ME3","Geriatria","4o Trimestre ME3 - Em paciente geriátrico, qual alteração farmacocinética é frequente?","Aumento da depuração renal","Redução da água corporal total","Aumento da massa magra","Redução da sensibilidade a opioides","B","A depuração renal tende a reduzir.
+
+Correta. Menor água corporal altera volume de distribuição.
+
+A massa magra reduz-se.
+
+Sensibilidade geralmente aumenta."
+"c8de0ee6-700e-4d97-9379-876454616bfb","ME3","SAOS","4o Trimestre ME3 - Em pacientes com SAOS, qual estratégia reduz risco respiratório pós-operatório?","Uso liberal de opioides","Analgesia multimodal","Sedação contínua profunda","Hipoventilação permissiva","B","Aumenta depressão respiratória.
+
+Correta. Reduz necessidade de opioides.
+
+Aumenta risco de obstrução.
+
+Não é recomendada."
+"6e0a1e4d-0a16-43af-878d-515a42974a53","ME3","PCA","4o Trimestre ME3 - Em PCA com opioides, qual complicação deve ser monitorada?","Hipercalcemia","Depressão respiratória","Hipertensão intracraniana","Hiperglicemia","B","Não é complicação típica.
+
+Correta. Opioides podem causar hipoventilação.
+
+Não é principal complicação.
+
+Não é principal complicação."
+"705fa49f-c25b-4f1b-b3fa-33fed762862f","ME3","Anestesia Regional","4o Trimestre ME3 - Em bloqueio neuroaxial de paciente anticoagulado, qual complicação é mais temida?","Hipoglicemia","Hematoma epidural","Broncoespasmo","Hipocalcemia","B","Não é complicação típica.
+
+Correta. Compressão medular pode gerar déficit irreversível.
+
+Não é principal risco.
+
+Não é complicação relevante nesse contexto."
+"dd443245-b431-412a-8b6c-ae009ce0cc1f","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual condição contraindica alta imediata?","Controle adequado da dor","Hipoxemia persistente","Náusea ausente","Mobilização adequada","B","A hipoxemia persistente na SRPA (SpO2 <94% em ar ambiente ou necessidade de O2 suplementar acima do basal) é critério absoluto de internação não planejada. Representa complicação respiratória que exige investigação e tratamento adequados antes de qualquer alta. Referência: Miller's Anesthesia 9ed, cap. 49."
+"29b4ce57-6e77-4b08-a8aa-dc05adc5001d","ME3","Sedação","4o Trimestre ME3 - Em sedação procedural, qual monitorização ventilatória é altamente recomendada?","Capnografia","Somente ECG","Somente temperatura","Apenas PVC","A","Correta. Detecta precocemente hipoventilação e apneia.
+
+ECG isolado é insuficiente.
+
+Temperatura não avalia ventilação.
+
+PVC não monitora ventilação."
+"74a4e225-1c9f-4c41-a16a-ffc3f158666a","ME3","Geriatria","4o Trimestre ME3 - Em idosos, a MAC dos anestésicos inalatórios tende a:","Aumentar","Permanecer inalterada","Reduzir","Duplicar","C","A idade reduz necessidade anestésica.
+
+Não permanece fixa.
+
+Correta. O envelhecimento reduz a concentração alveolar mínima necessária.
+
+Não ocorre."
+"4f36f65a-a361-42f6-ad45-541e1577aa0f","ME3","Obesidade","4o Trimestre ME3 - Em paciente obeso mórbido, qual complicação respiratória pós-operatória é frequente?","Hiperventilação","Hipoxemia por atelectasia","Hipocapnia","Broncodilatação","B","A obesidade mórbida reduz significativamente a CRF por fechamento de vias aéreas periféricas e atelectasias de dependência — especialmente no pós-operatório em supino. Hipoxemia por atelectasia é a complicação respiratória mais frequente nesses pacientes. Referência: Miller's Anesthesia 9ed, cap. 65."
+"878c0f3d-a515-4f04-86c5-e9b53dfb2653","ME3","Sedação","4o Trimestre ME3 - Em sedação fora do centro cirúrgico, qual equipamento deve estar disponível?","Apenas oxímetro","Material para manejo de via aérea","Somente ECG","Apenas desfibrilador","B","Insuficiente isoladamente.
+
+Correta. Deve haver capacidade imediata de resgate ventilatório.
+
+Monitorização isolada não basta.
+
+Desfibrilador é importante, mas insuficiente isoladamente."
+"20f76c71-6c4b-4aae-a4b3-f3fe482bbbd3","ME3","Anestesia Regional","4o Trimestre ME3 - Em uso de HBPM, antes de punção neuroaxial deve-se:","Ignorar intervalo da última dose","Respeitar intervalo seguro","Suspender monitorização","Utilizar agulhas traumáticas","B","Aumenta risco hemorrágico.
+
+Correta. O intervalo reduz risco de hematoma neuraxial.
+
+Monitorização continua necessária.
+
+Punção traumática aumenta risco."
+"251bc873-7554-4c91-8a4e-830fa6e06372","ME3","Cardiovascular","4o Trimestre ME3 - Em paciente idoso, qual alteração cardiovascular é frequente?","Aumento da complacência vascular","Redução da complacência vascular","Aumento intenso da resposta beta","Maior reserva cardíaca","B","A complacência reduz-se com envelhecimento.
+
+Correta. Rigidez vascular aumenta pós-carga.
+
+A resposta beta-adrenérgica reduz-se.
+
+A reserva fisiológica reduz-se."
+"aa4c644d-641c-4281-a2ac-5d8ef10296aa","ME3","Geriatria","4o Trimestre ME3 - Em delirium pós-operatório, qual medida auxilia prevenção?","Privação do sono","Orientação frequente e mobilização precoce","Sedação profunda contínua","Isolamento prolongado","B","Privação do sono aumenta risco.
+
+Correta. Medidas não farmacológicas reduzem delirium.
+
+Sedação profunda favorece delirium.
+
+Isolamento pode piorar quadro cognitivo."
+"c5653c89-7c04-4eab-81b7-f7dc17397546","ME3","Dor Aguda","4o Trimestre ME3 - Em analgesia multimodal, qual classe reduz consumo de opioides?","AINEs","Somente benzodiazepínicos","Antibióticos","Bloqueadores neuromusculares","A","Correta. AINEs possuem efeito poupador de opioides.
+
+Não são analgésicos principais.
+
+Não possuem ação analgésica relevante.
+
+Não tratam dor."
+"390440a8-721d-4b73-8d60-82adaafca6e7","ME3","Sedação","4o Trimestre ME3 - Em sedação profunda, qual complicação é mais provável?","Hiperventilação","Obstrução de vias aéreas","Hipercalcemia","Hipotermia grave obrigatória","B","Hipoventilação é mais comum.
+
+Correta. Redução do tônus faríngeo favorece obstrução.
+
+Não é complicação típica.
+
+Não é obrigatória."
+"d7d47cce-fa75-4ebc-a918-5aa9d419ddff","ME3","SRPA","4o Trimestre ME3 - Em recuperação pós-anestésica, qual escala é frequentemente utilizada para alta?","Mallampati","Aldrete-Kroulik","Ramsay","APACHE II","B","Avalia via aérea.
+
+Correta. Avalia critérios de recuperação pós-anestésica.
+
+Avalia sedação.
+
+É escore prognóstico de UTI."
+"9838c601-4faf-4f8f-8b60-29f663db4815","ME3","Cardiovascular","4o Trimestre ME3 - Em idosos, hipotensão perioperatória pode ser mais frequente devido a:","Maior reserva autonômica","Redução da resposta barorreflexa","Aumento obrigatório da volemia","Hipercalcemia","B","A reserva autonômica reduz-se.
+
+Correta. A resposta compensatória cardiovascular é menos eficiente.
+
+Não é principal mecanismo.
+
+Não possui relação direta."
+"d620a205-8fa1-43a1-962d-ddf2c05eccb4","ME3","Geriatria","4o Trimestre ME3 - Em paciente geriátrico, qual complicação pulmonar pós-operatória é comum?","Atelectasia","Hiperventilação persistente","Broncodilatação","Hipocalcemia","A","Correta. Redução da reserva pulmonar aumenta complicações respiratórias.
+
+Hipoventilação é mais comum.
+
+Não é complicação típica.
+
+Não possui relação direta."
+"08959c13-a839-4b62-b478-b6a5be83aa37","ME3","SRPA","4o Trimestre ME3 - Em recuperação pós-anestésica, qual fator aumenta risco de obstrução de vias aéreas superiores?","Bloqueio neuromuscular residual","Hipervolemia","Hipercalcemia","Hiperglicemia","A","Correta. Fraqueza da musculatura faríngea favorece obstrução.
+
+Não é principal causa.
+
+Não possui relação direta.
+
+Não é causa típica."
+"e1e6a430-58b7-4f86-93bf-9fa85b3bf646","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual condição favorece alta?","Dor controlada","Hipoxemia persistente","Vômitos incoercíveis","Instabilidade hemodinâmica","A","Para alta segura da SRPA/ambulatório são necessários: dor controlada (EVA ≤3), náuseas controladas, SpO2 estável, hemodinâmica estável e nível de consciência adequado. Escala de Aldrete-Kroulik ≥9 orienta a alta. Hipoxemia, vômitos incoercíveis e instabilidade contraindicam. Referência: Miller's Anesthesia 9ed, cap. 49."
+"ca722693-57f8-4d4b-8056-074f7d19007a","ME3","PCA","4o Trimestre ME3 - Em PCA com morfina, qual efeito adverso deve ser monitorado continuamente?","Hipocalcemia","Depressão respiratória","Hipertensão intracraniana","Hiperglicemia","B","Não é efeito esperado.
+
+Correta. Opioides podem causar hipoventilação grave.
+
+Não é principal complicação.
+
+Não é principal complicação."
+"0f4d385a-9c0c-4676-8b36-4acec85d16c4","ME3","Geriatria","4o Trimestre ME3 - Em idosos, hipotermia perioperatória ocorre mais facilmente devido a:","Maior termogênese","Alteração da termorregulação","Aumento da massa muscular","Hipermetabolismo","B","A termogênese reduz-se.
+
+Correta. A resposta vasoconstritora e metabólica é reduzida.
+
+A massa muscular tende a reduzir.
+
+O metabolismo tende a reduzir."
+"fc47c6bd-c0a4-4665-acdb-99f5c897cea7","ME3","Dor Crônica","4o Trimestre ME3 - Em dor crônica, sensibilização central significa:","Redução da transmissão nociceptiva","Amplificação da resposta dolorosa no SNC","Bloqueio completo da dor","Ausência de alodinia","B","Ocorre o oposto.
+
+Correta. Há aumento da excitabilidade neuronal central.
+
+Não ocorre bloqueio total.
+
+Alodinia pode ocorrer."
+"37a75014-2219-4a8b-80b6-2f87987b93d3","ME3","Via Aérea","4o Trimestre ME3 - Em paciente com risco elevado de aspiração, qual estratégia é apropriada?","Indução em sequência rápida","Ventilação espontânea prolongada","Suspensão da pré-oxigenação","Hipoventilação","A","Correta. Minimiza tempo sem proteção de vias aéreas.
+
+Pode aumentar risco.
+
+Pré-oxigenação é fundamental.
+
+Não é estratégia segura."
+"7aa6021e-0a7f-4a08-b950-60030969f57b","ME3","Dor Aguda","4o Trimestre ME3 - Em analgesia multimodal, qual objetivo principal é buscado?","Aumentar consumo de opioides","Reduzir efeitos adversos dos opioides","Promover sedação profunda","Eliminar monitorização","B","O consumo tende a reduzir.
+
+Correta. Combinação de técnicas diminui necessidade opioide.
+
+Sedação profunda não é objetivo.
+
+Monitorização permanece necessária."
+"81bea862-0718-456c-821e-dc364f80ad31","ME3","Obesidade","4o Trimestre ME3 - Em obesidade mórbida, qual alteração cardiovascular é comum?","Aumento do débito cardíaco","Redução obrigatória do débito","Hipovolemia absoluta","Bradicardia persistente","A","Correta. Maior demanda metabólica aumenta débito cardíaco.
+
+Nem sempre ocorre.
+
+Não é alteração típica.
+
+Taquicardia é mais comum."
+"3cc7664b-1e7a-4e6e-b83c-7183ad16a267","ME3","Cuidados Paliativos","4o Trimestre ME3 - Em paciente terminal, qual princípio norteia analgesia paliativa?","Subtratamento da dor","Individualização terapêutica","Suspensão precoce de opioides","Evitar analgesia multimodal","B","É inadequado eticamente.
+
+Correta. Analgesia deve ser adaptada às necessidades do paciente.
+
+Opioides frequentemente são necessários.
+
+Abordagem multimodal pode ser útil."
+"ef782a99-e706-4cb7-9963-3fe02e2e4663","ME3","NVPO","4o Trimestre ME3 - Em prevenção de NVPO, qual estratégia farmacológica multimodal é recomendada em alto risco?","Nenhum antiemético","Associação de antieméticos com mecanismos diferentes","Uso isolado de opioides","Sedação profunda","B","A prevenção multimodal de NVPO combina antieméticos de classes diferentes para cobrir múltiplos mecanismos (ondansetrona, dexametasona, droperidol, escopolamina). Em pacientes de alto risco (Apfel ≥3), a combinação de 2-3 agentes reduz mais a incidência do que monoterapia. Referência: Diretrizes SBA/SGAS NVPO 2020."
+"cde43a57-5e21-4c87-a4f1-ce60b26e48dd","ME3","Ambulatorial","4o Trimestre ME3 - Em anestesia ambulatorial, qual característica é desejável nos fármacos utilizados?","Longa meia-vida","Recuperação rápida","Acúmulo tecidual","Sedação residual prolongada","B","Em anestesia ambulatorial, os fármacos ideais têm recuperação rápida e completa, mínimo acúmulo e baixa meia-vida contexto sensível (propofol, remifentanil, sevoflurano/desflurano). Isso permite alta precoce e reduz efeitos residuais como sonolência e sedação excessiva. Referência: Miller's Anesthesia 9ed, cap. 49."
+"d1690ee1-4258-4b63-92cb-bb5e7f1e7b00","ME3","Obesidade","4o Trimestre ME3 - Em obesidade mórbida, dessaturação rápida durante apneia ocorre principalmente por:","Aumento da CRF","Redução da reserva funcional pulmonar","Hipometabolismo","Redução do consumo de oxigênio","B","A CRF reduz-se.
+
+Correta. Menor reserva acelera dessaturação.
+
+O metabolismo é aumentado.
+
+Consumo de O2 geralmente é maior."
+"bea55f16-7c5f-4f1d-8625-c19fa1a7d1af","ME3","SAOS","4o Trimestre ME3 - Em pacientes com SAOS, qual conduta pós-operatória é recomendada?","Uso liberal de opioides","Monitorização respiratória ampliada","Sedação contínua","Alta imediata obrigatória","B","Aumenta risco de depressão respiratória.
+
+Correta. Pacientes possuem maior risco de obstrução e hipoxemia.
+
+Sedação aumenta risco.
+
+Nem sempre é segura."
+"ddbada90-7517-49b4-b6b9-b48056b68645","ME3","SAOS","4o Trimestre ME3 - Em paciente com SAOS, qual sedativo exige cautela especial?","Dexmedetomidina","Propofol","Midazolam","Cetamina","C","Pode ser utilizado com monitorização.
+
+Pode ser utilizado cuidadosamente.
+
+Correta. Benzodiazepínicos aumentam depressão respiratória e obstrução.
+
+Menor depressão respiratória relativa."
+"66c4cb21-64f8-42b2-beb1-52d1544d7832","ME3","Sedação","4o Trimestre ME3 - Em sedação fora do centro cirúrgico, quem deve ser capaz de manejar via aérea difícil?","Somente cirurgião","Equipe treinada em resgate ventilatório","Apenas enfermagem","Ninguém especificamente","B","Não é responsabilidade exclusiva do cirurgião.
+
+Correta. Segurança depende de capacidade imediata de intervenção.
+
+Equipe completa deve estar preparada.
+
+Conduta insegura."
+"49464369-8d28-4cfe-a816-529547f9f6c9","ME3","Dor Aguda","4o Trimestre ME3 - Em analgesia regional contínua, qual vantagem importante ocorre?","Maior incidência de dor","Menor consumo de opioides","Hiperglicemia obrigatória","Ausência de monitorização","B","A analgesia geralmente melhora.
+
+Correta. Bloqueios contínuos reduzem necessidade opioide.
+
+Não é efeito esperado.
+
+Monitorização permanece necessária."
+"38967b02-03e7-4ee9-9e45-3f58cf507b38","ME3","Opioides","4o Trimestre ME3 - Em uso prolongado de opioides, qual fenômeno farmacológico é comum?","Tolerância","Sensibilidade aumentada permanente","Ausência de necessidade analgésica","Analgesia definitiva","A","A tolerância aos opioides resulta de uso prolongado: dessensibilização e downregulation dos receptores opioides exigem doses progressivamente maiores para o mesmo efeito analgésico. Mecanismo: fosforilação do receptor, internalização e desacoplamento da proteína G. Referência: Stoelting's Pharmacology 5ed, cap. 3."
+"a1daffbe-0a55-4aa2-988b-f0c8d95f4871","ME3","Cuidados Paliativos","4o Trimestre ME3 - Em cuidados paliativos, sedação paliativa está indicada quando:","Sintomas refratários causam sofrimento intolerável","Toda dor leve está presente","O paciente não usa opioides","Sempre após cirurgia","A","A sedação paliativa é indicada quando há sintomas refratários (dor, dispneia, delirium hiperativo) com sofrimento intolerável ao paciente em fase terminal, não responsivo a tratamentos específicos. Deve ser proporcional ao sofrimento e requerer consentimento informado. Referência: CFM Resolução 1.805/2006; SBA."
+"ce389b93-32e6-4a5d-9578-0474fcea783e","ME3","Geriatria","4o Trimestre ME3 - Em paciente geriátrico, qual alteração farmacocinética aumenta meia-vida de fármacos lipossolúveis?","Redução da gordura corporal","Aumento da gordura corporal","Aumento da água corporal","Aumento da depuração renal","B","A gordura corporal geralmente aumenta.
+
+Correta. Maior compartimento lipídico prolonga redistribuição.
+
+Água corporal tende a reduzir.
+
+A depuração renal reduz-se."
+"388d7047-703e-4582-aea6-6868cfdfc8e6","ME3","Dor Neuropática","4o Trimestre ME3 - Em dor neuropática, qual classe farmacológica é frequentemente utilizada?","Anticonvulsivantes","Antibióticos","Bloqueadores neuromusculares","Antiarrítmicos classe I exclusivamente","A","Correta. Gabapentinoides são amplamente utilizados.
+
+Não tratam dor neuropática.
+
+Não possuem papel analgésico.
+
+Não são tratamento exclusivo."
+"2bd7e870-bbfe-47b5-8706-45b680cacf36","ME3","Sedação","4o Trimestre ME3 - Em sedação profunda, capnografia é útil porque:","Avalia glicemia","Detecta hipoventilação precocemente","Substitui oximetria","Avalia bloqueio neuromuscular","B","Não mede glicose.
+
+Correta. Alterações ventilatórias precedem dessaturação.
+
+Não substitui oximetria.
+
+Não monitora TOF."
+"5fb4e233-b31f-47fb-a569-1053dcb57a35","ME3","Obesidade","4o Trimestre ME3 - Em obesidade mórbida, qual complicação dificulta ventilação sob anestesia geral?","Aumento da complacência pulmonar","Redução da complacência respiratória","Hipocapnia obrigatória","Redução do consumo de oxigênio","B","A complacência geralmente reduz-se.
+
+Correta. O excesso de peso reduz complacência pulmonar e torácica.
+
+Hipercapnia pode ocorrer.
+
+O consumo de O2 é aumentado."
+"03d32adf-bda3-4ec4-acfd-78eeda93ddb9","ME3","Geriatria","4o Trimestre ME3 - Em prevenção de delirium no idoso, qual medida é benéfica?","Restrição de mobilização","Reorientação frequente","Privação do sono","Sedação contínua","B","A reorientação frequente (horário, local, pessoa) é das medidas não farmacológicas mais eficazes na prevenção e tratamento do delirium em idosos. O protocolo HELP inclui: reorientação, mobilização precoce, controle do sono/luz, hidratação, minimização de benzodiazepínicos. Referência: Inouye SK, NEJM 1999."
+"15957810-e062-4516-85bb-7b26a3cebbf6","ME3","Geriatria","4o Trimestre ME3 - Em paciente geriátrico frágil, qual objetivo hemodinâmico é importante?","Hipotensão permissiva ampla","Manutenção da perfusão orgânica","Taquicardia sustentada","Hipovolemia deliberada","B","Pode causar lesão orgânica.
+
+Correta. Idosos toleram mal hipoperfusão.
+
+Aumenta consumo miocárdico.
+
+Reduz perfusão tecidual."
+"9e3b7de3-1ecd-4b35-8345-9accd8a9527a","ME3","Geriatria","4o Trimestre ME3 - Em delirium pós-operatório, benzodiazepínicos podem:","Reduzir risco universalmente","Aumentar risco em idosos","Eliminar agitação sempre","Substituir analgesia","B","Não reduzem risco universalmente.
+
+Correta. Benzodiazepínicos podem precipitar delirium.
+
+Não controlam todas as causas de agitação.
+
+Não substituem analgesia."
+"db54cf7d-524c-46e8-a5f8-6016dae92dd1","ME3","Dor Neuropática","4o Trimestre ME3 - Qual característica sugere dor neuropática?","Dor em queimação","Dor exclusivamente mecânica","Ausência de parestesias","Resposta completa obrigatória aos AINEs","A","Correta. Queimação e parestesias são típicas.
+
+Não caracteriza dor neuropática.
+
+Parestesias podem ocorrer.
+
+Resposta pode ser limitada."
+"5e3b0d28-23ee-4014-b81a-e4da494aac25","ME3","Geriatria","4o Trimestre ME3 - Em paciente geriátrico, qual sistema apresenta menor reserva funcional?","Cardiovascular","Todos os sistemas orgânicos","Somente renal","Somente hepático","B","Não é exclusivo.
+
+Correta. O envelhecimento reduz reserva funcional global.
+
+A redução é multissistêmica.
+
+A redução é multissistêmica."
+"e6fdf37d-4949-4afb-bd50-e3d5ab1c5db2","ME3","Geriatria","4o Trimestre ME3 - Em idosos, qual complicação cognitiva pode persistir semanas após cirurgia?","Disfunção cognitiva pós-operatória","Hipercalcemia","Broncoespasmo","Hiperglicemia","A","Correta. Alterações cognitivas podem persistir após alta.
+
+Não é complicação cognitiva.
+
+Não é principal complicação neurológica.
+
+Não define disfunção cognitiva."
+"d193204d-de60-40a4-ab59-3818f1aa8214","ME3","ERAS","4o Trimestre ME3 - Em analgesia multimodal, qual vantagem perioperatória é esperada?","Recuperação funcional mais rápida","Maior incidência de íleo","Maior consumo opioide","Sedação prolongada obrigatória","A","Correta. Melhor controle da dor favorece mobilização precoce.
+
+Íleo pode reduzir com menos opioides.
+
+O consumo tende a diminuir.
+
+Não é obrigatória."
+"415b1ca1-cc6f-4ae5-a21e-884b352bd8ee","ME3","ERAS","4o Trimestre ME3 - Em ERAS (Enhanced Recovery After Surgery), qual medida é incentivada?","Mobilização precoce","Jejum prolongado desnecessário","Uso excessivo de opioides","Restrição absoluta de líquidos","A","Correta. Mobilização reduz complicações e acelera recuperação.
+
+ERAS reduz jejuns prolongados.
+
+Busca-se reduzir opioides.
+
+Reposição deve ser individualizada."

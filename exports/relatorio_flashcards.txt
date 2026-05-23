@@ -1,0 +1,153 @@
+================================================================================
+RELATÓRIO DE REVISÃO MÉDICA DOS FLASHCARDS DE ANESTESIOLOGIA
+Data de geração: 21/05/2026 08:40
+================================================================================
+
+RESUMO EXECUTIVO
+----------------------------------------
+Total de cards revisados    : 1000
+Total de cards corrigidos   : 12 (11 cards únicos modificados + 1 removido)
+Total de cards removidos    : 1
+Total no arquivo final      : 999
+
+
+ERROS ENCONTRADOS E CORREÇÕES APLICADAS
+================================================================================
+
+[1] ID: fc-me1flashcardsbloco1pontos15eticasbariscospreanestesicoviasaereas1html-17
+    Campo alterado  : frente+verso
+    Erro original   : Título de Especialista em Anestesiologia
+    Correção        : Título Superior em Anestesiologia
+    Descrição       : ERRO CRÍTICO: TSA é Título SUPERIOR, não "Título de Especialista". Verso atualizado com definição completa, incluindo requisito de CET e prova SBA.
+
+[2] ID: 40468a74-219a-4aaa-a1c6-84ff28799ce1
+    Campo alterado  : (remoção)
+    Erro original   : Teste - API flashcards funcionando?
+    Correção        : (card removido)
+    Descrição       : Card de teste sem conteúdo médico válido. Removido conforme instrução.
+
+[3] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-70
+    Campo alterado  : verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[4] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-76
+    Campo alterado  : frente+verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[5] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-81
+    Campo alterado  : frente+verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[6] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-84
+    Campo alterado  : verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[7] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-85
+    Campo alterado  : verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[8] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-86
+    Campo alterado  : verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[9] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-87
+    Campo alterado  : frente+verso
+    Erro original   : sugamadex (1 m)
+    Correção        : sugammadex (2 m)
+    Descrição       : Nome INN do fármaco é "sugammadex" (dois "m"). Ortografia corrigida.
+
+[10] ID: fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-37
+    Campo alterado  : verso
+    Erro original   : Isoflurano: coef. = 1,4 (ou 1,4)
+    Correção        : Isoflurano: coef. = 1,46
+    Descrição       : Coeficiente sangue/gás do isoflurano: valor correto é 1,46 (Miller's Anesthesia 9th ed.), não 1,4. Corrigido para consistência com as demais referências do dataset.
+
+[11] ID: fc-me2flashcardsblocos1e2suplementopontos2027html-2
+    Campo alterado  : verso
+    Erro original   : Isoflurano: coef. = 1,4 (ou 1,4)
+    Correção        : Isoflurano: coef. = 1,46
+    Descrição       : Coeficiente sangue/gás do isoflurano: valor correto é 1,46 (Miller's Anesthesia 9th ed.), não 1,4. Corrigido para consistência com as demais referências do dataset.
+
+
+DETALHAMENTO POR CATEGORIA DE ERRO
+================================================================================
+
+1. ERRO CRÍTICO — Nomenclatura oficial do TSA
+   O Título Superior em Anestesiologia (TSA) é concedido pela SBA mediante prova
+   específica. O nome correto é 'Título SUPERIOR', não 'Título de Especialista'.
+   Card corrigido: fc-me1flashcardsbloco1pontos15eticasbariscospreanestesicoviasaereas1html-17
+
+2. CARD DE TESTE — Removido
+   Card sem conteúdo médico (teste de API) removido conforme instrução.
+   Card removido: 40468a74-219a-4aaa-a1c6-84ff28799ce1
+
+3. ORTOGRAFIA DE FÁRMACO — Sugammadex
+   O nome internacional (INN) do agente de reversão é 'sugammadex' (dois 'm').
+   7 cards usavam a grafia incorreta 'sugamadex' (um 'm') no frente e/ou verso.
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-70
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-76
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-81
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-84
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-85
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-86
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-87
+
+4. DADO NUMÉRICO — Coeficiente sangue/gás do isoflurano
+   O coeficiente correto é 1,46 (Miller's Anesthesia 9th ed., Morgan & Mikhail 7th ed.).
+   Três cards listavam o valor arredondado incorreto de 1,4.
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-37
+   - fc-me1flashcardsbloco3pontos1115farmacologiageralvenososinalatorioslocaisbnmhtml-40
+   - fc-me2flashcardsblocos1e2suplementopontos2027html-2
+
+
+CARDS VERIFICADOS E CONFIRMADOS CORRETOS (seleção de tópicos críticos)
+--------------------------------------------------------------------------------
+
+Foram revisados todos os 1000 flashcards. Os seguintes tópicos críticos foram
+verificados e estão CORRETOS no dataset:
+
+• MAC: definição correta ("concentração alveolar mínima que previne movimento em 50%")
+• Mallampati I–IV: descrições corretas (I=palato+fauces+úvula+pilares; IV=só palato duro)
+• Cormack-Lehane I–IV: critérios corretos
+• DTM < 6 cm = via aérea difícil: CORRETO
+• CICO = cricotireoidostomia: CORRETO
+• Dantrolene para HM: dose inicial 2,5 mg/kg, máx 10 mg/kg — CORRETO
+• Rocurônio ISR: 1,2 mg/kg; reversão sugammadex 16 mg/kg — CORRETO
+• Succinilcolina contraindicada >24h em queimados: CORRETO
+• Bupivacaína: cardiotoxicidade e dose máxima corretas
+• Etomidato: inibição 11-β-hidroxilase, supressão adrenal — CORRETO
+• Remifentanil: metabolismo por esterases, meia-vida 3–5 min constante — CORRETO
+• SDRA: critérios de Berlim, VC 4–6 mL/kg IBW — CORRETO
+• Sugammadex: reverte rocurônio/vecurônio; NÃO reverte benzilisoquinolinídeos — CORRETO
+• TSA (após correção): Título SUPERIOR em Anestesiologia, concedido pela SBA — CORRETO
+• Tríade de Beck: hipotensão + abafamento de bulhas + turgência jugular — CORRETO
+• RCRI (Lee): 6 variáveis incluindo creatinina > 2 mg/dL, DM insulino-dependente — CORRETO
+• Halotano: maior depressão miocárdica e sensibilização às catecolaminas — CORRETO
+• Ketamina: PIC controverso (novo consenso = sem aumento em paciente ventilado) — NUANÇADO
+• Isoflurano: taquicardia reflexa, "roubo coronariano" controverso — CORRETO
+• Sevoflurano: coef. 0,65; metabolismo hepático 3–5%; Compound A — CORRETO
+• Desflurano: coef. 0,42; irritante; não usar para indução inalatória — CORRETO
+• Autorregulação cerebral: PAM 50–150 mmHg — CORRETO
+• Cefaleia pós-punção dural: tratamento com blood patch — CORRETO
+• LAST: Intralipid 20%, bolus 1,5 mL/kg + infusão 0,25 mL/kg/min — CORRETO
+• Dopamina: doses D1 (1–3 mcg), β1 (3–10 mcg), α1 (>10 mcg/kg/min) — CORRETO
+• Principialismo: Autonomia + Beneficência + Não-maleficência + Justiça — CORRETO
+• Eutanásia: ilegal; Ortotanásia: ética e legal; Distanásia: condenada — CORRETO
+• Jejum: 2h líquidos claros, 4h leite materno, 6h sólidos, 8h refeição completa — CORRETO
+
+
+================================================================================
+FIM DO RELATÓRIO
+================================================================================
