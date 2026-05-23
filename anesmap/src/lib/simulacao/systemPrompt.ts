@@ -77,6 +77,13 @@ export type HistoricoItem = {
   pontuacao_turno?: number;
 };
 
+export type Fase = {
+  titulo: string;
+  situacao: string;
+  sinais_vitais: SinaisVitais;
+  opcoes: string[];
+};
+
 export type CasoSimulacao = {
   id: string;
   titulo: string;
@@ -89,6 +96,8 @@ export type CasoSimulacao = {
   nivel_recomendado: string[];
   duracao_estimada: string;
   tags: string[];
+  /** Optional pre-scripted phases that guide AI progression */
+  fases?: Fase[];
 };
 
 export type SinaisVitais = {
@@ -105,6 +114,8 @@ export function montarMensagem(
   historico: HistoricoItem[],
   condutaAtual: string,
 ): string {
+  const turnoAtual = historico.length + 1;
+
   const historicoFormatado = historico
     .map(
       (h, i) =>
@@ -112,12 +123,40 @@ export function montarMensagem(
     )
     .join("\n\n");
 
+  // Build phase roadmap if case has pre-scripted phases
+  let roteiro = "";
+  if (caso.fases && caso.fases.length > 1) {
+    const fasesTexto = caso.fases
+      .map((f, i) => {
+        const sv = f.sinais_vitais;
+        const opcoes = f.opcoes.filter(Boolean);
+        return (
+          `  Fase ${i + 1} — ${f.titulo || `Turno ~${i + 1}`}:\n` +
+          `    Situação: ${f.situacao}\n` +
+          `    Sinais vitais esperados: PA ${sv.PA}, FC ${sv.FC}, SpO2 ${sv.SpO2}%, ETCO2 ${sv.ETCO2}, FR ${sv.FR}, Temp ${sv.Temp}°C\n` +
+          (opcoes.length > 0 ? `    Condutas esperadas: ${opcoes.join(" | ")}` : "")
+        );
+      })
+      .join("\n\n");
+
+    // Which phase should we be at now (based on turn count)
+    const faseAlvo = Math.min(turnoAtual, caso.fases.length);
+    roteiro = `
+ROTEIRO DO CASO (${caso.fases.length} fases pré-definidas pelo instrutor):
+${fasesTexto}
+
+Turno atual: ${turnoAtual} → direcione a evolução clínica para a Fase ${faseAlvo}.
+Condutas corretas avançam o roteiro fase a fase. Erros desviam e agravam o quadro.
+Ao atingir a última fase com condutas majoritariamente corretas, encaminhe para desfecho de recuperação.
+`;
+  }
+
   return `
 CASO CLÍNICO:
 ${caso.descricao}
 
 NÍVEL DO RESIDENTE: ${caso.nivel_residente}
-
+${roteiro}
 HISTÓRICO DO ATENDIMENTO:
 ${historicoFormatado || "Início do caso — nenhuma conduta tomada ainda."}
 
@@ -125,7 +164,7 @@ CONDUTA ATUAL DO RESIDENTE:
 "${condutaAtual}"
 
 Avalie esta conduta e continue a simulação.
-Lembre-se: turno atual é ${historico.length + 1}.
-${historico.length >= 9 ? "Este é um dos últimos turnos — considere encaminhar para o desfecho." : ""}
+Lembre-se: turno atual é ${turnoAtual}.
+${turnoAtual >= 9 ? "Este é um dos últimos turnos — considere encaminhar para o desfecho." : ""}
   `;
 }

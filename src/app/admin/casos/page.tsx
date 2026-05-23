@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { ChevronDown, ChevronUp, Plus, Trash2, MoveUp, MoveDown } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -11,6 +12,13 @@ type SinaisVitais = {
   ETCO2: number;
   FR: number;
   Temp: number;
+};
+
+type Fase = {
+  titulo: string;
+  situacao: string;
+  sinais_vitais: SinaisVitais;
+  opcoes: string[];
 };
 
 type Caso = {
@@ -25,6 +33,7 @@ type Caso = {
   situacao_inicial: string;
   sinais_vitais_iniciais: SinaisVitais;
   opcoes_iniciais: string[];
+  fases: Fase[];
   ativo: boolean;
   revisado: boolean;
   created_at?: string;
@@ -35,14 +44,7 @@ type CasoPayload = Omit<Caso, "id" | "ativo" | "revisado" | "created_at">;
 const NIVEIS = ["ME1", "ME2", "ME3"] as const;
 const DIFICULDADES = ["iniciante", "intermediário", "avançado"] as const;
 
-const SINAIS_VAZIOS: SinaisVitais = {
-  PA: "",
-  FC: 0,
-  SpO2: 0,
-  ETCO2: 0,
-  FR: 0,
-  Temp: 0,
-};
+const SINAIS_VAZIOS: SinaisVitais = { PA: "", FC: 0, SpO2: 0, ETCO2: 0, FR: 0, Temp: 0 };
 
 function sinaisFromUnknown(raw: unknown): SinaisVitais {
   if (raw && typeof raw === "object") {
@@ -59,7 +61,17 @@ function sinaisFromUnknown(raw: unknown): SinaisVitais {
   return { ...SINAIS_VAZIOS };
 }
 
+function emptyFase(index = 0): Fase {
+  return {
+    titulo: index === 0 ? "Fase 1 — Apresentação inicial" : `Fase ${index + 1}`,
+    situacao: "",
+    sinais_vitais: { ...SINAIS_VAZIOS },
+    opcoes: ["", "", "", ""],
+  };
+}
+
 function emptyForm(): CasoPayload {
+  const fase0 = emptyFase(0);
   return {
     titulo: "",
     slug: "",
@@ -68,9 +80,21 @@ function emptyForm(): CasoPayload {
     nivel_recomendado: [],
     duracao_estimada: "",
     tags: [],
-    situacao_inicial: "",
+    fases: [fase0],
+    situacao_inicial: fase0.situacao,
     sinais_vitais_iniciais: { ...SINAIS_VAZIOS },
     opcoes_iniciais: ["", "", "", ""],
+  };
+}
+
+/** Before saving, auto-populate legacy top-level fields from fases[0] */
+function buildPayload(form: CasoPayload): CasoPayload {
+  const f0 = form.fases[0];
+  return {
+    ...form,
+    situacao_inicial: f0?.situacao ?? "",
+    sinais_vitais_iniciais: f0?.sinais_vitais ?? { ...SINAIS_VAZIOS },
+    opcoes_iniciais: (f0?.opcoes ?? []).filter(Boolean),
   };
 }
 
@@ -85,62 +109,43 @@ function dificuldadeBadge(d: string) {
 // ─── Fluxograma ──────────────────────────────────────────────────────────────
 
 function Fluxograma() {
-  const etapas = [
-    { label: "PACIENTE", color: "border-teal text-teal bg-teal/10" },
-    { label: "SITUAÇÃO INICIAL", color: "border-blue-400 text-blue-300 bg-blue-400/10" },
-    { label: "SINAIS VITAIS", color: "border-purple-400 text-purple-300 bg-purple-400/10" },
-    { label: "4 OPÇÕES DE CONDUTA", color: "border-amber-400 text-amber-300 bg-amber-400/10" },
-  ];
-
-  const etapas2 = [
-    { label: "IA AVALIA CONDUTA", color: "border-pink-400 text-pink-300 bg-pink-400/10" },
-    { label: "FEEDBACK + NOVA SITUAÇÃO", color: "border-indigo-400 text-indigo-300 bg-indigo-400/10" },
-    { label: "DESFECHO FINAL", color: "border-emerald-400 text-emerald-300 bg-emerald-400/10" },
+  const fases = [
+    { label: "Fase 1", color: "border-teal text-teal bg-teal/10" },
+    { label: "Fase 2", color: "border-blue-400 text-blue-300 bg-blue-400/10" },
+    { label: "Fase N", color: "border-purple-400 text-purple-300 bg-purple-400/10" },
   ];
 
   return (
-    <div className="rounded-2xl border border-border bg-white/3 p-6">
-      <p className="mb-5 font-mono text-xs uppercase tracking-widest text-muted">
+    <div className="rounded-2xl border border-border bg-white/3 p-5">
+      <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted">
         Estrutura do caso
       </p>
-
-      {/* Linha horizontal */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
-        {etapas.map((e, i) => (
-          <div key={e.label} className="flex shrink-0 items-center gap-2">
-            <div
-              className={`rounded-xl border px-3 py-2 text-center text-xs font-semibold ${e.color}`}
-            >
-              {e.label}
-            </div>
-            {i < etapas.length - 1 && (
-              <span className="text-lg font-light text-muted">→</span>
-            )}
+      <div className="flex flex-col gap-2">
+        {/* Phase row */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          <div className="shrink-0 rounded-xl border border-border/50 bg-white/5 px-3 py-2 text-center text-xs text-muted" style={{ minWidth: 80 }}>
+            PACIENTE
           </div>
-        ))}
-      </div>
-
-      {/* Seta para baixo */}
-      <div className="my-2 ml-[calc(75%-1rem)] flex flex-col items-center" style={{ marginLeft: "75%" }}>
-        <span className="text-lg text-muted">↓</span>
-      </div>
-
-      {/* Linha vertical para a segunda fase */}
-      <div className="flex flex-col items-end gap-2 pr-0">
-        <div className="flex flex-col items-center gap-2">
-          {etapas2.map((e, i) => (
-            <div key={e.label} className="flex flex-col items-center gap-1">
-              <div
-                className={`rounded-xl border px-3 py-2 text-center text-xs font-semibold ${e.color}`}
-                style={{ minWidth: "200px" }}
-              >
-                {e.label}
+          <span className="text-muted">→</span>
+          {fases.map((f, i) => (
+            <div key={f.label} className="flex shrink-0 items-center gap-2">
+              <div className={`rounded-xl border px-3 py-2 text-center text-xs font-semibold ${f.color}`} style={{ minWidth: 80 }}>
+                {f.label}
               </div>
-              {i < etapas2.length - 1 && (
-                <span className="text-lg text-muted">↓</span>
-              )}
+              {i < fases.length - 1 && <span className="text-muted">→</span>}
             </div>
           ))}
+          <span className="text-muted">→</span>
+          <div className="shrink-0 rounded-xl border border-emerald-400/40 bg-emerald-400/10 px-3 py-2 text-center text-xs font-semibold text-emerald-300" style={{ minWidth: 80 }}>
+            DESFECHO
+          </div>
+        </div>
+
+        {/* Legend */}
+        <div className="mt-1 flex flex-wrap gap-3 text-xs text-muted">
+          <span>Cada fase define: <span className="text-foreground">situação clínica + sinais vitais + opções de conduta</span></span>
+          <span>·</span>
+          <span>A IA avalia cada conduta e progride pelas fases</span>
         </div>
       </div>
     </div>
@@ -177,7 +182,289 @@ function ModalOverlay({
   );
 }
 
-// ─── Shared form fields (used in both modals) ────────────────────────────────
+// ─── FaseEditor ──────────────────────────────────────────────────────────────
+
+const FASE_COLORS = [
+  "border-teal/40 bg-teal/5",
+  "border-blue-400/40 bg-blue-400/5",
+  "border-purple-400/40 bg-purple-400/5",
+  "border-amber-400/40 bg-amber-400/5",
+  "border-pink-400/40 bg-pink-400/5",
+];
+
+function FaseEditor({
+  fase,
+  index,
+  total,
+  onChange,
+  onDelete,
+  onMoveUp,
+  onMoveDown,
+}: {
+  fase: Fase;
+  index: number;
+  total: number;
+  onChange: (f: Fase) => void;
+  onDelete: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+}) {
+  const [open, setOpen] = useState(index === 0);
+
+  const colorClass = FASE_COLORS[index % FASE_COLORS.length];
+  const inputClass =
+    "w-full rounded-xl border border-border bg-white/5 px-3 py-2 text-sm text-foreground placeholder:text-muted focus:border-teal focus:outline-none";
+
+  function set<K extends keyof Fase>(key: K, value: Fase[K]) {
+    onChange({ ...fase, [key]: value });
+  }
+
+  function setSinal<K extends keyof SinaisVitais>(key: K, value: string) {
+    onChange({
+      ...fase,
+      sinais_vitais: {
+        ...fase.sinais_vitais,
+        [key]: key === "PA" ? value : Number(value),
+      },
+    });
+  }
+
+  function setOpcao(i: number, value: string) {
+    const opcoes = [...fase.opcoes];
+    opcoes[i] = value;
+    onChange({ ...fase, opcoes });
+  }
+
+  function addOpcao() {
+    onChange({ ...fase, opcoes: [...fase.opcoes, ""] });
+  }
+
+  function removeOpcao(i: number) {
+    if (fase.opcoes.length <= 1) return;
+    onChange({ ...fase, opcoes: fase.opcoes.filter((_, idx) => idx !== i) });
+  }
+
+  return (
+    <div className={`rounded-2xl border ${colorClass} overflow-hidden`}>
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 py-3">
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className="flex flex-1 items-center gap-2 text-left"
+        >
+          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-foreground">
+            {index + 1}
+          </span>
+          <span className="flex-1 text-sm font-semibold text-foreground truncate">
+            {fase.titulo || `Fase ${index + 1}`}
+          </span>
+          {open ? (
+            <ChevronUp size={15} className="text-muted" />
+          ) : (
+            <ChevronDown size={15} className="text-muted" />
+          )}
+        </button>
+
+        {/* Reorder + delete */}
+        <div className="flex shrink-0 items-center gap-1">
+          <button
+            type="button"
+            onClick={onMoveUp}
+            disabled={index === 0}
+            className="rounded-lg p-1 text-muted hover:text-foreground disabled:opacity-30"
+            title="Mover para cima"
+          >
+            <MoveUp size={14} />
+          </button>
+          <button
+            type="button"
+            onClick={onMoveDown}
+            disabled={index === total - 1}
+            className="rounded-lg p-1 text-muted hover:text-foreground disabled:opacity-30"
+            title="Mover para baixo"
+          >
+            <MoveDown size={14} />
+          </button>
+          {total > 1 && (
+            <button
+              type="button"
+              onClick={onDelete}
+              className="rounded-lg p-1 text-red-400/60 hover:text-red-400"
+              title="Remover fase"
+            >
+              <Trash2 size={14} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Body (collapsible) */}
+      {open && (
+        <div className="space-y-4 border-t border-white/8 px-4 pb-4 pt-3">
+          {/* Título da fase */}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-muted">Título da fase</label>
+            <input
+              className={inputClass}
+              value={fase.titulo}
+              onChange={(e) => set("titulo", e.target.value)}
+              placeholder={`Ex: Fase ${index + 1} — Agravamento do broncoespasmo`}
+            />
+          </div>
+
+          {/* Situação clínica */}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-muted">
+              Situação clínica {index === 0 ? "(inicial)" : "desta fase"}
+            </label>
+            <textarea
+              className={`${inputClass} resize-none`}
+              rows={4}
+              value={fase.situacao}
+              onChange={(e) => set("situacao", e.target.value)}
+              placeholder={
+                index === 0
+                  ? "Cena clínica detalhada que o residente verá ao iniciar..."
+                  : "Como o quadro evolui ao entrar nesta fase..."
+              }
+            />
+          </div>
+
+          {/* Sinais vitais */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-muted">
+              Sinais vitais {index === 0 ? "iniciais" : "desta fase"}
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {(["PA", "FC", "SpO2", "ETCO2", "FR", "Temp"] as const).map((key) => (
+                <div key={key}>
+                  <label className="mb-0.5 block text-[11px] text-muted">{key}</label>
+                  <input
+                    className={inputClass}
+                    value={String(fase.sinais_vitais[key])}
+                    onChange={(e) => setSinal(key, e.target.value)}
+                    placeholder={key === "PA" ? "120/80" : "0"}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Opções de conduta */}
+          <div>
+            <div className="mb-1.5 flex items-center justify-between">
+              <label className="text-xs font-medium text-muted">
+                Opções de conduta ({fase.opcoes.length})
+              </label>
+              <button
+                type="button"
+                onClick={addOpcao}
+                className="flex items-center gap-1 rounded-lg border border-border px-2 py-0.5 text-xs text-muted hover:text-foreground"
+              >
+                <Plus size={11} /> Opção
+              </button>
+            </div>
+            <div className="space-y-2">
+              {fase.opcoes.map((opcao, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-muted">
+                    {String.fromCharCode(65 + i)}
+                  </span>
+                  <input
+                    className={`${inputClass} flex-1`}
+                    value={opcao}
+                    onChange={(e) => setOpcao(i, e.target.value)}
+                    placeholder={`Opção ${String.fromCharCode(65 + i)}`}
+                  />
+                  {fase.opcoes.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeOpcao(i)}
+                      className="shrink-0 text-red-400/50 hover:text-red-400"
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── FasesEditor ─────────────────────────────────────────────────────────────
+
+function FasesEditor({
+  fases,
+  onChange,
+}: {
+  fases: Fase[];
+  onChange: (fases: Fase[]) => void;
+}) {
+  function addFase() {
+    onChange([...fases, emptyFase(fases.length)]);
+  }
+
+  function updateFase(index: number, fase: Fase) {
+    const next = [...fases];
+    next[index] = fase;
+    onChange(next);
+  }
+
+  function deleteFase(index: number) {
+    if (fases.length <= 1) return;
+    onChange(fases.filter((_, i) => i !== index));
+  }
+
+  function moveFase(index: number, dir: "up" | "down") {
+    const next = [...fases];
+    const target = dir === "up" ? index - 1 : index + 1;
+    if (target < 0 || target >= next.length) return;
+    [next[index], next[target]] = [next[target], next[index]];
+    onChange(next);
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-semibold text-foreground">
+            Fases do caso
+          </p>
+          <p className="text-xs text-muted">
+            {fases.length} fase{fases.length !== 1 ? "s" : ""} · a IA guiará a progressão fase a fase
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={addFase}
+          className="flex items-center gap-1.5 rounded-xl border border-teal/30 bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal transition hover:bg-teal/20"
+        >
+          <Plus size={13} /> Adicionar fase
+        </button>
+      </div>
+
+      {fases.map((fase, i) => (
+        <FaseEditor
+          key={i}
+          fase={fase}
+          index={i}
+          total={fases.length}
+          onChange={(f) => updateFase(i, f)}
+          onDelete={() => deleteFase(i)}
+          onMoveUp={() => moveFase(i, "up")}
+          onMoveDown={() => moveFase(i, "down")}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ─── Shared form fields ───────────────────────────────────────────────────────
 
 function CamposForm({
   form,
@@ -188,22 +475,6 @@ function CamposForm({
 }) {
   function set<K extends keyof CasoPayload>(key: K, value: CasoPayload[K]) {
     onChange({ ...form, [key]: value });
-  }
-
-  function setSinal<K extends keyof SinaisVitais>(key: K, value: string) {
-    onChange({
-      ...form,
-      sinais_vitais_iniciais: {
-        ...form.sinais_vitais_iniciais,
-        [key]: key === "PA" ? value : Number(value),
-      },
-    });
-  }
-
-  function setOpcao(index: number, value: string) {
-    const opcoes = [...form.opcoes_iniciais];
-    opcoes[index] = value;
-    onChange({ ...form, opcoes_iniciais: opcoes });
   }
 
   function toggleNivel(nivel: string) {
@@ -218,7 +489,7 @@ function CamposForm({
   const labelClass = "mb-1 block text-xs font-medium text-muted";
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Título + Slug */}
       <div className="grid grid-cols-2 gap-3">
         <div>
@@ -243,13 +514,13 @@ function CamposForm({
 
       {/* Descrição */}
       <div>
-        <label className={labelClass}>Descrição</label>
+        <label className={labelClass}>Descrição do caso</label>
         <textarea
           className={`${inputClass} resize-none`}
           rows={3}
           value={form.descricao}
           onChange={(e) => set("descricao", e.target.value)}
-          placeholder="Contexto do paciente, procedimento, histórico..."
+          placeholder="Contexto do paciente, procedimento, histórico clínico..."
         />
       </div>
 
@@ -317,66 +588,21 @@ function CamposForm({
         />
       </div>
 
-      {/* Situação inicial */}
-      <div>
-        <label className={labelClass}>Situação inicial</label>
-        <textarea
-          className={`${inputClass} resize-none`}
-          rows={4}
-          value={form.situacao_inicial}
-          onChange={(e) => set("situacao_inicial", e.target.value)}
-          placeholder="Cena clínica detalhada que o residente verá..."
-        />
-      </div>
+      {/* Divisor */}
+      <div className="border-t border-border pt-1" />
 
-      {/* Sinais vitais */}
-      <div>
-        <label className={labelClass}>Sinais vitais iniciais</label>
-        <div className="grid grid-cols-3 gap-2">
-          {(["PA", "FC", "SpO2", "ETCO2", "FR", "Temp"] as const).map((key) => (
-            <div key={key}>
-              <label className="mb-0.5 block text-[11px] text-muted">{key}</label>
-              <input
-                className={inputClass}
-                value={String(form.sinais_vitais_iniciais[key])}
-                onChange={(e) => setSinal(key, e.target.value)}
-                placeholder={key === "PA" ? "120/80" : "0"}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Opções iniciais */}
-      <div>
-        <label className={labelClass}>Opções iniciais (4 condutas)</label>
-        <div className="space-y-2">
-          {["A", "B", "C", "D"].map((letra, i) => (
-            <div key={letra} className="flex items-center gap-2">
-              <span className="w-5 shrink-0 text-xs font-bold text-muted">{letra}</span>
-              <input
-                className={inputClass}
-                value={form.opcoes_iniciais[i] ?? ""}
-                onChange={(e) => setOpcao(i, e.target.value)}
-                placeholder={`Opção ${letra}`}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Fases */}
+      <FasesEditor
+        fases={form.fases}
+        onChange={(fases) => set("fases", fases)}
+      />
     </div>
   );
 }
 
 // ─── Modal: Criar com IA ─────────────────────────────────────────────────────
 
-function ModalIA({
-  onClose,
-  onSaved,
-}: {
-  onClose: () => void;
-  onSaved: () => void;
-}) {
+function ModalIA({ onClose, onSaved }: { onClose: () => void; onSaved: () => void }) {
   const [topico, setTopico] = useState("");
   const [nivel, setNivel] = useState<string>("ME1");
   const [dificuldade, setDificuldade] = useState<string>("intermediário");
@@ -386,12 +612,8 @@ function ModalIA({
   const [salvando, setSalvando] = useState(false);
 
   async function gerar() {
-    if (!topico.trim()) {
-      setErro("Descreva o cenário clínico.");
-      return;
-    }
-    setErro("");
-    setGerando(true);
+    if (!topico.trim()) { setErro("Descreva o cenário clínico."); return; }
+    setErro(""); setGerando(true);
     try {
       const res = await fetch("/api/admin/casos/gerar", {
         method: "POST",
@@ -399,55 +621,59 @@ function ModalIA({
         body: JSON.stringify({ topico, nivel, dificuldade }),
       });
       const data = (await res.json()) as Record<string, unknown>;
-      if (!res.ok) {
-        setErro(String(data.error ?? "Erro ao gerar."));
-        return;
-      }
+      if (!res.ok) { setErro(String(data.error ?? "Erro ao gerar.")); return; }
+
+      // Build fases array from AI response
+      type FaseRaw = { titulo?: string; situacao?: string; sinais_vitais?: unknown; opcoes?: unknown[] };
+      const fasesRaw: FaseRaw[] = Array.isArray(data.fases) ? (data.fases as FaseRaw[]) : [];
+      const fases: Fase[] = fasesRaw.length > 0
+        ? fasesRaw.map((f, i) => ({
+            titulo: String(f.titulo ?? `Fase ${i + 1}`),
+            situacao: String(f.situacao ?? ""),
+            sinais_vitais: sinaisFromUnknown(f.sinais_vitais),
+            opcoes: Array.isArray(f.opcoes) ? (f.opcoes as string[]) : ["", "", "", ""],
+          }))
+        : [
+            {
+              titulo: "Fase 1 — Apresentação inicial",
+              situacao: String(data.situacao_inicial ?? ""),
+              sinais_vitais: sinaisFromUnknown(data.sinais_vitais_iniciais),
+              opcoes: Array.isArray(data.opcoes_iniciais) ? (data.opcoes_iniciais as string[]) : ["", "", "", ""],
+            },
+          ];
+
       setForm({
         titulo: String(data.titulo ?? ""),
         slug: String(data.slug ?? ""),
         descricao: String(data.descricao ?? ""),
         dificuldade: String(data.dificuldade ?? "iniciante"),
-        nivel_recomendado: Array.isArray(data.nivel_recomendado)
-          ? (data.nivel_recomendado as string[])
-          : [],
+        nivel_recomendado: Array.isArray(data.nivel_recomendado) ? (data.nivel_recomendado as string[]) : [],
         duracao_estimada: String(data.duracao_estimada ?? ""),
         tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
-        situacao_inicial: String(data.situacao_inicial ?? ""),
-        sinais_vitais_iniciais: sinaisFromUnknown(data.sinais_vitais_iniciais),
-        opcoes_iniciais: Array.isArray(data.opcoes_iniciais)
-          ? (data.opcoes_iniciais as string[])
-          : ["", "", "", ""],
+        fases,
+        situacao_inicial: fases[0]?.situacao ?? "",
+        sinais_vitais_iniciais: fases[0]?.sinais_vitais ?? { ...SINAIS_VAZIOS },
+        opcoes_iniciais: fases[0]?.opcoes.filter(Boolean) ?? [],
       });
-    } catch {
-      setErro("Falha de conexão.");
-    } finally {
-      setGerando(false);
-    }
+    } catch { setErro("Falha de conexão."); }
+    finally { setGerando(false); }
   }
 
   async function salvar() {
     if (!form) return;
-    setSalvando(true);
-    setErro("");
+    setSalvando(true); setErro("");
     try {
+      const payload = buildPayload(form);
       const res = await fetch("/api/admin/casos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       const data = (await res.json()) as Record<string, unknown>;
-      if (!res.ok) {
-        setErro(String(data.error ?? "Erro ao salvar."));
-        return;
-      }
-      onSaved();
-      onClose();
-    } catch {
-      setErro("Falha de conexão.");
-    } finally {
-      setSalvando(false);
-    }
+      if (!res.ok) { setErro(String(data.error ?? "Erro ao salvar.")); return; }
+      onSaved(); onClose();
+    } catch { setErro("Falha de conexão."); }
+    finally { setSalvando(false); }
   }
 
   const inputClass =
@@ -455,9 +681,8 @@ function ModalIA({
   const labelClass = "mb-1 block text-xs font-medium text-muted";
 
   return (
-    <ModalOverlay title="Criar com IA" onClose={onClose}>
+    <ModalOverlay title="✦ Criar com IA" onClose={onClose}>
       <div className="space-y-4">
-        {/* Campos de geração */}
         <div>
           <label className={labelClass}>Cenário clínico *</label>
           <textarea
@@ -473,32 +698,14 @@ function ModalIA({
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className={labelClass}>Nível</label>
-            <select
-              className={inputClass}
-              value={nivel}
-              onChange={(e) => setNivel(e.target.value)}
-              disabled={gerando}
-            >
-              {NIVEIS.map((n) => (
-                <option key={n} value={n}>
-                  {n}
-                </option>
-              ))}
+            <select className={inputClass} value={nivel} onChange={(e) => setNivel(e.target.value)} disabled={gerando}>
+              {NIVEIS.map((n) => <option key={n} value={n}>{n}</option>)}
             </select>
           </div>
           <div>
             <label className={labelClass}>Dificuldade</label>
-            <select
-              className={inputClass}
-              value={dificuldade}
-              onChange={(e) => setDificuldade(e.target.value)}
-              disabled={gerando}
-            >
-              {DIFICULDADES.map((d) => (
-                <option key={d} value={d}>
-                  {d.charAt(0).toUpperCase() + d.slice(1)}
-                </option>
-              ))}
+            <select className={inputClass} value={dificuldade} onChange={(e) => setDificuldade(e.target.value)} disabled={gerando}>
+              {DIFICULDADES.map((d) => <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>)}
             </select>
           </div>
         </div>
@@ -509,22 +716,14 @@ function ModalIA({
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-background transition hover:opacity-90 disabled:opacity-50"
         >
           {gerando ? (
-            <>
-              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
-              Gerando…
-            </>
-          ) : (
-            "✦ Gerar com IA"
-          )}
+            <><span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" /> Gerando fases…</>
+          ) : "✦ Gerar caso com múltiplas fases"}
         </button>
 
         {erro && (
-          <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">
-            {erro}
-          </p>
+          <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">{erro}</p>
         )}
 
-        {/* Preview editável */}
         {form && (
           <>
             <div className="border-t border-border pt-4">
@@ -533,7 +732,6 @@ function ModalIA({
               </p>
               <CamposForm form={form} onChange={setForm} />
             </div>
-
             <button
               onClick={() => void salvar()}
               disabled={salvando}
@@ -550,42 +748,26 @@ function ModalIA({
 
 // ─── Modal: Criar Manual ─────────────────────────────────────────────────────
 
-function ModalManual({
-  onClose,
-  onSaved,
-}: {
-  onClose: () => void;
-  onSaved: () => void;
-}) {
+function ModalManual({ onClose, onSaved }: { onClose: () => void; onSaved: () => void }) {
   const [form, setForm] = useState<CasoPayload>(emptyForm());
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
 
   async function salvar() {
-    if (!form.titulo.trim() || !form.slug.trim()) {
-      setErro("Título e slug são obrigatórios.");
-      return;
-    }
-    setSalvando(true);
-    setErro("");
+    if (!form.titulo.trim() || !form.slug.trim()) { setErro("Título e slug são obrigatórios."); return; }
+    setSalvando(true); setErro("");
     try {
+      const payload = buildPayload(form);
       const res = await fetch("/api/admin/casos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       const data = (await res.json()) as Record<string, unknown>;
-      if (!res.ok) {
-        setErro(String(data.error ?? "Erro ao salvar."));
-        return;
-      }
-      onSaved();
-      onClose();
-    } catch {
-      setErro("Falha de conexão.");
-    } finally {
-      setSalvando(false);
-    }
+      if (!res.ok) { setErro(String(data.error ?? "Erro ao salvar.")); return; }
+      onSaved(); onClose();
+    } catch { setErro("Falha de conexão."); }
+    finally { setSalvando(false); }
   }
 
   return (
@@ -594,9 +776,7 @@ function ModalManual({
         <CamposForm form={form} onChange={setForm} />
 
         {erro && (
-          <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">
-            {erro}
-          </p>
+          <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">{erro}</p>
         )}
 
         <button
@@ -611,7 +791,7 @@ function ModalManual({
   );
 }
 
-// ─── Card de caso ─────────────────────────────────────────────────────────────
+// ─── CasoCard ────────────────────────────────────────────────────────────────
 
 function CasoCard({
   caso,
@@ -638,68 +818,49 @@ function CasoCard({
     setDeleting(false);
   }
 
+  const numFases = caso.fases?.length ?? 0;
+
   return (
     <div className="rounded-2xl border border-border bg-card p-5 transition hover:border-white/20">
-      {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h3 className="truncate text-sm font-semibold text-foreground">{caso.titulo}</h3>
           <p className="mt-0.5 font-mono text-xs text-muted">{caso.slug}</p>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1.5">
-          <span
-            className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${dificuldadeBadge(caso.dificuldade)}`}
-          >
+          <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${dificuldadeBadge(caso.dificuldade)}`}>
             {caso.dificuldade}
           </span>
-          <span
-            className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
-              caso.ativo
-                ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
-                : "bg-white/5 text-muted border border-border"
-            }`}
-          >
+          <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${caso.ativo ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30" : "bg-white/5 text-muted border border-border"}`}>
             {caso.ativo ? "Ativo" : "Inativo"}
           </span>
         </div>
       </div>
 
-      {/* Descrição curta */}
       {caso.descricao && (
         <p className="mb-3 line-clamp-2 text-xs text-muted">{caso.descricao}</p>
       )}
 
-      {/* Meta */}
       <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted">
-        {caso.duracao_estimada && (
-          <span className="flex items-center gap-1">
-            <span className="text-teal">⏱</span>
-            {caso.duracao_estimada}
-          </span>
-        )}
-        {caso.nivel_recomendado?.length > 0 && (
-          <span className="flex items-center gap-1">
-            <span className="text-teal">🎓</span>
-            {caso.nivel_recomendado.join(", ")}
+        {caso.duracao_estimada && <span>⏱ {caso.duracao_estimada}</span>}
+        {caso.nivel_recomendado?.length > 0 && <span>🎓 {caso.nivel_recomendado.join(", ")}</span>}
+        {numFases > 0 && (
+          <span className="flex items-center gap-1 rounded-full border border-border bg-white/5 px-2 py-0.5 text-[11px]">
+            {numFases} fase{numFases !== 1 ? "s" : ""}
           </span>
         )}
       </div>
 
-      {/* Tags */}
       {caso.tags?.length > 0 && (
         <div className="mb-4 flex flex-wrap gap-1.5">
           {caso.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-border bg-white/5 px-2 py-0.5 text-[11px] text-muted"
-            >
+            <span key={tag} className="rounded-full border border-border bg-white/5 px-2 py-0.5 text-[11px] text-muted">
               {tag}
             </span>
           ))}
         </div>
       )}
 
-      {/* Ações */}
       <div className="flex gap-2">
         <button
           onClick={() => void toggle()}
@@ -739,9 +900,7 @@ export default function CasosPage() {
     }
   }, []);
 
-  useEffect(() => {
-    void carregar();
-  }, [carregar]);
+  useEffect(() => { void carregar(); }, [carregar]);
 
   async function toggleAtivo(id: string, ativoAtual: boolean) {
     const res = await fetch(`/api/admin/casos?id=${id}`, {
@@ -749,18 +908,12 @@ export default function CasosPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ativo: !ativoAtual }),
     });
-    if (res.ok) {
-      setCasos((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, ativo: !ativoAtual } : c)),
-      );
-    }
+    if (res.ok) setCasos((prev) => prev.map((c) => (c.id === id ? { ...c, ativo: !ativoAtual } : c)));
   }
 
   async function excluir(id: string) {
     const res = await fetch(`/api/admin/casos?id=${id}`, { method: "DELETE" });
-    if (res.ok) {
-      setCasos((prev) => prev.filter((c) => c.id !== id));
-    }
+    if (res.ok) setCasos((prev) => prev.filter((c) => c.id !== id));
   }
 
   const ativos = casos.filter((c) => c.ativo).length;
@@ -768,13 +921,11 @@ export default function CasosPage() {
 
   return (
     <main className="min-h-screen bg-background px-4 py-8 sm:px-8">
-      {/* Cabeçalho */}
       <div className="mx-auto max-w-5xl">
+        {/* Header */}
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-teal">
-              Admin · Simulação
-            </p>
+            <p className="font-mono text-xs uppercase tracking-widest text-teal">Admin · Simulação</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
               Casos de Simulação Clínica
             </h1>
@@ -784,7 +935,6 @@ export default function CasosPage() {
                 : `${casos.length} caso${casos.length !== 1 ? "s" : ""} · ${ativos} ativo${ativos !== 1 ? "s" : ""} · ${inativos} inativo${inativos !== 1 ? "s" : ""}`}
             </p>
           </div>
-
           <div className="flex gap-3">
             <button
               onClick={() => setModalIA(true)}
@@ -806,7 +956,7 @@ export default function CasosPage() {
           <Fluxograma />
         </div>
 
-        {/* Lista de casos */}
+        {/* Lista */}
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-teal border-t-transparent" />
@@ -815,9 +965,7 @@ export default function CasosPage() {
           <div className="rounded-2xl border border-dashed border-border py-16 text-center">
             <p className="text-2xl">🩺</p>
             <p className="mt-3 text-sm text-muted">Nenhum caso cadastrado ainda.</p>
-            <p className="text-xs text-muted">
-              Use os botões acima para criar o primeiro caso.
-            </p>
+            <p className="text-xs text-muted">Use os botões acima para criar o primeiro caso.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -833,19 +981,8 @@ export default function CasosPage() {
         )}
       </div>
 
-      {/* Modais */}
-      {modalIA && (
-        <ModalIA
-          onClose={() => setModalIA(false)}
-          onSaved={() => void carregar()}
-        />
-      )}
-      {modalManual && (
-        <ModalManual
-          onClose={() => setModalManual(false)}
-          onSaved={() => void carregar()}
-        />
-      )}
+      {modalIA && <ModalIA onClose={() => setModalIA(false)} onSaved={() => void carregar()} />}
+      {modalManual && <ModalManual onClose={() => setModalManual(false)} onSaved={() => void carregar()} />}
     </main>
   );
 }

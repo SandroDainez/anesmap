@@ -75,6 +75,7 @@ export async function POST(request: NextRequest) {
               PA: "120/80", FC: 72, SpO2: 98, ETCO2: 35, FR: 14, Temp: 36.5,
             },
             opcoes_iniciais: (row.opcoes_iniciais as string[]) ?? [],
+            fases: Array.isArray(row.fases) ? (row.fases as CasoSimulacao["fases"]) : undefined,
           };
         }
       }
@@ -140,6 +141,7 @@ export async function POST(request: NextRequest) {
               PA: "120/80", FC: 72, SpO2: 98, ETCO2: 35, FR: 14, Temp: 36.5,
             },
             opcoes_iniciais: (row.opcoes_iniciais as string[]) ?? [],
+            fases: Array.isArray(row.fases) ? (row.fases as CasoSimulacao["fases"]) : undefined,
           };
         }
       }
