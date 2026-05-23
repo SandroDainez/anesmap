@@ -21,6 +21,7 @@ type TrackId = "ME1" | "ME2" | "ME3";
 const moduleLinks = [
   { href: "/flashcards", label: "Flashcards SM-2", description: "Revisão espaçada com algoritmo SM-2", color: "teal" },
   { href: "/simulados", label: "Simulados TEA", description: "Banco de questões com cronômetro", color: "blue" },
+  { href: "/simulacao", label: "Simulação Clínica", description: "Casos interativos com IA anestesiologista", color: "purple" },
   { href: "/complicacoes", label: "Complicações", description: "Protocolos de intercorrências", color: "purple" },
   { href: "/avaliacao", label: "Autoavaliação", description: "Progresso e lacunas de conhecimento", color: "blue" },
 ] as const;
