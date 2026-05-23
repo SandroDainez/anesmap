@@ -56,6 +56,8 @@ export async function PATCH(req: NextRequest) {
     if (item.explicacaoC !== undefined) payload.explicacao_c = item.explicacaoC;
     if (item.explicacaoD !== undefined) payload.explicacao_d = item.explicacaoD;
     if (item.explicacaoE !== undefined) payload.explicacao_e = item.explicacaoE;
+    if (item.frente !== undefined) payload.frente = item.frente;
+    if (item.verso !== undefined) payload.verso = item.verso;
 
     if (Object.keys(payload).length === 0) {
       errors.push(`Item ${item.id} sem campos para atualizar`);
