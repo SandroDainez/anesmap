@@ -5,7 +5,6 @@ import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 export async function POST(request: NextRequest) {
   const ctx = await checkAdminAccess();
   if (!ctx) return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
-  const caller = ctx.user;
 
   const admin = createSupabaseAdminClient();
   if (!admin) return NextResponse.json({ error: "SUPABASE_SERVICE_ROLE_KEY não configurada." }, { status: 500 });

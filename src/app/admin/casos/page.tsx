@@ -592,9 +592,9 @@ function CamposForm({
       {/* Divisor */}
       <div className="border-t border-border pt-1" />
 
-      {/* Fases */}
+      {/* Fases — garantir ao menos 1 fase, inclusive quando fases=[] vindo do banco */}
       <FasesEditor
-        fases={form.fases ?? [emptyFase(0)]}
+        fases={form.fases?.length ? form.fases : [emptyFase(0)]}
         onChange={(fases) => set("fases", fases)}
       />
     </div>

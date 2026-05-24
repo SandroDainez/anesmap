@@ -128,9 +128,12 @@ export async function updateWeeklyGoal(minutes: number): Promise<boolean> {
 export async function loadFlashcardProgressRemoteByUser(): Promise<Record<string, FlashcardProgress> | null> {
   const supabase = browserSupabase();
   if (!supabase) return null;
+  const user = await getCurrentAuthUser();
+  if (!user) return null;
   const { data, error } = await supabase
     .from("flashcard_progress")
-    .select("card_id, ease_factor, repetitions, interval_days, next_review_at, last_quality");
+    .select("card_id, ease_factor, repetitions, interval_days, next_review_at, last_quality")
+    .eq("user_id", user.id); // always filter by user — defence in depth against RLS gaps
   if (error || !data) return null;
   const map: Record<string, FlashcardProgress> = {};
   for (const item of data) {
@@ -318,9 +321,20 @@ async function loadMyFlashcardEventsCount() {
 export async function loadMySimuladoAttempts() {
   const supabase = browserSupabase();
   if (!supabase) return [];
+  const user = await getCurrentAuthUser();
+  if (!user) return [];
+  // Start of current ISO week (Monday 00:00:00 UTC)
+  const now = new Date();
+  const day = now.getUTCDay(); // 0=Sun … 6=Sat
+  const diffToMonday = (day === 0 ? -6 : 1 - day);
+  const monday = new Date(now);
+  monday.setUTCDate(now.getUTCDate() + diffToMonday);
+  monday.setUTCHours(0, 0, 0, 0);
   const { data, error } = await supabase
     .from("simulado_attempts")
     .select("id, user_id, track, started_at, ended_at, duration_sec, score_percent, created_at")
+    .eq("user_id", user.id)
+    .gte("created_at", monday.toISOString())
     .order("created_at", { ascending: false });
   if (error || !data) return [];
   return data as SimuladoAttempt[];

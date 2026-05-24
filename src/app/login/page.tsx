@@ -24,8 +24,15 @@ export default function LoginPage() {
   const [signupPassword, setSignupPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [signupSuccess, setSignupSuccess] = useState(false);
+
+  // Show blocked message if redirected here by middleware
+  const blockedParam = searchParams.get("bloqueado");
+  const [error, setError] = useState<string | null>(
+    blockedParam === "1"
+      ? "Seu acesso foi bloqueado. Entre em contato com o administrador."
+      : null,
+  );
 
   function switchMode(next: LoginMode) {
     setMode(next);
@@ -65,8 +72,16 @@ export default function LoginPage() {
 
     const profile = await readProfileWithRetry(supabase, user.id);
 
+    // Profile not found at all — unexpected state
+    if (!profile) {
+      await supabase.auth.signOut();
+      setError("Perfil não encontrado. Entre em contato com o administrador.");
+      setIsLoading(false);
+      return;
+    }
+
     // Block pending users
-    if (profile?.status === "pending") {
+    if (profile.status === "pending") {
       await supabase.auth.signOut();
       setError("Seu cadastro está aguardando aprovação do administrador. Você receberá acesso em breve.");
       setIsLoading(false);
@@ -74,23 +89,23 @@ export default function LoginPage() {
     }
 
     // Block blocked users
-    if (profile?.status === "blocked") {
+    if (profile.status === "blocked") {
       await supabase.auth.signOut();
       setError("Seu acesso foi bloqueado. Entre em contato com o administrador.");
       setIsLoading(false);
       return;
     }
 
-    const role = profile?.role ?? null;
+    const role = profile.role;
 
-    if (role && mode === "admin" && role !== "admin") {
+    if (mode === "admin" && role !== "admin") {
       await supabase.auth.signOut();
       setError("Esta conta não possui acesso de admin.");
       setIsLoading(false);
       return;
     }
 
-    if (role && mode === "student" && role === "admin") {
+    if (mode === "student" && role === "admin") {
       await supabase.auth.signOut();
       setError("Conta admin deve entrar pelo modo Admin.");
       setIsLoading(false);
@@ -296,15 +311,19 @@ export default function LoginPage() {
 async function readProfileWithRetry(
   supabase: NonNullable<ReturnType<typeof createSupabaseBrowserClient>>,
   userId: string,
-) {
+): Promise<{ role: string; status: string } | null> {
   for (let attempt = 0; attempt < 5; attempt += 1) {
     const { data } = await supabase
       .from("profiles")
       .select("role, status")
       .eq("id", userId)
       .maybeSingle();
-    if (data?.role) {
-      return data as { role: string; status: string };
+    // Exit as soon as the profile row exists (even if role is null)
+    if (data !== null) {
+      return {
+        role: (data as { role?: string; status?: string }).role ?? "student",
+        status: (data as { role?: string; status?: string }).status ?? "pending",
+      };
     }
     await new Promise((resolve) => window.setTimeout(resolve, 150));
   }

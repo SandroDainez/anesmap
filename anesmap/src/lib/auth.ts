@@ -5,6 +5,7 @@ export type AppRole = "student" | "admin";
 export type AuthContext = {
   userId: string;
   role: AppRole;
+  status: "pending" | "active" | "blocked";
   name?: string;
   weeklyGoalMinutes: number;
 };
@@ -21,13 +22,14 @@ export async function getAuthContext(): Promise<AuthContext | null> {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role, name, weekly_goal_minutes")
+    .select("role, name, weekly_goal_minutes, status")
     .eq("id", user.id)
     .single();
 
   return {
     userId: user.id,
     role: (profile?.role as AppRole) ?? "student",
+    status: ((profile as { status?: string } | null)?.status ?? "active") as AuthContext["status"],
     name: profile?.name ?? undefined,
     weeklyGoalMinutes: profile?.weekly_goal_minutes ?? 300,
   };

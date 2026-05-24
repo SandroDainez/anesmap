@@ -21,6 +21,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ erro: "nao_autenticado" }, { status: 401 });
     }
 
+    // Verify user is active (not pending or blocked)
+    const { data: profileRow } = await supabase
+      .from("profiles")
+      .select("status")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    const userStatus = (profileRow as { status?: string } | null)?.status ?? "active";
+    if (userStatus !== "active") {
+      return NextResponse.json({ erro: "acesso_negado" }, { status: 403 });
+    }
+
     const body = await request.json() as {
       acao: "iniciar" | "continuar";
       caso_id?: string;
