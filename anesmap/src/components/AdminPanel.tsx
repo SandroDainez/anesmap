@@ -5,6 +5,7 @@ import {
   loadAdminOverview,
   loadAdminUserDetails,
   loadAdminUsers,
+  loadPendingUsers,
   loadAdminMEStats,
   loadAdminAssessmentData,
   loadAdminContentStats,
@@ -14,6 +15,7 @@ import {
   updateUserTrack,
   updateUserRole,
   type UserProfile,
+  type PendingUser,
   type InviteCode,
   type ContentStats,
 } from "@/lib/user-study";
@@ -51,7 +53,7 @@ function simuladosToCSV(qs: Awaited<ReturnType<typeof loadSimuladosRemote>>): st
   return [header, ...rows].join("\n");
 }
 
-type Tab = "overview" | "users" | "duplicados" | "content" | "export" | "invites" | "revisar" | "revisar-simulados";
+type Tab = "overview" | "users" | "pendentes" | "duplicados" | "content" | "export" | "invites" | "revisar" | "revisar-simulados";
 type AdminUserDetails = Awaited<ReturnType<typeof loadAdminUserDetails>>;
 type Track = "ME1" | "ME2" | "ME3" | "ALL";
 
@@ -137,6 +139,7 @@ const NAV_GROUPS: NavGroup[] = [
     group: "Usuários",
     items: [
       { id: "users", label: "Usuários", icon: "◎" },
+      { id: "pendentes", label: "Pendentes", icon: "⏳" },
       { id: "invites", label: "Convites", icon: "⌘" },
     ],
   },
@@ -188,6 +191,15 @@ export function AdminPanel() {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
+  // Pending users state
+  const [pendingUsers, setPendingUsers] = useState<PendingUser[]>([]);
+  const [approveTargetId, setApproveTargetId] = useState<string | null>(null);
+  const [approveNivel, setApproveNivel] = useState<"ME1" | "ME2" | "ME3">("ME1");
+  const [approveLoading, setApproveLoading] = useState(false);
+  const [approveError, setApproveError] = useState<string | null>(null);
+  const [rejectTargetId, setRejectTargetId] = useState<string | null>(null);
+  const [rejectLoading, setRejectLoading] = useState(false);
+
   // ME Stats state
   type MEStatsData = Awaited<ReturnType<typeof loadAdminMEStats>>;
   const [meStatsData, setMeStatsData] = useState<MEStatsData>(null);
@@ -233,11 +245,12 @@ export function AdminPanel() {
 
   useEffect(() => {
     void (async () => {
-      const [ov, list, codes, stats] = await Promise.all([
-        loadAdminOverview(), loadAdminUsers(), loadInviteCodes(), loadAdminContentStats(),
+      const [ov, list, pending, codes, stats] = await Promise.all([
+        loadAdminOverview(), loadAdminUsers(), loadPendingUsers(), loadInviteCodes(), loadAdminContentStats(),
       ]);
       setOverview(ov);
       setUsers(list);
+      setPendingUsers(pending);
       setInviteCodes(codes);
       setContentStats(stats);
       if (list[0]?.id) setSelectedUserId(list[0].id);
@@ -750,6 +763,39 @@ export function AdminPanel() {
     finally { setDeleteLoading(false); }
   }
 
+  async function handleApproveUser() {
+    if (!approveTargetId) return;
+    setApproveLoading(true);
+    setApproveError(null);
+    try {
+      const res = await fetch(`/api/admin/users/${approveTargetId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "active", nivel: approveNivel }),
+      });
+      const json = await res.json();
+      if (!res.ok) { setApproveError(json.error ?? "Erro ao aprovar."); return; }
+      setApproveTargetId(null);
+      setPendingUsers((prev) => prev.filter((u) => u.id !== approveTargetId));
+      // Reload active users list
+      const list = await loadAdminUsers();
+      setUsers(list);
+    } catch { setApproveError("Erro inesperado."); }
+    finally { setApproveLoading(false); }
+  }
+
+  async function handleRejectPending(userId: string) {
+    setRejectTargetId(userId);
+    setRejectLoading(true);
+    try {
+      const res = await fetch(`/api/admin/users/${userId}`, { method: "DELETE" });
+      if (res.ok) {
+        setPendingUsers((prev) => prev.filter((u) => u.id !== userId));
+      }
+    } catch { /* silent */ }
+    finally { setRejectLoading(false); setRejectTargetId(null); }
+  }
+
   const revisarFiltered = useMemo(() => {
     if (!revisarCards) return [];
     return revisarCards.filter((c) => {
@@ -791,7 +837,12 @@ export function AdminPanel() {
                     }`}
                   >
                     <span className="text-base">{item.icon}</span>
-                    {item.label}
+                    <span className="flex-1 text-left">{item.label}</span>
+                    {item.id === "pendentes" && pendingUsers.length > 0 && (
+                      <span className="rounded-full bg-amber-500/20 px-1.5 py-0.5 text-[10px] font-bold text-amber-400 leading-none">
+                        {pendingUsers.length}
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -2358,6 +2409,121 @@ export function AdminPanel() {
                   <li>Na aba Conteúdo, clique em <strong className="text-foreground">Enviar Cards/Simulados/Lote para o app</strong>.</li>
                   <li>Quando finalizar o envio, o conteúdo já aparece para os usuários automaticamente.</li>
                 </ol>
+              </div>
+            </div>
+          )}
+
+          {/* ── PENDENTES ── */}
+          {tab === "pendentes" && (
+            <div className="max-w-2xl space-y-6">
+              <div>
+                <h2 className="text-xl font-bold text-foreground">Cadastros pendentes</h2>
+                <p className="mt-1 text-sm text-muted">
+                  Usuários que se cadastraram e aguardam aprovação para acessar o app.
+                </p>
+              </div>
+
+              {pendingUsers.length === 0 ? (
+                <div className="rounded-2xl border border-border bg-background/30 px-6 py-12 text-center">
+                  <p className="text-3xl">✓</p>
+                  <p className="mt-2 font-medium text-foreground">Nenhum cadastro pendente</p>
+                  <p className="mt-1 text-sm text-muted">Todos os usuários foram revisados.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {pendingUsers.map((u) => (
+                    <div
+                      key={u.id}
+                      className="flex items-center gap-4 rounded-2xl border border-border bg-background/40 px-4 py-3"
+                    >
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-sm font-bold text-amber-400">
+                        {(u.name ?? "?")[0]?.toUpperCase()}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-foreground truncate">{u.name ?? "—"}</p>
+                        <p className="text-xs text-muted">
+                          Cadastrado em{" "}
+                          {new Date(u.created_at).toLocaleDateString("pt-BR", {
+                            day: "2-digit", month: "2-digit", year: "numeric",
+                          })}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => { setApproveTargetId(u.id); setApproveNivel("ME1"); setApproveError(null); }}
+                          className="rounded-xl border border-teal/40 bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal hover:bg-teal/20 transition"
+                        >
+                          Aprovar
+                        </button>
+                        <button
+                          type="button"
+                          disabled={rejectLoading && rejectTargetId === u.id}
+                          onClick={() => void handleRejectPending(u.id)}
+                          className="rounded-xl border border-rose/30 bg-rose/10 px-3 py-1.5 text-xs font-semibold text-rose hover:bg-rose/20 transition disabled:opacity-40"
+                        >
+                          {rejectLoading && rejectTargetId === u.id ? "Removendo…" : "Rejeitar"}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── APPROVAL MODAL ── */}
+          {approveTargetId !== null && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+              <div className="w-full max-w-sm rounded-2xl border border-border bg-background p-6 shadow-xl space-y-5">
+                <div>
+                  <h3 className="text-lg font-bold text-foreground">Aprovar usuário</h3>
+                  <p className="mt-1 text-sm text-muted">
+                    Selecione o nível de residência para liberar o acesso.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted/60">Nível</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(["ME1", "ME2", "ME3"] as const).map((n) => (
+                      <button
+                        key={n}
+                        type="button"
+                        onClick={() => setApproveNivel(n)}
+                        className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                          approveNivel === n
+                            ? "border-teal/60 bg-teal/20 text-teal"
+                            : "border-border bg-background/35 text-muted hover:text-foreground"
+                        }`}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {approveError && (
+                  <p className="text-sm text-rose">{approveError}</p>
+                )}
+
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setApproveTargetId(null)}
+                    className="flex-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium text-muted hover:text-foreground transition"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    disabled={approveLoading}
+                    onClick={() => void handleApproveUser()}
+                    className="flex-1 rounded-xl border border-teal/40 bg-teal/15 px-4 py-2.5 text-sm font-semibold text-teal hover:bg-teal/25 transition disabled:opacity-40"
+                  >
+                    {approveLoading ? "Aprovando…" : "Confirmar aprovação"}
+                  </button>
+                </div>
               </div>
             </div>
           )}

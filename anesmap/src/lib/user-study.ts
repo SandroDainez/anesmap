@@ -7,6 +7,7 @@ export type UserProfile = {
   name: string | null;
   role: "student" | "admin";
   nivel?: string;
+  status?: "pending" | "active" | "blocked";
   weekly_goal_minutes: number;
   assigned_track_cards: "ME1" | "ME2" | "ME3" | "ALL";
   assigned_track_simulados: "ME1" | "ME2" | "ME3" | "ALL";
@@ -356,14 +357,16 @@ export async function loadAdminUsers() {
   let { data, error } = await supabase
     .from("profiles")
     .select(
-      "id, name, role, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
+      "id, name, role, status, weekly_goal_minutes, assigned_track, assigned_track_cards, assigned_track_simulados, created_at",
     )
+    .neq("status", "pending")
     .order("created_at", { ascending: false });
 
   if (isMissingTrackColumnsError(error)) {
     const legacyRes = await supabase
       .from("profiles")
-      .select("id, name, role, weekly_goal_minutes, assigned_track, created_at")
+      .select("id, name, role, status, weekly_goal_minutes, assigned_track, created_at")
+      .neq("status", "pending")
       .order("created_at", { ascending: false });
     data = legacyRes.data as typeof data;
     error = legacyRes.error;
@@ -376,6 +379,25 @@ export async function loadAdminUsers() {
     assigned_track_simulados: (item.assigned_track_simulados ?? item.assigned_track ?? "ALL") as UserProfile["assigned_track_simulados"],
     assigned_track: (item.assigned_track ?? item.assigned_track_cards ?? item.assigned_track_simulados ?? "ALL") as UserProfile["assigned_track"],
   }));
+}
+
+export type PendingUser = {
+  id: string;
+  name: string | null;
+  email?: string;
+  created_at: string;
+};
+
+export async function loadPendingUsers(): Promise<PendingUser[]> {
+  const supabase = browserSupabase();
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, name, created_at")
+    .eq("status", "pending")
+    .order("created_at", { ascending: true });
+  if (error || !data) return [];
+  return data as PendingUser[];
 }
 
 export async function updateUserTrack(

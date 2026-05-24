@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, useCallback } from "react";
-import { ChevronDown, ChevronUp, Plus, Trash2, MoveUp, MoveDown } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Plus, Trash2, MoveUp, MoveDown } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -922,6 +923,15 @@ export default function CasosPage() {
   return (
     <main className="min-h-screen bg-background px-4 py-8 sm:px-8">
       <div className="mx-auto max-w-5xl">
+        {/* Back link */}
+        <Link
+          href="/admin"
+          className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-foreground"
+        >
+          <ArrowLeft size={15} />
+          Voltar ao Admin
+        </Link>
+
         {/* Header */}
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

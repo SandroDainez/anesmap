@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
   });
   if (authError || !authData.user) return NextResponse.json({ error: authError?.message ?? "Erro ao criar usuário." }, { status: 400 });
 
-  const { error: profileError } = await admin.from("profiles").upsert({ id: authData.user.id, name: name.trim(), role, weekly_goal_minutes: 300 });
+  const { error: profileError } = await admin.from("profiles").upsert({ id: authData.user.id, name: name.trim(), role, status: "active", weekly_goal_minutes: 300 });
   if (profileError) {
     await admin.auth.admin.deleteUser(authData.user.id);
     return NextResponse.json({ error: "Erro ao salvar perfil: " + profileError.message }, { status: 500 });
