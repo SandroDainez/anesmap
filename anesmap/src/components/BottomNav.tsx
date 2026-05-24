@@ -60,6 +60,9 @@ export function BottomNav() {
     [role],
   );
 
+  // Ocultar em rotas admin — o admin tem seu próprio layout fixo
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <nav
       aria-label="Navegação principal"
