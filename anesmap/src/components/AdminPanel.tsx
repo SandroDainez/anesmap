@@ -125,15 +125,31 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#039;");
 }
 
-const NAV_ITEMS: { id: Tab; label: string; icon: string }[] = [
-  { id: "overview", label: "Visão Geral", icon: "◈" },
-  { id: "users", label: "Usuários", icon: "◎" },
-  { id: "duplicados", label: "Duplicados", icon: "⊟" },
-  { id: "content", label: "Conteúdo", icon: "⊞" },
-  { id: "export", label: "Exportar", icon: "↓" },
-  { id: "invites", label: "Convites", icon: "⌘" },
-  { id: "revisar", label: "Revisar Cards", icon: "✎" },
-  { id: "revisar-simulados", label: "Revisar Provas", icon: "✎" },
+type NavItem = { id: Tab; label: string; icon: string };
+type NavGroup = { group: string; items: NavItem[] };
+
+const NAV_GROUPS: NavGroup[] = [
+  {
+    group: "",
+    items: [{ id: "overview", label: "Visão Geral", icon: "◈" }],
+  },
+  {
+    group: "Usuários",
+    items: [
+      { id: "users", label: "Usuários", icon: "◎" },
+      { id: "invites", label: "Convites", icon: "⌘" },
+    ],
+  },
+  {
+    group: "Conteúdo",
+    items: [
+      { id: "content", label: "Estatísticas", icon: "⊞" },
+      { id: "revisar", label: "Revisar Cards", icon: "✎" },
+      { id: "revisar-simulados", label: "Revisar Provas", icon: "✎" },
+      { id: "duplicados", label: "Duplicados", icon: "⊟" },
+      { id: "export", label: "Exportar", icon: "↓" },
+    ],
+  },
 ];
 
 export function AdminPanel() {
@@ -750,90 +766,62 @@ export function AdminPanel() {
   );
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      {/* Top header */}
-      <header className="flex shrink-0 items-center justify-between border-b border-border bg-background/80 px-6 py-3 backdrop-blur">
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-widest text-teal">AnesMap</span>
-          <span className="text-border">|</span>
-          <span className="text-sm font-semibold text-foreground">Painel Administrativo</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="rounded-lg border border-purple/40 bg-purple/15 px-4 py-2 text-sm font-semibold text-purple">
-            Admin
-          </span>
-          <a
-            href="/dashboard"
-            className="rounded-lg border border-border bg-background/35 px-4 py-2 text-sm font-medium text-muted transition hover:text-foreground"
-          >
-            ← App
-          </a>
-          <a
-            href="/logout"
-            className="rounded-lg border border-border bg-background/35 px-4 py-2 text-sm font-medium text-muted transition hover:text-foreground"
-          >
-            Sair
-          </a>
-        </div>
-      </header>
-
+    <div className="flex h-full flex-col overflow-hidden">
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <nav className="flex w-52 shrink-0 flex-col gap-1 border-r border-border bg-background/50 px-3 py-4">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setTab(item.id)}
-              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${
-                tab === item.id
-                  ? "bg-teal/10 text-teal font-medium"
-                  : "text-muted hover:bg-background/60 hover:text-foreground"
-              }`}
-            >
-              <span className="text-base">{item.icon}</span>
-              {item.label}
-            </button>
-          ))}
-
-          <div className="border-t border-border pt-4 px-1 mb-2 space-y-1">
-            <a
-              href="/admin/simulacoes"
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-background/60 hover:text-foreground"
-            >
-              <span className="text-base">🩺</span>
-              Simulação Clínica
-            </a>
-            <a
-              href="/admin/casos"
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-background/60 hover:text-foreground"
-            >
-              <span className="text-base">✦</span>
-              Criar Casos
-            </a>
+        <nav className="flex w-52 shrink-0 flex-col border-r border-border bg-background/50">
+          {/* Nav items — scrollable */}
+          <div className="flex-1 overflow-auto px-3 py-4 space-y-0.5">
+            {NAV_GROUPS.map((group) => (
+              <div key={group.group || "__root"}>
+                {group.group && (
+                  <p className="mb-1 mt-4 px-3 font-mono text-[10px] uppercase tracking-widest text-muted/50 first:mt-0">
+                    {group.group}
+                  </p>
+                )}
+                {group.items.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setTab(item.id)}
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${
+                      tab === item.id
+                        ? "bg-teal/10 text-teal font-medium"
+                        : "text-muted hover:bg-background/60 hover:text-foreground"
+                    }`}
+                  >
+                    <span className="text-base">{item.icon}</span>
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            ))}
           </div>
 
-          <div className="mt-auto border-t border-border pt-5 space-y-3 px-1">
-            <p className="font-mono uppercase tracking-widest text-xs text-muted">Resumo</p>
-            <div className="space-y-3">
+          {/* Stats — always visible at bottom */}
+          <div className="shrink-0 border-t border-border px-4 py-3">
+            <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted/50">
+              Resumo geral
+            </p>
+            <div className="grid grid-cols-3 gap-1 text-center">
               <div>
-                <p className="text-3xl font-bold text-teal leading-none">{overview.totalUsers}</p>
-                <p className="mt-1 text-xs text-muted">usuários ativos</p>
+                <p className="text-lg font-bold leading-none text-teal">{overview.totalUsers}</p>
+                <p className="mt-0.5 text-[10px] text-muted">usuários</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-blue leading-none">{overview.totalSessions}</p>
-                <p className="mt-1 text-xs text-muted">sessões de estudo</p>
+                <p className="text-lg font-bold leading-none text-blue">{overview.totalSessions}</p>
+                <p className="mt-0.5 text-[10px] text-muted">sessões</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-purple leading-none">{overview.totalAttempts}</p>
-                <p className="mt-1 text-xs text-muted">provas realizadas</p>
+                <p className="text-lg font-bold leading-none text-purple">{overview.totalAttempts}</p>
+                <p className="mt-0.5 text-[10px] text-muted">provas</p>
               </div>
             </div>
           </div>
         </nav>
 
         {/* Main content */}
-        <main className="flex-1 overflow-auto p-6 pb-28">
+        <main className="flex-1 overflow-auto p-6 pb-8">
 
           {/* ── OVERVIEW ── */}
           {tab === "overview" && (
