@@ -402,7 +402,7 @@ export default function FlashcardsPage() {
             tone="rose"
             className="px-2"
             onClick={() => gradeCard(2)}
-            disabled={!isFlipped}
+            disabled={!isFlipped || !currentCard}
           >
             Difícil
           </StatusBadge>
@@ -411,7 +411,7 @@ export default function FlashcardsPage() {
             tone="amber"
             className="px-2"
             onClick={() => gradeCard(3)}
-            disabled={!isFlipped}
+            disabled={!isFlipped || !currentCard}
           >
             Médio
           </StatusBadge>
@@ -420,7 +420,7 @@ export default function FlashcardsPage() {
             tone="teal"
             className="px-2"
             onClick={() => gradeCard(5)}
-            disabled={!isFlipped}
+            disabled={!isFlipped || !currentCard}
           >
             Fácil
           </StatusBadge>

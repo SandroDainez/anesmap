@@ -10,6 +10,7 @@ import {
   FlashcardProgress,
   getDefaultFlashcardProgress,
   StudyTrack,
+  Trimestre,
   isSupabaseConfigured,
   loadFlashcardProgress,
   loadFlashcards,
@@ -22,12 +23,19 @@ import {
   addFlashcardEvent,
   endStudySession,
   loadFlashcardProgressRemoteByUser,
+  loadMyProfile,
   startStudySession,
   upsertFlashcardProgressRemote,
 } from "@/lib/user-study";
 
+const ALL_TRACKS: StudyTrack[] = ["ME1", "ME2", "ME3"];
+const ALL_TRIMESTERS: Array<Trimestre | "todos"> = ["todos", "T1", "T2", "T3", "T4"];
+
 export default function FlashcardsPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
+  const [selectedTrimestre, setSelectedTrimestre] = useState<Trimestre | "todos">("todos");
+  const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
+  // Keep SSR and first client render identical to avoid hydration mismatch.
   const [importedCards, setImportedCards] = useState<Flashcard[]>([]);
   const [progressMap, setProgressMap] = useState<Record<string, FlashcardProgress>>({});
   const [now, setNow] = useState(() => new Date());
@@ -37,10 +45,28 @@ export default function FlashcardsPage() {
   const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
   useEffect(() => {
-    const local = loadFlashcards();
-    setImportedCards(local);
+    // Hydrate local cached data only on client.
+    setImportedCards(loadFlashcards());
     setProgressMap(loadFlashcardProgress());
+    setNow(new Date());
 
+    // Restore preferred track from dashboard selection
+    const preferredTrack = localStorage.getItem("anesmap_preferred_track") as StudyTrack | null;
+    if (preferredTrack && ["ME1", "ME2", "ME3"].includes(preferredTrack)) {
+      setSelectedMe(preferredTrack);
+    }
+
+    void (async () => {
+      const profile = await loadMyProfile();
+      const track = profile?.assigned_track_cards ?? profile?.assigned_track;
+      if (track && track !== "ALL") {
+        setAllowedTracks([track as StudyTrack]);
+        setSelectedMe(track as StudyTrack);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     if (!isSupabaseConfigured()) return;
 
     void (async () => {
@@ -80,9 +106,14 @@ export default function FlashcardsPage() {
   const cardsByTrack = useMemo(
     () =>
       importedCards
-        .filter((item) => item.me === selectedMe)
+        .filter((item) => {
+          if (item.me !== selectedMe) return false;
+          if (selectedTrimestre === "todos") return true;
+          // Filtro estrito: só cards com o trimestre exato selecionado
+          return item.trimestre === selectedTrimestre;
+        })
         .sort((a, b) => compareCardsForStudyOrder(a, b)),
-    [importedCards, selectedMe],
+    [importedCards, selectedMe, selectedTrimestre],
   );
   const dueCards = useMemo(
     () =>
@@ -102,7 +133,9 @@ export default function FlashcardsPage() {
     [cardsByTrack, progressMap, now],
   );
   const studyDeck = dueCards.length > 0 ? dueCards : cardsByTrack;
-  const currentCard: Flashcard | undefined = studyDeck[currentCardIndex];
+  const safeCardIndex =
+    studyDeck.length === 0 ? 0 : Math.max(0, Math.min(currentCardIndex, studyDeck.length - 1));
+  const currentCard: Flashcard | undefined = studyDeck[safeCardIndex];
   const currentProgress =
     currentCard ? progressMap[currentCard.id] ?? getDefaultFlashcardProgress(now) : null;
   const currentCardFormatted = currentCard
@@ -110,25 +143,10 @@ export default function FlashcardsPage() {
     : null;
 
   useEffect(() => {
-    setIsFlipped(false);
     if (currentCard?.id) {
       void addFlashcardEvent({ cardId: currentCard.id, eventType: "view" });
     }
-  }, [selectedMe, currentCard?.id]);
-
-  useEffect(() => {
-    setCurrentCardIndex(0);
-  }, [selectedMe]);
-
-  useEffect(() => {
-    if (studyDeck.length === 0) {
-      setCurrentCardIndex(0);
-      return;
-    }
-    if (currentCardIndex > studyDeck.length - 1) {
-      setCurrentCardIndex(studyDeck.length - 1);
-    }
-  }, [studyDeck.length, currentCardIndex]);
+  }, [currentCard?.id]);
 
   function gradeCard(quality: number) {
     if (!currentCard) return;
@@ -146,13 +164,29 @@ export default function FlashcardsPage() {
   }
 
   function goNextCard() {
-    if (currentCardIndex >= studyDeck.length - 1) return;
+    if (safeCardIndex >= studyDeck.length - 1) return;
     setCurrentCardIndex((value) => value + 1);
+    setIsFlipped(false);
   }
 
   function goPrevCard() {
-    if (currentCardIndex <= 0) return;
+    if (safeCardIndex <= 0) return;
     setCurrentCardIndex((value) => value - 1);
+    setIsFlipped(false);
+  }
+
+  function changeTrack(track: StudyTrack) {
+    setSelectedMe(track);
+    setSelectedTrimestre("todos");
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
+    localStorage.setItem("anesmap_preferred_track", track);
+  }
+
+  function changeTrimestre(t: Trimestre | "todos") {
+    setSelectedTrimestre(t);
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
   }
 
   const deckStats = [
@@ -170,33 +204,84 @@ export default function FlashcardsPage() {
       />
 
       <AppCard>
-        <h2 className="mb-4 text-sm font-medium text-muted">Selecionar matéria</h2>
-        <div className="grid grid-cols-3 gap-2">
-          <StatusBadge
-            as="button"
-            tone="blue"
-            className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME1")}
-          >
-            ME1
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="purple"
-            className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME2")}
-          >
-            ME2
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="teal"
-            className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME3")}
-          >
-            ME3
-          </StatusBadge>
+        <h2 className="mb-4 text-sm font-medium text-muted">
+          {allowedTracks.length === 1 ? "Sua trilha" : "Selecionar matéria"}
+        </h2>
+        {allowedTracks.length === 1 ? (
+          <div className="flex items-center gap-2">
+            <StatusBadge tone={selectedMe === "ME1" ? "blue" : selectedMe === "ME2" ? "purple" : "teal"}>
+              {selectedMe}
+            </StatusBadge>
+            <span className="text-xs text-muted">Trilha atribuída pelo administrador</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            <StatusBadge
+              as="button"
+              tone="blue"
+              className={
+                selectedMe === "ME1"
+                  ? "ring-2 ring-blue/60 bg-blue/20 text-blue shadow-[0_0_0_1px_rgba(79,142,247,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-blue/12"
+              }
+              onClick={() => changeTrack("ME1")}
+            >
+              ME1
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="purple"
+              className={
+                selectedMe === "ME2"
+                  ? "ring-2 ring-purple/60 bg-purple/20 text-purple shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-purple/12"
+              }
+              onClick={() => changeTrack("ME2")}
+            >
+              ME2
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="teal"
+              className={
+                selectedMe === "ME3"
+                  ? "ring-2 ring-teal/60 bg-teal/20 text-teal shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-teal/12"
+              }
+              onClick={() => changeTrack("ME3")}
+            >
+              ME3
+            </StatusBadge>
+          </div>
+        )}
+      </AppCard>
+
+      <AppCard>
+        <h2 className="mb-3 text-sm font-medium text-muted">Período</h2>
+        <div className="grid grid-cols-5 gap-1.5">
+          {ALL_TRIMESTERS.map((t) => {
+            const isActive = selectedTrimestre === t;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => changeTrimestre(t)}
+                className={`rounded-lg border px-2 py-1.5 text-xs font-medium transition-all ${
+                  isActive
+                    ? "border-teal bg-teal/20 text-teal shadow-sm"
+                    : "border-border bg-background/30 text-muted hover:border-teal/40 hover:text-foreground"
+                }`}
+              >
+                {t === "todos" ? "Todos" : t}
+              </button>
+            );
+          })}
         </div>
+        <p className="mt-2 text-xs text-muted">
+          {selectedTrimestre === "todos"
+            ? "Exibindo todos os cards da trilha"
+            : `Exibindo cards do ${selectedTrimestre} (inclui cards sem período definido)`}
+        </p>
       </AppCard>
 
       <section className="grid grid-cols-3 gap-2">
@@ -218,7 +303,7 @@ export default function FlashcardsPage() {
         {currentCard ? (
           <>
             <p className="mt-2 text-xs text-muted">
-              Card {currentCardIndex + 1} de {studyDeck.length}
+              Card {safeCardIndex + 1} de {studyDeck.length}
             </p>
             <button
               type="button"
@@ -236,24 +321,29 @@ export default function FlashcardsPage() {
                   <h2 className="mt-2 text-2xl font-semibold leading-snug">
                     {formatCardQuestionForSession(
                       currentCardFormatted?.question ?? "",
-                      currentCardIndex,
+                      safeCardIndex,
                     )}
                   </h2>
                   <p className="mt-3 text-xs text-muted">Toque para virar e ver a resposta.</p>
                 </>
               ) : (
                 <>
-                  <p className="font-mono text-xs uppercase tracking-wider text-blue">Verso</p>
-                  <h3 className="mt-2 text-sm font-semibold text-foreground">Resposta</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {currentCardFormatted?.answer}
-                  </p>
-                  <h3 className="mt-3 text-sm font-semibold text-foreground">
-                    Referência bibliográfica
-                  </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-muted">
-                    {currentCardFormatted?.reference}
-                  </p>
+                  <p className="font-mono text-xs uppercase tracking-wider text-blue">Verso — Resposta</p>
+                  <div className="mt-2 rounded-lg border border-teal/30 bg-teal/8 px-3 py-3">
+                    <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
+                      {currentCardFormatted?.answer}
+                    </p>
+                  </div>
+                  {currentCardFormatted?.reference && (
+                    <div className="mt-3 rounded-lg border border-blue/25 bg-blue/8 px-3 py-2">
+                      <p className="font-mono text-xs uppercase tracking-wider text-blue mb-1">
+                        📚 Referência bibliográfica
+                      </p>
+                      <p className="text-xs leading-relaxed text-muted whitespace-pre-wrap">
+                        {currentCardFormatted.reference}
+                      </p>
+                    </div>
+                  )}
                   <p className="mt-3 text-xs text-muted">Toque para voltar para a pergunta.</p>
                 </>
               )}
@@ -281,7 +371,7 @@ export default function FlashcardsPage() {
               <button
                 type="button"
                 onClick={goNextCard}
-                disabled={currentCardIndex >= studyDeck.length - 1}
+                disabled={safeCardIndex >= studyDeck.length - 1}
                 className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
               >
                 Próximo
@@ -289,9 +379,22 @@ export default function FlashcardsPage() {
             </div>
           </>
         ) : (
-          <p className="mt-2 text-sm text-muted">
-            Nenhum card importado para {selectedMe}. Vá em /importar e envie seus CSVs.
-          </p>
+          <div className="mt-2 space-y-2">
+            {selectedTrimestre !== "todos" ? (
+              <>
+                <p className="text-sm text-muted">
+                  Nenhum card marcado como <span className="font-semibold text-foreground">{selectedTrimestre}</span> em {selectedMe}.
+                </p>
+                <p className="text-xs text-muted">
+                  Os cards existentes ainda não têm trimestre definido. Para usar este filtro, adicione uma coluna <span className="font-mono text-foreground">trimestre</span> com valor <span className="font-mono text-foreground">T1</span>, <span className="font-mono text-foreground">T2</span>, <span className="font-mono text-foreground">T3</span> ou <span className="font-mono text-foreground">T4</span> ao CSV e reimporte. Enquanto isso, use <span className="font-semibold text-foreground">Todos</span> para ver todos os cards.
+                </p>
+              </>
+            ) : (
+              <p className="text-sm text-muted">
+                Nenhum card importado para {selectedMe}. Vá em /importar e envie seus CSVs.
+              </p>
+            )}
+          </div>
         )}
         <div className="mt-4 grid grid-cols-3 gap-2 text-sm font-medium">
           <StatusBadge
@@ -299,7 +402,7 @@ export default function FlashcardsPage() {
             tone="rose"
             className="px-2"
             onClick={() => gradeCard(2)}
-            disabled={!isFlipped}
+            disabled={!isFlipped || !currentCard}
           >
             Difícil
           </StatusBadge>
@@ -308,7 +411,7 @@ export default function FlashcardsPage() {
             tone="amber"
             className="px-2"
             onClick={() => gradeCard(3)}
-            disabled={!isFlipped}
+            disabled={!isFlipped || !currentCard}
           >
             Médio
           </StatusBadge>
@@ -317,7 +420,7 @@ export default function FlashcardsPage() {
             tone="teal"
             className="px-2"
             onClick={() => gradeCard(5)}
-            disabled={!isFlipped}
+            disabled={!isFlipped || !currentCard}
           >
             Fácil
           </StatusBadge>
@@ -345,35 +448,20 @@ function parseCardContent(frente: string, verso: string, structuredReferences?: 
 }
 
 function compareCardsForStudyOrder(a: Flashcard, b: Flashcard) {
+  // Prioridade 1: número embutido no texto (ex: "5) Qual é...")
   const numberA = extractCardNumber(a.frente);
   const numberB = extractCardNumber(b.frente);
   if (numberA !== null && numberB !== null && numberA !== numberB) return numberA - numberB;
   if (numberA !== null && numberB === null) return -1;
   if (numberA === null && numberB !== null) return 1;
 
-  const rowA = extractImportedRowOrder(a.id);
-  const rowB = extractImportedRowOrder(b.id);
-  if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
-  if (rowA !== null && rowB === null) return -1;
-  if (rowA === null && rowB !== null) return 1;
-  return a.frente.localeCompare(b.frente, "pt-BR");
-}
-
-function extractImportedRowOrder(id: string) {
-  const match = id.match(/-(\d+)$/);
-  if (!match) return null;
-  return Number(match[1]);
+  // Prioridade 2: ordem de importação pelo ID completo (estável entre arquivos)
+  return a.id.localeCompare(b.id, "pt-BR", { numeric: true });
 }
 
 function formatCardQuestionForSession(question: string, index: number) {
-  const existingNumber = extractCardNumber(question);
-  if (existingNumber !== null) {
-    const cleaned = question
-      .trim()
-      .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")
-      .trim();
-    return `${existingNumber}) ${cleaned || question}`;
-  }
+  // SEMPRE usa posição no array (index+1) para exibição — nunca o número embutido.
+  // O número embutido é usado apenas para ordenação, não para display.
   const cleaned = question
     .trim()
     .replace(/^(?:#\s*)?(?:q(?:uest[aã]o)?\s*)?\d{1,4}[\)\.\-:–—\s]*/i, "")

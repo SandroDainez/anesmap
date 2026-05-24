@@ -122,7 +122,7 @@ export default function SimulacaoAtiva() {
     })();
   }, [caso_id, resetKey]);
 
-  async function enviarConduta(conduta: string) {
+  async function enviarConduta(conduta: string, tipoConduta: "opcao_rapida" | "digitada" = "digitada") {
     if (!sessaoId || !caso || enviando) return;
     setEnviando(true);
     setErroEnvio(null);
@@ -146,6 +146,7 @@ export default function SimulacaoAtiva() {
           caso_id,
           sessao_id: sessaoId,
           conduta,
+          tipo_conduta: tipoConduta,
           historico: historicoParaApi,
           turno,
           nivel_residente: userNivel,
@@ -302,7 +303,7 @@ export default function SimulacaoAtiva() {
           {opcoesAtuais.map((opcao) => (
             <button
               key={opcao}
-              onClick={() => void enviarConduta(opcao)}
+              onClick={() => void enviarConduta(opcao, "opcao_rapida")}
               disabled={enviando}
               className="w-full rounded-xl border border-border bg-card px-4 py-3 text-left text-sm text-foreground transition hover:border-teal/40 hover:bg-white/5 disabled:opacity-50"
             >

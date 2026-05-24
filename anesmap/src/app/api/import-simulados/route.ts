@@ -58,7 +58,8 @@ export async function POST(req: NextRequest) {
   const rows = items.map((q, idx) => ({
     id: `q_${Date.now()}_${idx}`,
     me: (q.me ?? "").toUpperCase() || null,
-    trimestre: q.trimestre?.toUpperCase() || null,
+    // anual (lowercase) is valid in the DB check constraint; other values like t1/t2/t3 -> T1/T2/T3
+    trimestre: q.trimestre?.toLowerCase() === 'anual' ? 'anual' : (q.trimestre?.toUpperCase() || null),
     prova: q.prova?.toUpperCase() || null,
     tema: q.tema?.trim() || null,
     enunciado: q.enunciado.trim(),

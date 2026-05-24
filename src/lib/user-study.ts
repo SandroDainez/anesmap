@@ -277,12 +277,17 @@ export async function finishSimuladoAttempt(params: {
 }
 
 export async function loadMyDashboardMetrics() {
-  const [profile, progressMap, cardEvents, attempts] = await Promise.all([
+  // allSettled: a single failure (e.g. RLS hiccup) never blanks the whole dashboard
+  const [profileRes, progressRes, eventsRes, attemptsRes] = await Promise.allSettled([
     loadMyProfile(),
     loadFlashcardProgressRemoteByUser(),
     loadMyFlashcardEventsCount(),
     loadMySimuladoAttempts(),
   ]);
+  const profile     = profileRes.status  === "fulfilled" ? profileRes.value   : null;
+  const progressMap = progressRes.status === "fulfilled" ? progressRes.value  : null;
+  const cardEvents  = eventsRes.status   === "fulfilled" ? eventsRes.value    : 0;
+  const attempts    = attemptsRes.status === "fulfilled" ? attemptsRes.value  : [];
 
   const progressEntries = Object.values(progressMap ?? {});
   const reviewed = progressEntries.filter((item) => item.repetitions > 0).length;

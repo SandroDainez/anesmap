@@ -38,13 +38,14 @@ export async function POST(request: NextRequest) {
       caso_id?: string;
       sessao_id?: string;
       conduta?: string;
+      tipo_conduta?: "opcao_rapida" | "digitada";
       historico?: HistoricoItem[];
       turno?: number;
       nivel_residente?: string;
       tempo_resposta_segundos?: number;
     };
 
-    const { acao, caso_id, sessao_id, conduta, historico = [], turno, nivel_residente, tempo_resposta_segundos } = body;
+    const { acao, caso_id, sessao_id, conduta, historico = [], turno, nivel_residente, tempo_resposta_segundos, tipo_conduta } = body;
 
     // ─── INICIAR NOVA SIMULAÇÃO ───────────────────────────────
     if (acao === "iniciar") {
@@ -181,7 +182,7 @@ export async function POST(request: NextRequest) {
         situacao_apresentada: situacaoAtual,
         sinais_vitais: resultado.sinais_vitais,
         conduta_usuario: conduta,
-        tipo_conduta: conduta.length < 60 ? "opcao_rapida" : "digitada",
+        tipo_conduta: tipo_conduta ?? (conduta.length < 60 ? "opcao_rapida" : "digitada"),
         avaliacao_ia: resultado.avaliacao,
         feedback_ia: resultado.feedback,
         nova_situacao: resultado.nova_situacao,
