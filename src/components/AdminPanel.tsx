@@ -53,7 +53,7 @@ function simuladosToCSV(qs: Awaited<ReturnType<typeof loadSimuladosRemote>>): st
   return [header, ...rows].join("\n");
 }
 
-type Tab = "overview" | "users" | "pendentes" | "duplicados" | "content" | "export" | "invites" | "revisar" | "revisar-simulados";
+type Tab = "overview" | "users" | "pendentes" | "duplicados" | "content" | "export" | "import" | "invites" | "revisar" | "revisar-simulados";
 type AdminUserDetails = Awaited<ReturnType<typeof loadAdminUserDetails>>;
 type Track = "ME1" | "ME2" | "ME3" | "ALL";
 
@@ -147,6 +147,7 @@ const NAV_GROUPS: NavGroup[] = [
     group: "Conteúdo",
     items: [
       { id: "content", label: "Estatísticas", icon: "⊞" },
+      { id: "import", label: "Importar", icon: "↑" },
       { id: "revisar", label: "Revisar Cards", icon: "✎" },
       { id: "revisar-simulados", label: "Revisar Provas", icon: "✎" },
       { id: "duplicados", label: "Duplicados", icon: "⊟" },
@@ -2287,6 +2288,67 @@ export function AdminPanel() {
                   Remover cards ou simulados apaga o conteúdo para todos os usuários mas <strong className="text-foreground">não</strong> apaga
                   o progresso individual de cada aluno. O histórico de estudo é preservado.
                 </p>
+              </div>
+            </div>
+          )}
+
+          {/* ── IMPORT ── */}
+          {tab === "import" && (
+            <div className="max-w-3xl space-y-6">
+              <h2 className="text-xl font-bold text-foreground">Importar conteúdo</h2>
+
+              {/* Importar com IA */}
+              <div className="rounded-2xl border border-teal/25 bg-teal/5 p-5 space-y-3">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-semibold text-foreground flex items-center gap-2">
+                      ✦ Importar com IA
+                      <span className="rounded-full border border-teal/30 bg-teal/10 px-2 py-0.5 text-[10px] font-bold text-teal">RECOMENDADO</span>
+                    </p>
+                    <p className="mt-1 text-sm text-muted">
+                      Cole qualquer texto — anotações, capítulos de livro, slides — e a IA estrutura automaticamente em questões TEA com justificativas individuais por alternativa, ou em flashcards com respostas completas e referências bibliográficas.
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href="/admin/importar-ia"
+                  className="inline-flex items-center gap-2 rounded-xl border border-teal/35 bg-teal/15 px-5 py-2.5 text-sm font-medium text-teal transition hover:opacity-90"
+                >
+                  ↑ Abrir Importar com IA
+                </a>
+              </div>
+
+              {/* Importar CSV/HTML */}
+              <div className="rounded-2xl border border-blue/20 bg-blue/5 p-5 space-y-3">
+                <div>
+                  <p className="font-semibold text-foreground">Importar CSV / HTML</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Para arquivos já estruturados em CSV ou HTML com colunas definidas (frente, verso, enunciado, alternativas, gabarito). Suporta importação em lote de vários arquivos.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {(["all", "flashcards", "simulados"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setEmbeddedImportMode(mode)}
+                      className={`rounded-xl border px-3 py-1.5 text-xs font-medium transition ${
+                        embeddedImportMode === mode
+                          ? "border-blue/50 bg-blue/20 text-blue"
+                          : "border-border bg-background/40 text-muted hover:text-foreground"
+                      }`}
+                    >
+                      {mode === "all" ? "Todos" : mode === "flashcards" ? "Só Cards" : "Só Simulados"}
+                    </button>
+                  ))}
+                </div>
+                <div className="overflow-hidden rounded-xl border border-border">
+                  <iframe
+                    src={`/importar?embedded=1&mode=${embeddedImportMode}`}
+                    className="h-[600px] w-full border-none bg-background"
+                    title="Importar conteúdo"
+                  />
+                </div>
               </div>
             </div>
           )}
