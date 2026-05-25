@@ -220,6 +220,22 @@ export function AdminPanel() {
   const [selectedDupIds, setSelectedDupIds] = useState<string[]>([]);
   const [dupDeleteStatus, setDupDeleteStatus] = useState<string | null>(null);
 
+  // Sim passos (expandable in user detail)
+  type SimPassoItem = {
+    id: string;
+    turno: number;
+    conduta_usuario: string;
+    avaliacao_ia: string | null;
+    feedback_ia: string;
+    explicacao_clinica: string | null;
+    pontuacao_turno: number | null;
+    sinais_vitais: Record<string, unknown> | null;
+    tempo_resposta_segundos: number | null;
+  };
+  const [simPassosPorSessao, setSimPassosPorSessao] = useState<Record<string, SimPassoItem[]>>({});
+  const [simSessaoExpandida, setSimSessaoExpandida] = useState<string | null>(null);
+  const [simPassosLoading, setSimPassosLoading] = useState<string | null>(null);
+
   // Revisar Cards state
   type RevisarCard = NonNullable<Awaited<ReturnType<typeof loadFlashcardsRemote>>>[number];
   const REVISAR_PAGE_SIZE = 20;
@@ -834,6 +850,20 @@ export function AdminPanel() {
       }
     } catch { /* silent */ }
     finally { setRejectLoading(false); setRejectTargetId(null); }
+  }
+
+  async function loadSimPassos(sessaoId: string) {
+    if (simPassosPorSessao[sessaoId]) return; // already fetched
+    setSimPassosLoading(sessaoId);
+    try {
+      const res = await fetch(`/api/admin/simulacoes?sessao_id=${sessaoId}`);
+      const data = (await res.json()) as SimPassoItem[];
+      setSimPassosPorSessao((prev) => ({ ...prev, [sessaoId]: Array.isArray(data) ? data : [] }));
+    } catch {
+      setSimPassosPorSessao((prev) => ({ ...prev, [sessaoId]: [] }));
+    } finally {
+      setSimPassosLoading(null);
+    }
   }
 
   const revisarFiltered = useMemo(() => {
@@ -1645,20 +1675,95 @@ export function AdminPanel() {
                                     </div>
                                   )}
 
-                                  {/* Histórico por caso */}
-                                  <div className="max-h-64 space-y-1.5 overflow-auto pr-1">
+                                  {/* Histórico por caso — expandível com passos */}
+                                  <div className="max-h-[480px] space-y-1.5 overflow-auto pr-1">
                                     {sessoes.map(s => {
                                       const pts = s.pontuacao_final;
                                       const ptsColor = pts === null ? "text-muted" : pts >= 70 ? "text-teal" : pts >= 50 ? "text-amber" : "text-rose";
                                       const desfechoEmoji: Record<string, string> = { recuperacao: "✅", complicacao: "⚠️", obito: "❌" };
+                                      const isOpen = simSessaoExpandida === s.id;
+                                      const passos = simPassosPorSessao[s.id];
+                                      const avaliacaoColors: Record<string, string> = {
+                                        correto: "bg-green-500/15 text-green-400",
+                                        parcial: "bg-yellow-500/15 text-yellow-400",
+                                        incorreto: "bg-red-500/15 text-red-400",
+                                        tardio: "bg-orange-500/15 text-orange-400",
+                                      };
                                       return (
-                                        <div key={s.id} className="flex items-center gap-3 rounded-lg border border-border/50 bg-background/20 px-3 py-2">
-                                          <span className="text-sm">{s.desfecho ? (desfechoEmoji[s.desfecho] ?? "🔄") : "🔄"}</span>
-                                          <span className="flex-1 truncate text-xs text-foreground">{s.caso_titulo}</span>
-                                          <span className={`shrink-0 text-sm font-bold ${ptsColor}`}>
-                                            {pts !== null ? `${pts} pts` : "—"}
-                                          </span>
-                                          <span className="shrink-0 text-[10px] text-muted">{new Date(s.iniciada_em).toLocaleDateString("pt-BR")}</span>
+                                        <div key={s.id} className="rounded-lg border border-border/50 bg-background/20 overflow-hidden">
+                                          {/* Cabeçalho da sessão */}
+                                          <div className="flex items-center gap-3 px-3 py-2">
+                                            <span className="text-sm">{s.desfecho ? (desfechoEmoji[s.desfecho] ?? "🔄") : "🔄"}</span>
+                                            <span className="flex-1 truncate text-xs text-foreground">{s.caso_titulo}</span>
+                                            <span className={`shrink-0 text-xs font-bold ${ptsColor}`}>
+                                              {pts !== null ? `${pts} pts` : "—"}
+                                            </span>
+                                            <span className="shrink-0 text-[10px] text-muted">{new Date(s.iniciada_em).toLocaleDateString("pt-BR")}</span>
+                                            <button
+                                              onClick={() => {
+                                                const opening = simSessaoExpandida !== s.id;
+                                                setSimSessaoExpandida(opening ? s.id : null);
+                                                if (opening) void loadSimPassos(s.id);
+                                              }}
+                                              className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium text-teal hover:bg-teal/10"
+                                            >
+                                              {isOpen ? "▲ Ocultar" : "▼ Turnos"}
+                                            </button>
+                                          </div>
+
+                                          {/* Passos expandidos */}
+                                          {isOpen && (
+                                            <div className="border-t border-border/30 px-3 pb-3 pt-2 space-y-2">
+                                              {simPassosLoading === s.id ? (
+                                                <div className="flex justify-center py-3">
+                                                  <div className="h-3 w-3 animate-spin rounded-full border-2 border-teal border-t-transparent" />
+                                                </div>
+                                              ) : !passos || passos.length === 0 ? (
+                                                <p className="text-[11px] text-muted italic">Nenhum turno registrado.</p>
+                                              ) : (
+                                                passos.map(p => (
+                                                  <div key={p.id} className="rounded-lg border border-white/8 bg-black/25 p-2.5 text-xs">
+                                                    <div className="mb-1.5 flex items-center justify-between gap-2">
+                                                      <span className="rounded-full bg-white/10 px-1.5 py-0.5 text-[10px] font-semibold text-muted">
+                                                        Turno {p.turno}
+                                                      </span>
+                                                      <div className="flex items-center gap-1.5">
+                                                        {p.avaliacao_ia && (
+                                                          <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${avaliacaoColors[p.avaliacao_ia] ?? "bg-white/10 text-muted"}`}>
+                                                            {p.avaliacao_ia}
+                                                          </span>
+                                                        )}
+                                                        {p.pontuacao_turno !== null && (
+                                                          <span className="font-semibold text-teal">+{p.pontuacao_turno} pts</span>
+                                                        )}
+                                                        {p.tempo_resposta_segundos !== null && (
+                                                          <span className="text-[10px] text-muted">{p.tempo_resposta_segundos}s</span>
+                                                        )}
+                                                      </div>
+                                                    </div>
+                                                    <p className="mb-1 font-semibold text-foreground leading-snug">{p.conduta_usuario}</p>
+                                                    {p.feedback_ia && (
+                                                      <p className="mb-1 leading-relaxed text-muted">{p.feedback_ia}</p>
+                                                    )}
+                                                    {p.explicacao_clinica && (
+                                                      <p className="rounded border border-blue/20 bg-blue/5 px-2 py-1 italic text-[11px] text-blue">
+                                                        {p.explicacao_clinica}
+                                                      </p>
+                                                    )}
+                                                    {p.sinais_vitais && (
+                                                      <div className="mt-1.5 flex flex-wrap gap-2 text-[10px] text-muted">
+                                                        {(["PA","FC","SpO2","ETCO2"] as const).map(k =>
+                                                          p.sinais_vitais?.[k] !== undefined
+                                                            ? <span key={k}>{k}: {String(p.sinais_vitais![k])}</span>
+                                                            : null
+                                                        )}
+                                                      </div>
+                                                    )}
+                                                  </div>
+                                                ))
+                                              )}
+                                            </div>
+                                          )}
                                         </div>
                                       );
                                     })}
