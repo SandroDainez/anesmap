@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Sparkles, Save, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Sparkles, Save, Trash2, ChevronDown, ChevronUp, Link2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { createBrowserClient } from "@supabase/ssr";
 
@@ -353,6 +353,9 @@ export default function ImportarIAPage() {
   const [erroIA, setErroIA] = useState<string | null>(null);
   const [itens, setItens] = useState<ItemIA[]>([]);
   const [savedCount, setSavedCount] = useState<number | null>(null);
+  const [driveUrl, setDriveUrl] = useState("");
+  const [extraindoDrive, setExtraindoDrive] = useState(false);
+  const [provaOverflowInfo, setProvaOverflowInfo] = useState<Record<string, number> | null>(null);
 
   async function processar() {
     if (!texto.trim()) {
@@ -412,7 +415,7 @@ export default function ImportarIAPage() {
 
     try {
       if (tipo === "simulados") {
-        const rows = (itens as SimuladoIA[]).map((item, idx) => ({
+        const baseRows = (itens as SimuladoIA[]).map((item, idx) => ({
           id: `ai_${tipo}_${Date.now()}_${idx}`,
           me: item.me ?? me,
           trimestre: item.trimestre ?? (trimestre || null),
@@ -435,6 +438,60 @@ export default function ImportarIAPage() {
             item.referencias?.length ? `Referências: ${item.referencias.join("; ")}` : null,
           ].filter(Boolean).join("\n\n") || null,
         }));
+
+        // ── Auto-prova overflow ───────────────────────────────────────────────
+        // When trimestre is set, distribute questions across A1→A2→A3→A4
+        // respecting per-prova limits: 30 for trimestral, 50 for anual.
+        let rows = baseRows;
+        setProvaOverflowInfo(null);
+
+        if (trimestre) {
+          const limit = trimestre === "anual" ? 50 : 30;
+          const provaSeq: Array<"A1" | "A2" | "A3" | "A4"> = ["A1", "A2", "A3", "A4"];
+
+          // Query how many questions already exist per prova for this ME + trimestre
+          const { data: existingRows } = await supabase
+            .from("simulados")
+            .select("prova")
+            .eq("me", me)
+            .eq("trimestre", trimestre);
+
+          const dbCounts: Record<string, number> = { A1: 0, A2: 0, A3: 0, A4: 0 };
+          for (const r of existingRows ?? []) {
+            const p = r.prova as string | null;
+            if (p && p in dbCounts) dbCounts[p]++;
+          }
+
+          // Start from the selected prova (default A1)
+          let provaIdx = prova ? provaSeq.indexOf(prova as "A1" | "A2" | "A3" | "A4") : 0;
+          if (provaIdx < 0) provaIdx = 0;
+
+          const localCounts: Record<string, number> = {};
+          const overflowInfo: Record<string, number> = {};
+
+          rows = baseRows.map((row) => {
+            // Walk forward through provas until one has capacity
+            while (provaIdx < provaSeq.length) {
+              const p = provaSeq[provaIdx];
+              if ((dbCounts[p] ?? 0) + (localCounts[p] ?? 0) < limit) {
+                localCounts[p] = (localCounts[p] ?? 0) + 1;
+                overflowInfo[p] = (overflowInfo[p] ?? 0) + 1;
+                return { ...row, prova: p };
+              }
+              provaIdx++;
+            }
+            // All provas full — keep in A4 as last resort
+            localCounts.A4 = (localCounts.A4 ?? 0) + 1;
+            overflowInfo.A4 = (overflowInfo.A4 ?? 0) + 1;
+            return { ...row, prova: "A4" };
+          });
+
+          // Only show distribution info if questions landed in multiple provas
+          if (Object.keys(overflowInfo).length > 0) {
+            setProvaOverflowInfo(overflowInfo);
+          }
+        }
+        // ─────────────────────────────────────────────────────────────────────
 
         const { error } = await supabase.from("simulados").insert(rows);
         if (error) throw new Error(error.message);
@@ -501,6 +558,30 @@ export default function ImportarIAPage() {
 
   function removerItem(index: number) {
     setItens((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  async function extrairDoDrive() {
+    if (!driveUrl.trim()) return;
+    setExtraindoDrive(true);
+    setErroIA(null);
+    try {
+      const res = await fetch("/api/admin/importar-gdrive", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: driveUrl }),
+      });
+      const data = await res.json() as { texto?: string; error?: string };
+      if (!res.ok || !data.texto) {
+        setErroIA(data.error ?? "Erro ao extrair texto do Google Drive.");
+        return;
+      }
+      setTexto(data.texto);
+      setDriveUrl("");
+    } catch (err) {
+      setErroIA(err instanceof Error ? err.message : "Erro de conexão.");
+    } finally {
+      setExtraindoDrive(false);
+    }
   }
 
   return (
@@ -610,6 +691,40 @@ export default function ImportarIAPage() {
           <p className="text-xs font-semibold uppercase tracking-wider text-muted">
             Material de origem
           </p>
+
+          {/* Google Drive import */}
+          <div className="rounded-lg border border-border bg-background/40 px-3 py-2.5 space-y-2">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5">
+              <Link2 size={10} />
+              Importar do Google Drive (opcional)
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="url"
+                value={driveUrl}
+                onChange={(e) => setDriveUrl(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") void extrairDoDrive(); }}
+                placeholder="https://docs.google.com/document/d/..."
+                className="min-w-0 flex-1 rounded-lg border border-border bg-background/60 px-3 py-1.5 text-xs text-foreground placeholder:text-muted/50 focus:border-teal focus:outline-none"
+              />
+              <button
+                onClick={() => void extrairDoDrive()}
+                disabled={extraindoDrive || !driveUrl.trim()}
+                className="flex shrink-0 items-center gap-1.5 rounded-lg border border-teal/40 bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal transition hover:bg-teal/20 disabled:opacity-40"
+              >
+                {extraindoDrive ? (
+                  <Loader2 size={12} className="animate-spin" />
+                ) : (
+                  <Link2 size={12} />
+                )}
+                Extrair texto
+              </button>
+            </div>
+            <p className="text-[10px] text-muted">
+              Suporta Google Docs, Slides e Sheets públicos ("Qualquer pessoa com o link pode visualizar").
+            </p>
+          </div>
+
           <textarea
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
@@ -664,6 +779,14 @@ export default function ImportarIAPage() {
                 Os casos estão inativos — ative-os no{" "}
                 <a href="/admin/casos" className="underline">Banco de Casos</a>{" "}
                 após revisão.
+              </span>
+            )}
+            {provaOverflowInfo && Object.keys(provaOverflowInfo).length > 0 && (
+              <span className="block mt-1.5 text-xs opacity-90">
+                📋 Distribuição por prova:{" "}
+                {Object.entries(provaOverflowInfo)
+                  .map(([p, n]) => `${p}: ${n} questão${n > 1 ? "ões" : ""}`)
+                  .join(" · ")}
               </span>
             )}
           </div>
