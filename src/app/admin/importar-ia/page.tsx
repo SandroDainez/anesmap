@@ -5,12 +5,32 @@ import { ArrowLeft, Sparkles, Save, Trash2, ChevronDown, ChevronUp } from "lucid
 import Link from "next/link";
 import { createBrowserClient } from "@supabase/ssr";
 
-type Tipo = "simulados" | "flashcards";
+type Tipo = "simulados" | "flashcards" | "casos";
 type ME = "ME1" | "ME2" | "ME3";
 type Trimestre = "T1" | "T2" | "T3" | "T4" | "anual" | "";
 type Prova = "A1" | "A2" | "A3" | "A4" | "";
 
 // ─── Tipos de itens gerados pela IA ──────────────────────────────────────────
+
+type CasoSimulacaoIA = {
+  titulo: string;
+  descricao: string;
+  dificuldade: string;
+  nivel_recomendado: string[];
+  duracao_estimada: string;
+  tags: string[];
+  slug: string;
+  situacao_inicial: string;
+  sinais_vitais_iniciais: {
+    PA: string;
+    FC: number;
+    SpO2: number;
+    ETCO2: number;
+    FR: number;
+    Temp: number;
+  };
+  opcoes_iniciais: string[];
+};
 
 type SimuladoIA = {
   enunciado: string;
@@ -41,10 +61,14 @@ type FlashcardIA = {
   trimestre?: string | null;
 };
 
-type ItemIA = SimuladoIA | FlashcardIA;
+type ItemIA = SimuladoIA | FlashcardIA | CasoSimulacaoIA;
 
 function isSimulado(item: ItemIA): item is SimuladoIA {
   return "enunciado" in item;
+}
+
+function isCaso(item: ItemIA): item is CasoSimulacaoIA {
+  return "situacao_inicial" in item;
 }
 
 // ─── Supabase client ──────────────────────────────────────────────────────────
@@ -54,6 +78,94 @@ function getSupabase() {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) return null;
   return createBrowserClient(url, key);
+}
+
+// ─── Componente de preview de caso de simulação clínica ──────────────────────
+
+function CasoCard({
+  item,
+  index,
+  onRemove,
+}: {
+  item: CasoSimulacaoIA;
+  index: number;
+  onRemove: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  const difColor = item.dificuldade === "avançado"
+    ? "text-rose border-rose/30 bg-rose/8"
+    : item.dificuldade === "intermediário"
+    ? "text-amber border-amber/30 bg-amber/8"
+    : "text-green-400 border-green-500/30 bg-green-500/8";
+
+  return (
+    <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="rounded-full bg-purple/15 px-2 py-0.5 text-[10px] font-semibold text-purple">
+            Caso {index + 1}
+          </span>
+          <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${difColor}`}>
+            {item.dificuldade}
+          </span>
+          {(item.nivel_recomendado ?? []).map((n) => (
+            <span key={n} className="rounded-full bg-blue/15 px-2 py-0.5 text-[10px] font-semibold text-blue">{n}</span>
+          ))}
+        </div>
+        <button onClick={onRemove} className="shrink-0 rounded-lg p-1 text-muted hover:bg-rose/10 hover:text-rose">
+          <Trash2 size={14} />
+        </button>
+      </div>
+
+      <div>
+        <p className="text-sm font-bold text-foreground">{item.titulo}</p>
+        <p className="mt-0.5 text-xs text-muted">{item.descricao}</p>
+      </div>
+
+      {/* Sinais vitais */}
+      <div className="grid grid-cols-6 gap-1">
+        {Object.entries(item.sinais_vitais_iniciais ?? {}).map(([k, v]) => (
+          <div key={k} className="rounded-lg border border-border bg-background/40 px-2 py-1.5 text-center">
+            <p className="text-[9px] font-semibold uppercase tracking-wider text-muted">{k}</p>
+            <p className="text-xs font-bold text-teal">{String(v)}</p>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        className="flex items-center gap-1 text-xs text-muted hover:text-foreground transition"
+      >
+        {expanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+        {expanded ? "Ocultar detalhes" : "Ver situação e opções"}
+      </button>
+
+      {expanded && (
+        <div className="space-y-2">
+          <div className="rounded-lg border border-border bg-background/40 px-3 py-2 text-xs">
+            <p className="mb-1 font-semibold text-foreground">Situação inicial:</p>
+            <p className="leading-relaxed text-muted">{item.situacao_inicial}</p>
+          </div>
+          <div className="rounded-lg border border-blue/20 bg-blue/5 px-3 py-2 text-xs">
+            <p className="mb-1 font-semibold text-blue">Opções de conduta:</p>
+            <ul className="space-y-1">
+              {(item.opcoes_iniciais ?? []).map((op, i) => (
+                <li key={i} className="text-muted">• {op}</li>
+              ))}
+            </ul>
+          </div>
+          {(item.tags ?? []).length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {item.tags.map((t) => (
+                <span key={t} className="rounded-full border border-border px-2 py-0.5 text-[10px] text-muted">{t}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
 
 // ─── Componente de preview de simulado ───────────────────────────────────────
@@ -327,6 +439,41 @@ export default function ImportarIAPage() {
         const { error } = await supabase.from("simulados").insert(rows);
         if (error) throw new Error(error.message);
         setSavedCount(rows.length);
+      } else if (tipo === "casos") {
+        // Insert one caso at a time via admin API (handles auth + column sanitization)
+        const casos = itens as CasoSimulacaoIA[];
+        let saved = 0;
+        for (const item of casos) {
+          // Ensure slug uniqueness by appending timestamp if needed
+          const slug = item.slug
+            ? `${item.slug}-${Date.now()}`
+            : `caso-ia-${Date.now()}`;
+
+          const res = await fetch("/api/admin/casos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              slug,
+              titulo: item.titulo?.trim(),
+              descricao: item.descricao?.trim() || null,
+              dificuldade: item.dificuldade || "intermediário",
+              nivel_recomendado: item.nivel_recomendado ?? [],
+              duracao_estimada: item.duracao_estimada || null,
+              tags: item.tags ?? [],
+              situacao_inicial: item.situacao_inicial?.trim() || null,
+              sinais_vitais_iniciais: item.sinais_vitais_iniciais ?? null,
+              opcoes_iniciais: item.opcoes_iniciais ?? [],
+              ativo: false,
+              revisado: false,
+            }),
+          });
+          if (!res.ok) {
+            const err = await res.json() as { error?: string };
+            throw new Error(err.error ?? `Erro ao salvar caso: ${res.status}`);
+          }
+          saved++;
+        }
+        setSavedCount(saved);
       } else {
         const rows = (itens as FlashcardIA[]).map((item, idx) => ({
           id: `ai_fc_${Date.now()}_${idx}`,
@@ -381,72 +528,81 @@ export default function ImportarIAPage() {
         {/* Tipo */}
         <div className="rounded-xl border border-border bg-card p-4 space-y-3">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted">Tipo de conteúdo</p>
-          <div className="grid grid-cols-2 gap-2">
-            {(["simulados", "flashcards"] as Tipo[]).map((t) => (
+          <div className="grid grid-cols-3 gap-2">
+            {([
+              { value: "simulados", label: "Questões TEA", activeClass: "border-blue/50 bg-blue/15 text-blue" },
+              { value: "flashcards", label: "Flashcards", activeClass: "border-teal/50 bg-teal/15 text-teal" },
+              { value: "casos", label: "Simulação Clínica", activeClass: "border-purple/50 bg-purple/15 text-purple" },
+            ] as { value: Tipo; label: string; activeClass: string }[]).map(({ value, label, activeClass }) => (
               <button
-                key={t}
-                onClick={() => { setTipo(t); setItens([]); setSavedCount(null); }}
-                className={`rounded-xl border py-2.5 text-sm font-medium transition ${
-                  tipo === t
-                    ? t === "simulados"
-                      ? "border-blue/50 bg-blue/15 text-blue"
-                      : "border-teal/50 bg-teal/15 text-teal"
-                    : "border-border bg-background/40 text-muted hover:text-foreground"
+                key={value}
+                onClick={() => { setTipo(value); setItens([]); setSavedCount(null); }}
+                className={`rounded-xl border py-2.5 text-xs font-medium transition ${
+                  tipo === value ? activeClass : "border-border bg-background/40 text-muted hover:text-foreground"
                 }`}
               >
-                {t === "simulados" ? "Questões TEA" : "Flashcards"}
+                {label}
               </button>
             ))}
           </div>
 
-          {/* Metadados */}
-          <div className="grid grid-cols-3 gap-2">
-            {/* ME */}
-            <div>
-              <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-muted">ME</label>
-              <select
-                value={me}
-                onChange={(e) => setMe(e.target.value as ME)}
-                className="w-full rounded-lg border border-border bg-background/40 px-2 py-1.5 text-xs text-foreground focus:border-teal focus:outline-none"
-              >
-                {["ME1", "ME2", "ME3"].map((v) => (
-                  <option key={v} value={v}>{v}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Trimestre */}
-            <div>
-              <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-muted">Trimestre</label>
-              <select
-                value={trimestre}
-                onChange={(e) => { setTrimestre(e.target.value as Trimestre); setProva(""); }}
-                className="w-full rounded-lg border border-border bg-background/40 px-2 py-1.5 text-xs text-foreground focus:border-teal focus:outline-none"
-              >
-                <option value="">—</option>
-                {["T1", "T2", "T3", "T4", "anual"].map((v) => (
-                  <option key={v} value={v}>{v === "anual" ? "Anual" : v}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Prova — só para simulados com trimestre */}
-            {tipo === "simulados" && trimestre && (
+          {/* Metadados — só para simulados e flashcards */}
+          {tipo !== "casos" && (
+            <div className="grid grid-cols-3 gap-2">
+              {/* ME */}
               <div>
-                <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-muted">Prova</label>
+                <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-muted">ME</label>
                 <select
-                  value={prova}
-                  onChange={(e) => setProva(e.target.value as Prova)}
+                  value={me}
+                  onChange={(e) => setMe(e.target.value as ME)}
                   className="w-full rounded-lg border border-border bg-background/40 px-2 py-1.5 text-xs text-foreground focus:border-teal focus:outline-none"
                 >
-                  <option value="">—</option>
-                  {["A1", "A2", "A3", "A4"].map((v) => (
+                  {["ME1", "ME2", "ME3"].map((v) => (
                     <option key={v} value={v}>{v}</option>
                   ))}
                 </select>
               </div>
-            )}
-          </div>
+
+              {/* Trimestre */}
+              <div>
+                <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-muted">Trimestre</label>
+                <select
+                  value={trimestre}
+                  onChange={(e) => { setTrimestre(e.target.value as Trimestre); setProva(""); }}
+                  className="w-full rounded-lg border border-border bg-background/40 px-2 py-1.5 text-xs text-foreground focus:border-teal focus:outline-none"
+                >
+                  <option value="">—</option>
+                  {["T1", "T2", "T3", "T4", "anual"].map((v) => (
+                    <option key={v} value={v}>{v === "anual" ? "Anual" : v}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Prova — só para simulados com trimestre */}
+              {tipo === "simulados" && trimestre && (
+                <div>
+                  <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-muted">Prova</label>
+                  <select
+                    value={prova}
+                    onChange={(e) => setProva(e.target.value as Prova)}
+                    className="w-full rounded-lg border border-border bg-background/40 px-2 py-1.5 text-xs text-foreground focus:border-teal focus:outline-none"
+                  >
+                    <option value="">—</option>
+                    {["A1", "A2", "A3", "A4"].map((v) => (
+                      <option key={v} value={v}>{v}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Info para casos */}
+          {tipo === "casos" && (
+            <div className="rounded-lg border border-purple/20 bg-purple/5 px-3 py-2 text-xs text-muted">
+              💡 Descreva o cenário clínico livremente — a IA vai estruturar um caso de simulação interativa com situação inicial, sinais vitais e opções de conduta. O caso ficará inativo até você ativá-lo no Banco de Casos.
+            </div>
+          )}
         </div>
 
         {/* Área de texto */}
@@ -460,6 +616,8 @@ export default function ImportarIAPage() {
             placeholder={
               tipo === "simulados"
                 ? "Cole aqui anotações de aula, capítulo de livro, slides, questões em qualquer formato...\n\nA IA vai estruturar em questões TEA com alternativas A-E e justificativas individuais para cada alternativa."
+                : tipo === "casos"
+                ? "Descreva o cenário clínico: paciente, procedimento cirúrgico, contexto, complicação ou situação...\n\nEx: Paciente de 68 anos, obeso grau III (IMC 42), diabético, para colecistectomia laparoscópica eletiva. Inicia-se indução anestésica e ao laringoscopia direta visualiza-se apenas palato mole (Cormack-Lehane IV).\n\nA IA vai criar um caso de simulação interativa completo com sinais vitais e opções de conduta."
                 : "Cole aqui o material de estudo que deseja converter em flashcards...\n\nA IA vai gerar perguntas inteligentes com respostas estruturadas e referências bibliográficas."
             }
             rows={12}
@@ -482,7 +640,7 @@ export default function ImportarIAPage() {
             ) : (
               <>
                 <Sparkles size={16} />
-                Gerar {tipo === "simulados" ? "questões" : "flashcards"} com IA
+                {tipo === "simulados" ? "Gerar questões" : tipo === "casos" ? "Gerar caso clínico" : "Gerar flashcards"} com IA
               </>
             )}
           </button>
@@ -498,7 +656,16 @@ export default function ImportarIAPage() {
         {/* Sucesso */}
         {savedCount !== null && (
           <div className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-400">
-            ✅ {savedCount} {tipo === "simulados" ? "questão(ões)" : "flashcard(s)"} salvo(s) com sucesso!
+            ✅ {savedCount}{" "}
+            {tipo === "simulados" ? "questão(ões)" : tipo === "casos" ? "caso(s) de simulação" : "flashcard(s)"}{" "}
+            salvo(s) com sucesso!
+            {tipo === "casos" && (
+              <span className="block mt-1 text-xs opacity-80">
+                Os casos estão inativos — ative-os no{" "}
+                <a href="/admin/casos" className="underline">Banco de Casos</a>{" "}
+                após revisão.
+              </span>
+            )}
           </div>
         )}
 
@@ -507,7 +674,9 @@ export default function ImportarIAPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-foreground">
-                {itens.length} {tipo === "simulados" ? "questão(ões) gerada(s)" : "flashcard(s) gerado(s)"} — revise antes de salvar
+                {itens.length}{" "}
+                {tipo === "simulados" ? "questão(ões) gerada(s)" : tipo === "casos" ? "caso(s) gerado(s)" : "flashcard(s) gerado(s)"}{" "}
+                — revise antes de salvar
               </p>
               <button
                 onClick={() => setItens([])}
@@ -520,6 +689,13 @@ export default function ImportarIAPage() {
             {itens.map((item, i) =>
               isSimulado(item) ? (
                 <SimuladoCard
+                  key={i}
+                  item={item}
+                  index={i}
+                  onRemove={() => removerItem(i)}
+                />
+              ) : isCaso(item) ? (
+                <CasoCard
                   key={i}
                   item={item}
                   index={i}
@@ -548,7 +724,8 @@ export default function ImportarIAPage() {
               ) : (
                 <>
                   <Save size={16} />
-                  Salvar {itens.length} {tipo === "simulados" ? "questão(ões)" : "flashcard(s)"} no banco
+                  Salvar {itens.length}{" "}
+                  {tipo === "simulados" ? "questão(ões)" : tipo === "casos" ? "caso(s)" : "flashcard(s)"} no banco
                 </>
               )}
             </button>
