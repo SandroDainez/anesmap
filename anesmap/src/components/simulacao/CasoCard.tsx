@@ -20,11 +20,20 @@ type Props = {
 const difConfig: Record<string, { label: string; style: string }> = {
   iniciante:    { label: "Iniciante",    style: "bg-green-100  dark:bg-green-500/20  text-green-800  dark:text-green-300" },
   intermediário:{ label: "Intermediário",style: "bg-amber-100  dark:bg-yellow-500/20 text-amber-800  dark:text-yellow-300" },
+  intermediario:{ label: "Intermediário",style: "bg-amber-100  dark:bg-yellow-500/20 text-amber-800  dark:text-yellow-300" },
   avançado:     { label: "Avançado",     style: "bg-red-100    dark:bg-red-500/20    text-red-700    dark:text-red-300" },
+  avancado:     { label: "Avançado",     style: "bg-red-100    dark:bg-red-500/20    text-red-700    dark:text-red-300" },
 };
 
+const DEFAULT_DIF = difConfig["intermediário"];
+
 export function CasoCard({ caso, onClick, bloqueado = false }: Props) {
-  const dif = difConfig[caso.dificuldade] ?? { label: caso.dificuldade, style: "bg-white/10 text-white" };
+  // Normalize: lowercase + strip accents for lookup, fallback to intermediário
+  const difKey = (caso.dificuldade ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+  const dif = difConfig[caso.dificuldade?.toLowerCase() ?? ""] ?? difConfig[difKey] ?? DEFAULT_DIF;
 
   return (
     <button
