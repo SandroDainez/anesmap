@@ -18,9 +18,9 @@ type Props = {
 };
 
 const difConfig: Record<string, { label: string; style: string }> = {
-  iniciante: { label: "Iniciante", style: "bg-green-500/20 text-green-300" },
-  intermediário: { label: "Intermediário", style: "bg-yellow-500/20 text-yellow-300" },
-  avançado: { label: "Avançado", style: "bg-red-500/20 text-red-300" },
+  iniciante:    { label: "Iniciante",    style: "bg-green-100  dark:bg-green-500/20  text-green-800  dark:text-green-300" },
+  intermediário:{ label: "Intermediário",style: "bg-amber-100  dark:bg-yellow-500/20 text-amber-800  dark:text-yellow-300" },
+  avançado:     { label: "Avançado",     style: "bg-red-100    dark:bg-red-500/20    text-red-700    dark:text-red-300" },
 };
 
 export function CasoCard({ caso, onClick, bloqueado = false }: Props) {

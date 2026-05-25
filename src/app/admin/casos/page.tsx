@@ -102,9 +102,9 @@ function buildPayload(form: CasoPayload): CasoPayload {
 // ─── Badge colours ────────────────────────────────────────────────────────────
 
 function dificuldadeBadge(d: string) {
-  if (d === "avançado") return "bg-red-500/15 text-red-400 border border-red-500/30";
-  if (d === "intermediário") return "bg-amber-500/15 text-amber-400 border border-amber-500/30";
-  return "bg-green-500/15 text-green-400 border border-green-500/30";
+  if (d === "avançado")      return "bg-red-100   dark:bg-red-500/15   text-red-700   dark:text-red-400   border border-red-500/30";
+  if (d === "intermediário") return "bg-amber-100 dark:bg-amber-500/15 text-amber-800 dark:text-amber-400 border border-amber-500/30";
+  return                            "bg-green-100 dark:bg-green-500/15 text-green-800 dark:text-green-400 border border-green-500/30";
 }
 
 // ─── Fluxograma ──────────────────────────────────────────────────────────────

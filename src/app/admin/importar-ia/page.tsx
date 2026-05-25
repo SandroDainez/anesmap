@@ -94,10 +94,10 @@ function CasoCard({
   const [expanded, setExpanded] = useState(false);
 
   const difColor = item.dificuldade === "avançado"
-    ? "text-rose border-rose/30 bg-rose/8"
+    ? "bg-red-100 dark:bg-rose/8 text-red-700 dark:text-rose border-red-300 dark:border-rose/30"
     : item.dificuldade === "intermediário"
-    ? "text-amber border-amber/30 bg-amber/8"
-    : "text-green-400 border-green-500/30 bg-green-500/8";
+    ? "bg-amber-100 dark:bg-amber/8 text-amber-800 dark:text-amber border-amber-300 dark:border-amber/30"
+    : "bg-green-100 dark:bg-green-500/8 text-green-800 dark:text-green-400 border-green-300 dark:border-green-500/30";
 
   return (
     <div className="rounded-xl border border-border bg-card p-4 space-y-3">
