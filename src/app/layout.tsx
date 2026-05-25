@@ -4,6 +4,8 @@ import { JetBrains_Mono, Outfit } from "next/font/google";
 import { BottomNav } from "@/components/BottomNav";
 import { PageTransition } from "@/components/PageTransition";
 import { AuthBootstrap } from "@/components/AuthBootstrap";
+import { ThemeProvider, themeScript } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { getAuthContext } from "@/lib/auth";
 import "./globals.css";
 
@@ -36,13 +38,19 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${outfit.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Inline script runs before React to prevent flash of wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full bg-background text-foreground font-sans">
-        <Header authPromise={authPromise} />
-        <AuthBootstrap />
-        <div className="mx-auto flex min-h-screen w-full max-w-md flex-col px-4 pb-28 pt-4">
-          <PageTransition>{children}</PageTransition>
-        </div>
-        <BottomNav />
+        <ThemeProvider>
+          <Header authPromise={authPromise} />
+          <AuthBootstrap />
+          <div className="mx-auto flex min-h-screen w-full max-w-md flex-col px-4 pb-28 pt-4">
+            <PageTransition>{children}</PageTransition>
+          </div>
+          <BottomNav />
+        </ThemeProvider>
       </body>
     </html>
   );
@@ -58,6 +66,7 @@ async function Header({
     <header className="mx-auto mt-3 flex w-full max-w-md items-center justify-between px-4">
       <p className="text-xs text-muted">{auth ? `Olá, ${auth.name ?? "Usuário"}` : "AnesMap"}</p>
       <div className="flex items-center gap-2 text-xs">
+        <ThemeToggle />
         {auth ? (
           <>
             {auth.role === "admin" && (
