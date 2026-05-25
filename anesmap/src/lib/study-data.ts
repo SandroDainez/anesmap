@@ -427,26 +427,40 @@ export function applySm2(
   now = new Date(),
 ): FlashcardProgress {
   const boundedQuality = Math.min(5, Math.max(0, quality));
-
-  // Fixed review intervals:
-  // Difícil (quality ≤ 2) → 1 dia
-  // Médio   (quality 3-4) → 3 dias
-  // Fácil   (quality 5)   → 7 dias
+  let nextEaseFactor = progress.easeFactor;
+  let nextRepetitions = progress.repetitions;
   let nextIntervalDays: number;
+
   if (boundedQuality <= 2) {
+    // Difícil: sempre reseta — volta em 1 dia, reinicia contagem
+    nextRepetitions = 0;
     nextIntervalDays = 1;
-  } else if (boundedQuality <= 4) {
-    nextIntervalDays = 3;
   } else {
-    nextIntervalDays = 7;
+    // Médio / Fácil: intervalos iniciais intuitivos, depois SM-2 progressivo
+    // 1ª revisão  → Médio: 3 dias | Fácil: 7 dias
+    // 2ª revisão  → SM-2 assume (intervalDays × easeFactor, mín 6 dias)
+    // 3ª revisão+ → SM-2 progressivo (intervalos crescem com histórico)
+    if (nextRepetitions === 0) {
+      nextIntervalDays = boundedQuality >= 5 ? 7 : 3;
+    } else if (nextRepetitions === 1) {
+      nextIntervalDays = Math.max(6, Math.round(progress.intervalDays * nextEaseFactor));
+    } else {
+      nextIntervalDays = Math.max(1, Math.round(progress.intervalDays * nextEaseFactor));
+    }
+    nextRepetitions += 1;
   }
+
+  // Ajusta ease factor com base na qualidade (SM-2 padrão)
+  nextEaseFactor =
+    nextEaseFactor + (0.1 - (5 - boundedQuality) * (0.08 + (5 - boundedQuality) * 0.02));
+  nextEaseFactor = Math.max(1.3, Number(nextEaseFactor.toFixed(2)));
 
   const nextReviewAt = new Date(now);
   nextReviewAt.setDate(nextReviewAt.getDate() + nextIntervalDays);
 
   return {
-    easeFactor: progress.easeFactor,
-    repetitions: progress.repetitions + 1,
+    easeFactor: nextEaseFactor,
+    repetitions: nextRepetitions,
     intervalDays: nextIntervalDays,
     nextReviewAt: nextReviewAt.toISOString(),
     lastQuality: boundedQuality,
