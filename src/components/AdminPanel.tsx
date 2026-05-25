@@ -2355,40 +2355,42 @@ export function AdminPanel() {
 
           {/* ── EXPORT ── */}
           {tab === "export" && (
-            <div className="max-w-3xl space-y-8">
-              <h2 className="text-2xl font-bold text-foreground">Exportar conteúdo</h2>
+            <div className="space-y-8">
+              <h2 className="text-3xl font-bold text-foreground">Exportar conteúdo</h2>
 
               {/* Intenção */}
-              <div className="rounded-2xl border border-border bg-background/40 p-6 space-y-4">
-                <p className="text-base font-semibold text-foreground">O que você quer fazer agora?</p>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-background/40 p-8 space-y-5">
+                <p className="text-lg font-semibold text-foreground">O que você quer fazer agora?</p>
+                <div className="grid grid-cols-2 gap-4">
                   <button
                     type="button"
                     onClick={() => handleExport("backup", "json")}
-                    className="rounded-2xl border border-teal/35 bg-teal/15 px-6 py-5 text-base font-semibold text-teal transition hover:opacity-90 text-left leading-snug"
+                    className="rounded-2xl border-2 border-teal/40 bg-teal/15 px-8 py-8 text-lg font-bold text-teal transition hover:bg-teal/25 text-left leading-snug"
                   >
+                    <span className="block text-2xl mb-2">⬇️</span>
                     1) Quero baixar todos os arquivos
                   </button>
                   <button
                     type="button"
                     onClick={() => setTab("content")}
-                    className="rounded-2xl border border-blue/35 bg-blue/15 px-6 py-5 text-base font-semibold text-blue transition hover:opacity-90 text-left leading-snug"
+                    className="rounded-2xl border-2 border-blue/40 bg-blue/15 px-8 py-8 text-lg font-bold text-blue transition hover:bg-blue/25 text-left leading-snug"
                   >
+                    <span className="block text-2xl mb-2">⬆️</span>
                     2) Quero enviar conteúdo para o app
                   </button>
                 </div>
-                <p className="text-sm text-muted">
+                <p className="text-base text-muted">
                   Dica: se você vai apenas guardar backup, clique em <strong className="text-foreground">baixar</strong>.
                   Se quer publicar conteúdo novo no app, vá em <strong className="text-foreground">enviar conteúdo para o app</strong>.
                 </p>
               </div>
 
               {/* Backup completo */}
-              <div className="rounded-2xl border border-teal/20 bg-teal/5 p-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="rounded-2xl border-2 border-teal/25 bg-teal/5 p-8">
+                <div className="flex items-center justify-between gap-6">
                   <div>
-                    <h3 className="text-lg font-bold text-foreground">Backup completo</h3>
-                    <p className="mt-1.5 text-sm text-muted leading-relaxed">
+                    <h3 className="text-xl font-bold text-foreground">Backup completo</h3>
+                    <p className="mt-2 text-base text-muted leading-relaxed">
                       Exporta todos os flashcards e simulados em um único arquivo JSON.
                       Ideal para guardar antes de fazer grandes alterações.
                     </p>
@@ -2397,7 +2399,7 @@ export function AdminPanel() {
                     type="button"
                     onClick={() => handleExport("backup", "json")}
                     disabled={exportStatus["backup"] === "loading"}
-                    className="shrink-0 rounded-2xl border border-teal/30 bg-teal/15 px-6 py-3.5 text-base font-semibold text-teal transition hover:opacity-90 disabled:opacity-40"
+                    className="shrink-0 rounded-2xl border-2 border-teal/35 bg-teal/20 px-8 py-4 text-lg font-bold text-teal transition hover:bg-teal/30 disabled:opacity-40"
                   >
                     {exportStatus["backup"] === "loading" ? "Baixando..." : exportStatus["backup"] === "done" ? "✓ Baixado" : "↓ Baixar backup"}
                   </button>
@@ -2405,19 +2407,19 @@ export function AdminPanel() {
               </div>
 
               {/* Cards e simulados separados */}
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div className="grid grid-cols-2 gap-6">
                 {/* Flashcards */}
-                <div className="rounded-2xl border border-border bg-background/40 p-6 space-y-4">
-                  <h3 className="text-lg font-bold text-foreground">Flashcards</h3>
-                  <p className="text-sm text-muted leading-relaxed">
+                <div className="rounded-2xl border border-border bg-background/40 p-8 space-y-5">
+                  <h3 className="text-xl font-bold text-foreground">Flashcards</h3>
+                  <p className="text-base text-muted leading-relaxed">
                     Exporta todos os cards com frente, verso, trilha (ME1/ME2/ME3), tags e especialidade.
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-4">
                     <button
                       type="button"
                       onClick={() => handleExport("flashcards", "json")}
                       disabled={exportStatus["flashcards"] === "loading"}
-                      className="flex-1 rounded-xl border border-blue/30 bg-blue/10 py-3 text-sm font-semibold text-blue transition hover:opacity-90 disabled:opacity-40"
+                      className="flex-1 rounded-xl border-2 border-blue/30 bg-blue/10 py-4 text-base font-bold text-blue transition hover:bg-blue/20 disabled:opacity-40"
                     >
                       {exportStatus["flashcards"] === "loading" ? "..." : exportStatus["flashcards"] === "done" ? "✓ JSON" : "↓ JSON"}
                     </button>
@@ -2425,28 +2427,28 @@ export function AdminPanel() {
                       type="button"
                       onClick={() => handleExport("flashcards", "csv")}
                       disabled={exportStatus["flashcards-csv"] === "loading"}
-                      className="flex-1 rounded-xl border border-purple/30 bg-purple/10 py-3 text-sm font-semibold text-purple transition hover:opacity-90 disabled:opacity-40"
+                      className="flex-1 rounded-xl border-2 border-purple/30 bg-purple/10 py-4 text-base font-bold text-purple transition hover:bg-purple/20 disabled:opacity-40"
                     >
                       {exportStatus["flashcards-csv"] === "loading" ? "..." : exportStatus["flashcards-csv"] === "done" ? "✓ CSV" : "↓ CSV"}
                     </button>
                   </div>
-                  <p className="text-xs text-muted">
+                  <p className="text-sm text-muted">
                     O JSON pode ser reimportado pelo app. O CSV pode ser aberto no Excel ou Google Sheets.
                   </p>
                 </div>
 
                 {/* Simulados */}
-                <div className="rounded-2xl border border-border bg-background/40 p-6 space-y-4">
-                  <h3 className="text-lg font-bold text-foreground">Simulados</h3>
-                  <p className="text-sm text-muted leading-relaxed">
+                <div className="rounded-2xl border border-border bg-background/40 p-8 space-y-5">
+                  <h3 className="text-xl font-bold text-foreground">Simulados</h3>
+                  <p className="text-base text-muted leading-relaxed">
                     Exporta todas as questões com enunciado, alternativas, gabarito e explicação.
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-4">
                     <button
                       type="button"
                       onClick={() => handleExport("simulados", "json")}
                       disabled={exportStatus["simulados"] === "loading"}
-                      className="flex-1 rounded-xl border border-blue/30 bg-blue/10 py-3 text-sm font-semibold text-blue transition hover:opacity-90 disabled:opacity-40"
+                      className="flex-1 rounded-xl border-2 border-blue/30 bg-blue/10 py-4 text-base font-bold text-blue transition hover:bg-blue/20 disabled:opacity-40"
                     >
                       {exportStatus["simulados"] === "loading" ? "..." : exportStatus["simulados"] === "done" ? "✓ JSON" : "↓ JSON"}
                     </button>
@@ -2454,21 +2456,21 @@ export function AdminPanel() {
                       type="button"
                       onClick={() => handleExport("simulados", "csv")}
                       disabled={exportStatus["simulados-csv"] === "loading"}
-                      className="flex-1 rounded-xl border border-purple/30 bg-purple/10 py-3 text-sm font-semibold text-purple transition hover:opacity-90 disabled:opacity-40"
+                      className="flex-1 rounded-xl border-2 border-purple/30 bg-purple/10 py-4 text-base font-bold text-purple transition hover:bg-purple/20 disabled:opacity-40"
                     >
                       {exportStatus["simulados-csv"] === "loading" ? "..." : exportStatus["simulados-csv"] === "done" ? "✓ CSV" : "↓ CSV"}
                     </button>
                   </div>
-                  <p className="text-xs text-muted">
+                  <p className="text-sm text-muted">
                     O JSON pode ser reimportado pelo app. O CSV pode ser editado e reimportado.
                   </p>
                 </div>
               </div>
 
               {/* Como usar */}
-              <div className="rounded-2xl border border-border bg-background/40 p-6">
-                <h3 className="mb-3 text-base font-bold text-foreground">Como usar sem dúvida</h3>
-                <ol className="space-y-2 text-sm text-muted list-decimal list-inside leading-relaxed">
+              <div className="rounded-2xl border border-border bg-background/40 p-8">
+                <h3 className="mb-4 text-lg font-bold text-foreground">Como usar sem dúvida</h3>
+                <ol className="space-y-3 text-base text-muted list-decimal list-inside leading-relaxed">
                   <li>Para guardar backup: clique em <strong className="text-foreground">Quero baixar todos os arquivos</strong>.</li>
                   <li>Para publicar conteúdo novo no app: vá para a aba <strong className="text-foreground">Conteúdo</strong>.</li>
                   <li>Na aba Conteúdo, clique em <strong className="text-foreground">Enviar Cards/Simulados/Lote para o app</strong>.</li>
