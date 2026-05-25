@@ -184,6 +184,8 @@ export function AdminPanel() {
   const [contentStats, setContentStats] = useState<ContentStats | null>(null);
   const [classificando, setClassificando] = useState(false);
   const [classifStatus, setClassifStatus] = useState<{ processados: number; restantes: number; mensagem: string } | null>(null);
+  const [classificandoFC, setClassificandoFC] = useState(false);
+  const [classifFCStatus, setClassifFCStatus] = useState<{ processados: number; restantes: number; mensagem: string } | null>(null);
 
   // Add/delete user state
   const [showAddUser, setShowAddUser] = useState(false);
@@ -625,6 +627,23 @@ export function AdminPanel() {
   async function handleDeleteCode(id: string) {
     await deleteInviteCode(id);
     setInviteCodes((prev) => prev.filter((c) => c.id !== id));
+  }
+
+  async function handleClassificarEspecialidade() {
+    setClassificandoFC(true);
+    setClassifFCStatus(null);
+    try {
+      const res = await fetch("/api/admin/flashcards/classificar-especialidade", { method: "POST" });
+      const data = await res.json() as { processados?: number; restantes?: number; mensagem?: string; error?: string };
+      if (!res.ok) { setClassifFCStatus({ processados: 0, restantes: 0, mensagem: data.error ?? "Erro." }); return; }
+      setClassifFCStatus({ processados: data.processados ?? 0, restantes: data.restantes ?? 0, mensagem: data.mensagem ?? "" });
+      const stats = await loadAdminContentStats();
+      if (stats) setContentStats(stats);
+    } catch (e) {
+      setClassifFCStatus({ processados: 0, restantes: 0, mensagem: e instanceof Error ? e.message : "Erro inesperado." });
+    } finally {
+      setClassificandoFC(false);
+    }
   }
 
   async function handleClassificarTemas() {
@@ -2113,8 +2132,28 @@ export function AdminPanel() {
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-xs font-semibold text-muted">Por especialidade</p>
-                          <button type="button" onClick={() => setTab("revisar")} className="text-xs text-teal hover:underline">Editar cards →</button>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={handleClassificarEspecialidade}
+                              disabled={classificandoFC}
+                              className="rounded-lg border border-teal/30 bg-teal/10 px-2 py-0.5 text-[10px] font-medium text-teal hover:opacity-80 disabled:opacity-40"
+                            >
+                              {classificandoFC ? "Classificando…" : "✦ Classificar com IA"}
+                            </button>
+                            <button type="button" onClick={() => setTab("revisar")} className="text-xs text-teal hover:underline">Editar →</button>
+                          </div>
                         </div>
+                        {classifFCStatus && (
+                          <p className={`mb-2 text-[11px] rounded-lg px-2 py-1 ${classifFCStatus.processados > 0 ? "bg-teal/10 text-teal" : "bg-rose/10 text-rose"}`}>
+                            {classifFCStatus.mensagem}
+                            {classifFCStatus.restantes > 0 && (
+                              <button type="button" onClick={handleClassificarEspecialidade} disabled={classificandoFC} className="ml-2 underline">
+                                Próximo lote →
+                              </button>
+                            )}
+                          </p>
+                        )}
                         <div className="max-h-48 space-y-1.5 overflow-auto pr-1">
                           {contentStats.flashcards.byEspecialidade.map((item) => {
                             const pct = Math.round((item.count / contentStats.flashcards.total) * 100);
