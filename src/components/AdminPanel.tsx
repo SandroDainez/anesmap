@@ -182,6 +182,8 @@ export function AdminPanel() {
 
   // Content stats
   const [contentStats, setContentStats] = useState<ContentStats | null>(null);
+  const [classificando, setClassificando] = useState(false);
+  const [classifStatus, setClassifStatus] = useState<{ processados: number; restantes: number; mensagem: string } | null>(null);
 
   // Add/delete user state
   const [showAddUser, setShowAddUser] = useState(false);
@@ -623,6 +625,24 @@ export function AdminPanel() {
   async function handleDeleteCode(id: string) {
     await deleteInviteCode(id);
     setInviteCodes((prev) => prev.filter((c) => c.id !== id));
+  }
+
+  async function handleClassificarTemas() {
+    setClassificando(true);
+    setClassifStatus(null);
+    try {
+      const res = await fetch("/api/admin/simulados/classificar-temas", { method: "POST" });
+      const data = await res.json() as { processados?: number; restantes?: number; mensagem?: string; error?: string };
+      if (!res.ok) { setClassifStatus({ processados: 0, restantes: 0, mensagem: data.error ?? "Erro." }); return; }
+      setClassifStatus({ processados: data.processados ?? 0, restantes: data.restantes ?? 0, mensagem: data.mensagem ?? "" });
+      // Recarrega stats de conteúdo
+      const stats = await loadAdminContentStats();
+      if (stats) setContentStats(stats);
+    } catch (e) {
+      setClassifStatus({ processados: 0, restantes: 0, mensagem: e instanceof Error ? e.message : "Erro inesperado." });
+    } finally {
+      setClassificando(false);
+    }
   }
 
   async function handleExport(key: string, format: "json" | "csv") {
@@ -2150,8 +2170,28 @@ export function AdminPanel() {
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-xs font-semibold text-muted">Por tema</p>
-                          <button type="button" onClick={() => setTab("revisar")} className="text-xs text-blue hover:underline">Editar simulados →</button>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={handleClassificarTemas}
+                              disabled={classificando}
+                              className="rounded-lg border border-teal/30 bg-teal/10 px-2 py-0.5 text-[10px] font-medium text-teal hover:opacity-80 disabled:opacity-40"
+                            >
+                              {classificando ? "Classificando…" : "✦ Classificar com IA"}
+                            </button>
+                            <button type="button" onClick={() => setTab("revisar")} className="text-xs text-blue hover:underline">Editar →</button>
+                          </div>
                         </div>
+                        {classifStatus && (
+                          <p className={`mb-2 text-[11px] rounded-lg px-2 py-1 ${classifStatus.processados > 0 ? "bg-teal/10 text-teal" : "bg-rose/10 text-rose"}`}>
+                            {classifStatus.mensagem}
+                            {classifStatus.restantes > 0 && (
+                              <button type="button" onClick={handleClassificarTemas} disabled={classificando} className="ml-2 underline">
+                                Classificar próximo lote →
+                              </button>
+                            )}
+                          </p>
+                        )}
                         <div className="max-h-48 space-y-1.5 overflow-auto pr-1">
                           {contentStats.simulados.byTema.map((item) => {
                             const pct = Math.round((item.count / contentStats.simulados.total) * 100);
