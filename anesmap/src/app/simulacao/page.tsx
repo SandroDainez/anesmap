@@ -53,12 +53,13 @@ export default function SimulacaoPage() {
   );
 
   function handleCasoClick(casoId: string, nivelRecomendado: string[]) {
+    // Limit is still loading — wait for it (CasoCard will appear slightly dimmed)
     if (!limite) return;
     if (!limite.pode_simular) {
       setModalLimite(true);
       return;
     }
-    router.push(`/simulacao/${casoId}`);
+    void router.push(`/simulacao/${casoId}`);
   }
 
   function isBloqueado(nivelRecomendado: string[]): boolean {
@@ -103,7 +104,7 @@ export default function SimulacaoPage() {
       </div>
 
       {/* Grid de casos */}
-      <div className="grid gap-3">
+      <div className={`grid gap-3 transition-opacity ${!limite ? "pointer-events-none opacity-60" : ""}`}>
         {casosFiltrados.map((caso) => {
           const bloqueado = isBloqueado(caso.nivel_recomendado);
           return (

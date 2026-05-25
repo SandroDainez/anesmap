@@ -63,6 +63,13 @@ export default function SimulacaoAtiva() {
   const tempoInicio = useRef<number>(Date.now());
 
   useEffect(() => {
+    // AbortController ensures only the last effect invocation wins.
+    // React StrictMode (dev) double-invokes effects; the first is cancelled
+    // by the cleanup before the second starts, preventing duplicate sessions
+    // and double-increments of the usage counter.
+    const controller = new AbortController();
+    const { signal } = controller;
+
     // Reset state on re-start
     setSessaoId(null);
     setSinaisAtuais(null);
@@ -78,48 +85,66 @@ export default function SimulacaoAtiva() {
     setIniciando(true);
 
     void (async () => {
-      const perfil = await loadMyProfile();
-      const nivel = perfil?.nivel ?? "ME1";
-      setUserNivel(nivel);
+      try {
+        const perfil = await loadMyProfile();
+        if (signal.aborted) return;
+        const nivel = perfil?.nivel ?? "ME1";
+        setUserNivel(nivel);
 
-      // If case not found in hardcoded list, try DB
-      let resolvedCaso = caso;
-      if (!resolvedCaso) {
-        const res = await fetch("/api/simulacao/casos").catch(() => null);
-        if (res?.ok) {
-          const dbCasos = await res.json() as import("@/lib/simulacao/systemPrompt").CasoSimulacao[];
-          resolvedCaso = dbCasos.find((c) => c.id === caso_id) ?? null;
-          if (resolvedCaso) setCaso(resolvedCaso);
+        // If case not found in hardcoded list, try DB
+        let resolvedCaso = caso;
+        if (!resolvedCaso) {
+          const res = await fetch("/api/simulacao/casos", { signal }).catch(() => null);
+          if (signal.aborted) return;
+          if (res?.ok) {
+            const dbCasos = await res.json() as import("@/lib/simulacao/systemPrompt").CasoSimulacao[];
+            resolvedCaso = dbCasos.find((c) => c.id === caso_id) ?? null;
+            if (resolvedCaso) setCaso(resolvedCaso);
+          }
         }
-      }
 
-      if (!resolvedCaso) {
-        setErroInicio("Caso clínico não encontrado.");
+        if (!resolvedCaso) {
+          if (signal.aborted) return;
+          setErroInicio("Caso clínico não encontrado.");
+          setIniciando(false);
+          return;
+        }
+
+        const res = await fetch("/api/simulacao", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ acao: "iniciar", caso_id }),
+          signal,
+        });
+
+        if (signal.aborted) return;
+
+        const data = await res.json() as { sessao_id?: string; erro?: string; mensagem?: string };
+
+        if (signal.aborted) return;
+
+        if (!res.ok || !data.sessao_id) {
+          setErroInicio(data.mensagem ?? data.erro ?? "Erro ao iniciar simulação.");
+          setIniciando(false);
+          return;
+        }
+
+        setSessaoId(data.sessao_id);
+        setSinaisAtuais(resolvedCaso.sinais_vitais_iniciais);
+        setSituacaoAtual(resolvedCaso.situacao_inicial);
+        setOpcoesAtuais(resolvedCaso.opcoes_iniciais);
         setIniciando(false);
-        return;
-      }
-
-      const res = await fetch("/api/simulacao", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ acao: "iniciar", caso_id }),
-      });
-
-      const data = await res.json() as { sessao_id?: string; erro?: string; mensagem?: string };
-
-      if (!res.ok || !data.sessao_id) {
-        setErroInicio(data.mensagem ?? data.erro ?? "Erro ao iniciar simulação.");
+        tempoInicio.current = Date.now();
+      } catch (err) {
+        // AbortError is expected when the effect is cleaned up — ignore it
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        if (signal.aborted) return;
+        setErroInicio("Erro ao iniciar simulação. Tente novamente.");
         setIniciando(false);
-        return;
       }
-
-      setSessaoId(data.sessao_id);
-      setSinaisAtuais(resolvedCaso.sinais_vitais_iniciais);
-      setSituacaoAtual(resolvedCaso.situacao_inicial);
-      setOpcoesAtuais(resolvedCaso.opcoes_iniciais);
-      setIniciando(false);
-      tempoInicio.current = Date.now();
     })();
+
+    return () => controller.abort();
   }, [caso_id, resetKey]);
 
   async function enviarConduta(conduta: string, tipoConduta: "opcao_rapida" | "digitada" = "digitada") {
