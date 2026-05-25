@@ -948,7 +948,7 @@ export function AdminPanel() {
 
           {/* ── USERS ── */}
           {tab === "users" && (
-            <div className="flex h-full gap-5">
+            <div className="flex gap-5">
               {/* User list */}
               <div className="flex w-72 shrink-0 flex-col gap-3">
                 <div className="flex items-center justify-between">
@@ -1006,7 +1006,7 @@ export function AdminPanel() {
                     </button>
                   ))}
                 </div>
-                <div className="flex-1 space-y-2 overflow-auto">
+                <div className="space-y-2 overflow-y-auto max-h-[calc(100svh-260px)]">
                   {filteredUsers.map((user, i) => {
                     const track = (user.assigned_track ?? "ALL") as Track;
                     return (
@@ -1060,7 +1060,7 @@ export function AdminPanel() {
               </div>
 
               {/* User detail */}
-              <div className="flex-1 overflow-auto">
+              <div className="min-w-0 flex-1 overflow-auto">
                 {selectedUser ? (
                   <div className="space-y-5">
                     {/* User header */}
