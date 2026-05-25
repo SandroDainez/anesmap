@@ -1007,7 +1007,7 @@ export function AdminPanel() {
                   ))}
                 </div>
                 <div className="flex-1 space-y-2 overflow-auto">
-                  {filteredUsers.map((user) => {
+                  {filteredUsers.map((user, i) => {
                     const track = (user.assigned_track ?? "ALL") as Track;
                     return (
                       <div key={user.id} className="flex items-center gap-1.5">
@@ -1019,7 +1019,10 @@ export function AdminPanel() {
                           }`}
                         >
                           <div className="flex items-center justify-between">
-                            <p className="text-sm font-medium text-foreground truncate">{user.name ?? "Sem nome"}</p>
+                            <p className="text-sm font-medium text-foreground truncate">
+                              <span className="mr-1.5 text-xs text-muted font-normal tabular-nums">{i + 1}.</span>
+                              {user.name ?? "Sem nome"}
+                            </p>
                             <span className={`ml-2 shrink-0 rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
                           </div>
                           <p className="text-xs text-muted">{humanRoleName(user.role)}</p>
