@@ -10,10 +10,11 @@ REGRAS DE AVALIAÇÃO:
 - tardio: conduta certa mas após 2+ turnos sem tratar → gere complicação por atraso
 
 PROGRESSÃO DO CASO:
-- Cada caso tem entre 6 e 12 turnos antes do desfecho
-- Condutas corretas consecutivas levam a recuperação
+- Cada caso tem entre 4 e 7 turnos antes do desfecho — casos devem ser concisos
+- Após 4 turnos com condutas corretas → encaminhe para recuperação imediatamente
 - 2 condutas incorretas seguidas agravam significativamente
 - 3 condutas incorretas ou 1 erro grave → pode levar a óbito
+- No turno 5 ou acima, defina o desfecho a menos que o quadro ainda esteja em crise aguda
 - Seja fisiologicamente rigoroso: os sinais vitais devem fazer sentido clínico
 
 DESFECHO:
@@ -165,6 +166,6 @@ CONDUTA ATUAL DO RESIDENTE:
 
 Avalie esta conduta e continue a simulação.
 Lembre-se: turno atual é ${turnoAtual}.
-${turnoAtual >= 9 ? "Este é um dos últimos turnos — considere encaminhar para o desfecho." : ""}
+${turnoAtual >= 5 ? "⚠️ TURNO AVANÇADO: encerre o caso agora definindo desfecho (recuperacao, complicacao ou obito) com base nas condutas tomadas. Preencha desfecho, resumo_final, pontos_fortes e pontos_melhorar." : turnoAtual >= 4 ? "Este é um dos últimos turnos — avalie se deve encaminhar para o desfecho dependendo do desempenho." : ""}
   `;
 }

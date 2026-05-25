@@ -1641,24 +1641,35 @@ export function AdminPanel() {
                               ) : (
                                 <>
                                   {/* Resumo */}
-                                  <div className="mb-4 grid grid-cols-4 gap-3">
-                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
-                                      <p className="text-2xl font-bold text-foreground">{sessoes.length}</p>
-                                      <p className="mt-0.5 text-[11px] text-muted">realizadas</p>
-                                    </div>
-                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
-                                      <p className="text-2xl font-bold text-teal">{concluidas.length}</p>
-                                      <p className="mt-0.5 text-[11px] text-muted">concluídas</p>
-                                    </div>
-                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
-                                      <p className="text-2xl font-bold text-foreground">{mediaPts !== null ? `${mediaPts}` : "—"}</p>
-                                      <p className="mt-0.5 text-[11px] text-muted">média pts</p>
-                                    </div>
-                                    <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
-                                      <p className="text-2xl font-bold text-amber">{usoMes}</p>
-                                      <p className="mt-0.5 text-[11px] text-muted">este mês</p>
-                                    </div>
-                                  </div>
+                                  {(() => {
+                                    const emAndamento = sessoes.filter(s => s.status !== "concluida");
+                                    const totalTurnos = sessoes.reduce((acc, s) => acc + ((s as typeof s & { total_passos?: number }).total_passos ?? 0), 0);
+                                    return (
+                                      <div className="mb-4 grid grid-cols-4 gap-3">
+                                        <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                          <p className="text-2xl font-bold text-foreground">{sessoes.length}</p>
+                                          <p className="mt-0.5 text-[11px] text-muted">iniciadas</p>
+                                        </div>
+                                        <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                          <p className="text-2xl font-bold text-teal">{concluidas.length}</p>
+                                          <p className="mt-0.5 text-[11px] text-muted">
+                                            concluídas
+                                            {emAndamento.length > 0 && (
+                                              <span className="ml-1 text-amber"> · {emAndamento.length} em andamento</span>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                          <p className="text-2xl font-bold text-purple">{totalTurnos}</p>
+                                          <p className="mt-0.5 text-[11px] text-muted">turnos totais</p>
+                                        </div>
+                                        <div className="rounded-xl border border-border bg-background/30 p-3 text-center">
+                                          <p className="text-2xl font-bold text-foreground">{mediaPts !== null ? `${mediaPts}` : "—"}</p>
+                                          <p className="mt-0.5 text-[11px] text-muted">média pts</p>
+                                        </div>
+                                      </div>
+                                    );
+                                  })()}
 
                                   {/* Desfechos */}
                                   {concluidas.length > 0 && (
@@ -1683,6 +1694,8 @@ export function AdminPanel() {
                                       const desfechoEmoji: Record<string, string> = { recuperacao: "✅", complicacao: "⚠️", obito: "❌" };
                                       const isOpen = simSessaoExpandida === s.id;
                                       const passos = simPassosPorSessao[s.id];
+                                      const totalPassos = (s as typeof s & { total_passos?: number }).total_passos ?? 0;
+                                      const isConcluida = s.status === "concluida";
                                       const avaliacaoColors: Record<string, string> = {
                                         correto: "bg-green-500/15 text-green-400",
                                         parcial: "bg-yellow-500/15 text-yellow-400",
@@ -1692,9 +1705,21 @@ export function AdminPanel() {
                                       return (
                                         <div key={s.id} className="rounded-lg border border-border/50 bg-background/20 overflow-hidden">
                                           {/* Cabeçalho da sessão */}
-                                          <div className="flex items-center gap-3 px-3 py-2">
-                                            <span className="text-sm">{s.desfecho ? (desfechoEmoji[s.desfecho] ?? "🔄") : "🔄"}</span>
-                                            <span className="flex-1 truncate text-xs text-foreground">{s.caso_titulo}</span>
+                                          <div className="flex items-center gap-2 px-3 py-2 flex-wrap">
+                                            <span className="text-sm shrink-0">{s.desfecho ? (desfechoEmoji[s.desfecho] ?? "🔄") : "🔄"}</span>
+                                            <span className="flex-1 min-w-0 truncate text-xs text-foreground">{s.caso_titulo}</span>
+                                            {/* Status badge */}
+                                            <span className={`shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-semibold ${
+                                              isConcluida ? "bg-green-500/15 text-green-400" : "bg-amber-500/15 text-amber-400"
+                                            }`}>
+                                              {isConcluida ? "concluída" : "em andamento"}
+                                            </span>
+                                            {/* Passos count */}
+                                            {totalPassos > 0 && (
+                                              <span className="shrink-0 rounded-full bg-white/8 px-1.5 py-0.5 text-[9px] text-muted">
+                                                {totalPassos} {totalPassos === 1 ? "turno" : "turnos"}
+                                              </span>
+                                            )}
                                             <span className={`shrink-0 text-xs font-bold ${ptsColor}`}>
                                               {pts !== null ? `${pts} pts` : "—"}
                                             </span>
@@ -1707,7 +1732,7 @@ export function AdminPanel() {
                                               }}
                                               className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium text-teal hover:bg-teal/10"
                                             >
-                                              {isOpen ? "▲ Ocultar" : "▼ Turnos"}
+                                              {isOpen ? "▲ Ocultar" : totalPassos > 0 ? `▼ ${totalPassos} turnos` : "▼ Detalhes"}
                                             </button>
                                           </div>
 

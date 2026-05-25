@@ -516,7 +516,7 @@ export async function loadAdminUserDetails(userId: string) {
       .maybeSingle(),
     supabase
       .from("simulacao_sessoes")
-      .select("id, caso_id, caso_titulo, status, desfecho, pontuacao_final, iniciada_em, concluida_em")
+      .select("id, caso_id, caso_titulo, status, desfecho, pontuacao_final, iniciada_em, concluida_em, simulacao_passos(count)")
       .eq("usuario_id", userId)
       .order("iniciada_em", { ascending: false })
       .limit(50),
@@ -567,7 +567,7 @@ export async function loadAdminUserDetails(userId: string) {
       ratings: AssessmentRatings;
     }>,
     procedureCounts: (proceduresRes.data as { counts: ProcedureCountsMap; updated_at: string } | null) ?? null,
-    simSessoes: (simSessoesRes.data ?? []) as Array<{
+    simSessoes: ((simSessoesRes.data ?? []) as Array<{
       id: string;
       caso_id: string;
       caso_titulo: string;
@@ -576,7 +576,11 @@ export async function loadAdminUserDetails(userId: string) {
       pontuacao_final: number | null;
       iniciada_em: string;
       concluida_em: string | null;
-    }>,
+      simulacao_passos?: [{ count: number }] | [];
+    }>).map((s) => ({
+      ...s,
+      total_passos: (s.simulacao_passos as [{ count: number }] | undefined)?.[0]?.count ?? 0,
+    })),
     simUso: (simUsoRes.data ?? []) as Array<{
       mes_ano: string;
       quantidade: number;
