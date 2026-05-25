@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const ADMIN_LINKS = [
   { href: "/admin", label: "Painel", exact: true },
@@ -43,6 +44,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
         {/* Right side actions */}
         <div className="flex items-center gap-1">
+          <ThemeToggle />
           <a
             href="/dashboard"
             className="rounded-lg px-3 py-1.5 text-xs text-muted transition hover:bg-white/5 hover:text-foreground"
