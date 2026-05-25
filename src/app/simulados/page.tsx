@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import {
   SimuladoQuestion,
   StudyTrack,
+  Trimestre,
   isSupabaseConfigured,
   loadSimulados,
   loadSimuladosRemote,
@@ -16,30 +17,60 @@ import {
 import {
   endStudySession,
   finishSimuladoAttempt,
+  loadMyProfile,
   recordSimuladoAnswer,
   startSimuladoAttempt,
   startStudySession,
 } from "@/lib/user-study";
 
+const ALL_TRACKS: StudyTrack[] = ["ME1", "ME2", "ME3"];
+// Trimestres T1–T4 = simulados de 30q (trimestrais); "anual" = 50q (anuais); "todos" = sem filtro
+const ALL_TRIMESTERS: Array<Trimestre | "todos"> = ["todos", "T1", "T2", "T3", "T4", "anual"];
+
 export default function SimuladosPage() {
   const [selectedMe, setSelectedMe] = useState<StudyTrack>("ME1");
+  const [selectedTrimestre, setSelectedTrimestre] = useState<Trimestre | "todos">("todos");
+  const [selectedProvaKey, setSelectedProvaKey] = useState<string | null>(null);
+  const [allowedTracks, setAllowedTracks] = useState<StudyTrack[]>(ALL_TRACKS);
+  // Keep SSR and first client render consistent to avoid hydration mismatch.
   const [importedSimulados, setImportedSimulados] = useState<SimuladoQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
   const [answers, setAnswers] = useState<
-    Record<string, { selected: "A" | "B" | "C" | "D"; isCorrect: boolean }>
+    Record<string, { selected: "A" | "B" | "C" | "D" | "E"; isCorrect: boolean }>
   >({});
   const [attemptState, setAttemptState] = useState<{
     attemptId: string;
     startedAt: Date;
   } | null>(null);
+  // Ref keeps the attempt available inside async closures without stale-closure issues.
+  // Also acts as a guard: once set, concurrent calls to chooseAlternative won't create
+  // a second attempt even before setAttemptState flushes.
+  const attemptRef = useRef<{ attemptId: string; startedAt: Date } | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
   useEffect(() => {
-    const local = loadSimulados();
-    setImportedSimulados(local);
+    // Hydrate local cached data only after mount (client-side).
+    setImportedSimulados(loadSimulados());
 
+    // Restore preferred track from dashboard selection
+    const preferredTrack = localStorage.getItem("anesmap_preferred_track") as StudyTrack | null;
+    if (preferredTrack && ["ME1", "ME2", "ME3"].includes(preferredTrack)) {
+      setSelectedMe(preferredTrack);
+    }
+
+    void (async () => {
+      const profile = await loadMyProfile();
+      const track = profile?.assigned_track_simulados ?? profile?.assigned_track;
+      if (track && track !== "ALL") {
+        setAllowedTracks([track as StudyTrack]);
+        setSelectedMe(track as StudyTrack);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     if (!isSupabaseConfigured()) return;
 
     void (async () => {
@@ -70,53 +101,116 @@ export default function SimuladosPage() {
   const simuladosByTrack = useMemo(
     () =>
       importedSimulados
-        .filter((item) => item.me === selectedMe)
+        .filter((item) => {
+          if (item.me !== selectedMe) return false;
+          if (selectedTrimestre === "todos") return true;
+          // Filtro estrito: só questões com o trimestre exato selecionado
+          return item.trimestre === selectedTrimestre;
+        })
         .sort((a, b) => compareSimuladosForSessionOrder(a, b)),
-    [importedSimulados, selectedMe],
+    [importedSimulados, selectedMe, selectedTrimestre],
   );
-  const currentQuestion = simuladosByTrack[currentIndex];
+
+  // Slots fixos de prova — sempre exibe A1/A2/A3/A4
+  const PROVA_SLOTS = ["A1", "A2", "A3", "A4"] as const;
+
+  // Agrupa questões por prova usando a coluna `prova` do banco
+  const provaGroups = useMemo(() => {
+    if (selectedTrimestre === "todos") return null;
+    const groups = new Map<string, SimuladoQuestion[]>();
+    for (const slot of PROVA_SLOTS) groups.set(slot, []);
+    for (const q of simuladosByTrack) {
+      const key = q.prova ?? "A1";
+      if (groups.has(key)) groups.get(key)!.push(q);
+    }
+    return groups;
+  }, [simuladosByTrack, selectedTrimestre]);
+
+  // Questões efetivamente ativas na sessão
+  const activeQuestions = useMemo(() => {
+    if (provaGroups) {
+      if (selectedProvaKey && provaGroups.has(selectedProvaKey)) {
+        return provaGroups.get(selectedProvaKey)!;
+      }
+      return [];
+    }
+    return simuladosByTrack;
+  }, [provaGroups, selectedProvaKey, simuladosByTrack]);
+
+  const safeIndex =
+    activeQuestions.length === 0 ? 0 : Math.max(0, Math.min(currentIndex, activeQuestions.length - 1));
+  const currentQuestion = activeQuestions[safeIndex];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
 
-  useEffect(() => {
-    setCurrentIndex(0);
-    setShowBack(false);
-    setAnswers({});
-    void (async () => {
-      const started = await startSimuladoAttempt(selectedMe);
-      setAttemptState(started);
-    })();
-  }, [selectedMe]);
-
-  useEffect(() => {
-    setShowBack(false);
-  }, [currentIndex]);
-
-  function chooseAlternative(letter: "A" | "B" | "C" | "D") {
+  function chooseAlternative(letter: "A" | "B" | "C" | "D" | "E") {
     if (!currentQuestion) return;
     const isCorrect = currentQuestion.correta === letter;
     setAnswers((prev) => ({
       ...prev,
       [currentQuestion.id]: { selected: letter, isCorrect },
     }));
-    if (attemptState) {
-      void recordSimuladoAnswer({
-        attemptId: attemptState.attemptId,
-        questionId: currentQuestion.id,
-        selected: letter,
-        correct: isCorrect,
-      });
-    }
     setShowBack(true);
+
+    // Lazily create the attempt on the user's very first answer — never on mount or track
+    // change, so React StrictMode double-invocation can't create phantom attempts.
+    const q = currentQuestion; // stable capture before the async boundary
+    void (async () => {
+      if (!attemptRef.current) {
+        const started = await startSimuladoAttempt(selectedMe);
+        if (started) {
+          attemptRef.current = started;
+          setAttemptState(started);
+        }
+      }
+      if (attemptRef.current) {
+        void recordSimuladoAnswer({
+          attemptId: attemptRef.current.attemptId,
+          questionId: q.id,
+          selected: letter,
+          correct: isCorrect,
+        });
+      }
+    })();
   }
 
   function goNext() {
-    if (currentIndex >= simuladosByTrack.length - 1) return;
+    if (safeIndex >= activeQuestions.length - 1) return;
     setCurrentIndex((value) => value + 1);
+    setShowBack(false);
   }
 
   function goPrev() {
-    if (currentIndex <= 0) return;
+    if (safeIndex <= 0) return;
     setCurrentIndex((value) => value - 1);
+    setShowBack(false);
+  }
+
+  function changeTrack(track: StudyTrack) {
+    setSelectedMe(track);
+    setSelectedTrimestre("todos");
+    setSelectedProvaKey(null);
+    setCurrentIndex(0);
+    setShowBack(false);
+    setAnswers({});
+    // Reset attempt so the next answer creates a fresh one for the new track.
+    setAttemptState(null);
+    attemptRef.current = null;
+    localStorage.setItem("anesmap_preferred_track", track);
+  }
+
+  function changeTrimestre(t: Trimestre | "todos") {
+    setSelectedTrimestre(t);
+    setSelectedProvaKey(null);
+    setCurrentIndex(0);
+    setShowBack(false);
+    setAnswers({});
+  }
+
+  function chooseProva(key: string) {
+    setSelectedProvaKey(key);
+    setCurrentIndex(0);
+    setShowBack(false);
+    setAnswers({});
   }
 
   const answeredCount = Object.keys(answers).length;
@@ -125,16 +219,16 @@ export default function SimuladosPage() {
 
   useEffect(() => {
     if (!attemptState) return;
-    if (answeredCount === 0 || answeredCount < simuladosByTrack.length) return;
+    if (answeredCount === 0 || answeredCount < activeQuestions.length) return;
     void finishSimuladoAttempt({
       attemptId: attemptState.attemptId,
       startedAt: attemptState.startedAt,
       scorePercent: score,
     });
-  }, [attemptState, answeredCount, simuladosByTrack.length, score]);
+  }, [attemptState, answeredCount, activeQuestions.length, score]);
 
   const dynamicMeta = [
-    { label: "Questões", value: String(simuladosByTrack.length) },
+    { label: "Questões", value: String(activeQuestions.length) },
     { label: "Acertos", value: `${score}%` },
     { label: "Respondidas", value: String(answeredCount) },
   ] as const;
@@ -143,39 +237,136 @@ export default function SimuladosPage() {
     <main className="flex flex-1 flex-col gap-6">
       <SectionHeader
         eyebrow="Módulo 02"
-        title="Simulados TSBA"
-        description="Treine com cronômetro e métricas no padrão da prova."
+        title="Simulados TEA"
+        description="Questões no formato TEA — Título de Especialista em Anestesiologia."
       />
 
       <AppCard>
-        <h2 className="mb-4 text-sm font-medium text-muted">Selecionar matéria</h2>
-        <div className="grid grid-cols-3 gap-2">
-          <StatusBadge
-            as="button"
-            tone="blue"
-            className={selectedMe === "ME1" ? "ring-1 ring-blue/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME1")}
-          >
-            ME1
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="purple"
-            className={selectedMe === "ME2" ? "ring-1 ring-purple/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME2")}
-          >
-            ME2
-          </StatusBadge>
-          <StatusBadge
-            as="button"
-            tone="teal"
-            className={selectedMe === "ME3" ? "ring-1 ring-teal/40" : "opacity-70"}
-            onClick={() => setSelectedMe("ME3")}
-          >
-            ME3
-          </StatusBadge>
-        </div>
+        <h2 className="mb-4 text-sm font-medium text-muted">
+          {allowedTracks.length === 1 ? "Sua trilha" : "Selecionar matéria"}
+        </h2>
+        {allowedTracks.length === 1 ? (
+          <div className="flex items-center gap-2">
+            <StatusBadge tone={selectedMe === "ME1" ? "blue" : selectedMe === "ME2" ? "purple" : "teal"}>
+              {selectedMe}
+            </StatusBadge>
+            <span className="text-xs text-muted">Trilha atribuída pelo administrador</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            <StatusBadge
+              as="button"
+              tone="blue"
+              className={
+                selectedMe === "ME1"
+                  ? "ring-2 ring-blue/60 bg-blue/20 text-blue shadow-[0_0_0_1px_rgba(79,142,247,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-blue/12"
+              }
+              onClick={() => changeTrack("ME1")}
+            >
+              ME1
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="purple"
+              className={
+                selectedMe === "ME2"
+                  ? "ring-2 ring-purple/60 bg-purple/20 text-purple shadow-[0_0_0_1px_rgba(155,109,255,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-purple/12"
+              }
+              onClick={() => changeTrack("ME2")}
+            >
+              ME2
+            </StatusBadge>
+            <StatusBadge
+              as="button"
+              tone="teal"
+              className={
+                selectedMe === "ME3"
+                  ? "ring-2 ring-teal/60 bg-teal/20 text-teal shadow-[0_0_0_1px_rgba(0,201,167,0.35)]"
+                  : "opacity-95 hover:opacity-100 hover:bg-teal/12"
+              }
+              onClick={() => changeTrack("ME3")}
+            >
+              ME3
+            </StatusBadge>
+          </div>
+        )}
       </AppCard>
+
+      <AppCard>
+        <h2 className="mb-3 text-sm font-medium text-muted">Período / Prova</h2>
+        <div className="grid grid-cols-3 gap-1.5">
+          {ALL_TRIMESTERS.map((t) => {
+            const isActive = selectedTrimestre === t;
+            const label =
+              t === "todos" ? "Todos" : t === "anual" ? "Anual" : t;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => changeTrimestre(t)}
+                className={`rounded-lg border px-2 py-1.5 text-xs font-medium transition-all ${
+                  isActive
+                    ? "border-blue bg-blue/20 text-blue shadow-sm"
+                    : "border-border bg-background/30 text-muted hover:border-blue/40 hover:text-foreground"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-xs text-muted">
+          {selectedTrimestre === "todos"
+            ? "Todas as questões da trilha"
+            : selectedTrimestre === "anual"
+            ? "Simulado anual — conteúdo dos 4 trimestres"
+            : `Simulado trimestral ${selectedTrimestre}`}
+        </p>
+      </AppCard>
+
+      {provaGroups && (
+        <AppCard>
+          <h2 className="mb-3 text-sm font-medium text-muted">Selecionar prova</h2>
+          <div className="grid grid-cols-4 gap-1.5">
+            {(["A1", "A2", "A3", "A4"] as const).map((slot) => {
+              const questions = provaGroups.get(slot) ?? [];
+              const isEmpty = questions.length === 0;
+              const isActive = selectedProvaKey === slot;
+              return (
+                <button
+                  key={slot}
+                  type="button"
+                  disabled={isEmpty}
+                  onClick={() => chooseProva(slot)}
+                  className={`rounded-lg border px-2 py-2.5 text-xs font-medium transition-all ${
+                    isEmpty
+                      ? "cursor-not-allowed border-border/40 bg-background/10 text-muted/40"
+                      : isActive
+                      ? "border-teal bg-teal/20 text-teal shadow-sm"
+                      : "border-border bg-background/30 text-muted hover:border-teal/40 hover:text-foreground"
+                  }`}
+                >
+                  <span className="block font-semibold">{slot}</span>
+                  <span className="block opacity-60 text-[10px] mt-0.5">
+                    {isEmpty ? "em breve" : `${questions.length}q`}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          {selectedProvaKey && (
+            <button
+              type="button"
+              onClick={() => setSelectedProvaKey(null)}
+              className="mt-2 text-xs text-muted underline underline-offset-2 hover:text-foreground"
+            >
+              Trocar prova
+            </button>
+          )}
+        </AppCard>
+      )}
 
       <AppCard>
         <p className="font-mono text-xs uppercase tracking-wider text-blue">
@@ -205,26 +396,19 @@ export default function SimuladosPage() {
         {currentQuestion ? (
           <>
             <h3 className="text-sm font-medium text-muted">
-              Questão {currentIndex + 1} de {simuladosByTrack.length}
+              Questão {safeIndex + 1} de {activeQuestions.length}
             </h3>
             {!showBack ? (
               <>
                 <p className="mt-2 text-base text-foreground">
-                  {formatQuestionWithNumber(currentQuestion.enunciado, currentIndex)}
+                  {formatQuestionWithNumber(currentQuestion.enunciado, safeIndex)}
                 </p>
                 <div className="mt-3 space-y-2 text-sm">
-                  {(
-                    [
-                      ["A", currentQuestion.alternativaA],
-                      ["B", currentQuestion.alternativaB],
-                      ["C", currentQuestion.alternativaC],
-                      ["D", currentQuestion.alternativaD],
-                    ] as const
-                  ).map(([letter, content]) => (
+                  {buildAlternativesList(currentQuestion).map(([letter, content]) => (
                     <button
                       key={letter}
                       type="button"
-                      onClick={() => chooseAlternative(letter)}
+                      onClick={() => chooseAlternative(letter as "A" | "B" | "C" | "D" | "E")}
                       className="w-full rounded-xl border border-border bg-background/40 px-3 py-2 text-left text-muted transition hover:bg-background/60"
                     >
                       <span className="font-medium text-foreground">{letter})</span> {content}
@@ -234,38 +418,45 @@ export default function SimuladosPage() {
               </>
             ) : (
               <>
-                <p className="mt-2 font-medium text-foreground">
+                <p className={`mt-2 font-medium ${currentAnswer?.isCorrect ? "text-teal" : "text-rose"}`}>
                   {currentAnswer?.isCorrect
-                    ? "Resposta correta!"
-                    : `Você marcou ${currentAnswer?.selected ?? "-"}, mas a correta é ${currentQuestion.correta}.`}
+                    ? "✅ Resposta correta!"
+                    : `❌ Você marcou ${currentAnswer?.selected ?? "-"} — a correta é ${currentQuestion.correta}.`}
                 </p>
                 <div className="mt-3 space-y-2 text-sm">
-                  {(
-                    [
-                      ["A", currentQuestion.alternativaA],
-                      ["B", currentQuestion.alternativaB],
-                      ["C", currentQuestion.alternativaC],
-                      ["D", currentQuestion.alternativaD],
-                    ] as const
-                  ).map(([letter, content]) => (
-                    <article
-                      key={letter}
-                      className="rounded-xl border border-border bg-background/40 px-3 py-2"
-                    >
-                      <p className="text-foreground">
-                        <span className="font-semibold">{letter})</span> {content}
-                      </p>
-                      <p className="mt-1 text-xs text-muted">
-                        {buildOptionComment(letter, currentQuestion)}
-                      </p>
-                    </article>
-                  ))}
+                  {buildAlternativesList(currentQuestion).map(([letter, content]) => {
+                    const isCorrect = currentQuestion.correta === letter;
+                    const isSelected = currentAnswer?.selected === letter;
+                    const isWrong = isSelected && !isCorrect;
+                    const comment = buildOptionComment(letter as "A" | "B" | "C" | "D" | "E", currentQuestion);
+                    return (
+                      <article
+                        key={letter}
+                        className={`rounded-xl border px-3 py-2 ${
+                          isCorrect
+                            ? "border-teal/40 bg-teal/10"
+                            : isWrong
+                              ? "border-rose/40 bg-rose/10"
+                              : "border-border bg-background/40"
+                        }`}
+                      >
+                        <p className={`font-semibold ${isCorrect ? "text-teal" : isWrong ? "text-rose" : "text-foreground"}`}>
+                          {letter}) {content}
+                          {isCorrect && <span className="ml-2 text-xs font-medium">✓ correta</span>}
+                          {isWrong && <span className="ml-2 text-xs font-medium">✗ sua resposta</span>}
+                        </p>
+                        {comment && (
+                          <p className="mt-1 text-xs leading-relaxed text-muted">{comment}</p>
+                        )}
+                      </article>
+                    );
+                  })}
                 </div>
-                <article className="mt-3 rounded-xl border border-border bg-background/40 px-3 py-2 text-xs text-muted">
-                  <p className="font-semibold text-foreground">Referências sugeridas</p>
+                <article className="mt-3 rounded-xl border border-blue/30 bg-blue/8 px-3 py-2 text-xs text-muted">
+                  <p className="font-semibold text-foreground">📚 Referências bibliográficas</p>
                   <ul className="mt-1 space-y-1">
                     {getQuestionReferences(currentQuestion).map((ref) => (
-                      <li key={ref}>- {ref}</li>
+                      <li key={ref} className="leading-relaxed">— {ref}</li>
                     ))}
                   </ul>
                 </article>
@@ -290,7 +481,7 @@ export default function SimuladosPage() {
               <button
                 type="button"
                 onClick={goNext}
-                disabled={currentIndex >= simuladosByTrack.length - 1}
+                disabled={safeIndex >= activeQuestions.length - 1}
                 className="rounded-xl border border-border bg-background/35 px-3 py-2 text-sm text-foreground transition hover:bg-background/55 disabled:opacity-40"
               >
                 Próxima
@@ -300,10 +491,24 @@ export default function SimuladosPage() {
         ) : (
           <>
             <h3 className="text-sm font-medium text-muted">Questão do simulado</h3>
-            <p className="mt-2 text-sm text-muted">
-              Nenhuma questão importada para {selectedMe}. Vá em /importar e envie
-              os CSVs de simulados.
-            </p>
+            {provaGroups && !selectedProvaKey ? (
+              <p className="mt-2 text-sm text-muted">
+                Selecione uma <span className="font-semibold text-foreground">prova</span> acima para começar a sessão de 30 questões.
+              </p>
+            ) : selectedTrimestre !== "todos" ? (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm text-muted">
+                  Nenhuma questão marcada como <span className="font-semibold text-foreground">{selectedTrimestre === "anual" ? "Anual" : selectedTrimestre}</span> em {selectedMe}.
+                </p>
+                <p className="text-xs text-muted">
+                  Use <span className="font-semibold text-foreground">Todos</span> para ver todas as questões.
+                </p>
+              </div>
+            ) : (
+              <p className="mt-2 text-sm text-muted">
+                Nenhuma questão importada para {selectedMe}. Vá em /importar e envie os CSVs de simulados.
+              </p>
+            )}
           </>
         )}
       </AppCard>
@@ -313,27 +518,20 @@ export default function SimuladosPage() {
 
 function extractQuestionOrder(enunciado: string) {
   const match = enunciado.trim().match(/^(?:q(?:uest[aã]o)?\s*)?(\d{1,3})[\)\.\-:\s]/i);
-  if (!match) return Number.MAX_SAFE_INTEGER;
-  return Number(match[1]);
-}
-
-function extractImportedRowOrder(id: string) {
-  const match = id.match(/-(\d+)$/);
   if (!match) return null;
   return Number(match[1]);
 }
 
 function compareSimuladosForSessionOrder(a: SimuladoQuestion, b: SimuladoQuestion) {
+  // Prioridade 1: número embutido no enunciado (ex: "5) Um paciente...")
   const numA = extractQuestionOrder(a.enunciado);
   const numB = extractQuestionOrder(b.enunciado);
-  if (numA !== numB) return numA - numB;
+  if (numA !== null && numB !== null && numA !== numB) return numA - numB;
+  if (numA !== null && numB === null) return -1;
+  if (numA === null && numB !== null) return 1;
 
-  const rowA = extractImportedRowOrder(a.id);
-  const rowB = extractImportedRowOrder(b.id);
-  if (rowA !== null && rowB !== null && rowA !== rowB) return rowA - rowB;
-  if (rowA !== null && rowB === null) return -1;
-  if (rowA === null && rowB !== null) return 1;
-  return a.enunciado.localeCompare(b.enunciado, "pt-BR");
+  // Prioridade 2: ID completo como desempate estável entre diferentes arquivos importados
+  return a.id.localeCompare(b.id, "pt-BR", { numeric: true });
 }
 
 function formatQuestionWithNumber(enunciado: string, index: number) {
@@ -342,18 +540,47 @@ function formatQuestionWithNumber(enunciado: string, index: number) {
   return `${index + 1}) ${cleaned || text}`;
 }
 
-function buildOptionComment(letter: "A" | "B" | "C" | "D", question: SimuladoQuestion) {
-  if (letter === question.correta) {
-    if (question.explicacao?.trim()) {
-      return `Correta. ${question.explicacao.trim()}`;
-    }
-    return "Correta de acordo com o gabarito importado para esta questão.";
+/** Retorna lista de alternativas [letra, texto] incluindo E quando presente */
+function buildAlternativesList(question: SimuladoQuestion): [string, string][] {
+  const alts: [string, string][] = [
+    ["A", question.alternativaA],
+    ["B", question.alternativaB],
+    ["C", question.alternativaC],
+    ["D", question.alternativaD],
+  ];
+  if (question.alternativaE) {
+    alts.push(["E", question.alternativaE]);
   }
-  if (question.explicacao?.trim()) {
-    return `Não é a correta. O gabarito indica ${question.correta}. Veja a justificativa da correta: ${question.explicacao.trim()}`;
-  }
-  return `Não é a correta para esta questão. O gabarito importado indica ${question.correta}.`;
+  return alts;
 }
+
+/** Retorna o comentário individual para uma alternativa, priorizando explicação por alternativa */
+function buildOptionComment(letter: "A" | "B" | "C" | "D" | "E", question: SimuladoQuestion) {
+  const isCorrect = letter === question.correta;
+
+  // Prioridade 1: explicação individual por alternativa (formato interativo)
+  const perAlt = (
+    letter === "A" ? question.explicacaoA :
+    letter === "B" ? question.explicacaoB :
+    letter === "C" ? question.explicacaoC :
+    letter === "D" ? question.explicacaoD :
+    question.explicacaoE
+  )?.trim();
+
+  if (perAlt) return perAlt;
+
+  // Prioridade 2: explicação geral da questão
+  if (isCorrect) {
+    if (question.explicacao?.trim()) return question.explicacao.trim();
+    return "Alternativa correta conforme gabarito.";
+  }
+
+  if (question.explicacao?.trim()) {
+    return `Incorreta. A correta é ${question.correta}. ${question.explicacao.trim()}`;
+  }
+  return `Incorreta — gabarito: ${question.correta}.`;
+}
+
 
 function getQuestionReferences(question: SimuladoQuestion) {
   if (question.references && question.references.length > 0) {

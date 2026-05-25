@@ -496,7 +496,7 @@ export async function loadAdminUserDetails(userId: string) {
       .select("id, user_id, track, started_at, ended_at, duration_sec, score_percent, created_at")
       .eq("user_id", userId)
       .order("created_at", { ascending: false })
-      .limit(100),
+      .limit(500),
     supabase
       .from("simulado_answers")
       .select("id, attempt_id, question_id, selected, correct, answered_at")

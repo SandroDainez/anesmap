@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AppCard } from "@/components/AppCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -43,6 +43,10 @@ export default function SimuladosPage() {
     attemptId: string;
     startedAt: Date;
   } | null>(null);
+  // Ref keeps the attempt available inside async closures without stale-closure issues.
+  // Also acts as a guard: once set, concurrent calls to chooseAlternative won't create
+  // a second attempt even before setAttemptState flushes.
+  const attemptRef = useRef<{ attemptId: string; startedAt: Date } | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [sessionStartedAt, setSessionStartedAt] = useState<Date | null>(null);
 
@@ -138,13 +142,6 @@ export default function SimuladosPage() {
   const currentQuestion = activeQuestions[safeIndex];
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
 
-  useEffect(() => {
-    void (async () => {
-      const started = await startSimuladoAttempt(selectedMe);
-      setAttemptState(started);
-    })();
-  }, [selectedMe]);
-
   function chooseAlternative(letter: "A" | "B" | "C" | "D" | "E") {
     if (!currentQuestion) return;
     const isCorrect = currentQuestion.correta === letter;
@@ -152,15 +149,28 @@ export default function SimuladosPage() {
       ...prev,
       [currentQuestion.id]: { selected: letter, isCorrect },
     }));
-    if (attemptState) {
-      void recordSimuladoAnswer({
-        attemptId: attemptState.attemptId,
-        questionId: currentQuestion.id,
-        selected: letter,
-        correct: isCorrect,
-      });
-    }
     setShowBack(true);
+
+    // Lazily create the attempt on the user's very first answer — never on mount or track
+    // change, so React StrictMode double-invocation can't create phantom attempts.
+    const q = currentQuestion; // stable capture before the async boundary
+    void (async () => {
+      if (!attemptRef.current) {
+        const started = await startSimuladoAttempt(selectedMe);
+        if (started) {
+          attemptRef.current = started;
+          setAttemptState(started);
+        }
+      }
+      if (attemptRef.current) {
+        void recordSimuladoAnswer({
+          attemptId: attemptRef.current.attemptId,
+          questionId: q.id,
+          selected: letter,
+          correct: isCorrect,
+        });
+      }
+    })();
   }
 
   function goNext() {
@@ -182,6 +192,9 @@ export default function SimuladosPage() {
     setCurrentIndex(0);
     setShowBack(false);
     setAnswers({});
+    // Reset attempt so the next answer creates a fresh one for the new track.
+    setAttemptState(null);
+    attemptRef.current = null;
     localStorage.setItem("anesmap_preferred_track", track);
   }
 

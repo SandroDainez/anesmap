@@ -348,7 +348,7 @@ export function AdminPanel() {
     const wrongAnswers = totalAnswers - correctAnswers;
     const accuracy = totalAnswers > 0 ? Math.round((correctAnswers / totalAnswers) * 100) : 0;
 
-    const finishedAttempts = attempts.filter((a) => a.ended_at || a.score_percent !== null).length;
+    const finishedAttempts = attempts.filter((a) => a.ended_at !== null).length;
     const avgScoreFinished =
       attempts.filter((a) => a.score_percent !== null).length > 0
         ? Math.round(
