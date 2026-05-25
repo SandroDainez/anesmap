@@ -58,8 +58,6 @@ export async function PATCH(
     }
     updates.nivel = body.nivel;
     updates.assigned_track = body.nivel;
-    updates.assigned_track_cards = body.nivel;
-    updates.assigned_track_simulados = body.nivel;
   }
 
   if (Object.keys(updates).length === 0) {
