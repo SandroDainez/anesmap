@@ -427,36 +427,26 @@ export function applySm2(
   now = new Date(),
 ): FlashcardProgress {
   const boundedQuality = Math.min(5, Math.max(0, quality));
-  let nextEaseFactor = progress.easeFactor;
-  let nextRepetitions = progress.repetitions;
-  let nextIntervalDays = progress.intervalDays;
 
-  if (boundedQuality < 3) {
-    nextRepetitions = 0;
+  // Fixed review intervals:
+  // Difícil (quality ≤ 2) → 1 dia
+  // Médio   (quality 3-4) → 3 dias
+  // Fácil   (quality 5)   → 7 dias
+  let nextIntervalDays: number;
+  if (boundedQuality <= 2) {
     nextIntervalDays = 1;
+  } else if (boundedQuality <= 4) {
+    nextIntervalDays = 3;
   } else {
-    if (nextRepetitions === 0) {
-      nextIntervalDays = 1;
-    } else if (nextRepetitions === 1) {
-      nextIntervalDays = 6;
-    } else {
-      nextIntervalDays = Math.max(1, Math.round(nextIntervalDays * nextEaseFactor));
-    }
-    nextRepetitions += 1;
+    nextIntervalDays = 7;
   }
-
-  nextEaseFactor =
-    nextEaseFactor +
-    (0.1 -
-      (5 - boundedQuality) * (0.08 + (5 - boundedQuality) * 0.02));
-  nextEaseFactor = Math.max(1.3, Number(nextEaseFactor.toFixed(2)));
 
   const nextReviewAt = new Date(now);
   nextReviewAt.setDate(nextReviewAt.getDate() + nextIntervalDays);
 
   return {
-    easeFactor: nextEaseFactor,
-    repetitions: nextRepetitions,
+    easeFactor: progress.easeFactor,
+    repetitions: progress.repetitions + 1,
     intervalDays: nextIntervalDays,
     nextReviewAt: nextReviewAt.toISOString(),
     lastQuality: boundedQuality,
@@ -665,6 +655,25 @@ export async function updateFlashcardRemote(
   const supabase = getSupabaseClient();
   if (!supabase) throw new Error("Supabase não configurado");
   const { error } = await supabase.from("flashcards").update(patch).eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function updateSimuladoRemote(
+  id: string,
+  patch: Partial<Pick<SimuladoQuestion, "tema" | "enunciado" | "alternativaA" | "alternativaB" | "alternativaC" | "alternativaD" | "correta" | "explicacao">>,
+): Promise<void> {
+  const supabase = getSupabaseClient();
+  if (!supabase) throw new Error("Supabase não configurado");
+  const dbPatch: Record<string, unknown> = {};
+  if (patch.tema !== undefined) dbPatch.tema = patch.tema;
+  if (patch.enunciado !== undefined) dbPatch.enunciado = patch.enunciado;
+  if (patch.alternativaA !== undefined) dbPatch.alternativa_a = patch.alternativaA;
+  if (patch.alternativaB !== undefined) dbPatch.alternativa_b = patch.alternativaB;
+  if (patch.alternativaC !== undefined) dbPatch.alternativa_c = patch.alternativaC;
+  if (patch.alternativaD !== undefined) dbPatch.alternativa_d = patch.alternativaD;
+  if (patch.correta !== undefined) dbPatch.correta = patch.correta;
+  if (patch.explicacao !== undefined) dbPatch.explicacao = patch.explicacao;
+  const { error } = await supabase.from("simulados").update(dbPatch).eq("id", id);
   if (error) throw new Error(error.message);
 }
 

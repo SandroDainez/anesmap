@@ -199,8 +199,8 @@ export default function FlashcardsPage() {
     <main className="flex flex-1 flex-col gap-6">
       <SectionHeader
         eyebrow="Módulo 01"
-        title="Flashcards SM-2"
-        description="Classifique por Difícil, Médio ou Fácil."
+        title="Flashcards"
+        description="Difícil → volta em 1 dia · Médio → 3 dias · Fácil → 1 semana"
       />
 
       <AppCard>
