@@ -1010,28 +1010,30 @@ export function AdminPanel() {
                   {filteredUsers.map((user, i) => {
                     const track = (user.assigned_track ?? "ALL") as Track;
                     return (
-                      <div key={user.id} className="flex items-center gap-1.5">
+                      <div key={user.id} className="relative">
+                        {/* Card de seleção */}
                         <button
                           type="button"
                           onClick={() => setSelectedUserId(user.id)}
-                          className={`flex-1 rounded-xl border px-3 py-2.5 text-left transition ${
+                          className={`w-full rounded-xl border px-3 py-2.5 pr-10 text-left transition ${
                             selectedUserId === user.id ? "border-blue/40 bg-blue/10" : "border-border bg-background/35 hover:bg-background/60"
                           }`}
                         >
-                          <div className="flex items-center justify-between">
-                            <p className="text-sm font-medium text-foreground truncate">
-                              <span className="mr-1.5 text-xs text-muted font-normal tabular-nums">{i + 1}.</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
+                              <span className="mr-1.5 font-normal tabular-nums text-xs text-muted">{i + 1}.</span>
                               {user.name ?? "Sem nome"}
                             </p>
-                            <span className={`ml-2 shrink-0 rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
+                            <span className={`shrink-0 rounded-md border px-1.5 py-0.5 text-xs ${TRACK_STYLE[track]}`}>{track}</span>
                           </div>
                           <p className="text-xs text-muted">{humanRoleName(user.role)}</p>
                         </button>
+                        {/* Lixeira absoluta — sempre dentro do card */}
                         <button
                           type="button"
-                          onClick={() => { setDeleteTargetId(user.id); setDeleteError(null); }}
+                          onClick={(e) => { e.stopPropagation(); setDeleteTargetId(user.id); setDeleteError(null); }}
                           title="Excluir usuário"
-                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-rose/20 bg-rose/10 text-rose hover:opacity-80"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-lg text-rose/50 hover:bg-rose/10 hover:text-rose transition"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
                         </button>
