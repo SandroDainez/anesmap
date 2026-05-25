@@ -21,6 +21,21 @@ type SessaoItem = {
   concluida_em: string | null;
 };
 
+type SessaoPasso = {
+  id: string;
+  turno: number;
+  situacao_apresentada: string;
+  conduta_usuario: string;
+  tipo_conduta: string | null;
+  avaliacao_ia: string | null;
+  feedback_ia: string;
+  explicacao_clinica: string | null;
+  nova_situacao: string | null;
+  pontuacao_turno: number | null;
+  tempo_resposta_segundos: number | null;
+  sinais_vitais: Record<string, unknown> | null;
+};
+
 const LIMITE_PADRAO = 5;
 
 const desfechoEmoji: Record<string, string> = {
@@ -40,6 +55,15 @@ export default function AdminSimulacoesPage() {
   const [loadingSessoes, setLoadingSessoes] = useState<string | null>(null);
   const [novoLimite, setNovoLimite] = useState<Record<string, string>>({});
   const [salvando, setSalvando] = useState<string | null>(null);
+  const [passosPorSessao, setPassosPorSessao] = useState<Record<string, SessaoPasso[]>>({});
+  const [sessaoDetalhada, setSessaoDetalhada] = useState<string | null>(null);
+
+  async function loadPassosSessao(sessao_id: string) {
+    if (passosPorSessao[sessao_id]) return;
+    const res = await fetch(`/api/admin/simulacoes?sessao_id=${sessao_id}`);
+    const data = (await res.json()) as SessaoPasso[];
+    setPassosPorSessao((prev) => ({ ...prev, [sessao_id]: Array.isArray(data) ? data : [] }));
+  }
 
   async function carregarUso() {
     setLoading(true);
@@ -402,6 +426,89 @@ export default function AdminSimulacoesPage() {
                                 </span>
                               )}
                             </div>
+                            {/* Ver turnos button */}
+                            <button
+                              onClick={() => {
+                                const isOpen = sessaoDetalhada === s.id;
+                                setSessaoDetalhada(isOpen ? null : s.id);
+                                if (!isOpen) void loadPassosSessao(s.id);
+                              }}
+                              className="mt-2 text-[10px] font-medium text-teal hover:opacity-80"
+                            >
+                              {sessaoDetalhada === s.id ? "Ocultar turnos ↑" : "Ver turnos →"}
+                            </button>
+
+                            {/* Passo cards */}
+                            {sessaoDetalhada === s.id && (
+                              <div className="mt-3 space-y-2">
+                                {!passosPorSessao[s.id] ? (
+                                  <div className="flex justify-center py-2">
+                                    <div className="h-3 w-3 animate-spin rounded-full border-2 border-teal border-t-transparent" />
+                                  </div>
+                                ) : passosPorSessao[s.id].length === 0 ? (
+                                  <p className="text-[10px] text-muted">Nenhum turno registrado.</p>
+                                ) : (
+                                  passosPorSessao[s.id].map((p) => {
+                                    const avaliacaoColors: Record<string, string> = {
+                                      correto: "bg-green-500/15 text-green-400",
+                                      parcial: "bg-yellow-500/15 text-yellow-400",
+                                      incorreto: "bg-red-500/15 text-red-400",
+                                      tardio: "bg-orange-500/15 text-orange-400",
+                                    };
+                                    const avaliacaoClass = avaliacaoColors[p.avaliacao_ia ?? ""] ?? "bg-white/10 text-muted";
+                                    const sv = p.sinais_vitais;
+                                    return (
+                                      <div key={p.id} className="rounded-lg border border-white/10 bg-black/20 p-2.5 text-xs">
+                                        <div className="mb-1.5 flex items-center justify-between gap-2">
+                                          <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-muted">
+                                            Turno {p.turno}
+                                          </span>
+                                          <div className="flex items-center gap-1.5">
+                                            {p.avaliacao_ia && (
+                                              <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${avaliacaoClass}`}>
+                                                {p.avaliacao_ia}
+                                              </span>
+                                            )}
+                                            {p.pontuacao_turno !== null && (
+                                              <span className="font-semibold text-teal">+{p.pontuacao_turno} pts</span>
+                                            )}
+                                          </div>
+                                        </div>
+                                        <p className="mb-1 font-semibold text-foreground leading-snug">
+                                          {p.conduta_usuario}
+                                          {p.tipo_conduta && (
+                                            <span className="ml-1.5 rounded px-1 py-0.5 text-[9px] font-normal bg-white/10 text-muted">
+                                              {p.tipo_conduta === "opcao_rapida" ? "opção rápida" : "digitada"}
+                                            </span>
+                                          )}
+                                        </p>
+                                        {p.feedback_ia && (
+                                          <p className="mb-1 leading-relaxed text-muted">{p.feedback_ia}</p>
+                                        )}
+                                        {p.explicacao_clinica && (
+                                          <p className="mb-1.5 rounded border border-blue-500/20 bg-blue-500/5 px-2 py-1 italic text-blue-300">
+                                            {p.explicacao_clinica}
+                                          </p>
+                                        )}
+                                        {sv && (
+                                          <div className="flex flex-wrap gap-1.5 text-[10px] text-muted">
+                                            {sv.PA !== undefined && <span>PA: {String(sv.PA)}</span>}
+                                            {sv.FC !== undefined && <span>FC: {String(sv.FC)}</span>}
+                                            {sv.SpO2 !== undefined && <span>SpO2: {String(sv.SpO2)}%</span>}
+                                            {sv.ETCO2 !== undefined && <span>ETCO2: {String(sv.ETCO2)}</span>}
+                                          </div>
+                                        )}
+                                        {p.tempo_resposta_segundos !== null && (
+                                          <p className="mt-1 text-[10px] text-muted">
+                                            Resp: {p.tempo_resposta_segundos}s
+                                          </p>
+                                        )}
+                                      </div>
+                                    );
+                                  })
+                                )}
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>

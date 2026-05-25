@@ -49,6 +49,31 @@ export async function POST(request: NextRequest) {
 
     // ─── INICIAR NOVA SIMULAÇÃO ───────────────────────────────
     if (acao === "iniciar") {
+      // Check for existing in-progress session first — resume without charging
+      const { data: sessaoExistente } = await supabase
+        .from("simulacao_sessoes")
+        .select("id")
+        .eq("usuario_id", user.id)
+        .eq("caso_id", caso_id ?? "")
+        .eq("status", "em_andamento")
+        .order("iniciada_em", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (sessaoExistente) {
+        const { data: passos } = await supabase
+          .from("simulacao_passos")
+          .select("*")
+          .eq("sessao_id", sessaoExistente.id)
+          .order("turno", { ascending: true });
+
+        return NextResponse.json({
+          sessao_id: (sessaoExistente as { id: string }).id,
+          resumindo: true,
+          passos: passos ?? [],
+        });
+      }
+
       const limite = await verificarLimite(user.id);
       if (!limite.pode_simular) {
         return NextResponse.json(
@@ -188,6 +213,7 @@ export async function POST(request: NextRequest) {
         nova_situacao: resultado.nova_situacao,
         pontuacao_turno: resultado.pontuacao_turno,
         tempo_resposta_segundos: tempo_resposta_segundos ?? 0,
+        explicacao_clinica: (resultado as { explicacao_clinica?: string }).explicacao_clinica ?? null,
       });
 
       if (resultado.desfecho) {

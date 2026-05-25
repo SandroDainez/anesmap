@@ -32,6 +32,7 @@ type HistoricoLocal = HistoricoItem & {
   avaliacao_ia?: string;
   conduta_usuario?: string;
   turno?: number;
+  explicacao_clinica?: string;
 };
 
 export default function SimulacaoAtiva() {
@@ -59,6 +60,7 @@ export default function SimulacaoAtiva() {
   const [enviando, setEnviando] = useState(false);
   const [erroEnvio, setErroEnvio] = useState<string | null>(null);
   const [resetKey, setResetKey] = useState(0);
+  const [retomando, setRetomando] = useState(false);
 
   const tempoInicio = useRef<number>(Date.now());
 
@@ -83,6 +85,7 @@ export default function SimulacaoAtiva() {
     setErroInicio(null);
     setErroEnvio(null);
     setIniciando(true);
+    setRetomando(false);
 
     void (async () => {
       try {
@@ -119,7 +122,26 @@ export default function SimulacaoAtiva() {
 
         if (signal.aborted) return;
 
-        const data = await res.json() as { sessao_id?: string; erro?: string; mensagem?: string };
+        type IniciarResponse = {
+          sessao_id?: string;
+          resumindo?: boolean;
+          passos?: Array<{
+            turno: number;
+            situacao_apresentada: string;
+            conduta_usuario: string;
+            avaliacao_ia: string;
+            feedback_ia: string;
+            nova_situacao: string | null;
+            pontuacao_turno: number | null;
+            sinais_vitais: SinaisVitais;
+            explicacao_clinica?: string | null;
+          }>;
+          erro?: string;
+          mensagem?: string;
+          limite_atualizado?: unknown;
+        };
+
+        const data = await res.json() as IniciarResponse;
 
         if (signal.aborted) return;
 
@@ -129,10 +151,35 @@ export default function SimulacaoAtiva() {
           return;
         }
 
+        if (data.resumindo && data.passos && data.passos.length > 0) {
+          const passos = data.passos;
+          const lastPasso = passos[passos.length - 1];
+          const historicoReconstruido: HistoricoLocal[] = passos.map((p) => ({
+            situacao: p.situacao_apresentada,
+            conduta: p.conduta_usuario,
+            avaliacao: p.avaliacao_ia,
+            feedback: p.feedback_ia,
+            nova_situacao: p.nova_situacao ?? "",
+            pontuacao_turno: p.pontuacao_turno ?? 0,
+            avaliacao_ia: p.avaliacao_ia,
+            conduta_usuario: p.conduta_usuario,
+            turno: p.turno,
+            explicacao_clinica: p.explicacao_clinica ?? undefined,
+          }));
+          const pontuacaoReconstruida = passos.reduce((acc, p) => acc + (p.pontuacao_turno ?? 0), 0);
+          setHistorico(historicoReconstruido);
+          setPontuacaoTotal(pontuacaoReconstruida);
+          setTurno(lastPasso.turno + 1);
+          setSinaisAtuais(lastPasso.sinais_vitais);
+          setSituacaoAtual(lastPasso.nova_situacao ?? resolvedCaso.situacao_inicial);
+          setOpcoesAtuais([]);
+          setRetomando(true);
+        } else {
+          setSinaisAtuais(resolvedCaso.sinais_vitais_iniciais);
+          setSituacaoAtual(resolvedCaso.situacao_inicial);
+          setOpcoesAtuais(resolvedCaso.opcoes_iniciais);
+        }
         setSessaoId(data.sessao_id);
-        setSinaisAtuais(resolvedCaso.sinais_vitais_iniciais);
-        setSituacaoAtual(resolvedCaso.situacao_inicial);
-        setOpcoesAtuais(resolvedCaso.opcoes_iniciais);
         setIniciando(false);
         tempoInicio.current = Date.now();
       } catch (err) {
@@ -198,6 +245,7 @@ export default function SimulacaoAtiva() {
         avaliacao_ia: resultado.avaliacao,
         conduta_usuario: conduta,
         turno,
+        explicacao_clinica: resultado.explicacao_clinica,
       };
 
       setHistorico((h) => [...h, novoHistorico]);
@@ -288,6 +336,12 @@ export default function SimulacaoAtiva() {
           <span className="text-teal font-semibold">{pontuacaoTotal} pts</span>
         </div>
       </div>
+
+      {retomando && (
+        <div className="mb-3 rounded-xl border border-teal/30 bg-teal/10 px-4 py-2 text-xs text-teal">
+          🔄 Simulação retomada — continue do ponto onde parou.
+        </div>
+      )}
 
       <h1 className="mb-4 text-base font-bold text-foreground">{caso?.titulo ?? "Simulação Clínica"}</h1>
 

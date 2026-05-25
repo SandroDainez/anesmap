@@ -10,6 +10,10 @@ type HistoricoItem = {
   avaliacao_ia?: string;
   pontuacao_turno?: number;
   turno?: number;
+  feedback?: string;
+  explicacao_clinica?: string;
+  situacao?: string;
+  nova_situacao?: string;
 };
 
 type Props = {
@@ -44,12 +48,23 @@ const desfechoConfig: Record<Desfecho, { icon: React.ReactNode; titulo: string; 
   },
 };
 
-const avaliacaoLabel: Record<string, string> = {
-  correto: "✅",
-  parcial: "🟡",
-  incorreto: "❌",
-  tardio: "🟠",
+type AvaliacaoKey = "correto" | "parcial" | "incorreto" | "tardio";
+
+const avaliacaoConfig: Record<AvaliacaoKey, { label: string; bg: string; text: string }> = {
+  correto: { label: "Correto", bg: "bg-green-500/15", text: "text-green-400" },
+  parcial: { label: "Parcial", bg: "bg-yellow-500/15", text: "text-yellow-400" },
+  incorreto: { label: "Incorreto", bg: "bg-red-500/15", text: "text-red-400" },
+  tardio: { label: "Tardio", bg: "bg-orange-500/15", text: "text-orange-400" },
 };
+
+function AvaliacaoBadge({ avaliacao }: { avaliacao: string | undefined }) {
+  const cfg = avaliacaoConfig[avaliacao as AvaliacaoKey] ?? { label: avaliacao ?? "—", bg: "bg-white/10", text: "text-muted" };
+  return (
+    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${cfg.bg} ${cfg.text}`}>
+      {cfg.label}
+    </span>
+  );
+}
 
 export function DesfechoFinal({
   desfecho,
@@ -114,26 +129,54 @@ export function DesfechoFinal({
         </div>
       )}
 
-      {/* Timeline de turnos */}
+      {/* Timeline de turnos — rich per-turn cards */}
       {historico.length > 0 && (
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="mb-3 font-semibold text-foreground">Timeline da Simulação</h3>
-          <ul className="space-y-2">
+          <div className="space-y-3">
             {historico.map((h, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm">
-                <span className="mt-0.5 text-base">
-                  {avaliacaoLabel[h.avaliacao_ia ?? ""] ?? "•"}
-                </span>
-                <div className="flex-1">
-                  <span className="text-muted">Turno {h.turno ?? i + 1}: </span>
-                  <span className="text-foreground">{h.conduta_usuario}</span>
-                  {h.pontuacao_turno !== undefined && (
-                    <span className="ml-2 text-xs text-muted">+{h.pontuacao_turno} pts</span>
-                  )}
+              <div
+                key={i}
+                className="rounded-lg border border-border/60 bg-white/3 p-3"
+              >
+                {/* Turn badge + score */}
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-muted">
+                    Turno {h.turno ?? i + 1}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <AvaliacaoBadge avaliacao={h.avaliacao_ia} />
+                    {h.pontuacao_turno !== undefined && (
+                      <span className="text-xs font-semibold text-teal">
+                        +{h.pontuacao_turno} pts
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </li>
+
+                {/* Conduta do residente */}
+                {h.conduta_usuario && (
+                  <p className="mb-2 text-sm font-semibold text-foreground leading-snug">
+                    {h.conduta_usuario}
+                  </p>
+                )}
+
+                {/* Feedback da IA */}
+                {h.feedback && (
+                  <p className="mb-1.5 text-xs leading-relaxed text-muted line-clamp-2">
+                    {h.feedback}
+                  </p>
+                )}
+
+                {/* Explicação clínica */}
+                {h.explicacao_clinica && (
+                  <p className="mt-1.5 rounded-lg border border-blue-500/20 bg-blue-500/5 px-2.5 py-1.5 text-xs italic leading-relaxed text-blue-300">
+                    {h.explicacao_clinica}
+                  </p>
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
