@@ -158,8 +158,6 @@ const NAV_GROUPS: NavGroup[] = [
 
 export function AdminPanel() {
   const [tab, setTab] = useState<Tab>("overview");
-  const [showEmbeddedImporter, setShowEmbeddedImporter] = useState(false);
-  const [embeddedImportMode, setEmbeddedImportMode] = useState<"flashcards" | "simulados" | "all">("all");
 
   const [overview, setOverview] = useState({ totalUsers: 0, totalSessions: 0, totalCardEvents: 0, totalAttempts: 0 });
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -261,6 +259,14 @@ export function AdminPanel() {
   const [revisarSimuladosPage, setRevisarSimuladosPage] = useState(0);
   const [editingSimulado, setEditingSimulado] = useState<RevisarSimulado | null>(null);
   const [editSimuladoTema, setEditSimuladoTema] = useState("");
+  const [editSimuladoEnunciado, setEditSimuladoEnunciado] = useState("");
+  const [editSimuladoAltA, setEditSimuladoAltA] = useState("");
+  const [editSimuladoAltB, setEditSimuladoAltB] = useState("");
+  const [editSimuladoAltC, setEditSimuladoAltC] = useState("");
+  const [editSimuladoAltD, setEditSimuladoAltD] = useState("");
+  const [editSimuladoCorreta, setEditSimuladoCorreta] = useState("");
+  const [editSimuladoExplicacao, setEditSimuladoExplicacao] = useState("");
+  const [editSimuladoError, setEditSimuladoError] = useState<string | null>(null);
   const [savingSimulado, setSavingSimulado] = useState(false);
   const [saveSimuladoSuccess, setSaveSimuladoSuccess] = useState(false);
 
@@ -766,11 +772,43 @@ export function AdminPanel() {
   async function handleSaveSimulado() {
     if (!editingSimulado) return;
     setSavingSimulado(true);
+    setEditSimuladoError(null);
     try {
-      const tema = editSimuladoTema.trim() || null;
-      await updateSimuladoRemote(editingSimulado.id, { tema: tema ?? undefined });
+      const corretaRaw = editSimuladoCorreta.trim().toUpperCase();
+      const corretaValida = (["A", "B", "C", "D", "E"] as const).includes(
+        corretaRaw as "A" | "B" | "C" | "D" | "E",
+      )
+        ? (corretaRaw as "A" | "B" | "C" | "D" | "E")
+        : undefined;
+      const patch = {
+        tema: editSimuladoTema.trim() || undefined,
+        enunciado: editSimuladoEnunciado.trim() || undefined,
+        alternativaA: editSimuladoAltA.trim() || undefined,
+        alternativaB: editSimuladoAltB.trim() || undefined,
+        alternativaC: editSimuladoAltC.trim() || undefined,
+        alternativaD: editSimuladoAltD.trim() || undefined,
+        correta: corretaValida,
+        explicacao: editSimuladoExplicacao.trim() || undefined,
+      };
+      await updateSimuladoRemote(editingSimulado.id, patch);
       setRevisarSimulados((prev) =>
-        prev ? prev.map((s) => (s.id === editingSimulado.id ? { ...s, tema: tema } as typeof s : s)) : prev,
+        prev
+          ? prev.map((s) =>
+              s.id === editingSimulado.id
+                ? ({
+                    ...s,
+                    tema: patch.tema ?? s.tema,
+                    enunciado: patch.enunciado ?? s.enunciado,
+                    alternativaA: patch.alternativaA ?? s.alternativaA,
+                    alternativaB: patch.alternativaB ?? s.alternativaB,
+                    alternativaC: patch.alternativaC ?? s.alternativaC,
+                    alternativaD: patch.alternativaD ?? s.alternativaD,
+                    correta: patch.correta ?? s.correta,
+                    explicacao: patch.explicacao ?? s.explicacao,
+                  } as typeof s)
+                : s,
+            )
+          : prev,
       );
       setSaveSimuladoSuccess(true);
       setTimeout(() => {
@@ -778,7 +816,7 @@ export function AdminPanel() {
         void loadAdminContentStats().then(setContentStats);
       }, 800);
     } catch (e) {
-      alert(e instanceof Error ? e.message : "Erro ao salvar");
+      setEditSimuladoError(e instanceof Error ? e.message : "Erro ao salvar");
     } finally {
       setSavingSimulado(false);
     }
@@ -2386,100 +2424,34 @@ export function AdminPanel() {
                 </div>
               )}
 
-              <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-5">
-                <p className="text-sm text-muted">
-                  Use em dois passos simples: <strong className="text-foreground">1) baixar</strong> os arquivos que você quer usar,
-                  depois <strong className="text-foreground">2) enviar para o app</strong> para publicar para todos os usuários.
-                </p>
-
-                {/* PASSO 1 */}
-                <div className="rounded-xl border border-blue/20 bg-blue/5 px-4 py-3 space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-blue">Passo 1 — Baixar conteúdo</p>
-                  <p className="text-xs text-muted">
-                    Se você quer pegar os arquivos para guardar/editar, use a aba <strong className="text-foreground">Exportar</strong>.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setTab("export")}
-                    className="inline-flex items-center justify-center rounded-xl border border-blue/30 bg-blue/15 px-4 py-2 text-xs font-medium text-blue transition hover:opacity-90"
+              <div className="rounded-2xl border border-border bg-background/40 p-5 space-y-3">
+                <p className="text-sm font-semibold text-foreground">Adicionar conteúdo</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href="/admin/importar-ia"
+                    className="flex flex-col gap-1 rounded-xl border border-teal/30 bg-teal/8 p-4 transition hover:bg-teal/15"
                   >
-                    Ir para Exportar (baixar arquivos)
-                  </button>
+                    <span className="text-sm font-semibold text-teal">✦ Importar com IA</span>
+                    <span className="text-xs text-muted">Cole texto, slides ou link do Google Drive — a IA estrutura tudo automaticamente.</span>
+                  </a>
+                  <a
+                    href="/importar"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex flex-col gap-1 rounded-xl border border-border bg-background/40 p-4 transition hover:bg-background/60"
+                  >
+                    <span className="text-sm font-semibold text-foreground">Importar CSV / HTML ↗</span>
+                    <span className="text-xs text-muted">Para arquivos estruturados do Google Sheets, Anki etc. Abre em nova aba.</span>
+                  </a>
                 </div>
-
-                {/* PASSO 2 */}
-                <div className="rounded-xl border border-teal/20 bg-teal/5 px-4 py-3 space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-teal">Passo 2 — Enviar conteúdo para o app</p>
-                  <p className="text-xs text-muted">
-                    Escolha o tipo de conteúdo e envie os arquivos direto aqui no admin. Ao concluir, o conteúdo já fica publicado no app.
-                  </p>
-                  <div className="grid grid-cols-3 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEmbeddedImportMode("flashcards");
-                        setShowEmbeddedImporter(true);
-                      }}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-teal/40 bg-teal/20 px-4 py-2.5 text-sm font-medium text-teal transition hover:opacity-90"
-                    >
-                      Enviar Cards para o app
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEmbeddedImportMode("simulados");
-                        setShowEmbeddedImporter(true);
-                      }}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue/40 bg-blue/20 px-4 py-2.5 text-sm font-medium text-blue transition hover:opacity-90"
-                    >
-                      Enviar Simulados para o app
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEmbeddedImportMode("all");
-                        setShowEmbeddedImporter(true);
-                      }}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-purple/40 bg-purple/20 px-4 py-2.5 text-sm font-medium text-purple transition hover:opacity-90"
-                    >
-                      Enviar Lote para o app
-                    </button>
-                  </div>
-                </div>
-
-                <a
-                  href="/importar"
+                <button
+                  type="button"
+                  onClick={() => setTab("export")}
                   className="inline-flex items-center gap-2 rounded-xl border border-border bg-background/35 px-4 py-2 text-xs font-medium text-muted transition hover:text-foreground"
                 >
-                  Abrir gerenciador completo (modo avançado) →
-                </a>
+                  ↓ Exportar / baixar backup do conteúdo
+                </button>
               </div>
-
-              {showEmbeddedImporter ? (
-                <div className="rounded-2xl border border-border bg-background/40 p-3">
-                  <div className="mb-2 flex items-center justify-between gap-2">
-                    <p className="text-sm font-semibold text-foreground">
-                      Importador embutido no Admin ({embeddedImportMode === "flashcards"
-                        ? "Cards"
-                        : embeddedImportMode === "simulados"
-                          ? "Simulados"
-                          : "Lote"})
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setShowEmbeddedImporter(false)}
-                      className="rounded-lg border border-border bg-background/35 px-3 py-1 text-xs text-muted hover:text-foreground"
-                    >
-                      Fechar
-                    </button>
-                  </div>
-                  <iframe
-                    src={`/importar?embedded=1&mode=${embeddedImportMode}`}
-                    title="Importador embutido"
-                    className="h-[980px] w-full rounded-xl border border-border bg-background"
-                  />
-                </div>
-              ) : null}
 
 
               <div className="grid grid-cols-3 gap-4">
@@ -2508,62 +2480,57 @@ export function AdminPanel() {
 
           {/* ── IMPORT ── */}
           {tab === "import" && (
-            <div className="max-w-3xl space-y-6">
+            <div className="max-w-2xl space-y-4">
               <h2 className="text-xl font-bold text-foreground">Importar conteúdo</h2>
+              <p className="text-sm text-muted">Escolha o método de importação mais adequado ao seu material.</p>
 
-              {/* Importar com IA */}
-              <div className="rounded-2xl border border-teal/25 bg-teal/5 p-5 space-y-3">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
+              {/* IA import — recommended */}
+              <a
+                href="/admin/importar-ia"
+                className="group block rounded-2xl border border-teal/30 bg-teal/5 p-5 transition hover:bg-teal/10"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="space-y-1">
                     <p className="font-semibold text-foreground flex items-center gap-2">
                       ✦ Importar com IA
-                      <span className="rounded-full border border-teal/30 bg-teal/10 px-2 py-0.5 text-[10px] font-bold text-teal">RECOMENDADO</span>
+                      <span className="rounded-full border border-teal/30 bg-teal/15 px-2 py-0.5 text-[10px] font-bold text-teal">RECOMENDADO</span>
                     </p>
-                    <p className="mt-1 text-sm text-muted">
-                      Cole qualquer texto — anotações, capítulos de livro, slides — e a IA estrutura automaticamente em questões TEA com justificativas individuais por alternativa, ou em flashcards com respostas completas e referências bibliográficas.
+                    <p className="text-sm text-muted">
+                      Cole texto, anotações, slides ou cole um link do Google Drive — a IA estrutura questões TEA completas (com justificativas por alternativa) ou flashcards com referências.
                     </p>
+                    <ul className="mt-2 space-y-0.5 text-xs text-muted">
+                      <li>✓ Questões TEA (simulados)</li>
+                      <li>✓ Flashcards</li>
+                      <li>✓ Casos de simulação clínica</li>
+                      <li>✓ Import do Google Drive (link público)</li>
+                    </ul>
                   </div>
+                  <span className="shrink-0 text-teal transition group-hover:translate-x-0.5">→</span>
                 </div>
-                <a
-                  href="/admin/importar-ia"
-                  className="inline-flex items-center gap-2 rounded-xl border border-teal/35 bg-teal/15 px-5 py-2.5 text-sm font-medium text-teal transition hover:opacity-90"
-                >
-                  ↑ Abrir Importar com IA
-                </a>
-              </div>
+              </a>
 
-              {/* Importar CSV/HTML */}
-              <div className="rounded-2xl border border-blue/20 bg-blue/5 p-5 space-y-3">
-                <div>
-                  <p className="font-semibold text-foreground">Importar CSV / HTML</p>
-                  <p className="mt-1 text-sm text-muted">
-                    Para arquivos já estruturados em CSV ou HTML com colunas definidas (frente, verso, enunciado, alternativas, gabarito). Suporta importação em lote de vários arquivos.
-                  </p>
+              {/* CSV/HTML import */}
+              <a
+                href="/importar"
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-2xl border border-border bg-background/40 p-5 transition hover:bg-background/60"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <p className="font-semibold text-foreground">Importar CSV / HTML em lote</p>
+                    <p className="text-sm text-muted">
+                      Para arquivos já estruturados (exportados do Google Sheets, Anki, etc.) com colunas definidas. Suporta múltiplos arquivos ao mesmo tempo.
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {["CSV", "HTML", "JSON (backup)"].map((f) => (
+                        <span key={f} className="rounded-md border border-border px-2 py-0.5 text-[10px] text-muted">{f}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="shrink-0 text-[10px] text-muted">↗ nova aba</span>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {(["all", "flashcards", "simulados"] as const).map((mode) => (
-                    <button
-                      key={mode}
-                      type="button"
-                      onClick={() => setEmbeddedImportMode(mode)}
-                      className={`rounded-xl border px-3 py-1.5 text-xs font-medium transition ${
-                        embeddedImportMode === mode
-                          ? "border-blue/50 bg-blue/20 text-blue"
-                          : "border-border bg-background/40 text-muted hover:text-foreground"
-                      }`}
-                    >
-                      {mode === "all" ? "Todos" : mode === "flashcards" ? "Só Cards" : "Só Simulados"}
-                    </button>
-                  ))}
-                </div>
-                <div className="overflow-hidden rounded-xl border border-border">
-                  <iframe
-                    src={`/importar?embedded=1&mode=${embeddedImportMode}`}
-                    className="h-[600px] w-full border-none bg-background"
-                    title="Importar conteúdo"
-                  />
-                </div>
-              </div>
+              </a>
             </div>
           )}
 
@@ -3001,7 +2968,25 @@ export function AdminPanel() {
                           </div>
                           <p className="text-xs text-muted line-clamp-2">{s.enunciado}</p>
                         </div>
-                        <button type="button" onClick={() => { setEditingSimulado(s); setEditSimuladoTema(s.tema ?? ""); setSaveSimuladoSuccess(false); }} className="shrink-0 rounded-lg border border-border bg-background/35 px-3 py-1.5 text-xs hover:bg-background/60">Editar tema</button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEditingSimulado(s);
+                            setEditSimuladoTema(s.tema ?? "");
+                            setEditSimuladoEnunciado(s.enunciado ?? "");
+                            setEditSimuladoAltA(s.alternativaA ?? "");
+                            setEditSimuladoAltB(s.alternativaB ?? "");
+                            setEditSimuladoAltC(s.alternativaC ?? "");
+                            setEditSimuladoAltD(s.alternativaD ?? "");
+                            setEditSimuladoCorreta(s.correta ?? "");
+                            setEditSimuladoExplicacao(s.explicacao ?? "");
+                            setEditSimuladoError(null);
+                            setSaveSimuladoSuccess(false);
+                          }}
+                          className="shrink-0 rounded-lg border border-teal/30 bg-teal/10 px-3 py-1.5 text-xs text-teal hover:bg-teal/20"
+                        >
+                          Editar questão
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -3015,22 +3000,111 @@ export function AdminPanel() {
             </div>
           )}
 
-          {/* Edit simulado tema modal */}
+          {/* Edit simulado modal — full question editing */}
           {editingSimulado && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-              <div className="w-full max-w-lg rounded-xl border border-border bg-background p-6 shadow-xl flex flex-col gap-4">
-                <h3 className="font-semibold">Editar tema da questão</h3>
-                <p className="text-xs text-muted line-clamp-3">{editingSimulado.enunciado}</p>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs font-medium text-muted-foreground">Tema</label>
-                  <input type="text" value={editSimuladoTema} onChange={(e) => setEditSimuladoTema(e.target.value)} placeholder="Ex: Ventilação, Neuroanestesia, Sepse..." className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm" />
+            <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-4 pt-8">
+              <div className="w-full max-w-2xl rounded-xl border border-border bg-background shadow-xl flex flex-col gap-0 mb-8">
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-border px-5 py-4">
+                  <div>
+                    <h3 className="font-semibold text-foreground">Editar questão</h3>
+                    <p className="text-[11px] text-muted mt-0.5">
+                      {editingSimulado.me && <span className="font-medium">{editingSimulado.me}</span>}
+                      {editingSimulado.trimestre && <span> · {editingSimulado.trimestre}</span>}
+                      {editingSimulado.prova && <span> · {editingSimulado.prova}</span>}
+                    </p>
+                  </div>
+                  <button type="button" onClick={() => setEditingSimulado(null)} className="rounded-lg p-1.5 text-muted hover:bg-rose/10 hover:text-rose">✕</button>
                 </div>
-                {saveSimuladoSuccess && <p className="text-sm text-green-500">Salvo com sucesso!</p>}
-                <div className="flex gap-2 justify-end">
-                  <button type="button" onClick={() => setEditingSimulado(null)} className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-muted">Cancelar</button>
-                  <button type="button" onClick={() => void handleSaveSimulado()} disabled={savingSimulado} className="rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-                    {savingSimulado ? "Salvando..." : "Salvar"}
-                  </button>
+
+                <div className="flex flex-col gap-4 p-5">
+                  {/* Enunciado */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted">Enunciado</label>
+                    <textarea
+                      value={editSimuladoEnunciado}
+                      onChange={(e) => setEditSimuladoEnunciado(e.target.value)}
+                      rows={4}
+                      className="rounded-lg border border-border bg-background/60 px-3 py-2 text-sm text-foreground resize-y focus:border-teal focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Alternativas */}
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted">Alternativas</label>
+                    {(["A", "B", "C", "D"] as const).map((letter, idx) => {
+                      const val = [editSimuladoAltA, editSimuladoAltB, editSimuladoAltC, editSimuladoAltD][idx];
+                      const set = [setEditSimuladoAltA, setEditSimuladoAltB, setEditSimuladoAltC, setEditSimuladoAltD][idx];
+                      const isCorreta = editSimuladoCorreta.toUpperCase() === letter;
+                      return (
+                        <div key={letter} className="flex items-start gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setEditSimuladoCorreta(letter)}
+                            className={`mt-1.5 shrink-0 h-6 w-6 rounded-full border text-xs font-bold transition ${
+                              isCorreta ? "border-teal bg-teal text-black" : "border-border text-muted hover:border-teal/50"
+                            }`}
+                            title={isCorreta ? "Gabarito" : "Marcar como correta"}
+                          >
+                            {letter}
+                          </button>
+                          <input
+                            type="text"
+                            value={val}
+                            onChange={(e) => set(e.target.value)}
+                            placeholder={`Alternativa ${letter}`}
+                            className={`flex-1 rounded-lg border px-3 py-1.5 text-sm focus:outline-none ${
+                              isCorreta ? "border-teal/40 bg-teal/5 focus:border-teal" : "border-border bg-background/60 focus:border-border"
+                            }`}
+                          />
+                        </div>
+                      );
+                    })}
+                    <p className="text-[10px] text-muted">Clique na letra para definir o gabarito. Gabarito atual: <strong>{editSimuladoCorreta || "—"}</strong></p>
+                  </div>
+
+                  {/* Tema */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted">Tema</label>
+                    <input
+                      type="text"
+                      value={editSimuladoTema}
+                      onChange={(e) => setEditSimuladoTema(e.target.value)}
+                      placeholder="Ex: Ventilação, Neuroanestesia, Sepse..."
+                      className="rounded-lg border border-border bg-background/60 px-3 py-2 text-sm focus:border-teal focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Explicação */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted">Explicação / Comentário</label>
+                    <textarea
+                      value={editSimuladoExplicacao}
+                      onChange={(e) => setEditSimuladoExplicacao(e.target.value)}
+                      rows={4}
+                      placeholder="Explicação geral da questão, raciocínio clínico, referências..."
+                      className="rounded-lg border border-border bg-background/60 px-3 py-2 text-sm text-foreground resize-y focus:border-teal focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Feedback */}
+                  {editSimuladoError && <p className="rounded-lg border border-rose/30 bg-rose/10 px-3 py-2 text-sm text-rose">{editSimuladoError}</p>}
+                  {saveSimuladoSuccess && <p className="rounded-lg border border-green-500/30 bg-green-500/10 px-3 py-2 text-sm text-green-400">✅ Questão salva com sucesso!</p>}
+
+                  {/* Actions */}
+                  <div className="flex gap-2 justify-end pt-1">
+                    <button type="button" onClick={() => setEditingSimulado(null)} className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-background/60">
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void handleSaveSimulado()}
+                      disabled={savingSimulado}
+                      className="rounded-lg bg-teal px-5 py-2 text-sm font-semibold text-black hover:opacity-90 disabled:opacity-50"
+                    >
+                      {savingSimulado ? "Salvando..." : "Salvar questão"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
